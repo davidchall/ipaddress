@@ -9,9 +9,18 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ipaddress)](https://CRAN.R-project.org/package=ipaddress)
+[![R build
+status](https://github.com/davidchall/ipaddress/workflows/R-CMD-check/badge.svg)](https://github.com/davidchall/ipaddress/actions)
 <!-- badges: end -->
 
-The goal of ipaddress is to …
+The goal of ipaddress is to provide classes for working with IP
+addresses, which play nicely with the tidyverse. I plan to emulate some
+of the features from Python’s
+[`ipaddress`](https://docs.python.org/library/ipaddress.html) and
+[`cyberpandas`](https://cyberpandas.readthedocs.io) modules.
+
+Right now, my focus is on providing a working interface with unit tests.
+Once this is working, I’ll move onto performance optimizations.
 
 ## Installation
 
@@ -24,9 +33,20 @@ install.packages("ipaddress")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+Here’s how IP addresses can be stored within a tibble:
 
 ``` r
+library(tibble)
 library(ipaddress)
-## basic example code
+
+ip_str <- c("0.0.0.0", "0.0.0.1", "192.168.0.1", "255.255.255.255")
+
+tibble(ip = ip_address(ip_str))
+#> # A tibble: 4 x 1
+#>                ip
+#>         <ip_addr>
+#> 1         0.0.0.0
+#> 2         0.0.0.1
+#> 3     192.168.0.1
+#> 4 255.255.255.255
 ```
