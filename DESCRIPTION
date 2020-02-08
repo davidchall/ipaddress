@@ -1,5 +1,5 @@
 Package: ipaddress
-Title: What the Package Does (One Line, Title Case)
+Title: Tools for being tidy about IP addresses
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "David",
@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "david.hall.physics@gmail.com",
            comment = c(ORCID = "0000-0002-2193-0480"))
-Description: What the package does (one paragraph).
+Description: Tools for being tidy about IP addresses.
 License: MIT + file LICENSE
 Suggests: 
     testthat
