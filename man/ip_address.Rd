@@ -3,15 +3,12 @@
 \name{ip_address}
 \alias{ip_address}
 \alias{is_ip_address}
-\alias{as_ip_address}
 \alias{format.vctrs_ip_address}
 \title{IP address}
 \usage{
 ip_address(x = character())
 
 is_ip_address(x)
-
-as_ip_address(x)
 
 \method{format}{vctrs_ip_address}(x, ...)
 }

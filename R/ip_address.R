@@ -47,10 +47,6 @@ is_ip_address <- function(x) {
 
 #' @rdname ip_address
 #' @export
-as_ip_address <- function(x) vec_cast(x, new_ip_address())
-
-#' @rdname ip_address
-#' @export
 format.vctrs_ip_address <- function(x, ...) as.character(x)
 
 
