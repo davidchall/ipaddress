@@ -5,8 +5,13 @@ x <- c("0.0.0.0", "0.0.0.1", "192.168.0.1", "255.255.255.255")
 test_that("construction works", {
   expect_s3_class(ip_address(), c("vctrs_ip_address", "vctrs_vctr"))
   expect_equal(ip_address(x), new_ip_address(x_int))
+  expect_true(is_ip_address(ip_address(x)))
   expect_length(ip_address(), 0)
   expect_length(ip_address(x), length(x))
+})
+
+test_that("formats correctly", {
+  expect_equal(format(ip_address(x)), x)
 })
 
 test_that("casting works", {
