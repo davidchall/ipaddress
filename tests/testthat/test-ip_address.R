@@ -59,9 +59,10 @@ test_that("comparison operations work", {
   )
 })
 
-test_that("unpermitted operations fail", {
+test_that("arithmetic operations work", {
   expect_error(+ip_address(x), class = "vctrs_error_incompatible_op")
   expect_error(-ip_address(x), class = "vctrs_error_incompatible_op")
+
   expect_error(ip_address(x) + ip_address(x), class = "vctrs_error_incompatible_op")
   expect_error(ip_address(x) - ip_address(x), class = "vctrs_error_incompatible_op")
   expect_error(ip_address(x) / ip_address(x), class = "vctrs_error_incompatible_op")
@@ -69,4 +70,6 @@ test_that("unpermitted operations fail", {
   expect_error(ip_address(x) ^ ip_address(x), class = "vctrs_error_incompatible_op")
   expect_error(ip_address(x) %% ip_address(x), class = "vctrs_error_incompatible_op")
   expect_error(ip_address(x) %/% ip_address(x), class = "vctrs_error_incompatible_op")
+
+  # TODO: support add/subtract integer
 })

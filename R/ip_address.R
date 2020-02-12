@@ -22,10 +22,7 @@ NULL
 #' @rdname ip_address
 #' @export
 ip_address <- function(x = character()) {
-  octets <- strsplit(x, ".", fixed = TRUE)
-  shift_bits <- function(x, y) bitwOr(bitwShiftL(x, 8L), y)
-  out <- vapply(octets, function(x) Reduce(shift_bits, as.integer(x)), 0L)
-  new_ip_address(out)
+  new_ip_address(ipv4_aton(x))
 }
 
 # `new_ip_address()` is a low-level constructor that accepts the data type
@@ -77,13 +74,7 @@ vec_cast.vctrs_ip_address.character <- function(x, to, ...) ip_address(x)
 #' @method vec_cast.character vctrs_ip_address
 #' @export
 vec_cast.character.vctrs_ip_address <- function(x, to, ...) {
-  out <- paste(
-    bitwAnd(bitwShiftR(x, 24L), 255L),
-    bitwAnd(bitwShiftR(x, 16L), 255L),
-    bitwAnd(bitwShiftR(x, 8L), 255L),
-    bitwAnd(bitwShiftR(x, 0L), 255L),
-    sep = "."
-  )
+  out <- ipv4_ntoa(x)
   out[is.na(x)] <- NA
   out
 }
@@ -125,12 +116,12 @@ vec_ptype2.character.vctrs_ip_address <- function(x, y, ...) new_ip_address()
 
 #' @export
 vec_proxy_compare.vctrs_ip_address <- function(x, ...) {
-  left_mask <- bitwShiftL(1L, 16L) - 1
-  right_mask <- bitwXor(bitwNot(0), left_mask)
+  left_mask <- bitwShiftL(1L, 16L) - 1L
+  right_mask <- bitwXor(bitwNot(0L), left_mask)
 
   data.frame(
-    right = bitwShiftR(bitwAnd(x, right_mask), 16),
-    left = bitwAnd(x, left_mask)
+    right = bitwShiftR(bitwAnd(vec_data(x), right_mask), 16L),
+    left = bitwAnd(vec_data(x), left_mask)
   )
 }
 
