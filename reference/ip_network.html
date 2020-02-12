@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • ipaddress</title>
+<title>IP network — ip_network • ipaddress</title>
 
 
 <!-- jquery -->
@@ -35,7 +35,11 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="IP network — ip_network" />
+<meta property="og:description" content="ip_network() is a high-level constructor that accepts character vectors
+representing the IP network in CIDR notation.
+is_ip_network() checks if an object is of class ip_network." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -54,7 +58,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -104,48 +108,47 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>IP network</h1>
+    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/ip_network.R'><code>R/ip_network.R</code></a></small>
+    <div class="hidden name"><code>ip_network.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p><code>ip_network()</code> is a high-level constructor that accepts character vectors
+representing the IP network in CIDR notation.</p>
+<p><code>is_ip_network()</code> checks if an object is of class <code>ip_network</code>.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>ip_network</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>())
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="ip_address.html">ip_address()</a></code> <code><a href="ip_address.html">is_ip_address()</a></code> <code><a href="ip_address.html">format(<i>&lt;vctrs_ip_address&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>IP address</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ip_network.html">ip_network()</a></code> <code><a href="ip_network.html">is_ip_network()</a></code> <code><a href="ip_network.html">format(<i>&lt;vctrs_ip_network&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>IP network</p></td>
-      </tr>
-    </tbody>
+<span class='fu'>is_ip_network</span>(<span class='no'>x</span>)
+
+<span class='co'># S3 method for vctrs_ip_network</span>
+<span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>Vector of IP networks</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Other parameters passed on</p></td>
+    </tr>
     </table>
-  </div>
 
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#arguments">Arguments</a></li>
     </ul>
+
   </div>
 </div>
 
