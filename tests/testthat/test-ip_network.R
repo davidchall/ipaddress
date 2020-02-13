@@ -1,7 +1,7 @@
 # underlying data is a 32-bit integer and R only supports signed integers
-host_int <- c(0L, 1L, -1062731775L, -1L)
-prefix_int <- c(32L, 32L, 32L, 32L)
-x <- c("0.0.0.0/32", "0.0.0.1/32", "192.168.0.1/32", "255.255.255.255/32")
+host_int <- c(0L, -1062731776L, -1062706176L, -1L)
+prefix_int <- c(32L, 16L, 22L, 32L)
+x <- c("0.0.0.0/32", "192.168.0.0/16", "192.168.100.0/22", "255.255.255.255/32")
 
 test_that("construction works", {
   expect_s3_class(ip_network(), c("vctrs_ip_network", "vctrs_vctr"))
@@ -16,28 +16,29 @@ test_that("formats correctly", {
 })
 
 test_that("casting works", {
-  expect_equal(vctrs::vec_cast(ip_network("1.2.3.4/5"), ip_network()), ip_network("1.2.3.4/5"))
-  expect_equal(vctrs::vec_cast("1.2.3.4/5", ip_network()), ip_network("1.2.3.4/5"))
-  expect_equal(vctrs::vec_cast(ip_network("1.2.3.4/5"), character()), "1.2.3.4/5")
+  expect_equal(vctrs::vec_cast(ip_network("198.51.100.0/24"), ip_network()), ip_network("198.51.100.0/24"))
+  expect_equal(vctrs::vec_cast("198.51.100.0/24", ip_network()), ip_network("198.51.100.0/24"))
+  expect_equal(vctrs::vec_cast(ip_network("198.51.100.0/24"), character()), "198.51.100.0/24")
 
   # since R only provides signed integers, we don't support integer casting
-  expect_error(vctrs::vec_cast(ip_network("1.2.3.4/5"), integer()), class = "vctrs_error_incompatible_cast")
+  expect_error(vctrs::vec_cast(ip_network("198.51.100.0/24"), integer()), class = "vctrs_error_incompatible_cast")
   expect_error(vctrs::vec_cast(1L, ip_network()), class = "vctrs_error_incompatible_cast")
 })
 
 test_that("coercion works", {
   expect_equal(vctrs::vec_ptype2(ip_network(), ip_network()), ip_network())
-  expect_equal(vctrs::vec_ptype2(ip_network(), "1.2.3.4/5"), ip_network())
-  expect_equal(vctrs::vec_ptype2("1.2.3.4/5", ip_network()), ip_network())
+  expect_equal(vctrs::vec_ptype2(ip_network(), "198.51.100.0/24"), ip_network())
+  expect_equal(vctrs::vec_ptype2("198.51.100.0/24", ip_network()), ip_network())
 
   # since R only provides signed integers, we don't support integer coercion
-  expect_error(vctrs::vec_ptype2(ip_network("1.2.3.4/5"), integer()), class = "vctrs_error_incompatible_type")
+  expect_error(vctrs::vec_ptype2(ip_network("198.51.100.0/24"), integer()), class = "vctrs_error_incompatible_type")
   expect_error(vctrs::vec_ptype2(1L, ip_network()), class = "vctrs_error_incompatible_type")
 })
 
 test_that("missing values work", {
   # TODO: expect_equal(ip_network(NA), NA)
   expect_equal(ip_network(c(x, NA)), c(ip_network(x), NA))
+  expect_equal(as.character(ip_network(c(x, NA))), c(x, NA))
   expect_equal(is.na(ip_network(c(x, NA))), c(rep(FALSE, length(x)), TRUE))
 })
 

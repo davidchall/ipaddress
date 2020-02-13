@@ -37,6 +37,7 @@ test_that("coercion works", {
 test_that("missing values work", {
   # TODO: expect_equal(ip_address(NA), NA)
   expect_equal(ip_address(c(x, NA)), c(ip_address(x), NA))
+  expect_equal(as.character(ip_address(c(x, NA))), c(x, NA))
   expect_equal(is.na(ip_address(c(x, NA))), c(rep(FALSE, length(x)), TRUE))
 })
 

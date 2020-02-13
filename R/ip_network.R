@@ -19,12 +19,8 @@ NULL
 #' @rdname ip_network
 #' @export
 ip_network <- function(x = character()) {
-  if (length(x) >= 1) {
-    parts <- split_cidr(x)
-    new_ip_network(ipv4_aton(parts$address), as.integer(parts$prefix))
-  } else {
-    new_ip_network()
-  }
+  parts <- ipv4_network_aton(x)
+  new_ip_network(parts$address, parts$prefix)
 }
 
 # `new_ip_network()` is a low-level constructor that accepts the data types
@@ -78,12 +74,7 @@ vec_cast.vctrs_ip_network.character <- function(x, to, ...) ip_network(x)
 #' @method vec_cast.character vctrs_ip_network
 #' @export
 vec_cast.character.vctrs_ip_network <- function(x, to, ...) {
-  address <- ipv4_ntoa(field(x, "address"))
-  prefix <- field(x, "prefix")
-
-  out <- paste_cidr(address, prefix)
-  out[is.na(x)] <- NA
-  out
+  ipv4_network_ntoa(field(x, "address"), field(x, "prefix"))
 }
 
 
