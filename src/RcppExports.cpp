@@ -39,14 +39,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // ipv4_network_ntoa
-CharacterVector ipv4_network_ntoa(IntegerVector address, IntegerVector prefix);
-RcppExport SEXP _ipaddress_ipv4_network_ntoa(SEXP addressSEXP, SEXP prefixSEXP) {
+CharacterVector ipv4_network_ntoa(List network);
+RcppExport SEXP _ipaddress_ipv4_network_ntoa(SEXP networkSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< IntegerVector >::type address(addressSEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type prefix(prefixSEXP);
-    rcpp_result_gen = Rcpp::wrap(ipv4_network_ntoa(address, prefix));
+    Rcpp::traits::input_parameter< List >::type network(networkSEXP);
+    rcpp_result_gen = Rcpp::wrap(ipv4_network_ntoa(network));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -55,7 +54,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_ipv4_address_aton", (DL_FUNC) &_ipaddress_ipv4_address_aton, 1},
     {"_ipaddress_ipv4_address_ntoa", (DL_FUNC) &_ipaddress_ipv4_address_ntoa, 1},
     {"_ipaddress_ipv4_network_aton", (DL_FUNC) &_ipaddress_ipv4_network_aton, 1},
-    {"_ipaddress_ipv4_network_ntoa", (DL_FUNC) &_ipaddress_ipv4_network_ntoa, 2},
+    {"_ipaddress_ipv4_network_ntoa", (DL_FUNC) &_ipaddress_ipv4_network_ntoa, 1},
     {NULL, NULL, 0}
 };
 

@@ -1,9 +1,9 @@
 #include "IpNetworkVector.hpp"
 
-IpNetworkVector::IpNetworkVector(CharacterVector x)
+IpNetworkVector::IpNetworkVector(CharacterVector network_r)
 {
-  network.assign(x.size(), asio::ip::network_v4());
-  is_na.assign(x.size(), 0);
+  network.assign(network_r.size(), asio::ip::network_v4());
+  is_na.assign(network_r.size(), 0);
 
   CharacterVector::iterator it_input;
   std::vector<asio::ip::network_v4>::iterator it_netw;
@@ -11,8 +11,8 @@ IpNetworkVector::IpNetworkVector(CharacterVector x)
 
   asio::error_code ec;
 
-  for (it_input = x.begin(), it_netw = network.begin(), it_na = is_na.begin();
-       it_input != x.end();
+  for (it_input = network_r.begin(), it_netw = network.begin(), it_na = is_na.begin();
+       it_input != network_r.end();
        ++it_input, ++it_netw, ++it_na) {
     if (*it_input == NA_STRING) {
       *it_na = true;
@@ -26,18 +26,21 @@ IpNetworkVector::IpNetworkVector(CharacterVector x)
   }
 }
 
-IpNetworkVector::IpNetworkVector(IntegerVector address, IntegerVector prefix)
+IpNetworkVector::IpNetworkVector(List network_r)
 {
-  network.assign(address.size(), asio::ip::network_v4());
-  is_na.assign(address.size(), 0);
+  IntegerVector address_r = as<IntegerVector>(network_r["address"]);
+  IntegerVector prefix_r = as<IntegerVector>(network_r["prefix"]);
+
+  network.assign(address_r.size(), asio::ip::network_v4());
+  is_na.assign(address_r.size(), 0);
 
   IntegerVector::iterator it_addr;
   IntegerVector::iterator it_pfx;
   std::vector<asio::ip::network_v4>::iterator it_netw;
   std::vector<bool>::iterator it_na;
 
-  for (it_addr = address.begin(), it_pfx = prefix.begin(), it_netw = network.begin(), it_na = is_na.begin();
-       it_addr != address.end();
+  for (it_addr = address_r.begin(), it_pfx = prefix_r.begin(), it_netw = network.begin(), it_na = is_na.begin();
+       it_addr != address_r.end();
        ++it_addr, ++it_pfx, ++it_netw, ++it_na) {
     if (*it_addr == NA_INTEGER || *it_pfx == NA_INTEGER) {
       *it_na = true;
@@ -48,7 +51,7 @@ IpNetworkVector::IpNetworkVector(IntegerVector address, IntegerVector prefix)
   }
 }
 
-List IpNetworkVector::toList() const
+List IpNetworkVector::asList() const
 {
   IntegerVector address(network.size());
   IntegerVector prefix(network.size());
@@ -76,7 +79,7 @@ List IpNetworkVector::toList() const
   );
 }
 
-CharacterVector IpNetworkVector::toCharacterVector() const
+CharacterVector IpNetworkVector::asCharacterVector() const
 {
   CharacterVector output(network.size());
 

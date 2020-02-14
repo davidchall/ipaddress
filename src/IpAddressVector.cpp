@@ -1,9 +1,9 @@
 #include "IpAddressVector.hpp"
 
-IpAddressVector::IpAddressVector(CharacterVector x)
+IpAddressVector::IpAddressVector(CharacterVector address_r)
 {
-  address.assign(x.size(), asio::ip::address_v4());
-  is_na.assign(x.size(), 0);
+  address.assign(address_r.size(), asio::ip::address_v4());
+  is_na.assign(address_r.size(), 0);
 
   CharacterVector::iterator it_input;
   std::vector<asio::ip::address_v4>::iterator it_addr;
@@ -11,8 +11,8 @@ IpAddressVector::IpAddressVector(CharacterVector x)
 
   asio::error_code ec;
 
-  for (it_input = x.begin(), it_addr = address.begin(), it_na = is_na.begin();
-       it_input != x.end();
+  for (it_input = address_r.begin(), it_addr = address.begin(), it_na = is_na.begin();
+       it_input != address_r.end();
        ++it_input, ++it_addr, ++it_na) {
     if (*it_input == NA_STRING) {
       *it_na = true;
@@ -26,17 +26,17 @@ IpAddressVector::IpAddressVector(CharacterVector x)
   }
 }
 
-IpAddressVector::IpAddressVector(IntegerVector x)
+IpAddressVector::IpAddressVector(IntegerVector address_r)
 {
-  address.assign(x.size(), asio::ip::address_v4());
-  is_na.assign(x.size(), 0);
+  address.assign(address_r.size(), asio::ip::address_v4());
+  is_na.assign(address_r.size(), 0);
 
   IntegerVector::iterator it_input;
   std::vector<asio::ip::address_v4>::iterator it_addr;
   std::vector<bool>::iterator it_na;
 
-  for (it_input = x.begin(), it_addr = address.begin(), it_na = is_na.begin();
-       it_input != x.end();
+  for (it_input = address_r.begin(), it_addr = address.begin(), it_na = is_na.begin();
+       it_input != address_r.end();
        ++it_input, ++it_addr, ++it_na) {
     if (*it_input == NA_INTEGER) {
       *it_na = true;
@@ -46,7 +46,7 @@ IpAddressVector::IpAddressVector(IntegerVector x)
   }
 }
 
-IntegerVector IpAddressVector::toIntegerVector() const
+IntegerVector IpAddressVector::asIntegerVector() const
 {
   IntegerVector output(address.size());
 
@@ -67,7 +67,7 @@ IntegerVector IpAddressVector::toIntegerVector() const
   return output;
 }
 
-CharacterVector IpAddressVector::toCharacterVector() const
+CharacterVector IpAddressVector::asCharacterVector() const
 {
   CharacterVector output(address.size());
 

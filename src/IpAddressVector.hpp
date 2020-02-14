@@ -14,11 +14,11 @@ private:
   std::vector<bool> is_na;
 
 public:
-  IpAddressVector(CharacterVector);
-  IpAddressVector(IntegerVector);
+  IpAddressVector(CharacterVector address_r);
+  IpAddressVector(IntegerVector address_r);
 
-  CharacterVector toCharacterVector() const;
-  IntegerVector toIntegerVector() const;
+  CharacterVector asCharacterVector() const;
+  IntegerVector asIntegerVector() const;
 };
 
 #endif

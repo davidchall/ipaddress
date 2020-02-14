@@ -74,7 +74,7 @@ vec_cast.vctrs_ip_network.character <- function(x, to, ...) ip_network(x)
 #' @method vec_cast.character vctrs_ip_network
 #' @export
 vec_cast.character.vctrs_ip_network <- function(x, to, ...) {
-  ipv4_network_ntoa(field(x, "address"), field(x, "prefix"))
+  ipv4_network_ntoa(x)
 }
 
 

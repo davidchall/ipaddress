@@ -13,7 +13,7 @@ ipv4_network_aton <- function(x) {
     .Call(`_ipaddress_ipv4_network_aton`, x)
 }
 
-ipv4_network_ntoa <- function(address, prefix) {
-    .Call(`_ipaddress_ipv4_network_ntoa`, address, prefix)
+ipv4_network_ntoa <- function(network) {
+    .Call(`_ipaddress_ipv4_network_ntoa`, network)
 }
 
