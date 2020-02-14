@@ -9,13 +9,19 @@ IpAddressVector::IpAddressVector(CharacterVector x)
   std::vector<asio::ip::address_v4>::iterator it_addr;
   std::vector<bool>::iterator it_na;
 
+  asio::error_code ec;
+
   for (it_input = x.begin(), it_addr = address.begin(), it_na = is_na.begin();
        it_input != x.end();
        ++it_input, ++it_addr, ++it_na) {
     if (*it_input == NA_STRING) {
       *it_na = true;
     } else {
-      *it_addr = asio::ip::make_address_v4(*it_input);
+      *it_addr = asio::ip::make_address_v4(*it_input, ec);
+      if (ec) {
+        *it_na = true;
+        warning(ec.message() + ": " + *it_input);
+      }
     }
   }
 }

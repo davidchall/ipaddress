@@ -9,13 +9,19 @@ IpNetworkVector::IpNetworkVector(CharacterVector x)
   std::vector<asio::ip::network_v4>::iterator it_netw;
   std::vector<bool>::iterator it_na;
 
+  asio::error_code ec;
+
   for (it_input = x.begin(), it_netw = network.begin(), it_na = is_na.begin();
        it_input != x.end();
        ++it_input, ++it_netw, ++it_na) {
     if (*it_input == NA_STRING) {
       *it_na = true;
     } else {
-      *it_netw = asio::ip::make_network_v4(*it_input);
+      *it_netw = asio::ip::make_network_v4(*it_input, ec);
+      if (ec) {
+        *it_na = true;
+        warning(ec.message() + ": " + *it_input);
+      }
     }
   }
 }
