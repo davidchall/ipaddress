@@ -1,7 +1,7 @@
 #' @importFrom methods setOldClass
 methods::setOldClass(c("vctrs_ip_network", "vctrs_vctr"))
 
-#' IP network
+#' Class for storing IP networks (IPv4 or IPv6)
 #'
 #' @param x Vector of IP networks
 #' @param ... Other parameters passed on
@@ -19,17 +19,29 @@ NULL
 #' @rdname ip_network
 #' @export
 ip_network <- function(x = character()) {
-  parts <- ipv4_network_aton(x)
-  new_ip_network(parts$address, parts$prefix)
+  y <- network_aton(x)
+  new_ip_network(
+    y$address1, y$address2, y$address3, y$address4,
+    y$prefix,
+    y$is_ipv6
+  )
 }
 
 # `new_ip_network()` is a low-level constructor that accepts the data types
 # stored in the background, [integer, integer].
-new_ip_network <- function(address = integer(), prefix = integer()) {
-  vec_assert(address, ptype = integer())
+new_ip_network <- function(address1 = integer(), address2 = integer(), address3 = integer(), address4 = integer(), prefix = integer(), is_ipv6 = logical()) {
+  vec_assert(address1, ptype = integer())
+  vec_assert(address2, ptype = integer())
+  vec_assert(address3, ptype = integer())
+  vec_assert(address4, ptype = integer())
   vec_assert(prefix, ptype = integer())
+  vec_assert(is_ipv6, ptype = logical())
 
-  new_rcrd(list(address = address, prefix = prefix), class = "vctrs_ip_network")
+  new_rcrd(list(
+    address1 = address1, address2 = address2, address3 = address3, address4 = address4,
+    prefix = prefix,
+    is_ipv6 = is_ipv6
+  ), class = "vctrs_ip_network")
 }
 
 #' `is_ip_network()`
@@ -74,7 +86,7 @@ vec_cast.vctrs_ip_network.character <- function(x, to, ...) ip_network(x)
 #' @method vec_cast.character vctrs_ip_network
 #' @export
 vec_cast.character.vctrs_ip_network <- function(x, to, ...) {
-  ipv4_network_ntoa(x)
+  network_ntoa(x)
 }
 
 
@@ -118,8 +130,8 @@ vec_proxy_compare.vctrs_ip_network <- function(x, ...) {
   right_mask <- bitwXor(bitwNot(0L), left_mask)
 
   data.frame(
-    right = bitwShiftR(bitwAnd(field(x, "address"), right_mask), 16L),
-    left = bitwAnd(field(x, "address"), left_mask)
+    right = bitwShiftR(bitwAnd(field(x, "address1"), right_mask), 16L),
+    left = bitwAnd(field(x, "address1"), left_mask)
   )
 }
 

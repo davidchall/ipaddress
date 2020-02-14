@@ -1,14 +1,11 @@
-# underlying data is a 32-bit integer and R only supports signed integers
-host_int <- c(0L, -1062731776L, -1062706176L, -1L)
-prefix_int <- c(32L, 16L, 22L, 32L)
 x <- c("0.0.0.0/32", "192.168.0.0/16", "192.168.100.0/22", "255.255.255.255/32")
 
 test_that("construction works", {
   expect_s3_class(ip_network(), c("vctrs_ip_network", "vctrs_vctr"))
-  expect_equal(ip_network(x), new_ip_network(host_int, prefix_int))
   expect_true(is_ip_network(ip_network(x)))
   expect_length(ip_network(), 0)
   expect_length(ip_network(x), length(x))
+  expect_equal(as.character(ip_network(x)), x)
 })
 
 test_that("formats correctly", {
@@ -36,7 +33,7 @@ test_that("coercion works", {
 })
 
 test_that("missing values work", {
-  expect_equal(field(ip_network(NA), "address"), NA_integer_)
+  expect_equal(field(ip_network(NA), "address1"), NA_integer_)
   expect_equal(ip_network(c(x, NA)), c(ip_network(x), NA))
   expect_equal(as.character(ip_network(c(x, NA))), c(x, NA))
   expect_equal(is.na(ip_network(c(x, NA))), c(rep(FALSE, length(x)), TRUE))
@@ -72,20 +69,4 @@ test_that("comparison operations work", {
     vctrs::vec_compare(ip_network(x), ip_network(shifter(x, -1L))),
     c(-1L, rep(1L, length(x) - 1L))
   )
-})
-
-test_that("arithmetic operations work", {
-  expect_error(+ip_network(x), class = "vctrs_error_incompatible_op")
-  expect_error(-ip_network(x), class = "vctrs_error_incompatible_op")
-
-  expect_error(ip_network(x) + ip_network(x), class = "vctrs_error_incompatible_op")
-  expect_error(ip_network(x) - ip_network(x), class = "vctrs_error_incompatible_op")
-  expect_error(ip_network(x) / ip_network(x), class = "vctrs_error_incompatible_op")
-  expect_error(ip_network(x) * ip_network(x), class = "vctrs_error_incompatible_op")
-  expect_error(ip_network(x) ^ ip_network(x), class = "vctrs_error_incompatible_op")
-  expect_error(ip_network(x) %% ip_network(x), class = "vctrs_error_incompatible_op")
-  expect_error(ip_network(x) %/% ip_network(x), class = "vctrs_error_incompatible_op")
-
-  expect_error(ip_network(x) + 1L, class = "vctrs_error_incompatible_op")
-  expect_error(ip_network(x) - 1L, class = "vctrs_error_incompatible_op")
 })
