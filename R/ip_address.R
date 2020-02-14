@@ -22,7 +22,7 @@ NULL
 #' @rdname ip_address
 #' @export
 ip_address <- function(x = character()) {
-  new_ip_address(ipv4_aton(x))
+  new_ip_address(ipv4_address_aton(x))
 }
 
 # `new_ip_address()` is a low-level constructor that accepts the data type
@@ -74,9 +74,7 @@ vec_cast.vctrs_ip_address.character <- function(x, to, ...) ip_address(x)
 #' @method vec_cast.character vctrs_ip_address
 #' @export
 vec_cast.character.vctrs_ip_address <- function(x, to, ...) {
-  out <- ipv4_ntoa(x)
-  out[is.na(x)] <- NA
-  out
+  ipv4_address_ntoa(x)
 }
 
 

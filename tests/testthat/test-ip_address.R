@@ -35,9 +35,18 @@ test_that("coercion works", {
 })
 
 test_that("missing values work", {
-  # TODO: expect_equal(ip_address(NA), NA)
+  expect_equal(vec_data(ip_address(NA)), NA_integer_)
   expect_equal(ip_address(c(x, NA)), c(ip_address(x), NA))
+  expect_equal(as.character(ip_address(c(x, NA))), c(x, NA))
   expect_equal(is.na(ip_address(c(x, NA))), c(rep(FALSE, length(x)), TRUE))
+})
+
+test_that("invalid inputs are caught", {
+  expect_warning(ip_address("abc"), "Invalid argument")
+  expect_warning(ip_address("1.2.3.256"), "Invalid argument")
+  expect_warning(ip_address("1.2.3.-1"), "Invalid argument")
+  expect_warning(ip_address("1.2.3"), "Invalid argument")
+  expect_warning(ip_address("1.2.3.4.5"), "Invalid argument")
 })
 
 test_that("equality operations work", {
