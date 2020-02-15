@@ -3,14 +3,14 @@
 \name{ip_network}
 \alias{ip_network}
 \alias{is_ip_network}
-\alias{format.vctrs_ip_network}
+\alias{format.ip_network}
 \title{Class for storing IP networks (IPv4 or IPv6)}
 \usage{
 ip_network(x = character())
 
 is_ip_network(x)
 
-\method{format}{vctrs_ip_network}(x, ...)
+\method{format}{ip_network}(x, ...)
 }
 \arguments{
 \item{x}{Vector of IP networks}

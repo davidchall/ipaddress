@@ -3,14 +3,14 @@
 \name{ip_address}
 \alias{ip_address}
 \alias{is_ip_address}
-\alias{format.vctrs_ip_address}
+\alias{format.ip_address}
 \title{Class for storing IP addresses (IPv4 or IPv6)}
 \usage{
 ip_address(x = character())
 
 is_ip_address(x)
 
-\method{format}{vctrs_ip_address}(x, ...)
+\method{format}{ip_address}(x, ...)
 }
 \arguments{
 \item{x}{Vector of IP addresses}

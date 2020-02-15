@@ -1,7 +1,7 @@
 x <- c("0.0.0.0/32", "192.168.0.0/16", "192.168.100.0/22", "255.255.255.255/32")
 
 test_that("construction works", {
-  expect_s3_class(ip_network(), c("vctrs_ip_network", "vctrs_vctr"))
+  expect_s3_class(ip_network(), c("ip_network", "vctrs_vctr"))
   expect_true(is_ip_network(ip_network(x)))
   expect_length(ip_network(), 0)
   expect_length(ip_network(x), length(x))

@@ -1,7 +1,7 @@
 x <- c("0.0.0.0", "0.0.0.1", "192.168.0.1", "255.255.255.255")
 
 test_that("construction works", {
-  expect_s3_class(ip_address(), c("vctrs_ip_address", "vctrs_vctr"))
+  expect_s3_class(ip_address(), c("ip_address", "vctrs_vctr"))
   expect_true(is_ip_address(ip_address(x)))
   expect_length(ip_address(), 0)
   expect_length(ip_address(x), length(x))

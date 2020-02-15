@@ -1,5 +1,5 @@
 #' @importFrom methods setOldClass
-methods::setOldClass(c("vctrs_ip_address", "vctrs_vctr"))
+methods::setOldClass(c("ip_address", "vctrs_vctr"))
 
 #' Class for storing IP addresses (IPv4 or IPv6)
 #'
@@ -49,7 +49,7 @@ new_ip_address <- function(address1 = integer(), address2 = integer(), address3 
   new_rcrd(list(
     address1 = address1, address2 = address2, address3 = address3, address4 = address4,
     is_ipv6 = is_ipv6
-  ), class = "vctrs_ip_address")
+  ), class = "ip_address")
 }
 
 #' `is_ip_address()`
@@ -59,12 +59,12 @@ new_ip_address <- function(address1 = integer(), address2 = integer(), address3 
 #' @rdname ip_address
 #' @export
 is_ip_address <- function(x) {
-  inherits(x, "vctrs_ip_address")
+  inherits(x, "ip_address")
 }
 
 #' @rdname ip_address
 #' @export
-format.vctrs_ip_address <- function(x, ...) as.character(x)
+format.ip_address <- function(x, ...) as.character(x)
 
 
 
@@ -72,28 +72,28 @@ format.vctrs_ip_address <- function(x, ...) as.character(x)
 
 #' @rdname vctrs-compat
 #' @keywords internal
-#' @method vec_cast vctrs_ip_address
+#' @method vec_cast ip_address
 #' @export
-#' @export vec_cast.vctrs_ip_address
-vec_cast.vctrs_ip_address <- function(x, to, ...) UseMethod("vec_cast.vctrs_ip_address")
+#' @export vec_cast.ip_address
+vec_cast.ip_address <- function(x, to, ...) UseMethod("vec_cast.ip_address")
 
-#' @method vec_cast.vctrs_ip_address default
+#' @method vec_cast.ip_address default
 #' @export
-vec_cast.vctrs_ip_address.default <- function(x, to, ...) vec_default_cast(x, to)
+vec_cast.ip_address.default <- function(x, to, ...) vec_default_cast(x, to)
 
-#' @method vec_cast.vctrs_ip_address vctrs_ip_address
+#' @method vec_cast.ip_address ip_address
 #' @export
-vec_cast.vctrs_ip_address.vctrs_ip_address <- function(x, to, ...) x
+vec_cast.ip_address.ip_address <- function(x, to, ...) x
 
 #' @rdname vctrs-compat
 #' @keywords internal
-#' @method vec_cast.vctrs_ip_address character
+#' @method vec_cast.ip_address character
 #' @export
-vec_cast.vctrs_ip_address.character <- function(x, to, ...) ip_address(x)
+vec_cast.ip_address.character <- function(x, to, ...) ip_address(x)
 
-#' @method vec_cast.character vctrs_ip_address
+#' @method vec_cast.character ip_address
 #' @export
-vec_cast.character.vctrs_ip_address <- function(x, to, ...) {
+vec_cast.character.ip_address <- function(x, to, ...) {
   address_ntoa(x)
 }
 
@@ -106,34 +106,34 @@ vec_cast.character.vctrs_ip_address <- function(x, to, ...) {
 #' @inheritParams vctrs::vec_ptype2
 #' @rdname vctrs-compat
 #'
-#' @method vec_ptype2 vctrs_ip_address
+#' @method vec_ptype2 ip_address
 #' @export
-#' @export vec_ptype2.vctrs_ip_address
-vec_ptype2.vctrs_ip_address <- function(x, y, ...) UseMethod("vec_ptype2.vctrs_ip_address", y)
+#' @export vec_ptype2.ip_address
+vec_ptype2.ip_address <- function(x, y, ...) UseMethod("vec_ptype2.ip_address", y)
 
-#' @method vec_ptype2.vctrs_ip_address default
+#' @method vec_ptype2.ip_address default
 #' @export
-vec_ptype2.vctrs_ip_address.default <- function(x, y, ..., x_arg = "x", y_arg = "y") {
+vec_ptype2.ip_address.default <- function(x, y, ..., x_arg = "x", y_arg = "y") {
   vec_default_ptype2(x, y, x_arg = x_arg, y_arg = y_arg)
 }
 
-#' @method vec_ptype2.vctrs_ip_address vctrs_ip_address
+#' @method vec_ptype2.ip_address ip_address
 #' @export
-vec_ptype2.vctrs_ip_address.vctrs_ip_address <- function(x, y, ...) new_ip_address()
+vec_ptype2.ip_address.ip_address <- function(x, y, ...) new_ip_address()
 
-#' @method vec_ptype2.vctrs_ip_address character
+#' @method vec_ptype2.ip_address character
 #' @export
-vec_ptype2.vctrs_ip_address.character <- function(x, y, ...) new_ip_address()
+vec_ptype2.ip_address.character <- function(x, y, ...) new_ip_address()
 
-#' @method vec_ptype2.character vctrs_ip_address
+#' @method vec_ptype2.character ip_address
 #' @export
-vec_ptype2.character.vctrs_ip_address <- function(x, y, ...) new_ip_address()
+vec_ptype2.character.ip_address <- function(x, y, ...) new_ip_address()
 
 
 # Comparison ------------------------------------------------------------
 
 #' @export
-vec_proxy_compare.vctrs_ip_address <- function(x, ...) {
+vec_proxy_compare.ip_address <- function(x, ...) {
   left_mask <- bitwShiftL(1L, 16L) - 1L
   right_mask <- bitwXor(bitwNot(0L), left_mask)
 
@@ -147,11 +147,11 @@ vec_proxy_compare.vctrs_ip_address <- function(x, ...) {
 # Other ------------------------------------------------------------
 
 #' @export
-vec_ptype_abbr.vctrs_ip_address <- function(x, ...) {
+vec_ptype_abbr.ip_address <- function(x, ...) {
   "ip_addr"
 }
 
 #' @export
-vec_ptype_full.vctrs_ip_address <- function(x, ...) {
+vec_ptype_full.ip_address <- function(x, ...) {
   "ip_address"
 }
