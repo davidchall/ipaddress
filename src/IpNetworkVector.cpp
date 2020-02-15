@@ -1,99 +1,123 @@
 #include "IpNetworkVector.hpp"
+#include "encoding.hpp"
 
-IpNetworkVector::IpNetworkVector(CharacterVector network_r)
-{
-  network.assign(network_r.size(), asio::ip::network_v4());
-  is_na.assign(network_r.size(), 0);
+IpNetworkVector::IpNetworkVector(CharacterVector input) {
+  unsigned int vsize = input.size();
 
-  CharacterVector::iterator it_input;
-  std::vector<asio::ip::network_v4>::iterator it_netw;
-  std::vector<bool>::iterator it_na;
+  // initialize vectors
+  network_v4.assign(vsize, asio::ip::network_v4());
+  network_v6.assign(vsize, asio::ip::network_v6());
+  is_ipv6.assign(vsize, false);
+  is_na.assign(vsize, false);
 
   asio::error_code ec;
 
-  for (it_input = network_r.begin(), it_netw = network.begin(), it_na = is_na.begin();
-       it_input != network_r.end();
-       ++it_input, ++it_netw, ++it_na) {
-    if (*it_input == NA_STRING) {
-      *it_na = true;
+  for (unsigned int i=0; i<vsize; ++i) {
+    if (input[i] == NA_STRING) {
+      is_na[i] = true;
     } else {
-      *it_netw = asio::ip::make_network_v4(*it_input, ec);
+      network_v4[i] = asio::ip::make_network_v4(input[i], ec);
       if (ec) {
-        *it_na = true;
-        warning(ec.message() + ": " + *it_input);
+        network_v6[i] = asio::ip::make_network_v6(input[i], ec);
+        if (ec) {
+          is_na[i] = true;
+          warning(ec.message() + ": " + input[i]);
+        } else {
+          is_ipv6[i] = true;
+        }
       }
     }
   }
 }
 
-IpNetworkVector::IpNetworkVector(List network_r)
-{
-  IntegerVector address_r = as<IntegerVector>(network_r["address"]);
-  IntegerVector prefix_r = as<IntegerVector>(network_r["prefix"]);
+IpNetworkVector::IpNetworkVector(List input) {
+  // extract data
+  IntegerVector in_addr1 = as<IntegerVector>(input["address1"]);
+  IntegerVector in_addr2 = as<IntegerVector>(input["address2"]);
+  IntegerVector in_addr3 = as<IntegerVector>(input["address3"]);
+  IntegerVector in_addr4 = as<IntegerVector>(input["address4"]);
+  IntegerVector in_pfx = as<IntegerVector>(input["prefix"]);
+  LogicalVector in_v6 = as<LogicalVector>(input["is_ipv6"]);
 
-  network.assign(address_r.size(), asio::ip::network_v4());
-  is_na.assign(address_r.size(), 0);
+  unsigned int vsize = in_v6.size();
 
-  IntegerVector::iterator it_addr;
-  IntegerVector::iterator it_pfx;
-  std::vector<asio::ip::network_v4>::iterator it_netw;
-  std::vector<bool>::iterator it_na;
+  // initialize vectors
+  network_v4.assign(vsize, asio::ip::network_v4());
+  network_v6.assign(vsize, asio::ip::network_v6());
+  is_ipv6.assign(vsize, false);
+  is_na.assign(vsize, false);
 
-  for (it_addr = address_r.begin(), it_pfx = prefix_r.begin(), it_netw = network.begin(), it_na = is_na.begin();
-       it_addr != address_r.end();
-       ++it_addr, ++it_pfx, ++it_netw, ++it_na) {
-    if (*it_addr == NA_INTEGER || *it_pfx == NA_INTEGER) {
-      *it_na = true;
+  for (unsigned int i=0; i<vsize; ++i) {
+    if (in_addr1[i] == NA_INTEGER) {
+      is_na[i] = true;
+    } else if (in_v6[i]) {
+      std::array<int32_t, 4> bytes = {in_addr1[i], in_addr2[i], in_addr3[i], in_addr4[i]};
+      asio::ip::address_v6 tmp_addr = decode_ipv6(bytes);
+      network_v6[i] = asio::ip::network_v6(tmp_addr, in_pfx[i]);
+      is_ipv6[i] = true;
     } else {
-      asio::ip::address_v4 address = asio::ip::make_address_v4((unsigned int)*it_addr);
-      *it_netw = asio::ip::network_v4(address, *it_pfx);
+      asio::ip::address_v4 tmp_addr = decode_ipv4(in_addr1[i]);
+      network_v4[i] = asio::ip::network_v4(tmp_addr, in_pfx[i]);
     }
   }
 }
 
-List IpNetworkVector::asList() const
-{
-  IntegerVector address(network.size());
-  IntegerVector prefix(network.size());
+List IpNetworkVector::asList() const {
+  unsigned int vsize = is_na.size();
 
-  IntegerVector::iterator it_addr;
-  IntegerVector::iterator it_pfx;
-  std::vector<asio::ip::network_v4>::const_iterator it_netw;
-  std::vector<bool>::const_iterator it_na;
+  // initialize vectors
+  IntegerVector out_addr1(vsize);
+  IntegerVector out_addr2(vsize);
+  IntegerVector out_addr3(vsize);
+  IntegerVector out_addr4(vsize);
+  IntegerVector out_pfx(vsize);
+  LogicalVector out_v6(vsize);
 
-  for (it_addr = address.begin(), it_pfx = prefix.begin(), it_netw = network.begin(), it_na = is_na.begin();
-       it_addr != address.end();
-       ++it_addr, ++it_pfx, ++it_netw, ++it_na) {
-    if (*it_na) {
-      *it_addr = NA_INTEGER;
-      *it_pfx = NA_INTEGER;
+  for (unsigned int i=0; i<vsize; ++i) {
+    if (is_na[i]) {
+      out_addr1[i] = NA_INTEGER;
+      out_addr2[i] = NA_INTEGER;
+      out_addr3[i] = NA_INTEGER;
+      out_addr4[i] = NA_INTEGER;
+      out_pfx[i] = NA_INTEGER;
+      out_v6[i] = NA_LOGICAL;
+    } else if (is_ipv6[i]) {
+      std::array<int32_t, 4> bytes = encode_ipv6(network_v6[i].address());
+      out_addr1[i] = bytes[0];
+      out_addr2[i] = bytes[1];
+      out_addr3[i] = bytes[2];
+      out_addr4[i] = bytes[3];
+      out_pfx[i] = network_v6[i].prefix_length();
+      out_v6[i] = true;
     } else {
-      *it_addr = (signed int)it_netw->network().to_uint();
-      *it_pfx = it_netw->prefix_length();
+      out_addr1[i] = encode_ipv4(network_v4[i].address());
+      out_pfx[i] = network_v4[i].prefix_length();
     }
   }
 
   return List::create(
-    _["address"] = address,
-    _["prefix"] = prefix
+    _["address1"] = out_addr1,
+    _["address2"] = out_addr2,
+    _["address3"] = out_addr3,
+    _["address4"] = out_addr4,
+    _["prefix"] = out_pfx,
+    _["is_ipv6"] = out_v6
   );
 }
 
-CharacterVector IpNetworkVector::asCharacterVector() const
-{
-  CharacterVector output(network.size());
+CharacterVector IpNetworkVector::asCharacterVector() const {
+  unsigned int vsize = is_na.size();
 
-  CharacterVector::iterator it_output;
-  std::vector<asio::ip::network_v4>::const_iterator it_netw;
-  std::vector<bool>::const_iterator it_na;
+  // initialize vectors
+  CharacterVector output(vsize);
 
-  for (it_output = output.begin(), it_netw = network.begin(), it_na = is_na.begin();
-       it_output != output.end();
-       ++it_output, ++it_netw, ++it_na) {
-    if (*it_na) {
-      *it_output = NA_STRING;
+  for (unsigned int i=0; i<vsize; ++i) {
+    if (is_na[i]) {
+      output[i] = NA_STRING;
+    } else if (is_ipv6[i]) {
+      output[i] = network_v6[i].to_string();
     } else {
-      *it_output = it_netw->to_string();
+      output[i] = network_v4[i].to_string();
     }
   }
 

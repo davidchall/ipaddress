@@ -1,13 +1,11 @@
-# underlying data is a 32-bit integer and R only supports signed integers
-x_int <- c(0L, 1L, -1062731775L, -1L)
 x <- c("0.0.0.0", "0.0.0.1", "192.168.0.1", "255.255.255.255")
 
 test_that("construction works", {
   expect_s3_class(ip_address(), c("vctrs_ip_address", "vctrs_vctr"))
-  expect_equal(ip_address(x), new_ip_address(x_int))
   expect_true(is_ip_address(ip_address(x)))
   expect_length(ip_address(), 0)
   expect_length(ip_address(x), length(x))
+  expect_equal(as.character(ip_address(x)), x)
 })
 
 test_that("formats correctly", {
@@ -35,7 +33,7 @@ test_that("coercion works", {
 })
 
 test_that("missing values work", {
-  expect_equal(vec_data(ip_address(NA)), NA_integer_)
+  expect_equal(field(ip_address(NA), "address1"), NA_integer_)
   expect_equal(ip_address(c(x, NA)), c(ip_address(x), NA))
   expect_equal(as.character(ip_address(c(x, NA))), c(x, NA))
   expect_equal(is.na(ip_address(c(x, NA))), c(rep(FALSE, length(x)), TRUE))
@@ -66,19 +64,4 @@ test_that("comparison operations work", {
     vctrs::vec_compare(ip_address(x), ip_address(shifter(x, -1L))),
     c(-1L, rep(1L, length(x) - 1L))
   )
-})
-
-test_that("arithmetic operations work", {
-  expect_error(+ip_address(x), class = "vctrs_error_incompatible_op")
-  expect_error(-ip_address(x), class = "vctrs_error_incompatible_op")
-
-  expect_error(ip_address(x) + ip_address(x), class = "vctrs_error_incompatible_op")
-  expect_error(ip_address(x) - ip_address(x), class = "vctrs_error_incompatible_op")
-  expect_error(ip_address(x) / ip_address(x), class = "vctrs_error_incompatible_op")
-  expect_error(ip_address(x) * ip_address(x), class = "vctrs_error_incompatible_op")
-  expect_error(ip_address(x) ^ ip_address(x), class = "vctrs_error_incompatible_op")
-  expect_error(ip_address(x) %% ip_address(x), class = "vctrs_error_incompatible_op")
-  expect_error(ip_address(x) %/% ip_address(x), class = "vctrs_error_incompatible_op")
-
-  # TODO: support add/subtract integer
 })

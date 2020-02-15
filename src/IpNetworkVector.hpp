@@ -1,21 +1,24 @@
+#ifndef __IPADDRESS_NETWORK__
+#define __IPADDRESS_NETWORK__
+
 #define ASIO_STANDALONE
 
 #include <Rcpp.h>
 #include <asio/ip/network_v4.hpp>
+#include <asio/ip/network_v6.hpp>
 
 using namespace Rcpp;
 
-#ifndef __IP_NETWORK_VECTOR__
-#define __IP_NETWORK_VECTOR__
-
 class IpNetworkVector {
 private:
-  std::vector<asio::ip::network_v4> network;
+  std::vector<asio::ip::network_v4> network_v4;
+  std::vector<asio::ip::network_v6> network_v6;
+  std::vector<bool> is_ipv6;
   std::vector<bool> is_na;
 
 public:
-  IpNetworkVector(CharacterVector network_r);
-  IpNetworkVector(List network_r);
+  IpNetworkVector(CharacterVector input);
+  IpNetworkVector(List input);
 
   CharacterVector asCharacterVector() const;
   List asList() const;

@@ -4,7 +4,7 @@
 \alias{ip_network}
 \alias{is_ip_network}
 \alias{format.vctrs_ip_network}
-\title{IP network}
+\title{Class for storing IP networks (IPv4 or IPv6)}
 \usage{
 ip_network(x = character())
 

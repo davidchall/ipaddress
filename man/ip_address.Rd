@@ -4,7 +4,7 @@
 \alias{ip_address}
 \alias{is_ip_address}
 \alias{format.vctrs_ip_address}
-\title{IP address}
+\title{Class for storing IP addresses (IPv4 or IPv6)}
 \usage{
 ip_address(x = character())
 
@@ -18,11 +18,19 @@ is_ip_address(x)
 \item{...}{Other parameters passed on}
 }
 \description{
-IPv4 addresses are 32-bit integers that are usually presented as
-a string in dotted-decimal notation, e.g. "192.168.0.1".
-
 \code{ip_address()} is a high-level constructor that accepts character vectors
 representing the IP address in dotted-decimal notation.
 
 \code{is_ip_address()} checks if an object is of class \code{ip_address}.
+}
+\details{
+Addresses in IPv4 space are 32-bits long. They are usually represented
+as 4 groups of 8 bits, each shown as decimal digits (e.g. "192.168.0.1").
+This is known as dot-decimal notation.
+
+Addresses in IPv6 space are 128-bits long. They are usually represented
+as 8 groups of 16 bits, each shown as hexadecimal digits
+(e.g. "2001:0db8:85a3:0000:0000:8a2e:0370:7334"). This representation can
+also be compressed by removing leading zeros and replacing consecutive
+groups of zeros with double-colon (e.g. "2001:db8:85a3::8a2e:370:7334").
 }
