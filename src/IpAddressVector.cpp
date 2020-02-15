@@ -1,5 +1,5 @@
-#include "IpAddressVector.hpp"
-#include "encoding.hpp"
+#include "IpAddressVector.h"
+#include "encoding.h"
 
 IpAddressVector::IpAddressVector(CharacterVector input) {
   unsigned int vsize = input.size();

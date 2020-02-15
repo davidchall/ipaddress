@@ -1,8 +1,8 @@
 #define ASIO_STANDALONE
 
 #include <Rcpp.h>
-#include "IpAddressVector.hpp"
-#include "IpNetworkVector.hpp"
+#include "IpAddressVector.h"
+#include "IpNetworkVector.h"
 
 using namespace Rcpp;
 

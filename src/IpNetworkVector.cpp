@@ -1,5 +1,5 @@
-#include "IpNetworkVector.hpp"
-#include "encoding.hpp"
+#include "IpNetworkVector.h"
+#include "encoding.h"
 
 IpNetworkVector::IpNetworkVector(CharacterVector input) {
   unsigned int vsize = input.size();
