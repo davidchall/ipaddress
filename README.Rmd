@@ -22,11 +22,14 @@ knitr::opts_chunk$set(
 [![codecov.io](https://codecov.io/github/davidchall/ipaddress/coverage.svg?branch=master)](https://codecov.io/github/davidchall/ipaddress?branch=master)
 <!-- badges: end -->
 
-The goal of ipaddress is to provide classes for working with IP addresses, which play nicely with the tidyverse.
-I plan to emulate some of the features from Python's [`ipaddress`](https://docs.python.org/library/ipaddress.html) and [`cyberpandas`](https://cyberpandas.readthedocs.io) modules.
+The ipaddress packages provides classes for storing IP addresses and networks, in both the IPv4 and IPv6 address spaces. Its interface is inspired by by Python's [`ipaddress`](https://docs.python.org/library/ipaddress.html) and [`cyberpandas`](https://cyberpandas.readthedocs.io) modules.
 
-Right now, my focus is on providing a working interface with unit tests.
-Once this is working, I'll move onto performance optimizations.
+Here are some of the features:
+
+* IP addresses stored in their native representation (a sequence of bits) for **efficient data storage**
+* Calculations are performed in C++ for **improved performance**
+* **Compatible with tidyverse** functions
+* Supports both **IPv4 and IPv6** address spaces
 
 
 ## Installation
@@ -37,15 +40,34 @@ You can install the released version of ipaddress from [CRAN](https://CRAN.R-pro
 install.packages("ipaddress")
 ```
 
-## Example
+Or you can install the development version from GitHub:
 
-Here's how IP addresses can be stored within a tibble:
+``` r
+# install.packages("remotes")
+remotes::install_github("davidchall/ipaddress")
+```
 
-```{r example}
-library(tibble)
+
+## Usage
+
+This package provides the `ip_address` and `ip_network` classes, which can be used as standalone vectors or as columns within data frames and tibbles.
+
+```{r example, message=FALSE}
+library(tidyverse)
 library(ipaddress)
 
-ip_str <- c("0.0.0.0", "0.0.0.1", "192.168.0.1", "255.255.255.255")
+ip_address(c("0.0.0.1", "192.168.0.1", "2001:db8::8a2e:370:7334"))
 
-tibble(ip = ip_address(ip_str))
+tibble(
+  address = ip_address(c("0.0.0.1", "192.168.0.1", "2001:db8::8a2e:370:7334")),
+  network = ip_network(c("92.0.2.0/24", "192.168.100.0/22", "2001:db8::/48"))
+)
 ```
+
+Input character vectors are validated as they are parsed.
+Invalid inputs raise a warning and are replaced with `NA`.
+
+```{r input_validation}
+ip_address(c("0.0.0.0", "255.255.255.255", "255.255.255.256"))
+```
+

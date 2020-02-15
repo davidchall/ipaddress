@@ -17,7 +17,7 @@ Imports:
     vctrs (>= 0.2.2)
 Suggests: 
     testthat (>= 2.1.0),
-    tibble
+    tidyverse
 LinkingTo: 
     AsioHeaders,
     Rcpp
