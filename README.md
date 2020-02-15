@@ -14,18 +14,17 @@ status](https://github.com/davidchall/ipaddress/workflows/R-CMD-check/badge.svg)
 [![codecov.io](https://codecov.io/github/davidchall/ipaddress/coverage.svg?branch=master)](https://codecov.io/github/davidchall/ipaddress?branch=master)
 <!-- badges: end -->
 
-The ipaddress packages provides classes for storing IP addresses and
-networks, in both the IPv4 and IPv6 address spaces. Its interface is
-inspired by by Python’s
+The ipaddress package provides classes for storing IP addresses and
+networks. Its interface is inspired by Python’s
 [`ipaddress`](https://docs.python.org/library/ipaddress.html) and
 [`cyberpandas`](https://cyberpandas.readthedocs.io) modules.
 
 Here are some of the features:
 
-  - IP addresses stored in their native representation (a sequence of
-    bits) for **efficient data storage**
+  - IP addresses are stored in their native representation (a sequence
+    of bits) for **efficient data storage**
   - Calculations are performed in C++ for **improved performance**
-  - **Compatible with tidyverse** functions
+  - Classes are **compatible with the tidyverse**
   - Supports both **IPv4 and IPv6** address spaces
 
 ## Installation
@@ -70,8 +69,8 @@ tibble(
 #> 3 2001:db8::8a2e:370:7334    2001:db8::/48
 ```
 
-Input character vectors are validated as they are parsed. Invalid inputs
-raise a warning and are replaced with `NA`.
+Input character vectors are automatically validated as they are parsed.
+Invalid inputs raise a warning and are replaced with `NA`.
 
 ``` r
 ip_address(c("0.0.0.0", "255.255.255.255", "255.255.255.256"))
