@@ -36,7 +36,10 @@
 
 
 <meta property="og:title" content="Classify version of IP address space — classify_version" />
-<meta property="og:description" content="is_ipv4 identifies IPv4 addresses/networks
+<meta property="og:description" content="Classify version of IP address space
+is_ipv4
+is_ipv4 identifies IPv4 addresses/networks
+is_ipv6
 is_ipv6 identifies IPv6 addresses/networks" />
 <meta name="twitter:card" content="summary" />
 
@@ -115,8 +118,11 @@ is_ipv6 identifies IPv6 addresses/networks" />
     </div>
 
     <div class="ref-description">
-    <p><code>is_ipv4</code> identifies IPv4 addresses/networks</p>
-<p><code>is_ipv6</code> identifies IPv6 addresses/networks</p>
+    <p>Classify version of IP address space</p>
+<p><code>is_ipv4</code>
+<code>is_ipv4</code> identifies IPv4 addresses/networks</p>
+<p><code>is_ipv6</code>
+<code>is_ipv6</code> identifies IPv6 addresses/networks</p>
     </div>
 
     <pre class="usage"><span class='fu'>is_ipv4</span>(<span class='no'>x</span>)
@@ -134,8 +140,8 @@ is_ipv6 identifies IPv6 addresses/networks" />
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>tibble</span>(<span class='kw'>ip</span> <span class='kw'>=</span> <span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"0.0.0.1"</span>, <span class='st'>"192.168.0.1"</span>, <span class='st'>"2001:db8::7334"</span>))) <span class='kw'>%&gt;%</span>
-  <span class='fu'>mutate</span>(<span class='kw'>ipv4</span> <span class='kw'>=</span> <span class='fu'>is_ipv4</span>(<span class='no'>ip</span>), <span class='kw'>ipv6</span> <span class='kw'>=</span> <span class='fu'>is_ipv6</span>(<span class='no'>ip</span>))</div><div class='output co'>#&gt; <span class='error'>Error in tibble(ip = ip_address(c("0.0.0.1", "192.168.0.1", "2001:db8::7334"))) %&gt;%     mutate(ipv4 = is_ipv4(ip), ipv6 = is_ipv6(ip)): could not find function "%&gt;%"</span></div><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'>is_ipv4</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"0.0.0.1"</span>, <span class='st'>"192.168.0.1"</span>, <span class='st'>"2001:db8::7334"</span>)))</div><div class='output co'>#&gt; [1]  TRUE  TRUE FALSE</div><div class='input'>
+<span class='fu'>is_ipv6</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"0.0.0.1"</span>, <span class='st'>"192.168.0.1"</span>, <span class='st'>"2001:db8::7334"</span>)))</div><div class='output co'>#&gt; [1] FALSE FALSE  TRUE</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
