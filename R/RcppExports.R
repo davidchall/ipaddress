@@ -25,3 +25,11 @@ hostmask_wrapper <- function(x) {
     .Call(`_ipaddress_hostmask_wrapper`, x)
 }
 
+is_within_wrapper <- function(address_r, network_r) {
+    .Call(`_ipaddress_is_within_wrapper`, address_r, network_r)
+}
+
+is_within_any_wrapper <- function(address_r, network_r) {
+    .Call(`_ipaddress_is_within_any_wrapper`, address_r, network_r)
+}
+

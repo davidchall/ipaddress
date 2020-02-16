@@ -35,3 +35,19 @@ List netmask_wrapper(List x) {
 List hostmask_wrapper(List x) {
   return IpNetworkVector(x).hostmask().asList();
 }
+
+// [[Rcpp::export]]
+LogicalVector is_within_wrapper(List address_r, List network_r) {
+  IpAddressVector address(address_r);
+  IpNetworkVector network(network_r);
+
+  return address.isWithin(network);
+}
+
+// [[Rcpp::export]]
+LogicalVector is_within_any_wrapper(List address_r, List network_r) {
+  IpAddressVector address(address_r);
+  IpNetworkVector network(network_r);
+
+  return address.isWithinAny(network);
+}

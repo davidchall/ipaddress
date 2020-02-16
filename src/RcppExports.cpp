@@ -71,6 +71,30 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// is_within_wrapper
+LogicalVector is_within_wrapper(List address_r, List network_r);
+RcppExport SEXP _ipaddress_is_within_wrapper(SEXP address_rSEXP, SEXP network_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type address_r(address_rSEXP);
+    Rcpp::traits::input_parameter< List >::type network_r(network_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(is_within_wrapper(address_r, network_r));
+    return rcpp_result_gen;
+END_RCPP
+}
+// is_within_any_wrapper
+LogicalVector is_within_any_wrapper(List address_r, List network_r);
+RcppExport SEXP _ipaddress_is_within_any_wrapper(SEXP address_rSEXP, SEXP network_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type address_r(address_rSEXP);
+    Rcpp::traits::input_parameter< List >::type network_r(network_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(is_within_any_wrapper(address_r, network_r));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_parse_address_wrapper", (DL_FUNC) &_ipaddress_parse_address_wrapper, 1},
@@ -79,6 +103,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_print_network_wrapper", (DL_FUNC) &_ipaddress_print_network_wrapper, 1},
     {"_ipaddress_netmask_wrapper", (DL_FUNC) &_ipaddress_netmask_wrapper, 1},
     {"_ipaddress_hostmask_wrapper", (DL_FUNC) &_ipaddress_hostmask_wrapper, 1},
+    {"_ipaddress_is_within_wrapper", (DL_FUNC) &_ipaddress_is_within_wrapper, 2},
+    {"_ipaddress_is_within_any_wrapper", (DL_FUNC) &_ipaddress_is_within_any_wrapper, 2},
     {NULL, NULL, 0}
 };
 

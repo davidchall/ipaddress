@@ -9,14 +9,15 @@
 
 using namespace Rcpp;
 
+class IpNetworkVector;
+
 class IpAddressVector {
-private:
+public:
   std::vector<asio::ip::address_v4> address_v4;
   std::vector<asio::ip::address_v6> address_v6;
   std::vector<bool> is_ipv6;
   std::vector<bool> is_na;
 
-public:
   IpAddressVector(
     std::vector<asio::ip::address_v4> in_address_v4,
     std::vector<asio::ip::address_v6> in_address_v6,
@@ -29,6 +30,9 @@ public:
   // output
   List asList() const;
   CharacterVector asCharacterVector() const;
+
+  LogicalVector isWithin(const IpNetworkVector &network) const;
+  LogicalVector isWithinAny(const IpNetworkVector &network) const;
 };
 
 #endif

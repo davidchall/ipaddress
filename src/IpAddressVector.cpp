@@ -1,5 +1,7 @@
 #include "IpAddressVector.h"
+#include "IpNetworkVector.h"
 #include "encoding.h"
+#include "masking.h"
 
 IpAddressVector::IpAddressVector(
   std::vector<asio::ip::address_v4> in_address_v4,
@@ -117,6 +119,58 @@ CharacterVector IpAddressVector::asCharacterVector() const {
       output[i] = address_v6[i].to_string();
     } else {
       output[i] = address_v4[i].to_string();
+    }
+  }
+
+  return output;
+}
+
+LogicalVector IpAddressVector::isWithin(const IpNetworkVector &network) const {
+  unsigned int vsize = is_na.size();
+
+  if (network.is_na.size() != vsize) {
+    stop("Address and network must have same length");
+  }
+
+  // initialize vectors
+  LogicalVector output(vsize);
+
+  for (unsigned int i=0; i<vsize; ++i) {
+    if (is_na[i] || network.is_na[i]) {
+      output[i] = NA_LOGICAL;
+    } else if (is_ipv6[i] != network.is_ipv6[i]) {
+      output[i] = false;
+    } else if (is_ipv6[i]) {
+      output[i] = in_network(address_v6[i], network.network_v6[i]);
+    } else {
+      output[i] = in_network(address_v4[i], network.network_v4[i]);
+    }
+  }
+
+  return output;
+}
+
+LogicalVector IpAddressVector::isWithinAny(const IpNetworkVector &network) const {
+  unsigned int address_size = is_na.size();
+  unsigned int network_size = network.is_na.size();
+
+  // initialize vectors
+  LogicalVector output(address_size);
+
+  for (unsigned int i_addr=0; i_addr<address_size; ++i_addr) {
+    if (is_na[i_addr]) {
+      output[i_addr] = NA_LOGICAL;
+    } else {
+      output[i_addr] = false;
+      for (unsigned int i_netw=0; i_netw<network_size; ++i_netw) {
+        bool compare_v6 = !network.is_na[i_netw] && is_ipv6[i_addr] && network.is_ipv6[i_netw];
+        bool compare_v4 = !network.is_na[i_netw] && !is_ipv6[i_addr] && !network.is_ipv6[i_netw];
+
+        if ((compare_v6 && in_network(address_v6[i_addr], network.network_v6[i_netw])) ||
+            (compare_v4 && in_network(address_v4[i_addr], network.network_v4[i_netw]))) {
+          output[i_addr] = true;
+        }
+      }
     }
   }
 

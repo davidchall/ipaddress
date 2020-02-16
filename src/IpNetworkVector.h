@@ -6,18 +6,18 @@
 #include <Rcpp.h>
 #include <asio/ip/network_v4.hpp>
 #include <asio/ip/network_v6.hpp>
-#include "IpAddressVector.h"
 
 using namespace Rcpp;
 
+class IpAddressVector;
+
 class IpNetworkVector {
-private:
+public:
   std::vector<asio::ip::network_v4> network_v4;
   std::vector<asio::ip::network_v6> network_v6;
   std::vector<bool> is_ipv6;
   std::vector<bool> is_na;
 
-public:
   IpNetworkVector(
     std::vector<asio::ip::network_v4> in_network_v4,
     std::vector<asio::ip::network_v6> in_network_v6,
