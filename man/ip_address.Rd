@@ -4,33 +4,46 @@
 \alias{ip_address}
 \alias{is_ip_address}
 \alias{format.ip_address}
-\title{Class for storing IP addresses (IPv4 or IPv6)}
+\alias{as.character.ip_address}
+\title{Class for storing IP addresses}
 \usage{
-ip_address(x = character())
+ip_address(ip = character())
 
 is_ip_address(x)
 
 \method{format}{ip_address}(x, ...)
+
+\method{as.character}{ip_address}(x, ...)
 }
 \arguments{
-\item{x}{Vector of IP addresses}
+\item{ip}{Character vector of IP addresses, in dot-decimal notation (IPv4)
+or hexadecimal notation (IPv6).}
 
-\item{...}{Other parameters passed on}
+\item{x}{An object}
+
+\item{...}{Additional arguments to be passed to or from methods}
 }
 \description{
-\code{ip_address()} is a high-level constructor that accepts character vectors
-representing the IP address in dotted-decimal notation.
+\code{ip_address()} constructs a vector of IP addresses.
 
 \code{is_ip_address()} checks if an object is of class \code{ip_address}.
 }
 \details{
-Addresses in IPv4 space are 32-bits long. They are usually represented
+Addresses in IPv4 space use 32-bits. They are usually represented
 as 4 groups of 8 bits, each shown as decimal digits (e.g. "192.168.0.1").
 This is known as dot-decimal notation.
 
-Addresses in IPv6 space are 128-bits long. They are usually represented
+Addresses in IPv6 space use 128-bits. They are usually represented
 as 8 groups of 16 bits, each shown as hexadecimal digits
 (e.g. "2001:0db8:85a3:0000:0000:8a2e:0370:7334"). This representation can
 also be compressed by removing leading zeros and replacing consecutive
 groups of zeros with double-colon (e.g. "2001:db8:85a3::8a2e:370:7334").
+}
+\examples{
+# supports IPv4 and IPv6 simultaneously
+ip_address(c("0.0.0.1", "192.168.0.1", "2001:db8::8a2e:370:7334"))
+
+# validates inputs and replaces with NA
+ip_address(c("1.2.3.4", "255.255.255.256", "1.2.3.4/5"))
+
 }

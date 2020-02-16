@@ -1,25 +1,34 @@
 #' @importFrom methods setOldClass
 methods::setOldClass(c("ip_network", "vctrs_vctr"))
 
-#' Class for storing IP networks (IPv4 or IPv6)
+#' Class for storing IP networks
 #'
-#' @param x Vector of IP networks
-#' @param ... Other parameters passed on
+#' @param x An object
+#' @param ... Additional arguments to be passed to or from methods
 #'
 #' @name ip_network
 NULL
+
 
 # Construction ------------------------------------------------------------
 
 #' `ip_network()`
 #'
-#' `ip_network()` is a high-level constructor that accepts character vectors
-#' representing the IP network in CIDR notation.
+#' `ip_network()` constructs a vector of IP networks.
+#'
+#' @param ip Character vector of IP networks, in CIDR notation (IPv4 or IPv6).
+#'
+#' @examples
+#' # supports IPv4 and IPv6 simultaneously
+#' ip_network(c("92.0.2.0/24", "192.168.100.0/22", "2001:db8::/48"))
+#'
+#' # validates inputs and replaces with NA
+#' ip_network(c("192.168.0.0/24", "192.168.0.0/33", "1.2.3.4"))
 #'
 #' @rdname ip_network
 #' @export
-ip_network <- function(x = character()) {
-  y <- network_aton(x)
+ip_network <- function(ip = character()) {
+  y <- network_aton(ip)
   new_ip_network(
     y$address1, y$address2, y$address3, y$address4,
     y$prefix,
@@ -27,8 +36,7 @@ ip_network <- function(x = character()) {
   )
 }
 
-# `new_ip_network()` is a low-level constructor that accepts the data types
-# stored in the background, [integer, integer].
+# low-level constructor that accepts the underlying data types being stored
 new_ip_network <- function(address1 = integer(), address2 = integer(), address3 = integer(), address4 = integer(), prefix = integer(), is_ipv6 = logical()) {
   vec_assert(address1, ptype = integer())
   vec_assert(address2, ptype = integer())
@@ -50,14 +58,11 @@ new_ip_network <- function(address1 = integer(), address2 = integer(), address3 
 #'
 #' @rdname ip_network
 #' @export
-is_ip_network <- function(x) {
-  inherits(x, "ip_network")
-}
+is_ip_network <- function(x) inherits(x, "ip_network")
 
 #' @rdname ip_network
 #' @export
 format.ip_network <- function(x, ...) as.character(x)
-
 
 
 # Casting ------------------------------------------------------------
@@ -85,9 +90,11 @@ vec_cast.ip_network.character <- function(x, to, ...) ip_network(x)
 
 #' @method vec_cast.character ip_network
 #' @export
-vec_cast.character.ip_network <- function(x, to, ...) {
-  network_ntoa(x)
-}
+vec_cast.character.ip_network <- function(x, to, ...) network_ntoa(x)
+
+#' @rdname ip_network
+#' @export
+as.character.ip_network <- function(x, ...) vec_cast(x, character())
 
 
 # Coercion ------------------------------------------------------------
@@ -141,9 +148,4 @@ vec_proxy_compare.ip_network <- function(x, ...) {
 #' @export
 vec_ptype_abbr.ip_network <- function(x, ...) {
   "ip_netw"
-}
-
-#' @export
-vec_ptype_full.ip_network <- function(x, ...) {
-  "ip_network"
 }

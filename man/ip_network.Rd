@@ -4,22 +4,34 @@
 \alias{ip_network}
 \alias{is_ip_network}
 \alias{format.ip_network}
-\title{Class for storing IP networks (IPv4 or IPv6)}
+\alias{as.character.ip_network}
+\title{Class for storing IP networks}
 \usage{
-ip_network(x = character())
+ip_network(ip = character())
 
 is_ip_network(x)
 
 \method{format}{ip_network}(x, ...)
+
+\method{as.character}{ip_network}(x, ...)
 }
 \arguments{
-\item{x}{Vector of IP networks}
+\item{ip}{Character vector of IP networks, in CIDR notation (IPv4 or IPv6).}
 
-\item{...}{Other parameters passed on}
+\item{x}{An object}
+
+\item{...}{Additional arguments to be passed to or from methods}
 }
 \description{
-\code{ip_network()} is a high-level constructor that accepts character vectors
-representing the IP network in CIDR notation.
+\code{ip_network()} constructs a vector of IP networks.
 
 \code{is_ip_network()} checks if an object is of class \code{ip_network}.
+}
+\examples{
+# supports IPv4 and IPv6 simultaneously
+ip_network(c("92.0.2.0/24", "192.168.100.0/22", "2001:db8::/48"))
+
+# validates inputs and replaces with NA
+ip_network(c("192.168.0.0/24", "192.168.0.0/33", "1.2.3.4"))
+
 }

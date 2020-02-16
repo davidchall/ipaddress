@@ -53,10 +53,6 @@ tibbles.
 library(tidyverse)
 library(ipaddress)
 
-ip_address(c("0.0.0.1", "192.168.0.1", "2001:db8::8a2e:370:7334"))
-#> <ip_address[3]>
-#> [1] 0.0.0.1                 192.168.0.1             2001:db8::8a2e:370:7334
-
 tibble(
   address = ip_address(c("0.0.0.1", "192.168.0.1", "2001:db8::8a2e:370:7334")),
   network = ip_network(c("92.0.2.0/24", "192.168.100.0/22", "2001:db8::/48"))
@@ -74,7 +70,7 @@ Invalid inputs raise a warning and are replaced with `NA`.
 
 ``` r
 ip_address(c("0.0.0.0", "255.255.255.255", "255.255.255.256"))
-#> Warning in address_aton(x): Invalid argument: 255.255.255.256
+#> Warning in address_aton(ip): Invalid argument: 255.255.255.256
 #> <ip_address[3]>
 #> [1] 0.0.0.0         255.255.255.255 <NA>
 ```

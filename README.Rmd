@@ -57,8 +57,6 @@ This package provides the `ip_address` and `ip_network` classes, which can be us
 library(tidyverse)
 library(ipaddress)
 
-ip_address(c("0.0.0.1", "192.168.0.1", "2001:db8::8a2e:370:7334"))
-
 tibble(
   address = ip_address(c("0.0.0.1", "192.168.0.1", "2001:db8::8a2e:370:7334")),
   network = ip_network(c("92.0.2.0/24", "192.168.100.0/22", "2001:db8::/48"))

@@ -40,6 +40,7 @@ test_that("missing values work", {
 })
 
 test_that("invalid inputs are caught", {
+  expect_warning(ip_address("1.2.3.4/5"), "Invalid argument")
   expect_warning(ip_address("abc"), "Invalid argument")
   expect_warning(ip_address("1.2.3.256"), "Invalid argument")
   expect_warning(ip_address("1.2.3.-1"), "Invalid argument")
