@@ -13,11 +13,15 @@ NULL
 #' @rdname is_ipv6
 #' @export
 is_ipv4 <- function(x) {
+  assertthat::assert_that(is_ip_address(x) || is_ip_network(x))
+
   !field(x, "is_ipv6")
 }
 
 #' @rdname is_ipv6
 #' @export
 is_ipv6 <- function(x) {
+  assertthat::assert_that(is_ip_address(x) || is_ip_network(x))
+
   field(x, "is_ipv6")
 }
