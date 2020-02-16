@@ -11,5 +11,6 @@ reference:
       - is_ipv6
   - title: "Network membership"
     contents:
+      - prefix_length
       - netmask
       - hostmask

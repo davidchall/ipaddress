@@ -11,6 +11,7 @@ Implements an S3 class for storing IP addresses.
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://davidchall.github.io/ipaddress}
   \item \url{https://github.com/davidchall/ipaddress}
   \item Report bugs at \url{https://github.com/davidchall/ipaddress/issues}
 }

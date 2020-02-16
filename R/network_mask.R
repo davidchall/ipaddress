@@ -1,18 +1,25 @@
-#' Netmask and hostmask
+#' IP network masking
+#'
+#' These functions yield different representations of the IP network mask.
 #'
 #' @param x An `ip_network` vector
 #' @return An `ip_address` vector corresponding to the netmask
 #'
+#' @examples
+#' ip <- ip_network(c("192.168.1.0/22", "2001:db00::0/26"))
+#' prefix_length(ip)
+#' netmask(ip)
+#' hostmask(ip)
+#'
 #' @name netmask
 NULL
 
-#' `netmask()`
-#'
-#' `netmask()` extracts the netmask from an IP network
-#'
-#' @examples
-#' netmask(ip_network(c("192.168.1.0/24", "2001:db00::0/24")))
-#'
+#' @rdname netmask
+#' @export
+prefix_length <- function(x) {
+  field(x, "prefix")
+}
+
 #' @rdname netmask
 #' @export
 netmask <- function(x) {
@@ -23,13 +30,6 @@ netmask <- function(x) {
   )
 }
 
-#' `hostmask()`
-#'
-#' `hostmask()` extracts the hostmask from an IP network
-#'
-#' @examples
-#' hostmask(ip_network(c("192.168.1.0/24", "2001:db00::0/24")))
-#'
 #' @rdname netmask
 #' @export
 hostmask <- function(x) {
