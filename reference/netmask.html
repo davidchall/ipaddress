@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • ipaddress</title>
+<title>Extract netmask from IP network — netmask • ipaddress</title>
 
 
 <!-- jquery -->
@@ -35,7 +35,9 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Extract netmask from IP network — netmask" />
+<meta property="og:description" content="Extract netmask from IP network" />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -54,7 +56,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -104,54 +106,44 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Extract netmask from IP network</h1>
+    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
+    <div class="hidden name"><code>netmask.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Extract netmask from IP network</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>netmask</span>(<span class='no'>network</span>)</pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="ip_address.html">ip_address()</a></code> <code><a href="ip_address.html">is_ip_address()</a></code> <code><a href="ip_address.html">format(<i>&lt;ip_address&gt;</i>)</a></code> <code><a href="ip_address.html">as.character(<i>&lt;ip_address&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Class for storing IP addresses</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ip_network.html">ip_network()</a></code> <code><a href="ip_network.html">is_ip_network()</a></code> <code><a href="ip_network.html">format(<i>&lt;ip_network&gt;</i>)</a></code> <code><a href="ip_network.html">as.character(<i>&lt;ip_network&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Class for storing IP networks</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="netmask.html">netmask()</a></code> </p>
-        </td>
-        <td><p>Extract netmask from IP network</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>network</th>
+      <td><p>An <code>ip_network</code> vector</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>An <code>ip_address</code> vector corresponding to the netmask</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>netmask</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.1.0/24"</span>, <span class='st'>"2001:db00::0/24"</span>)))</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
+#&gt; [1] 255.255.255.0 ffff:ff00::  </div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
+
   </div>
 </div>
 
