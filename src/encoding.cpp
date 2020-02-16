@@ -1,14 +1,14 @@
 #include "encoding.h"
 
-int32_t encode_ipv4(asio::ip::address_v4 x) {
-  return (int32_t)x.to_uint();
+address_v4_r_bytes_type encode_ipv4(asio::ip::address_v4 x) {
+  return (address_v4_r_bytes_type)x.to_uint();
 }
 
-asio::ip::address_v4 decode_ipv4(int32_t x) {
+asio::ip::address_v4 decode_ipv4(address_v4_r_bytes_type x) {
   return asio::ip::make_address_v4((uint32_t)x);
 }
 
-std::array<int32_t, 4> encode_ipv6(asio::ip::address_v6 x) {
+address_v6_r_bytes_type encode_ipv6(asio::ip::address_v6 x) {
   asio::ip::address_v6::bytes_type address_bytes = x.to_bytes();
 
   uint32_t x1_n, x2_n, x3_n, x4_n;
@@ -22,10 +22,10 @@ std::array<int32_t, 4> encode_ipv6(asio::ip::address_v6 x) {
   int32_t x3 = (int32_t)ntohl(x3_n);
   int32_t x4 = (int32_t)ntohl(x4_n);
 
-  return std::array<int32_t, 4> {x1, x2, x3, x4};
+  return address_v6_r_bytes_type {x1, x2, x3, x4};
 }
 
-asio::ip::address_v6 decode_ipv6(std::array<int32_t, 4> x) {
+asio::ip::address_v6 decode_ipv6(address_v6_r_bytes_type x) {
   // convert from processor order to network order
   uint32_t x1_n = htonl((uint32_t)x[0]);
   uint32_t x2_n = htonl((uint32_t)x[1]);

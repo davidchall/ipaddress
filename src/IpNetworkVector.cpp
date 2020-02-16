@@ -58,7 +58,7 @@ IpNetworkVector::IpNetworkVector(List input) {
     if (in_addr1[i] == NA_INTEGER) {
       is_na[i] = true;
     } else if (in_v6[i]) {
-      std::array<int32_t, 4> bytes = {in_addr1[i], in_addr2[i], in_addr3[i], in_addr4[i]};
+      address_v6_r_bytes_type bytes = {in_addr1[i], in_addr2[i], in_addr3[i], in_addr4[i]};
       asio::ip::address_v6 tmp_addr = decode_ipv6(bytes);
       network_v6[i] = asio::ip::network_v6(tmp_addr, in_pfx[i]);
       is_ipv6[i] = true;
@@ -89,7 +89,7 @@ List IpNetworkVector::asList() const {
       out_pfx[i] = NA_INTEGER;
       out_v6[i] = NA_LOGICAL;
     } else if (is_ipv6[i]) {
-      std::array<int32_t, 4> bytes = encode_ipv6(network_v6[i].address());
+      address_v6_r_bytes_type bytes = encode_ipv6(network_v6[i].address());
       out_addr1[i] = bytes[0];
       out_addr2[i] = bytes[1];
       out_addr3[i] = bytes[2];
