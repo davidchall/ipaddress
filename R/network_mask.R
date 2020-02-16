@@ -17,12 +17,14 @@ NULL
 #' @rdname netmask
 #' @export
 prefix_length <- function(x) {
+  assertthat::assert_that(is_ip_network(x))
   field(x, "prefix")
 }
 
 #' @rdname netmask
 #' @export
 netmask <- function(x) {
+  assertthat::assert_that(is_ip_network(x))
   y <- netmask_wrapper(x)
   new_ip_address(
     y$address1, y$address2, y$address3, y$address4,
@@ -33,6 +35,7 @@ netmask <- function(x) {
 #' @rdname netmask
 #' @export
 hostmask <- function(x) {
+  assertthat::assert_that(is_ip_network(x))
   y <- hostmask_wrapper(x)
   new_ip_address(
     y$address1, y$address2, y$address3, y$address4,

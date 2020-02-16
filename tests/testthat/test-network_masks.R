@@ -24,3 +24,9 @@ test_that("masking works", {
     ip_address(c("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff", "0:3ff:ffff:ffff:ffff:ffff:ffff:ffff", "::7f:ffff:ffff:ffff", "::"))
   )
 })
+
+test_that("only accepts networks", {
+  expect_error(prefix_length(ip_address("1.2.3.4")), "not an ip_network")
+  expect_error(netmask(ip_address("1.2.3.4")), "not an ip_network")
+  expect_error(hostmask(ip_address("1.2.3.4")), "not an ip_network")
+})

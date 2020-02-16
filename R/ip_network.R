@@ -60,6 +60,10 @@ new_ip_network <- function(address1 = integer(), address2 = integer(), address3 
 #' @export
 is_ip_network <- function(x) inherits(x, "ip_network")
 
+assertthat::on_failure(is_ip_network) <- function(call, env) {
+  paste0(deparse(call$x), " is not an ip_network vector")
+}
+
 #' @rdname ip_network
 #' @export
 format.ip_network <- function(x, ...) as.character(x)
