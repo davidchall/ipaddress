@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract netmask from IP network — netmask • ipaddress</title>
+<title>Netmask and hostmask — netmask • ipaddress</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,9 @@
 
 
 
-<meta property="og:title" content="Extract netmask from IP network — netmask" />
-<meta property="og:description" content="Extract netmask from IP network" />
+<meta property="og:title" content="Netmask and hostmask — netmask" />
+<meta property="og:description" content="netmask() extracts the netmask from an IP network
+hostmask() extracts the hostmask from an IP network" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -108,22 +109,25 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract netmask from IP network</h1>
+    <h1>Netmask and hostmask</h1>
     <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
     <div class="hidden name"><code>netmask.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Extract netmask from IP network</p>
+    <p><code>netmask()</code> extracts the netmask from an IP network</p>
+<p><code>hostmask()</code> extracts the hostmask from an IP network</p>
     </div>
 
-    <pre class="usage"><span class='fu'>netmask</span>(<span class='no'>network</span>)</pre>
+    <pre class="usage"><span class='fu'>netmask</span>(<span class='no'>x</span>)
+
+<span class='fu'>hostmask</span>(<span class='no'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>network</th>
+      <th>x</th>
       <td><p>An <code>ip_network</code> vector</p></td>
     </tr>
     </table>
@@ -134,7 +138,10 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>netmask</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.1.0/24"</span>, <span class='st'>"2001:db00::0/24"</span>)))</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
-#&gt; [1] 255.255.255.0 ffff:ff00::  </div></pre>
+#&gt; [1] 255.255.255.0 ffff:ff00::  </div><div class='input'>
+<span class='fu'>hostmask</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.1.0/24"</span>, <span class='st'>"2001:db00::0/24"</span>)))</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
+#&gt; [1] 0.0.0.255                          0:ff:ffff:ffff:ffff:ffff:ffff:ffff</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
