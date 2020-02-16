@@ -40,7 +40,7 @@ NULL
 #' @rdname ip_address
 #' @export
 ip_address <- function(ip = character()) {
-  y <- address_aton(ip)
+  y <- parse_address_wrapper(ip)
   new_ip_address(
     y$address1, y$address2, y$address3, y$address4,
     y$is_ipv6
@@ -99,7 +99,7 @@ vec_cast.ip_address.character <- function(x, to, ...) ip_address(x)
 
 #' @method vec_cast.character ip_address
 #' @export
-vec_cast.character.ip_address <- function(x, to, ...) address_ntoa(x)
+vec_cast.character.ip_address <- function(x, to, ...) print_address_wrapper(x)
 
 #' @rdname ip_address
 #' @export

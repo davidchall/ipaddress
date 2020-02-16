@@ -7,21 +7,26 @@
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-List address_aton(CharacterVector x) {
+List parse_address_wrapper(CharacterVector x) {
   return IpAddressVector(x).asList();
 }
 
 // [[Rcpp::export]]
-CharacterVector address_ntoa(List x) {
+CharacterVector print_address_wrapper(List x) {
   return IpAddressVector(x).asCharacterVector();
 }
 
 // [[Rcpp::export]]
-List network_aton(CharacterVector x) {
+List parse_network_wrapper(CharacterVector x) {
   return IpNetworkVector(x).asList();
 }
 
 // [[Rcpp::export]]
-CharacterVector network_ntoa(List x) {
+CharacterVector print_network_wrapper(List x) {
   return IpNetworkVector(x).asCharacterVector();
+}
+
+// [[Rcpp::export]]
+List netmask_wrapper(List x) {
+  return IpNetworkVector(x).netmask().asList();
 }

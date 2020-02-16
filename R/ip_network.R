@@ -28,7 +28,7 @@ NULL
 #' @rdname ip_network
 #' @export
 ip_network <- function(ip = character()) {
-  y <- network_aton(ip)
+  y <- parse_network_wrapper(ip)
   new_ip_network(
     y$address1, y$address2, y$address3, y$address4,
     y$prefix,
@@ -90,7 +90,7 @@ vec_cast.ip_network.character <- function(x, to, ...) ip_network(x)
 
 #' @method vec_cast.character ip_network
 #' @export
-vec_cast.character.ip_network <- function(x, to, ...) network_ntoa(x)
+vec_cast.character.ip_network <- function(x, to, ...) print_network_wrapper(x)
 
 #' @rdname ip_network
 #' @export

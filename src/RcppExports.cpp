@@ -5,56 +5,68 @@
 
 using namespace Rcpp;
 
-// address_aton
-List address_aton(CharacterVector x);
-RcppExport SEXP _ipaddress_address_aton(SEXP xSEXP) {
+// parse_address_wrapper
+List parse_address_wrapper(CharacterVector x);
+RcppExport SEXP _ipaddress_parse_address_wrapper(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(address_aton(x));
+    rcpp_result_gen = Rcpp::wrap(parse_address_wrapper(x));
     return rcpp_result_gen;
 END_RCPP
 }
-// address_ntoa
-CharacterVector address_ntoa(List x);
-RcppExport SEXP _ipaddress_address_ntoa(SEXP xSEXP) {
+// print_address_wrapper
+CharacterVector print_address_wrapper(List x);
+RcppExport SEXP _ipaddress_print_address_wrapper(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< List >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(address_ntoa(x));
+    rcpp_result_gen = Rcpp::wrap(print_address_wrapper(x));
     return rcpp_result_gen;
 END_RCPP
 }
-// network_aton
-List network_aton(CharacterVector x);
-RcppExport SEXP _ipaddress_network_aton(SEXP xSEXP) {
+// parse_network_wrapper
+List parse_network_wrapper(CharacterVector x);
+RcppExport SEXP _ipaddress_parse_network_wrapper(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(network_aton(x));
+    rcpp_result_gen = Rcpp::wrap(parse_network_wrapper(x));
     return rcpp_result_gen;
 END_RCPP
 }
-// network_ntoa
-CharacterVector network_ntoa(List x);
-RcppExport SEXP _ipaddress_network_ntoa(SEXP xSEXP) {
+// print_network_wrapper
+CharacterVector print_network_wrapper(List x);
+RcppExport SEXP _ipaddress_print_network_wrapper(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< List >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(network_ntoa(x));
+    rcpp_result_gen = Rcpp::wrap(print_network_wrapper(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// netmask_wrapper
+List netmask_wrapper(List x);
+RcppExport SEXP _ipaddress_netmask_wrapper(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(netmask_wrapper(x));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_ipaddress_address_aton", (DL_FUNC) &_ipaddress_address_aton, 1},
-    {"_ipaddress_address_ntoa", (DL_FUNC) &_ipaddress_address_ntoa, 1},
-    {"_ipaddress_network_aton", (DL_FUNC) &_ipaddress_network_aton, 1},
-    {"_ipaddress_network_ntoa", (DL_FUNC) &_ipaddress_network_ntoa, 1},
+    {"_ipaddress_parse_address_wrapper", (DL_FUNC) &_ipaddress_parse_address_wrapper, 1},
+    {"_ipaddress_print_address_wrapper", (DL_FUNC) &_ipaddress_print_address_wrapper, 1},
+    {"_ipaddress_parse_network_wrapper", (DL_FUNC) &_ipaddress_parse_network_wrapper, 1},
+    {"_ipaddress_print_network_wrapper", (DL_FUNC) &_ipaddress_print_network_wrapper, 1},
+    {"_ipaddress_netmask_wrapper", (DL_FUNC) &_ipaddress_netmask_wrapper, 1},
     {NULL, NULL, 0}
 };
 

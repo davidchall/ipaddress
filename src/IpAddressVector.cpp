@@ -1,6 +1,13 @@
 #include "IpAddressVector.h"
 #include "encoding.h"
 
+IpAddressVector::IpAddressVector(
+  std::vector<asio::ip::address_v4> in_address_v4,
+  std::vector<asio::ip::address_v6> in_address_v6,
+  std::vector<bool> in_is_ipv6,
+  std::vector<bool> in_is_na
+) : address_v4(in_address_v4), address_v6(in_address_v6), is_ipv6(in_is_ipv6), is_na(in_is_na) { }
+
 IpAddressVector::IpAddressVector(CharacterVector input) {
   unsigned int vsize = input.size();
 

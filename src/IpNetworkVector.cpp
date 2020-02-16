@@ -1,6 +1,13 @@
 #include "IpNetworkVector.h"
 #include "encoding.h"
 
+IpNetworkVector::IpNetworkVector(
+  std::vector<asio::ip::network_v4> in_network_v4,
+  std::vector<asio::ip::network_v6> in_network_v6,
+  std::vector<bool> in_is_ipv6,
+  std::vector<bool> in_is_na
+) : network_v4(in_network_v4), network_v6(in_network_v6), is_ipv6(in_is_ipv6), is_na(in_is_na) { }
+
 IpNetworkVector::IpNetworkVector(CharacterVector input) {
   unsigned int vsize = input.size();
 
@@ -122,4 +129,39 @@ CharacterVector IpNetworkVector::asCharacterVector() const {
   }
 
   return output;
+}
+
+IpAddressVector IpNetworkVector::netmask() const {
+  unsigned int vsize = is_na.size();
+
+  // initialize vectors
+  std::vector<asio::ip::address_v4> out_address_v4(vsize);
+  std::vector<asio::ip::address_v6> out_address_v6(vsize);
+
+  for (unsigned int i=0; i<vsize; ++i) {
+    if (is_na[i]) {
+      continue;
+    } else if (is_ipv6[i]) {
+      out_address_v6[i] = netmask_v6(network_v6[i].prefix_length());
+    } else {
+      out_address_v4[i] = network_v4[i].netmask();
+    }
+  }
+
+  return IpAddressVector(out_address_v4, out_address_v6, is_ipv6, is_na);
+}
+
+asio::ip::address_v6 IpNetworkVector::netmask_v6(int prefix_length) const {
+  asio::ip::address_v6::bytes_type address_bytes;
+
+  for (unsigned int j=0; j<16; ++j) {
+    int ingest = std::min(prefix_length, 8);
+    uint8_t byte_mask = ingest == 0 ? 0 : (1 << 8) - (1 << (8 - ingest));
+
+    std::memcpy(&address_bytes[j], &byte_mask, sizeof(byte_mask));
+
+    prefix_length = std::max(prefix_length - 8, 0);
+  }
+
+  return asio::ip::address_v6(address_bytes);
 }
