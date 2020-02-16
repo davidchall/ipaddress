@@ -5,8 +5,8 @@
 #' @name classify_version
 NULL
 
-#' `is_ipv4`
-#' `is_ipv4` identifies IPv4 addresses/networks
+#' `is_ipv4()`
+#' `is_ipv4()` identifies IPv4 addresses/networks
 #' @examples
 #' is_ipv4(ip_address(c("0.0.0.1", "192.168.0.1", "2001:db8::7334")))
 #'
@@ -16,8 +16,8 @@ is_ipv4 <- function(x) {
   !field(x, "is_ipv6")
 }
 
-#' `is_ipv6`
-#' `is_ipv6` identifies IPv6 addresses/networks
+#' `is_ipv6()`
+#' `is_ipv6()` identifies IPv6 addresses/networks
 #' @examples
 #' is_ipv6(ip_address(c("0.0.0.1", "192.168.0.1", "2001:db8::7334")))
 #'
