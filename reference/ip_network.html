@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Class for storing IP networks (IPv4 or IPv6) — ip_network • ipaddress</title>
+<title>Class for storing IP networks — ip_network • ipaddress</title>
 
 
 <!-- jquery -->
@@ -35,9 +35,8 @@
 
 
 
-<meta property="og:title" content="Class for storing IP networks (IPv4 or IPv6) — ip_network" />
-<meta property="og:description" content="ip_network() is a high-level constructor that accepts character vectors
-representing the IP network in CIDR notation.
+<meta property="og:title" content="Class for storing IP networks — ip_network" />
+<meta property="og:description" content="ip_network() constructs a vector of IP networks.
 is_ip_network() checks if an object is of class ip_network." />
 <meta name="twitter:card" content="summary" />
 
@@ -110,43 +109,58 @@ is_ip_network() checks if an object is of class ip_network." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Class for storing IP networks (IPv4 or IPv6)</h1>
+    <h1>Class for storing IP networks</h1>
     <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/ip_network.R'><code>R/ip_network.R</code></a></small>
     <div class="hidden name"><code>ip_network.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>ip_network()</code> is a high-level constructor that accepts character vectors
-representing the IP network in CIDR notation.</p>
+    <p><code>ip_network()</code> constructs a vector of IP networks.</p>
 <p><code>is_ip_network()</code> checks if an object is of class <code>ip_network</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ip_network</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>())
+    <pre class="usage"><span class='fu'>ip_network</span>(<span class='kw'>ip</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>())
 
 <span class='fu'>is_ip_network</span>(<span class='no'>x</span>)
 
 <span class='co'># S3 method for ip_network</span>
-<span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for ip_network</span>
+<span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>ip</th>
+      <td><p>Character vector of IP networks, in CIDR notation (IPv4 or IPv6).</p></td>
+    </tr>
+    <tr>
       <th>x</th>
-      <td><p>Vector of IP networks</p></td>
+      <td><p>An object</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Other parameters passed on</p></td>
+      <td><p>Additional arguments to be passed to or from methods</p></td>
     </tr>
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># supports IPv4 and IPv6 simultaneously</span>
+<span class='fu'>ip_network</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"92.0.2.0/24"</span>, <span class='st'>"192.168.100.0/22"</span>, <span class='st'>"2001:db8::/48"</span>))</div><div class='output co'>#&gt; &lt;ip_network[3]&gt;
+#&gt; [1] 92.0.2.0/24      192.168.100.0/22 2001:db8::/48   </div><div class='input'>
+<span class='co'># validates inputs and replaces with NA</span>
+<span class='fu'>ip_network</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.0/24"</span>, <span class='st'>"192.168.0.0/33"</span>, <span class='st'>"1.2.3.4"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: Invalid argument: 192.168.0.0/33</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Invalid argument: 1.2.3.4</span></div><div class='output co'>#&gt; &lt;ip_network[3]&gt;
+#&gt; [1] 192.168.0.0/24 &lt;NA&gt;           &lt;NA&gt;          </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
