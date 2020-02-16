@@ -1,1 +1,15 @@
 destination: docs
+
+reference:
+  - title: "Classes"
+    contents:
+      - ip_address
+      - ip_network
+  - title: "Address spaces"
+    contents:
+      - is_ipv4
+      - is_ipv6
+  - title: "Network membership"
+    contents:
+      - netmask
+      - hostmask
