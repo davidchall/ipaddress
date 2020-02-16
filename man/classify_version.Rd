@@ -14,12 +14,17 @@ is_ipv6(x)
 \item{x}{An \code{ip_address} or \code{ip_network} vector}
 }
 \description{
+Classify version of IP address space
+
+\code{is_ipv4}
 \code{is_ipv4} identifies IPv4 addresses/networks
 
+\code{is_ipv6}
 \code{is_ipv6} identifies IPv6 addresses/networks
 }
 \examples{
-tibble(ip = ip_address(c("0.0.0.1", "192.168.0.1", "2001:db8::7334"))) \%>\%
-  mutate(ipv4 = is_ipv4(ip), ipv6 = is_ipv6(ip))
+is_ipv4(ip_address(c("0.0.0.1", "192.168.0.1", "2001:db8::7334")))
+
+is_ipv6(ip_address(c("0.0.0.1", "192.168.0.1", "2001:db8::7334")))
 
 }
