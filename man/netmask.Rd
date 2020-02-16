@@ -2,19 +2,27 @@
 % Please edit documentation in R/utils.R
 \name{netmask}
 \alias{netmask}
-\title{Extract netmask from IP network}
+\alias{hostmask}
+\title{Netmask and hostmask}
 \usage{
-netmask(network)
+netmask(x)
+
+hostmask(x)
 }
 \arguments{
-\item{network}{An \code{ip_network} vector}
+\item{x}{An \code{ip_network} vector}
 }
 \value{
 An \code{ip_address} vector corresponding to the netmask
 }
 \description{
-Extract netmask from IP network
+\code{netmask()} extracts the netmask from an IP network
+
+\code{hostmask()} extracts the hostmask from an IP network
 }
 \examples{
 netmask(ip_network(c("192.168.1.0/24", "2001:db00::0/24")))
+
+hostmask(ip_network(c("192.168.1.0/24", "2001:db00::0/24")))
+
 }

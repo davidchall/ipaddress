@@ -17,8 +17,6 @@ private:
   std::vector<bool> is_ipv6;
   std::vector<bool> is_na;
 
-  asio::ip::address_v6 netmask_v6(int prefix_length) const;
-
 public:
   IpNetworkVector(
     std::vector<asio::ip::network_v4> in_network_v4,
@@ -34,6 +32,7 @@ public:
   List asList() const;
 
   IpAddressVector netmask() const;
+  IpAddressVector hostmask() const;
 };
 
 #endif

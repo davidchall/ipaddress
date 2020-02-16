@@ -30,3 +30,8 @@ CharacterVector print_network_wrapper(List x) {
 List netmask_wrapper(List x) {
   return IpNetworkVector(x).netmask().asList();
 }
+
+// [[Rcpp::export]]
+List hostmask_wrapper(List x) {
+  return IpNetworkVector(x).hostmask().asList();
+}

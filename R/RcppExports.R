@@ -21,3 +21,7 @@ netmask_wrapper <- function(x) {
     .Call(`_ipaddress_netmask_wrapper`, x)
 }
 
+hostmask_wrapper <- function(x) {
+    .Call(`_ipaddress_hostmask_wrapper`, x)
+}
+
