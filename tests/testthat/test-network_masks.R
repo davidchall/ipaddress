@@ -30,3 +30,9 @@ test_that("only accepts networks", {
   expect_error(netmask(ip_address("1.2.3.4")), "not an ip_network")
   expect_error(hostmask(ip_address("1.2.3.4")), "not an ip_network")
 })
+
+test_that("missing values work", {
+  expect_equal(prefix_length(ip_network(NA)), NA_integer_)
+  expect_equal(netmask(ip_network(NA)), ip_address(NA))
+  expect_equal(hostmask(ip_network(NA)), ip_address(NA))
+})
