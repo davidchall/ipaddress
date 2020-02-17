@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Are IP addresses within IP network(s)? — address_in_network • ipaddress</title>
+<title>Are IP networks within other networks? — network_in_network • ipaddress</title>
 
 
 <!-- jquery -->
@@ -35,9 +35,9 @@
 
 
 
-<meta property="og:title" content="Are IP addresses within IP network(s)? — address_in_network" />
-<meta property="og:description" content="is_within() checks if an IP address is within a single IP network
-is_within_any() checks if an IP address is within a vector of IP networks" />
+<meta property="og:title" content="Are IP networks within other networks? — network_in_network" />
+<meta property="og:description" content="is_subnet() checks if network1 is a subnet of network2?
+is_supernet() checks if network1 is a supernet of network2?" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -109,37 +109,39 @@ is_within_any() checks if an IP address is within a vector of IP networks" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Are IP addresses within IP network(s)?</h1>
+    <h1>Are IP networks within other networks?</h1>
     <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/within_network.R'><code>R/within_network.R</code></a></small>
-    <div class="hidden name"><code>address_in_network.Rd</code></div>
+    <div class="hidden name"><code>network_in_network.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>is_within()</code> checks if an IP address is within a single IP network</p>
-<p><code>is_within_any()</code> checks if an IP address is within a vector of IP networks</p>
+    <p><code>is_subnet()</code> checks if <code>network1</code> is a subnet of <code>network2</code>?</p>
+<p><code>is_supernet()</code> checks if <code>network1</code> is a supernet of <code>network2</code>?</p>
     </div>
 
-    <pre class="usage"><span class='fu'>is_within</span>(<span class='no'>address</span>, <span class='no'>network</span>)
+    <pre class="usage"><span class='fu'>is_subnet</span>(<span class='no'>network1</span>, <span class='no'>network2</span>)
 
-<span class='fu'>is_within_any</span>(<span class='no'>address</span>, <span class='no'>network</span>)</pre>
+<span class='fu'>is_supernet</span>(<span class='no'>network1</span>, <span class='no'>network2</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>address</th>
-      <td><p>An <code>ip_address</code> vector</p></td>
+      <th>network1</th>
+      <td><p>An <code>ip_network</code> vector</p></td>
     </tr>
     <tr>
-      <th>network</th>
+      <th>network2</th>
       <td><p>An <code>ip_network</code> vector</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>is_within</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"192.0.2.6"</span>), <span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>"192.0.2.0/28"</span>))</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>is_within</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"192.0.3.6"</span>), <span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>"192.0.2.0/28"</span>))</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
-<span class='fu'>is_within_any</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"192.0.3.6"</span>), <span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.0.2.0/28"</span>, <span class='st'>"192.0.2.0/28"</span>)))</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
+    <pre class="examples"><div class='input'><span class='no'>net1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>"192.168.1.0/24"</span>)
+<span class='no'>net2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>"192.168.1.128/30"</span>)
+
+<span class='fu'>is_subnet</span>(<span class='no'>net2</span>, <span class='no'>net1</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>is_supernet</span>(<span class='no'>net1</span>, <span class='no'>net2</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
