@@ -70,7 +70,7 @@ is_ip_address() checks if an object is of class ip_address." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -160,7 +160,7 @@ groups of zeros with double-colon (e.g. "2001:db8:85a3::8a2e:370:7334").</p>
 <p>The <code>ip_address()</code> constructor accepts a character vector of IP addresses
 in these two formats. It checks whether each string is a valid IPv4 or IPv6
 address, and converts it to an <code>ip_address</code> object. If the input is invalid,
-a warning is emitted and an <code>NA</code> is stored instead.</p>
+a warning is emitted and <code>NA</code> is stored instead.</p>
 <p>When casting an <code>ip_address</code> object back to a character vector using
 <code><a href='https://rdrr.io/r/base/character.html'>as.character()</a></code>, IPv6 addresses are reduced to their compressed representation.</p>
 

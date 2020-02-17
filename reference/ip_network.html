@@ -70,7 +70,7 @@ is_ip_network() checks if an object is of class ip_network." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -119,7 +119,7 @@ is_ip_network() checks if an object is of class ip_network." />
 <p><code>is_ip_network()</code> checks if an object is of class <code>ip_network</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ip_network</span>(<span class='kw'>ip</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>())
+    <pre class="usage"><span class='fu'>ip_network</span>(<span class='kw'>ip</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(), <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='fu'>is_ip_network</span>(<span class='no'>x</span>)
 
@@ -135,6 +135,12 @@ is_ip_network() checks if an object is of class ip_network." />
     <tr>
       <th>ip</th>
       <td><p>Character vector of IP networks, in CIDR notation (IPv4 or IPv6).</p></td>
+    </tr>
+    <tr>
+      <th>strict</th>
+      <td><p>If <code>strict = TRUE</code> (the default) and the input has host bits set,
+then a warning is emitted and <code>NA</code> is returned. If <code>FALSE</code>, the
+host bits are set to zero and a valid IP network is returned.</p></td>
     </tr>
     <tr>
       <th>x</th>
@@ -162,7 +168,7 @@ IP address.</p>
 <p>The <code>ip_network()</code> constructor accepts a character vector of IP networks
 in CIDR notation. It checks whether each string is a valid IPv4 or IPv6
 network, and converts it to an <code>ip_network</code> object. If the input is invalid,
-a warning is emitted and an <code>NA</code> is stored instead.</p>
+a warning is emitted and <code>NA</code> is stored instead.</p>
 <p>When casting an <code>ip_network</code> object back to a character vector using
 <code><a href='https://rdrr.io/r/base/character.html'>as.character()</a></code>, IPv6 addresses are reduced to their compressed representation.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -177,6 +183,11 @@ a warning is emitted and an <code>NA</code> is stored instead.</p>
 <span class='co'># validates inputs and replaces with NA</span>
 <span class='fu'>ip_network</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.0/24"</span>, <span class='st'>"192.168.0.0/33"</span>, <span class='st'>"1.2.3.4"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: Invalid argument: 192.168.0.0/33</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Invalid argument: 1.2.3.4</span></div><div class='output co'>#&gt; &lt;ip_network[3]&gt;
 #&gt; [1] 192.168.0.0/24 &lt;NA&gt;           &lt;NA&gt;          </div><div class='input'>
+<span class='co'># IP networks should not have any host bits set</span>
+<span class='fu'>ip_network</span>(<span class='st'>"192.168.0.1/22"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Invalid argument: 192.168.0.1/22 has host bits set</span></div><div class='output co'>#&gt; &lt;ip_network[1]&gt;
+#&gt; [1] 0.0.0.0/0</div><div class='input'>
+<span class='fu'>ip_network</span>(<span class='st'>"192.168.0.1/22"</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; &lt;ip_network[1]&gt;
+#&gt; [1] 192.168.0.0/22</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
