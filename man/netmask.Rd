@@ -13,18 +13,21 @@ netmask(x)
 hostmask(x)
 }
 \arguments{
-\item{x}{An \code{ip_network} vector}
+\item{x}{An \code{\link{ip_network}} vector}
 }
 \value{
-An \code{ip_address} vector corresponding to the netmask
+An \code{\link{ip_address}} vector corresponding to the netmask
 }
 \description{
 These functions yield different representations of the IP network mask.
 }
 \examples{
 ip <- ip_network(c("192.168.1.0/22", "2001:db00::0/26"))
+
 prefix_length(ip)
+
 netmask(ip)
+
 hostmask(ip)
 
 }

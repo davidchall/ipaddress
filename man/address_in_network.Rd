@@ -4,24 +4,28 @@
 \alias{address_in_network}
 \alias{is_within}
 \alias{is_within_any}
-\title{Are IP addresses within IP network(s)?}
+\title{Network membership of IP addresses}
 \usage{
 is_within(address, network)
 
 is_within_any(address, network)
 }
 \arguments{
-\item{address}{An \code{ip_address} vector}
+\item{address}{An \code{\link{ip_address}} vector}
 
-\item{network}{An \code{ip_network} vector}
+\item{network}{An \code{\link{ip_network}} vector}
 }
 \description{
-\code{is_within()} checks if an IP address is within a single IP network
+These functions check whether an IP address falls within the range
+of an IP network.
 
-\code{is_within_any()} checks if an IP address is within a vector of IP networks
+\code{is_within()} performs a one-to-one matching between addresses and networks.
+
+\code{is_within_any()} checks if each IP address falls within \emph{any} of the IP networks.
 }
 \examples{
 is_within(ip_address("192.0.2.6"), ip_network("192.0.2.0/28"))
+
 is_within(ip_address("192.0.3.6"), ip_network("192.0.2.0/28"))
 
 is_within_any(ip_address("192.0.3.6"), ip_network(c("192.0.2.0/28", "192.0.3.0/28")))

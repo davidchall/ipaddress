@@ -27,6 +27,28 @@ is_ip_network(x)
 
 \code{is_ip_network()} checks if an object is of class \code{ip_network}.
 }
+\details{
+An IP network corresponds to a range of contiguous IP addresses
+(also known as an IP block). CIDR notation represents an
+IP network as the routing prefix address (which denotes the start
+of the range) and the prefix length (which indicates the size of
+the range) separated by a forward slash. For example, "192.168.100.0/22"
+represents addresses from "192.168.100.0" to "192.168.103.255".
+
+The prefix length indicates the number of bits reserved by the
+routing prefix. This means that larger prefix lengths indicate
+smaller networks. The maximum prefix length is 32 for IPv4 and
+128 for IPv6. These would correspond to an IP network of a single
+IP address.
+
+The \code{ip_network()} constructor accepts a character vector of IP networks
+in CIDR notation. It checks whether each string is a valid IPv4 or IPv6
+network, and converts it to an \code{ip_network} object. If the input is invalid,
+a warning is emitted and an \code{NA} is stored instead.
+
+When casting an \code{ip_network} object back to a character vector using
+\code{as.character()}, IPv6 addresses are reduced to their compressed representation.
+}
 \examples{
 # supports IPv4 and IPv6 simultaneously
 ip_network(c("92.0.2.0/24", "192.168.100.0/22", "2001:db8::/48"))
@@ -34,4 +56,8 @@ ip_network(c("92.0.2.0/24", "192.168.100.0/22", "2001:db8::/48"))
 # validates inputs and replaces with NA
 ip_network(c("192.168.0.0/24", "192.168.0.0/33", "1.2.3.4"))
 
+}
+\seealso{
+\code{\link{prefix_length}}, \code{\link{netmask}},
+\code{\link{hostmask}}
 }

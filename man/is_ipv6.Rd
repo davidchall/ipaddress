@@ -10,14 +10,16 @@ is_ipv4(x)
 is_ipv6(x)
 }
 \arguments{
-\item{x}{An \code{ip_address} or \code{ip_network} vector}
+\item{x}{An \code{\link{ip_address}} or \code{\link{ip_network}} vector}
 }
 \description{
 Classify version of IP address space
 }
 \examples{
 ip <- ip_address(c("0.0.0.1", "192.168.0.1", "2001:db8::7334"))
+
 is_ipv4(ip)
+
 is_ipv6(ip)
 
 }

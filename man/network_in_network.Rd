@@ -4,27 +4,27 @@
 \alias{network_in_network}
 \alias{is_subnet}
 \alias{is_supernet}
-\title{Are IP networks within other networks?}
+\title{Network membership of other IP networks}
 \usage{
 is_subnet(network1, network2)
 
 is_supernet(network1, network2)
 }
 \arguments{
-\item{network1}{An \code{ip_network} vector}
+\item{network1}{An \code{\link{ip_network}} vector}
 
-\item{network2}{An \code{ip_network} vector}
+\item{network2}{An \code{\link{ip_network}} vector}
 }
 \description{
-\code{is_subnet()} checks if \code{network1} is a subnet of \code{network2}?
-
-\code{is_supernet()} checks if \code{network1} is a supernet of \code{network2}?
+These functions check if an IP network is a subnet or supernet
+of another network.
 }
 \examples{
 net1 <- ip_network("192.168.1.0/24")
 net2 <- ip_network("192.168.1.128/30")
 
 is_subnet(net2, net1)
+
 is_supernet(net1, net2)
 
 }

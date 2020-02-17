@@ -3,6 +3,31 @@ methods::setOldClass(c("ip_network", "vctrs_vctr"))
 
 #' Class for storing IP networks
 #'
+#' @details
+#' An IP network corresponds to a range of contiguous IP addresses
+#' (also known as an IP block). CIDR notation represents an
+#' IP network as the routing prefix address (which denotes the start
+#' of the range) and the prefix length (which indicates the size of
+#' the range) separated by a forward slash. For example, "192.168.100.0/22"
+#' represents addresses from "192.168.100.0" to "192.168.103.255".
+#'
+#' The prefix length indicates the number of bits reserved by the
+#' routing prefix. This means that larger prefix lengths indicate
+#' smaller networks. The maximum prefix length is 32 for IPv4 and
+#' 128 for IPv6. These would correspond to an IP network of a single
+#' IP address.
+#'
+#' The `ip_network()` constructor accepts a character vector of IP networks
+#' in CIDR notation. It checks whether each string is a valid IPv4 or IPv6
+#' network, and converts it to an `ip_network` object. If the input is invalid,
+#' a warning is emitted and an `NA` is stored instead.
+#'
+#' When casting an `ip_network` object back to a character vector using
+#' `as.character()`, IPv6 addresses are reduced to their compressed representation.
+#'
+#' @seealso \code{\link{prefix_length}}, \code{\link{netmask}},
+#'   \code{\link{hostmask}}
+#'
 #' @param x An object
 #' @param ... Additional arguments to be passed to or from methods
 #'
