@@ -51,3 +51,17 @@ LogicalVector is_within_any_wrapper(List address_r, List network_r) {
 
   return address.isWithinAny(network);
 }
+
+// [[Rcpp::export]]
+LogicalVector is_subnet_wrapper(List network1_r, List network2_r) {
+  IpAddressVector address1(List::create(
+      _["address1"] = network1_r["address1"],
+      _["address2"] = network1_r["address2"],
+      _["address3"] = network1_r["address3"],
+      _["address4"] = network1_r["address4"],
+      _["is_ipv6"] = network1_r["is_ipv6"]
+  ));
+  IpNetworkVector network2(network2_r);
+
+  return address1.isWithin(network2);
+}

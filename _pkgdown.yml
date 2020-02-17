@@ -13,6 +13,8 @@ reference:
     contents:
       - is_within
       - is_within_any
+      - is_subnet
+      - is_supernet
       - prefix_length
       - netmask
       - hostmask

@@ -33,3 +33,7 @@ is_within_any_wrapper <- function(address_r, network_r) {
     .Call(`_ipaddress_is_within_any_wrapper`, address_r, network_r)
 }
 
+is_subnet_wrapper <- function(network1_r, network2_r) {
+    .Call(`_ipaddress_is_subnet_wrapper`, network1_r, network2_r)
+}
+
