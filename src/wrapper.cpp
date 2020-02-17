@@ -27,6 +27,23 @@ CharacterVector print_network_wrapper(List x) {
 }
 
 // [[Rcpp::export]]
+DataFrame compare_address_wrapper(List x) {
+  return IpAddressVector(x).compare();
+}
+
+// [[Rcpp::export]]
+DataFrame compare_network_wrapper(List x) {
+  IpAddressVector address(List::create(
+      _["address1"] = x["address1"],
+      _["address2"] = x["address2"],
+      _["address3"] = x["address3"],
+      _["address4"] = x["address4"],
+      _["is_ipv6"] = x["is_ipv6"]
+  ));
+  return IpAddressVector(address).compare();
+}
+
+// [[Rcpp::export]]
 List netmask_wrapper(List x) {
   return IpNetworkVector(x).netmask().asList();
 }

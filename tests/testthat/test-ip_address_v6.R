@@ -18,16 +18,16 @@ test_that("equality operations work", {
   expect_false(any(vctrs::vec_equal(ip_address(x), ip_address(rev(x)))))
 })
 
-# test_that("comparison operations work", {
-#   shifter <- function(x, n = 1L) {
-#     if (n == 0) x else c(tail(x, -n), head(x, n))
-#   }
-#   expect_equal(
-#     vctrs::vec_compare(ip_address(x), ip_address(shifter(x, 1L))),
-#     c(rep(-1L, length(x) - 1L), 1L)
-#   )
-#   expect_equal(
-#     vctrs::vec_compare(ip_address(x), ip_address(shifter(x, -1L))),
-#     c(-1L, rep(1L, length(x) - 1L))
-#   )
-# })
+test_that("comparison operations work", {
+  shifter <- function(x, n = 1L) {
+    if (n == 0) x else c(tail(x, -n), head(x, n))
+  }
+  expect_equal(
+    vctrs::vec_compare(ip_address(x), ip_address(shifter(x, 1L))),
+    c(rep(-1L, length(x) - 1L), 1L)
+  )
+  expect_equal(
+    vctrs::vec_compare(ip_address(x), ip_address(shifter(x, -1L))),
+    c(-1L, rep(1L, length(x) - 1L))
+  )
+})

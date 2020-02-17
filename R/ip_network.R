@@ -136,15 +136,7 @@ vec_ptype2.character.ip_network <- function(x, y, ...) new_ip_network()
 # Comparison ------------------------------------------------------------
 
 #' @export
-vec_proxy_compare.ip_network <- function(x, ...) {
-  left_mask <- bitwShiftL(1L, 16L) - 1L
-  right_mask <- bitwXor(bitwNot(0L), left_mask)
-
-  data.frame(
-    right = bitwShiftR(bitwAnd(field(x, "address1"), right_mask), 16L),
-    left = bitwAnd(field(x, "address1"), left_mask)
-  )
-}
+vec_proxy_compare.ip_network <- function(x, ...) compare_network_wrapper(x)
 
 
 # Other ------------------------------------------------------------

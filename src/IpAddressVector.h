@@ -30,6 +30,7 @@ public:
   // output
   List asList() const;
   CharacterVector asCharacterVector() const;
+  DataFrame compare() const;
 
   LogicalVector isWithin(const IpNetworkVector &network) const;
   LogicalVector isWithinAny(const IpNetworkVector &network) const;

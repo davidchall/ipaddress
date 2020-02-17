@@ -49,6 +49,28 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// compare_address_wrapper
+DataFrame compare_address_wrapper(List x);
+RcppExport SEXP _ipaddress_compare_address_wrapper(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(compare_address_wrapper(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// compare_network_wrapper
+DataFrame compare_network_wrapper(List x);
+RcppExport SEXP _ipaddress_compare_network_wrapper(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(compare_network_wrapper(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // netmask_wrapper
 List netmask_wrapper(List x);
 RcppExport SEXP _ipaddress_netmask_wrapper(SEXP xSEXP) {
@@ -113,6 +135,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_print_address_wrapper", (DL_FUNC) &_ipaddress_print_address_wrapper, 1},
     {"_ipaddress_parse_network_wrapper", (DL_FUNC) &_ipaddress_parse_network_wrapper, 1},
     {"_ipaddress_print_network_wrapper", (DL_FUNC) &_ipaddress_print_network_wrapper, 1},
+    {"_ipaddress_compare_address_wrapper", (DL_FUNC) &_ipaddress_compare_address_wrapper, 1},
+    {"_ipaddress_compare_network_wrapper", (DL_FUNC) &_ipaddress_compare_network_wrapper, 1},
     {"_ipaddress_netmask_wrapper", (DL_FUNC) &_ipaddress_netmask_wrapper, 1},
     {"_ipaddress_hostmask_wrapper", (DL_FUNC) &_ipaddress_hostmask_wrapper, 1},
     {"_ipaddress_is_within_wrapper", (DL_FUNC) &_ipaddress_is_within_wrapper, 2},

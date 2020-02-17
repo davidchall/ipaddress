@@ -125,6 +125,65 @@ CharacterVector IpAddressVector::asCharacterVector() const {
   return output;
 }
 
+DataFrame IpAddressVector::compare() const {
+  unsigned int vsize = is_na.size();
+
+  // initialize vectors
+  IntegerVector out_addr1(vsize);
+  IntegerVector out_addr2(vsize);
+  IntegerVector out_addr3(vsize);
+  IntegerVector out_addr4(vsize);
+  IntegerVector out_addr5(vsize);
+  IntegerVector out_addr6(vsize);
+  IntegerVector out_addr7(vsize);
+  IntegerVector out_addr8(vsize);
+  LogicalVector out_v6(vsize);
+
+  uint32_t right_mask = (1 << 16) - 1;
+  uint32_t left_mask = ~right_mask;
+
+  for (unsigned int i=0; i<vsize; ++i) {
+    if (is_na[i]) {
+      out_addr1[i] = NA_INTEGER;
+      out_addr2[i] = NA_INTEGER;
+      out_addr3[i] = NA_INTEGER;
+      out_addr4[i] = NA_INTEGER;
+      out_addr5[i] = NA_INTEGER;
+      out_addr6[i] = NA_INTEGER;
+      out_addr7[i] = NA_INTEGER;
+      out_addr8[i] = NA_INTEGER;
+      out_v6[i] = NA_LOGICAL;
+    } else if (is_ipv6[i]) {
+      address_v6_r_bytes_type bytes = encode_ipv6(address_v6[i]);
+      out_addr1[i] = (bytes[0] & left_mask) >> 16;
+      out_addr2[i] = (bytes[0] & right_mask);
+      out_addr3[i] = (bytes[1] & left_mask) >> 16;
+      out_addr4[i] = (bytes[1] & right_mask);
+      out_addr5[i] = (bytes[2] & left_mask) >> 16;
+      out_addr6[i] = (bytes[2] & right_mask);
+      out_addr7[i] = (bytes[3] & left_mask) >> 16;
+      out_addr8[i] = (bytes[3] & right_mask);
+      out_v6[i] = true;
+    } else {
+      address_v4_r_bytes_type bytes = encode_ipv4(address_v4[i]);
+      out_addr1[i] = (bytes & left_mask) >> 16;
+      out_addr2[i] = (bytes & right_mask);
+    }
+  }
+
+  return DataFrame::create(
+    _["is_ipv6"] = out_v6,
+    _["address1"] = out_addr1,
+    _["address2"] = out_addr2,
+    _["address3"] = out_addr3,
+    _["address4"] = out_addr4,
+    _["address5"] = out_addr5,
+    _["address6"] = out_addr6,
+    _["address7"] = out_addr7,
+    _["address8"] = out_addr8
+  );
+}
+
 LogicalVector IpAddressVector::isWithin(const IpNetworkVector &network) const {
   unsigned int vsize = is_na.size();
 

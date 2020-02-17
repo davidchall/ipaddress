@@ -17,6 +17,14 @@ print_network_wrapper <- function(x) {
     .Call(`_ipaddress_print_network_wrapper`, x)
 }
 
+compare_address_wrapper <- function(x) {
+    .Call(`_ipaddress_compare_address_wrapper`, x)
+}
+
+compare_network_wrapper <- function(x) {
+    .Call(`_ipaddress_compare_network_wrapper`, x)
+}
+
 netmask_wrapper <- function(x) {
     .Call(`_ipaddress_netmask_wrapper`, x)
 }
