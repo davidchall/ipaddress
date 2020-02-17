@@ -29,7 +29,7 @@ is_within <- function(address, network) {
 #' `is_within_any()` checks if an IP address is within a vector of IP networks
 #'
 #' @examples
-#' is_within_any(ip_address("192.0.3.6"), ip_network(c("192.0.2.0/28", "192.0.2.0/28")))
+#' is_within_any(ip_address("192.0.3.6"), ip_network(c("192.0.2.0/28", "192.0.3.0/28")))
 #'
 #' @rdname address_in_network
 #' @export
