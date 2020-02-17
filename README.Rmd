@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 [![codecov.io](https://codecov.io/github/davidchall/ipaddress/coverage.svg?branch=master)](https://codecov.io/github/davidchall/ipaddress?branch=master)
 <!-- badges: end -->
 
-This package provides classes for working with IP addresses, inspired by Python's [`ipaddress`](https://docs.python.org/library/ipaddress.html) module.
+This package provides classes for working with IP addresses, inspired by the Python [`ipaddress`](https://docs.python.org/library/ipaddress.html) module.
 
 Here are some of the features:
 

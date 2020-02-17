@@ -15,7 +15,7 @@ status](https://github.com/davidchall/ipaddress/workflows/R-CMD-check/badge.svg)
 <!-- badges: end -->
 
 This package provides classes for working with IP addresses, inspired by
-Python’s [`ipaddress`](https://docs.python.org/library/ipaddress.html)
+the Python [`ipaddress`](https://docs.python.org/library/ipaddress.html)
 module.
 
 Here are some of the features:
