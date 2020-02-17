@@ -4,9 +4,10 @@
 \name{ipaddress-package}
 \alias{ipaddress}
 \alias{ipaddress-package}
-\title{ipaddress: Tools for being tidy about IP addresses}
+\title{ipaddress: Tidy IP addresses}
 \description{
-Implements an S3 class for storing IP addresses.
+This package provides classes for working with
+    IP addresses, inspired by the Python 'ipaddress' module.
 }
 \seealso{
 Useful links:

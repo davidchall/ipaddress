@@ -6,6 +6,10 @@
 
 using namespace Rcpp;
 
+/*------------------------
+ *  Encoding and decoding
+ * -----------------------
+ */
 // [[Rcpp::export]]
 List parse_address_wrapper(CharacterVector x) {
   return IpAddressVector(x).asList();
@@ -17,8 +21,11 @@ CharacterVector print_address_wrapper(List x) {
 }
 
 // [[Rcpp::export]]
-List parse_network_wrapper(CharacterVector x) {
-  return IpNetworkVector(x).asList();
+List parse_network_wrapper(CharacterVector x, LogicalVector strict) {
+  if (strict.size() != 1) {
+    stop("argument 'strict' must be a scalar logical value");
+  }
+  return IpNetworkVector(x, strict[0]).asList();
 }
 
 // [[Rcpp::export]]
@@ -26,6 +33,10 @@ CharacterVector print_network_wrapper(List x) {
   return IpNetworkVector(x).asCharacterVector();
 }
 
+/*-----------------------
+ *  Comparison operators
+ * ----------------------
+ */
 // [[Rcpp::export]]
 DataFrame compare_address_wrapper(List x) {
   return IpAddressVector(x).compare();
@@ -43,6 +54,10 @@ DataFrame compare_network_wrapper(List x) {
   return IpAddressVector(address).compare();
 }
 
+/*--------------
+ *  Bit masking
+ * -------------
+ */
 // [[Rcpp::export]]
 List netmask_wrapper(List x) {
   return IpNetworkVector(x).netmask().asList();

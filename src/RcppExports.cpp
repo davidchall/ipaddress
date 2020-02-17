@@ -28,13 +28,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // parse_network_wrapper
-List parse_network_wrapper(CharacterVector x);
-RcppExport SEXP _ipaddress_parse_network_wrapper(SEXP xSEXP) {
+List parse_network_wrapper(CharacterVector x, LogicalVector strict);
+RcppExport SEXP _ipaddress_parse_network_wrapper(SEXP xSEXP, SEXP strictSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(parse_network_wrapper(x));
+    Rcpp::traits::input_parameter< LogicalVector >::type strict(strictSEXP);
+    rcpp_result_gen = Rcpp::wrap(parse_network_wrapper(x, strict));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -133,7 +134,7 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_parse_address_wrapper", (DL_FUNC) &_ipaddress_parse_address_wrapper, 1},
     {"_ipaddress_print_address_wrapper", (DL_FUNC) &_ipaddress_print_address_wrapper, 1},
-    {"_ipaddress_parse_network_wrapper", (DL_FUNC) &_ipaddress_parse_network_wrapper, 1},
+    {"_ipaddress_parse_network_wrapper", (DL_FUNC) &_ipaddress_parse_network_wrapper, 2},
     {"_ipaddress_print_network_wrapper", (DL_FUNC) &_ipaddress_print_network_wrapper, 1},
     {"_ipaddress_compare_address_wrapper", (DL_FUNC) &_ipaddress_compare_address_wrapper, 1},
     {"_ipaddress_compare_network_wrapper", (DL_FUNC) &_ipaddress_compare_network_wrapper, 1},

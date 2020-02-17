@@ -10,7 +10,7 @@ IpNetworkVector::IpNetworkVector(
   std::vector<bool> in_is_na
 ) : network_v4(in_network_v4), network_v6(in_network_v6), is_ipv6(in_is_ipv6), is_na(in_is_na) { }
 
-IpNetworkVector::IpNetworkVector(CharacterVector input) {
+IpNetworkVector::IpNetworkVector(CharacterVector input, bool strict) {
   unsigned int vsize = input.size();
 
   // initialize vectors
@@ -20,19 +20,43 @@ IpNetworkVector::IpNetworkVector(CharacterVector input) {
   is_na.assign(vsize, false);
 
   asio::error_code ec;
+  asio::ip::network_v4 tmp_v4;
+  asio::ip::network_v6 tmp_v6;
 
   for (unsigned int i=0; i<vsize; ++i) {
     if (input[i] == NA_STRING) {
       is_na[i] = true;
     } else {
-      network_v4[i] = asio::ip::make_network_v4(input[i], ec);
-      if (ec) {
-        network_v6[i] = asio::ip::make_network_v6(input[i], ec);
-        if (ec) {
+
+      // Parse IPv4
+      tmp_v4 = asio::ip::make_network_v4(input[i], ec);
+      if (!ec) {
+        if (tmp_v4 == tmp_v4.canonical()) {
+          network_v4[i] = tmp_v4;
+        } else if (strict) {
+          warning("Invalid argument: " + input[i] + " has host bits set");
+        } else {
+          network_v4[i] = tmp_v4.canonical();
+        }
+      }
+
+      // Parse IPv4
+      else {
+        tmp_v6 = asio::ip::make_network_v6(input[i], ec);
+        if (!ec) {
+          if (tmp_v6 == tmp_v6.canonical()) {
+            network_v6[i] = tmp_v6;
+            is_ipv6[i] = true;
+          } else if (strict) {
+            is_na[i] = true;
+            warning("Invalid argument: " + input[i] + " has host bits set");
+          } else {
+            network_v6[i] = tmp_v6.canonical();
+            is_ipv6[i] = true;
+          }
+        } else {
           is_na[i] = true;
           warning(ec.message() + ": " + input[i]);
-        } else {
-          is_ipv6[i] = true;
         }
       }
     }

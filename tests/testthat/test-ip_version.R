@@ -1,4 +1,4 @@
-x <- c("1.2.3.4", "2001:db8::7334")
+x <- c("1.2.3.0", "2001:ff00::")
 
 test_that("is_ipv4 and is_ipv6 work", {
   expect_equal(is_ipv4(ip_address(x)), c(TRUE, FALSE))

@@ -52,6 +52,11 @@ test_that("invalid inputs are caught", {
   expect_warning(ip_network("1.2.3.4/24/24"), "Invalid argument")
 })
 
+test_that("strict argument works", {
+  expect_warning(ip_network("255.255.255.255/21"), "host bits set")
+  expect_equal(ip_network("255.255.255.255/21", strict = FALSE), ip_network("255.255.248.0/21"))
+})
+
 test_that("equality operations work", {
   expect_true(all(vctrs::vec_equal(ip_network(x), ip_network(x))))
   expect_false(any(vctrs::vec_equal(ip_network(x), ip_network(rev(x)))))

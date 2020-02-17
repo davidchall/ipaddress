@@ -20,7 +20,7 @@ methods::setOldClass(c("ip_network", "vctrs_vctr"))
 #' The `ip_network()` constructor accepts a character vector of IP networks
 #' in CIDR notation. It checks whether each string is a valid IPv4 or IPv6
 #' network, and converts it to an `ip_network` object. If the input is invalid,
-#' a warning is emitted and an `NA` is stored instead.
+#' a warning is emitted and `NA` is stored instead.
 #'
 #' When casting an `ip_network` object back to a character vector using
 #' `as.character()`, IPv6 addresses are reduced to their compressed representation.
@@ -42,6 +42,9 @@ NULL
 #' `ip_network()` constructs a vector of IP networks.
 #'
 #' @param ip Character vector of IP networks, in CIDR notation (IPv4 or IPv6).
+#' @param strict If `strict = TRUE` (the default) and the input has host bits set,
+#'   then a warning is emitted and `NA` is returned. If `FALSE`, the
+#'   host bits are set to zero and a valid IP network is returned.
 #'
 #' @examples
 #' # supports IPv4 and IPv6 simultaneously
@@ -50,10 +53,17 @@ NULL
 #' # validates inputs and replaces with NA
 #' ip_network(c("192.168.0.0/24", "192.168.0.0/33", "1.2.3.4"))
 #'
+#' # IP networks should not have any host bits set
+#' ip_network("192.168.0.1/22")
+#'
+#' ip_network("192.168.0.1/22", strict = FALSE)
+#'
 #' @rdname ip_network
 #' @export
-ip_network <- function(ip = character()) {
-  y <- parse_network_wrapper(ip)
+ip_network <- function(ip = character(), strict = TRUE) {
+  assertthat::is.flag(strict)
+  y <- parse_network_wrapper(ip, strict)
+
   new_ip_network(
     y$address1, y$address2, y$address3, y$address4,
     y$prefix,

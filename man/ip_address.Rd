@@ -42,7 +42,7 @@ groups of zeros with double-colon (e.g. "2001:db8:85a3::8a2e:370:7334").
 The \code{ip_address()} constructor accepts a character vector of IP addresses
 in these two formats. It checks whether each string is a valid IPv4 or IPv6
 address, and converts it to an \code{ip_address} object. If the input is invalid,
-a warning is emitted and an \code{NA} is stored instead.
+a warning is emitted and \code{NA} is stored instead.
 
 When casting an \code{ip_address} object back to a character vector using
 \code{as.character()}, IPv6 addresses are reduced to their compressed representation.

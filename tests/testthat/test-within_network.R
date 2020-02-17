@@ -8,11 +8,11 @@ test_that("input validation works", {
 
   expect_error(is_subnet(ip_address(), ip_network()), "not an ip_network vector")
   expect_error(is_subnet(ip_network(), ip_address()), "not an ip_network vector")
-  expect_error(is_subnet(ip_network("1.2.3.4/5"), ip_network()), "not equal to length")
+  expect_error(is_subnet(ip_network("1.2.3.4/32"), ip_network()), "not equal to length")
 
   expect_error(is_supernet(ip_address(), ip_network()), "not an ip_network vector")
   expect_error(is_supernet(ip_network(), ip_address()), "not an ip_network vector")
-  expect_error(is_supernet(ip_network("1.2.3.4/5"), ip_network()), "not equal to length")
+  expect_error(is_supernet(ip_network("1.2.3.4/32"), ip_network()), "not equal to length")
 })
 
 test_that("is_within works", {
@@ -91,8 +91,8 @@ test_that("missing values work", {
   expect_false(is_within_any(ip_address("192.168.0.1"), ip_network(c("192.168.0.0/32", NA))))
 
   expect_equal(is_subnet(ip_network(NA), ip_network("192.168.0.0/24")), NA)
-  expect_equal(is_subnet(ip_network("192.168.0.1/24"), ip_network(NA)), NA)
+  expect_equal(is_subnet(ip_network("192.168.0.0/24"), ip_network(NA)), NA)
 
   expect_equal(is_supernet(ip_network(NA), ip_network("192.168.0.0/24")), NA)
-  expect_equal(is_supernet(ip_network("192.168.0.1/24"), ip_network(NA)), NA)
+  expect_equal(is_supernet(ip_network("192.168.0.0/24"), ip_network(NA)), NA)
 })

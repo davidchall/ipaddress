@@ -24,7 +24,7 @@ public:
     std::vector<bool> in_is_ipv6,
     std::vector<bool> in_is_na
   );
-  IpNetworkVector(CharacterVector input);
+  IpNetworkVector(CharacterVector input, bool strict);
   IpNetworkVector(List input);
 
   // output

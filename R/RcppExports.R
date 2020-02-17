@@ -9,8 +9,8 @@ print_address_wrapper <- function(x) {
     .Call(`_ipaddress_print_address_wrapper`, x)
 }
 
-parse_network_wrapper <- function(x) {
-    .Call(`_ipaddress_parse_network_wrapper`, x)
+parse_network_wrapper <- function(x, strict) {
+    .Call(`_ipaddress_parse_network_wrapper`, x, strict)
 }
 
 print_network_wrapper <- function(x) {

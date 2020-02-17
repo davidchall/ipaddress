@@ -17,7 +17,7 @@ methods::setOldClass(c("ip_address", "vctrs_vctr"))
 #' The `ip_address()` constructor accepts a character vector of IP addresses
 #' in these two formats. It checks whether each string is a valid IPv4 or IPv6
 #' address, and converts it to an `ip_address` object. If the input is invalid,
-#' a warning is emitted and an `NA` is stored instead.
+#' a warning is emitted and `NA` is stored instead.
 #'
 #' When casting an `ip_address` object back to a character vector using
 #' `as.character()`, IPv6 addresses are reduced to their compressed representation.

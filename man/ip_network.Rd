@@ -7,7 +7,7 @@
 \alias{as.character.ip_network}
 \title{Class for storing IP networks}
 \usage{
-ip_network(ip = character())
+ip_network(ip = character(), strict = TRUE)
 
 is_ip_network(x)
 
@@ -17,6 +17,10 @@ is_ip_network(x)
 }
 \arguments{
 \item{ip}{Character vector of IP networks, in CIDR notation (IPv4 or IPv6).}
+
+\item{strict}{If \code{strict = TRUE} (the default) and the input has host bits set,
+then a warning is emitted and \code{NA} is returned. If \code{FALSE}, the
+host bits are set to zero and a valid IP network is returned.}
 
 \item{x}{An object}
 
@@ -44,7 +48,7 @@ IP address.
 The \code{ip_network()} constructor accepts a character vector of IP networks
 in CIDR notation. It checks whether each string is a valid IPv4 or IPv6
 network, and converts it to an \code{ip_network} object. If the input is invalid,
-a warning is emitted and an \code{NA} is stored instead.
+a warning is emitted and \code{NA} is stored instead.
 
 When casting an \code{ip_network} object back to a character vector using
 \code{as.character()}, IPv6 addresses are reduced to their compressed representation.
@@ -55,6 +59,11 @@ ip_network(c("92.0.2.0/24", "192.168.100.0/22", "2001:db8::/48"))
 
 # validates inputs and replaces with NA
 ip_network(c("192.168.0.0/24", "192.168.0.0/33", "1.2.3.4"))
+
+# IP networks should not have any host bits set
+ip_network("192.168.0.1/22")
+
+ip_network("192.168.0.1/22", strict = FALSE)
 
 }
 \seealso{

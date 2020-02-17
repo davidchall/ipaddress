@@ -1,4 +1,4 @@
-x <- c("::/128", "256::/72", "2001:db8::8a2e:370:7334/36", "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff/128")
+x <- c("::/128", "256::/72", "2001:db8::/36", "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff/128")
 
 test_that("formats correctly", {
   expect_equal(format(ip_network(x)), x)
@@ -14,6 +14,11 @@ test_that("invalid inputs are caught", {
   expect_warning(ip_network("1::2/129"), "Invalid argument")
   expect_warning(ip_network("1::2/a"), "Invalid argument")
   expect_warning(ip_network("1::2/24/24"), "Invalid argument")
+})
+
+test_that("strict argument works", {
+  expect_warning(ip_network("2001:db8::8a2e:370:7334/36"), "host bits set")
+  expect_equal(ip_network("2001:db8::8a2e:370:7334/36", strict = FALSE), ip_network("2001:db8::/36"))
 })
 
 test_that("equality operations work", {
