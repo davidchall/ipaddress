@@ -30,7 +30,7 @@ IpAddressVector::IpAddressVector(CharacterVector input) {
         address_v6[i] = asio::ip::make_address_v6(input[i], ec);
         if (ec) {
           is_na[i] = true;
-          warning(ec.message() + ": " + input[i]);
+          warning("Invalid argument: " + input[i]);
         } else {
           is_ipv6[i] = true;
         }

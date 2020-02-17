@@ -56,7 +56,7 @@ IpNetworkVector::IpNetworkVector(CharacterVector input, bool strict) {
           }
         } else {
           is_na[i] = true;
-          warning(ec.message() + ": " + input[i]);
+          warning("Invalid argument: " + input[i]);
         }
       }
     }
