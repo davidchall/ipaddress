@@ -9,7 +9,7 @@ Authors@R:
            comment = c(ORCID = "0000-0002-2193-0480"))
 Description: Classes and functions for working with IP addresses
     and networks, inspired by the Python 'ipaddress' module. Offers full
-    support for both IPv4 and IPv6 address spaces.  It is specifically
+    support for both IPv4 and IPv6 address spaces. It is specifically
     designed to work well with the 'tidyverse'.
 License: MIT + file LICENSE
 URL: https://davidchall.github.io/ipaddress,
@@ -23,8 +23,7 @@ Imports:
     Rcpp,
     vctrs (>= 0.2.2)
 Suggests: 
-    testthat (>= 2.1.0),
-    tidyverse
+    testthat (>= 2.1.0)
 LinkingTo: 
     AsioHeaders,
     Rcpp
