@@ -185,7 +185,7 @@ a warning is emitted and <code>NA</code> is stored instead.</p>
 #&gt; [1] 192.168.0.0/24 &lt;NA&gt;           &lt;NA&gt;          </div><div class='input'>
 <span class='co'># IP networks should not have any host bits set</span>
 <span class='fu'>ip_network</span>(<span class='st'>"192.168.0.1/22"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Invalid argument: 192.168.0.1/22 has host bits set</span></div><div class='output co'>#&gt; &lt;ip_network[1]&gt;
-#&gt; [1] 0.0.0.0/0</div><div class='input'>
+#&gt; [1] &lt;NA&gt;</div><div class='input'>
 <span class='fu'>ip_network</span>(<span class='st'>"192.168.0.1/22"</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; &lt;ip_network[1]&gt;
 #&gt; [1] 192.168.0.0/22</div><div class='input'>
 </div></pre>
