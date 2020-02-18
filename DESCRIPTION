@@ -1,5 +1,5 @@
 Package: ipaddress
-Title: Tidy IP addresses
+Title: Tidy IP Addresses
 Version: 0.1.0
 Authors@R: 
     person(given = "David",
@@ -7,8 +7,8 @@ Authors@R:
            role = c("aut", "cre"),
            email = "david.hall.physics@gmail.com",
            comment = c(ORCID = "0000-0002-2193-0480"))
-Description: This package provides classes for working with
-    IP addresses, inspired by the Python 'ipaddress' module.
+Description: Classes for working with IP addresses, inspired by
+    the Python 'ipaddress' module.
 License: MIT + file LICENSE
 URL: https://davidchall.github.io/ipaddress,
     https://github.com/davidchall/ipaddress
