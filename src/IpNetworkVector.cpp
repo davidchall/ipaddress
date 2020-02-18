@@ -34,6 +34,7 @@ IpNetworkVector::IpNetworkVector(CharacterVector input, bool strict) {
         if (tmp_v4 == tmp_v4.canonical()) {
           network_v4[i] = tmp_v4;
         } else if (strict) {
+          is_na[i] = true;
           warning("Invalid argument: " + input[i] + " has host bits set");
         } else {
           network_v4[i] = tmp_v4.canonical();
@@ -56,7 +57,7 @@ IpNetworkVector::IpNetworkVector(CharacterVector input, bool strict) {
           }
         } else {
           is_na[i] = true;
-          warning(ec.message() + ": " + input[i]);
+          warning("Invalid argument: " + input[i]);
         }
       }
     }

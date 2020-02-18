@@ -1,0 +1,4 @@
+# Windows target version: https://docs.microsoft.com/en-us/cpp/porting/modifying-winver-and-win32-winnt
+# set value corresponds to Windows 7
+PKG_CXXFLAGS = -D_WIN32_WINNT=0x0601
+PKG_LIBS = -lws2_32 -lwsock32
