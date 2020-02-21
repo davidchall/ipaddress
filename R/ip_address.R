@@ -113,6 +113,11 @@ vec_cast.ip_address.character <- function(x, to, ...) ip_address(x)
 #' @export
 vec_cast.character.ip_address <- function(x, to, ...) print_address_wrapper(x)
 
+#' @importFrom blob vec_cast.blob
+#' @method vec_cast.blob ip_address
+#' @export
+vec_cast.blob.ip_address <- function(x, to, ...) blob_address_wrapper(x)
+
 #' @rdname ip_address
 #' @export
 as.character.ip_address <- function(x, ...) vec_cast(x, character())

@@ -19,6 +19,7 @@ Depends:
     R (>= 3.2.0)
 Imports: 
     assertthat,
+    blob (>= 1.2.0),
     methods,
     Rcpp,
     vctrs (>= 0.2.2)

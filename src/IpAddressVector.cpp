@@ -125,6 +125,31 @@ CharacterVector IpAddressVector::asCharacterVector() const {
   return output;
 }
 
+List IpAddressVector::asBlob() const {
+  unsigned int vsize = is_na.size();
+
+  List output(vsize);
+
+  for (unsigned int i=0; i<vsize; ++i) {
+    if (is_na[i]) {
+      RawVector raw(1);
+      output[i] = raw;
+    } else if (is_ipv6[i]) {
+      asio::ip::address_v6::bytes_type bytes = address_v6[i].to_bytes();
+      RawVector raw(bytes.size());
+      std::copy(bytes.begin(), bytes.end(), raw.begin());
+      output[i] = raw;
+    } else {
+      asio::ip::address_v4::bytes_type bytes = address_v4[i].to_bytes();
+      RawVector raw(bytes.size());
+      std::copy(bytes.begin(), bytes.end(), raw.begin());
+      output[i] = raw;
+    }
+  }
+
+  return output;
+}
+
 DataFrame IpAddressVector::compare() const {
   unsigned int vsize = is_na.size();
 
