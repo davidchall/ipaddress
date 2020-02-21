@@ -132,7 +132,7 @@ List IpAddressVector::asBlob() const {
 
   for (unsigned int i=0; i<vsize; ++i) {
     if (is_na[i]) {
-      RawVector raw(1);
+      RawVector raw(0);
       output[i] = raw;
     } else if (is_ipv6[i]) {
       asio::ip::address_v6::bytes_type bytes = address_v6[i].to_bytes();
