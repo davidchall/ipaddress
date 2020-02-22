@@ -11,9 +11,9 @@ bool address_in_network(Address address, Network network) {
   return network.hosts().find(address) != network.hosts().end();
 }
 
-template<std::size_t N>
-std::array<unsigned char, N> netmask_bytes(int prefix_length) {
-  std::array<unsigned char, N> out;
+template<class Bytes>
+Bytes netmask_bytes(int prefix_length) {
+  Bytes out;
 
   for (unsigned int i=0; i<sizeof(out); ++i) {
     int ingest = std::min(prefix_length, 8);
@@ -27,14 +27,14 @@ std::array<unsigned char, N> netmask_bytes(int prefix_length) {
   return out;
 }
 
-template<class Address, std::size_t N>
+template<class Address>
 Address netmask(int prefix_length) {
-  return Address(netmask_bytes<N>(prefix_length));
+  return Address(netmask_bytes<typename Address::bytes_type>(prefix_length));
 }
 
-template<class Address, std::size_t N>
+template<class Address>
 Address hostmask(int prefix_length) {
-  std::array<unsigned char, N> hostmask_bytes = netmask_bytes<N>(prefix_length);
+  typename Address::bytes_type hostmask_bytes = netmask_bytes<typename Address::bytes_type>(prefix_length);
 
   for (unsigned int i=0; i<hostmask_bytes.size(); ++i) {
     hostmask_bytes[i] = ~hostmask_bytes[i];

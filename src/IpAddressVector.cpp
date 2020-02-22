@@ -81,10 +81,10 @@ IpAddressVector IpAddressVector::createNetmask(LogicalVector in_v6, IntegerVecto
     if (in_pfx[i] == NA_INTEGER) {
       is_na[i] = true;
     } else if (in_v6[i]) {
-      address_v6[i] = netmask<asio::ip::address_v6, 16>(in_pfx[i]);
+      address_v6[i] = netmask<asio::ip::address_v6>(in_pfx[i]);
       is_ipv6[i] = true;
     } else {
-      address_v4[i] = netmask<asio::ip::address_v4, 4>(in_pfx[i]);
+      address_v4[i] = netmask<asio::ip::address_v4>(in_pfx[i]);
     }
   }
 
@@ -104,10 +104,10 @@ IpAddressVector IpAddressVector::createHostmask(LogicalVector in_v6, IntegerVect
     if (in_pfx[i] == NA_INTEGER) {
       is_na[i] = true;
     } else if (in_v6[i]) {
-      address_v6[i] = hostmask<asio::ip::address_v6, 16>(in_pfx[i]);
+      address_v6[i] = hostmask<asio::ip::address_v6>(in_pfx[i]);
       is_ipv6[i] = true;
     } else {
-      address_v4[i] = hostmask<asio::ip::address_v4, 4>(in_pfx[i]);
+      address_v4[i] = hostmask<asio::ip::address_v4>(in_pfx[i]);
     }
   }
 
