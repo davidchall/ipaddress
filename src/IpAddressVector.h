@@ -1,8 +1,6 @@
 #ifndef __IPADDRESS_ADDRESS__
 #define __IPADDRESS_ADDRESS__
 
-#define ASIO_STANDALONE
-
 #include <Rcpp.h>
 #include <asio/ip/address_v4.hpp>
 #include <asio/ip/address_v6.hpp>

@@ -1,8 +1,6 @@
 #ifndef __IPADDRESS_MASKING__
 #define __IPADDRESS_MASKING__
 
-#define ASIO_STANDALONE
-
 #include <asio/ip/network_v4.hpp>
 #include <asio/ip/network_v6.hpp>
 

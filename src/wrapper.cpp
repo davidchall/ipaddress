@@ -1,5 +1,3 @@
-#define ASIO_STANDALONE
-
 #include <Rcpp.h>
 #include "IpAddressVector.h"
 #include "IpNetworkVector.h"
