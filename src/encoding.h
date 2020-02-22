@@ -4,12 +4,30 @@
 #include <asio/ip/network_v4.hpp>
 #include <asio/ip/network_v6.hpp>
 
-typedef int32_t address_v4_r_bytes_type;
-typedef std::array<int32_t, 4> address_v6_r_bytes_type;
+typedef std::array<int32_t, 1> r_address_v4_type;
+typedef std::array<int32_t, 4> r_address_v6_type;
 
-address_v4_r_bytes_type encode_ipv4(asio::ip::address_v4 x);
-asio::ip::address_v4 decode_ipv4(address_v4_r_bytes_type x);
-address_v6_r_bytes_type encode_ipv6(asio::ip::address_v6 x);
-asio::ip::address_v6 decode_ipv6(address_v6_r_bytes_type x);
+template<class CAddress, class RAddress>
+RAddress encode(CAddress x) {
+  RAddress x_out;
+  typename CAddress::bytes_type x_in = x.to_bytes();
+
+  for (std::size_t i=0; i<x_out.size(); ++i) {
+    std::memcpy(&x_out[i], &x_in[4*i], sizeof(x_out[i]));
+  }
+
+  return x_out;
+}
+
+template<class CAddress, class RAddress>
+CAddress decode(RAddress x_in) {
+  typename CAddress::bytes_type x_out;
+
+  for (std::size_t i=0; i<x_in.size(); ++i) {
+    std::memcpy(&x_out[4*i], &x_in[i], sizeof(x_in[i]));
+  }
+
+  return CAddress(x_out);
+}
 
 #endif

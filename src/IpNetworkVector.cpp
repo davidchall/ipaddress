@@ -86,12 +86,13 @@ IpNetworkVector::IpNetworkVector(List input) {
     if (in_addr1[i] == NA_INTEGER) {
       is_na[i] = true;
     } else if (in_v6[i]) {
-      address_v6_r_bytes_type bytes = {in_addr1[i], in_addr2[i], in_addr3[i], in_addr4[i]};
-      asio::ip::address_v6 tmp_addr = decode_ipv6(bytes);
+      r_address_v6_type bytes = {in_addr1[i], in_addr2[i], in_addr3[i], in_addr4[i]};
+      asio::ip::address_v6 tmp_addr = decode<asio::ip::address_v6, r_address_v6_type>(bytes);
       network_v6[i] = asio::ip::network_v6(tmp_addr, in_pfx[i]);
       is_ipv6[i] = true;
     } else {
-      asio::ip::address_v4 tmp_addr = decode_ipv4(in_addr1[i]);
+      r_address_v4_type bytes = {in_addr1[i]};
+      asio::ip::address_v4 tmp_addr = decode<asio::ip::address_v4, r_address_v4_type>(bytes);
       network_v4[i] = asio::ip::network_v4(tmp_addr, in_pfx[i]);
     }
   }
@@ -117,7 +118,7 @@ List IpNetworkVector::asList() const {
       out_pfx[i] = NA_INTEGER;
       out_v6[i] = NA_LOGICAL;
     } else if (is_ipv6[i]) {
-      address_v6_r_bytes_type bytes = encode_ipv6(network_v6[i].address());
+      r_address_v6_type bytes = encode<asio::ip::address_v6, r_address_v6_type>(network_v6[i].address());
       out_addr1[i] = bytes[0];
       out_addr2[i] = bytes[1];
       out_addr3[i] = bytes[2];
@@ -125,7 +126,8 @@ List IpNetworkVector::asList() const {
       out_pfx[i] = network_v6[i].prefix_length();
       out_v6[i] = true;
     } else {
-      out_addr1[i] = encode_ipv4(network_v4[i].address());
+      r_address_v4_type bytes = encode<asio::ip::address_v4, r_address_v4_type>(network_v4[i].address());
+      out_addr1[i] = bytes[0];
       out_pfx[i] = network_v4[i].prefix_length();
     }
   }
