@@ -200,9 +200,9 @@ LogicalVector IpAddressVector::isWithin(const IpNetworkVector &network) const {
     } else if (is_ipv6[i] != network.is_ipv6[i]) {
       output[i] = false;
     } else if (is_ipv6[i]) {
-      output[i] = in_network(address_v6[i], network.network_v6[i]);
+      output[i] = address_in_network(address_v6[i], network.network_v6[i]);
     } else {
-      output[i] = in_network(address_v4[i], network.network_v4[i]);
+      output[i] = address_in_network(address_v4[i], network.network_v4[i]);
     }
   }
 
@@ -222,11 +222,11 @@ LogicalVector IpAddressVector::isWithinAny(const IpNetworkVector &network) const
     } else {
       output[i_addr] = false;
       for (unsigned int i_netw=0; i_netw<network_size; ++i_netw) {
-        bool compare_v6 = !network.is_na[i_netw] && is_ipv6[i_addr] && network.is_ipv6[i_netw];
-        bool compare_v4 = !network.is_na[i_netw] && !is_ipv6[i_addr] && !network.is_ipv6[i_netw];
-
-        if ((compare_v6 && in_network(address_v6[i_addr], network.network_v6[i_netw])) ||
-            (compare_v4 && in_network(address_v4[i_addr], network.network_v4[i_netw]))) {
+        if (network.is_na[i_netw] || is_ipv6[i_addr] != network.is_ipv6[i_netw]) {
+          continue;
+        } else if (is_ipv6[i_addr] && address_in_network(address_v6[i_addr], network.network_v6[i_netw])) {
+          output[i_addr] = true;
+        } else if (address_in_network(address_v4[i_addr], network.network_v4[i_netw])) {
           output[i_addr] = true;
         }
       }
