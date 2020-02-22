@@ -28,12 +28,12 @@ std::array<unsigned char, N> netmask_bytes(int prefix_length) {
 }
 
 template<class Address, std::size_t N>
-Address netmask2(int prefix_length) {
+Address netmask(int prefix_length) {
   return Address(netmask_bytes<N>(prefix_length));
 }
 
 template<class Address, std::size_t N>
-Address hostmask2(int prefix_length) {
+Address hostmask(int prefix_length) {
   std::array<unsigned char, N> hostmask_bytes = netmask_bytes<N>(prefix_length);
 
   for (unsigned int i=0; i<hostmask_bytes.size(); ++i) {

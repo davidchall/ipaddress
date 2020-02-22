@@ -58,12 +58,12 @@ DataFrame compare_network_wrapper(List x) {
  */
 // [[Rcpp::export]]
 List netmask_wrapper(List x) {
-  return IpNetworkVector(x).netmask().asList();
+  return IpAddressVector::createNetmask(x["is_ipv6"], x["prefix"]).asList();
 }
 
 // [[Rcpp::export]]
 List hostmask_wrapper(List x) {
-  return IpNetworkVector(x).hostmask().asList();
+  return IpAddressVector::createHostmask(x["is_ipv6"], x["prefix"]).asList();
 }
 
 // [[Rcpp::export]]

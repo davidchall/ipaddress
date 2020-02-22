@@ -68,6 +68,52 @@ IpAddressVector::IpAddressVector(List input) {
   }
 }
 
+IpAddressVector IpAddressVector::createNetmask(LogicalVector in_v6, IntegerVector in_pfx) {
+  unsigned int vsize = in_v6.size();
+
+  // initialize vectors
+  std::vector<asio::ip::address_v4> address_v4(vsize);
+  std::vector<asio::ip::address_v6> address_v6(vsize);
+  std::vector<bool> is_ipv6(vsize, false);
+  std::vector<bool> is_na(vsize, false);
+
+  for (unsigned int i=0; i<vsize; ++i) {
+    if (in_pfx[i] == NA_INTEGER) {
+      is_na[i] = true;
+    } else if (in_v6[i]) {
+      address_v6[i] = netmask<asio::ip::address_v6, 16>(in_pfx[i]);
+      is_ipv6[i] = true;
+    } else {
+      address_v4[i] = netmask<asio::ip::address_v4, 4>(in_pfx[i]);
+    }
+  }
+
+  return IpAddressVector(address_v4, address_v6, is_ipv6, is_na);
+}
+
+IpAddressVector IpAddressVector::createHostmask(LogicalVector in_v6, IntegerVector in_pfx) {
+  unsigned int vsize = in_v6.size();
+
+  // initialize vectors
+  std::vector<asio::ip::address_v4> address_v4(vsize);
+  std::vector<asio::ip::address_v6> address_v6(vsize);
+  std::vector<bool> is_ipv6(vsize, false);
+  std::vector<bool> is_na(vsize, false);
+
+  for (unsigned int i=0; i<vsize; ++i) {
+    if (in_pfx[i] == NA_INTEGER) {
+      is_na[i] = true;
+    } else if (in_v6[i]) {
+      address_v6[i] = hostmask<asio::ip::address_v6, 16>(in_pfx[i]);
+      is_ipv6[i] = true;
+    } else {
+      address_v4[i] = hostmask<asio::ip::address_v4, 4>(in_pfx[i]);
+    }
+  }
+
+  return IpAddressVector(address_v4, address_v6, is_ipv6, is_na);
+}
+
 List IpAddressVector::asList() const {
   unsigned int vsize = is_na.size();
 

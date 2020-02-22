@@ -28,9 +28,6 @@ public:
   // output
   CharacterVector asCharacterVector() const;
   List asList() const;
-
-  IpAddressVector netmask() const;
-  IpAddressVector hostmask() const;
 };
 
 #endif
