@@ -1,7 +1,7 @@
 #include "IpAddressVector.h"
 #include "IpNetworkVector.h"
 #include "encoding.h"
-#include "masking.h"
+#include "utils.h"
 
 IpAddressVector::IpAddressVector(
   std::vector<asio::ip::address_v4> in_address_v4,

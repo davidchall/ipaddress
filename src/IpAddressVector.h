@@ -34,10 +34,4 @@ public:
   LogicalVector isWithinAny(const IpNetworkVector &network) const;
 };
 
-// utility functions
-template<class Address, class Network>
-bool address_in_network(Address address, Network network) {
-  return network.hosts().find(address) != network.hosts().end();
-}
-
 #endif

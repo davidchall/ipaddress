@@ -1,7 +1,8 @@
 #include "IpNetworkVector.h"
 #include "IpAddressVector.h"
 #include "encoding.h"
-#include "masking.h"
+#include "utils.h"
+
 
 IpNetworkVector::IpNetworkVector(
   std::vector<asio::ip::network_v4> in_network_v4,
@@ -169,9 +170,9 @@ IpAddressVector IpNetworkVector::netmask() const {
     if (is_na[i]) {
       continue;
     } else if (is_ipv6[i]) {
-      out_address_v6[i] = netmask_v6(network_v6[i].prefix_length());
+      out_address_v6[i] = netmask2<asio::ip::address_v6, 16>(network_v6[i].prefix_length());
     } else {
-      out_address_v4[i] = network_v4[i].netmask();
+      out_address_v4[i] = netmask2<asio::ip::address_v4, 4>(network_v4[i].prefix_length());
     }
   }
 
@@ -189,10 +190,9 @@ IpAddressVector IpNetworkVector::hostmask() const {
     if (is_na[i]) {
       continue;
     } else if (is_ipv6[i]) {
-      out_address_v6[i] = hostmask_v6(network_v6[i].prefix_length());
+      out_address_v6[i] = hostmask2<asio::ip::address_v6, 16>(network_v6[i].prefix_length());
     } else {
-      uint32_t netmask_uint = ~network_v4[i].netmask().to_uint();
-      out_address_v4[i] = asio::ip::make_address_v4(netmask_uint);
+      out_address_v4[i] = hostmask2<asio::ip::address_v4, 4>(network_v4[i].prefix_length());
     }
   }
 
