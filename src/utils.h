@@ -29,18 +29,19 @@ Bytes netmask_bytes(int prefix_length) {
 
 template<class Address>
 Address netmask(int prefix_length) {
-  return Address(netmask_bytes<typename Address::bytes_type>(prefix_length));
+  typedef typename Address::bytes_type Bytes;
+  return Address(netmask_bytes<Bytes>(prefix_length));
 }
 
 template<class Address>
 Address hostmask(int prefix_length) {
-  typename Address::bytes_type hostmask_bytes = netmask_bytes<typename Address::bytes_type>(prefix_length);
+  typedef typename Address::bytes_type Bytes;
+  Bytes bytes = netmask_bytes<Bytes>(prefix_length);
 
-  for (unsigned int i=0; i<hostmask_bytes.size(); ++i) {
-    hostmask_bytes[i] = ~hostmask_bytes[i];
-  }
+  // flip bits
+  std::transform(bytes.begin(), bytes.end(), bytes.begin(), [](unsigned char c) { return ~c; });
 
-  return Address(hostmask_bytes);
+  return Address(bytes);
 }
 
 #endif
