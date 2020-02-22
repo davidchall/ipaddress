@@ -7,7 +7,7 @@
 typedef std::array<int32_t, 1> r_address_v4_type;
 typedef std::array<int32_t, 4> r_address_v6_type;
 
-template<class CAddress, class RAddress>
+template<class RAddress, class CAddress>
 RAddress encode(CAddress x) {
   RAddress x_out;
   typename CAddress::bytes_type x_in = x.to_bytes();

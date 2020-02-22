@@ -60,11 +60,11 @@ IpAddressVector::IpAddressVector(List input) {
       is_na[i] = true;
     } else if (in_v6[i]) {
       r_address_v6_type bytes = {in_addr1[i], in_addr2[i], in_addr3[i], in_addr4[i]};
-      address_v6[i] = decode<asio::ip::address_v6, r_address_v6_type>(bytes);
+      address_v6[i] = decode<asio::ip::address_v6>(bytes);
       is_ipv6[i] = true;
     } else {
       r_address_v4_type bytes = {in_addr1[i]};
-      address_v4[i] = decode<asio::ip::address_v4, r_address_v4_type>(bytes);
+      address_v4[i] = decode<asio::ip::address_v4>(bytes);
     }
   }
 }
@@ -133,14 +133,14 @@ List IpAddressVector::asList() const {
       out_addr4[i] = NA_INTEGER;
       out_v6[i] = NA_LOGICAL;
     } else if (is_ipv6[i]) {
-      r_address_v6_type bytes = encode<asio::ip::address_v6, r_address_v6_type>(address_v6[i]);
+      r_address_v6_type bytes = encode<r_address_v6_type>(address_v6[i]);
       out_addr1[i] = bytes[0];
       out_addr2[i] = bytes[1];
       out_addr3[i] = bytes[2];
       out_addr4[i] = bytes[3];
       out_v6[i] = true;
     } else {
-      r_address_v4_type bytes = encode<asio::ip::address_v4, r_address_v4_type>(address_v4[i]);
+      r_address_v4_type bytes = encode<r_address_v4_type>(address_v4[i]);
       out_addr1[i] = bytes[0];
     }
   }
@@ -202,7 +202,7 @@ DataFrame IpAddressVector::compare() const {
       out_addr8[i] = NA_INTEGER;
       out_v6[i] = NA_LOGICAL;
     } else if (is_ipv6[i]) {
-      r_address_v6_type bytes = encode<asio::ip::address_v6, r_address_v6_type>(address_v6[i]);
+      r_address_v6_type bytes = encode<r_address_v6_type>(address_v6[i]);
       out_addr1[i] = (bytes[0] & left_mask) >> 16;
       out_addr2[i] = (bytes[0] & right_mask);
       out_addr3[i] = (bytes[1] & left_mask) >> 16;
@@ -213,7 +213,7 @@ DataFrame IpAddressVector::compare() const {
       out_addr8[i] = (bytes[3] & right_mask);
       out_v6[i] = true;
     } else {
-      r_address_v4_type bytes = encode<asio::ip::address_v4, r_address_v4_type>(address_v4[i]);
+      r_address_v4_type bytes = encode<r_address_v4_type>(address_v4[i]);
       out_addr1[i] = (bytes[0] & left_mask) >> 16;
       out_addr2[i] = (bytes[0] & right_mask);
     }
