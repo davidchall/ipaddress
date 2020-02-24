@@ -12,9 +12,7 @@ RAddress encode(CAddress x) {
   RAddress x_out;
   typename CAddress::bytes_type x_in = x.to_bytes();
 
-  for (std::size_t i=0; i<x_out.size(); ++i) {
-    std::memcpy(&x_out[i], &x_in[4*i], sizeof(x_out[i]));
-  }
+  std::memcpy(x_out.begin(), x_in.begin(), x_in.size());
 
   return x_out;
 }
@@ -23,9 +21,7 @@ template<class CAddress, class RAddress>
 CAddress decode(RAddress x_in) {
   typename CAddress::bytes_type x_out;
 
-  for (std::size_t i=0; i<x_in.size(); ++i) {
-    std::memcpy(&x_out[4*i], &x_in[i], sizeof(x_in[i]));
-  }
+  std::memcpy(x_out.begin(), x_in.begin(), x_out.size());
 
   return CAddress(x_out);
 }
