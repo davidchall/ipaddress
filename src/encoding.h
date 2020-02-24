@@ -4,6 +4,7 @@
 #include <asio/ip/network_v4.hpp>
 #include <asio/ip/network_v6.hpp>
 
+
 typedef std::array<int32_t, 1> r_address_v4_type;
 typedef std::array<int32_t, 4> r_address_v6_type;
 
