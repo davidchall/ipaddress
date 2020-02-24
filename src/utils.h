@@ -14,14 +14,14 @@ bool address_in_network(Address address, Network network) {
 template<class Bytes>
 Bytes netmask_bytes(int prefix_length) {
   Bytes out;
+  uint8_t mask_all = 0xff;
 
   for (unsigned int i=0; i<sizeof(out); ++i) {
     int ingest = std::min(prefix_length, 8);
-    uint8_t byte_mask = ingest == 0 ? 0 : (1 << 8) - (1 << (8 - ingest));
+    uint8_t byte_mask = ingest == 0 ? 0 : mask_all << (8 - ingest);
+    prefix_length -= ingest;
 
     std::memcpy(&out[i], &byte_mask, sizeof(byte_mask));
-
-    prefix_length = std::max(prefix_length - 8, 0);
   }
 
   return out;
