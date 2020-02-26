@@ -1,3 +1,12 @@
+## Resubmission
+
+This is a resubmission. In this version I have:
+
+* Put acronyms within single quotes in the title and description of the DESCRIPTION.
+* Added \value to all .Rd files that are not data files and explain the functions results in the documentation.
+* Fixed a typo in the \examples section of network_mask.Rd.
+
+
 ## Test environments
 * macOS 10.15 (local), R 3.6.2
 * macOS 10.15 (GitHub Actions), R 3.6.2
