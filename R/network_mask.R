@@ -8,7 +8,7 @@
 #'   \code{\link{ip_address}} vector.
 #'
 #' @examples
-#' ip <- ip_network(c("192.168.1.0/22", "2001:db00::0/26"))
+#' ip <- ip_network(c("192.168.0.0/22", "2001:db00::0/26"))
 #'
 #' prefix_length(ip)
 #'
