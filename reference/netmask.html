@@ -139,12 +139,13 @@ The <code>netmask()</code> and <code>hostmask()</code> functions return an
 <code><a href='ip_address.html'>ip_address</a></code> vector.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ip</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.1.0/22"</span>, <span class='st'>"2001:db00::0/26"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: Invalid argument: 192.168.1.0/22 has host bits set</span></div><div class='input'>
-<span class='fu'>prefix_length</span>(<span class='no'>ip</span>)</div><div class='output co'>#&gt; [1] NA 26</div><div class='input'>
+    <pre class="examples"><div class='input'><span class='no'>ip</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.0/22"</span>, <span class='st'>"2001:db00::0/26"</span>))
+
+<span class='fu'>prefix_length</span>(<span class='no'>ip</span>)</div><div class='output co'>#&gt; [1] 22 26</div><div class='input'>
 <span class='fu'>netmask</span>(<span class='no'>ip</span>)</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
-#&gt; [1] &lt;NA&gt;        ffff:ffc0::</div><div class='input'>
+#&gt; [1] 255.255.252.0 ffff:ffc0::  </div><div class='input'>
 <span class='fu'>hostmask</span>(<span class='no'>ip</span>)</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
-#&gt; [1] &lt;NA&gt;                               0:3f:ffff:ffff:ffff:ffff:ffff:ffff</div><div class='input'>
+#&gt; [1] 0.0.3.255                          0:3f:ffff:ffff:ffff:ffff:ffff:ffff</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
