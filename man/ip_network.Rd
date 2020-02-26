@@ -26,6 +26,9 @@ host bits are set to zero and a valid IP network is returned.}
 
 \item{...}{Additional arguments to be passed to or from methods}
 }
+\value{
+An \code{ip_network} vector
+}
 \description{
 \code{ip_network()} constructs a vector of IP networks.
 

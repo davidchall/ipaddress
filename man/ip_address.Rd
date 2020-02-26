@@ -23,6 +23,9 @@ or hexadecimal notation (IPv6).}
 
 \item{...}{Additional arguments to be passed to or from methods}
 }
+\value{
+An \code{ip_address} vector
+}
 \description{
 \code{ip_address()} constructs a vector of IP addresses.
 

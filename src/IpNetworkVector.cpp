@@ -1,7 +1,8 @@
 #include "IpNetworkVector.h"
 #include "IpAddressVector.h"
 #include "encoding.h"
-#include "masking.h"
+#include "utils.h"
+
 
 IpNetworkVector::IpNetworkVector(
   std::vector<asio::ip::network_v4> in_network_v4,
@@ -85,12 +86,13 @@ IpNetworkVector::IpNetworkVector(List input) {
     if (in_addr1[i] == NA_INTEGER) {
       is_na[i] = true;
     } else if (in_v6[i]) {
-      address_v6_r_bytes_type bytes = {in_addr1[i], in_addr2[i], in_addr3[i], in_addr4[i]};
-      asio::ip::address_v6 tmp_addr = decode_ipv6(bytes);
+      r_address_v6_type bytes = {in_addr1[i], in_addr2[i], in_addr3[i], in_addr4[i]};
+      asio::ip::address_v6 tmp_addr = decode<asio::ip::address_v6>(bytes);
       network_v6[i] = asio::ip::network_v6(tmp_addr, in_pfx[i]);
       is_ipv6[i] = true;
     } else {
-      asio::ip::address_v4 tmp_addr = decode_ipv4(in_addr1[i]);
+      r_address_v4_type bytes = {in_addr1[i]};
+      asio::ip::address_v4 tmp_addr = decode<asio::ip::address_v4>(bytes);
       network_v4[i] = asio::ip::network_v4(tmp_addr, in_pfx[i]);
     }
   }
@@ -116,7 +118,7 @@ List IpNetworkVector::asList() const {
       out_pfx[i] = NA_INTEGER;
       out_v6[i] = NA_LOGICAL;
     } else if (is_ipv6[i]) {
-      address_v6_r_bytes_type bytes = encode_ipv6(network_v6[i].address());
+      r_address_v6_type bytes = encode<r_address_v6_type>(network_v6[i].address());
       out_addr1[i] = bytes[0];
       out_addr2[i] = bytes[1];
       out_addr3[i] = bytes[2];
@@ -124,7 +126,8 @@ List IpNetworkVector::asList() const {
       out_pfx[i] = network_v6[i].prefix_length();
       out_v6[i] = true;
     } else {
-      out_addr1[i] = encode_ipv4(network_v4[i].address());
+      r_address_v4_type bytes = encode<r_address_v4_type>(network_v4[i].address());
+      out_addr1[i] = bytes[0];
       out_pfx[i] = network_v4[i].prefix_length();
     }
   }
@@ -156,45 +159,4 @@ CharacterVector IpNetworkVector::asCharacterVector() const {
   }
 
   return output;
-}
-
-IpAddressVector IpNetworkVector::netmask() const {
-  unsigned int vsize = is_na.size();
-
-  // initialize vectors
-  std::vector<asio::ip::address_v4> out_address_v4(vsize);
-  std::vector<asio::ip::address_v6> out_address_v6(vsize);
-
-  for (unsigned int i=0; i<vsize; ++i) {
-    if (is_na[i]) {
-      continue;
-    } else if (is_ipv6[i]) {
-      out_address_v6[i] = netmask_v6(network_v6[i].prefix_length());
-    } else {
-      out_address_v4[i] = network_v4[i].netmask();
-    }
-  }
-
-  return IpAddressVector(out_address_v4, out_address_v6, is_ipv6, is_na);
-}
-
-IpAddressVector IpNetworkVector::hostmask() const {
-  unsigned int vsize = is_na.size();
-
-  // initialize vectors
-  std::vector<asio::ip::address_v4> out_address_v4(vsize);
-  std::vector<asio::ip::address_v6> out_address_v6(vsize);
-
-  for (unsigned int i=0; i<vsize; ++i) {
-    if (is_na[i]) {
-      continue;
-    } else if (is_ipv6[i]) {
-      out_address_v6[i] = hostmask_v6(network_v6[i].prefix_length());
-    } else {
-      uint32_t netmask_uint = ~network_v4[i].netmask().to_uint();
-      out_address_v4[i] = asio::ip::make_address_v4(netmask_uint);
-    }
-  }
-
-  return IpAddressVector(out_address_v4, out_address_v6, is_ipv6, is_na);
 }

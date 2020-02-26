@@ -37,6 +37,7 @@ NULL
 #'
 #' @param ip Character vector of IP addresses, in dot-decimal notation (IPv4)
 #'   or hexadecimal notation (IPv6).
+#' @return An `ip_address` vector
 #'
 #' @examples
 #' # supports IPv4 and IPv6 simultaneously
@@ -85,74 +86,10 @@ assertthat::on_failure(is_ip_address) <- function(call, env) {
 #' @export
 format.ip_address <- function(x, ...) as.character(x)
 
-
-# Casting ------------------------------------------------------------
-
-#' @rdname vctrs-compat
-#' @keywords internal
-#' @method vec_cast ip_address
-#' @export
-#' @export vec_cast.ip_address
-vec_cast.ip_address <- function(x, to, ...) UseMethod("vec_cast.ip_address")
-
-#' @method vec_cast.ip_address default
-#' @export
-vec_cast.ip_address.default <- function(x, to, ...) vec_default_cast(x, to)
-
-#' @method vec_cast.ip_address ip_address
-#' @export
-vec_cast.ip_address.ip_address <- function(x, to, ...) x
-
-#' @rdname vctrs-compat
-#' @keywords internal
-#' @method vec_cast.ip_address character
-#' @export
-vec_cast.ip_address.character <- function(x, to, ...) ip_address(x)
-
-#' @method vec_cast.character ip_address
-#' @export
-vec_cast.character.ip_address <- function(x, to, ...) print_address_wrapper(x)
-
-#' @importFrom blob vec_cast.blob
-#' @method vec_cast.blob ip_address
-#' @export
-vec_cast.blob.ip_address <- function(x, to, ...) blob_address_wrapper(x)
-
 #' @rdname ip_address
 #' @export
 as.character.ip_address <- function(x, ...) vec_cast(x, character())
 
-
-# Coercion ------------------------------------------------------------
-
-#' Coercion
-#'
-#' Double dispatch methods to support [vctrs::vec_ptype2()].
-#' @inheritParams vctrs::vec_ptype2
-#' @rdname vctrs-compat
-#'
-#' @method vec_ptype2 ip_address
-#' @export
-#' @export vec_ptype2.ip_address
-vec_ptype2.ip_address <- function(x, y, ...) UseMethod("vec_ptype2.ip_address", y)
-
-#' @method vec_ptype2.ip_address default
-#' @export
-vec_ptype2.ip_address.default <- function(x, y, ..., x_arg = "x", y_arg = "y") {
-  vec_default_ptype2(x, y, x_arg = x_arg, y_arg = y_arg)
-}
-
-#' @method vec_ptype2.ip_address ip_address
-#' @export
-vec_ptype2.ip_address.ip_address <- function(x, y, ...) new_ip_address()
-
-#' @method vec_ptype2.ip_address character
-#' @export
-vec_ptype2.ip_address.character <- function(x, y, ...) new_ip_address()
-
-#' @method vec_ptype2.character ip_address
-#' @export
-vec_ptype2.character.ip_address <- function(x, y, ...) new_ip_address()
 
 
 # Comparison ------------------------------------------------------------

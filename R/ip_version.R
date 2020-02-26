@@ -1,6 +1,7 @@
 #' Classify version of IP address space
 #'
 #' @param x An \code{\link{ip_address}} or \code{\link{ip_network}} vector
+#' @return A logical vector
 #'
 #' @examples
 #' ip <- ip_address(c("0.0.0.1", "192.168.0.1", "2001:db8::7334"))

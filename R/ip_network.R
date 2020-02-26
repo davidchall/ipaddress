@@ -45,6 +45,7 @@ NULL
 #' @param strict If `strict = TRUE` (the default) and the input has host bits set,
 #'   then a warning is emitted and `NA` is returned. If `FALSE`, the
 #'   host bits are set to zero and a valid IP network is returned.
+#' @return An `ip_network` vector
 #'
 #' @examples
 #' # supports IPv4 and IPv6 simultaneously
@@ -103,69 +104,9 @@ assertthat::on_failure(is_ip_network) <- function(call, env) {
 #' @export
 format.ip_network <- function(x, ...) as.character(x)
 
-
-# Casting ------------------------------------------------------------
-
-#' @rdname vctrs-compat
-#' @keywords internal
-#' @method vec_cast ip_network
-#' @export
-#' @export vec_cast.ip_network
-vec_cast.ip_network <- function(x, to, ...) UseMethod("vec_cast.ip_network")
-
-#' @method vec_cast.ip_network default
-#' @export
-vec_cast.ip_network.default <- function(x, to, ...) vec_default_cast(x, to)
-
-#' @method vec_cast.ip_network ip_network
-#' @export
-vec_cast.ip_network.ip_network <- function(x, to, ...) x
-
-#' @rdname vctrs-compat
-#' @keywords internal
-#' @method vec_cast.ip_network character
-#' @export
-vec_cast.ip_network.character <- function(x, to, ...) ip_network(x)
-
-#' @method vec_cast.character ip_network
-#' @export
-vec_cast.character.ip_network <- function(x, to, ...) print_network_wrapper(x)
-
 #' @rdname ip_network
 #' @export
 as.character.ip_network <- function(x, ...) vec_cast(x, character())
-
-
-# Coercion ------------------------------------------------------------
-
-#' Coercion
-#'
-#' Double dispatch methods to support [vctrs::vec_ptype2()].
-#' @inheritParams vctrs::vec_ptype2
-#' @rdname vctrs-compat
-#'
-#' @method vec_ptype2 ip_network
-#' @export
-#' @export vec_ptype2.ip_network
-vec_ptype2.ip_network <- function(x, y, ...) UseMethod("vec_ptype2.ip_network", y)
-
-#' @method vec_ptype2.ip_network default
-#' @export
-vec_ptype2.ip_network.default <- function(x, y, ..., x_arg = "x", y_arg = "y") {
-  vec_default_ptype2(x, y, x_arg = x_arg, y_arg = y_arg)
-}
-
-#' @method vec_ptype2.ip_network ip_network
-#' @export
-vec_ptype2.ip_network.ip_network <- function(x, y, ...) new_ip_network()
-
-#' @method vec_ptype2.ip_network character
-#' @export
-vec_ptype2.ip_network.character <- function(x, y, ...) new_ip_network()
-
-#' @method vec_ptype2.character ip_network
-#' @export
-vec_ptype2.character.ip_network <- function(x, y, ...) new_ip_network()
 
 
 # Comparison ------------------------------------------------------------

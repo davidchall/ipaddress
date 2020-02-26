@@ -12,6 +12,9 @@ is_ipv6(x)
 \arguments{
 \item{x}{An \code{\link{ip_address}} or \code{\link{ip_network}} vector}
 }
+\value{
+A logical vector
+}
 \description{
 Classify version of IP address space
 }

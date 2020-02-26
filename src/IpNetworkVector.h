@@ -1,8 +1,6 @@
 #ifndef __IPADDRESS_NETWORK__
 #define __IPADDRESS_NETWORK__
 
-#define ASIO_STANDALONE
-
 #include <Rcpp.h>
 #include <asio/ip/network_v4.hpp>
 #include <asio/ip/network_v6.hpp>
@@ -30,9 +28,6 @@ public:
   // output
   CharacterVector asCharacterVector() const;
   List asList() const;
-
-  IpAddressVector netmask() const;
-  IpAddressVector hostmask() const;
 };
 
 #endif
