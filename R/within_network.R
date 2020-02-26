@@ -5,6 +5,7 @@
 #'
 #' @param address An \code{\link{ip_address}} vector
 #' @param network An \code{\link{ip_network}} vector
+#' @return A logical vector
 #'
 #' @name address_in_network
 NULL
@@ -52,6 +53,7 @@ is_within_any <- function(address, network) {
 #'
 #' @param network1 An \code{\link{ip_network}} vector
 #' @param network2 An \code{\link{ip_network}} vector
+#' @return A logical vector
 #'
 #' @examples
 #' net1 <- ip_network("192.168.1.0/24")

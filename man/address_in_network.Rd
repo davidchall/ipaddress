@@ -15,6 +15,9 @@ is_within_any(address, network)
 
 \item{network}{An \code{\link{ip_network}} vector}
 }
+\value{
+A logical vector
+}
 \description{
 These functions check whether an IP address falls within the range
 of an IP network.

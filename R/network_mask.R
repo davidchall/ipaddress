@@ -3,7 +3,9 @@
 #' These functions yield different representations of the IP network mask.
 #'
 #' @param x An \code{\link{ip_network}} vector
-#' @return An \code{\link{ip_address}} vector corresponding to the netmask
+#' @return The `prefix_length()` function returns an integer vector.
+#'   The `netmask()` and `hostmask()` functions return an
+#'   \code{\link{ip_address}} vector.
 #'
 #' @examples
 #' ip <- ip_network(c("192.168.1.0/22", "2001:db00::0/26"))

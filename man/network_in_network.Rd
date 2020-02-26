@@ -15,6 +15,9 @@ is_supernet(network1, network2)
 
 \item{network2}{An \code{\link{ip_network}} vector}
 }
+\value{
+A logical vector
+}
 \description{
 These functions check if an IP network is a subnet or supernet
 of another network.

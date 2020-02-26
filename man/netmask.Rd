@@ -16,7 +16,9 @@ hostmask(x)
 \item{x}{An \code{\link{ip_network}} vector}
 }
 \value{
-An \code{\link{ip_address}} vector corresponding to the netmask
+The \code{prefix_length()} function returns an integer vector.
+The \code{netmask()} and \code{hostmask()} functions return an
+\code{\link{ip_address}} vector.
 }
 \description{
 These functions yield different representations of the IP network mask.
