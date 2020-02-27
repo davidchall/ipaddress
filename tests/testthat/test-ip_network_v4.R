@@ -74,4 +74,5 @@ test_that("comparison operations work", {
     vctrs::vec_compare(ip_network(x), ip_network(shifter(x, -1L))),
     c(-1L, rep(1L, length(x) - 1L))
   )
+  expect_equal(vec_compare(ip_network("192.168.0.0/16"), ip_network(NA)), NA_integer_)
 })

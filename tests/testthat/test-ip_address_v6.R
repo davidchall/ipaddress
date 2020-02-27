@@ -33,4 +33,5 @@ test_that("comparison operations work", {
     vctrs::vec_compare(ip_address(x), ip_address(shifter(x, -1L))),
     c(-1L, rep(1L, length(x) - 1L))
   )
+  expect_equal(vec_compare(ip_address("2001:db8::8a2e:370:7334"), ip_address(NA)), NA_integer_)
 })
