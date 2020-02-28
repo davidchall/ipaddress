@@ -83,15 +83,6 @@ jobs:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
 
-      - name: Run benchmarks
-        if: matrix.config.os == 'macOS-latest' && matrix.config.r == '3.6'
-        run: |
-          Rscript -e "remotes::install_github('r-lib/bench')"
-          Rscript -e "bench::cb_fetch()"
-          Rscript -e "bench::cb_run()"
-          git notes --ref benchmarks show
-          Rscript -e "bench::cb_push()"
-
       - name: Test coverage
         if: matrix.config.os == 'macOS-latest' && matrix.config.r == '3.6'
         run: |

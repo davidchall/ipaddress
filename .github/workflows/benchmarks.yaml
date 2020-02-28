@@ -1,0 +1,41 @@
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+name: Continuous Benchmarks
+
+jobs:
+  build:
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@master
+
+      - name: Setup R
+        uses: r-lib/actions/setup-r@master
+
+      - name: Install dependencies
+        run: |
+          install.packages(c('remotes'))
+          remotes::install_github('r-lib/bench')
+          remotes::install_deps(dependencies = TRUE)
+        shell: Rscript {0}
+
+      - name: Install package
+        run: R CMD INSTALL .
+
+      - name: Fetch existing benchmarks
+        run: Rscript -e 'bench::cb_fetch()'
+
+      - name: Run benchmarks
+        run: Rscript -e 'bench::cb_run()'
+
+      - name: Show benchmarks
+        run: git notes --ref benchmarks show
+
+      - name: Push benchmarks
+        run: Rscript -e "bench::cb_push()"
