@@ -24,6 +24,7 @@ test_that("strict argument works", {
 test_that("equality operations work", {
   expect_true(all(vctrs::vec_equal(ip_network(x), ip_network(x))))
   expect_false(any(vctrs::vec_equal(ip_network(x), ip_network(rev(x)))))
+  expect_false(vctrs::vec_equal(ip_network("2001:db8::/36"), ip_network("2001:db8::/42")))
 })
 
 test_that("comparison operations work", {
