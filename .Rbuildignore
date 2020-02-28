@@ -8,3 +8,4 @@
 ^pkgdown$
 ^\.github$
 ^bench$
+^CRAN-RELEASE$
