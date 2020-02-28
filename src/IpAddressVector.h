@@ -10,7 +10,9 @@ using namespace Rcpp;
 class IpNetworkVector;
 
 class IpAddressVector {
-public:
+  friend class IpNetworkVector;
+
+private:
   std::vector<asio::ip::address_v4> address_v4;
   std::vector<asio::ip::address_v6> address_v6;
   std::vector<bool> is_ipv6;
@@ -21,17 +23,41 @@ public:
     std::vector<asio::ip::address_v6> &in_address_v6,
     std::vector<bool> &in_is_ipv6,
     std::vector<bool> &in_is_na
-  );
+  ) : address_v4(in_address_v4), address_v6(in_address_v6), is_ipv6(in_is_ipv6), is_na(in_is_na) { };
+
+public:
+  /*----------------*
+   *  Constructors  *
+   *----------------*/
+  // Parse strings (dotted-decimal or dotted-hexidecimal format)
   IpAddressVector(CharacterVector input);
+
+  // Decode from R class
   IpAddressVector(List input);
+
+  // Construct netmask from prefix length
   static IpAddressVector createNetmask(LogicalVector is_ipv6, IntegerVector prefix_length);
+
+  // Construct hostmask from prefix length
   static IpAddressVector createHostmask(LogicalVector is_ipv6, IntegerVector prefix_length);
 
-  // output
-  List asList() const;
-  CharacterVector asCharacterVector() const;
 
-  DataFrame compare() const;
+  /*----------*
+   *  Output  *
+   *----------*/
+  // Encode to strings
+  CharacterVector encodeStrings() const;
+
+  // Encode to R class
+  List encodeR() const;
+
+  // Encode to R dataframe for direct comparisons
+  DataFrame encodeComparable() const;
+
+
+  /*-----------------------*
+   *  Other functionality  *
+   *-----------------------*/
   LogicalVector isWithin(const IpNetworkVector &network) const;
   LogicalVector isWithinAny(const IpNetworkVector &network) const;
 };

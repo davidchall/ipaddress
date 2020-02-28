@@ -10,12 +10,12 @@ using namespace Rcpp;
  */
 // [[Rcpp::export]]
 List parse_address_wrapper(CharacterVector x) {
-  return IpAddressVector(x).asList();
+  return IpAddressVector(x).encodeR();
 }
 
 // [[Rcpp::export]]
 CharacterVector print_address_wrapper(List x) {
-  return IpAddressVector(x).asCharacterVector();
+  return IpAddressVector(x).encodeStrings();
 }
 
 // [[Rcpp::export]]
@@ -23,12 +23,12 @@ List parse_network_wrapper(CharacterVector x, LogicalVector strict) {
   if (strict.size() != 1) {
     stop("argument 'strict' must be a scalar logical value");
   }
-  return IpNetworkVector(x, strict[0]).asList();
+  return IpNetworkVector(x, strict[0]).encodeR();
 }
 
 // [[Rcpp::export]]
 CharacterVector print_network_wrapper(List x) {
-  return IpNetworkVector(x).asCharacterVector();
+  return IpNetworkVector(x).encodeStrings();
 }
 
 /*-----------------------
@@ -37,7 +37,7 @@ CharacterVector print_network_wrapper(List x) {
  */
 // [[Rcpp::export]]
 DataFrame compare_address_wrapper(List x) {
-  return IpAddressVector(x).compare();
+  return IpAddressVector(x).encodeComparable();
 }
 
 // [[Rcpp::export]]
@@ -49,7 +49,7 @@ DataFrame compare_network_wrapper(List x) {
       _["address4"] = x["address4"],
       _["is_ipv6"] = x["is_ipv6"]
   ));
-  return IpAddressVector(address).compare();
+  return address.encodeComparable();
 }
 
 /*--------------
@@ -58,12 +58,12 @@ DataFrame compare_network_wrapper(List x) {
  */
 // [[Rcpp::export]]
 List netmask_wrapper(List x) {
-  return IpAddressVector::createNetmask(x["is_ipv6"], x["prefix"]).asList();
+  return IpAddressVector::createNetmask(x["is_ipv6"], x["prefix"]).encodeR();
 }
 
 // [[Rcpp::export]]
 List hostmask_wrapper(List x) {
-  return IpAddressVector::createHostmask(x["is_ipv6"], x["prefix"]).asList();
+  return IpAddressVector::createHostmask(x["is_ipv6"], x["prefix"]).encodeR();
 }
 
 // [[Rcpp::export]]

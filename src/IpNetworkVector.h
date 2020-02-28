@@ -10,7 +10,9 @@ using namespace Rcpp;
 class IpAddressVector;
 
 class IpNetworkVector {
-public:
+  friend class IpAddressVector;
+
+private:
   std::vector<asio::ip::network_v4> network_v4;
   std::vector<asio::ip::network_v6> network_v6;
   std::vector<bool> is_ipv6;
@@ -21,13 +23,26 @@ public:
     std::vector<asio::ip::network_v6> in_network_v6,
     std::vector<bool> in_is_ipv6,
     std::vector<bool> in_is_na
-  );
+  ) : network_v4(in_network_v4), network_v6(in_network_v6), is_ipv6(in_is_ipv6), is_na(in_is_na) { };
+
+public:
+  /*----------------*
+   *  Constructors  *
+   *----------------*/
+  // Parse strings (CIDR format)
   IpNetworkVector(CharacterVector input, bool strict);
+
+  // Decode from R class
   IpNetworkVector(List input);
 
-  // output
-  CharacterVector asCharacterVector() const;
-  List asList() const;
+  /*----------*
+   *  Output  *
+   *----------*/
+  // Encode to strings
+  CharacterVector encodeStrings() const;
+
+  // Encode to R class
+  List encodeR() const;
 };
 
 #endif

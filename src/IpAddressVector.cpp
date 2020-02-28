@@ -3,12 +3,10 @@
 #include "encoding.h"
 #include "utils.h"
 
-IpAddressVector::IpAddressVector(
-  std::vector<asio::ip::address_v4> &in_address_v4,
-  std::vector<asio::ip::address_v6> &in_address_v6,
-  std::vector<bool> &in_is_ipv6,
-  std::vector<bool> &in_is_na
-) : address_v4(in_address_v4), address_v6(in_address_v6), is_ipv6(in_is_ipv6), is_na(in_is_na) { }
+
+/*----------------*
+ *  Constructors  *
+ *----------------*/
 
 IpAddressVector::IpAddressVector(CharacterVector input) {
   unsigned int vsize = input.size();
@@ -115,7 +113,12 @@ IpAddressVector IpAddressVector::createHostmask(LogicalVector in_v6, IntegerVect
   return IpAddressVector(address_v4, address_v6, is_ipv6, is_na);
 }
 
-List IpAddressVector::asList() const {
+
+/*----------*
+ *  Output  *
+ *----------*/
+
+List IpAddressVector::encodeR() const {
   unsigned int vsize = is_na.size();
 
   // initialize vectors
@@ -154,7 +157,7 @@ List IpAddressVector::asList() const {
   );
 }
 
-CharacterVector IpAddressVector::asCharacterVector() const {
+CharacterVector IpAddressVector::encodeStrings() const {
   unsigned int vsize = is_na.size();
 
   // initialize vectors
@@ -173,7 +176,7 @@ CharacterVector IpAddressVector::asCharacterVector() const {
   return output;
 }
 
-DataFrame IpAddressVector::compare() const {
+DataFrame IpAddressVector::encodeComparable() const {
   unsigned int vsize = is_na.size();
 
   // initialize vectors
@@ -231,6 +234,11 @@ DataFrame IpAddressVector::compare() const {
     _["address8"] = out_addr8
   );
 }
+
+
+/*-----------------------*
+ *  Other functionality  *
+ *-----------------------*/
 
 LogicalVector IpAddressVector::isWithin(const IpNetworkVector &network) const {
   unsigned int vsize = is_na.size();

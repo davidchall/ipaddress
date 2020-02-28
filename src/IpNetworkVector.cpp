@@ -4,12 +4,9 @@
 #include "utils.h"
 
 
-IpNetworkVector::IpNetworkVector(
-  std::vector<asio::ip::network_v4> in_network_v4,
-  std::vector<asio::ip::network_v6> in_network_v6,
-  std::vector<bool> in_is_ipv6,
-  std::vector<bool> in_is_na
-) : network_v4(in_network_v4), network_v6(in_network_v6), is_ipv6(in_is_ipv6), is_na(in_is_na) { }
+/*----------------*
+ *  Constructors  *
+ *----------------*/
 
 IpNetworkVector::IpNetworkVector(CharacterVector input, bool strict) {
   unsigned int vsize = input.size();
@@ -98,7 +95,12 @@ IpNetworkVector::IpNetworkVector(List input) {
   }
 }
 
-List IpNetworkVector::asList() const {
+
+/*----------*
+ *  Output  *
+ *----------*/
+
+List IpNetworkVector::encodeR() const {
   unsigned int vsize = is_na.size();
 
   // initialize vectors
@@ -142,7 +144,7 @@ List IpNetworkVector::asList() const {
   );
 }
 
-CharacterVector IpNetworkVector::asCharacterVector() const {
+CharacterVector IpNetworkVector::encodeStrings() const {
   unsigned int vsize = is_na.size();
 
   // initialize vectors
