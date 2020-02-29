@@ -35,6 +35,9 @@ public:
   // Decode from R class
   IpNetworkVector(List input);
 
+  // Construct from address + prefix length
+  IpNetworkVector(IpAddressVector address, IntegerVector prefix_length, bool strict);
+
   /*----------*
    *  Output  *
    *----------*/
