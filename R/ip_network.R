@@ -129,17 +129,17 @@ vec_ptype_abbr.ip_network <- function(x, ...) {
 #' An IP network is uniquely defined by its network address and
 #' prefix length.
 #'
-#' @param network An \code{\link{ip_network}} vector
+#' @param x An \code{\link{ip_network}} vector
 #' @return
 #' * `network_address()` returns an \code{\link{ip_address}} vector
 #' * `prefix_length()` returns an integer vector
 #'
 #' @examples
-#' network <- ip_network(c("192.168.0.0/22", "2001:db00::0/26"))
+#' x <- ip_network(c("192.168.0.0/22", "2001:db00::0/26"))
 #'
-#' network_address(network)
+#' network_address(x)
 #'
-#' prefix_length(network)
+#' prefix_length(x)
 #'
 #' @seealso
 #' The prefix length can equivalently be represented by the [netmask()] or [hostmask()].
@@ -149,21 +149,21 @@ NULL
 
 #' @rdname network_address
 #' @export
-network_address <- function(network) {
-  assertthat::assert_that(is_ip_network(network))
+network_address <- function(x) {
+  assertthat::assert_that(is_ip_network(x))
 
   new_ip_address(
-    field(network, "address1"),
-    field(network, "address2"),
-    field(network, "address3"),
-    field(network, "address4"),
-    field(network, "is_ipv6")
+    field(x, "address1"),
+    field(x, "address2"),
+    field(x, "address3"),
+    field(x, "address4"),
+    field(x, "is_ipv6")
   )
 }
 
 #' @rdname network_address
 #' @export
-prefix_length <- function(network) {
-  assertthat::assert_that(is_ip_network(network))
-  field(network, "prefix")
+prefix_length <- function(x) {
+  assertthat::assert_that(is_ip_network(x))
+  field(x, "prefix")
 }

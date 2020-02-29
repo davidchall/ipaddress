@@ -5,12 +5,12 @@
 \alias{prefix_length}
 \title{Extract components of an IP network}
 \usage{
-network_address(network)
+network_address(x)
 
-prefix_length(network)
+prefix_length(x)
 }
 \arguments{
-\item{network}{An \code{\link{ip_network}} vector}
+\item{x}{An \code{\link{ip_network}} vector}
 }
 \value{
 \itemize{
@@ -23,11 +23,11 @@ An IP network is uniquely defined by its network address and
 prefix length.
 }
 \examples{
-network <- ip_network(c("192.168.0.0/22", "2001:db00::0/26"))
+x <- ip_network(c("192.168.0.0/22", "2001:db00::0/26"))
 
-network_address(network)
+network_address(x)
 
-prefix_length(network)
+prefix_length(x)
 
 }
 \seealso{
