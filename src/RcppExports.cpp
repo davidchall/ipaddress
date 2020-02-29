@@ -28,13 +28,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // parse_network_wrapper
-List parse_network_wrapper(CharacterVector x, LogicalVector strict);
+List parse_network_wrapper(CharacterVector x, bool strict);
 RcppExport SEXP _ipaddress_parse_network_wrapper(SEXP xSEXP, SEXP strictSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< LogicalVector >::type strict(strictSEXP);
+    Rcpp::traits::input_parameter< bool >::type strict(strictSEXP);
     rcpp_result_gen = Rcpp::wrap(parse_network_wrapper(x, strict));
     return rcpp_result_gen;
 END_RCPP

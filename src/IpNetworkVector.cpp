@@ -39,7 +39,7 @@ IpNetworkVector::IpNetworkVector(CharacterVector input, bool strict) {
         }
       }
 
-      // Parse IPv4
+      // Parse IPv6
       else {
         tmp_v6 = asio::ip::make_network_v6(input[i], ec);
         if (!ec) {

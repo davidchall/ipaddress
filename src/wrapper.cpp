@@ -18,11 +18,9 @@ CharacterVector print_address_wrapper(List x) {
 }
 
 // [[Rcpp::export]]
-List parse_network_wrapper(CharacterVector x, LogicalVector strict) {
-  if (strict.size() != 1) {
-    stop("argument 'strict' must be a scalar logical value");
-  }
-  return IpNetworkVector(x, strict[0]).encodeR();
+List parse_network_wrapper(CharacterVector x, bool strict) {
+  return IpNetworkVector(x, strict).encodeR();
+}
 }
 
 // [[Rcpp::export]]
