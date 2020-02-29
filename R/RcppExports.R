@@ -13,6 +13,10 @@ parse_network_wrapper <- function(x, strict) {
     .Call(`_ipaddress_parse_network_wrapper`, x, strict)
 }
 
+construct_network_wrapper <- function(address, prefix_length, strict) {
+    .Call(`_ipaddress_construct_network_wrapper`, address, prefix_length, strict)
+}
+
 print_network_wrapper <- function(x) {
     .Call(`_ipaddress_print_network_wrapper`, x)
 }

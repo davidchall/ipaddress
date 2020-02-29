@@ -19,9 +19,9 @@ is_ip_address(x)
 \item{ip}{Character vector of IP addresses, in dot-decimal notation (IPv4)
 or hexadecimal notation (IPv6).}
 
-\item{x}{An object}
+\item{x}{An \code{ip_address} vector}
 
-\item{...}{Additional arguments to be passed to or from methods}
+\item{...}{Arguments to be passed to other methods}
 }
 \value{
 An \code{ip_address} vector

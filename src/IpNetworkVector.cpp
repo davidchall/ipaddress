@@ -95,6 +95,62 @@ IpNetworkVector::IpNetworkVector(List input) {
   }
 }
 
+IpNetworkVector::IpNetworkVector(IpAddressVector address, IntegerVector prefix_length, bool strict) {
+  unsigned int vsize = address.is_na.size();
+
+  // initialize vectors
+  network_v4.assign(vsize, asio::ip::network_v4());
+  network_v6.assign(vsize, asio::ip::network_v6());
+  is_ipv6.assign(vsize, false);
+  is_na.assign(vsize, false);
+
+  for (unsigned int i=0; i<vsize; ++i) {
+    if (address.is_na[i] || prefix_length[i] == NA_INTEGER) {
+      is_na[i] = true;
+    } else if (address.is_ipv6[i]) {
+
+      // Construct IPv6
+      if (prefix_length[i] < 0 || prefix_length[i] > 128) {
+        is_na[i] = true;
+        std::string cidr = address.address_v6[i].to_string() + "/" + std::to_string(prefix_length[i]);
+        warning("Invalid argument: " + cidr);
+      } else {
+        asio::ip::network_v6 tmp_v6(address.address_v6[i], prefix_length[i]);
+        if (tmp_v6 == tmp_v6.canonical()) {
+          network_v6[i] = tmp_v6;
+          is_ipv6[i] = true;
+        } else if (strict) {
+          is_na[i] = true;
+          warning("Invalid argument: " + tmp_v6.to_string() + " has host bits set");
+        } else {
+          network_v6[i] = tmp_v6.canonical();
+          is_ipv6[i] = true;
+        }
+      }
+
+    } else {
+
+      // Construct IPv4
+      if (prefix_length[i] < 0 || prefix_length[i] > 32) {
+        is_na[i] = true;
+        std::string cidr = address.address_v4[i].to_string() + "/" + std::to_string(prefix_length[i]);
+        warning("Invalid argument: " + cidr);
+      } else {
+        asio::ip::network_v4 tmp_v4(address.address_v4[i], prefix_length[i]);
+        if (tmp_v4 == tmp_v4.canonical()) {
+          network_v4[i] = tmp_v4;
+        } else if (strict) {
+          is_na[i] = true;
+          warning("Invalid argument: " + tmp_v4.to_string() + " has host bits set");
+        } else {
+          network_v4[i] = tmp_v4.canonical();
+        }
+      }
+
+    }
+  }
+}
+
 
 /*----------*
  *  Output  *

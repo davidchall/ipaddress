@@ -1,5 +1,18 @@
 x <- c("::/128", "256::/72", "2001:db8::/36", "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff/128")
 
+test_that("construction works", {
+  expect_s3_class(ip_network(), c("ip_network", "vctrs_vctr"))
+  expect_true(is_ip_network(ip_network(x)))
+  expect_length(ip_network(), 0)
+  expect_length(ip_network(x), length(x))
+  expect_equal(as.character(ip_network(x)), x)
+
+  expect_equal(
+    ip_network(x),
+    ip_network(ip_address(c("::", "256::", "2001:db8::", "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff")), c(128L, 72L, 36L, 128L))
+  )
+})
+
 test_that("formats correctly", {
   expect_equal(format(ip_network(x)), x)
 })
@@ -9,16 +22,27 @@ test_that("invalid inputs are caught", {
   expect_warning(ip_address("1::g/24"), "Invalid argument")
   expect_warning(ip_network("1::-2/24"), "Invalid argument")
   expect_warning(ip_network("1:2/24"), "Invalid argument")
+  expect_warning(ip_network("1::2::3/24"), "Invalid argument")
   expect_warning(ip_network("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff/24"), "Invalid argument")
   expect_warning(ip_network("1::2/-1"), "Invalid argument")
   expect_warning(ip_network("1::2/129"), "Invalid argument")
   expect_warning(ip_network("1::2/a"), "Invalid argument")
   expect_warning(ip_network("1::2/24/24"), "Invalid argument")
+
+  expect_error(ip_network(ip_address("2001:db8::"), 24), "not an integer")
+  expect_warning(ip_network(ip_address("2001:db8::"), -1L), "Invalid argument")
+  expect_warning(ip_network(ip_address("2001:db8::"), 129L), "Invalid argument")
 })
 
 test_that("strict argument works", {
+  expect_error(ip_network("2001:db8::/36", strict = "yes"), "not a flag")
+  expect_error(ip_network("2001:db8::/36", strict = NA), "contains 1 missing values")
+
   expect_warning(ip_network("2001:db8::8a2e:370:7334/36"), "host bits set")
   expect_equal(ip_network("2001:db8::8a2e:370:7334/36", strict = FALSE), ip_network("2001:db8::/36"))
+
+  expect_warning(ip_network(ip_address("2001:db8::8a2e:370:7334"), 36L), "host bits set")
+  expect_equal(ip_network(ip_address("2001:db8::8a2e:370:7334"), 36L, strict = FALSE), ip_network("2001:db8::/36"))
 })
 
 test_that("equality operations work", {
@@ -47,5 +71,10 @@ test_that("component extraction works", {
   expect_equal(
     network_address(ip_network(x)),
     ip_address(c("::", "256::", "2001:db8::", "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"))
+  )
+
+  expect_equal(
+    ip_network(x),
+    ip_network(network_address(ip_network(x)), prefix_length(ip_network(x)))
   )
 })

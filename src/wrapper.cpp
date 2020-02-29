@@ -21,6 +21,10 @@ CharacterVector print_address_wrapper(List x) {
 List parse_network_wrapper(CharacterVector x, bool strict) {
   return IpNetworkVector(x, strict).encodeR();
 }
+
+// [[Rcpp::export]]
+List construct_network_wrapper(List address, IntegerVector prefix_length, bool strict) {
+  return IpNetworkVector(IpAddressVector(address), prefix_length, strict).encodeR();
 }
 
 // [[Rcpp::export]]

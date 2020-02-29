@@ -6,6 +6,11 @@ test_that("construction works", {
   expect_length(ip_network(), 0)
   expect_length(ip_network(x), length(x))
   expect_equal(as.character(ip_network(x)), x)
+
+  expect_equal(
+    ip_network(x),
+    ip_network(ip_address(c("0.0.0.0", "192.168.0.0", "192.168.100.0", "255.255.255.255")), c(32L, 16L, 22L, 32L))
+  )
 })
 
 test_that("formats correctly", {
@@ -50,11 +55,21 @@ test_that("invalid inputs are caught", {
   expect_warning(ip_network("1.2.3.4/33"), "Invalid argument")
   expect_warning(ip_network("1.2.3.4/a"), "Invalid argument")
   expect_warning(ip_network("1.2.3.4/24/24"), "Invalid argument")
+
+  expect_error(ip_network(ip_address("1.2.3.4"), 24), "not an integer")
+  expect_warning(ip_network(ip_address("1.2.3.4"), -1L), "Invalid argument")
+  expect_warning(ip_network(ip_address("1.2.3.4"), 33L), "Invalid argument")
 })
 
 test_that("strict argument works", {
+  expect_error(ip_network("1.2.3.4/32", strict = "yes"), "not a flag")
+  expect_error(ip_network("1.2.3.4/32", strict = NA), "contains 1 missing values")
+
   expect_warning(ip_network("255.255.255.255/21"), "host bits set")
   expect_equal(ip_network("255.255.255.255/21", strict = FALSE), ip_network("255.255.248.0/21"))
+
+  expect_warning(ip_network(ip_address("255.255.255.255"), 21L), "host bits set")
+  expect_equal(ip_network(ip_address("255.255.255.255"), 21L, strict = FALSE), ip_network("255.255.248.0/21"))
 })
 
 test_that("equality operations work", {
@@ -90,4 +105,9 @@ test_that("component extraction works", {
 
   expect_equal(prefix_length(ip_network(NA)), NA_integer_)
   expect_equal(network_address(ip_network(NA)), ip_address(NA))
+
+  expect_equal(
+    ip_network(x),
+    ip_network(network_address(ip_network(x)), prefix_length(ip_network(x)))
+  )
 })
