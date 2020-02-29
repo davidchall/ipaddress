@@ -2,12 +2,9 @@
 % Please edit documentation in R/network_mask.R
 \name{netmask}
 \alias{netmask}
-\alias{prefix_length}
 \alias{hostmask}
 \title{IP network masking}
 \usage{
-prefix_length(x)
-
 netmask(x)
 
 hostmask(x)
@@ -16,20 +13,19 @@ hostmask(x)
 \item{x}{An \code{\link{ip_network}} vector}
 }
 \value{
-The \code{prefix_length()} function returns an integer vector.
-The \code{netmask()} and \code{hostmask()} functions return an
-\code{\link{ip_address}} vector.
+An \code{\link{ip_address}} vector.
 }
 \description{
 These functions yield different representations of the IP network mask.
 }
 \examples{
-ip <- ip_network(c("192.168.0.0/22", "2001:db00::0/26"))
+x <- ip_network(c("192.168.0.0/22", "2001:db00::0/26"))
 
-prefix_length(ip)
+netmask(x)
 
-netmask(ip)
+hostmask(x)
 
-hostmask(ip)
-
+}
+\seealso{
+The netmask can equivalently be represented by the \code{\link[=prefix_length]{prefix_length()}}.
 }

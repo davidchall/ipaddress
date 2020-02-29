@@ -41,3 +41,11 @@ test_that("comparison operations work", {
   )
   expect_equal(vec_compare(ip_network("2001:db8::/36"), ip_network(NA)), NA_integer_)
 })
+
+test_that("component extraction works", {
+  expect_equal(prefix_length(ip_network(x)), c(128L, 72L, 36L, 128L))
+  expect_equal(
+    network_address(ip_network(x)),
+    ip_address(c("::", "256::", "2001:db8::", "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"))
+  )
+})

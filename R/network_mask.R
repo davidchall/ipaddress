@@ -3,28 +3,19 @@
 #' These functions yield different representations of the IP network mask.
 #'
 #' @param x An \code{\link{ip_network}} vector
-#' @return The `prefix_length()` function returns an integer vector.
-#'   The `netmask()` and `hostmask()` functions return an
-#'   \code{\link{ip_address}} vector.
+#' @return An \code{\link{ip_address}} vector.
 #'
 #' @examples
-#' ip <- ip_network(c("192.168.0.0/22", "2001:db00::0/26"))
+#' x <- ip_network(c("192.168.0.0/22", "2001:db00::0/26"))
 #'
-#' prefix_length(ip)
+#' netmask(x)
 #'
-#' netmask(ip)
+#' hostmask(x)
 #'
-#' hostmask(ip)
+#' @seealso The netmask can equivalently be represented by the [prefix_length()].
 #'
 #' @name netmask
 NULL
-
-#' @rdname netmask
-#' @export
-prefix_length <- function(x) {
-  assertthat::assert_that(is_ip_network(x))
-  field(x, "prefix")
-}
 
 #' @rdname netmask
 #' @export

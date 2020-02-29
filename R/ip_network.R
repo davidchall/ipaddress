@@ -25,8 +25,7 @@ methods::setOldClass(c("ip_network", "vctrs_vctr"))
 #' When casting an `ip_network` object back to a character vector using
 #' `as.character()`, IPv6 addresses are reduced to their compressed representation.
 #'
-#' @seealso \code{\link{prefix_length}}, \code{\link{netmask}},
-#'   \code{\link{hostmask}}
+#' @seealso [prefix_length()], [network_address()], [netmask()], [hostmask()]
 #'
 #' @param x An object
 #' @param ... Additional arguments to be passed to or from methods
@@ -112,7 +111,9 @@ as.character.ip_network <- function(x, ...) vec_cast(x, character())
 # Comparison ------------------------------------------------------------
 
 #' @export
-vec_proxy_compare.ip_network <- function(x, ...) compare_network_wrapper(x)
+vec_proxy_compare.ip_network <- function(x, ...) {
+  compare_address_wrapper(network_address(x))
+}
 
 
 # Other ------------------------------------------------------------
@@ -120,4 +121,49 @@ vec_proxy_compare.ip_network <- function(x, ...) compare_network_wrapper(x)
 #' @export
 vec_ptype_abbr.ip_network <- function(x, ...) {
   "ip_netw"
+}
+
+
+#' Extract components of an IP network
+#'
+#' An IP network is uniquely defined by its network address and
+#' prefix length.
+#'
+#' @param network An \code{\link{ip_network}} vector
+#' @return
+#' * `network_address()` returns an \code{\link{ip_address}} vector
+#' * `prefix_length()` returns an integer vector
+#'
+#' @examples
+#' network <- ip_network(c("192.168.0.0/22", "2001:db00::0/26"))
+#'
+#' network_address(network)
+#'
+#' prefix_length(network)
+#'
+#' @seealso
+#' The prefix length can equivalently be represented by the [netmask()] or [hostmask()].
+#'
+#' @name network_address
+NULL
+
+#' @rdname network_address
+#' @export
+network_address <- function(network) {
+  assertthat::assert_that(is_ip_network(network))
+
+  new_ip_address(
+    field(network, "address1"),
+    field(network, "address2"),
+    field(network, "address3"),
+    field(network, "address4"),
+    field(network, "is_ipv6")
+  )
+}
+
+#' @rdname network_address
+#' @export
+prefix_length <- function(network) {
+  assertthat::assert_that(is_ip_network(network))
+  field(network, "prefix")
 }
