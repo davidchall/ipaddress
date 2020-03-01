@@ -5,6 +5,8 @@ reference:
     contents:
       - ip_address
       - ip_network
+      - network_address
+      - prefix_length
   - title: "Address spaces"
     contents:
       - is_ipv4
@@ -15,6 +17,5 @@ reference:
       - is_within_any
       - is_subnet
       - is_supernet
-      - prefix_length
       - netmask
       - hostmask

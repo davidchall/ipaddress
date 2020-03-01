@@ -13,16 +13,16 @@ parse_network_wrapper <- function(x, strict) {
     .Call(`_ipaddress_parse_network_wrapper`, x, strict)
 }
 
+construct_network_wrapper <- function(address, prefix_length, strict) {
+    .Call(`_ipaddress_construct_network_wrapper`, address, prefix_length, strict)
+}
+
 print_network_wrapper <- function(x) {
     .Call(`_ipaddress_print_network_wrapper`, x)
 }
 
 compare_address_wrapper <- function(x) {
     .Call(`_ipaddress_compare_address_wrapper`, x)
-}
-
-compare_network_wrapper <- function(x) {
-    .Call(`_ipaddress_compare_network_wrapper`, x)
 }
 
 netmask_wrapper <- function(x) {
@@ -39,9 +39,5 @@ is_within_wrapper <- function(address_r, network_r) {
 
 is_within_any_wrapper <- function(address_r, network_r) {
     .Call(`_ipaddress_is_within_any_wrapper`, address_r, network_r)
-}
-
-is_subnet_wrapper <- function(network1_r, network2_r) {
-    .Call(`_ipaddress_is_subnet_wrapper`, network1_r, network2_r)
 }
 
