@@ -4,11 +4,6 @@
 #include <algorithm>
 
 
-template<class Address, class Network>
-bool address_in_network(Address address, Network network) {
-  return network.hosts().find(address) != network.hosts().end();
-}
-
 template<class Bytes>
 Bytes netmask_bytes(int prefix_length) {
   Bytes out;
@@ -40,6 +35,22 @@ Address hostmask(int prefix_length) {
   std::transform(bytes.begin(), bytes.end(), bytes.begin(), [](unsigned char c) { return ~c; });
 
   return Address(bytes);
+}
+
+template<class Address, class Network>
+bool address_in_network(Address address, Network network) {
+  typedef typename Address::bytes_type Bytes;
+  Bytes address_bytes = address.to_bytes();
+  Bytes network_bytes = network.address().to_bytes();
+  Bytes netmask_bytes2 = netmask_bytes<Bytes>(network.prefix_length());
+
+  for (unsigned int i=0; i<address_bytes.size(); ++i) {
+    if ((address_bytes[i] & netmask_bytes2[i]) != network_bytes[i]) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 #endif
