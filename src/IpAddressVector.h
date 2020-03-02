@@ -36,10 +36,10 @@ public:
   IpAddressVector(List input);
 
   // Construct netmask from prefix length
-  static IpAddressVector createNetmask(LogicalVector is_ipv6, IntegerVector prefix_length);
+  static IpAddressVector createNetmask(IntegerVector prefix_length, LogicalVector is_ipv6);
 
   // Construct hostmask from prefix length
-  static IpAddressVector createHostmask(LogicalVector is_ipv6, IntegerVector prefix_length);
+  static IpAddressVector createHostmask(IntegerVector prefix_length, LogicalVector is_ipv6);
 
 
   /*----------*

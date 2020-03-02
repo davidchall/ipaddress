@@ -3,14 +3,32 @@
 \name{netmask}
 \alias{netmask}
 \alias{hostmask}
+\alias{netmask.default}
+\alias{hostmask.default}
+\alias{netmask.ip_network}
+\alias{hostmask.ip_network}
 \title{IP network masking}
 \usage{
-netmask(x)
+netmask(...)
 
-hostmask(x)
+hostmask(...)
+
+\method{netmask}{default}(prefix_length = integer(), is_ipv6 = logical(), ...)
+
+\method{hostmask}{default}(prefix_length = integer(), is_ipv6 = logical(), ...)
+
+\method{netmask}{ip_network}(network, ...)
+
+\method{hostmask}{ip_network}(network, ...)
 }
 \arguments{
-\item{x}{An \code{\link{ip_network}} vector}
+\item{...}{Arguments to be passed to other methods}
+
+\item{prefix_length}{An integer vector}
+
+\item{is_ipv6}{A logical vector}
+
+\item{network}{An \code{\link{ip_network}} vector}
 }
 \value{
 An \code{\link{ip_address}} vector.
@@ -24,6 +42,10 @@ x <- ip_network(c("192.168.0.0/22", "2001:db00::0/26"))
 netmask(x)
 
 hostmask(x)
+
+netmask(c(22L, 26L), c(FALSE, TRUE))
+
+hostmask(c(22L, 26L), c(FALSE, TRUE))
 
 }
 \seealso{

@@ -25,12 +25,12 @@ compare_address_wrapper <- function(x) {
     .Call(`_ipaddress_compare_address_wrapper`, x)
 }
 
-netmask_wrapper <- function(x) {
-    .Call(`_ipaddress_netmask_wrapper`, x)
+netmask_wrapper <- function(prefix_length, is_ipv6) {
+    .Call(`_ipaddress_netmask_wrapper`, prefix_length, is_ipv6)
 }
 
-hostmask_wrapper <- function(x) {
-    .Call(`_ipaddress_hostmask_wrapper`, x)
+hostmask_wrapper <- function(prefix_length, is_ipv6) {
+    .Call(`_ipaddress_hostmask_wrapper`, prefix_length, is_ipv6)
 }
 
 is_within_wrapper <- function(address_r, network_r) {

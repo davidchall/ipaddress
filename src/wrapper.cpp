@@ -46,13 +46,13 @@ DataFrame compare_address_wrapper(List x) {
  *  Bit masking  *
  * --------------*/
 // [[Rcpp::export]]
-List netmask_wrapper(List x) {
-  return IpAddressVector::createNetmask(x["is_ipv6"], x["prefix"]).encodeR();
+List netmask_wrapper(IntegerVector prefix_length, LogicalVector is_ipv6) {
+  return IpAddressVector::createNetmask(prefix_length, is_ipv6).encodeR();
 }
 
 // [[Rcpp::export]]
-List hostmask_wrapper(List x) {
-  return IpAddressVector::createHostmask(x["is_ipv6"], x["prefix"]).encodeR();
+List hostmask_wrapper(IntegerVector prefix_length, LogicalVector is_ipv6) {
+  return IpAddressVector::createHostmask(prefix_length, is_ipv6).encodeR();
 }
 
 // [[Rcpp::export]]
