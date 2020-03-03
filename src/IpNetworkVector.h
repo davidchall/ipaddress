@@ -38,6 +38,7 @@ public:
   // Construct from address + prefix length
   IpNetworkVector(IpAddressVector address, IntegerVector prefix_length, bool strict);
 
+
   /*----------*
    *  Output  *
    *----------*/
@@ -46,6 +47,13 @@ public:
 
   // Encode to R class
   List encodeR() const;
+
+
+  /*-----------------------*
+   *  Other functionality  *
+   *-----------------------*/
+  // List all addresses in network
+  IpAddressVector hosts(bool exclude_unusable) const;
 };
 
 #endif

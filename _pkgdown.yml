@@ -13,6 +13,8 @@ reference:
       - is_ipv6
   - title: "Network membership"
     contents:
+      - seq.ip_network
+      - hosts
       - is_within
       - is_within_any
       - is_subnet

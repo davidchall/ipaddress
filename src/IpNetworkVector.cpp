@@ -218,3 +218,65 @@ CharacterVector IpNetworkVector::encodeStrings() const {
 
   return output;
 }
+
+
+/*-----------------------*
+ *  Other functionality  *
+ *-----------------------*/
+IpAddressVector IpNetworkVector::hosts(bool exclude_unusable) const {
+  // initialize vectors
+  std::vector<asio::ip::address_v4> out_address_v4;
+  std::vector<asio::ip::address_v6> out_address_v6;
+  std::vector<bool> out_is_ipv6;
+  std::vector<bool> out_is_na;
+
+  if (is_na.size() != 1) {
+    // pass
+  } else if (is_na[0]) {
+    out_address_v4.resize(1);
+    out_address_v6.resize(1);
+    out_is_ipv6.resize(1);
+    out_is_na.resize(1, true);
+  } else if (exclude_unusable && is_ipv6[0] && network_v6[0].prefix_length() == 128) {
+    // pass
+  } else if (exclude_unusable && !is_ipv6[0] && network_v4[0].prefix_length() == 32) {
+    // pass
+  } else if (is_ipv6[0]) {
+    asio::ip::address_v6_iterator ip_begin(network_v6[0].address());
+    asio::ip::address_v6_iterator ip_end(broadcast_address<asio::ip::address_v6>(network_v6[0]));
+
+    // IPv6 does not use final address as broadcast address
+    ip_end++;
+
+    // exclude subnet router anycast address
+    if (exclude_unusable && (network_v6[0].prefix_length() != 127)) {
+      ip_begin++;
+    }
+
+    std::copy(ip_begin, ip_end, std::back_inserter(out_address_v6));
+
+    size_t vsize = out_address_v6.size();
+    out_address_v4.resize(vsize);
+    out_is_ipv6.resize(vsize, true);
+    out_is_na.resize(vsize, false);
+  } else {
+    asio::ip::address_v4_iterator ip_begin(network_v4[0].address());
+    asio::ip::address_v4_iterator ip_end(broadcast_address<asio::ip::address_v4>(network_v4[0]));
+
+    // exclude network and broadcast addresses
+    if (exclude_unusable && (network_v4[0].prefix_length() != 31)) {
+      ip_begin++;
+    } else {
+      ip_end++;
+    }
+
+    std::copy(ip_begin, ip_end, std::back_inserter(out_address_v4));
+
+    size_t vsize = out_address_v4.size();
+    out_address_v6.resize(vsize);
+    out_is_ipv6.resize(vsize, false);
+    out_is_na.resize(vsize, false);
+  }
+
+  return IpAddressVector(out_address_v4, out_address_v6, out_is_ipv6, out_is_na);
+}

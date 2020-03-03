@@ -6,7 +6,7 @@
 #' @param is_ipv6 A logical vector
 #' @param network An \code{\link{ip_network}} vector
 #' @param ... Arguments to be passed to other methods
-#' @return An \code{\link{ip_address}} vector.
+#' @return An \code{\link{ip_address}} vector
 #'
 #' @examples
 #' x <- ip_network(c("192.168.0.0/22", "2001:db00::0/26"))

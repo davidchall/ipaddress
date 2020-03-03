@@ -31,7 +31,7 @@ hostmask(...)
 \item{network}{An \code{\link{ip_network}} vector}
 }
 \value{
-An \code{\link{ip_address}} vector.
+An \code{\link{ip_address}} vector
 }
 \description{
 These functions yield different representations of the IP network mask.

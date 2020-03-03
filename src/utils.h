@@ -21,13 +21,13 @@ Bytes netmask_bytes(int prefix_length) {
 }
 
 template<class Address>
-Address netmask(int prefix_length) {
+Address netmask(unsigned int prefix_length) {
   typedef typename Address::bytes_type Bytes;
   return Address(netmask_bytes<Bytes>(prefix_length));
 }
 
 template<class Address>
-Address hostmask(int prefix_length) {
+Address hostmask(unsigned int prefix_length) {
   typedef typename Address::bytes_type Bytes;
   Bytes bytes = netmask_bytes<Bytes>(prefix_length);
 
@@ -38,7 +38,20 @@ Address hostmask(int prefix_length) {
 }
 
 template<class Address, class Network>
-bool address_in_network(Address address, Network network) {
+Address broadcast_address(const Network &network) {
+  typedef typename Address::bytes_type Bytes;
+  Bytes network_bytes = network.address().to_bytes();
+  Bytes hostmask_bytes = hostmask<Address>(network.prefix_length()).to_bytes();
+  Bytes broadcast_bytes;
+
+  std::transform(network_bytes.begin(), network_bytes.end(), hostmask_bytes.begin(), broadcast_bytes.begin(),
+                 [](unsigned char net, unsigned char mask) { return net | mask; });
+
+  return Address(broadcast_bytes);
+}
+
+template<class Address, class Network>
+bool address_in_network(const Address &address, const Network &network) {
   typedef typename Address::bytes_type Bytes;
   Bytes address_bytes = address.to_bytes();
   Bytes network_bytes = network.address().to_bytes();

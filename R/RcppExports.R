@@ -33,6 +33,10 @@ hostmask_wrapper <- function(prefix_length, is_ipv6) {
     .Call(`_ipaddress_hostmask_wrapper`, prefix_length, is_ipv6)
 }
 
+hosts_wrapper <- function(network_r, exclude_unusable) {
+    .Call(`_ipaddress_hosts_wrapper`, network_r, exclude_unusable)
+}
+
 is_within_wrapper <- function(address_r, network_r) {
     .Call(`_ipaddress_is_within_wrapper`, address_r, network_r)
 }
