@@ -40,7 +40,6 @@ is_ipv6 <- function(x) {
 #' x <- ip_address(c("192.168.0.1", "2001:db8::7334"))
 #'
 #' max_prefix_length(x)
-#'
 #' @seealso [is_ipv6()], [prefix_length()]
 #' @export
 max_prefix_length <- function(x) {

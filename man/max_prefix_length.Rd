@@ -20,7 +20,6 @@ The total number of bits available in the address space. IPv4 uses
 x <- ip_address(c("192.168.0.1", "2001:db8::7334"))
 
 max_prefix_length(x)
-
 }
 \seealso{
 \code{\link[=is_ipv6]{is_ipv6()}}, \code{\link[=prefix_length]{prefix_length()}}
