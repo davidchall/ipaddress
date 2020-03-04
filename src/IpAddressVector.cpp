@@ -291,3 +291,84 @@ LogicalVector IpAddressVector::isWithinAny(const IpNetworkVector &network) const
 
   return output;
 }
+
+
+/*----------------------*
+ *  Reserved addresses  *
+ * ---------------------*/
+LogicalVector IpAddressVector::isMulticast() const {
+  unsigned int vsize = is_na.size();
+
+  // initialize vectors
+  LogicalVector output(vsize);
+
+  for (unsigned int i=0; i<vsize; ++i) {
+    if (is_na[i]) {
+      output[i] = NA_LOGICAL;
+    } else if (is_ipv6[i]) {
+      output[i] = address_v6[i].is_multicast();
+    } else {
+      output[i] = address_v4[i].is_multicast();
+    }
+  }
+
+  return output;
+}
+
+LogicalVector IpAddressVector::isUnspecified() const {
+  unsigned int vsize = is_na.size();
+
+  // initialize vectors
+  LogicalVector output(vsize);
+
+  for (unsigned int i=0; i<vsize; ++i) {
+    if (is_na[i]) {
+      output[i] = NA_LOGICAL;
+    } else if (is_ipv6[i]) {
+      output[i] = address_v6[i].is_unspecified();
+    } else {
+      output[i] = address_v4[i].is_unspecified();
+    }
+  }
+
+  return output;
+}
+
+LogicalVector IpAddressVector::isLoopback() const {
+  unsigned int vsize = is_na.size();
+
+  // initialize vectors
+  LogicalVector output(vsize);
+
+  for (unsigned int i=0; i<vsize; ++i) {
+    if (is_na[i]) {
+      output[i] = NA_LOGICAL;
+    } else if (is_ipv6[i]) {
+      output[i] = address_v6[i].is_loopback();
+    } else {
+      output[i] = address_v4[i].is_loopback();
+    }
+  }
+
+  return output;
+}
+
+LogicalVector IpAddressVector::isLinkLocal() const {
+  unsigned int vsize = is_na.size();
+
+  // initialize vectors
+  LogicalVector output(vsize);
+
+  for (unsigned int i=0; i<vsize; ++i) {
+    if (is_na[i]) {
+      output[i] = NA_LOGICAL;
+    } else if (is_ipv6[i]) {
+      output[i] = address_v6[i].is_link_local();
+    } else {
+      // asio::ip::address_v4::is_link_local() doesn't exist
+      output[i] = (address_v4[i].to_uint() & 0xFFFF0000) == 0xA9FE0000;
+    }
+  }
+
+  return output;
+}

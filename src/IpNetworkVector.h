@@ -57,6 +57,15 @@ public:
 
   // List all addresses in network
   IpAddressVector hosts(bool exclude_unusable) const;
+
+
+  /*----------------------*
+   *  Reserved addresses  *
+   * ---------------------*/
+  LogicalVector isMulticast() const;
+  LogicalVector isUnspecified() const;
+  LogicalVector isLoopback() const;
+  LogicalVector isLinkLocal() const;
 };
 
 #endif

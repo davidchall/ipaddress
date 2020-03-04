@@ -60,6 +60,15 @@ public:
    *-----------------------*/
   LogicalVector isWithin(const IpNetworkVector &network) const;
   LogicalVector isWithinAny(const IpNetworkVector &network) const;
+
+
+  /*----------------------*
+   *  Reserved addresses  *
+   * ---------------------*/
+  LogicalVector isMulticast() const;
+  LogicalVector isUnspecified() const;
+  LogicalVector isLoopback() const;
+  LogicalVector isLinkLocal() const;
 };
 
 #endif

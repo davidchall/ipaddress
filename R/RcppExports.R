@@ -49,3 +49,35 @@ is_within_any_wrapper <- function(address_r, network_r) {
     .Call(`_ipaddress_is_within_any_wrapper`, address_r, network_r)
 }
 
+is_multicast_address_wrapper <- function(address_r) {
+    .Call(`_ipaddress_is_multicast_address_wrapper`, address_r)
+}
+
+is_multicast_network_wrapper <- function(network_r) {
+    .Call(`_ipaddress_is_multicast_network_wrapper`, network_r)
+}
+
+is_unspecified_address_wrapper <- function(address_r) {
+    .Call(`_ipaddress_is_unspecified_address_wrapper`, address_r)
+}
+
+is_unspecified_network_wrapper <- function(network_r) {
+    .Call(`_ipaddress_is_unspecified_network_wrapper`, network_r)
+}
+
+is_loopback_address_wrapper <- function(address_r) {
+    .Call(`_ipaddress_is_loopback_address_wrapper`, address_r)
+}
+
+is_loopback_network_wrapper <- function(network_r) {
+    .Call(`_ipaddress_is_loopback_network_wrapper`, network_r)
+}
+
+is_link_local_address_wrapper <- function(address_r) {
+    .Call(`_ipaddress_is_link_local_address_wrapper`, address_r)
+}
+
+is_link_local_network_wrapper <- function(network_r) {
+    .Call(`_ipaddress_is_link_local_network_wrapper`, network_r)
+}
+

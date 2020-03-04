@@ -303,3 +303,101 @@ IpAddressVector IpNetworkVector::hosts(bool exclude_unusable) const {
 
   return IpAddressVector(out_address_v4, out_address_v6, out_is_ipv6, out_is_na);
 }
+
+
+/*----------------------*
+ *  Reserved addresses  *
+ * ---------------------*/
+LogicalVector IpNetworkVector::isMulticast() const {
+  unsigned int vsize = is_na.size();
+
+  // initialize vectors
+  LogicalVector output(vsize);
+
+  for (unsigned int i=0; i<vsize; ++i) {
+    if (is_na[i]) {
+      output[i] = NA_LOGICAL;
+    } else if (is_ipv6[i]) {
+      asio::ip::address_v6 first = network_v6[i].address();
+      asio::ip::address_v6 last = broadcast_address<asio::ip::address_v6>(network_v6[i]);
+      output[i] = first.is_multicast() && last.is_multicast();
+    } else {
+      asio::ip::address_v4 first = network_v4[i].address();
+      asio::ip::address_v4 last = broadcast_address<asio::ip::address_v4>(network_v4[i]);
+      output[i] = first.is_multicast() && last.is_multicast();
+    }
+  }
+
+  return output;
+}
+
+LogicalVector IpNetworkVector::isUnspecified() const {
+  unsigned int vsize = is_na.size();
+
+  // initialize vectors
+  LogicalVector output(vsize);
+
+  for (unsigned int i=0; i<vsize; ++i) {
+    if (is_na[i]) {
+      output[i] = NA_LOGICAL;
+    } else if (is_ipv6[i]) {
+      asio::ip::address_v6 first = network_v6[i].address();
+      asio::ip::address_v6 last = broadcast_address<asio::ip::address_v6>(network_v6[i]);
+      output[i] = first.is_unspecified() && last.is_unspecified();
+    } else {
+      asio::ip::address_v4 first = network_v4[i].address();
+      asio::ip::address_v4 last = broadcast_address<asio::ip::address_v4>(network_v4[i]);
+      output[i] = first.is_unspecified() && last.is_unspecified();
+    }
+  }
+
+  return output;
+}
+
+LogicalVector IpNetworkVector::isLoopback() const {
+  unsigned int vsize = is_na.size();
+
+  // initialize vectors
+  LogicalVector output(vsize);
+
+  for (unsigned int i=0; i<vsize; ++i) {
+    if (is_na[i]) {
+      output[i] = NA_LOGICAL;
+    } else if (is_ipv6[i]) {
+      asio::ip::address_v6 first = network_v6[i].address();
+      asio::ip::address_v6 last = broadcast_address<asio::ip::address_v6>(network_v6[i]);
+      output[i] = first.is_loopback() && last.is_loopback();
+    } else {
+      asio::ip::address_v4 first = network_v4[i].address();
+      asio::ip::address_v4 last = broadcast_address<asio::ip::address_v4>(network_v4[i]);
+      output[i] = first.is_loopback() && last.is_loopback();
+    }
+  }
+
+  return output;
+}
+
+LogicalVector IpNetworkVector::isLinkLocal() const {
+  unsigned int vsize = is_na.size();
+
+  // initialize vectors
+  LogicalVector output(vsize);
+
+  for (unsigned int i=0; i<vsize; ++i) {
+    if (is_na[i]) {
+      output[i] = NA_LOGICAL;
+    } else if (is_ipv6[i]) {
+      asio::ip::address_v6 first = network_v6[i].address();
+      asio::ip::address_v6 last = broadcast_address<asio::ip::address_v6>(network_v6[i]);
+      output[i] = first.is_link_local() && last.is_link_local();
+    } else {
+      asio::ip::address_v4 first = network_v4[i].address();
+      asio::ip::address_v4 last = broadcast_address<asio::ip::address_v4>(network_v4[i]);
+      // asio::ip::address_v4::is_link_local() doesn't exist
+      output[i] = ((first.to_uint() & 0xFFFF0000) == 0xA9FE0000) &&
+        ((last.to_uint() & 0xFFFF0000) == 0xA9FE0000);
+    }
+  }
+
+  return output;
+}

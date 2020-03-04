@@ -80,3 +80,47 @@ LogicalVector is_within_any_wrapper(List address_r, List network_r) {
 
   return address.isWithinAny(network);
 }
+
+
+/*----------------------*
+ *  Reserved addresses  *
+ * ---------------------*/
+// [[Rcpp::export]]
+LogicalVector is_multicast_address_wrapper(List address_r) {
+  return IpAddressVector(address_r).isMulticast();
+}
+
+// [[Rcpp::export]]
+LogicalVector is_multicast_network_wrapper(List network_r) {
+  return IpNetworkVector(network_r).isMulticast();
+}
+
+// [[Rcpp::export]]
+LogicalVector is_unspecified_address_wrapper(List address_r) {
+  return IpAddressVector(address_r).isUnspecified();
+}
+
+// [[Rcpp::export]]
+LogicalVector is_unspecified_network_wrapper(List network_r) {
+  return IpNetworkVector(network_r).isUnspecified();
+}
+
+// [[Rcpp::export]]
+LogicalVector is_loopback_address_wrapper(List address_r) {
+  return IpAddressVector(address_r).isLoopback();
+}
+
+// [[Rcpp::export]]
+LogicalVector is_loopback_network_wrapper(List network_r) {
+  return IpNetworkVector(network_r).isLoopback();
+}
+
+// [[Rcpp::export]]
+LogicalVector is_link_local_address_wrapper(List address_r) {
+  return IpAddressVector(address_r).isLinkLocal();
+}
+
+// [[Rcpp::export]]
+LogicalVector is_link_local_network_wrapper(List network_r) {
+  return IpNetworkVector(network_r).isLinkLocal();
+}

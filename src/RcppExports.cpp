@@ -145,6 +145,94 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// is_multicast_address_wrapper
+LogicalVector is_multicast_address_wrapper(List address_r);
+RcppExport SEXP _ipaddress_is_multicast_address_wrapper(SEXP address_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type address_r(address_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(is_multicast_address_wrapper(address_r));
+    return rcpp_result_gen;
+END_RCPP
+}
+// is_multicast_network_wrapper
+LogicalVector is_multicast_network_wrapper(List network_r);
+RcppExport SEXP _ipaddress_is_multicast_network_wrapper(SEXP network_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type network_r(network_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(is_multicast_network_wrapper(network_r));
+    return rcpp_result_gen;
+END_RCPP
+}
+// is_unspecified_address_wrapper
+LogicalVector is_unspecified_address_wrapper(List address_r);
+RcppExport SEXP _ipaddress_is_unspecified_address_wrapper(SEXP address_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type address_r(address_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(is_unspecified_address_wrapper(address_r));
+    return rcpp_result_gen;
+END_RCPP
+}
+// is_unspecified_network_wrapper
+LogicalVector is_unspecified_network_wrapper(List network_r);
+RcppExport SEXP _ipaddress_is_unspecified_network_wrapper(SEXP network_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type network_r(network_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(is_unspecified_network_wrapper(network_r));
+    return rcpp_result_gen;
+END_RCPP
+}
+// is_loopback_address_wrapper
+LogicalVector is_loopback_address_wrapper(List address_r);
+RcppExport SEXP _ipaddress_is_loopback_address_wrapper(SEXP address_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type address_r(address_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(is_loopback_address_wrapper(address_r));
+    return rcpp_result_gen;
+END_RCPP
+}
+// is_loopback_network_wrapper
+LogicalVector is_loopback_network_wrapper(List network_r);
+RcppExport SEXP _ipaddress_is_loopback_network_wrapper(SEXP network_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type network_r(network_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(is_loopback_network_wrapper(network_r));
+    return rcpp_result_gen;
+END_RCPP
+}
+// is_link_local_address_wrapper
+LogicalVector is_link_local_address_wrapper(List address_r);
+RcppExport SEXP _ipaddress_is_link_local_address_wrapper(SEXP address_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type address_r(address_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(is_link_local_address_wrapper(address_r));
+    return rcpp_result_gen;
+END_RCPP
+}
+// is_link_local_network_wrapper
+LogicalVector is_link_local_network_wrapper(List network_r);
+RcppExport SEXP _ipaddress_is_link_local_network_wrapper(SEXP network_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type network_r(network_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(is_link_local_network_wrapper(network_r));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_parse_address_wrapper", (DL_FUNC) &_ipaddress_parse_address_wrapper, 1},
@@ -159,6 +247,14 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_hosts_wrapper", (DL_FUNC) &_ipaddress_hosts_wrapper, 2},
     {"_ipaddress_is_within_wrapper", (DL_FUNC) &_ipaddress_is_within_wrapper, 2},
     {"_ipaddress_is_within_any_wrapper", (DL_FUNC) &_ipaddress_is_within_any_wrapper, 2},
+    {"_ipaddress_is_multicast_address_wrapper", (DL_FUNC) &_ipaddress_is_multicast_address_wrapper, 1},
+    {"_ipaddress_is_multicast_network_wrapper", (DL_FUNC) &_ipaddress_is_multicast_network_wrapper, 1},
+    {"_ipaddress_is_unspecified_address_wrapper", (DL_FUNC) &_ipaddress_is_unspecified_address_wrapper, 1},
+    {"_ipaddress_is_unspecified_network_wrapper", (DL_FUNC) &_ipaddress_is_unspecified_network_wrapper, 1},
+    {"_ipaddress_is_loopback_address_wrapper", (DL_FUNC) &_ipaddress_is_loopback_address_wrapper, 1},
+    {"_ipaddress_is_loopback_network_wrapper", (DL_FUNC) &_ipaddress_is_loopback_network_wrapper, 1},
+    {"_ipaddress_is_link_local_address_wrapper", (DL_FUNC) &_ipaddress_is_link_local_address_wrapper, 1},
+    {"_ipaddress_is_link_local_network_wrapper", (DL_FUNC) &_ipaddress_is_link_local_network_wrapper, 1},
     {NULL, NULL, 0}
 };
 
