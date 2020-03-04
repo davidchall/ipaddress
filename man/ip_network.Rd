@@ -83,7 +83,6 @@ ip_network(c("192.168.0.0/24", "192.168.0.0/33", "1.2.3.4"))
 ip_network("192.168.0.1/22")
 
 ip_network("192.168.0.1/22", strict = FALSE)
-
 }
 \seealso{
 \code{\link[=prefix_length]{prefix_length()}}, \code{\link[=network_address]{network_address()}}, \code{\link[=netmask]{netmask()}}, \code{\link[=hostmask]{hostmask()}}

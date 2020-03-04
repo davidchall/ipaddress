@@ -53,7 +53,6 @@ num_addresses(x)
 network_address(x)
 
 broadcast_address(x)
-
 }
 \seealso{
 The prefix length can equivalently be represented by the \code{\link[=netmask]{netmask()}} or \code{\link[=hostmask]{hostmask()}}.

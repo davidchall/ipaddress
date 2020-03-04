@@ -30,7 +30,5 @@ of an IP network.
 is_within(ip_address("192.0.2.6"), ip_network("192.0.2.0/28"))
 
 is_within(ip_address("192.0.3.6"), ip_network("192.0.2.0/28"))
-
 is_within_any(ip_address("192.0.3.6"), ip_network(c("192.0.2.0/28", "192.0.3.0/28")))
-
 }

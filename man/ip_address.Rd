@@ -56,5 +56,4 @@ ip_address(c("0.0.0.1", "192.168.0.1", "2001:db8::8a2e:370:7334"))
 
 # validates inputs and replaces with NA
 ip_address(c("1.2.3.4", "255.255.255.256", "1.2.3.4/5"))
-
 }
