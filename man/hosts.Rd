@@ -41,6 +41,7 @@ might find that machine memory imposes stricter limitations.
 seq(ip_network("192.0.2.0/30"))
 
 seq(ip_network("2001:db8::/126"))
+
 hosts(ip_network("192.0.2.0/30"))
 
 hosts(ip_network("2001:db8::/126"))

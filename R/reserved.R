@@ -10,11 +10,17 @@
 #' @param x An \code{\link{ip_address}} or \code{\link{ip_network}} vector
 #' @return A logical vector
 #'
+#' @examples
+#' is_multicast(ip_network(c("224.0.0.0/4", "ff00::/8")))
+#'
+#' is_unspecified(ip_address(c("0.0.0.0", "::")))
+#'
+#' is_loopback(ip_network(c("127.0.0.0/8", "::1/128")))
+#'
+#' is_link_local(ip_network(c("169.254.0.0/16", "fe80::/10")))
 #' @name is_reserved
 NULL
 
-#' @examples
-#' is_multicast(ip_network(c("224.0.0.0/4", "ff00::/8")))
 #' @rdname is_reserved
 #' @export
 is_multicast <- function(x) {
@@ -27,8 +33,6 @@ is_multicast <- function(x) {
   }
 }
 
-#' @examples
-#' is_unspecified(ip_address(c("0.0.0.0", "::")))
 #' @rdname is_reserved
 #' @export
 is_unspecified <- function(x) {
@@ -41,8 +45,6 @@ is_unspecified <- function(x) {
   }
 }
 
-#' @examples
-#' is_loopback(ip_network(c("127.0.0.0/8", "::1/128")))
 #' @rdname is_reserved
 #' @export
 is_loopback <- function(x) {
@@ -55,8 +57,6 @@ is_loopback <- function(x) {
   }
 }
 
-#' @examples
-#' is_link_local(ip_network(c("169.254.0.0/16", "fe80::/10")))
 #' @rdname is_reserved
 #' @export
 is_link_local <- function(x) {
