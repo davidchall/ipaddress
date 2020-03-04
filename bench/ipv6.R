@@ -1,7 +1,7 @@
 library(ipaddress)
 
 addr_obj <- seq(ip_network("2001:db8::/110"))
-addr_str <- as.character(addr_str)
+addr_str <- as.character(addr_obj)
 netw_str <- paste0(addr_str, "/128")
 netw_obj <- ip_network(netw_str)
 
