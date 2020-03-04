@@ -18,24 +18,17 @@ This is a resubmission. In this version I have:
 
 ## R CMD check results
 
-0 errors | 0 warnings | 3 notes
+0 errors | 0 warnings | 1 note
 
 Maintainer: 'David Hall <david.hall.physics@gmail.com>'
 
-* New submission
+New submission
 
-* Possibly mis-spelled words in DESCRIPTION:
-     IP (2:13, 10:39)
-     IPv (12:22, 12:31)
+Possibly mis-spelled words in DESCRIPTION:
+  IP (2:13, 10:53)
+  IPv (12:43, 12:52)
 
 The acronyms IP, IPv4 and IPv6 are spelled correctly.
-
-* checking for non-standard things in the check directory ... NOTE
-Found the following files/directories:
-  'ipaddress-Ex_x64.Rout' 'tests_i386' 'tests_x64'
-  'examples_i386' 'examples_x64' 'ipaddress-Ex_i386.Rout'
-  
-These seem to be specific to the RHub build environment.
 
 
 ## Reverse dependencies
