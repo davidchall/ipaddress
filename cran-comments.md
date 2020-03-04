@@ -2,9 +2,7 @@
 
 This is a resubmission. In this version I have:
 
-* Put acronyms within single quotes in the title and description of the DESCRIPTION.
-* Added \value to all .Rd files that are not data files and explain the functions results in the documentation.
-* Fixed a typo in the \examples section of network_mask.Rd.
+* Removed single quotes from acronyms in the DESCRIPTION file and instead write out the full version in parentheses.
 
 
 ## Test environments
