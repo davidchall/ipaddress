@@ -1,7 +1,7 @@
 #include "IpAddressVector.h"
 #include "IpNetworkVector.h"
 #include "encoding.h"
-#include "utils.h"
+#include "masking.h"
 
 
 /*----------------*
