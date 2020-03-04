@@ -56,6 +56,11 @@ List hostmask_wrapper(IntegerVector prefix_length, LogicalVector is_ipv6) {
 }
 
 // [[Rcpp::export]]
+List broadcast_address_wrapper(List network_r) {
+  return IpNetworkVector(network_r).broadcastAddress().encodeR();
+}
+
+// [[Rcpp::export]]
 List hosts_wrapper(List network_r, bool exclude_unusable) {
   return IpNetworkVector(network_r).hosts(exclude_unusable).encodeR();
 }

@@ -68,9 +68,14 @@ test_that("comparison operations work", {
 
 test_that("component extraction works", {
   expect_equal(prefix_length(ip_network(x)), c(128L, 72L, 36L, 128L))
+  expect_equal(num_addresses(ip_network(x)), c(1, 2^56, 2^92, 1))
   expect_equal(
     network_address(ip_network(x)),
     ip_address(c("::", "256::", "2001:db8::", "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"))
+  )
+  expect_equal(
+    broadcast_address(ip_network(x)),
+    ip_address(c("::", "256::ff:ffff:ffff:ffff", "2001:db8:fff:ffff:ffff:ffff:ffff:ffff", "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"))
   )
 
   expect_equal(
@@ -78,3 +83,5 @@ test_that("component extraction works", {
     ip_network(network_address(ip_network(x)), prefix_length(ip_network(x)))
   )
 })
+
+

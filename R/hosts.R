@@ -19,6 +19,10 @@
 #' to prefix lengths less than 2 (for IPv4) or 98 (for IPv6). However, you
 #' might find that machine memory imposes stricter limitations.
 #'
+#' @seealso
+#' To get the IP address range of a network without generating all addresses,
+#' use [network_address()] and [broadcast_address()].
+#'
 #' @name hosts
 NULL
 

@@ -223,6 +223,29 @@ CharacterVector IpNetworkVector::encodeStrings() const {
 /*-----------------------*
  *  Other functionality  *
  *-----------------------*/
+IpAddressVector IpNetworkVector::broadcastAddress() const {
+  unsigned int vsize = is_na.size();
+
+  // initialize vectors
+  std::vector<asio::ip::address_v4> out_address_v4(vsize);
+  std::vector<asio::ip::address_v6> out_address_v6(vsize);
+  std::vector<bool> out_is_ipv6(vsize);
+  std::vector<bool> out_is_na(vsize);
+
+  for (unsigned int i=0; i<vsize; ++i) {
+    if (is_na[i]) {
+      out_is_na[i] = true;
+    } else if (is_ipv6[i]) {
+      out_address_v6[i] = broadcast_address<asio::ip::address_v6>(network_v6[i]);
+      out_is_ipv6[i] = true;
+    } else {
+      out_address_v4[i] = broadcast_address<asio::ip::address_v4>(network_v4[i]);
+    }
+  }
+
+  return IpAddressVector(out_address_v4, out_address_v6, out_is_ipv6, out_is_na);
+}
+
 IpAddressVector IpNetworkVector::hosts(bool exclude_unusable) const {
   // initialize vectors
   std::vector<asio::ip::address_v4> out_address_v4;

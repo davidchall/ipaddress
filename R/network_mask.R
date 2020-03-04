@@ -1,4 +1,4 @@
-#' IP network masking
+#' Subnet masking
 #'
 #' These functions yield different representations of the IP network mask.
 #'

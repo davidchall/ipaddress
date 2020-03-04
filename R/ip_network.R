@@ -162,30 +162,59 @@ vec_ptype_abbr.ip_network <- function(x, ...) {
 }
 
 
-#' Extract components of an IP network
-#'
-#' An IP network is uniquely defined by its network address and
-#' prefix length.
+#' Basic information about a network
 #'
 #' @param x An \code{\link{ip_network}} vector
 #' @return
-#' * `network_address()` returns an \code{\link{ip_address}} vector
 #' * `prefix_length()` returns an integer vector
+#' * `num_addresses()` returns a numeric vector
+#' * `network_address()` and `broadcast_address()` return an \code{\link{ip_address}} vector
 #'
 #' @examples
 #' x <- ip_network(c("192.168.0.0/22", "2001:db00::0/26"))
 #'
+#' prefix_length(x)
+#'
+#' num_addresses(x)
+#'
 #' network_address(x)
 #'
-#' prefix_length(x)
+#' broadcast_address(x)
 #'
 #' @seealso
 #' The prefix length can equivalently be represented by the [netmask()] or [hostmask()].
 #'
-#' @name network_address
+#' @name network_info
 NULL
 
-#' @rdname network_address
+#' `prefix_length()`
+#'
+#' `prefix_length()` gives the prefix length
+#'
+#' @rdname network_info
+#' @export
+prefix_length <- function(x) {
+  assertthat::assert_that(is_ip_network(x))
+  field(x, "prefix")
+}
+
+#' `num_addresses()`
+#'
+#' `num_addresses()` gives the total number of addresses
+#'
+#' @rdname network_info
+#' @export
+num_addresses <- function(x) {
+  assertthat::assert_that(is_ip_network(x))
+
+  2L ^ (ifelse(field(x, "is_ipv6"), 128L, 32L) - field(x, "prefix"))
+}
+
+#' `network_address()`
+#'
+#' `network_address()` gives the first address
+#'
+#' @rdname network_info
 #' @export
 network_address <- function(x) {
   assertthat::assert_that(is_ip_network(x))
@@ -199,9 +228,27 @@ network_address <- function(x) {
   )
 }
 
-#' @rdname network_address
+#' `broadcast_address()`
+#'
+#' `broadcast_address()` gives the last address
+#'
+#' @details
+#' The broadcast address is a special address at which any host connected
+#' to the network can receive messages. That is, packets sent to this address
+#' are received by all hosts on the network.
+#' In IPv4, the last address of a network is the broadcast address.
+#' Although IPv6 does not follow this approach to broadcast addresses, the
+#' `broadcast_address()` function still returns the last address of the network.
+#'
+#' @rdname network_info
 #' @export
-prefix_length <- function(x) {
+broadcast_address <- function(x) {
   assertthat::assert_that(is_ip_network(x))
-  field(x, "prefix")
+
+  y <- broadcast_address_wrapper(x)
+
+  new_ip_address(
+    y$address1, y$address2, y$address3, y$address4,
+    y$is_ipv6
+  )
 }

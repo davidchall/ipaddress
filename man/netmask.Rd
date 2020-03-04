@@ -7,7 +7,7 @@
 \alias{hostmask.default}
 \alias{netmask.ip_network}
 \alias{hostmask.ip_network}
-\title{IP network masking}
+\title{Subnet masking}
 \usage{
 netmask(...)
 

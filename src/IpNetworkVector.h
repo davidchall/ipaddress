@@ -52,6 +52,9 @@ public:
   /*-----------------------*
    *  Other functionality  *
    *-----------------------*/
+  // Return last address in network
+  IpAddressVector broadcastAddress() const;
+
   // List all addresses in network
   IpAddressVector hosts(bool exclude_unusable) const;
 };

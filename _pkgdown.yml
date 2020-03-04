@@ -5,19 +5,21 @@ reference:
     contents:
       - ip_address
       - ip_network
-      - network_address
-      - prefix_length
   - title: "Address spaces"
     contents:
       - is_ipv4
       - is_ipv6
   - title: "Network membership"
     contents:
+      - prefix_length
+      - num_addresses
+      - network_address
+      - broadcast_address
+      - netmask
+      - hostmask
       - seq.ip_network
       - hosts
       - is_within
       - is_within_any
       - is_subnet
       - is_supernet
-      - netmask
-      - hostmask

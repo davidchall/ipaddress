@@ -93,18 +93,27 @@ test_that("comparison operations work", {
   expect_equal(vec_compare(ip_network("192.168.0.0/16"), ip_network(NA)), NA_integer_)
 })
 
-test_that("component extraction works", {
+test_that("extracting basic info works", {
   expect_equal(prefix_length(ip_network(x)), c(32L, 16L, 22L, 32L))
+  expect_equal(num_addresses(ip_network(x)), c(1, 65536, 1024, 1))
   expect_equal(
     network_address(ip_network(x)),
     ip_address(c("0.0.0.0", "192.168.0.0", "192.168.100.0", "255.255.255.255"))
   )
+  expect_equal(
+    broadcast_address(ip_network(x)),
+    ip_address(c("0.0.0.0", "192.168.255.255", "192.168.103.255", "255.255.255.255"))
+  )
 
   expect_error(prefix_length(ip_address("192.168.0.1")), "not an ip_network")
+  expect_error(num_addresses(ip_address("192.168.0.1")), "not an ip_network")
   expect_error(network_address(ip_address("192.168.0.1")), "not an ip_network")
+  expect_error(broadcast_address(ip_address("192.168.0.1")), "not an ip_network")
 
   expect_equal(prefix_length(ip_network(NA)), NA_integer_)
+  expect_equal(num_addresses(ip_network(NA)), NA_real_)
   expect_equal(network_address(ip_network(NA)), ip_address(NA))
+  expect_equal(broadcast_address(ip_network(NA)), ip_address(NA))
 
   expect_equal(
     ip_network(x),
