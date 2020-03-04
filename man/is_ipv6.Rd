@@ -3,7 +3,7 @@
 \name{is_ipv6}
 \alias{is_ipv6}
 \alias{is_ipv4}
-\title{Classify version of IP address space}
+\title{Version of the address space}
 \usage{
 is_ipv4(x)
 
@@ -16,7 +16,7 @@ is_ipv6(x)
 A logical vector
 }
 \description{
-Classify version of IP address space
+Version of the address space
 }
 \examples{
 ip <- ip_address(c("0.0.0.1", "192.168.0.1", "2001:db8::7334"))

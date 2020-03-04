@@ -205,7 +205,7 @@ prefix_length <- function(x) {
 num_addresses <- function(x) {
   assertthat::assert_that(is_ip_network(x))
 
-  2L^(ifelse(field(x, "is_ipv6"), 128L, 32L) - field(x, "prefix"))
+  2L^(max_prefix_length(x) - field(x, "prefix"))
 }
 
 #' `network_address()`

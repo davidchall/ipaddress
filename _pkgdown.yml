@@ -9,6 +9,7 @@ reference:
     contents:
       - is_ipv4
       - is_ipv6
+      - max_prefix_length
       - is_multicast
       - is_unspecified
       - is_loopback

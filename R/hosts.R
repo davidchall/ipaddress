@@ -42,7 +42,7 @@ NULL
 seq.ip_network <- function(x, ...) {
   assertthat::assert_that(assertthat::is.scalar(x))
   assertthat::assert_that(
-    all(field(x, "prefix") >= ifelse(field(x, "is_ipv6"), 128L, 32L) - 30L, na.rm = TRUE),
+    all(field(x, "prefix") >= (max_prefix_length(x) - 30L), na.rm = TRUE),
     msg = "Network too large"
   )
 
@@ -65,7 +65,7 @@ hosts <- function(x) {
     assertthat::is.scalar(x)
   )
   assertthat::assert_that(
-    all(field(x, "prefix") >= ifelse(field(x, "is_ipv6"), 128L, 32L) - 30L, na.rm = TRUE),
+    all(field(x, "prefix") >= (max_prefix_length(x) - 30L), na.rm = TRUE),
     msg = "Network too large"
   )
 
