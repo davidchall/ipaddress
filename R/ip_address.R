@@ -45,7 +45,6 @@ NULL
 #'
 #' # validates inputs and replaces with NA
 #' ip_address(c("1.2.3.4", "255.255.255.256", "1.2.3.4/5"))
-#'
 #' @rdname ip_address
 #' @export
 ip_address <- function(ip = character()) {

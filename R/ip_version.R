@@ -9,7 +9,6 @@
 #' is_ipv4(ip)
 #'
 #' is_ipv6(ip)
-#'
 #' @name is_ipv6
 NULL
 

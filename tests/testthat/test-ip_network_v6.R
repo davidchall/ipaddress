@@ -83,5 +83,3 @@ test_that("component extraction works", {
     ip_network(network_address(ip_network(x)), prefix_length(ip_network(x)))
   )
 })
-
-

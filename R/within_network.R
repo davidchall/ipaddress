@@ -18,7 +18,6 @@ NULL
 #' is_within(ip_address("192.0.2.6"), ip_network("192.0.2.0/28"))
 #'
 #' is_within(ip_address("192.0.3.6"), ip_network("192.0.2.0/28"))
-#'
 #' @rdname address_in_network
 #' @export
 is_within <- function(address, network) {
@@ -35,7 +34,6 @@ is_within <- function(address, network) {
 #'
 #' @examples
 #' is_within_any(ip_address("192.0.3.6"), ip_network(c("192.0.2.0/28", "192.0.3.0/28")))
-#'
 #' @rdname address_in_network
 #' @export
 is_within_any <- function(address, network) {
@@ -62,7 +60,6 @@ is_within_any <- function(address, network) {
 #' is_subnet(net2, net1)
 #'
 #' is_supernet(net1, net2)
-#'
 #' @name network_in_network
 NULL
 

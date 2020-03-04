@@ -34,7 +34,6 @@ NULL
 #' seq(ip_network("192.0.2.0/30"))
 #'
 #' seq(ip_network("2001:db8::/126"))
-#'
 #' @rdname hosts
 #' @export
 seq.ip_network <- function(x, ...) {
@@ -60,7 +59,6 @@ seq.ip_network <- function(x, ...) {
 #' hosts(ip_network("192.0.2.0/30"))
 #'
 #' hosts(ip_network("2001:db8::/126"))
-#'
 #' @rdname hosts
 #' @export
 hosts <- function(x) {

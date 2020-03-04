@@ -65,7 +65,6 @@ NULL
 #' ip_network("192.168.0.1/22")
 #'
 #' ip_network("192.168.0.1/22", strict = FALSE)
-#'
 #' @rdname ip_network
 #' @export
 ip_network <- function(...) {
@@ -180,7 +179,6 @@ vec_ptype_abbr.ip_network <- function(x, ...) {
 #' network_address(x)
 #'
 #' broadcast_address(x)
-#'
 #' @seealso
 #' The prefix length can equivalently be represented by the [netmask()] or [hostmask()].
 #'
@@ -207,7 +205,7 @@ prefix_length <- function(x) {
 num_addresses <- function(x) {
   assertthat::assert_that(is_ip_network(x))
 
-  2L ^ (ifelse(field(x, "is_ipv6"), 128L, 32L) - field(x, "prefix"))
+  2L^(ifelse(field(x, "is_ipv6"), 128L, 32L) - field(x, "prefix"))
 }
 
 #' `network_address()`

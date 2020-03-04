@@ -18,7 +18,6 @@
 #' netmask(c(22L, 26L), c(FALSE, TRUE))
 #'
 #' hostmask(c(22L, 26L), c(FALSE, TRUE))
-#'
 #' @seealso The netmask can equivalently be represented by the [prefix_length()].
 #'
 #' @name netmask
