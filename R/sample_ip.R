@@ -48,20 +48,40 @@ sample_ip.ip_network <- function(x, size, replace = FALSE, ...) {
   )
 
   if (!replace && size > num_addresses(x)) {
-    stop("cannot take a sample larger than the population when 'replace = FALSE'")
+    stop("cannot take a sample larger than the network size when 'replace = FALSE'")
   }
+
+  # if generating all addresses, we can use C++ for performance boost
   if (!replace && size == num_addresses(x)) {
-    return(sample(seq(x)))
+    return(sample(seq(x), size, replace))
+  }
+
+  # for small networks it's quicker to generate all addresses
+  if (num_addresses(x) < 1000L) {
+    return(sample(seq(x), size, replace))
   }
 
   n_bits_to_sample <- max_prefix_length(x) - prefix_length(x)
   sample_func <- ifelse(is_ipv6(x), sample_ipv6, sample_ipv4)
 
   if (replace) {
-    do.call(sample_func, list(n_bits_to_sample, size))
+    result <- do.call(sample_func, list(n_bits_to_sample, size))
   } else {
-    stop("Not yet implemented")
+    result <- do.call(sample_func, list(n_bits_to_sample, size))
+
+    unique <- FALSE
+    while (!unique) {
+      dupes <- duplicated(result)
+      n_dupes <- sum(dupes)
+      if (n_dupes == 0) {
+        unique <- TRUE
+      } else {
+        result[dupes] <- do.call(sample_func, list(n_bits_to_sample, sum(dupes)))
+      }
+    }
   }
+
+  result
 }
 
 sample_ipv4 <- function(n_bits_to_sample, size) {
