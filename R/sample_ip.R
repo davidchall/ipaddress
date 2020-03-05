@@ -1,4 +1,7 @@
-#' Randomly sample addresses from a network
+#' Sample addresses within a network
+#'
+#' Generates random addresses within an IP network or from the
+#' entire address space.
 #'
 #' @param space The address space to sample ("IPv4" or "IPv6")
 #' @param x An \code{\link{ip_network}} scalar
@@ -28,6 +31,8 @@ sample_ip <- function(...) {
 #' @rdname sample_ip
 #' @export
 sample_ip.default <- function(space = c("IPv4", "IPv6"), size, replace = FALSE, ...) {
+  assertthat::assert_that(assertthat::is.string(space))
+
   if (space == "IPv4") {
     sample_ip(ip_network("0.0.0.0/0"), size, replace)
   } else if (space == "IPv6") {
@@ -42,6 +47,7 @@ sample_ip.default <- function(space = c("IPv4", "IPv6"), size, replace = FALSE, 
 sample_ip.ip_network <- function(x, size, replace = FALSE, ...) {
   assertthat::assert_that(
     assertthat::is.scalar(x),
+    assertthat::noNA(x),
     assertthat::is.count(size),
     assertthat::is.flag(replace),
     assertthat::noNA(replace)

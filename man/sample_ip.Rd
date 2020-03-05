@@ -4,7 +4,7 @@
 \alias{sample_ip}
 \alias{sample_ip.default}
 \alias{sample_ip.ip_network}
-\title{Randomly sample addresses from a network}
+\title{Sample addresses within a network}
 \usage{
 sample_ip(...)
 
@@ -27,7 +27,8 @@ sample_ip(...)
 An \code{\link{ip_address}} vector
 }
 \description{
-Randomly sample addresses from a network
+Generates random addresses within an IP network or from the
+entire address space.
 }
 \examples{
 set.seed(2020)
