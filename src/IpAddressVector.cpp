@@ -28,7 +28,7 @@ IpAddressVector::IpAddressVector(CharacterVector input) {
         address_v6[i] = asio::ip::make_address_v6(input[i], ec);
         if (ec) {
           is_na[i] = true;
-          warning("Invalid argument: " + input[i]);
+          warnInvalidInput(i, as<std::string>(input[i]));
         } else {
           is_ipv6[i] = true;
         }
@@ -111,6 +111,16 @@ IpAddressVector IpAddressVector::createHostmask(IntegerVector in_pfx, LogicalVec
   }
 
   return IpAddressVector(address_v4, address_v6, is_ipv6, is_na);
+}
+
+void IpAddressVector::warnInvalidInput(unsigned int index, const std::string &input, const std::string &reason) {
+  // Indexes are 1-based in R
+  std::string msg = "Invalid input in row " + std::to_string(index + 1) + ": " + input;
+  if (!reason.empty()) {
+    msg += " (" + reason + ")";
+  }
+
+  Rf_warningcall(R_NilValue, msg.c_str());
 }
 
 

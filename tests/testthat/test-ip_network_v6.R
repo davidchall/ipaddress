@@ -18,20 +18,20 @@ test_that("formats correctly", {
 })
 
 test_that("invalid inputs are caught", {
-  expect_warning(ip_network("1::2"), "Invalid argument")
-  expect_warning(ip_address("1::g/24"), "Invalid argument")
-  expect_warning(ip_network("1::-2/24"), "Invalid argument")
-  expect_warning(ip_network("1:2/24"), "Invalid argument")
-  expect_warning(ip_network("1::2::3/24"), "Invalid argument")
-  expect_warning(ip_network("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff/24"), "Invalid argument")
-  expect_warning(ip_network("1::2/-1"), "Invalid argument")
-  expect_warning(ip_network("1::2/129"), "Invalid argument")
-  expect_warning(ip_network("1::2/a"), "Invalid argument")
-  expect_warning(ip_network("1::2/24/24"), "Invalid argument")
+  expect_warning(ip_network("1::2"), "Invalid input")
+  expect_warning(ip_address("1::g/24"), "Invalid input")
+  expect_warning(ip_network("1::-2/24"), "Invalid input")
+  expect_warning(ip_network("1:2/24"), "Invalid input")
+  expect_warning(ip_network("1::2::3/24"), "Invalid input")
+  expect_warning(ip_network("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff/24"), "Invalid input")
+  expect_warning(ip_network("1::2/-1"), "Invalid input")
+  expect_warning(ip_network("1::2/129"), "Invalid input")
+  expect_warning(ip_network("1::2/a"), "Invalid input")
+  expect_warning(ip_network("1::2/24/24"), "Invalid input")
 
   expect_error(ip_network(ip_address("2001:db8::"), 24), "not an integer")
-  expect_warning(ip_network(ip_address("2001:db8::"), -1L), "Invalid argument")
-  expect_warning(ip_network(ip_address("2001:db8::"), 129L), "Invalid argument")
+  expect_warning(ip_network(ip_address("2001:db8::"), -1L), "Invalid input")
+  expect_warning(ip_network(ip_address("2001:db8::"), 129L), "Invalid input")
 })
 
 test_that("strict argument works", {

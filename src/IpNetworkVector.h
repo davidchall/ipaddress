@@ -38,6 +38,9 @@ public:
   // Construct from address + prefix length
   IpNetworkVector(IpAddressVector address, IntegerVector prefix_length, bool strict);
 
+  // Warn about invalid input
+  static void warnInvalidInput(unsigned int index, const std::string &input, const std::string &reason = "");
+
 
   /*----------*
    *  Output  *

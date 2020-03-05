@@ -33,7 +33,7 @@ IpNetworkVector::IpNetworkVector(CharacterVector input, bool strict) {
           network_v4[i] = tmp_v4;
         } else if (strict) {
           is_na[i] = true;
-          warning("Invalid argument: " + input[i] + " has host bits set");
+          warnInvalidInput(i, as<std::string>(input[i]), "host bits set");
         } else {
           network_v4[i] = tmp_v4.canonical();
         }
@@ -48,14 +48,14 @@ IpNetworkVector::IpNetworkVector(CharacterVector input, bool strict) {
             is_ipv6[i] = true;
           } else if (strict) {
             is_na[i] = true;
-            warning("Invalid argument: " + input[i] + " has host bits set");
+            warnInvalidInput(i, as<std::string>(input[i]), "host bits set");
           } else {
             network_v6[i] = tmp_v6.canonical();
             is_ipv6[i] = true;
           }
         } else {
           is_na[i] = true;
-          warning("Invalid argument: " + input[i]);
+          warnInvalidInput(i, as<std::string>(input[i]));
         }
       }
     }
@@ -113,7 +113,7 @@ IpNetworkVector::IpNetworkVector(IpAddressVector address, IntegerVector prefix_l
       if (prefix_length[i] < 0 || prefix_length[i] > 128) {
         is_na[i] = true;
         std::string cidr = address.address_v6[i].to_string() + "/" + std::to_string(prefix_length[i]);
-        warning("Invalid argument: " + cidr);
+        warnInvalidInput(i, cidr);
       } else {
         asio::ip::network_v6 tmp_v6(address.address_v6[i], prefix_length[i]);
         if (tmp_v6 == tmp_v6.canonical()) {
@@ -121,7 +121,7 @@ IpNetworkVector::IpNetworkVector(IpAddressVector address, IntegerVector prefix_l
           is_ipv6[i] = true;
         } else if (strict) {
           is_na[i] = true;
-          warning("Invalid argument: " + tmp_v6.to_string() + " has host bits set");
+          warnInvalidInput(i, tmp_v6.to_string(), "host bits set");
         } else {
           network_v6[i] = tmp_v6.canonical();
           is_ipv6[i] = true;
@@ -134,14 +134,14 @@ IpNetworkVector::IpNetworkVector(IpAddressVector address, IntegerVector prefix_l
       if (prefix_length[i] < 0 || prefix_length[i] > 32) {
         is_na[i] = true;
         std::string cidr = address.address_v4[i].to_string() + "/" + std::to_string(prefix_length[i]);
-        warning("Invalid argument: " + cidr);
+        warnInvalidInput(i, cidr);
       } else {
         asio::ip::network_v4 tmp_v4(address.address_v4[i], prefix_length[i]);
         if (tmp_v4 == tmp_v4.canonical()) {
           network_v4[i] = tmp_v4;
         } else if (strict) {
           is_na[i] = true;
-          warning("Invalid argument: " + tmp_v4.to_string() + " has host bits set");
+          warnInvalidInput(i, tmp_v4.to_string(), "host bits set");
         } else {
           network_v4[i] = tmp_v4.canonical();
         }
@@ -149,6 +149,16 @@ IpNetworkVector::IpNetworkVector(IpAddressVector address, IntegerVector prefix_l
 
     }
   }
+}
+
+void IpNetworkVector::warnInvalidInput(unsigned int index, const std::string &input, const std::string &reason) {
+  // Indexes are 1-based in R
+  std::string msg = "Invalid input in row " + std::to_string(index + 1) + ": " + input;
+  if (!reason.empty()) {
+    msg += " (" + reason + ")";
+  }
+
+  Rf_warningcall(R_NilValue, msg.c_str());
 }
 
 

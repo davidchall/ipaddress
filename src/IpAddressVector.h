@@ -41,6 +41,9 @@ public:
   // Construct hostmask from prefix length
   static IpAddressVector createHostmask(IntegerVector prefix_length, LogicalVector is_ipv6);
 
+  // Warn about invalid input
+  static void warnInvalidInput(unsigned int index, const std::string &input, const std::string &reason = "");
+
 
   /*----------*
    *  Output  *
