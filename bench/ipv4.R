@@ -1,14 +1,8 @@
 library(ipaddress)
 
-generate_range <- function() {
-  dat <- expand.grid(a = 192, b = 168:171, c = 0:255, d = 0:255)
-  paste(dat$a, dat$b, dat$c, dat$d, sep = ".")
-}
-
-# use IP address range 192.168.0.0/14
-addr_str <- generate_range()
+addr_obj <- seq(ip_network("192.168.0.0/14"))
+addr_str <- as.character(addr_obj)
 netw_str <- paste0(addr_str, "/32")
-addr_obj <- ip_address(addr_str)
 netw_obj <- ip_network(netw_str)
 
 single_subnet <- ip_network(rep("192.168.0.0/23", length(addr_str)))

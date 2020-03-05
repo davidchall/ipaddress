@@ -7,18 +7,18 @@
 #' @param network An \code{\link{ip_network}} vector
 #' @return A logical vector
 #'
+#' @examples
+#' is_within(ip_address("192.0.2.6"), ip_network("192.0.2.0/28"))
+#'
+#' is_within(ip_address("192.0.3.6"), ip_network("192.0.2.0/28"))
+#'
+#' is_within_any(ip_address("192.0.3.6"), ip_network(c("192.0.2.0/28", "192.0.3.0/28")))
 #' @name address_in_network
 NULL
 
 #' `is_within()`
 #'
 #' `is_within()` performs a one-to-one matching between addresses and networks.
-#'
-#' @examples
-#' is_within(ip_address("192.0.2.6"), ip_network("192.0.2.0/28"))
-#'
-#' is_within(ip_address("192.0.3.6"), ip_network("192.0.2.0/28"))
-#'
 #' @rdname address_in_network
 #' @export
 is_within <- function(address, network) {
@@ -32,10 +32,6 @@ is_within <- function(address, network) {
 #' `is_within_any()`
 #'
 #' `is_within_any()` checks if each IP address falls within _any_ of the IP networks.
-#'
-#' @examples
-#' is_within_any(ip_address("192.0.3.6"), ip_network(c("192.0.2.0/28", "192.0.3.0/28")))
-#'
 #' @rdname address_in_network
 #' @export
 is_within_any <- function(address, network) {
@@ -62,7 +58,6 @@ is_within_any <- function(address, network) {
 #' is_subnet(net2, net1)
 #'
 #' is_supernet(net1, net2)
-#'
 #' @name network_in_network
 NULL
 
@@ -73,7 +68,7 @@ is_subnet <- function(network1, network2) {
   assertthat::assert_that(is_ip_network(network2))
   assertthat::assert_that(length(network1) == length(network2))
 
-  is_subnet_wrapper(network1, network2)
+  is_within_wrapper(network_address(network1), network2) & (prefix_length(network1) >= prefix_length(network2))
 }
 
 #' @rdname network_in_network
@@ -83,5 +78,5 @@ is_supernet <- function(network1, network2) {
   assertthat::assert_that(is_ip_network(network2))
   assertthat::assert_that(length(network1) == length(network2))
 
-  is_subnet_wrapper(network2, network1)
+  is_within_wrapper(network_address(network2), network1) & (prefix_length(network2) >= prefix_length(network1))
 }

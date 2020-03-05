@@ -1,14 +1,8 @@
 library(ipaddress)
 
-generate_range <- function() {
-  dat <- expand.grid(a = 0:3, b = as.character(as.hexmode(0:(2^16-1))))
-  paste("2001:db8:", dat$a, dat$b, sep = ":")
-}
-
-# use IP address range 2001:db8::/110
-addr_str <- generate_range()
+addr_obj <- seq(ip_network("2001:db8::/110"))
+addr_str <- as.character(addr_obj)
 netw_str <- paste0(addr_str, "/128")
-addr_obj <- ip_address(addr_str)
 netw_obj <- ip_network(netw_str)
 
 single_subnet <- ip_network(rep("2001:db8::/119", length(addr_str)))

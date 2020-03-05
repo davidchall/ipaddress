@@ -1,71 +1,68 @@
-#define ASIO_STANDALONE
-
 #include <Rcpp.h>
 #include "IpAddressVector.h"
 #include "IpNetworkVector.h"
 
 using namespace Rcpp;
 
-/*------------------------
- *  Encoding and decoding
- * -----------------------
- */
+/*-------------------------*
+ *  Encoding and decoding  *
+ * ------------------------*/
 // [[Rcpp::export]]
 List parse_address_wrapper(CharacterVector x) {
-  return IpAddressVector(x).asList();
+  return IpAddressVector(x).encodeR();
 }
 
 // [[Rcpp::export]]
 CharacterVector print_address_wrapper(List x) {
-  return IpAddressVector(x).asCharacterVector();
+  return IpAddressVector(x).encodeStrings();
 }
 
 // [[Rcpp::export]]
-List parse_network_wrapper(CharacterVector x, LogicalVector strict) {
-  if (strict.size() != 1) {
-    stop("argument 'strict' must be a scalar logical value");
-  }
-  return IpNetworkVector(x, strict[0]).asList();
+List parse_network_wrapper(CharacterVector x, bool strict) {
+  return IpNetworkVector(x, strict).encodeR();
+}
+
+// [[Rcpp::export]]
+List construct_network_wrapper(List address, IntegerVector prefix_length, bool strict) {
+  return IpNetworkVector(IpAddressVector(address), prefix_length, strict).encodeR();
 }
 
 // [[Rcpp::export]]
 CharacterVector print_network_wrapper(List x) {
-  return IpNetworkVector(x).asCharacterVector();
+  return IpNetworkVector(x).encodeStrings();
 }
 
-/*-----------------------
- *  Comparison operators
- * ----------------------
- */
+
+/*------------------------*
+ *  Comparison operators  *
+ * -----------------------*/
 // [[Rcpp::export]]
 DataFrame compare_address_wrapper(List x) {
-  return IpAddressVector(x).compare();
+  return IpAddressVector(x).encodeComparable();
+}
+
+
+/*---------------*
+ *  Bit masking  *
+ * --------------*/
+// [[Rcpp::export]]
+List netmask_wrapper(IntegerVector prefix_length, LogicalVector is_ipv6) {
+  return IpAddressVector::createNetmask(prefix_length, is_ipv6).encodeR();
 }
 
 // [[Rcpp::export]]
-DataFrame compare_network_wrapper(List x) {
-  IpAddressVector address(List::create(
-      _["address1"] = x["address1"],
-      _["address2"] = x["address2"],
-      _["address3"] = x["address3"],
-      _["address4"] = x["address4"],
-      _["is_ipv6"] = x["is_ipv6"]
-  ));
-  return IpAddressVector(address).compare();
-}
-
-/*--------------
- *  Bit masking
- * -------------
- */
-// [[Rcpp::export]]
-List netmask_wrapper(List x) {
-  return IpNetworkVector(x).netmask().asList();
+List hostmask_wrapper(IntegerVector prefix_length, LogicalVector is_ipv6) {
+  return IpAddressVector::createHostmask(prefix_length, is_ipv6).encodeR();
 }
 
 // [[Rcpp::export]]
-List hostmask_wrapper(List x) {
-  return IpNetworkVector(x).hostmask().asList();
+List broadcast_address_wrapper(List network_r) {
+  return IpNetworkVector(network_r).broadcastAddress().encodeR();
+}
+
+// [[Rcpp::export]]
+List hosts_wrapper(List network_r, bool exclude_unusable) {
+  return IpNetworkVector(network_r).hosts(exclude_unusable).encodeR();
 }
 
 // [[Rcpp::export]]
@@ -84,16 +81,46 @@ LogicalVector is_within_any_wrapper(List address_r, List network_r) {
   return address.isWithinAny(network);
 }
 
-// [[Rcpp::export]]
-LogicalVector is_subnet_wrapper(List network1_r, List network2_r) {
-  IpAddressVector address1(List::create(
-      _["address1"] = network1_r["address1"],
-      _["address2"] = network1_r["address2"],
-      _["address3"] = network1_r["address3"],
-      _["address4"] = network1_r["address4"],
-      _["is_ipv6"] = network1_r["is_ipv6"]
-  ));
-  IpNetworkVector network2(network2_r);
 
-  return address1.isWithin(network2);
+/*----------------------*
+ *  Reserved addresses  *
+ * ---------------------*/
+// [[Rcpp::export]]
+LogicalVector is_multicast_address_wrapper(List address_r) {
+  return IpAddressVector(address_r).isMulticast();
+}
+
+// [[Rcpp::export]]
+LogicalVector is_multicast_network_wrapper(List network_r) {
+  return IpNetworkVector(network_r).isMulticast();
+}
+
+// [[Rcpp::export]]
+LogicalVector is_unspecified_address_wrapper(List address_r) {
+  return IpAddressVector(address_r).isUnspecified();
+}
+
+// [[Rcpp::export]]
+LogicalVector is_unspecified_network_wrapper(List network_r) {
+  return IpNetworkVector(network_r).isUnspecified();
+}
+
+// [[Rcpp::export]]
+LogicalVector is_loopback_address_wrapper(List address_r) {
+  return IpAddressVector(address_r).isLoopback();
+}
+
+// [[Rcpp::export]]
+LogicalVector is_loopback_network_wrapper(List network_r) {
+  return IpNetworkVector(network_r).isLoopback();
+}
+
+// [[Rcpp::export]]
+LogicalVector is_link_local_address_wrapper(List address_r) {
+  return IpAddressVector(address_r).isLinkLocal();
+}
+
+// [[Rcpp::export]]
+LogicalVector is_link_local_network_wrapper(List network_r) {
+  return IpNetworkVector(network_r).isLinkLocal();
 }

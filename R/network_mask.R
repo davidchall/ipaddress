@@ -1,36 +1,57 @@
-#' IP network masking
+#' Subnet masking
 #'
 #' These functions yield different representations of the IP network mask.
 #'
-#' @param x An \code{\link{ip_network}} vector
-#' @return The `prefix_length()` function returns an integer vector.
-#'   The `netmask()` and `hostmask()` functions return an
-#'   \code{\link{ip_address}} vector.
+#' @param prefix_length An integer vector
+#' @param is_ipv6 A logical vector
+#' @param network An \code{\link{ip_network}} vector
+#' @param ... Arguments to be passed to other methods
+#' @return An \code{\link{ip_address}} vector
 #'
 #' @examples
-#' ip <- ip_network(c("192.168.0.0/22", "2001:db00::0/26"))
+#' x <- ip_network(c("192.168.0.0/22", "2001:db00::0/26"))
 #'
-#' prefix_length(ip)
+#' netmask(x)
 #'
-#' netmask(ip)
+#' hostmask(x)
 #'
-#' hostmask(ip)
+#' netmask(c(22L, 26L), c(FALSE, TRUE))
+#'
+#' hostmask(c(22L, 26L), c(FALSE, TRUE))
+#' @seealso The netmask can equivalently be represented by the [prefix_length()].
 #'
 #' @name netmask
 NULL
 
 #' @rdname netmask
 #' @export
-prefix_length <- function(x) {
-  assertthat::assert_that(is_ip_network(x))
-  field(x, "prefix")
+netmask <- function(...) {
+  UseMethod("netmask")
 }
 
 #' @rdname netmask
 #' @export
-netmask <- function(x) {
-  assertthat::assert_that(is_ip_network(x))
-  y <- netmask_wrapper(x)
+hostmask <- function(...) {
+  UseMethod("hostmask")
+}
+
+#' @rdname netmask
+#' @export
+netmask.default <- function(prefix_length = integer(), is_ipv6 = logical(), ...) {
+  assertthat::assert_that(
+    is.integer(prefix_length),
+    is.logical(is_ipv6),
+    length(is_ipv6) == length(prefix_length)
+  )
+  assertthat::assert_that(
+    all(prefix_length >= 0L, na.rm = TRUE),
+    all(prefix_length[!is_ipv6] <= 32L, na.rm = TRUE),
+    all(prefix_length[is_ipv6] <= 128L, na.rm = TRUE),
+    msg = "Found out-of-bounds prefix length"
+  )
+
+  y <- netmask_wrapper(prefix_length, is_ipv6)
+
   new_ip_address(
     y$address1, y$address2, y$address3, y$address4,
     y$is_ipv6
@@ -39,9 +60,49 @@ netmask <- function(x) {
 
 #' @rdname netmask
 #' @export
-hostmask <- function(x) {
-  assertthat::assert_that(is_ip_network(x))
-  y <- hostmask_wrapper(x)
+hostmask.default <- function(prefix_length = integer(), is_ipv6 = logical(), ...) {
+  assertthat::assert_that(
+    is.integer(prefix_length),
+    is.logical(is_ipv6),
+    length(is_ipv6) == length(prefix_length)
+  )
+  assertthat::assert_that(
+    all(prefix_length >= 0L, na.rm = TRUE),
+    all(prefix_length[!is_ipv6] <= 32L, na.rm = TRUE),
+    all(prefix_length[is_ipv6] <= 128L, na.rm = TRUE),
+    msg = "Found out-of-bounds prefix length"
+  )
+
+  y <- hostmask_wrapper(prefix_length, is_ipv6)
+
+  new_ip_address(
+    y$address1, y$address2, y$address3, y$address4,
+    y$is_ipv6
+  )
+}
+
+#' @rdname netmask
+#' @export
+netmask.ip_network <- function(network, ...) {
+  y <- netmask_wrapper(
+    field(network, "prefix"),
+    field(network, "is_ipv6")
+  )
+
+  new_ip_address(
+    y$address1, y$address2, y$address3, y$address4,
+    y$is_ipv6
+  )
+}
+
+#' @rdname netmask
+#' @export
+hostmask.ip_network <- function(network, ...) {
+  y <- hostmask_wrapper(
+    field(network, "prefix"),
+    field(network, "is_ipv6")
+  )
+
   new_ip_address(
     y$address1, y$address2, y$address3, y$address4,
     y$is_ipv6

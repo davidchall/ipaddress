@@ -84,3 +84,9 @@ mutate(x, ipv6 = is_ipv6(address), in_net = is_within(address, network))
 #> 1             192.168.0.1 192.168.100.0/22 FALSE FALSE 
 #> 2 2001:db8::8a2e:370:7334    2001:db8::/48 TRUE  TRUE
 ```
+
+-----
+
+Please note that the ‘ipaddress’ project is released with a [Contributor
+Code of Conduct](.github/CODE_OF_CONDUCT.md). By contributing to this
+project, you agree to abide by its terms.

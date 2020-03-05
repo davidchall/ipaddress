@@ -22,8 +22,8 @@ methods::setOldClass(c("ip_address", "vctrs_vctr"))
 #' When casting an `ip_address` object back to a character vector using
 #' `as.character()`, IPv6 addresses are reduced to their compressed representation.
 #'
-#' @param x An object
-#' @param ... Additional arguments to be passed to or from methods
+#' @param x An `ip_address` vector
+#' @param ... Arguments to be passed to other methods
 #'
 #' @name ip_address
 NULL
@@ -45,7 +45,6 @@ NULL
 #'
 #' # validates inputs and replaces with NA
 #' ip_address(c("1.2.3.4", "255.255.255.256", "1.2.3.4/5"))
-#'
 #' @rdname ip_address
 #' @export
 ip_address <- function(ip = character()) {
@@ -56,7 +55,8 @@ ip_address <- function(ip = character()) {
   )
 }
 
-# low-level constructor that accepts the underlying data types being stored
+#' Low-level constructor that accepts the underlying data types being stored
+#' @noRd
 new_ip_address <- function(address1 = integer(), address2 = integer(), address3 = integer(), address4 = integer(), is_ipv6 = logical()) {
   vec_assert(address1, ptype = integer())
   vec_assert(address2, ptype = integer())

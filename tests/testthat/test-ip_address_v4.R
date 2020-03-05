@@ -33,22 +33,22 @@ test_that("coercion works", {
 })
 
 test_that("missing values work", {
-  expect_equal(field(ip_address(NA), "address1"), NA_integer_)
+  expect_equal(field(ip_address(NA), "is_ipv6"), NA)
   expect_equal(ip_address(c(x, NA)), c(ip_address(x), NA))
   expect_equal(as.character(ip_address(c(x, NA))), c(x, NA))
   expect_equal(is.na(ip_address(c(x, NA))), c(rep(FALSE, length(x)), TRUE))
 })
 
 test_that("invalid inputs are caught", {
-  expect_warning(ip_address("1.2.3.4/5"), "Invalid argument")
-  expect_warning(ip_address("abc"), "Invalid argument")
-  expect_warning(ip_address("1.2.3.256"), "Invalid argument")
-  expect_warning(ip_address("1.2.3.-1"), "Invalid argument")
-  expect_warning(ip_address("1.2.3.4.5"), "Invalid argument")
+  expect_warning(ip_address("1.2.3.4/5"), "Invalid input")
+  expect_warning(ip_address("abc"), "Invalid input")
+  expect_warning(ip_address("1.2.3.256"), "Invalid input")
+  expect_warning(ip_address("1.2.3.-1"), "Invalid input")
+  expect_warning(ip_address("1.2.3.4.5"), "Invalid input")
 
   # Windows accepts IP addresses in alternative formats: https://superuser.com/a/486936
   skip_on_os("windows")
-  expect_warning(ip_address("1.2.3"), "Invalid argument")
+  expect_warning(ip_address("1.2.3"), "Invalid input")
 })
 
 test_that("equality operations work", {
@@ -68,4 +68,5 @@ test_that("comparison operations work", {
     vctrs::vec_compare(ip_address(x), ip_address(shifter(x, -1L))),
     c(-1L, rep(1L, length(x) - 1L))
   )
+  expect_equal(vec_compare(ip_address("192.168.0.1"), ip_address(NA)), NA_integer_)
 })
