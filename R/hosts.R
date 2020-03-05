@@ -31,6 +31,8 @@
 #' To get the IP address range of a network without generating all addresses,
 #' use [network_address()] and [broadcast_address()].
 #'
+#' Use [sample_ip()] to randomly sample addresses.
+#'
 #' @name hosts
 NULL
 

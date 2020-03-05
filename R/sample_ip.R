@@ -1,7 +1,46 @@
+#' Randomly sample addresses from a network
+#'
+#' @param space The address space to sample ("IPv4" or "IPv6")
+#' @param x An \code{\link{ip_network}} scalar
+#' @param size Integer specifying the number of addresses to return
+#' @param replace Should sampling be with replacement?
+#' @param ... Arguments to be passed to other methods
+#' @return An \code{\link{ip_address}} vector
+#'
+#' @seealso
+#' Use [seq.ip_network()] to generate _all_ addresses in a network.
+#'
+#' @examples
+#' set.seed(2020)
+#' sample_ip("IPv4", 5)
+#'
+#' sample_ip("IPv6", 5)
+#'
+#' sample_ip(ip_network("192.168.0.0/16"), 5)
+#'
+#' sample_ip(ip_network("2001:db8::/48"), 5)
+#' @name sample_ip
 #' @export
-sample_ip <- function(x, size, replace = FALSE) {
+sample_ip <- function(...) {
+  UseMethod("sample_ip")
+}
+
+#' @rdname sample_ip
+#' @export
+sample_ip.default <- function(space = c("IPv4", "IPv6"), size, replace = FALSE, ...) {
+  if (space == "IPv4") {
+    sample_ip(ip_network("0.0.0.0/0"), size, replace)
+  } else if (space == "IPv6") {
+    sample_ip(ip_network("::/0"), size, replace)
+  } else {
+    stop("`space` must be either 'IPv4' or 'IPv6")
+  }
+}
+
+#' @rdname sample_ip
+#' @export
+sample_ip.ip_network <- function(x, size, replace = FALSE, ...) {
   assertthat::assert_that(
-    is_ip_network(x),
     assertthat::is.scalar(x),
     assertthat::is.count(size),
     assertthat::is.flag(replace),
@@ -16,8 +55,13 @@ sample_ip <- function(x, size, replace = FALSE) {
   }
 
   n_bits_to_sample <- max_prefix_length(x) - prefix_length(x)
+  sample_func <- ifelse(is_ipv6(x), sample_ipv6, sample_ipv4)
 
-  sample_ipv4(n_bits_to_sample, size)
+  if (replace) {
+    do.call(sample_func, list(n_bits_to_sample, size))
+  } else {
+    stop("Not yet implemented")
+  }
 }
 
 sample_ipv4 <- function(n_bits_to_sample, size) {
