@@ -24,6 +24,8 @@ test_that("is_multicast works", {
 
   expect_equal(is_multicast(ip_address(NA)), NA)
   expect_equal(is_multicast(ip_network(NA)), NA)
+
+  expect_error(is_multicast("hello"))
 })
 
 test_that("is_unspecified works", {
@@ -52,6 +54,8 @@ test_that("is_unspecified works", {
 
   expect_equal(is_unspecified(ip_address(NA)), NA)
   expect_equal(is_unspecified(ip_network(NA)), NA)
+
+  expect_error(is_unspecified("hello"))
 })
 
 test_that("is_loopback works", {
@@ -80,6 +84,8 @@ test_that("is_loopback works", {
 
   expect_equal(is_loopback(ip_address(NA)), NA)
   expect_equal(is_loopback(ip_network(NA)), NA)
+
+  expect_error(is_loopback("hello"))
 })
 
 test_that("is_link_local works", {
@@ -108,4 +114,6 @@ test_that("is_link_local works", {
 
   expect_equal(is_link_local(ip_address(NA)), NA)
   expect_equal(is_link_local(ip_network(NA)), NA)
+
+  expect_error(is_link_local("hello"))
 })
