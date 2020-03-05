@@ -114,6 +114,37 @@
 <h1 class="page-header">
 <a href="#ipaddress-development-version" class="anchor"></a>ipaddress (development version)<small> Unreleased </small>
 </h1>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New features</h2>
+<ul>
+<li>New <code><a href="https://rdrr.io/r/base/seq.html">seq()</a></code> and <code><a href="../reference/hosts.html">hosts()</a></code> functions provide ability to list all addresses within a network.</li>
+<li>New <code><a href="../reference/network_info.html">num_addresses()</a></code>, <code><a href="../reference/network_info.html">network_address()</a></code> and <code><a href="../reference/network_info.html">broadcast_address()</a></code> functions provide basic information about a network.</li>
+<li>New <code><a href="../reference/max_prefix_length.html">max_prefix_length()</a></code> function specifies the size of the address space (32-bit for IPv4 and 128-bit for IPv6).</li>
+<li>New <code><a href="../reference/is_reserved.html">is_multicast()</a></code>, <code><a href="../reference/is_reserved.html">is_unspecified()</a></code>, <code><a href="../reference/is_reserved.html">is_loopback()</a></code> and <code><a href="../reference/is_reserved.html">is_link_local()</a></code> functions check if addresses or networks are reserved for special use.</li>
+<li>
+<code><a href="../reference/netmask.html">netmask()</a></code> and <code><a href="../reference/netmask.html">hostmask()</a></code> are now generics, so they can accept either an <code>ip_network</code> vector or an integer vector of prefix lengths. Previously they only accepted an <code>ip_network</code> vector.</li>
+<li>Added an <code>ip_network</code> constructor that accepts <code>ip_address</code> and prefix length vectors.</li>
+<li>Improved input validation warnings. They now report the row number involved and no longer mentioned internal function names.</li>
+<li>Performance improvements.</li>
+</ul>
+</div>
+<div id="bug-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<ul>
+<li>Fixed decoding bug which meant that some IP addresses were interpreted as NA
+<ul>
+<li>In IPv4, this affected <code>0.0.0.128</code>
+</li>
+<li>In IPv6, this affected any address in the <code>0:80::/32</code> network</li>
+</ul>
+</li>
+<li>Network membership functions (<code><a href="../reference/address_in_network.html">is_within()</a></code>, <code><a href="../reference/address_in_network.html">is_within_any()</a></code>, <code><a href="../reference/network_in_network.html">is_subnet()</a></code> and <code><a href="../reference/network_in_network.html">is_supernet()</a></code>) now report that the network address and broadcast address are within the network.</li>
+<li>
+<code><a href="../reference/network_in_network.html">is_subnet()</a></code> and <code><a href="../reference/network_in_network.html">is_supernet()</a></code> now check the prefix length, to ensure they are a true subnet or supernet.</li>
+</ul>
+</div>
 </div>
     <div id="ipaddress-010" class="section level1">
 <h1 class="page-header">
@@ -141,7 +172,7 @@
 <li>
 <code><a href="../reference/is_ipv6.html">is_ipv4()</a></code> and <code><a href="../reference/is_ipv6.html">is_ipv6()</a></code> classify the address space</li>
 <li>
-<code><a href="../reference/netmask.html">prefix_length()</a></code>, <code><a href="../reference/netmask.html">netmask()</a></code> and <code><a href="../reference/netmask.html">hostmask()</a></code> yield different representations of the network mask</li>
+<code><a href="../reference/network_info.html">prefix_length()</a></code>, <code><a href="../reference/netmask.html">netmask()</a></code> and <code><a href="../reference/netmask.html">hostmask()</a></code> yield different representations of the network mask</li>
 </ul>
 </li>
 <li>Calculations performed in C++ (using <code>Rcpp</code> and <code>AsioHeaders</code> packages) for improved performance</li>

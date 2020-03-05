@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Version of the address space — is_ipv6 • ipaddress</title>
+<title>Size of the address space — max_prefix_length • ipaddress</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,9 @@
 
 
 
-<meta property="og:title" content="Version of the address space — is_ipv6" />
-<meta property="og:description" content="Version of the address space" />
+<meta property="og:title" content="Size of the address space — max_prefix_length" />
+<meta property="og:description" content="The total number of bits available in the address space. IPv4 uses
+32-bit addresses and IPv6 uses 128-bit addresses." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -108,18 +109,17 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Version of the address space</h1>
+    <h1>Size of the address space</h1>
     <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/ip_version.R'><code>R/ip_version.R</code></a></small>
-    <div class="hidden name"><code>is_ipv6.Rd</code></div>
+    <div class="hidden name"><code>max_prefix_length.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Version of the address space</p>
+    <p>The total number of bits available in the address space. IPv4 uses
+32-bit addresses and IPv6 uses 128-bit addresses.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>is_ipv4</span>(<span class='no'>x</span>)
-
-<span class='fu'>is_ipv6</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>max_prefix_length</span>(<span class='no'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -132,19 +132,22 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A logical vector</p>
+    <p>An integer vector</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='is_ipv6.html'>is_ipv6()</a></code>, <code><a href='network_info.html'>prefix_length()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ip</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"0.0.0.1"</span>, <span class='st'>"192.168.0.1"</span>, <span class='st'>"2001:db8::7334"</span>))
+    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.1"</span>, <span class='st'>"2001:db8::7334"</span>))
 
-<span class='fu'>is_ipv4</span>(<span class='no'>ip</span>)</div><div class='output co'>#&gt; [1]  TRUE  TRUE FALSE</div><div class='input'>
-<span class='fu'>is_ipv6</span>(<span class='no'>ip</span>)</div><div class='output co'>#&gt; [1] FALSE FALSE  TRUE</div></pre>
+<span class='fu'>max_prefix_length</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1]  32 128</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
