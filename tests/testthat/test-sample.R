@@ -1,8 +1,8 @@
-ipv4 <- ip_network("0.0.0.0/22")
-ipv6 <- ip_network("::/118")
+ipv4 <- ip_network("192.168.0.0/22")
+ipv6 <- ip_network("2001:db8::/118")
 
 test_that("input validation works", {
-  expect_error(sample_ip(ip_network(rep("192.168.0.0/24", 2)), 1))
+  expect_error(sample_ip(ip_network(rep(ipv4, 2)), 1))
   expect_error(sample_ip(ip_network(), 1))
   expect_error(sample_ip(ip_address("192.168.0.0"), 1))
   expect_error(sample_ip(ip_network("0.0.0.0/32"), 0))
