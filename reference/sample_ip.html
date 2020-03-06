@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Casting — vec_cast.ip_network • ipaddress</title>
+<title>Sample addresses within a network — sample_ip • ipaddress</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,9 @@
 
 
 
-<meta property="og:title" content="Casting — vec_cast.ip_network" />
-<meta property="og:description" content="Double dispatch methods to support vctrs::vec_cast()." />
+<meta property="og:title" content="Sample addresses within a network — sample_ip" />
+<meta property="og:description" content="Generates random addresses within an IP network or from the
+entire address space." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -108,50 +109,80 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Casting</h1>
-    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/vctrs-cast.R'><code>R/vctrs-cast.R</code></a></small>
-    <div class="hidden name"><code>vec_cast.ip_network.Rd</code></div>
+    <h1>Sample addresses within a network</h1>
+    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/sample_ip.R'><code>R/sample_ip.R</code></a></small>
+    <div class="hidden name"><code>sample_ip.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Double dispatch methods to support <code><a href='https://rdrr.io/pkg/vctrs/man/vec_cast.html'>vctrs::vec_cast()</a></code>.</p>
+    <p>Generates random addresses within an IP network or from the
+entire address space.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for ip_network</span>
-<span class='fu'>vec_cast</span>(<span class='no'>x</span>, <span class='no'>to</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>sample_ip</span>(<span class='no'>...</span>)
+
+<span class='co'># S3 method for default</span>
+<span class='fu'>sample_ip</span>(<span class='kw'>space</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"IPv4"</span>, <span class='st'>"IPv6"</span>), <span class='no'>size</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for ip_network</span>
+<span class='fu'>sample_ip</span>(<span class='no'>x</span>, <span class='no'>size</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Vectors to cast.</p></td>
-    </tr>
-    <tr>
-      <th>to</th>
-      <td><p>Type to cast to. If <code>NULL</code>, <code>x</code> will be returned as is.</p></td>
-    </tr>
-    <tr>
       <th>...</th>
-      <td><p>For <code>vec_cast_common()</code>, vectors to cast. For
-<code>vec_cast()</code> and <code>vec_restore()</code>, these dots are only for future
-extensions and should be empty.</p></td>
+      <td><p>Arguments to be passed to other methods</p></td>
+    </tr>
+    <tr>
+      <th>space</th>
+      <td><p>The address space to sample ("IPv4" or "IPv6")</p></td>
+    </tr>
+    <tr>
+      <th>size</th>
+      <td><p>Integer specifying the number of addresses to return</p></td>
+    </tr>
+    <tr>
+      <th>replace</th>
+      <td><p>Should sampling be with replacement?</p></td>
+    </tr>
+    <tr>
+      <th>x</th>
+      <td><p>An <code><a href='ip_network.html'>ip_network</a></code> scalar</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A vector the same length as <code>x</code> with the same type as <code>to</code>,
-or an error if the cast is not possible. An error is generated if
-information is lost when casting between compatible types (i.e. when
-there is no 1-to-1 mapping for a specific value).</p>
+    <p>An <code><a href='ip_address.html'>ip_address</a></code> vector</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <div class='dont-index'><p>Use <code><a href='hosts.html'>seq.ip_network()</a></code> to generate <em>all</em> addresses in a network.</p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>sample_ip</span>(<span class='st'>"IPv4"</span>, <span class='fl'>5</span>)</div><div class='output co'>#&gt; &lt;ip_address[5]&gt;
+#&gt; [1] 172.101.229.23  150.110.200.78  203.46.196.76   62.158.4.129   
+#&gt; [5] 228.195.254.189</div><div class='input'>
+<span class='fu'>sample_ip</span>(<span class='st'>"IPv6"</span>, <span class='fl'>5</span>)</div><div class='output co'>#&gt; &lt;ip_address[5]&gt;
+#&gt; [1] 64e2:fe00:7b2:55f6:1b2c:101a:8682:c0a7 
+#&gt; [2] abe8:4935:80b1:357b:55b5:f37c:431f:f2b5
+#&gt; [3] dc35:5f71:eff6:9205:6d00:4685:2ad0:6660
+#&gt; [4] a1fa:8452:1ba9:8b8:b440:662c:c329:40ab 
+#&gt; [5] 4516:51ed:4292:6109:960c:a78c:11bb:3593</div><div class='input'>
+<span class='fu'>sample_ip</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>"192.168.0.0/16"</span>), <span class='fl'>5</span>)</div><div class='output co'>#&gt; &lt;ip_address[5]&gt;
+#&gt; [1] 192.168.21.209 192.168.19.181 192.168.27.57  192.168.63.73  192.168.41.227</div><div class='input'>
+<span class='fu'>sample_ip</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>"2001:db8::/48"</span>), <span class='fl'>5</span>)</div><div class='output co'>#&gt; &lt;ip_address[5]&gt;
+#&gt; [1] 2001:db8:0:608b:ac59:9d5d:2f94:cc2f 2001:db8:0:14ae:9ee:1d25:1b4f:8209 
+#&gt; [3] 2001:db8:0:990a:babd:4107:ea72:cee9 2001:db8:0:f1ff:8e11:247d:e793:190a
+#&gt; [5] 2001:db8:0:b863:83e9:347f:b6e0:6784</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

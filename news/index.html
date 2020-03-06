@@ -118,13 +118,15 @@
 <h2 class="hasAnchor">
 <a href="#new-features" class="anchor"></a>New features</h2>
 <ul>
-<li>New <code><a href="https://rdrr.io/r/base/seq.html">seq()</a></code> and <code><a href="../reference/hosts.html">hosts()</a></code> functions provide ability to list all addresses within a network.</li>
-<li>New <code><a href="../reference/network_info.html">num_addresses()</a></code>, <code><a href="../reference/network_info.html">network_address()</a></code> and <code><a href="../reference/network_info.html">broadcast_address()</a></code> functions provide basic information about a network.</li>
-<li>New <code><a href="../reference/max_prefix_length.html">max_prefix_length()</a></code> function specifies the size of the address space (32-bit for IPv4 and 128-bit for IPv6).</li>
-<li>New <code><a href="../reference/is_reserved.html">is_multicast()</a></code>, <code><a href="../reference/is_reserved.html">is_unspecified()</a></code>, <code><a href="../reference/is_reserved.html">is_loopback()</a></code> and <code><a href="../reference/is_reserved.html">is_link_local()</a></code> functions check if addresses or networks are reserved for special use.</li>
+<li>New <code><a href="../reference/hosts.html">seq.ip_network()</a></code> and <code><a href="../reference/hosts.html">hosts()</a></code> functions to list all addresses within a network.</li>
+<li>New <code><a href="../reference/sample_ip.html">sample_ip()</a></code> function to randomly sample addresses within a network.</li>
+<li>New functions to provide basic information about a network: <code><a href="../reference/network_info.html">num_addresses()</a></code>, <code><a href="../reference/network_info.html">network_address()</a></code> and <code><a href="../reference/network_info.html">broadcast_address()</a></code>.</li>
+<li>New functions to check if addresses or networks are reserved for special use: <code><a href="../reference/is_reserved.html">is_multicast()</a></code>, <code><a href="../reference/is_reserved.html">is_unspecified()</a></code>, <code><a href="../reference/is_reserved.html">is_loopback()</a></code> and <code><a href="../reference/is_reserved.html">is_link_local()</a></code>.</li>
+<li>New <code><a href="../reference/max_prefix_length.html">max_prefix_length()</a></code> function to get the size of the address space (32-bit for IPv4 and 128-bit for IPv6).</li>
+<li>Added bitwise operations to <code><a href="../reference/ip_address.html">ip_address()</a></code> vectors (<code><a href="https://rdrr.io/r/base/Logic.html">&amp;</a></code>, <code><a href="https://rdrr.io/r/base/Logic.html">|</a></code> and <code>!</code>).</li>
 <li>
-<code><a href="../reference/netmask.html">netmask()</a></code> and <code><a href="../reference/netmask.html">hostmask()</a></code> are now generics, so they can accept either an <code>ip_network</code> vector or an integer vector of prefix lengths. Previously they only accepted an <code>ip_network</code> vector.</li>
-<li>Added an <code>ip_network</code> constructor that accepts <code>ip_address</code> and prefix length vectors.</li>
+<code><a href="../reference/netmask.html">netmask()</a></code> and <code><a href="../reference/netmask.html">hostmask()</a></code> are now generics, so they can now accept either a vector of <code>ip_network</code> objects or prefix lengths. Previously they only accepted an <code>ip_network</code> vector.</li>
+<li>Added an <code><a href="../reference/ip_network.html">ip_network()</a></code> constructor that accepts <code>ip_address</code> and prefix length vectors.</li>
 <li>Improved input validation warnings. They now report the row number involved and no longer mentioned internal function names.</li>
 <li>Performance improvements.</li>
 </ul>
@@ -152,7 +154,7 @@
 </h1>
 <p>First CRAN release</p>
 <ul>
-<li>Added <code>ip_address</code> and <code>ip_network</code> classes
+<li>Added <code><a href="../reference/ip_address.html">ip_address()</a></code> and <code><a href="../reference/ip_network.html">ip_network()</a></code> classes
 <ul>
 <li>Full support for both IPv4 and IPv6 address spaces</li>
 <li>Efficiently store data in their native representations (i.e. a sequence of bits)</li>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • ipaddress</title>
+<title>Arithmetic operations — vec_arith.ip_address • ipaddress</title>
 
 
 <!-- jquery -->
@@ -35,7 +35,9 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Arithmetic operations — vec_arith.ip_address" />
+<meta property="og:description" content="Double dispatch methods to support vctrs::vec_arith()." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -54,7 +56,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -104,120 +106,51 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Arithmetic operations</h1>
+    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/vctrs-arithmetic.R'><code>R/vctrs-arithmetic.R</code></a></small>
+    <div class="hidden name"><code>vec_arith.ip_address.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Double dispatch methods to support <code><a href='https://rdrr.io/pkg/vctrs/man/vec_arith.html'>vctrs::vec_arith()</a></code>.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='co'># S3 method for ip_address</span>
+<span class='fu'>vec_arith</span>(<span class='no'>op</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>...</span>)</pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-classes" class="hasAnchor"><a href="#section-classes" class="anchor"></a>Classes</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="ip_address.html">ip_address()</a></code> <code><a href="ip_address.html">is_ip_address()</a></code> <code><a href="ip_address.html">format(<i>&lt;ip_address&gt;</i>)</a></code> <code><a href="ip_address.html">as.character(<i>&lt;ip_address&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Class for storing IP addresses</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ip_network.html">ip_network()</a></code> <code><a href="ip_network.html">is_ip_network()</a></code> <code><a href="ip_network.html">format(<i>&lt;ip_network&gt;</i>)</a></code> <code><a href="ip_network.html">as.character(<i>&lt;ip_network&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Class for storing IP networks</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-address-spaces" class="hasAnchor"><a href="#section-address-spaces" class="anchor"></a>Address spaces</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="is_ipv6.html">is_ipv4()</a></code> <code><a href="is_ipv6.html">is_ipv6()</a></code> </p>
-        </td>
-        <td><p>Version of the address space</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="max_prefix_length.html">max_prefix_length()</a></code> </p>
-        </td>
-        <td><p>Size of the address space</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="is_reserved.html">is_multicast()</a></code> <code><a href="is_reserved.html">is_unspecified()</a></code> <code><a href="is_reserved.html">is_loopback()</a></code> <code><a href="is_reserved.html">is_link_local()</a></code> </p>
-        </td>
-        <td><p>Reserved addresses</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-network-membership" class="hasAnchor"><a href="#section-network-membership" class="anchor"></a>Network membership</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="network_info.html">prefix_length()</a></code> <code><a href="network_info.html">num_addresses()</a></code> <code><a href="network_info.html">network_address()</a></code> <code><a href="network_info.html">broadcast_address()</a></code> </p>
-        </td>
-        <td><p>Basic information about a network</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="netmask.html">netmask()</a></code> <code><a href="netmask.html">hostmask()</a></code> </p>
-        </td>
-        <td><p>Subnet masking</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="hosts.html">seq(<i>&lt;ip_network&gt;</i>)</a></code> <code><a href="hosts.html">hosts()</a></code> </p>
-        </td>
-        <td><p>List addresses within a network</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sample_ip.html">sample_ip()</a></code> </p>
-        </td>
-        <td><p>Sample addresses within a network</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="address_in_network.html">is_within()</a></code> <code><a href="address_in_network.html">is_within_any()</a></code> </p>
-        </td>
-        <td><p>Network membership of IP addresses</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="network_in_network.html">is_subnet()</a></code> <code><a href="network_in_network.html">is_supernet()</a></code> </p>
-        </td>
-        <td><p>Network membership of other IP networks</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>op</th>
+      <td><p>An arithmetic operator as a string</p></td>
+    </tr>
+    <tr>
+      <th>x</th>
+      <td><p>A pair of vectors. For <code>!</code>, unary <code>+</code> and unary <code>-</code>, <code>y</code> will be
+a sentinel object of class <code>MISSING</code>, as created by <code>MISSING()</code>.</p></td>
+    </tr>
+    <tr>
+      <th>y</th>
+      <td><p>A pair of vectors. For <code>!</code>, unary <code>+</code> and unary <code>-</code>, <code>y</code> will be
+a sentinel object of class <code>MISSING</code>, as created by <code>MISSING()</code>.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>These dots are for future extensions and must be empty.</p></td>
+    </tr>
     </table>
-  </div>
 
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-classes">Classes</a></li>
-      <li><a href="#section-address-spaces">Address spaces</a></li>
-      <li><a href="#section-network-membership">Network membership</a></li>
+      <li><a href="#arguments">Arguments</a></li>
     </ul>
+
   </div>
 </div>
 
