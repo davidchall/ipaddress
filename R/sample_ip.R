@@ -56,13 +56,13 @@ sample_ip.ip_network <- function(x, size, replace = FALSE, ...) {
     stop("cannot take a sample larger than the network size when 'replace = FALSE'")
   }
 
-  # if generating all addresses, we can use C++ for performance boost
-  if (!replace && size == num_addresses(x)) {
+  # if generating all addresses, use C++ for performance
+  if (size >= num_addresses(x)) {
     return(sample(seq(x), size, replace))
   }
 
   # for small networks it's quicker to generate all addresses
-  if (num_addresses(x) < 1000L) {
+  if (num_addresses(x) < 1e6) {
     return(sample(seq(x), size, replace))
   }
 
