@@ -79,13 +79,7 @@ ip_network.default <- function(ip = character(), strict = TRUE, ...) {
     assertthat::noNA(strict)
   )
 
-  y <- parse_network_wrapper(ip, strict)
-
-  new_ip_network(
-    y$address1, y$address2, y$address3, y$address4,
-    y$prefix,
-    y$is_ipv6
-  )
+  new_ip_network_encode(parse_network_wrapper(ip, strict))
 }
 
 #' @rdname ip_network
@@ -98,12 +92,16 @@ ip_network.ip_address <- function(address, prefix_length, strict = TRUE, ...) {
     length(address) == length(prefix_length)
   )
 
-  y <- construct_network_wrapper(address, prefix_length, strict)
+  new_ip_network_encode(construct_network_wrapper(address, prefix_length, strict))
+}
 
+#' Low-level constructor that accepts the encoded data from C++
+#' @noRd
+new_ip_network_encode <- function(x) {
   new_ip_network(
-    y$address1, y$address2, y$address3, y$address4,
-    y$prefix,
-    y$is_ipv6
+    x$address1, x$address2, x$address3, x$address4,
+    x$prefix,
+    x$is_ipv6
   )
 }
 
@@ -243,10 +241,5 @@ network_address <- function(x) {
 broadcast_address <- function(x) {
   assertthat::assert_that(is_ip_network(x))
 
-  y <- broadcast_address_wrapper(x)
-
-  new_ip_address(
-    y$address1, y$address2, y$address3, y$address4,
-    y$is_ipv6
-  )
+  new_ip_address_encode(broadcast_address_wrapper(x))
 }

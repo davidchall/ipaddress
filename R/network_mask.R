@@ -50,12 +50,7 @@ netmask.default <- function(prefix_length = integer(), is_ipv6 = logical(), ...)
     msg = "Found out-of-bounds prefix length"
   )
 
-  y <- netmask_wrapper(prefix_length, is_ipv6)
-
-  new_ip_address(
-    y$address1, y$address2, y$address3, y$address4,
-    y$is_ipv6
-  )
+  new_ip_address_encode(netmask_wrapper(prefix_length, is_ipv6))
 }
 
 #' @rdname netmask
@@ -73,38 +68,23 @@ hostmask.default <- function(prefix_length = integer(), is_ipv6 = logical(), ...
     msg = "Found out-of-bounds prefix length"
   )
 
-  y <- hostmask_wrapper(prefix_length, is_ipv6)
-
-  new_ip_address(
-    y$address1, y$address2, y$address3, y$address4,
-    y$is_ipv6
-  )
+  new_ip_address_encode(hostmask_wrapper(prefix_length, is_ipv6))
 }
 
 #' @rdname netmask
 #' @export
 netmask.ip_network <- function(network, ...) {
-  y <- netmask_wrapper(
+  new_ip_address_encode(netmask_wrapper(
     field(network, "prefix"),
     field(network, "is_ipv6")
-  )
-
-  new_ip_address(
-    y$address1, y$address2, y$address3, y$address4,
-    y$is_ipv6
-  )
+  ))
 }
 
 #' @rdname netmask
 #' @export
 hostmask.ip_network <- function(network, ...) {
-  y <- hostmask_wrapper(
+  new_ip_address_encode(hostmask_wrapper(
     field(network, "prefix"),
     field(network, "is_ipv6")
-  )
-
-  new_ip_address(
-    y$address1, y$address2, y$address3, y$address4,
-    y$is_ipv6
-  )
+  ))
 }
