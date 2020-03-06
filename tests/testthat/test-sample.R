@@ -1,5 +1,5 @@
-ipv4 <- ip_network("192.168.0.0/22")
-ipv6 <- ip_network("2001:db8::/118")
+ipv4 <- ip_network("192.128.0.0/10")
+ipv6 <- ip_network("2001:db8::/106")
 
 test_that("input validation works", {
   expect_error(sample_ip(ip_network(rep(ipv4, 2)), 1))
@@ -24,6 +24,13 @@ test_that("generates within network", {
 })
 
 test_that("avoids duplicates", {
-  expect_false(any(duplicated(sample_ip(ipv4, 1000, replace = FALSE))))
-  expect_false(any(duplicated(sample_ip(ipv6, 1000, replace = FALSE))))
+  expect_false(any(duplicated(sample_ip(ipv4, 1e5, replace = FALSE))))
+  expect_false(any(duplicated(sample_ip(ipv6, 1e5, replace = FALSE))))
+})
+
+test_that("can sample entire address space", {
+  expect_true(all(is_ipv4(sample_ip("IPv4", 1000, replace = FALSE))))
+  expect_true(all(is_ipv6(sample_ip("IPv6", 1000, replace = FALSE))))
+  expect_true(all(is_ipv4(sample_ip("IPv4", 1000, replace = TRUE))))
+  expect_true(all(is_ipv6(sample_ip("IPv6", 1000, replace = TRUE))))
 })

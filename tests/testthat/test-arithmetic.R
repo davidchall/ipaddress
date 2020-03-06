@@ -47,3 +47,9 @@ test_that("bitwise OR works", {
 
   expect_error(ip_address(c("0.0.0.0", "1.2.3.4")) | ip_address("0.0.0.0"))
 })
+
+test_that("other operations fail", {
+  expect_error(ip_address() + ip_address())
+  expect_error(-ip_address())
+  expect_error(ip_address() + 1L)
+})
