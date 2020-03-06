@@ -44,9 +44,9 @@ remotes::install_github("davidchall/ipaddress")
 
 ## Usage
 
-This package provides the `ip_address` and `ip_network` classes, which
-can be used as standalone vectors or as columns within data frames and
-tibbles.
+This package provides the `ip_address()` and `ip_network()` classes,
+which can be used as standalone vectors or as columns within data frames
+and tibbles.
 
 ``` r
 library(tidyverse)
@@ -69,7 +69,7 @@ raise a warning and are replaced with `NA`.
 
 ``` r
 ip_address(c("0.0.0.0", "255.255.255.255", "255.255.255.256"))
-#> Warning in parse_address_wrapper(ip): Invalid argument: 255.255.255.256
+#> Warning: Invalid input in row 3: 255.255.255.256
 #> <ip_address[3]>
 #> [1] 0.0.0.0         255.255.255.255 <NA>
 ```
