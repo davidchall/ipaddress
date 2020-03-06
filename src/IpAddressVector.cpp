@@ -245,7 +245,7 @@ DataFrame IpAddressVector::encodeComparable() const {
   );
 }
 
-List IpAddressVector::asBlob() const {
+List IpAddressVector::packed() const {
   unsigned int vsize = is_na.size();
 
   List output(vsize);

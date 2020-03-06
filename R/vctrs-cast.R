@@ -28,8 +28,7 @@ vec_cast.character.ip_address <- function(x, to, ...) print_address_wrapper(x)
 #' @importFrom blob vec_cast.blob
 #' @method vec_cast.blob ip_address
 #' @export
-vec_cast.blob.ip_address <- function(x, to, ...) blob_address_wrapper(x)
-
+vec_cast.blob.ip_address <- function(x, to, ...) packed_address_wrapper(x)
 
 
 #' Casting

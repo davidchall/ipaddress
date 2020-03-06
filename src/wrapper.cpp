@@ -42,8 +42,8 @@ DataFrame compare_address_wrapper(List x) {
 }
 
 // [[Rcpp::export]]
-List blob_address_wrapper(List x) {
-  return IpAddressVector(x).asBlob();
+List packed_address_wrapper(List x) {
+  return IpAddressVector(x).packed();
 }
 
 

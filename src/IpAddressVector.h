@@ -57,7 +57,8 @@ public:
   // Encode to R dataframe for direct comparisons
   DataFrame encodeComparable() const;
 
-  List asBlob() const;
+  // Encode to R blob (list of raw vectors)
+  List packed() const;
 
 
   /*---------------------*

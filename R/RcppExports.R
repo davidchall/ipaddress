@@ -9,10 +9,6 @@ print_address_wrapper <- function(x) {
     .Call(`_ipaddress_print_address_wrapper`, x)
 }
 
-blob_address_wrapper <- function(x) {
-    .Call(`_ipaddress_blob_address_wrapper`, x)
-}
-
 parse_network_wrapper <- function(x, strict) {
     .Call(`_ipaddress_parse_network_wrapper`, x, strict)
 }
@@ -27,6 +23,10 @@ print_network_wrapper <- function(x) {
 
 compare_address_wrapper <- function(x) {
     .Call(`_ipaddress_compare_address_wrapper`, x)
+}
+
+packed_address_wrapper <- function(x) {
+    .Call(`_ipaddress_packed_address_wrapper`, x)
 }
 
 bitwise_and_wrapper <- function(addr1, addr2) {
