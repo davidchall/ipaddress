@@ -31,7 +31,6 @@ Generates random addresses within an IP network or from the
 entire address space.
 }
 \examples{
-set.seed(2020)
 sample_ip("IPv4", 5)
 
 sample_ip("IPv6", 5)

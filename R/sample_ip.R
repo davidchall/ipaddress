@@ -14,7 +14,6 @@
 #' Use [seq.ip_network()] to generate _all_ addresses in a network.
 #'
 #' @examples
-#' set.seed(2020)
 #' sample_ip("IPv4", 5)
 #'
 #' sample_ip("IPv6", 5)
