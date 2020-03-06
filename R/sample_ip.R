@@ -69,11 +69,9 @@ sample_ip.ip_network <- function(x, size, replace = FALSE, ...) {
   n_bits_to_sample <- max_prefix_length(x) - prefix_length(x)
   sample_func <- ifelse(is_ipv6(x), sample_ipv6, sample_ipv4)
 
-  if (replace) {
-    result <- do.call(sample_func, list(n_bits_to_sample, size))
-  } else {
-    result <- do.call(sample_func, list(n_bits_to_sample, size))
+  result <- do.call(sample_func, list(size, n_bits_to_sample))
 
+  if (!replace) {
     unique <- FALSE
     while (!unique) {
       dupes <- duplicated(result)
@@ -81,7 +79,7 @@ sample_ip.ip_network <- function(x, size, replace = FALSE, ...) {
       if (n_dupes == 0) {
         unique <- TRUE
       } else {
-        result[dupes] <- do.call(sample_func, list(n_bits_to_sample, sum(dupes)))
+        result[dupes] <- do.call(sample_func, list(sum(dupes), n_bits_to_sample))
       }
     }
   }
@@ -89,7 +87,7 @@ sample_ip.ip_network <- function(x, size, replace = FALSE, ...) {
   rep(network_address(x), size) | result
 }
 
-sample_ipv4 <- function(n_bits_to_sample, size) {
+sample_ipv4 <- function(size, n_bits_to_sample) {
   sample_octet <- function(i) {
     n_bits_octet <- pmin(pmax(n_bits_to_sample - 8L * i, 0L), 8L)
     range_octet <- 0L:(2L^n_bits_octet - 1L)
@@ -101,7 +99,7 @@ sample_ipv4 <- function(n_bits_to_sample, size) {
   ip_address(ip)
 }
 
-sample_ipv6 <- function(n_bits_to_sample, size) {
+sample_ipv6 <- function(size, n_bits_to_sample) {
   sample_nibble <- function(i) {
     n_bits_nibble <- pmin(pmax(n_bits_to_sample - 4L * i, 0L), 4L)
     max_decimal <- 2^n_bits_nibble - 1
