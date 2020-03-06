@@ -64,12 +64,12 @@ IpNetworkVector::IpNetworkVector(CharacterVector input, bool strict) {
 
 IpNetworkVector::IpNetworkVector(List input) {
   // extract data
-  IntegerVector in_addr1 = as<IntegerVector>(input["address1"]);
-  IntegerVector in_addr2 = as<IntegerVector>(input["address2"]);
-  IntegerVector in_addr3 = as<IntegerVector>(input["address3"]);
-  IntegerVector in_addr4 = as<IntegerVector>(input["address4"]);
-  IntegerVector in_pfx = as<IntegerVector>(input["prefix"]);
-  LogicalVector in_v6 = as<LogicalVector>(input["is_ipv6"]);
+  IntegerVector in_addr1 = input["address1"];
+  IntegerVector in_addr2 = input["address2"];
+  IntegerVector in_addr3 = input["address3"];
+  IntegerVector in_addr4 = input["address4"];
+  IntegerVector in_pfx = input["prefix"];
+  LogicalVector in_v6 = input["is_ipv6"];
 
   unsigned int vsize = in_v6.size();
 

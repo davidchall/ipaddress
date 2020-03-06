@@ -1,8 +1,7 @@
-## Resubmission
+## Release summary
 
-This is a resubmission. In this version I have:
-
-* Removed single quotes from acronyms in the DESCRIPTION file and instead write out the full version in parentheses.
+This is a patch release to fix CRAN errors on Solaris.
+I've checked that the errors were resolved by building on RHub.
 
 
 ## Test environments
@@ -15,14 +14,11 @@ This is a resubmission. In this version I have:
 * Debian Linux (RHub), R-devel
 * Windows Server 2019 (GitHub Actions), R 3.6.2
 * Windows Server 2008 R2 SP1 32/64 bit (RHub), R-devel
+* Oracle Solaris 10, x86, 32-bit (RHub), R-patched
 
 ## R CMD check results
 
 0 errors | 0 warnings | 1 note
-
-Maintainer: 'David Hall <david.hall.physics@gmail.com>'
-
-New submission
 
 Possibly mis-spelled words in DESCRIPTION:
   IP (2:13, 10:53)
@@ -32,4 +28,4 @@ The acronyms IP, IPv4 and IPv6 are spelled correctly.
 
 
 ## Reverse dependencies
-This is a new release, so there are no reverse dependencies.
+There are currently no reverse dependencies for this package.
