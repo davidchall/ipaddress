@@ -42,6 +42,8 @@ test_that("missing values work", {
   expect_equal(ip_network(c(x, NA)), c(ip_network(x), NA))
   expect_equal(as.character(ip_network(c(x, NA))), c(x, NA))
   expect_equal(is.na(ip_network(c(x, NA))), c(rep(FALSE, length(x)), TRUE))
+  expect_equal(ip_network(ip_address(NA), 32L), ip_network(NA))
+  expect_equal(ip_network(ip_address("0.0.0.0"), NA_integer_), ip_network(NA))
 })
 
 test_that("invalid inputs are caught", {
