@@ -87,7 +87,7 @@ sample_ip.ip_network <- function(x, size, replace = FALSE, ...) {
     }
   }
 
-  result
+  rep(network_address(x), size) | result
 }
 
 sample_ipv4 <- function(n_bits_to_sample, size) {
