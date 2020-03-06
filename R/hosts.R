@@ -31,6 +31,8 @@
 #' To get the IP address range of a network without generating all addresses,
 #' use [network_address()] and [broadcast_address()].
 #'
+#' Use [sample_ip()] to randomly sample addresses.
+#'
 #' @name hosts
 NULL
 
@@ -46,12 +48,7 @@ seq.ip_network <- function(x, ...) {
     msg = "Network too large"
   )
 
-  y <- hosts_wrapper(x, FALSE)
-
-  new_ip_address(
-    y$address1, y$address2, y$address3, y$address4,
-    y$is_ipv6
-  )
+  new_ip_address_encode(hosts_wrapper(x, FALSE))
 }
 
 #' `hosts()`
@@ -69,10 +66,5 @@ hosts <- function(x) {
     msg = "Network too large"
   )
 
-  y <- hosts_wrapper(x, TRUE)
-
-  new_ip_address(
-    y$address1, y$address2, y$address3, y$address4,
-    y$is_ipv6
-  )
+  new_ip_address_encode(hosts_wrapper(x, TRUE))
 }

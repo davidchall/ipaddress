@@ -49,4 +49,6 @@ hosts(ip_network("2001:db8::/126"))
 \seealso{
 To get the IP address range of a network without generating all addresses,
 use \code{\link[=network_address]{network_address()}} and \code{\link[=broadcast_address]{broadcast_address()}}.
+
+Use \code{\link[=sample_ip]{sample_ip()}} to randomly sample addresses.
 }

@@ -49,6 +49,8 @@ a warning is emitted and \code{NA} is stored instead.
 
 When casting an \code{ip_address} object back to a character vector using
 \code{as.character()}, IPv6 addresses are reduced to their compressed representation.
+
+This class also supports bitwise operations: \code{&} (AND), \code{|} (OR) and \code{!} (NOT).
 }
 \examples{
 # supports IPv4 and IPv6 simultaneously
@@ -56,4 +58,13 @@ ip_address(c("0.0.0.1", "192.168.0.1", "2001:db8::8a2e:370:7334"))
 
 # validates inputs and replaces with NA
 ip_address(c("1.2.3.4", "255.255.255.256", "1.2.3.4/5"))
+
+# bitwise NOT
+!ip_address("192.168.0.1")
+
+# bitwise AND
+ip_address("192.168.0.1") & ip_address("255.0.0.255")
+
+# bitwise OR
+ip_address("192.168.0.0") | ip_address("0.0.0.1")
 }

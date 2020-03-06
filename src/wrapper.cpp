@@ -42,6 +42,28 @@ DataFrame compare_address_wrapper(List x) {
 }
 
 
+/*---------------------*
+ *  Bitwise operators  *
+ *---------------------*/
+// [[Rcpp::export]]
+List bitwise_and_wrapper(List addr1, List addr2) {
+  IpAddressVector result = IpAddressVector(addr1) & IpAddressVector(addr2);
+  return result.encodeR();
+}
+
+// [[Rcpp::export]]
+List bitwise_or_wrapper(List addr1, List addr2) {
+  IpAddressVector result = IpAddressVector(addr1) | IpAddressVector(addr2);
+  return result.encodeR();
+}
+
+// [[Rcpp::export]]
+List bitwise_not_wrapper(List addr1) {
+  IpAddressVector result = ~IpAddressVector(addr1);
+  return result.encodeR();
+}
+
+
 /*---------------*
  *  Bit masking  *
  * --------------*/
