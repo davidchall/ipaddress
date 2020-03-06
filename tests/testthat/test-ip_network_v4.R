@@ -6,6 +6,11 @@ test_that("construction works", {
   expect_length(ip_network(), 0)
   expect_length(ip_network(x), length(x))
   expect_equal(as.character(ip_network(x)), x)
+
+  expect_equal(
+    ip_network(x),
+    ip_network(ip_address(c("0.0.0.0", "192.168.0.0", "192.168.100.0", "255.255.255.255")), c(32L, 16L, 22L, 32L))
+  )
 })
 
 test_that("formats correctly", {
@@ -33,33 +38,46 @@ test_that("coercion works", {
 })
 
 test_that("missing values work", {
-  expect_equal(field(ip_network(NA), "address1"), NA_integer_)
+  expect_equal(field(ip_network(NA), "is_ipv6"), NA)
   expect_equal(ip_network(c(x, NA)), c(ip_network(x), NA))
   expect_equal(as.character(ip_network(c(x, NA))), c(x, NA))
   expect_equal(is.na(ip_network(c(x, NA))), c(rep(FALSE, length(x)), TRUE))
+  expect_equal(ip_network(ip_address(NA), 32L), ip_network(NA))
+  expect_equal(ip_network(ip_address("0.0.0.0"), NA_integer_), ip_network(NA))
 })
 
 test_that("invalid inputs are caught", {
-  expect_warning(ip_network("abc"), "Invalid argument")
-  expect_warning(ip_network("1.2.3.4"), "Invalid argument")
-  expect_warning(ip_network("1.2.3.256/24"), "Invalid argument")
-  expect_warning(ip_network("1.2.3.-1/24"), "Invalid argument")
-  expect_warning(ip_network("1.2.3/24"), "Invalid argument")
-  expect_warning(ip_network("1.2.3.4.5/24"), "Invalid argument")
-  expect_warning(ip_network("1.2.3.4/-1"), "Invalid argument")
-  expect_warning(ip_network("1.2.3.4/33"), "Invalid argument")
-  expect_warning(ip_network("1.2.3.4/a"), "Invalid argument")
-  expect_warning(ip_network("1.2.3.4/24/24"), "Invalid argument")
+  expect_warning(ip_network("abc"), "Invalid input")
+  expect_warning(ip_network("1.2.3.4"), "Invalid input")
+  expect_warning(ip_network("1.2.3.256/24"), "Invalid input")
+  expect_warning(ip_network("1.2.3.-1/24"), "Invalid input")
+  expect_warning(ip_network("1.2.3/24"), "Invalid input")
+  expect_warning(ip_network("1.2.3.4.5/24"), "Invalid input")
+  expect_warning(ip_network("1.2.3.4/-1"), "Invalid input")
+  expect_warning(ip_network("1.2.3.4/33"), "Invalid input")
+  expect_warning(ip_network("1.2.3.4/a"), "Invalid input")
+  expect_warning(ip_network("1.2.3.4/24/24"), "Invalid input")
+
+  expect_error(ip_network(ip_address("1.2.3.4"), 24), "not an integer")
+  expect_warning(ip_network(ip_address("1.2.3.4"), -1L), "Invalid input")
+  expect_warning(ip_network(ip_address("1.2.3.4"), 33L), "Invalid input")
 })
 
 test_that("strict argument works", {
+  expect_error(ip_network("1.2.3.4/32", strict = "yes"), "not a flag")
+  expect_error(ip_network("1.2.3.4/32", strict = NA), "contains 1 missing values")
+
   expect_warning(ip_network("255.255.255.255/21"), "host bits set")
   expect_equal(ip_network("255.255.255.255/21", strict = FALSE), ip_network("255.255.248.0/21"))
+
+  expect_warning(ip_network(ip_address("255.255.255.255"), 21L), "host bits set")
+  expect_equal(ip_network(ip_address("255.255.255.255"), 21L, strict = FALSE), ip_network("255.255.248.0/21"))
 })
 
 test_that("equality operations work", {
   expect_true(all(vctrs::vec_equal(ip_network(x), ip_network(x))))
   expect_false(any(vctrs::vec_equal(ip_network(x), ip_network(rev(x)))))
+  expect_false(vctrs::vec_equal(ip_network("192.168.0.0/16"), ip_network("192.168.0.0/20")))
 })
 
 test_that("comparison operations work", {
@@ -73,5 +91,34 @@ test_that("comparison operations work", {
   expect_equal(
     vctrs::vec_compare(ip_network(x), ip_network(shifter(x, -1L))),
     c(-1L, rep(1L, length(x) - 1L))
+  )
+  expect_equal(vec_compare(ip_network("192.168.0.0/16"), ip_network(NA)), NA_integer_)
+})
+
+test_that("extracting basic info works", {
+  expect_equal(prefix_length(ip_network(x)), c(32L, 16L, 22L, 32L))
+  expect_equal(num_addresses(ip_network(x)), c(1, 65536, 1024, 1))
+  expect_equal(
+    network_address(ip_network(x)),
+    ip_address(c("0.0.0.0", "192.168.0.0", "192.168.100.0", "255.255.255.255"))
+  )
+  expect_equal(
+    broadcast_address(ip_network(x)),
+    ip_address(c("0.0.0.0", "192.168.255.255", "192.168.103.255", "255.255.255.255"))
+  )
+
+  expect_error(prefix_length(ip_address("192.168.0.1")), "not an ip_network")
+  expect_error(num_addresses(ip_address("192.168.0.1")), "not an ip_network")
+  expect_error(network_address(ip_address("192.168.0.1")), "not an ip_network")
+  expect_error(broadcast_address(ip_address("192.168.0.1")), "not an ip_network")
+
+  expect_equal(prefix_length(ip_network(NA)), NA_integer_)
+  expect_equal(num_addresses(ip_network(NA)), NA_real_)
+  expect_equal(network_address(ip_network(NA)), ip_address(NA))
+  expect_equal(broadcast_address(ip_network(NA)), ip_address(NA))
+
+  expect_equal(
+    ip_network(x),
+    ip_network(network_address(ip_network(x)), prefix_length(ip_network(x)))
   )
 })

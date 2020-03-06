@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 # ipaddress
 
 <!-- badges: start -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![CRAN status](https://www.r-pkg.org/badges/version/ipaddress)](https://CRAN.R-project.org/package=ipaddress)
 [![R build status](https://github.com/davidchall/ipaddress/workflows/R-CMD-check/badge.svg)](https://github.com/davidchall/ipaddress/actions)
 [![codecov.io](https://codecov.io/github/davidchall/ipaddress/coverage.svg?branch=master)](https://codecov.io/github/davidchall/ipaddress?branch=master)
@@ -50,7 +50,7 @@ remotes::install_github("davidchall/ipaddress")
 
 ## Usage
 
-This package provides the `ip_address` and `ip_network` classes, which can be used as standalone vectors or as columns within data frames and tibbles.
+This package provides the `ip_address()` and `ip_network()` classes, which can be used as standalone vectors or as columns within data frames and tibbles.
 
 ```{r example, message=FALSE}
 library(tidyverse)

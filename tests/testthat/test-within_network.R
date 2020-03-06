@@ -16,20 +16,25 @@ test_that("input validation works", {
 })
 
 test_that("is_within works", {
-  expect_equal(
-    is_within(
-      ip_address(rep("192.168.0.1", 4)),
-      ip_network(c("192.168.0.0/24", "192.168.0.0/22", "192.168.0.0/32", "192.169.0.0/24"))
-    ),
-    c(TRUE, TRUE, FALSE, FALSE)
-  )
-  expect_equal(
-    is_within(
-      ip_address(rep("2001:db8::8a2e:370:7334", 4)),
-      ip_network(c("2001:db8::/36", "2001:db8::/64", "2001:db8::8a2e:370:7335/128", "2001:db9::/36"))
-    ),
-    c(TRUE, TRUE, FALSE, FALSE)
-  )
+  addr <- ip_address(c(
+    "192.167.255.255",
+    "192.168.0.0",
+    "192.168.3.255",
+    "192.168.4.0"
+  ))
+  netw <- rep(ip_network("192.168.0.0/22"), length(addr))
+
+  expect_equal(is_within(addr, netw), c(FALSE, TRUE, TRUE, FALSE))
+
+  addr <- ip_address(c(
+    "2001:db7:fff:ffff:ffff:ffff:ffff:ffff",
+    "2001:db8::",
+    "2001:db8:fff:ffff:ffff:ffff:ffff:ffff",
+    "2001:db9::"
+  ))
+  netw <- rep(ip_network("2001:db8::/36"), length(addr))
+
+  expect_equal(is_within(addr, netw), c(FALSE, TRUE, TRUE, FALSE))
 })
 
 test_that("is_within_any works", {
@@ -50,21 +55,33 @@ test_that("is_within_any works", {
 })
 
 test_that("is_subnet and is_supernet work", {
-  net1 <- ip_network("192.168.1.0/24")
-  net2 <- ip_network("192.168.1.128/30")
+  net1 <- ip_network(c(
+    "192.167.255.255/32",
+    "192.168.0.0/32",
+    "192.168.3.255/32",
+    "192.168.4.0/32",
+    "192.168.0.0/20"
+  ))
+  net2 <- rep(ip_network("192.168.0.0/22"), length(net1))
 
-  expect_equal(is_subnet(net1, net2), FALSE)
-  expect_equal(is_subnet(net2, net1), TRUE)
-  expect_equal(is_supernet(net1, net2), TRUE)
-  expect_equal(is_supernet(net2, net1), FALSE)
+  expect_equal(is_subnet(net1, net2), c(FALSE, TRUE, TRUE, FALSE, FALSE))
+  expect_equal(is_subnet(net2, net1), c(FALSE, FALSE, FALSE, FALSE, TRUE))
+  expect_equal(is_supernet(net1, net2), c(FALSE, FALSE, FALSE, FALSE, TRUE))
+  expect_equal(is_supernet(net2, net1), c(FALSE, TRUE, TRUE, FALSE, FALSE))
 
-  net1 <- ip_network("2001:db8::/36")
-  net2 <- ip_network("2001:db8::8a2e:370:7334/128")
+  net1 <- ip_network(c(
+    "2001:db7:fff:ffff:ffff:ffff:ffff:ffff/128",
+    "2001:db8::/128",
+    "2001:db8:fff:ffff:ffff:ffff:ffff:ffff/128",
+    "2001:db9::/128",
+    "2001:db8::/30"
+  ))
+  net2 <- rep(ip_network("2001:db8::/36"), length(net1))
 
-  expect_equal(is_subnet(net1, net2), FALSE)
-  expect_equal(is_subnet(net2, net1), TRUE)
-  expect_equal(is_supernet(net1, net2), TRUE)
-  expect_equal(is_supernet(net2, net1), FALSE)
+  expect_equal(is_subnet(net1, net2), c(FALSE, TRUE, TRUE, FALSE, FALSE))
+  expect_equal(is_subnet(net2, net1), c(FALSE, FALSE, FALSE, FALSE, TRUE))
+  expect_equal(is_supernet(net1, net2), c(FALSE, FALSE, FALSE, FALSE, TRUE))
+  expect_equal(is_supernet(net2, net1), c(FALSE, TRUE, TRUE, FALSE, FALSE))
 })
 
 test_that("multi-space comparisons fail", {

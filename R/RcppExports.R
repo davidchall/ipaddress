@@ -17,6 +17,10 @@ parse_network_wrapper <- function(x, strict) {
     .Call(`_ipaddress_parse_network_wrapper`, x, strict)
 }
 
+construct_network_wrapper <- function(address, prefix_length, strict) {
+    .Call(`_ipaddress_construct_network_wrapper`, address, prefix_length, strict)
+}
+
 print_network_wrapper <- function(x) {
     .Call(`_ipaddress_print_network_wrapper`, x)
 }
@@ -25,16 +29,32 @@ compare_address_wrapper <- function(x) {
     .Call(`_ipaddress_compare_address_wrapper`, x)
 }
 
-compare_network_wrapper <- function(x) {
-    .Call(`_ipaddress_compare_network_wrapper`, x)
+bitwise_and_wrapper <- function(addr1, addr2) {
+    .Call(`_ipaddress_bitwise_and_wrapper`, addr1, addr2)
 }
 
-netmask_wrapper <- function(x) {
-    .Call(`_ipaddress_netmask_wrapper`, x)
+bitwise_or_wrapper <- function(addr1, addr2) {
+    .Call(`_ipaddress_bitwise_or_wrapper`, addr1, addr2)
 }
 
-hostmask_wrapper <- function(x) {
-    .Call(`_ipaddress_hostmask_wrapper`, x)
+bitwise_not_wrapper <- function(addr1) {
+    .Call(`_ipaddress_bitwise_not_wrapper`, addr1)
+}
+
+netmask_wrapper <- function(prefix_length, is_ipv6) {
+    .Call(`_ipaddress_netmask_wrapper`, prefix_length, is_ipv6)
+}
+
+hostmask_wrapper <- function(prefix_length, is_ipv6) {
+    .Call(`_ipaddress_hostmask_wrapper`, prefix_length, is_ipv6)
+}
+
+broadcast_address_wrapper <- function(network_r) {
+    .Call(`_ipaddress_broadcast_address_wrapper`, network_r)
+}
+
+hosts_wrapper <- function(network_r, exclude_unusable) {
+    .Call(`_ipaddress_hosts_wrapper`, network_r, exclude_unusable)
 }
 
 is_within_wrapper <- function(address_r, network_r) {
@@ -45,7 +65,35 @@ is_within_any_wrapper <- function(address_r, network_r) {
     .Call(`_ipaddress_is_within_any_wrapper`, address_r, network_r)
 }
 
-is_subnet_wrapper <- function(network1_r, network2_r) {
-    .Call(`_ipaddress_is_subnet_wrapper`, network1_r, network2_r)
+is_multicast_address_wrapper <- function(address_r) {
+    .Call(`_ipaddress_is_multicast_address_wrapper`, address_r)
+}
+
+is_multicast_network_wrapper <- function(network_r) {
+    .Call(`_ipaddress_is_multicast_network_wrapper`, network_r)
+}
+
+is_unspecified_address_wrapper <- function(address_r) {
+    .Call(`_ipaddress_is_unspecified_address_wrapper`, address_r)
+}
+
+is_unspecified_network_wrapper <- function(network_r) {
+    .Call(`_ipaddress_is_unspecified_network_wrapper`, network_r)
+}
+
+is_loopback_address_wrapper <- function(address_r) {
+    .Call(`_ipaddress_is_loopback_address_wrapper`, address_r)
+}
+
+is_loopback_network_wrapper <- function(network_r) {
+    .Call(`_ipaddress_is_loopback_network_wrapper`, network_r)
+}
+
+is_link_local_address_wrapper <- function(address_r) {
+    .Call(`_ipaddress_is_link_local_address_wrapper`, address_r)
+}
+
+is_link_local_network_wrapper <- function(network_r) {
+    .Call(`_ipaddress_is_link_local_network_wrapper`, network_r)
 }
 

@@ -22,8 +22,10 @@ methods::setOldClass(c("ip_address", "vctrs_vctr"))
 #' When casting an `ip_address` object back to a character vector using
 #' `as.character()`, IPv6 addresses are reduced to their compressed representation.
 #'
-#' @param x An object
-#' @param ... Additional arguments to be passed to or from methods
+#' This class also supports bitwise operations: `&` (AND), `|` (OR) and `!` (NOT).
+#'
+#' @param x An `ip_address` vector
+#' @param ... Arguments to be passed to other methods
 #'
 #' @name ip_address
 NULL
@@ -46,17 +48,31 @@ NULL
 #' # validates inputs and replaces with NA
 #' ip_address(c("1.2.3.4", "255.255.255.256", "1.2.3.4/5"))
 #'
+#' # bitwise NOT
+#' !ip_address("192.168.0.1")
+#'
+#' # bitwise AND
+#' ip_address("192.168.0.1") & ip_address("255.0.0.255")
+#'
+#' # bitwise OR
+#' ip_address("192.168.0.0") | ip_address("0.0.0.1")
 #' @rdname ip_address
 #' @export
 ip_address <- function(ip = character()) {
-  y <- parse_address_wrapper(ip)
+  new_ip_address_encode(parse_address_wrapper(ip))
+}
+
+#' Low-level constructor that accepts the encoded data from C++
+#' @noRd
+new_ip_address_encode <- function(x) {
   new_ip_address(
-    y$address1, y$address2, y$address3, y$address4,
-    y$is_ipv6
+    x$address1, x$address2, x$address3, x$address4,
+    x$is_ipv6
   )
 }
 
-# low-level constructor that accepts the underlying data types being stored
+#' Low-level constructor that accepts the underlying data types being stored
+#' @noRd
 new_ip_address <- function(address1 = integer(), address2 = integer(), address3 = integer(), address4 = integer(), is_ipv6 = logical()) {
   vec_assert(address1, ptype = integer())
   vec_assert(address2, ptype = integer())

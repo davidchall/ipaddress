@@ -29,5 +29,4 @@ net2 <- ip_network("192.168.1.128/30")
 is_subnet(net2, net1)
 
 is_supernet(net1, net2)
-
 }
