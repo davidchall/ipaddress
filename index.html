@@ -101,7 +101,7 @@
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
-<p>This package provides the <code>ip_address</code> and <code>ip_network</code> classes, which can be used as standalone vectors or as columns within data frames and tibbles.</p>
+<p>This package provides the <code><a href="reference/ip_address.html">ip_address()</a></code> and <code><a href="reference/ip_network.html">ip_network()</a></code> classes, which can be used as standalone vectors or as columns within data frames and tibbles.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidyverse)</span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ipaddress)</span>
 <span id="cb3-3"><a href="#cb3-3"></a></span>
@@ -117,7 +117,7 @@
 <span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt; 2 2001:db8::8a2e:370:7334    2001:db8::/48</span></span></code></pre></div>
 <p>Input character vectors are validated as they are parsed. Invalid inputs raise a warning and are replaced with <code>NA</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="reference/ip_address.html">ip_address</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"0.0.0.0"</span>, <span class="st">"255.255.255.255"</span>, <span class="st">"255.255.255.256"</span>))</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; Warning in parse_address_wrapper(ip): Invalid argument: 255.255.255.256</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; Warning: Invalid input in row 3: 255.255.255.256</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; &lt;ip_address[3]&gt;</span></span>
 <span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt; [1] 0.0.0.0         255.255.255.255 &lt;NA&gt;</span></span></code></pre></div>
 <p>Functions are provided to enable common tasks:</p>
