@@ -1,3 +1,8 @@
+# ipaddress 0.1.1
+
+Hotfix for CRAN errors on Solaris.
+
+
 # ipaddress 0.1.0
 
 First CRAN release
