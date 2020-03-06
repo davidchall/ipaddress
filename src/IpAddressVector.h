@@ -58,6 +58,14 @@ public:
   DataFrame encodeComparable() const;
 
 
+  /*---------------------*
+   *  Bitwise operators  *
+   *---------------------*/
+  IpAddressVector operator&(const IpAddressVector &rhs) const;
+  IpAddressVector operator|(const IpAddressVector &rhs) const;
+  IpAddressVector operator~() const;
+
+
   /*-----------------------*
    *  Other functionality  *
    *-----------------------*/

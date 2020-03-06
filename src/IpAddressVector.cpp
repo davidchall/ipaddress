@@ -246,6 +246,91 @@ DataFrame IpAddressVector::encodeComparable() const {
 }
 
 
+/*---------------------*
+ *  Bitwise operators  *
+ *---------------------*/
+IpAddressVector IpAddressVector::operator&(const IpAddressVector &rhs) const {
+  unsigned int vsize = is_na.size();
+
+  if (rhs.is_na.size() != vsize) {
+    stop("Addresses must have same length");
+  }
+
+  // initialize vectors
+  std::vector<asio::ip::address_v4> out_address_v4(vsize);
+  std::vector<asio::ip::address_v6> out_address_v6(vsize);
+  std::vector<bool> out_is_ipv6(vsize, false);
+  std::vector<bool> out_is_na(vsize, false);
+
+  for (unsigned int i=0; i<vsize; ++i) {
+    if (is_na[i] || rhs.is_na[i]) {
+      out_is_na[i] = true;
+    } else if (is_ipv6[i] != rhs.is_ipv6[i]) {
+      out_is_na[i] = true;
+    } else if (is_ipv6[i]) {
+      out_address_v6[i] = bitwise_and(address_v6[i], rhs.address_v6[i]);
+      out_is_ipv6[i] = true;
+    } else {
+      out_address_v4[i] = bitwise_and(address_v4[i], rhs.address_v4[i]);
+    }
+  }
+
+  return IpAddressVector(out_address_v4, out_address_v6, out_is_ipv6, out_is_na);
+}
+
+IpAddressVector IpAddressVector::operator|(const IpAddressVector &rhs) const {
+  unsigned int vsize = is_na.size();
+
+  if (rhs.is_na.size() != vsize) {
+    stop("Addresses must have same length");
+  }
+
+  // initialize vectors
+  std::vector<asio::ip::address_v4> out_address_v4(vsize);
+  std::vector<asio::ip::address_v6> out_address_v6(vsize);
+  std::vector<bool> out_is_ipv6(vsize, false);
+  std::vector<bool> out_is_na(vsize, false);
+
+  for (unsigned int i=0; i<vsize; ++i) {
+    if (is_na[i] || rhs.is_na[i]) {
+      out_is_na[i] = true;
+    } else if (is_ipv6[i] != rhs.is_ipv6[i]) {
+      out_is_na[i] = true;
+    } else if (is_ipv6[i]) {
+      out_address_v6[i] = bitwise_or(address_v6[i], rhs.address_v6[i]);
+      out_is_ipv6[i] = true;
+    } else {
+      out_address_v4[i] = bitwise_or(address_v4[i], rhs.address_v4[i]);
+    }
+  }
+
+  return IpAddressVector(out_address_v4, out_address_v6, out_is_ipv6, out_is_na);
+}
+
+IpAddressVector IpAddressVector::operator~() const {
+  unsigned int vsize = is_na.size();
+
+  // initialize vectors
+  std::vector<asio::ip::address_v4> out_address_v4(vsize);
+  std::vector<asio::ip::address_v6> out_address_v6(vsize);
+  std::vector<bool> out_is_ipv6(vsize, false);
+  std::vector<bool> out_is_na(vsize, false);
+
+  for (unsigned int i=0; i<vsize; ++i) {
+    if (is_na[i]) {
+      out_is_na[i] = true;
+    } else if (is_ipv6[i]) {
+      out_address_v6[i] = bitwise_not(address_v6[i]);
+      out_is_ipv6[i] = true;
+    } else {
+      out_address_v4[i] = bitwise_not(address_v4[i]);
+    }
+  }
+
+  return IpAddressVector(out_address_v4, out_address_v6, out_is_ipv6, out_is_na);
+}
+
+
 /*-----------------------*
  *  Other functionality  *
  *-----------------------*/

@@ -25,6 +25,18 @@ compare_address_wrapper <- function(x) {
     .Call(`_ipaddress_compare_address_wrapper`, x)
 }
 
+bitwise_and_wrapper <- function(addr1, addr2) {
+    .Call(`_ipaddress_bitwise_and_wrapper`, addr1, addr2)
+}
+
+bitwise_or_wrapper <- function(addr1, addr2) {
+    .Call(`_ipaddress_bitwise_or_wrapper`, addr1, addr2)
+}
+
+bitwise_not_wrapper <- function(addr1) {
+    .Call(`_ipaddress_bitwise_not_wrapper`, addr1)
+}
+
 netmask_wrapper <- function(prefix_length, is_ipv6) {
     .Call(`_ipaddress_netmask_wrapper`, prefix_length, is_ipv6)
 }
