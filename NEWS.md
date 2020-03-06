@@ -22,6 +22,11 @@
 * `is_subnet()` and `is_supernet()` now check the prefix length, to ensure they are a true subnet or supernet.
 
 
+# ipaddress 0.1.1
+
+Hotfix for CRAN errors on Solaris.
+
+
 # ipaddress 0.1.0
 
 First CRAN release
