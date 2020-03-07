@@ -175,8 +175,8 @@ host bits are set to zero and a valid IP network is returned.</p></td>
 (also known as an IP block). CIDR notation represents an
 IP network as the routing prefix address (which denotes the start
 of the range) and the prefix length (which indicates the size of
-the range) separated by a forward slash. For example, "192.168.100.0/22"
-represents addresses from "192.168.100.0" to "192.168.103.255".</p>
+the range) separated by a forward slash. For example, <code>192.168.100.0/22</code>
+represents addresses from <code>192.168.100.0</code> to <code>192.168.103.255</code>.</p>
 <p>The prefix length indicates the number of bits reserved by the
 routing prefix. This means that larger prefix lengths indicate
 smaller networks. The maximum prefix length is 32 for IPv4 and
@@ -207,6 +207,7 @@ integer vector containing the network address and prefix length, respectively.</
 <span class='co'># IP networks should not have any host bits set</span>
 <span class='fu'>ip_network</span>(<span class='st'>"192.168.0.1/22"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Invalid input in row 1: 192.168.0.1/22 (host bits set)</span></div><div class='output co'>#&gt; &lt;ip_network[1]&gt;
 #&gt; [1] &lt;NA&gt;</div><div class='input'>
+<span class='co'># but we can mask the host bits if desired</span>
 <span class='fu'>ip_network</span>(<span class='st'>"192.168.0.1/22"</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; &lt;ip_network[1]&gt;
 #&gt; [1] 192.168.0.0/22</div></pre>
   </div>
