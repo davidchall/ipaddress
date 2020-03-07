@@ -56,7 +56,7 @@ Address get_netmask(int prefix_length) {
   typedef typename Address::bytes_type Bytes;
   Bytes result_bytes;
 
-  for (unsigned int i=0; i<sizeof(result_bytes); ++i) {
+  for (std::size_t i=0; i<sizeof(result_bytes); ++i) {
     int ingest = std::min(prefix_length, 8);
     prefix_length -= ingest;
 

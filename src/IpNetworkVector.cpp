@@ -9,7 +9,7 @@
  *----------------*/
 
 IpNetworkVector::IpNetworkVector(CharacterVector input, bool strict) {
-  unsigned int vsize = input.size();
+  std::size_t vsize = input.size();
 
   // initialize vectors
   network_v4.assign(vsize, asio::ip::network_v4());
@@ -21,7 +21,7 @@ IpNetworkVector::IpNetworkVector(CharacterVector input, bool strict) {
   asio::ip::network_v4 tmp_v4;
   asio::ip::network_v6 tmp_v6;
 
-  for (unsigned int i=0; i<vsize; ++i) {
+  for (std::size_t i=0; i<vsize; ++i) {
     if (input[i] == NA_STRING) {
       is_na[i] = true;
     } else {
@@ -71,7 +71,7 @@ IpNetworkVector::IpNetworkVector(List input) {
   IntegerVector in_pfx = input["prefix"];
   LogicalVector in_v6 = input["is_ipv6"];
 
-  unsigned int vsize = in_v6.size();
+  std::size_t vsize = in_v6.size();
 
   // initialize vectors
   network_v4.assign(vsize, asio::ip::network_v4());
@@ -79,7 +79,7 @@ IpNetworkVector::IpNetworkVector(List input) {
   is_ipv6.assign(vsize, false);
   is_na.assign(vsize, false);
 
-  for (unsigned int i=0; i<vsize; ++i) {
+  for (std::size_t i=0; i<vsize; ++i) {
     if (in_v6[i] == NA_LOGICAL) {
       is_na[i] = true;
     } else if (in_v6[i]) {
@@ -96,7 +96,7 @@ IpNetworkVector::IpNetworkVector(List input) {
 }
 
 IpNetworkVector::IpNetworkVector(IpAddressVector address, IntegerVector prefix_length, bool strict) {
-  unsigned int vsize = address.is_na.size();
+  std::size_t vsize = address.is_na.size();
 
   // initialize vectors
   network_v4.assign(vsize, asio::ip::network_v4());
@@ -104,7 +104,7 @@ IpNetworkVector::IpNetworkVector(IpAddressVector address, IntegerVector prefix_l
   is_ipv6.assign(vsize, false);
   is_na.assign(vsize, false);
 
-  for (unsigned int i=0; i<vsize; ++i) {
+  for (std::size_t i=0; i<vsize; ++i) {
     if (address.is_na[i] || prefix_length[i] == NA_INTEGER) {
       is_na[i] = true;
     } else if (address.is_ipv6[i]) {
@@ -167,7 +167,7 @@ void IpNetworkVector::warnInvalidInput(unsigned int index, const std::string &in
  *----------*/
 
 List IpNetworkVector::encodeR() const {
-  unsigned int vsize = is_na.size();
+  std::size_t vsize = is_na.size();
 
   // initialize vectors
   IntegerVector out_addr1(vsize);
@@ -177,7 +177,7 @@ List IpNetworkVector::encodeR() const {
   IntegerVector out_pfx(vsize);
   LogicalVector out_v6(vsize);
 
-  for (unsigned int i=0; i<vsize; ++i) {
+  for (std::size_t i=0; i<vsize; ++i) {
     if (is_na[i]) {
       out_addr1[i] = NA_INTEGER;
       out_addr2[i] = NA_INTEGER;
@@ -211,12 +211,12 @@ List IpNetworkVector::encodeR() const {
 }
 
 CharacterVector IpNetworkVector::encodeStrings() const {
-  unsigned int vsize = is_na.size();
+  std::size_t vsize = is_na.size();
 
   // initialize vectors
   CharacterVector output(vsize);
 
-  for (unsigned int i=0; i<vsize; ++i) {
+  for (std::size_t i=0; i<vsize; ++i) {
     if (is_na[i]) {
       output[i] = NA_STRING;
     } else if (is_ipv6[i]) {
@@ -234,7 +234,7 @@ CharacterVector IpNetworkVector::encodeStrings() const {
  *  Other functionality  *
  *-----------------------*/
 IpAddressVector IpNetworkVector::broadcastAddress() const {
-  unsigned int vsize = is_na.size();
+  std::size_t vsize = is_na.size();
 
   // initialize vectors
   std::vector<asio::ip::address_v4> out_address_v4(vsize);
@@ -242,7 +242,7 @@ IpAddressVector IpNetworkVector::broadcastAddress() const {
   std::vector<bool> out_is_ipv6(vsize);
   std::vector<bool> out_is_na(vsize);
 
-  for (unsigned int i=0; i<vsize; ++i) {
+  for (std::size_t i=0; i<vsize; ++i) {
     if (is_na[i]) {
       out_is_na[i] = true;
     } else if (is_ipv6[i]) {
@@ -288,7 +288,7 @@ IpAddressVector IpNetworkVector::hosts(bool exclude_unusable) const {
 
     std::copy(ip_begin, ip_end, std::back_inserter(out_address_v6));
 
-    size_t vsize = out_address_v6.size();
+    std::size_t vsize = out_address_v6.size();
     out_address_v4.resize(vsize);
     out_is_ipv6.resize(vsize, true);
     out_is_na.resize(vsize, false);
@@ -305,7 +305,7 @@ IpAddressVector IpNetworkVector::hosts(bool exclude_unusable) const {
 
     std::copy(ip_begin, ip_end, std::back_inserter(out_address_v4));
 
-    size_t vsize = out_address_v4.size();
+    std::size_t vsize = out_address_v4.size();
     out_address_v6.resize(vsize);
     out_is_ipv6.resize(vsize, false);
     out_is_na.resize(vsize, false);
@@ -319,12 +319,12 @@ IpAddressVector IpNetworkVector::hosts(bool exclude_unusable) const {
  *  Reserved addresses  *
  * ---------------------*/
 LogicalVector IpNetworkVector::isMulticast() const {
-  unsigned int vsize = is_na.size();
+  std::size_t vsize = is_na.size();
 
   // initialize vectors
   LogicalVector output(vsize);
 
-  for (unsigned int i=0; i<vsize; ++i) {
+  for (std::size_t i=0; i<vsize; ++i) {
     if (is_na[i]) {
       output[i] = NA_LOGICAL;
     } else if (is_ipv6[i]) {
@@ -342,12 +342,12 @@ LogicalVector IpNetworkVector::isMulticast() const {
 }
 
 LogicalVector IpNetworkVector::isUnspecified() const {
-  unsigned int vsize = is_na.size();
+  std::size_t vsize = is_na.size();
 
   // initialize vectors
   LogicalVector output(vsize);
 
-  for (unsigned int i=0; i<vsize; ++i) {
+  for (std::size_t i=0; i<vsize; ++i) {
     if (is_na[i]) {
       output[i] = NA_LOGICAL;
     } else if (is_ipv6[i]) {
@@ -365,12 +365,12 @@ LogicalVector IpNetworkVector::isUnspecified() const {
 }
 
 LogicalVector IpNetworkVector::isLoopback() const {
-  unsigned int vsize = is_na.size();
+  std::size_t vsize = is_na.size();
 
   // initialize vectors
   LogicalVector output(vsize);
 
-  for (unsigned int i=0; i<vsize; ++i) {
+  for (std::size_t i=0; i<vsize; ++i) {
     if (is_na[i]) {
       output[i] = NA_LOGICAL;
     } else if (is_ipv6[i]) {
@@ -388,12 +388,12 @@ LogicalVector IpNetworkVector::isLoopback() const {
 }
 
 LogicalVector IpNetworkVector::isLinkLocal() const {
-  unsigned int vsize = is_na.size();
+  std::size_t vsize = is_na.size();
 
   // initialize vectors
   LogicalVector output(vsize);
 
-  for (unsigned int i=0; i<vsize; ++i) {
+  for (std::size_t i=0; i<vsize; ++i) {
     if (is_na[i]) {
       output[i] = NA_LOGICAL;
     } else if (is_ipv6[i]) {
