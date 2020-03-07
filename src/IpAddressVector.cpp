@@ -67,6 +67,40 @@ IpAddressVector::IpAddressVector(List input) {
   }
 }
 
+IpAddressVector IpAddressVector::decodePacked(List input) {
+  unsigned int vsize = input.size();
+
+  // initialize vectors
+  std::vector<asio::ip::address_v4> address_v4(vsize);
+  std::vector<asio::ip::address_v6> address_v6(vsize);
+  std::vector<bool> is_ipv6(vsize, false);
+  std::vector<bool> is_na(vsize, false);
+
+  for (unsigned int i=0; i<vsize; ++i) {
+    if (input[i] == R_NilValue) {
+      is_na[i] = true;
+      continue;
+    }
+
+    RawVector raw = input[i];
+    if (raw.size() == 4) {
+      asio::ip::address_v4::bytes_type bytes;
+      std::copy(raw.begin(), raw.end(), bytes.begin());
+      address_v4[i] = asio::ip::address_v4(bytes);
+    } else if (raw.size() == 16) {
+      asio::ip::address_v6::bytes_type bytes;
+      std::copy(raw.begin(), raw.end(), bytes.begin());
+      address_v6[i] = asio::ip::address_v6(bytes);
+      is_ipv6[i] = true;
+    } else {
+      is_na[i] = true;
+      warnInvalidInput(i, "unable to decode");
+    }
+  }
+
+  return IpAddressVector(address_v4, address_v6, is_ipv6, is_na);
+}
+
 IpAddressVector IpAddressVector::createNetmask(IntegerVector in_pfx, LogicalVector in_v6) {
   unsigned int vsize = in_v6.size();
 
@@ -186,6 +220,30 @@ CharacterVector IpAddressVector::encodeStrings() const {
   return output;
 }
 
+List IpAddressVector::encodePacked() const {
+  unsigned int vsize = is_na.size();
+
+  List output(vsize);
+
+  for (unsigned int i=0; i<vsize; ++i) {
+    if (is_na[i]) {
+      output[i] = R_NilValue;
+    } else if (is_ipv6[i]) {
+      asio::ip::address_v6::bytes_type bytes = address_v6[i].to_bytes();
+      RawVector raw(bytes.size());
+      std::copy(bytes.begin(), bytes.end(), raw.begin());
+      output[i] = raw;
+    } else {
+      asio::ip::address_v4::bytes_type bytes = address_v4[i].to_bytes();
+      RawVector raw(bytes.size());
+      std::copy(bytes.begin(), bytes.end(), raw.begin());
+      output[i] = raw;
+    }
+  }
+
+  return output;
+}
+
 DataFrame IpAddressVector::encodeComparable() const {
   unsigned int vsize = is_na.size();
 
@@ -243,31 +301,6 @@ DataFrame IpAddressVector::encodeComparable() const {
     _["address7"] = out_addr7,
     _["address8"] = out_addr8
   );
-}
-
-List IpAddressVector::packed() const {
-  unsigned int vsize = is_na.size();
-
-  List output(vsize);
-
-  for (unsigned int i=0; i<vsize; ++i) {
-    if (is_na[i]) {
-      RawVector raw(0);
-      output[i] = raw;
-    } else if (is_ipv6[i]) {
-      asio::ip::address_v6::bytes_type bytes = address_v6[i].to_bytes();
-      RawVector raw(bytes.size());
-      std::copy(bytes.begin(), bytes.end(), raw.begin());
-      output[i] = raw;
-    } else {
-      asio::ip::address_v4::bytes_type bytes = address_v4[i].to_bytes();
-      RawVector raw(bytes.size());
-      std::copy(bytes.begin(), bytes.end(), raw.begin());
-      output[i] = raw;
-    }
-  }
-
-  return output;
 }
 
 

@@ -27,6 +27,28 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// to_packed_address_wrapper
+List to_packed_address_wrapper(List x);
+RcppExport SEXP _ipaddress_to_packed_address_wrapper(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(to_packed_address_wrapper(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// from_packed_address_wrapper
+List from_packed_address_wrapper(List x);
+RcppExport SEXP _ipaddress_from_packed_address_wrapper(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(from_packed_address_wrapper(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // parse_network_wrapper
 List parse_network_wrapper(CharacterVector x, bool strict);
 RcppExport SEXP _ipaddress_parse_network_wrapper(SEXP xSEXP, SEXP strictSEXP) {
@@ -71,17 +93,6 @@ BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< List >::type x(xSEXP);
     rcpp_result_gen = Rcpp::wrap(compare_address_wrapper(x));
-    return rcpp_result_gen;
-END_RCPP
-}
-// packed_address_wrapper
-List packed_address_wrapper(List x);
-RcppExport SEXP _ipaddress_packed_address_wrapper(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< List >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(packed_address_wrapper(x));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -283,11 +294,12 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_parse_address_wrapper", (DL_FUNC) &_ipaddress_parse_address_wrapper, 1},
     {"_ipaddress_print_address_wrapper", (DL_FUNC) &_ipaddress_print_address_wrapper, 1},
+    {"_ipaddress_to_packed_address_wrapper", (DL_FUNC) &_ipaddress_to_packed_address_wrapper, 1},
+    {"_ipaddress_from_packed_address_wrapper", (DL_FUNC) &_ipaddress_from_packed_address_wrapper, 1},
     {"_ipaddress_parse_network_wrapper", (DL_FUNC) &_ipaddress_parse_network_wrapper, 2},
     {"_ipaddress_construct_network_wrapper", (DL_FUNC) &_ipaddress_construct_network_wrapper, 3},
     {"_ipaddress_print_network_wrapper", (DL_FUNC) &_ipaddress_print_network_wrapper, 1},
     {"_ipaddress_compare_address_wrapper", (DL_FUNC) &_ipaddress_compare_address_wrapper, 1},
-    {"_ipaddress_packed_address_wrapper", (DL_FUNC) &_ipaddress_packed_address_wrapper, 1},
     {"_ipaddress_bitwise_and_wrapper", (DL_FUNC) &_ipaddress_bitwise_and_wrapper, 2},
     {"_ipaddress_bitwise_or_wrapper", (DL_FUNC) &_ipaddress_bitwise_or_wrapper, 2},
     {"_ipaddress_bitwise_not_wrapper", (DL_FUNC) &_ipaddress_bitwise_not_wrapper, 1},

@@ -35,6 +35,9 @@ public:
   // Decode from R class
   IpAddressVector(List input);
 
+  // Encode to R blob (list of raw vectors)
+  static IpAddressVector decodePacked(List input);
+
   // Construct netmask from prefix length
   static IpAddressVector createNetmask(IntegerVector prefix_length, LogicalVector is_ipv6);
 
@@ -54,11 +57,11 @@ public:
   // Encode to R class
   List encodeR() const;
 
+  // Encode to R blob (list of raw vectors)
+  List encodePacked() const;
+
   // Encode to R dataframe for direct comparisons
   DataFrame encodeComparable() const;
-
-  // Encode to R blob (list of raw vectors)
-  List packed() const;
 
 
   /*---------------------*
