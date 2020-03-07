@@ -49,8 +49,8 @@ An IP network corresponds to a range of contiguous IP addresses
 (also known as an IP block). CIDR notation represents an
 IP network as the routing prefix address (which denotes the start
 of the range) and the prefix length (which indicates the size of
-the range) separated by a forward slash. For example, "192.168.100.0/22"
-represents addresses from "192.168.100.0" to "192.168.103.255".
+the range) separated by a forward slash. For example, \verb{192.168.100.0/22}
+represents addresses from \verb{192.168.100.0} to \verb{192.168.103.255}.
 
 The prefix length indicates the number of bits reserved by the
 routing prefix. This means that larger prefix lengths indicate
@@ -82,6 +82,7 @@ ip_network(c("192.168.0.0/24", "192.168.0.0/33", "1.2.3.4"))
 # IP networks should not have any host bits set
 ip_network("192.168.0.1/22")
 
+# but we can mask the host bits if desired
 ip_network("192.168.0.1/22", strict = FALSE)
 }
 \seealso{

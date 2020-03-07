@@ -37,6 +37,24 @@ hostmask <- function(...) {
 
 #' @rdname netmask
 #' @export
+netmask.ip_network <- function(network, ...) {
+  new_ip_address_encode(netmask_wrapper(
+    field(network, "prefix"),
+    field(network, "is_ipv6")
+  ))
+}
+
+#' @rdname netmask
+#' @export
+hostmask.ip_network <- function(network, ...) {
+  new_ip_address_encode(hostmask_wrapper(
+    field(network, "prefix"),
+    field(network, "is_ipv6")
+  ))
+}
+
+#' @rdname netmask
+#' @export
 netmask.default <- function(prefix_length = integer(), is_ipv6 = logical(), ...) {
   assertthat::assert_that(
     is.integer(prefix_length),
@@ -69,22 +87,4 @@ hostmask.default <- function(prefix_length = integer(), is_ipv6 = logical(), ...
   )
 
   new_ip_address_encode(hostmask_wrapper(prefix_length, is_ipv6))
-}
-
-#' @rdname netmask
-#' @export
-netmask.ip_network <- function(network, ...) {
-  new_ip_address_encode(netmask_wrapper(
-    field(network, "prefix"),
-    field(network, "is_ipv6")
-  ))
-}
-
-#' @rdname netmask
-#' @export
-hostmask.ip_network <- function(network, ...) {
-  new_ip_address_encode(hostmask_wrapper(
-    field(network, "prefix"),
-    field(network, "is_ipv6")
-  ))
 }

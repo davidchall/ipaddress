@@ -3,32 +3,32 @@
 \name{netmask}
 \alias{netmask}
 \alias{hostmask}
-\alias{netmask.default}
-\alias{hostmask.default}
 \alias{netmask.ip_network}
 \alias{hostmask.ip_network}
+\alias{netmask.default}
+\alias{hostmask.default}
 \title{Subnet masking}
 \usage{
 netmask(...)
 
 hostmask(...)
 
-\method{netmask}{default}(prefix_length = integer(), is_ipv6 = logical(), ...)
-
-\method{hostmask}{default}(prefix_length = integer(), is_ipv6 = logical(), ...)
-
 \method{netmask}{ip_network}(network, ...)
 
 \method{hostmask}{ip_network}(network, ...)
+
+\method{netmask}{default}(prefix_length = integer(), is_ipv6 = logical(), ...)
+
+\method{hostmask}{default}(prefix_length = integer(), is_ipv6 = logical(), ...)
 }
 \arguments{
 \item{...}{Arguments to be passed to other methods}
 
+\item{network}{An \code{\link{ip_network}} vector}
+
 \item{prefix_length}{An integer vector}
 
 \item{is_ipv6}{A logical vector}
-
-\item{network}{An \code{\link{ip_network}} vector}
 }
 \value{
 An \code{\link{ip_address}} vector

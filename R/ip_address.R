@@ -5,16 +5,16 @@ methods::setOldClass(c("ip_address", "vctrs_vctr"))
 #'
 #' @details
 #' An address in IPv4 space uses 32-bits. It is usually represented
-#' as 4 groups of 8 bits, each shown as decimal digits (e.g. "192.168.0.1").
+#' as 4 groups of 8 bits, each shown as decimal digits (e.g. `192.168.0.1`).
 #' This is known as dot-decimal notation.
 #'
 #' An address in IPv6 space uses 128-bits. It is usually represented
 #' as 8 groups of 16 bits, each shown as hexadecimal digits
-#' (e.g. "2001:0db8:85a3:0000:0000:8a2e:0370:7334"). This representation can
+#' (e.g. `2001:0db8:85a3:0000:0000:8a2e:0370:7334`). This representation can
 #' also be compressed by removing leading zeros and replacing consecutive
-#' groups of zeros with double-colon (e.g. "2001:db8:85a3::8a2e:370:7334").
+#' groups of zeros with double-colon (e.g. `2001:db8:85a3::8a2e:370:7334`).
 #' Finally, there is also the dual representation. This expresses the final
-#' two groups as an IPv4 address (e.g. "2001:db8:85a3::8a2e:3.112.115.52").
+#' two groups as an IPv4 address (e.g. `2001:db8:85a3::8a2e:3.112.115.52`).
 #'
 #' The `ip_address()` constructor accepts a character vector of IP addresses
 #' in these two formats. It checks whether each string is a valid IPv4 or IPv6

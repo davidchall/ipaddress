@@ -28,8 +28,8 @@
 #'
 #' hosts(ip_network("2001:db8::/126"))
 #' @seealso
-#' To get the IP address range of a network without generating all addresses,
-#' use [network_address()] and [broadcast_address()].
+#' Use [network_address()] and [broadcast_address()] to get the IP address
+#' range of a network without generating all addresses.
 #'
 #' Use [sample_ip()] to randomly sample addresses.
 #'

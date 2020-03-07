@@ -3,10 +3,10 @@
 #' Generates random addresses within an IP network or from the
 #' entire address space.
 #'
-#' @param space The address space to sample ("IPv4" or "IPv6")
 #' @param x An \code{\link{ip_network}} scalar
 #' @param size Integer specifying the number of addresses to return
 #' @param replace Should sampling be with replacement?
+#' @param space The address space to sample (`IPv4` or `IPv6`)
 #' @param ... Arguments to be passed to other methods
 #' @return An \code{\link{ip_address}} vector
 #'
@@ -14,31 +14,17 @@
 #' Use [seq.ip_network()] to generate _all_ addresses in a network.
 #'
 #' @examples
-#' sample_ip("IPv4", 5)
-#'
-#' sample_ip("IPv6", 5)
-#'
 #' sample_ip(ip_network("192.168.0.0/16"), 5)
 #'
 #' sample_ip(ip_network("2001:db8::/48"), 5)
+#'
+#' sample_ip("IPv4", 5)
+#'
+#' sample_ip("IPv6", 5)
 #' @name sample_ip
 #' @export
 sample_ip <- function(...) {
   UseMethod("sample_ip")
-}
-
-#' @rdname sample_ip
-#' @export
-sample_ip.default <- function(space = c("IPv4", "IPv6"), size, replace = FALSE, ...) {
-  assertthat::assert_that(assertthat::is.string(space))
-
-  if (space == "IPv4") {
-    sample_ip(ip_network("0.0.0.0/0"), size, replace)
-  } else if (space == "IPv6") {
-    sample_ip(ip_network("::/0"), size, replace)
-  } else {
-    stop("`space` must be either 'IPv4' or 'IPv6")
-  }
 }
 
 #' @rdname sample_ip
@@ -85,6 +71,20 @@ sample_ip.ip_network <- function(x, size, replace = FALSE, ...) {
   }
 
   rep(network_address(x), size) | result
+}
+
+#' @rdname sample_ip
+#' @export
+sample_ip.default <- function(space = c("IPv4", "IPv6"), size, replace = FALSE, ...) {
+  assertthat::assert_that(assertthat::is.string(space))
+
+  if (space == "IPv4") {
+    sample_ip(ip_network("0.0.0.0/0"), size, replace)
+  } else if (space == "IPv6") {
+    sample_ip(ip_network("::/0"), size, replace)
+  } else {
+    stop("`space` must be either 'IPv4' or 'IPv6")
+  }
 }
 
 sample_ipv4 <- function(size, n_bits_to_sample) {

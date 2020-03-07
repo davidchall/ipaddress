@@ -1,6 +1,8 @@
 #' Reserved addresses
 #'
 #' Check if an address or network is reserved for special use.
+#' A network is considered reserved if both the `network_address()`
+#' and `broadcast_address()` are reserved.
 #'
 #' @details
 #' These special use addresses are documented in IETF documents
@@ -11,9 +13,11 @@
 #' @return A logical vector
 #'
 #' @examples
+#' # these examples show the reserved networks
+#'
 #' is_multicast(ip_network(c("224.0.0.0/4", "ff00::/8")))
 #'
-#' is_unspecified(ip_address(c("0.0.0.0", "::")))
+#' is_unspecified(ip_network(c("0.0.0.0/32", "::/128")))
 #'
 #' is_loopback(ip_network(c("127.0.0.0/8", "::1/128")))
 #'
