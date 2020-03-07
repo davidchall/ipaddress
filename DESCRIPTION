@@ -25,10 +25,14 @@ Imports:
     Rcpp,
     vctrs (>= 0.2.2)
 Suggests: 
+    knitr,
+    rmarkdown,
     testthat (>= 2.1.0)
 LinkingTo: 
     AsioHeaders,
     Rcpp
+VignetteBuilder: 
+    knitr
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
