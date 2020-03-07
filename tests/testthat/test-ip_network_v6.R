@@ -1,5 +1,11 @@
 x <- c("::/128", "256::/72", "2001:db8::/36", "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff/128")
 
+test_that("alternative formats accepted", {
+  expect_equal(ip_network("2001:0db8:85a3:0000:0000:8a2e:0370:7334/128"), ip_network("2001:db8:85a3::8a2e:370:7334/128"))
+  expect_equal(ip_network("2001:db8:85a3:0:0:8a2e:370:7334/128"), ip_network("2001:db8:85a3::8a2e:370:7334/128"))
+  expect_equal(ip_network("2001:db8:85a3::8a2e:3.112.115.52/128"), ip_network("2001:db8:85a3::8a2e:370:7334/128"))
+})
+
 test_that("construction works", {
   expect_s3_class(ip_network(), c("ip_network", "vctrs_vctr"))
   expect_true(is_ip_network(ip_network(x)))
