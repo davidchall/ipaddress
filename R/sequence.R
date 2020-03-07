@@ -33,13 +33,13 @@
 #'
 #' Use [sample_ip()] to randomly sample addresses.
 #'
-#' @name hosts
+#' @name sequence
 NULL
 
 #' `seq()`
 #'
 #' `seq()` returns _all_ hosts
-#' @rdname hosts
+#' @rdname sequence
 #' @export
 seq.ip_network <- function(x, ...) {
   assertthat::assert_that(assertthat::is.scalar(x))
@@ -54,7 +54,7 @@ seq.ip_network <- function(x, ...) {
 #' `hosts()`
 #'
 #' `hosts()` returns only _usable_ hosts
-#' @rdname hosts
+#' @rdname sequence
 #' @export
 hosts <- function(x) {
   assertthat::assert_that(
