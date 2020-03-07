@@ -5,6 +5,10 @@ reference:
     contents:
       - ip_address
       - ip_network
+  - title: "Binary representation"
+    contents:
+      - packed
+      - unpack
   - title: "Address spaces"
     contents:
       - is_ipv4

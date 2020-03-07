@@ -18,6 +18,16 @@ CharacterVector print_address_wrapper(List x) {
 }
 
 // [[Rcpp::export]]
+List to_packed_address_wrapper(List x) {
+  return IpAddressVector(x).encodePacked();
+}
+
+// [[Rcpp::export]]
+List from_packed_address_wrapper(List x) {
+  return IpAddressVector::decodePacked(x).encodeR();
+}
+
+// [[Rcpp::export]]
 List parse_network_wrapper(CharacterVector x, bool strict) {
   return IpNetworkVector(x, strict).encodeR();
 }
@@ -33,9 +43,9 @@ CharacterVector print_network_wrapper(List x) {
 }
 
 
-/*------------------------*
- *  Comparison operators  *
- * -----------------------*/
+/*----------------*
+ *  Other output  *
+ * ---------------*/
 // [[Rcpp::export]]
 DataFrame compare_address_wrapper(List x) {
   return IpAddressVector(x).encodeComparable();
