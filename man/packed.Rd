@@ -32,3 +32,6 @@ packed(x)
 
 unpack(packed(x))
 }
+\seealso{
+Use \code{as_binary()} and \code{from_binary()} to encode/decode binary.
+}

@@ -8,15 +8,17 @@
 \usage{
 as_binary(ip)
 
-from_binary(bin)
+from_binary(bits)
 }
 \arguments{
 \item{ip}{An \code{\link{ip_address}} vector}
 
-\item{bin}{A character vector containing only \code{0} and \code{1} characters}
+\item{bits}{A character vector containing only \code{0} and \code{1} characters}
 }
 \description{
-Encode or decode address as binary
+\code{as_binary()} encodes an \code{ip_address} vector to a character vector of bits
+
+\code{from_binary()} decodes a character vector of bits to an \code{ip_address} vector
 }
 \details{
 The bits are stored in network order (also known as
@@ -30,4 +32,7 @@ x <- ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334", NA))
 as_binary(x)
 
 from_binary(as_binary(x))
+}
+\seealso{
+Use \code{packed()} and \code{unpack()} to encode/decode raw bytes.
 }

@@ -52,7 +52,7 @@ unpack <- function(blob) {
 #' and missing values are encoded as `NA`.
 #'
 #' @param ip An \code{\link{ip_address}} vector
-#' @param bin A character vector containing only `0` and `1` characters
+#' @param bits A character vector containing only `0` and `1` characters
 #'
 #' @examples
 #' x <- ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334", NA))
@@ -63,6 +63,10 @@ unpack <- function(blob) {
 #' @name binary
 NULL
 
+#' `as_binary()`
+#'
+#' `as_binary()` encodes an `ip_address` vector to a character vector of bits
+#'
 #' @rdname binary
 #' @export
 as_binary <- function(ip) {
@@ -80,9 +84,13 @@ as_binary <- function(ip) {
   vapply(packed(ip), raw_to_binary, "")
 }
 
+#' `from_binary()`
+#'
+#' `from_binary()` decodes a character vector of bits to an `ip_address` vector
+#'
 #' @rdname binary
 #' @export
-from_binary <- function(bin) {
+from_binary <- function(bits) {
   binary_to_raw <- function(binary) {
     if (is.na(binary)) return(NULL)
 
@@ -94,5 +102,5 @@ from_binary <- function(bin) {
     packBits(bits)
   }
 
-  unpack(blob::as_blob(lapply(bin, binary_to_raw)))
+  unpack(blob::as_blob(lapply(bits, binary_to_raw)))
 }
