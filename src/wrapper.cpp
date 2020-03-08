@@ -164,5 +164,5 @@ LogicalVector is_ipv4_mapped_address_wrapper(List address_r) {
 
 // [[Rcpp::export]]
 LogicalVector is_ipv4_mapped_network_wrapper(List network_r) {
-  return IpAddressVector(network_r).isIPv4Mapped();
+  return IpNetworkVector(network_r).isIPv4Mapped();
 }
