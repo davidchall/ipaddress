@@ -167,7 +167,9 @@ in these two formats. It checks whether each string is a valid IPv4 or IPv6
 address, and converts it to an <code>ip_address</code> object. If the input is invalid,
 a warning is emitted and <code>NA</code> is stored instead.</p>
 <p>When casting an <code>ip_address</code> object back to a character vector using
-<code><a href='https://rdrr.io/r/base/character.html'>as.character()</a></code>, IPv6 addresses are reduced to their compressed representation.</p>
+<code><a href='https://rdrr.io/r/base/character.html'>as.character()</a></code>, IPv6 addresses are reduced to their compressed representation.
+A special case is IPv4-mapped IPv6 addresses, which are returned in their
+dual representation (e.g. <code>::ffff:192.0.2.128</code>).</p>
 <p>This class also supports bitwise operations: <code>&amp;</code> (AND), <code>|</code> (OR) and <code>!</code> (NOT).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
