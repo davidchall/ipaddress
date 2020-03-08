@@ -9,6 +9,8 @@ reference:
     contents:
       - packed
       - unpack
+      - as_binary
+      - from_binary
   - title: "Address spaces"
     contents:
       - is_ipv4

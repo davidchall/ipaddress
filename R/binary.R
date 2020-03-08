@@ -5,7 +5,7 @@
 #' big-endian order), which is part of the IP standard.
 #'
 #' IPv4 addresses use 4 bytes, IPv6 addresses use 16 bytes,
-#' and missing values are stored as `NULL`.
+#' and missing values are encoded as `NULL`.
 #'
 #' @param ip An \code{\link{ip_address}} vector
 #' @param blob A \code{\link[blob]{blob}} vector
@@ -15,6 +15,7 @@
 #' packed(x)
 #'
 #' unpack(packed(x))
+#' @seealso Use `as_binary()` and `from_binary()` to encode/decode binary.
 #' @name packed
 NULL
 
@@ -38,4 +39,60 @@ packed <- function(ip) {
 unpack <- function(blob) {
   assertthat::assert_that(blob::is_blob(blob), msg = "argument is not a blob object")
   vec_cast(blob, ip_address())
+}
+
+
+#' Encode or decode address as binary
+#'
+#' @details
+#' The bits are stored in network order (also known as
+#' big-endian order), which is part of the IP standard.
+#'
+#' IPv4 addresses use 32 bits, IPv6 addresses use 128 bits,
+#' and missing values are encoded as `NA`.
+#'
+#' @param ip An \code{\link{ip_address}} vector
+#' @param bin A character vector containing only `0` and `1` characters
+#'
+#' @examples
+#' x <- ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334", NA))
+#' as_binary(x)
+#'
+#' from_binary(as_binary(x))
+#' @seealso Use `packed()` and `unpack()` to encode/decode raw bytes.
+#' @name binary
+NULL
+
+#' @rdname binary
+#' @export
+as_binary <- function(ip) {
+  raw_to_binary <- function(raw) {
+    if (is.null(raw)) return(NA_character_)
+
+    # ipaddress returns big-endian order (bytes and bits), but
+    # rawToBits returns little-endian order (bits)
+    bits <- rawToBits(raw)
+    bits <- unlist(lapply(split(bits, ceiling(seq_along(bits) / 8L)), rev), use.names = FALSE)
+
+    paste(as.integer(bits), collapse = "")
+  }
+
+  vapply(packed(ip), raw_to_binary, "")
+}
+
+#' @rdname binary
+#' @export
+from_binary <- function(bin) {
+  binary_to_raw <- function(binary) {
+    if (is.na(binary)) return(NULL)
+
+    bits <- as.integer(unlist(strsplit(binary, "")))
+
+    # ipaddress expects big-endian order (bytes and bits), but
+    # packBits expects little-endian order (bits)
+    bits <- unlist(lapply(split(bits, ceiling(seq_along(bits) / 8L)), rev), use.names = FALSE)
+    packBits(bits)
+  }
+
+  unpack(blob::as_blob(lapply(bin, binary_to_raw)))
 }

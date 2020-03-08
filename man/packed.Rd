@@ -24,7 +24,7 @@ The bytes are stored in network order (also known as
 big-endian order), which is part of the IP standard.
 
 IPv4 addresses use 4 bytes, IPv6 addresses use 16 bytes,
-and missing values are stored as \code{NULL}.
+and missing values are encoded as \code{NULL}.
 }
 \examples{
 x <- ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334", NA))
