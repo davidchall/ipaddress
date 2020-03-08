@@ -26,7 +26,7 @@ is_ip_network(x)
 
 \item{ip}{Character vector of IP networks, in CIDR notation (IPv4 or IPv6).}
 
-\item{strict}{If \code{strict = TRUE} (the default) and the input has host bits set,
+\item{strict}{If \code{TRUE} (the default) and the input has host bits set,
 then a warning is emitted and \code{NA} is returned. If \code{FALSE}, the
 host bits are set to zero and a valid IP network is returned.}
 

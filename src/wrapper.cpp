@@ -166,3 +166,17 @@ LogicalVector is_ipv4_mapped_address_wrapper(List address_r) {
 LogicalVector is_ipv4_mapped_network_wrapper(List network_r) {
   return IpNetworkVector(network_r).isIPv4Mapped();
 }
+
+
+/*-----------------------*
+ *  Address translation  *
+ * ----------------------*/
+// [[Rcpp::export]]
+List map_to_ipv4_wrapper(List address_r, bool keep_ipv6) {
+  return IpAddressVector(address_r).mapToIPv4(keep_ipv6).encodeR();
+}
+
+// [[Rcpp::export]]
+List map_to_ipv6_wrapper(List address_r) {
+  return IpAddressVector(address_r).mapToIPv6().encodeR();
+}

@@ -87,6 +87,13 @@ public:
   LogicalVector isLoopback() const;
   LogicalVector isLinkLocal() const;
   LogicalVector isIPv4Mapped() const;
+
+
+  /*-----------------------*
+   *  Address translation  *
+   * ----------------------*/
+  IpAddressVector mapToIPv4(bool keep_ipv6) const;
+  IpAddressVector mapToIPv6() const;
 };
 
 #endif

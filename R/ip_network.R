@@ -46,7 +46,7 @@ NULL
 #' @param ip Character vector of IP networks, in CIDR notation (IPv4 or IPv6).
 #' @param address An \code{\link{ip_address}} vector
 #' @param prefix_length An integer vector
-#' @param strict If `strict = TRUE` (the default) and the input has host bits set,
+#' @param strict If `TRUE` (the default) and the input has host bits set,
 #'   then a warning is emitted and `NA` is returned. If `FALSE`, the
 #'   host bits are set to zero and a valid IP network is returned.
 #' @return An `ip_network` vector

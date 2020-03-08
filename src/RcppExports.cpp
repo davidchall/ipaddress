@@ -312,6 +312,29 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// map_to_ipv4_wrapper
+List map_to_ipv4_wrapper(List address_r, bool keep_ipv6);
+RcppExport SEXP _ipaddress_map_to_ipv4_wrapper(SEXP address_rSEXP, SEXP keep_ipv6SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type address_r(address_rSEXP);
+    Rcpp::traits::input_parameter< bool >::type keep_ipv6(keep_ipv6SEXP);
+    rcpp_result_gen = Rcpp::wrap(map_to_ipv4_wrapper(address_r, keep_ipv6));
+    return rcpp_result_gen;
+END_RCPP
+}
+// map_to_ipv6_wrapper
+List map_to_ipv6_wrapper(List address_r);
+RcppExport SEXP _ipaddress_map_to_ipv6_wrapper(SEXP address_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type address_r(address_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(map_to_ipv6_wrapper(address_r));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_parse_address_wrapper", (DL_FUNC) &_ipaddress_parse_address_wrapper, 1},
@@ -341,6 +364,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_is_link_local_network_wrapper", (DL_FUNC) &_ipaddress_is_link_local_network_wrapper, 1},
     {"_ipaddress_is_ipv4_mapped_address_wrapper", (DL_FUNC) &_ipaddress_is_ipv4_mapped_address_wrapper, 1},
     {"_ipaddress_is_ipv4_mapped_network_wrapper", (DL_FUNC) &_ipaddress_is_ipv4_mapped_network_wrapper, 1},
+    {"_ipaddress_map_to_ipv4_wrapper", (DL_FUNC) &_ipaddress_map_to_ipv4_wrapper, 2},
+    {"_ipaddress_map_to_ipv6_wrapper", (DL_FUNC) &_ipaddress_map_to_ipv6_wrapper, 1},
     {NULL, NULL, 0}
 };
 

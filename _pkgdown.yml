@@ -13,6 +13,8 @@ reference:
     contents:
       - is_ipv4
       - is_ipv6
+      - ipv4_mapped
+      - ipv6_mapped
       - max_prefix_length
       - is_multicast
       - is_unspecified

@@ -47,4 +47,8 @@ is_loopback(ip_network(c("127.0.0.0/8", "::1/128")))
 is_link_local(ip_network(c("169.254.0.0/16", "fe80::/10")))
 
 is_ipv4_mapped(ip_network("::ffff:0.0.0.0/96"))
+
+}
+\seealso{
+Use \code{\link[=ipv4_mapped]{ipv4_mapped()}} to extract the embedded IPv4 address.
 }

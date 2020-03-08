@@ -24,6 +24,9 @@
 #' is_link_local(ip_network(c("169.254.0.0/16", "fe80::/10")))
 #'
 #' is_ipv4_mapped(ip_network("::ffff:0.0.0.0/96"))
+#'
+#' @seealso
+#' Use [ipv4_mapped()] to extract the embedded IPv4 address.
 #' @name is_reserved
 NULL
 
