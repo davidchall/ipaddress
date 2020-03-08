@@ -22,6 +22,8 @@
 #' is_loopback(ip_network(c("127.0.0.0/8", "::1/128")))
 #'
 #' is_link_local(ip_network(c("169.254.0.0/16", "fe80::/10")))
+#'
+#' is_ipv4_mapped(ip_network("::ffff:0.0.0.0/96"))
 #' @name is_reserved
 NULL
 
@@ -68,6 +70,18 @@ is_link_local <- function(x) {
     is_link_local_address_wrapper(x)
   } else if (is_ip_network(x)) {
     is_link_local_network_wrapper(x)
+  } else {
+    stop("argument must be an ip_address vector or an ip_network vector")
+  }
+}
+
+#' @rdname is_reserved
+#' @export
+is_ipv4_mapped <- function(x) {
+  if (is_ip_address(x)) {
+    is_ipv4_mapped_address_wrapper(x)
+  } else if (is_ip_network(x)) {
+    is_ipv4_mapped_network_wrapper(x)
   } else {
     stop("argument must be an ip_address vector or an ip_network vector")
   }

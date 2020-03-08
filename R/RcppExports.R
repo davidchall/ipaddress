@@ -101,3 +101,11 @@ is_link_local_network_wrapper <- function(network_r) {
     .Call(`_ipaddress_is_link_local_network_wrapper`, network_r)
 }
 
+is_ipv4_mapped_address_wrapper <- function(address_r) {
+    .Call(`_ipaddress_is_ipv4_mapped_address_wrapper`, address_r)
+}
+
+is_ipv4_mapped_network_wrapper <- function(network_r) {
+    .Call(`_ipaddress_is_ipv4_mapped_network_wrapper`, network_r)
+}
+

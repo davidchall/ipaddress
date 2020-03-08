@@ -411,3 +411,24 @@ LogicalVector IpNetworkVector::isLinkLocal() const {
 
   return output;
 }
+
+LogicalVector IpNetworkVector::isIPv4Mapped() const {
+  std::size_t vsize = is_na.size();
+
+  // initialize vectors
+  LogicalVector output(vsize);
+
+  for (std::size_t i=0; i<vsize; ++i) {
+    if (is_na[i]) {
+      output[i] = NA_LOGICAL;
+    } else if (is_ipv6[i]) {
+      asio::ip::address_v6 first = network_v6[i].address();
+      asio::ip::address_v6 last = broadcast_address<asio::ip::address_v6>(network_v6[i]);
+      output[i] = first.is_v4_mapped() && last.is_v4_mapped();
+    } else {
+      output[i] = false;
+    }
+  }
+
+  return output;
+}

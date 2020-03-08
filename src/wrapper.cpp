@@ -156,3 +156,13 @@ LogicalVector is_link_local_address_wrapper(List address_r) {
 LogicalVector is_link_local_network_wrapper(List network_r) {
   return IpNetworkVector(network_r).isLinkLocal();
 }
+
+// [[Rcpp::export]]
+LogicalVector is_ipv4_mapped_address_wrapper(List address_r) {
+  return IpAddressVector(address_r).isIPv4Mapped();
+}
+
+// [[Rcpp::export]]
+LogicalVector is_ipv4_mapped_network_wrapper(List network_r) {
+  return IpAddressVector(network_r).isIPv4Mapped();
+}

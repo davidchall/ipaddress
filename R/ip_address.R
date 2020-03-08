@@ -23,6 +23,8 @@ methods::setOldClass(c("ip_address", "vctrs_vctr"))
 #'
 #' When casting an `ip_address` object back to a character vector using
 #' `as.character()`, IPv6 addresses are reduced to their compressed representation.
+#' A special case is IPv4-mapped IPv6 addresses, which are returned in their
+#' dual representation (e.g. `::ffff:192.0.2.128`).
 #'
 #' This class also supports bitwise operations: `&` (AND), `|` (OR) and `!` (NOT).
 #'

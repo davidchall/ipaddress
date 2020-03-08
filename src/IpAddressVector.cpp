@@ -525,3 +525,22 @@ LogicalVector IpAddressVector::isLinkLocal() const {
 
   return output;
 }
+
+LogicalVector IpAddressVector::isIPv4Mapped() const {
+  std::size_t vsize = is_na.size();
+
+  // initialize vectors
+  LogicalVector output(vsize);
+
+  for (std::size_t i=0; i<vsize; ++i) {
+    if (is_na[i]) {
+      output[i] = NA_LOGICAL;
+    } else if (is_ipv6[i]) {
+      output[i] = address_v6[i].is_v4_mapped();
+    } else {
+      output[i] = false;
+    }
+  }
+
+  return output;
+}

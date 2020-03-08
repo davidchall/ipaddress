@@ -117,3 +117,27 @@ test_that("is_link_local works", {
 
   expect_error(is_link_local("hello"))
 })
+
+test_that("is_ipv4_mapped works", {
+  # IPv4: none
+  expect_false(is_ipv4_mapped(ip_address("0.0.0.0")))
+  expect_false(is_ipv4_mapped(ip_network("0.0.0.0/32")))
+
+  # IPv6: ::ffff:0.0.0.0/96
+  expect_equal(
+    is_ipv4_mapped(ip_address(c("::fffe:ffff:ffff", "::ffff:0.0.0.0", "::ffff:255.255.255.255"))),
+    c(FALSE, TRUE, TRUE)
+  )
+  expect_equal(
+    is_ipv4_mapped(ip_network(c("::ffff:0.0.0.0/96", "::ffff:0.0.0.0/97", "::fffe:0.0.0.0/95"))),
+    c(TRUE, TRUE, FALSE)
+  )
+
+  expect_equal(is_ipv4_mapped(ip_address()), logical())
+  expect_equal(is_ipv4_mapped(ip_network()), logical())
+
+  expect_equal(is_ipv4_mapped(ip_address(NA)), NA)
+  expect_equal(is_ipv4_mapped(ip_network(NA)), NA)
+
+  expect_error(is_ipv4_mapped("hello"))
+})

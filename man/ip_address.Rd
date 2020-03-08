@@ -51,6 +51,8 @@ a warning is emitted and \code{NA} is stored instead.
 
 When casting an \code{ip_address} object back to a character vector using
 \code{as.character()}, IPv6 addresses are reduced to their compressed representation.
+A special case is IPv4-mapped IPv6 addresses, which are returned in their
+dual representation (e.g. \verb{::ffff:192.0.2.128}).
 
 This class also supports bitwise operations: \code{&} (AND), \code{|} (OR) and \code{!} (NOT).
 }

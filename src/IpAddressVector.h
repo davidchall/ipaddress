@@ -86,6 +86,7 @@ public:
   LogicalVector isUnspecified() const;
   LogicalVector isLoopback() const;
   LogicalVector isLinkLocal() const;
+  LogicalVector isIPv4Mapped() const;
 };
 
 #endif
