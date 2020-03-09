@@ -73,7 +73,7 @@ is_subnet <- function(network1, network2) {
   assertthat::assert_that(is_ip_network(network2))
   assertthat::assert_that(length(network1) == length(network2))
 
-  is_subnet_wrapper(network1, network2)
+  is_subnet_wrapper(network1, network2) & (prefix_length(network1) >= prefix_length(network2))
 }
 
 #' @rdname network_in_network
@@ -83,5 +83,5 @@ is_supernet <- function(network1, network2) {
   assertthat::assert_that(is_ip_network(network2))
   assertthat::assert_that(length(network1) == length(network2))
 
-  is_subnet_wrapper(network2, network1)
+  is_subnet_wrapper(network2, network1) & (prefix_length(network2) >= prefix_length(network1))
 }
