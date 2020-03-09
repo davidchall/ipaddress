@@ -2,13 +2,13 @@
 % Please edit documentation in R/mapping.R
 \name{mapping}
 \alias{mapping}
-\alias{ipv4_mapped}
-\alias{ipv6_mapped}
+\alias{extract_ipv4_mapped}
+\alias{embed_ipv4_mapped}
 \title{Mapping between address spaces}
 \usage{
-ipv4_mapped(x, keep_ipv6 = FALSE)
+extract_ipv4_mapped(x, keep_ipv6 = FALSE)
 
-ipv6_mapped(x)
+embed_ipv4_mapped(x)
 }
 \arguments{
 \item{x}{An \code{\link{ip_address}} vector}
@@ -18,12 +18,12 @@ not IPv4-mapped should be kept or converted to \code{NA}. If \code{FALSE}
 (the default), the returned vector will only contain IPv4 addresses.}
 }
 \value{
-An \code{\link{ip_address}}
+An \code{\link{ip_address}} vector
 }
 \description{
-\code{ipv4_mapped()} extracts an IPv4 address from an IPv4-mapped IPv6 address
+\code{extract_ipv4_mapped()} extracts an IPv4 address from an IPv4-mapped IPv6 address
 
-\code{ipv6_mapped()} embeds an IPv4 address within an IPv4-mapped IPv6 address
+\code{embed_ipv4_mapped()} embeds an IPv4 address within an IPv4-mapped IPv6 address
 }
 \details{
 Addresses already in the target address space are unaffected by
@@ -32,12 +32,12 @@ these functions.
 \examples{
 x <- ip_address(c("192.168.0.1", "::ffff:192.0.2.128", "2001:db8::"))
 
-ipv4_mapped(x)
+extract_ipv4_mapped(x)
 
-ipv6_mapped(x)
+embed_ipv4_mapped(x)
 
 # keep_ipv6 option prevents lossy mappings
-ipv6_mapped(ipv4_mapped(x, keep_ipv6 = TRUE))
+embed_ipv4_mapped(extract_ipv4_mapped(x, keep_ipv6 = TRUE))
 }
 \seealso{
 \code{\link[=is_ipv4_mapped]{is_ipv4_mapped()}}

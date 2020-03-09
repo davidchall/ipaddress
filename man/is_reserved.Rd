@@ -50,5 +50,5 @@ is_ipv4_mapped(ip_network("::ffff:0.0.0.0/96"))
 
 }
 \seealso{
-Use \code{\link[=ipv4_mapped]{ipv4_mapped()}} to extract the embedded IPv4 address.
+Use \code{\link[=extract_ipv4_mapped]{extract_ipv4_mapped()}} to extract the embedded IPv4 address.
 }

@@ -172,11 +172,11 @@ LogicalVector is_ipv4_mapped_network_wrapper(List network_r) {
  *  Address translation  *
  * ----------------------*/
 // [[Rcpp::export]]
-List map_to_ipv4_wrapper(List address_r, bool keep_ipv6) {
-  return IpAddressVector(address_r).mapToIPv4(keep_ipv6).encodeR();
+List extract_ipv4_mapped_wrapper(List address_r, bool keep_ipv6) {
+  return IpAddressVector(address_r).extractIPv4Mapped(keep_ipv6).encodeR();
 }
 
 // [[Rcpp::export]]
-List map_to_ipv6_wrapper(List address_r) {
-  return IpAddressVector(address_r).mapToIPv6().encodeR();
+List embed_ipv4_mapped_wrapper(List address_r) {
+  return IpAddressVector(address_r).embedIPv4Mapped().encodeR();
 }

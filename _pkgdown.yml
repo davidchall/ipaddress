@@ -13,14 +13,14 @@ reference:
     contents:
       - is_ipv4
       - is_ipv6
-      - ipv4_mapped
-      - ipv6_mapped
       - max_prefix_length
       - is_multicast
       - is_unspecified
       - is_loopback
       - is_link_local
       - is_ipv4_mapped
+      - extract_ipv4_mapped
+      - embed_ipv4_mapped
   - title: "Network membership"
     contents:
       - prefix_length

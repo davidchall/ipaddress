@@ -92,8 +92,8 @@ public:
   /*-----------------------*
    *  Address translation  *
    * ----------------------*/
-  IpAddressVector mapToIPv4(bool keep_ipv6) const;
-  IpAddressVector mapToIPv6() const;
+  IpAddressVector extractIPv4Mapped(bool keep_ipv6) const;
+  IpAddressVector embedIPv4Mapped() const;
 };
 
 #endif

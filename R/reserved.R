@@ -26,7 +26,7 @@
 #' is_ipv4_mapped(ip_network("::ffff:0.0.0.0/96"))
 #'
 #' @seealso
-#' Use [ipv4_mapped()] to extract the embedded IPv4 address.
+#' Use [extract_ipv4_mapped()] to extract the embedded IPv4 address.
 #' @name is_reserved
 NULL
 

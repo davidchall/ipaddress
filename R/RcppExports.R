@@ -109,11 +109,11 @@ is_ipv4_mapped_network_wrapper <- function(network_r) {
     .Call(`_ipaddress_is_ipv4_mapped_network_wrapper`, network_r)
 }
 
-map_to_ipv4_wrapper <- function(address_r, keep_ipv6) {
-    .Call(`_ipaddress_map_to_ipv4_wrapper`, address_r, keep_ipv6)
+extract_ipv4_mapped_wrapper <- function(address_r, keep_ipv6) {
+    .Call(`_ipaddress_extract_ipv4_mapped_wrapper`, address_r, keep_ipv6)
 }
 
-map_to_ipv6_wrapper <- function(address_r) {
-    .Call(`_ipaddress_map_to_ipv6_wrapper`, address_r)
+embed_ipv4_mapped_wrapper <- function(address_r) {
+    .Call(`_ipaddress_embed_ipv4_mapped_wrapper`, address_r)
 }
 

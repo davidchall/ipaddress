@@ -549,7 +549,7 @@ LogicalVector IpAddressVector::isIPv4Mapped() const {
 /*-----------------------*
  *  Address translation  *
  * ----------------------*/
-IpAddressVector IpAddressVector::mapToIPv4(bool keep_ipv6) const {
+IpAddressVector IpAddressVector::extractIPv4Mapped(bool keep_ipv6) const {
   std::size_t vsize = is_na.size();
 
   // initialize vectors
@@ -578,7 +578,7 @@ IpAddressVector IpAddressVector::mapToIPv4(bool keep_ipv6) const {
   return IpAddressVector(out_address_v4, out_address_v6, out_is_ipv6, out_is_na);
 }
 
-IpAddressVector IpAddressVector::mapToIPv6() const {
+IpAddressVector IpAddressVector::embedIPv4Mapped() const {
   std::size_t vsize = is_na.size();
 
   // initialize vectors
