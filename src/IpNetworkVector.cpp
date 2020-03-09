@@ -82,7 +82,7 @@ IpNetworkVector::IpNetworkVector(List input) {
   is_na.assign(vsize, false);
 
   for (unsigned int i=0; i<vsize; ++i) {
-    if (in_addr1[i] == NA_INTEGER) {
+    if (in_v6[i] == NA_LOGICAL) {
       is_na[i] = true;
     } else if (in_v6[i]) {
       address_v6_r_bytes_type bytes = {in_addr1[i], in_addr2[i], in_addr3[i], in_addr4[i]};

@@ -33,7 +33,7 @@ test_that("coercion works", {
 })
 
 test_that("missing values work", {
-  expect_equal(field(ip_network(NA), "address1"), NA_integer_)
+  expect_equal(field(ip_network(NA), "is_ipv6"), NA)
   expect_equal(ip_network(c(x, NA)), c(ip_network(x), NA))
   expect_equal(as.character(ip_network(c(x, NA))), c(x, NA))
   expect_equal(is.na(ip_network(c(x, NA))), c(rep(FALSE, length(x)), TRUE))

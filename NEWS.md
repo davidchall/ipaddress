@@ -1,3 +1,10 @@
+# ipaddress 0.1.2
+
+* Fixed decoding bug which meant that some IP addresses were interpreted as NA
+  * In IPv4, this affected `0.0.0.128`
+  * In IPv6, this affected any address in the `0:80::/32` network
+
+
 # ipaddress 0.1.1
 
 Hotfix for CRAN errors on Solaris.
