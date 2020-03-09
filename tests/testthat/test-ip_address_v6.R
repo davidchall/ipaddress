@@ -1,4 +1,4 @@
-x <- c("::", "::256", "2001:db8::8a2e:370:7334", "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff")
+x <- c("::", "256::", "2001:db8::8a2e:370:7334", "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff")
 
 test_that("formats correctly", {
   expect_equal(format(ip_address(x)), x)

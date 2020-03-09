@@ -1,7 +1,9 @@
 ## Release summary
 
-This is a patch release to fix a decoding bug that affected a small number of IP addresses.
-It also fixes a minor bug when comparing IP networks.
+This is a patch release to fix a few bugs:
+* CRAN errors on OSX (due to dual IPv6 representation of IPv4-compatible IPv6 addresses)
+* decoding failed for a small number of IP addresses
+* comparing IP networks did not consider prefix lengths
 
 
 ## Test environments
