@@ -20,7 +20,6 @@
 * Fixed decoding bug which meant that some IP addresses were interpreted as NA
   * In IPv4, this affected `0.0.0.128`
   * In IPv6, this affected any address in the `0:80::/32` network
-* Network membership functions (`is_within()`, `is_within_any()`, `is_subnet()` and `is_supernet()`) now report that the network address and broadcast address are within the network.
 * `is_subnet()` and `is_supernet()` now check the prefix length, to ensure they are a true subnet or supernet.
 
 
