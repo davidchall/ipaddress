@@ -13,6 +13,8 @@ reference:
     contents:
       - is_ipv4
       - is_ipv6
+      - sample_ipv4
+      - sample_ipv6
       - max_prefix_length
       - is_multicast
       - is_unspecified
@@ -31,7 +33,7 @@ reference:
       - hostmask
       - seq.ip_network
       - hosts
-      - sample_ip
+      - sample_network
       - is_within
       - is_within_any
       - is_subnet

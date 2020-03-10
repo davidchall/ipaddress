@@ -2,43 +2,30 @@
 % Please edit documentation in R/sample.R
 \name{sample_ip}
 \alias{sample_ip}
-\alias{sample_ip.ip_network}
-\alias{sample_ip.default}
-\title{Sample addresses within a network}
+\alias{sample_ipv4}
+\alias{sample_ipv6}
+\title{Sample random addresses}
 \usage{
-sample_ip(...)
+sample_ipv4(size, replace = FALSE)
 
-\method{sample_ip}{ip_network}(x, size, replace = FALSE, ...)
-
-\method{sample_ip}{default}(space = c("IPv4", "IPv6"), size, replace = FALSE, ...)
+sample_ipv6(size, replace = FALSE)
 }
 \arguments{
-\item{...}{Arguments to be passed to other methods}
-
-\item{x}{An \code{\link{ip_network}} scalar}
-
 \item{size}{Integer specifying the number of addresses to return}
 
 \item{replace}{Should sampling be with replacement?}
-
-\item{space}{The address space to sample (\code{IPv4} or \code{IPv6})}
 }
 \value{
 An \code{\link{ip_address}} vector
 }
 \description{
-Generates random addresses within an IP network or from the
-entire address space.
+Generates random IPv4 or IPv6 addresses.
 }
 \examples{
-sample_ip(ip_network("192.168.0.0/16"), 5)
+sample_ipv4(5)
 
-sample_ip(ip_network("2001:db8::/48"), 5)
-
-sample_ip("IPv4", 5)
-
-sample_ip("IPv6", 5)
+sample_ipv6(5)
 }
 \seealso{
-Use \code{\link[=seq.ip_network]{seq.ip_network()}} to generate \emph{all} addresses in a network.
+Use \code{\link[=sample_network]{sample_network()}} to sample addresses from a specific IP network.
 }

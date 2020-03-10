@@ -3,7 +3,7 @@
 ## New features
 
 * New `seq.ip_network()` and `hosts()` functions to list all addresses within a network.
-* New `sample_ip()` function to randomly sample addresses within a network.
+* New functions to randomly sample addresses: `sample_ipv4()`, `sample_ipv6()` and `sample_network()`.
 * New `packed()` and `unpack()` functions to encode and decode addresses as raw bytes.
 * New `extract_ipv4_mapped()` and `embed_ipv4_mapped()` functions map between address spaces (where possible).
 * New functions to provide basic information about a network: `num_addresses()`, `network_address()` and `broadcast_address()`.
