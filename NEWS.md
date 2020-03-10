@@ -5,9 +5,9 @@
 * New `seq.ip_network()` and `hosts()` functions to list all addresses within a network.
 * New functions to randomly sample addresses: `sample_ipv4()`, `sample_ipv6()` and `sample_network()`.
 * New `packed()` and `unpack()` functions to encode and decode addresses as raw bytes.
-* New `extract_ipv4_mapped()` and `embed_ipv4_mapped()` functions map between address spaces (where possible).
+* New `is_ipv4_mapped()` and `extract_ipv4_mapped()` functions for transitioning to IPv6.
 * New functions to provide basic information about a network: `num_addresses()`, `network_address()` and `broadcast_address()`.
-* New functions to check if addresses or networks are reserved for special use: `is_multicast()`, `is_unspecified()`, `is_loopback()`, `is_link_local()`, `is_ipv4_mapped()`.
+* New functions to check if addresses or networks are reserved for special use: `is_multicast()`, `is_unspecified()`, `is_loopback()`, `is_link_local()`.
 * New `max_prefix_length()` function to get the size of the address space (32-bit for IPv4 and 128-bit for IPv6).
 * Added bitwise operations to `ip_address()` vectors (`&`, `|` and `!`).
 * `netmask()` and `hostmask()` are now generics, so they can now accept either a vector of `ip_network` objects or prefix lengths. Previously they only accepted an `ip_network` vector.
