@@ -113,7 +113,3 @@ extract_ipv4_mapped_wrapper <- function(address_r, keep_ipv6) {
     .Call(`_ipaddress_extract_ipv4_mapped_wrapper`, address_r, keep_ipv6)
 }
 
-embed_ipv4_mapped_wrapper <- function(address_r) {
-    .Call(`_ipaddress_embed_ipv4_mapped_wrapper`, address_r)
-}
-

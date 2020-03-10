@@ -157,6 +157,10 @@ LogicalVector is_link_local_network_wrapper(List network_r) {
   return IpNetworkVector(network_r).isLinkLocal();
 }
 
+
+/*------------------------------*
+ *  IPv6 transition mechanisms  *
+ * -----------------------------*/
 // [[Rcpp::export]]
 LogicalVector is_ipv4_mapped_address_wrapper(List address_r) {
   return IpAddressVector(address_r).isIPv4Mapped();
@@ -167,16 +171,7 @@ LogicalVector is_ipv4_mapped_network_wrapper(List network_r) {
   return IpNetworkVector(network_r).isIPv4Mapped();
 }
 
-
-/*-----------------------*
- *  Address translation  *
- * ----------------------*/
 // [[Rcpp::export]]
 List extract_ipv4_mapped_wrapper(List address_r, bool keep_ipv6) {
   return IpAddressVector(address_r).extractIPv4Mapped(keep_ipv6).encodeR();
-}
-
-// [[Rcpp::export]]
-List embed_ipv4_mapped_wrapper(List address_r) {
-  return IpAddressVector(address_r).embedIPv4Mapped().encodeR();
 }

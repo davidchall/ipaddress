@@ -324,17 +324,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// embed_ipv4_mapped_wrapper
-List embed_ipv4_mapped_wrapper(List address_r);
-RcppExport SEXP _ipaddress_embed_ipv4_mapped_wrapper(SEXP address_rSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< List >::type address_r(address_rSEXP);
-    rcpp_result_gen = Rcpp::wrap(embed_ipv4_mapped_wrapper(address_r));
-    return rcpp_result_gen;
-END_RCPP
-}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_parse_address_wrapper", (DL_FUNC) &_ipaddress_parse_address_wrapper, 1},
@@ -365,7 +354,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_is_ipv4_mapped_address_wrapper", (DL_FUNC) &_ipaddress_is_ipv4_mapped_address_wrapper, 1},
     {"_ipaddress_is_ipv4_mapped_network_wrapper", (DL_FUNC) &_ipaddress_is_ipv4_mapped_network_wrapper, 1},
     {"_ipaddress_extract_ipv4_mapped_wrapper", (DL_FUNC) &_ipaddress_extract_ipv4_mapped_wrapper, 2},
-    {"_ipaddress_embed_ipv4_mapped_wrapper", (DL_FUNC) &_ipaddress_embed_ipv4_mapped_wrapper, 1},
     {NULL, NULL, 0}
 };
 

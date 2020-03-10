@@ -526,6 +526,10 @@ LogicalVector IpAddressVector::isLinkLocal() const {
   return output;
 }
 
+
+/*------------------------------*
+ *  IPv6 transition mechanisms  *
+ * -----------------------------*/
 LogicalVector IpAddressVector::isIPv4Mapped() const {
   std::size_t vsize = is_na.size();
 
@@ -545,10 +549,6 @@ LogicalVector IpAddressVector::isIPv4Mapped() const {
   return output;
 }
 
-
-/*-----------------------*
- *  Address translation  *
- * ----------------------*/
 IpAddressVector IpAddressVector::extractIPv4Mapped(bool keep_ipv6) const {
   std::size_t vsize = is_na.size();
 
@@ -572,30 +572,6 @@ IpAddressVector IpAddressVector::extractIPv4Mapped(bool keep_ipv6) const {
       }
     } else {
       out_address_v4[i] = address_v4[i];
-    }
-  }
-
-  return IpAddressVector(out_address_v4, out_address_v6, out_is_ipv6, out_is_na);
-}
-
-IpAddressVector IpAddressVector::embedIPv4Mapped() const {
-  std::size_t vsize = is_na.size();
-
-  // initialize vectors
-  std::vector<asio::ip::address_v4> out_address_v4(vsize);
-  std::vector<asio::ip::address_v6> out_address_v6(vsize);
-  std::vector<bool> out_is_ipv6(vsize, false);
-  std::vector<bool> out_is_na(vsize, false);
-
-  for (std::size_t i=0; i<vsize; ++i) {
-    if (is_na[i]) {
-      out_is_na[i] = true;
-    } else if (is_ipv6[i]) {
-      out_address_v6[i] = address_v6[i];
-      out_is_ipv6[i] = true;
-    } else {
-      out_address_v6[i] = asio::ip::make_address_v6(asio::ip::v4_mapped, address_v4[i]);
-      out_is_ipv6[i] = true;
     }
   }
 

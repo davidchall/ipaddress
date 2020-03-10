@@ -86,14 +86,13 @@ public:
   LogicalVector isUnspecified() const;
   LogicalVector isLoopback() const;
   LogicalVector isLinkLocal() const;
+
+
+  /*------------------------------*
+   *  IPv6 transition mechanisms  *
+   * -----------------------------*/
   LogicalVector isIPv4Mapped() const;
-
-
-  /*-----------------------*
-   *  Address translation  *
-   * ----------------------*/
   IpAddressVector extractIPv4Mapped(bool keep_ipv6) const;
-  IpAddressVector embedIPv4Mapped() const;
 };
 
 #endif
