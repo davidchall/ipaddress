@@ -87,4 +87,5 @@ test_that("other operations fail", {
   expect_error(ip_address() + ip_address())
   expect_error(-ip_address())
   expect_error(ip_address() + 1)
+  expect_error(ip_address() * 1L)
 })
