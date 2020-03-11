@@ -5,7 +5,7 @@
 \alias{is_ip_address}
 \alias{format.ip_address}
 \alias{as.character.ip_address}
-\title{Class for storing IP addresses}
+\title{Vector of IP addresses}
 \usage{
 ip_address(ip = character())
 
@@ -54,7 +54,8 @@ When casting an \code{ip_address} object back to a character vector using
 A special case is IPv4-mapped IPv6 addresses, which are returned in their
 dual representation (e.g. \verb{::ffff:192.0.2.128}).
 
-This class also supports bitwise operations: \code{&} (AND), \code{|} (OR) and \code{!} (NOT).
+This class also supports bitwise operations: \code{!} (NOT), \code{&} (AND),
+\code{|} (OR) and \code{^} (XOR).
 }
 \examples{
 # supports IPv4 and IPv6 simultaneously
@@ -70,5 +71,8 @@ ip_address(c("1.2.3.4", "255.255.255.256", "1.2.3.4/5"))
 ip_address("192.168.0.1") & ip_address("255.0.0.255")
 
 # bitwise OR
-ip_address("192.168.0.0") | ip_address("0.0.0.1")
+ip_address("192.168.0.0") | ip_address("255.0.0.255")
+
+# bitwise XOR
+ip_address("192.168.0.0") ^ ip_address("255.0.0.255")
 }

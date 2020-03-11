@@ -24,6 +24,7 @@ vec_arith.ip_address.ip_address <- function(op, x, y, ...) {
     op,
     "&" = new_ip_address_encode(bitwise_and_wrapper(x, y)),
     "|" = new_ip_address_encode(bitwise_or_wrapper(x, y)),
+    "^" = new_ip_address_encode(bitwise_xor_wrapper(x, y)),
     stop_incompatible_op(op, x, y)
   )
 }

@@ -1,7 +1,7 @@
 #' @importFrom methods setOldClass
 methods::setOldClass(c("ip_network", "vctrs_vctr"))
 
-#' Class for storing IP networks
+#' Vector of IP networks
 #'
 #' @details
 #' An IP network corresponds to a range of contiguous IP addresses

@@ -7,7 +7,7 @@
 \alias{is_ip_network}
 \alias{format.ip_network}
 \alias{as.character.ip_network}
-\title{Class for storing IP networks}
+\title{Vector of IP networks}
 \usage{
 ip_network(...)
 

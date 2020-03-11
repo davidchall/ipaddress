@@ -96,6 +96,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// bitwise_not_wrapper
+List bitwise_not_wrapper(List addr1);
+RcppExport SEXP _ipaddress_bitwise_not_wrapper(SEXP addr1SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type addr1(addr1SEXP);
+    rcpp_result_gen = Rcpp::wrap(bitwise_not_wrapper(addr1));
+    return rcpp_result_gen;
+END_RCPP
+}
 // bitwise_and_wrapper
 List bitwise_and_wrapper(List addr1, List addr2);
 RcppExport SEXP _ipaddress_bitwise_and_wrapper(SEXP addr1SEXP, SEXP addr2SEXP) {
@@ -120,14 +131,15 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// bitwise_not_wrapper
-List bitwise_not_wrapper(List addr1);
-RcppExport SEXP _ipaddress_bitwise_not_wrapper(SEXP addr1SEXP) {
+// bitwise_xor_wrapper
+List bitwise_xor_wrapper(List addr1, List addr2);
+RcppExport SEXP _ipaddress_bitwise_xor_wrapper(SEXP addr1SEXP, SEXP addr2SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< List >::type addr1(addr1SEXP);
-    rcpp_result_gen = Rcpp::wrap(bitwise_not_wrapper(addr1));
+    Rcpp::traits::input_parameter< List >::type addr2(addr2SEXP);
+    rcpp_result_gen = Rcpp::wrap(bitwise_xor_wrapper(addr1, addr2));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -334,9 +346,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_construct_network_wrapper", (DL_FUNC) &_ipaddress_construct_network_wrapper, 3},
     {"_ipaddress_print_network_wrapper", (DL_FUNC) &_ipaddress_print_network_wrapper, 1},
     {"_ipaddress_compare_address_wrapper", (DL_FUNC) &_ipaddress_compare_address_wrapper, 1},
+    {"_ipaddress_bitwise_not_wrapper", (DL_FUNC) &_ipaddress_bitwise_not_wrapper, 1},
     {"_ipaddress_bitwise_and_wrapper", (DL_FUNC) &_ipaddress_bitwise_and_wrapper, 2},
     {"_ipaddress_bitwise_or_wrapper", (DL_FUNC) &_ipaddress_bitwise_or_wrapper, 2},
-    {"_ipaddress_bitwise_not_wrapper", (DL_FUNC) &_ipaddress_bitwise_not_wrapper, 1},
+    {"_ipaddress_bitwise_xor_wrapper", (DL_FUNC) &_ipaddress_bitwise_xor_wrapper, 2},
     {"_ipaddress_netmask_wrapper", (DL_FUNC) &_ipaddress_netmask_wrapper, 2},
     {"_ipaddress_hostmask_wrapper", (DL_FUNC) &_ipaddress_hostmask_wrapper, 2},
     {"_ipaddress_broadcast_address_wrapper", (DL_FUNC) &_ipaddress_broadcast_address_wrapper, 1},
