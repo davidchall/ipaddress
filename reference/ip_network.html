@@ -70,7 +70,7 @@ is_ip_network() checks if an object is of class ip_network." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -119,13 +119,7 @@ is_ip_network() checks if an object is of class ip_network." />
 <p><code>is_ip_network()</code> checks if an object is of class <code>ip_network</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ip_network</span>(<span class='no'>...</span>)
-
-<span class='co'># S3 method for default</span>
-<span class='fu'>ip_network</span>(<span class='kw'>ip</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(), <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for ip_address</span>
-<span class='fu'>ip_network</span>(<span class='no'>address</span>, <span class='no'>prefix_length</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>ip_network</span>(<span class='kw'>ip</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(), <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='fu'>is_ip_network</span>(<span class='no'>x</span>)
 
@@ -139,30 +133,22 @@ is_ip_network() checks if an object is of class ip_network." />
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>...</th>
-      <td><p>Arguments to be passed to other methods</p></td>
-    </tr>
-    <tr>
       <th>ip</th>
       <td><p>Character vector of IP networks, in CIDR notation (IPv4 or IPv6).</p></td>
     </tr>
     <tr>
       <th>strict</th>
-      <td><p>If <code>TRUE</code> (the default) and the input has host bits set,
+      <td><p>If <code>strict = TRUE</code> (the default) and the input has host bits set,
 then a warning is emitted and <code>NA</code> is returned. If <code>FALSE</code>, the
 host bits are set to zero and a valid IP network is returned.</p></td>
     </tr>
     <tr>
-      <th>address</th>
-      <td><p>An <code><a href='ip_address.html'>ip_address</a></code> vector</p></td>
-    </tr>
-    <tr>
-      <th>prefix_length</th>
-      <td><p>An integer vector</p></td>
-    </tr>
-    <tr>
       <th>x</th>
-      <td><p>An <code>ip_network</code> vector</p></td>
+      <td><p>An object</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional arguments to be passed to or from methods</p></td>
     </tr>
     </table>
 
@@ -175,8 +161,8 @@ host bits are set to zero and a valid IP network is returned.</p></td>
 (also known as an IP block). CIDR notation represents an
 IP network as the routing prefix address (which denotes the start
 of the range) and the prefix length (which indicates the size of
-the range) separated by a forward slash. For example, <code>192.168.100.0/22</code>
-represents addresses from <code>192.168.100.0</code> to <code>192.168.103.255</code>.</p>
+the range) separated by a forward slash. For example, "192.168.100.0/22"
+represents addresses from "192.168.100.0" to "192.168.103.255".</p>
 <p>The prefix length indicates the number of bits reserved by the
 routing prefix. This means that larger prefix lengths indicate
 smaller networks. The maximum prefix length is 32 for IPv4 and
@@ -186,30 +172,26 @@ IP address.</p>
 in CIDR notation. It checks whether each string is a valid IPv4 or IPv6
 network, and converts it to an <code>ip_network</code> object. If the input is invalid,
 a warning is emitted and <code>NA</code> is stored instead.</p>
-<p>An alternative constructor accepts an <code><a href='ip_address.html'>ip_address</a></code> vector and an
-integer vector containing the network address and prefix length, respectively.</p>
 <p>When casting an <code>ip_network</code> object back to a character vector using
 <code><a href='https://rdrr.io/r/base/character.html'>as.character()</a></code>, IPv6 addresses are reduced to their compressed representation.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='network_info.html'>prefix_length()</a></code>, <code><a href='network_info.html'>network_address()</a></code>, <code><a href='netmask.html'>netmask()</a></code>, <code><a href='netmask.html'>hostmask()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='netmask.html'>prefix_length</a></code>, <code><a href='netmask.html'>netmask</a></code>,
+<code><a href='netmask.html'>hostmask</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># construct from character vector</span>
-<span class='fu'>ip_network</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.0/24"</span>, <span class='st'>"2001:db8::/48"</span>))</div><div class='output co'>#&gt; &lt;ip_network[2]&gt;
-#&gt; [1] 192.168.0.0/24 2001:db8::/48 </div><div class='input'>
-<span class='co'># construct from address + prefix length objects</span>
-<span class='fu'>ip_network</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.0"</span>, <span class='st'>"2001:db8::"</span>)), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>24L</span>, <span class='fl'>48L</span>))</div><div class='output co'>#&gt; &lt;ip_network[2]&gt;
-#&gt; [1] 192.168.0.0/24 2001:db8::/48 </div><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># supports IPv4 and IPv6 simultaneously</span>
+<span class='fu'>ip_network</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"92.0.2.0/24"</span>, <span class='st'>"192.168.100.0/22"</span>, <span class='st'>"2001:db8::/48"</span>))</div><div class='output co'>#&gt; &lt;ip_network[3]&gt;
+#&gt; [1] 92.0.2.0/24      192.168.100.0/22 2001:db8::/48   </div><div class='input'>
 <span class='co'># validates inputs and replaces with NA</span>
-<span class='fu'>ip_network</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.0/24"</span>, <span class='st'>"192.168.0.0/33"</span>, <span class='st'>"1.2.3.4"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: Invalid input in row 2: 192.168.0.0/33</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Invalid input in row 3: 1.2.3.4</span></div><div class='output co'>#&gt; &lt;ip_network[3]&gt;
+<span class='fu'>ip_network</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.0/24"</span>, <span class='st'>"192.168.0.0/33"</span>, <span class='st'>"1.2.3.4"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: Invalid argument: 192.168.0.0/33</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Invalid argument: 1.2.3.4</span></div><div class='output co'>#&gt; &lt;ip_network[3]&gt;
 #&gt; [1] 192.168.0.0/24 &lt;NA&gt;           &lt;NA&gt;          </div><div class='input'>
 <span class='co'># IP networks should not have any host bits set</span>
-<span class='fu'>ip_network</span>(<span class='st'>"192.168.0.1/22"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Invalid input in row 1: 192.168.0.1/22 (host bits set)</span></div><div class='output co'>#&gt; &lt;ip_network[1]&gt;
+<span class='fu'>ip_network</span>(<span class='st'>"192.168.0.1/22"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Invalid argument: 192.168.0.1/22 has host bits set</span></div><div class='output co'>#&gt; &lt;ip_network[1]&gt;
 #&gt; [1] &lt;NA&gt;</div><div class='input'>
-<span class='co'># but we can mask the host bits if desired</span>
 <span class='fu'>ip_network</span>(<span class='st'>"192.168.0.1/22"</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; &lt;ip_network[1]&gt;
-#&gt; [1] 192.168.0.0/22</div></pre>
+#&gt; [1] 192.168.0.0/22</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

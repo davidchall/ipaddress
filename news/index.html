@@ -67,7 +67,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -110,36 +110,12 @@
       <small>Source: <a href='https://github.com/davidchall/ipaddress/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="ipaddress-development-version" class="section level1">
-<h1 class="page-header">
-<a href="#ipaddress-development-version" class="anchor"></a>ipaddress (development version)<small> Unreleased </small>
-</h1>
-<div id="new-features" class="section level2">
-<h2 class="hasAnchor">
-<a href="#new-features" class="anchor"></a>New features</h2>
-<ul>
-<li>New <code><a href="../reference/sequence.html">seq.ip_network()</a></code> and <code><a href="../reference/sequence.html">hosts()</a></code> functions to list all addresses within a network.</li>
-<li>New functions to randomly sample addresses: <code><a href="../reference/sample_ip.html">sample_ipv4()</a></code>, <code><a href="../reference/sample_ip.html">sample_ipv6()</a></code> and <code><a href="../reference/sample_network.html">sample_network()</a></code>.</li>
-<li>New <code><a href="../reference/packed.html">packed()</a></code> and <code><a href="../reference/packed.html">unpack()</a></code> functions to encode and decode addresses as raw bytes.</li>
-<li>New <code><a href="../reference/ipv6_transition.html">extract_ipv4_mapped()</a></code> and <code>embed_ipv4_mapped()</code> functions map between address spaces (where possible).</li>
-<li>New functions to provide basic information about a network: <code><a href="../reference/network_info.html">num_addresses()</a></code>, <code><a href="../reference/network_info.html">network_address()</a></code> and <code><a href="../reference/network_info.html">broadcast_address()</a></code>.</li>
-<li>New functions to check if addresses or networks are reserved for special use: <code><a href="../reference/is_reserved.html">is_multicast()</a></code>, <code><a href="../reference/is_reserved.html">is_unspecified()</a></code>, <code><a href="../reference/is_reserved.html">is_loopback()</a></code>, <code><a href="../reference/is_reserved.html">is_link_local()</a></code>, <code><a href="../reference/ipv6_transition.html">is_ipv4_mapped()</a></code>.</li>
-<li>New <code><a href="../reference/max_prefix_length.html">max_prefix_length()</a></code> function to get the size of the address space (32-bit for IPv4 and 128-bit for IPv6).</li>
-<li>Added bitwise operations to <code><a href="../reference/ip_address.html">ip_address()</a></code> vectors (<code><a href="https://rdrr.io/r/base/Logic.html">&amp;</a></code>, <code><a href="https://rdrr.io/r/base/Logic.html">|</a></code> and <code>!</code>).</li>
-<li>
-<code><a href="../reference/netmask.html">netmask()</a></code> and <code><a href="../reference/netmask.html">hostmask()</a></code> are now generics, so they can now accept either a vector of <code>ip_network</code> objects or prefix lengths. Previously they only accepted an <code>ip_network</code> vector.</li>
-<li>Added an <code><a href="../reference/ip_network.html">ip_network()</a></code> constructor that accepts <code>ip_address</code> and prefix length vectors.</li>
-<li>Improved input validation warnings. They now report the row number involved and no longer mentioned internal function names.</li>
-<li>Performance improvements.</li>
-</ul>
-</div>
-</div>
     <div id="ipaddress-012" class="section level1">
 <h1 class="page-header">
-<a href="#ipaddress-012" class="anchor"></a>ipaddress 0.1.2<small> Unreleased </small>
+<a href="#ipaddress-012" class="anchor"></a>ipaddress 0.1.2<small> 2020-03-10 </small>
 </h1>
 <ul>
-<li>Fixed decoding bug which meant that some IP addresses were interpreted as <code>NA</code>
+<li>Fixed decoding bug which meant that some IP addresses were interpreted as NA
 <ul>
 <li>In IPv4, this affected <code>0.0.0.128</code>
 </li>
@@ -162,7 +138,7 @@
 </h1>
 <p>First CRAN release</p>
 <ul>
-<li>Added <code><a href="../reference/ip_address.html">ip_address()</a></code> and <code><a href="../reference/ip_network.html">ip_network()</a></code> classes
+<li>Added <code>ip_address</code> and <code>ip_network</code> classes
 <ul>
 <li>Full support for both IPv4 and IPv6 address spaces</li>
 <li>Efficiently store data in their native representations (i.e. a sequence of bits)</li>
@@ -182,7 +158,7 @@
 <li>
 <code><a href="../reference/is_ipv6.html">is_ipv4()</a></code> and <code><a href="../reference/is_ipv6.html">is_ipv6()</a></code> classify the address space</li>
 <li>
-<code><a href="../reference/network_info.html">prefix_length()</a></code>, <code><a href="../reference/netmask.html">netmask()</a></code> and <code><a href="../reference/netmask.html">hostmask()</a></code> yield different representations of the network mask</li>
+<code><a href="../reference/netmask.html">prefix_length()</a></code>, <code><a href="../reference/netmask.html">netmask()</a></code> and <code><a href="../reference/netmask.html">hostmask()</a></code> yield different representations of the network mask</li>
 </ul>
 </li>
 <li>Calculations performed in C++ (using <code>Rcpp</code> and <code>AsioHeaders</code> packages) for improved performance</li>
@@ -194,7 +170,6 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#ipaddress-development-version">development version</a></li>
         <li><a href="#ipaddress-012">0.1.2</a></li>
         <li><a href="#ipaddress-011">0.1.1</a></li>
         <li><a href="#ipaddress-010">0.1.0</a></li>

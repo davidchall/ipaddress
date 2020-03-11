@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -101,7 +101,7 @@
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
-<p>This package provides the <code><a href="reference/ip_address.html">ip_address()</a></code> and <code><a href="reference/ip_network.html">ip_network()</a></code> classes, which can be used as standalone vectors or as columns within data frames and tibbles.</p>
+<p>This package provides the <code>ip_address</code> and <code>ip_network</code> classes, which can be used as standalone vectors or as columns within data frames and tibbles.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidyverse)</span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ipaddress)</span>
 <span id="cb3-3"><a href="#cb3-3"></a></span>
@@ -117,7 +117,7 @@
 <span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt; 2 2001:db8::8a2e:370:7334    2001:db8::/48</span></span></code></pre></div>
 <p>Input character vectors are validated as they are parsed. Invalid inputs raise a warning and are replaced with <code>NA</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="reference/ip_address.html">ip_address</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"0.0.0.0"</span>, <span class="st">"255.255.255.255"</span>, <span class="st">"255.255.255.256"</span>))</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; Warning: Invalid input in row 3: 255.255.255.256</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; Warning in parse_address_wrapper(ip): Invalid argument: 255.255.255.256</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; &lt;ip_address[3]&gt;</span></span>
 <span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt; [1] 0.0.0.0         255.255.255.255 &lt;NA&gt;</span></span></code></pre></div>
 <p>Functions are provided to enable common tasks:</p>
@@ -127,8 +127,6 @@
 <span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt;                 &lt;ip_addr&gt;        &lt;ip_netw&gt; &lt;lgl&gt; &lt;lgl&gt; </span></span>
 <span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt; 1             192.168.0.1 192.168.100.0/22 FALSE FALSE </span></span>
 <span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt; 2 2001:db8::8a2e:370:7334    2001:db8::/48 TRUE  TRUE</span></span></code></pre></div>
-<hr>
-<p>Please note that the ‘ipaddress’ project is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
   </div>
@@ -152,13 +150,6 @@
 <li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
-<div class="community">
-<h2>Community</h2>
-<ul class="list-unstyled">
-<li><a href="CONTRIBUTING.html">Contributing guide</a></li>
-<li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
-</ul>
-</div>
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
@@ -169,7 +160,7 @@
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
+<li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
 <li><a href="https://CRAN.R-project.org/package=ipaddress"><img src="https://www.r-pkg.org/badges/version/ipaddress" alt="CRAN status"></a></li>
 <li><a href="https://github.com/davidchall/ipaddress/actions"><img src="https://github.com/davidchall/ipaddress/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
 <li><a href="https://codecov.io/github/davidchall/ipaddress?branch=master"><img src="https://codecov.io/github/davidchall/ipaddress/coverage.svg?branch=master" alt="codecov.io"></a></li>

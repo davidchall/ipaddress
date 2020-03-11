@@ -67,7 +67,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -140,20 +140,6 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-binary-representation" class="hasAnchor"><a href="#section-binary-representation" class="anchor"></a>Binary representation</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="packed.html">packed()</a></code> <code><a href="packed.html">unpack()</a></code> </p>
-        </td>
-        <td><p>Encode or decode address as raw bytes</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
           <h2 id="section-address-spaces" class="hasAnchor"><a href="#section-address-spaces" class="anchor"></a>Address spaces</h2>
           <p class="section-desc"></p>
         </th>
@@ -163,31 +149,7 @@
         <td>
           <p><code><a href="is_ipv6.html">is_ipv4()</a></code> <code><a href="is_ipv6.html">is_ipv6()</a></code> </p>
         </td>
-        <td><p>Version of the address space</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sample_ip.html">sample_ipv4()</a></code> <code><a href="sample_ip.html">sample_ipv6()</a></code> </p>
-        </td>
-        <td><p>Sample random addresses</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="max_prefix_length.html">max_prefix_length()</a></code> </p>
-        </td>
-        <td><p>Size of the address space</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="is_reserved.html">is_multicast()</a></code> <code><a href="is_reserved.html">is_unspecified()</a></code> <code><a href="is_reserved.html">is_loopback()</a></code> <code><a href="is_reserved.html">is_link_local()</a></code> </p>
-        </td>
-        <td><p>Reserved addresses</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ipv6_transition.html">is_ipv4_mapped()</a></code> <code><a href="ipv6_transition.html">extract_ipv4_mapped()</a></code> </p>
-        </td>
-        <td><p>IPv6 transition mechanisms</p></td>
+        <td><p>Classify version of IP address space</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -199,30 +161,6 @@
       <tr>
         
         <td>
-          <p><code><a href="network_info.html">prefix_length()</a></code> <code><a href="network_info.html">num_addresses()</a></code> <code><a href="network_info.html">network_address()</a></code> <code><a href="network_info.html">broadcast_address()</a></code> </p>
-        </td>
-        <td><p>Basic information about a network</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="netmask.html">netmask()</a></code> <code><a href="netmask.html">hostmask()</a></code> </p>
-        </td>
-        <td><p>Subnet masking</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sequence.html">seq(<i>&lt;ip_network&gt;</i>)</a></code> <code><a href="sequence.html">hosts()</a></code> </p>
-        </td>
-        <td><p>List addresses within a network</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sample_network.html">sample_network()</a></code> </p>
-        </td>
-        <td><p>Sample addresses within a network</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="address_in_network.html">is_within()</a></code> <code><a href="address_in_network.html">is_within_any()</a></code> </p>
         </td>
         <td><p>Network membership of IP addresses</p></td>
@@ -232,6 +170,12 @@
           <p><code><a href="network_in_network.html">is_subnet()</a></code> <code><a href="network_in_network.html">is_supernet()</a></code> </p>
         </td>
         <td><p>Network membership of other IP networks</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="netmask.html">prefix_length()</a></code> <code><a href="netmask.html">netmask()</a></code> <code><a href="netmask.html">hostmask()</a></code> </p>
+        </td>
+        <td><p>IP network masking</p></td>
       </tr>
     </tbody>
     </table>
@@ -241,7 +185,6 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#section-classes">Classes</a></li>
-      <li><a href="#section-binary-representation">Binary representation</a></li>
       <li><a href="#section-address-spaces">Address spaces</a></li>
       <li><a href="#section-network-membership">Network membership</a></li>
     </ul>
