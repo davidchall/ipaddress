@@ -12,14 +12,14 @@ test_that("formats correctly", {
 })
 
 test_that("invalid inputs are caught", {
-  expect_warning(ip_address("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"), "Invalid input")
-  expect_warning(ip_address("1::g"), "Invalid input")
-  expect_warning(ip_address("1::-2"), "Invalid input")
-  expect_warning(ip_address("1::2.5"), "Invalid input")
+  expect_warning(ip_address("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"), "Invalid value")
+  expect_warning(ip_address("1::g"), "Invalid value")
+  expect_warning(ip_address("1::-2"), "Invalid value")
+  expect_warning(ip_address("1::2.5"), "Invalid value")
 
   # Windows accepts IP addresses in alternative formats: https://superuser.com/a/486936
   skip_on_os("windows")
-  expect_warning(ip_address("1:2"), "Invalid input")
+  expect_warning(ip_address("1:2"), "Invalid value")
 })
 
 test_that("equality operations work", {

@@ -150,7 +150,7 @@ IpAddressVector IpAddressVector::createHostmask(IntegerVector in_pfx, LogicalVec
 
 void IpAddressVector::warnInvalidInput(unsigned int index, const std::string &input, const std::string &reason) {
   // Indexes are 1-based in R
-  std::string msg = "Invalid input in row " + std::to_string(index + 1) + ": " + input;
+  std::string msg = "Invalid value on row " + std::to_string(index + 1) + ": " + input;
   if (!reason.empty()) {
     msg += " (" + reason + ")";
   }
