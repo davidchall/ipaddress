@@ -29,6 +29,17 @@ vec_arith.ip_address.ip_address <- function(op, x, y, ...) {
   )
 }
 
+#' @method vec_arith.ip_address integer
+#' @export
+vec_arith.ip_address.integer <- function(op, x, y, ...) {
+  switch(
+    op,
+    "+" = new_ip_address_encode(addition_wrapper(x, y)),
+    "-" = new_ip_address_encode(addition_wrapper(x, -y)),
+    stop_incompatible_op(op, x, y)
+  )
+}
+
 #' @method vec_arith.ip_address MISSING
 #' @export
 vec_arith.ip_address.MISSING <- function(op, x, y, ...) {

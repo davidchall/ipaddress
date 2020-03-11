@@ -2,6 +2,7 @@
 #include "IpNetworkVector.h"
 #include "encoding.h"
 #include "masking.h"
+#include "utils.h"
 
 
 /*----------------*
@@ -149,7 +150,7 @@ IpAddressVector IpAddressVector::createHostmask(IntegerVector in_pfx, LogicalVec
 
 void IpAddressVector::warnInvalidInput(unsigned int index, const std::string &input, const std::string &reason) {
   // Indexes are 1-based in R
-  std::string msg = "Invalid input in row " + std::to_string(index + 1) + ": " + input;
+  std::string msg = "Invalid value on row " + std::to_string(index + 1) + ": " + input;
   if (!reason.empty()) {
     msg += " (" + reason + ")";
   }
@@ -304,9 +305,9 @@ DataFrame IpAddressVector::encodeComparable() const {
 }
 
 
-/*---------------------*
- *  Bitwise operators  *
- *---------------------*/
+/*-------------*
+ *  Operators  *
+ *-------------*/
 IpAddressVector IpAddressVector::operator~() const {
   std::size_t vsize = is_na.size();
 
@@ -411,6 +412,57 @@ IpAddressVector IpAddressVector::operator^(const IpAddressVector &rhs) const {
       out_is_ipv6[i] = true;
     } else {
       out_address_v4[i] = bitwise_xor(address_v4[i], rhs.address_v4[i]);
+    }
+  }
+
+  return IpAddressVector(out_address_v4, out_address_v6, out_is_ipv6, out_is_na);
+}
+
+IpAddressVector IpAddressVector::operator+(const IntegerVector &rhs) const {
+  std::size_t vsize = is_na.size();
+
+  if (rhs.size() != vsize) {
+    stop("Addresses must have same length");
+  }
+
+  // initialize vectors
+  std::vector<asio::ip::address_v4> out_address_v4(vsize);
+  std::vector<asio::ip::address_v6> out_address_v6(vsize);
+  std::vector<bool> out_is_ipv6(vsize, false);
+  std::vector<bool> out_is_na(vsize, false);
+
+  for (std::size_t i=0; i<vsize; ++i) {
+    if (is_na[i]) {
+      out_is_na[i] = true;
+    } else if (is_ipv6[i]) {
+      asio::ip::address_v6 tmp_addr = advance_ip(address_v6[i], rhs[i]);
+
+      if (rhs[i] > 0 && tmp_addr < address_v6[i]) {
+        out_is_na[i] = true;
+        warnInvalidInput(i, address_v6[i].to_string() + " + " + std::to_string(rhs[i]),
+                         "out-of-range");
+      } else if (rhs[i] < 0 && tmp_addr > address_v6[i]) {
+        out_is_na[i] = true;
+        warnInvalidInput(i, address_v6[i].to_string() + " - " + std::to_string(-rhs[i]),
+                         "out-of-range");
+      } else {
+        out_address_v6[i] = tmp_addr;
+        out_is_ipv6[i] = true;
+      }
+    } else {
+      asio::ip::address_v4 tmp_addr = advance_ip(address_v4[i], rhs[i]);
+
+      if (rhs[i] > 0 && tmp_addr < address_v4[i]) {
+        out_is_na[i] = true;
+        warnInvalidInput(i, address_v4[i].to_string() + " + " + std::to_string(rhs[i]),
+                         "out-of-range");
+      } else if (rhs[i] < 0 && tmp_addr > address_v4[i]) {
+        out_is_na[i] = true;
+        warnInvalidInput(i, address_v4[i].to_string() + " - " + std::to_string(-rhs[i]),
+                         "out-of-range");
+      } else {
+        out_address_v4[i] = tmp_addr;
+      }
     }
   }
 

@@ -52,30 +52,36 @@ DataFrame compare_address_wrapper(List x) {
 }
 
 
-/*---------------------*
- *  Bitwise operators  *
- *---------------------*/
+/*-------------*
+ *  Operators  *
+ *-------------*/
 // [[Rcpp::export]]
-List bitwise_not_wrapper(List addr1) {
-  IpAddressVector result = ~IpAddressVector(addr1);
+List bitwise_not_wrapper(List lhs) {
+  IpAddressVector result = ~IpAddressVector(lhs);
   return result.encodeR();
 }
 
 // [[Rcpp::export]]
-List bitwise_and_wrapper(List addr1, List addr2) {
-  IpAddressVector result = IpAddressVector(addr1) & IpAddressVector(addr2);
+List bitwise_and_wrapper(List lhs, List rhs) {
+  IpAddressVector result = IpAddressVector(lhs) & IpAddressVector(rhs);
   return result.encodeR();
 }
 
 // [[Rcpp::export]]
-List bitwise_or_wrapper(List addr1, List addr2) {
-  IpAddressVector result = IpAddressVector(addr1) | IpAddressVector(addr2);
+List bitwise_or_wrapper(List lhs, List rhs) {
+  IpAddressVector result = IpAddressVector(lhs) | IpAddressVector(rhs);
   return result.encodeR();
 }
 
 // [[Rcpp::export]]
-List bitwise_xor_wrapper(List addr1, List addr2) {
-  IpAddressVector result = IpAddressVector(addr1) ^ IpAddressVector(addr2);
+List bitwise_xor_wrapper(List lhs, List rhs) {
+  IpAddressVector result = IpAddressVector(lhs) ^ IpAddressVector(rhs);
+  return result.encodeR();
+}
+
+// [[Rcpp::export]]
+List addition_wrapper(List lhs, IntegerVector rhs) {
+  IpAddressVector result = IpAddressVector(lhs) + rhs;
   return result.encodeR();
 }
 

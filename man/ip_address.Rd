@@ -54,6 +54,7 @@ When casting an \code{ip_address} object back to a character vector using
 A special case is IPv4-mapped IPv6 addresses, which are returned in their
 dual representation (e.g. \verb{::ffff:192.0.2.128}).
 
+Integers can be added to or subtracted from \code{ip_address} vectors.
 This class also supports bitwise operations: \code{!} (NOT), \code{&} (AND),
 \code{|} (OR) and \code{^} (XOR).
 }
@@ -63,6 +64,12 @@ ip_address(c("0.0.0.1", "192.168.0.1", "2001:db8::8a2e:370:7334"))
 
 # validates inputs and replaces with NA
 ip_address(c("1.2.3.4", "255.255.255.256", "1.2.3.4/5"))
+
+# addition
+ip_address("192.168.0.1") + 12L
+
+# subtraction
+ip_address("192.168.0.1") - 12L
 
 # bitwise NOT
 !ip_address("192.168.0.1")
