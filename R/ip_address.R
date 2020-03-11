@@ -26,6 +26,7 @@ methods::setOldClass(c("ip_address", "vctrs_vctr"))
 #' A special case is IPv4-mapped IPv6 addresses, which are returned in their
 #' dual representation (e.g. `::ffff:192.0.2.128`).
 #'
+#' Integers can be added to or subtracted from `ip_address` vectors.
 #' This class also supports bitwise operations: `!` (NOT), `&` (AND),
 #' `|` (OR) and `^` (XOR).
 #'
@@ -52,6 +53,12 @@ NULL
 #'
 #' # validates inputs and replaces with NA
 #' ip_address(c("1.2.3.4", "255.255.255.256", "1.2.3.4/5"))
+#'
+#' # addition
+#' ip_address("192.168.0.1") + 12L
+#'
+#' # subtraction
+#' ip_address("192.168.0.1") - 12L
 #'
 #' # bitwise NOT
 #' !ip_address("192.168.0.1")
