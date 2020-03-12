@@ -2,4 +2,7 @@ pandoc: 2.7.3
 pkgdown: 1.4.1.9000
 pkgdown_sha: 2ae20f3d3c207330f5972642ec42a7be277c6a7a
 articles: []
+urls:
+  reference: https://davidchall.github.io/ipaddress/reference
+  article: https://davidchall.github.io/ipaddress/articles
 
