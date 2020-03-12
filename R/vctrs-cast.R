@@ -82,6 +82,24 @@ vec_cast.ip_interface.default <- function(x, to, ...) vec_default_cast(x, to)
 #' @export
 vec_cast.ip_interface.ip_interface <- function(x, to, ...) x
 
+#' @method vec_cast.ip_address ip_interface
+#' @export
+vec_cast.ip_address.ip_interface <- function(x, to, ...) {
+  new_ip_address(
+    field(x, "address1"),
+    field(x, "address2"),
+    field(x, "address3"),
+    field(x, "address4"),
+    field(x, "is_ipv6")
+  )
+}
+
+#' @method vec_cast.ip_network ip_interface
+#' @export
+vec_cast.ip_network.ip_interface <- function(x, to, ...) {
+  ip_network(x, field(x, "prefix"), strict = FALSE)
+}
+
 #' @method vec_cast.ip_interface character
 #' @export
 vec_cast.ip_interface.character <- function(x, to, ...) ip_interface(x)

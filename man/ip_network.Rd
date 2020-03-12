@@ -4,6 +4,7 @@
 \alias{ip_network}
 \alias{ip_network.default}
 \alias{ip_network.ip_address}
+\alias{as_ip_network}
 \alias{is_ip_network}
 \alias{format.ip_network}
 \alias{as.character.ip_network}
@@ -14,6 +15,8 @@ ip_network(...)
 \method{ip_network}{default}(ip = character(), strict = TRUE, ...)
 
 \method{ip_network}{ip_address}(address, prefix_length, strict = TRUE, ...)
+
+as_ip_network(x)
 
 is_ip_network(x)
 
@@ -41,6 +44,8 @@ An \code{ip_network} vector
 }
 \description{
 \code{ip_network()} constructs a vector of IP networks.
+
+\code{as_ip_network()} casts an object to \code{ip_network}.
 
 \code{is_ip_network()} checks if an object is of class \code{ip_network}.
 }
