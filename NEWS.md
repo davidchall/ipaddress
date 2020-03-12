@@ -10,6 +10,7 @@
 * New functions to check if addresses or networks are reserved for special use: `is_multicast()`, `is_unspecified()`, `is_loopback()`, `is_link_local()`.
 * New `max_prefix_length()` function to get the size of the address space (32-bit for IPv4 and 128-bit for IPv6).
 * Added bitwise operations to `ip_address()` vectors (`!`, `&`, `|` and `^`).
+* Support addition and subtraction of integers to/from `ip_address()` vectors.
 * `netmask()` and `hostmask()` are now generics, so they can now accept either a vector of `ip_network` objects or prefix lengths. Previously they only accepted an `ip_network` vector.
 * Added an `ip_network()` constructor that accepts `ip_address` and prefix length vectors.
 * Improved input validation warnings. They now report the row number involved and no longer mentioned internal function names.
