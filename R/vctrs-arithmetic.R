@@ -20,6 +20,10 @@ vec_arith.ip_address.default <- function(op, x, y, ...) {
 #' @method vec_arith.ip_address ip_address
 #' @export
 vec_arith.ip_address.ip_address <- function(op, x, y, ...) {
+  args <- vec_recycle_common(x, y)
+  x <- args[[1L]]
+  y <- args[[2L]]
+
   switch(
     op,
     "&" = new_ip_address_encode(bitwise_and_wrapper(x, y)),
@@ -32,6 +36,10 @@ vec_arith.ip_address.ip_address <- function(op, x, y, ...) {
 #' @method vec_arith.ip_address integer
 #' @export
 vec_arith.ip_address.integer <- function(op, x, y, ...) {
+  args <- vec_recycle_common(x, y)
+  x <- args[[1L]]
+  y <- args[[2L]]
+
   switch(
     op,
     "+" = new_ip_address_encode(addition_wrapper(x, y)),

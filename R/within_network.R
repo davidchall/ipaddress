@@ -22,9 +22,15 @@ NULL
 #' @rdname address_in_network
 #' @export
 is_within <- function(address, network) {
-  assertthat::assert_that(is_ip_address(address))
-  assertthat::assert_that(is_ip_network(network))
-  assertthat::assert_that(length(address) == length(network))
+  assertthat::assert_that(
+    is_ip_address(address),
+    is_ip_network(network)
+  )
+
+  # vector recycling
+  args <- vec_recycle_common(address, network)
+  address <- args[[1L]]
+  network <- args[[2L]]
 
   is_within_wrapper(address, network)
 }
@@ -35,8 +41,10 @@ is_within <- function(address, network) {
 #' @rdname address_in_network
 #' @export
 is_within_any <- function(address, network) {
-  assertthat::assert_that(is_ip_address(address))
-  assertthat::assert_that(is_ip_network(network))
+  assertthat::assert_that(
+    is_ip_address(address),
+    is_ip_network(network)
+  )
 
   is_within_any_wrapper(address, network)
 }
@@ -64,9 +72,15 @@ NULL
 #' @rdname network_in_network
 #' @export
 is_subnet <- function(network1, network2) {
-  assertthat::assert_that(is_ip_network(network1))
-  assertthat::assert_that(is_ip_network(network2))
-  assertthat::assert_that(length(network1) == length(network2))
+  assertthat::assert_that(
+    is_ip_network(network1),
+    is_ip_network(network2)
+  )
+
+  # vector recycling
+  args <- vec_recycle_common(network1, network2)
+  network1 <- args[[1L]]
+  network2 <- args[[2L]]
 
   is_within_wrapper(network_address(network1), network2) & (prefix_length(network1) >= prefix_length(network2))
 }
@@ -74,9 +88,15 @@ is_subnet <- function(network1, network2) {
 #' @rdname network_in_network
 #' @export
 is_supernet <- function(network1, network2) {
-  assertthat::assert_that(is_ip_network(network1))
-  assertthat::assert_that(is_ip_network(network2))
-  assertthat::assert_that(length(network1) == length(network2))
+  assertthat::assert_that(
+    is_ip_network(network1),
+    is_ip_network(network2)
+  )
+
+  # vector recycling
+  args <- vec_recycle_common(network1, network2)
+  network1 <- args[[1L]]
+  network2 <- args[[2L]]
 
   is_within_wrapper(network_address(network2), network1) & (prefix_length(network2) >= prefix_length(network1))
 }

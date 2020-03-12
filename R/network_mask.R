@@ -56,35 +56,41 @@ hostmask.ip_network <- function(network, ...) {
 #' @rdname netmask
 #' @export
 netmask.default <- function(prefix_length = integer(), is_ipv6 = logical(), ...) {
-  assertthat::assert_that(
-    is.integer(prefix_length),
-    is.logical(is_ipv6),
-    length(is_ipv6) == length(prefix_length)
-  )
-  assertthat::assert_that(
-    all(prefix_length >= 0L, na.rm = TRUE),
-    all(prefix_length[!is_ipv6] <= 32L, na.rm = TRUE),
-    all(prefix_length[is_ipv6] <= 128L, na.rm = TRUE),
-    msg = "Found out-of-bounds prefix length"
-  )
-
-  new_ip_address_encode(netmask_wrapper(prefix_length, is_ipv6))
+  subnet_mask(prefix_length, is_ipv6, netmask_wrapper)
 }
 
 #' @rdname netmask
 #' @export
 hostmask.default <- function(prefix_length = integer(), is_ipv6 = logical(), ...) {
+  subnet_mask(prefix_length, is_ipv6, hostmask_wrapper)
+}
+
+subnet_mask <- function(prefix_length, is_ipv6, mask_func) {
   assertthat::assert_that(
     is.integer(prefix_length),
-    is.logical(is_ipv6),
-    length(is_ipv6) == length(prefix_length)
-  )
-  assertthat::assert_that(
-    all(prefix_length >= 0L, na.rm = TRUE),
-    all(prefix_length[!is_ipv6] <= 32L, na.rm = TRUE),
-    all(prefix_length[is_ipv6] <= 128L, na.rm = TRUE),
-    msg = "Found out-of-bounds prefix length"
+    is.logical(is_ipv6)
   )
 
-  new_ip_address_encode(hostmask_wrapper(prefix_length, is_ipv6))
+  # vector recycling
+  args <- vec_recycle_common(prefix_length, is_ipv6)
+  prefix_length <- args[[1L]]
+  is_ipv6 <- args[[2L]]
+
+  assertthat::assert_that(
+    all(prefix_length >= 0L, na.rm = TRUE),
+    msg = "Found prefix length below zero"
+  )
+
+  assertthat::assert_that(
+    all(prefix_length[!is_ipv6] <= 32L, na.rm = TRUE),
+    msg = "Found IPv4 prefix length greater than 32"
+  )
+
+  assertthat::assert_that(
+    all(prefix_length[is_ipv6] <= 128L, na.rm = TRUE),
+    msg = "Found IPv6 prefix length greater than 128"
+  )
+
+  x <- do.call(mask_func, list(prefix_length, is_ipv6))
+  new_ip_address_encode(x)
 }

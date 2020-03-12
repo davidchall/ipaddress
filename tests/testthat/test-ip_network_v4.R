@@ -11,6 +11,17 @@ test_that("construction works", {
     ip_network(x),
     ip_network(ip_address(c("0.0.0.0", "192.168.0.0", "192.168.100.0", "255.255.255.255")), c(32L, 16L, 22L, 32L))
   )
+
+  # vector recycling
+  expect_equal(
+    ip_network(ip_address(rep("0.0.0.0", 3)), 24L),
+    ip_network(rep("0.0.0.0/24", 3))
+  )
+  expect_equal(
+    ip_network(ip_address("0.0.0.0"), rep(24L, 3)),
+    ip_network(rep("0.0.0.0/24", 3))
+  )
+  expect_error(ip_network(ip_address(rep("0.0.0.0", 3)), rep(24L, 2)))
 })
 
 test_that("formats correctly", {

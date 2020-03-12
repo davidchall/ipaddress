@@ -89,9 +89,13 @@ ip_network.ip_address <- function(address, prefix_length, strict = TRUE, ...) {
   assertthat::assert_that(
     assertthat::is.flag(strict),
     assertthat::noNA(strict),
-    is.integer(prefix_length),
-    length(address) == length(prefix_length)
+    is.integer(prefix_length)
   )
+
+  # vector recycling
+  args <- vec_recycle_common(address, prefix_length)
+  address <- args[[1L]]
+  prefix_length <- args[[2L]]
 
   new_ip_network_encode(construct_network_wrapper(address, prefix_length, strict))
 }
