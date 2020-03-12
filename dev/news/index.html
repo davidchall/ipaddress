@@ -126,6 +126,7 @@
 <li>New functions to check if addresses or networks are reserved for special use: <code><a href="../reference/is_reserved.html">is_multicast()</a></code>, <code><a href="../reference/is_reserved.html">is_unspecified()</a></code>, <code><a href="../reference/is_reserved.html">is_loopback()</a></code>, <code><a href="../reference/is_reserved.html">is_link_local()</a></code>.</li>
 <li>New <code><a href="../reference/max_prefix_length.html">max_prefix_length()</a></code> function to get the size of the address space (32-bit for IPv4 and 128-bit for IPv6).</li>
 <li>Added bitwise operations to <code><a href="../reference/ip_address.html">ip_address()</a></code> vectors (<code>!</code>, <code><a href="https://rdrr.io/r/base/Logic.html">&amp;</a></code>, <code><a href="https://rdrr.io/r/base/Logic.html">|</a></code> and <code><a href="https://rdrr.io/r/base/Arithmetic.html">^</a></code>).</li>
+<li>Support addition and subtraction of integers to/from <code><a href="../reference/ip_address.html">ip_address()</a></code> vectors.</li>
 <li>
 <code><a href="../reference/netmask.html">netmask()</a></code> and <code><a href="../reference/netmask.html">hostmask()</a></code> are now generics, so they can now accept either a vector of <code>ip_network</code> objects or prefix lengths. Previously they only accepted an <code>ip_network</code> vector.</li>
 <li>Added an <code><a href="../reference/ip_network.html">ip_network()</a></code> constructor that accepts <code>ip_address</code> and prefix length vectors.</li>
