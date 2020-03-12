@@ -25,7 +25,6 @@ reference:
       - is_link_local
       - is_ipv4_mapped
       - extract_ipv4_mapped
-      - embed_ipv4_mapped
   - title: "Network membership"
     contents:
       - prefix_length
