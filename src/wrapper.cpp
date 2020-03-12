@@ -38,6 +38,16 @@ List construct_network_wrapper(List address, IntegerVector prefix_length, bool s
 }
 
 // [[Rcpp::export]]
+List parse_interface_wrapper(CharacterVector x) {
+  return IpNetworkVector(x, false, true).encodeR();
+}
+
+// [[Rcpp::export]]
+List construct_interface_wrapper(List address, IntegerVector prefix_length) {
+  return IpNetworkVector(IpAddressVector(address), prefix_length, false, true).encodeR();
+}
+
+// [[Rcpp::export]]
 CharacterVector print_network_wrapper(List x) {
   return IpNetworkVector(x).encodeStrings();
 }

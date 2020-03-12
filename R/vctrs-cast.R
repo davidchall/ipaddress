@@ -61,3 +61,31 @@ vec_cast.ip_network.character <- function(x, to, ...) ip_network(x)
 #' @method vec_cast.character ip_network
 #' @export
 vec_cast.character.ip_network <- function(x, to, ...) print_network_wrapper(x)
+
+
+#' Casting
+#'
+#' Double dispatch methods to support [vctrs::vec_cast()].
+#'
+#' @inherit vctrs::vec_cast return params
+#' @keywords internal
+#' @method vec_cast ip_interface
+#' @export
+#' @export vec_cast.ip_interface
+vec_cast.ip_interface <- function(x, to, ...) UseMethod("vec_cast.ip_interface")
+
+#' @method vec_cast.ip_interface default
+#' @export
+vec_cast.ip_interface.default <- function(x, to, ...) vec_default_cast(x, to)
+
+#' @method vec_cast.ip_interface ip_interface
+#' @export
+vec_cast.ip_interface.ip_interface <- function(x, to, ...) x
+
+#' @method vec_cast.ip_interface character
+#' @export
+vec_cast.ip_interface.character <- function(x, to, ...) ip_interface(x)
+
+#' @method vec_cast.character ip_interface
+#' @export
+vec_cast.character.ip_interface <- function(x, to, ...) print_network_wrapper(x)

@@ -30,13 +30,15 @@ public:
    *  Constructors  *
    *----------------*/
   // Parse strings (CIDR format)
-  IpNetworkVector(CharacterVector input, bool strict);
+  IpNetworkVector(CharacterVector input,
+                  bool strict, bool is_interface = false);
 
   // Decode from R class
   IpNetworkVector(List input);
 
   // Construct from address + prefix length
-  IpNetworkVector(IpAddressVector address, IntegerVector prefix_length, bool strict);
+  IpNetworkVector(IpAddressVector address, IntegerVector prefix_length,
+                  bool strict, bool is_interface = false);
 
   // Warn about invalid input
   static void warnInvalidInput(unsigned int index, const std::string &input, const std::string &reason = "");
