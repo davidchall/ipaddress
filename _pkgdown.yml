@@ -1,6 +1,8 @@
 development:
   mode: auto
 
+url: https://davidchall.github.io/ipaddress
+
 reference:
   - title: "Classes"
     contents:
