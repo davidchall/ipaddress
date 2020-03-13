@@ -36,6 +36,16 @@ test_that("casting works", {
   expect_error(vec_cast(ip_network("192.128.0.0/10"), ip_interface()), class = "vctrs_error_incompatible_cast")
 })
 
+test_that("coercion works", {
+  expect_equal(vec_ptype2(ip_interface(), ip_interface()), ip_interface())
+  expect_equal(vec_ptype2(ip_interface(), character()), ip_interface())
+  expect_equal(vec_ptype2(character(), ip_interface()), ip_interface())
+
+  # since R only provides signed integers, we don't support integer coercion
+  expect_error(vec_ptype2(ip_interface(), integer()), class = "vctrs_error_incompatible_type")
+  expect_error(vec_ptype2(integer(), ip_interface()), class = "vctrs_error_incompatible_type")
+})
+
 test_that("can extract address and network", {
   expect_equal(
     as_ip_address(ip_interface(x)),
