@@ -37,8 +37,8 @@
 
 <meta property="og:title" content="Vector of IP networks — ip_network" />
 <meta property="og:description" content="ip_network() constructs a vector of IP networks.
+as_ip_network() casts an object to ip_network.
 is_ip_network() checks if an object is of class ip_network." />
-<meta name="twitter:card" content="summary" />
 
 
 <meta name="robots" content="noindex">
@@ -116,6 +116,7 @@ is_ip_network() checks if an object is of class ip_network." />
 
     <div class="ref-description">
     <p><code>ip_network()</code> constructs a vector of IP networks.</p>
+<p><code>as_ip_network()</code> casts an object to <code>ip_network</code>.</p>
 <p><code>is_ip_network()</code> checks if an object is of class <code>ip_network</code>.</p>
     </div>
 
@@ -126,6 +127,8 @@ is_ip_network() checks if an object is of class ip_network." />
 
 <span class='co'># S3 method for ip_address</span>
 <span class='fu'>ip_network</span>(<span class='no'>address</span>, <span class='no'>prefix_length</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
+
+<span class='fu'>as_ip_network</span>(<span class='no'>x</span>)
 
 <span class='fu'>is_ip_network</span>(<span class='no'>x</span>)
 
@@ -150,7 +153,8 @@ is_ip_network() checks if an object is of class ip_network." />
       <th>strict</th>
       <td><p>If <code>TRUE</code> (the default) and the input has host bits set,
 then a warning is emitted and <code>NA</code> is returned. If <code>FALSE</code>, the
-host bits are set to zero and a valid IP network is returned.</p></td>
+host bits are set to zero and a valid IP network is returned. If you need
+to retain the host bits, consider using <code><a href='ip_interface.html'>ip_interface()</a></code> instead.</p></td>
     </tr>
     <tr>
       <th>address</th>
