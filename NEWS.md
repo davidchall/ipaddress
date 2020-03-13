@@ -2,6 +2,7 @@
 
 ## New features
 
+* New `ip_interface()` class to simultaneously store the address and the network it is on.
 * New `seq.ip_network()` and `hosts()` functions to list all addresses within a network.
 * New functions to randomly sample addresses: `sample_ipv4()`, `sample_ipv6()` and `sample_network()`.
 * New `packed()` and `unpack()` functions to encode and decode addresses as raw bytes.

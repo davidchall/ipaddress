@@ -3,10 +3,42 @@ methods::setOldClass(c("ip_interface", "vctrs_vctr"))
 
 #' Vector of IP interfaces
 #'
+#' This hybrid class stores both the host address and the network it is on.
+#'
+#' @details
+#' Conceptually, constructing an `ip_interface` vector is like constructing an
+#' \code{\link{ip_network}} vector, except the host bits are retained.
+#'
+#' The `ip_interface` class inherits from the \code{\link{ip_address}} class.
+#' This means it can generally be used in places where an `ip_address` vector
+#' is expected. A few exceptions to this rule are:
+#' * It does not support addition and subtraction of integers
+#' * It does not support bitwise operations
+#' * It cannot be compared to `ip_address` vectors
+#'
+#' The `ip_interface` class additionally supports a few functions typically
+#' reserved for `ip_network` vectors: `prefix_length()`, `netmask()` and
+#' `hostmask()`.
+#'
+#' For other purposes, you can extract the address and network components using
+#' `as_ip_address()` and `as_ip_network()`.
+#'
 #' @param x An `ip_interface` vector
 #' @param ... Arguments to be passed to other methods
 #'
-#' @seealso [ip_address()], [ip_network()]
+#' @examples
+#' # construct from character vector
+#' ip_interface(c("192.168.0.1/10", "2001:db8:c3::abcd/45"))
+#'
+#' # construct from address + prefix length objects
+#' ip_interface(ip_address(c("192.168.0.1", "2001:db8:c3::abcd")), c(10L, 45L))
+#'
+#' # extract IP address
+#' x <- ip_interface(c("192.168.0.1/10", "2001:db8:c3::abcd/45"))
+#' as_ip_address(x)
+#'
+#' # extract IP network (with host bits masked)
+#' as_ip_network(x)
 #' @name ip_interface
 NULL
 
@@ -17,8 +49,7 @@ NULL
 #'
 #' `ip_interface()` constructs a vector of IP interfaces.
 #'
-#' @param ip Character vector of IP addresses, in dot-decimal notation (IPv4)
-#'   or hexadecimal notation (IPv6).
+#' @param ip Character vector of IP interfaces, in CIDR notation (IPv4 or IPv6).
 #' @param address An \code{\link{ip_address}} vector
 #' @param prefix_length An integer vector
 #' @return An `ip_interface` vector

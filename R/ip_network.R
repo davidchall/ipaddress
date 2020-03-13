@@ -48,7 +48,8 @@ NULL
 #' @param prefix_length An integer vector
 #' @param strict If `TRUE` (the default) and the input has host bits set,
 #'   then a warning is emitted and `NA` is returned. If `FALSE`, the
-#'   host bits are set to zero and a valid IP network is returned.
+#'   host bits are set to zero and a valid IP network is returned. If you need
+#'   to retain the host bits, consider using `ip_interface()` instead.
 #' @return An `ip_network` vector
 #'
 #' @examples

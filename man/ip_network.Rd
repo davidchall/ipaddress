@@ -31,7 +31,8 @@ is_ip_network(x)
 
 \item{strict}{If \code{TRUE} (the default) and the input has host bits set,
 then a warning is emitted and \code{NA} is returned. If \code{FALSE}, the
-host bits are set to zero and a valid IP network is returned.}
+host bits are set to zero and a valid IP network is returned. If you need
+to retain the host bits, consider using \code{ip_interface()} instead.}
 
 \item{address}{An \code{\link{ip_address}} vector}
 

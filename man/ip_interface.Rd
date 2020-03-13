@@ -27,8 +27,7 @@ is_ip_interface(x)
 \arguments{
 \item{...}{Arguments to be passed to other methods}
 
-\item{ip}{Character vector of IP addresses, in dot-decimal notation (IPv4)
-or hexadecimal notation (IPv6).}
+\item{ip}{Character vector of IP interfaces, in CIDR notation (IPv4 or IPv6).}
 
 \item{address}{An \code{\link{ip_address}} vector}
 
@@ -40,12 +39,45 @@ or hexadecimal notation (IPv6).}
 An \code{ip_interface} vector
 }
 \description{
+This hybrid class stores both the host address and the network it is on.
+
 \code{ip_interface()} constructs a vector of IP interfaces.
 
 \code{as_ip_interface()} casts an object to \code{ip_interface}.
 
 \code{is_ip_interface()} checks if an object is of class \code{ip_interface}.
 }
-\seealso{
-\code{\link[=ip_address]{ip_address()}}, \code{\link[=ip_network]{ip_network()}}
+\details{
+Conceptually, constructing an \code{ip_interface} vector is like constructing an
+\code{\link{ip_network}} vector, except the host bits are retained.
+
+The \code{ip_interface} class inherits from the \code{\link{ip_address}} class.
+This means it can generally be used in places where an \code{ip_address} vector
+is expected. A few exceptions to this rule are:
+\itemize{
+\item It does not support addition and subtraction of integers
+\item It does not support bitwise operations
+\item It cannot be compared to \code{ip_address} vectors
+}
+
+The \code{ip_interface} class additionally supports a few functions typically
+reserved for \code{ip_network} vectors: \code{prefix_length()}, \code{netmask()} and
+\code{hostmask()}.
+
+For other purposes, you can extract the address and network components using
+\code{as_ip_address()} and \code{as_ip_network()}.
+}
+\examples{
+# construct from character vector
+ip_interface(c("192.168.0.1/10", "2001:db8:c3::abcd/45"))
+
+# construct from address + prefix length objects
+ip_interface(ip_address(c("192.168.0.1", "2001:db8:c3::abcd")), c(10L, 45L))
+
+# extract IP address
+x <- ip_interface(c("192.168.0.1/10", "2001:db8:c3::abcd/45"))
+as_ip_address(x)
+
+# extract IP network (with host bits masked)
+as_ip_network(x)
 }
