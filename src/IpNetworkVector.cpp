@@ -48,6 +48,7 @@ IpNetworkVector::IpNetworkVector(CharacterVector input,
         if (!ec) {
           if (is_interface) {
             network_v6[i] = tmp_v6;
+            is_ipv6[i] = true;
           } else if (tmp_v6 == tmp_v6.canonical()) {
             network_v6[i] = tmp_v6;
             is_ipv6[i] = true;
@@ -124,6 +125,7 @@ IpNetworkVector::IpNetworkVector(IpAddressVector address, IntegerVector prefix_l
         asio::ip::network_v6 tmp_v6(address.address_v6[i], prefix_length[i]);
         if (is_interface) {
           network_v6[i] = tmp_v6;
+          is_ipv6[i] = true;
         } else if (tmp_v6 == tmp_v6.canonical()) {
           network_v6[i] = tmp_v6;
           is_ipv6[i] = true;
