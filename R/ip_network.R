@@ -203,7 +203,7 @@ NULL
 #' @rdname network_info
 #' @export
 prefix_length <- function(x) {
-  assertthat::assert_that(is_ip_network(x))
+  assertthat::assert_that(is_ip_network(x) || is_ip_interface(x))
   field(x, "prefix")
 }
 
