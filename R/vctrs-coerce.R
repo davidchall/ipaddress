@@ -85,6 +85,18 @@ vec_ptype2.ip_interface.default <- function(x, y, ..., x_arg = "x", y_arg = "y")
 #' @export
 vec_ptype2.ip_interface.ip_interface <- function(x, y, ...) new_ip_interface()
 
+#' @method vec_ptype2.ip_interface ip_address
+#' @export
+vec_ptype2.ip_interface.ip_address <- function(x, y, ..., x_arg = "x", y_arg = "y") {
+  stop_incompatible_type(x, y, x_arg = x_arg, y_arg = y_arg)
+}
+
+#' @method vec_ptype2.ip_address ip_interface
+#' @export
+vec_ptype2.ip_address.ip_interface <- function(x, y, ..., x_arg = "x", y_arg = "y") {
+  stop_incompatible_type(x, y, x_arg = x_arg, y_arg = y_arg)
+}
+
 #' @method vec_ptype2.ip_interface character
 #' @export
 vec_ptype2.ip_interface.character <- function(x, y, ...) new_ip_interface()
