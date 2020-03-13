@@ -2,12 +2,15 @@
 % Please edit documentation in R/ip_address.R
 \name{ip_address}
 \alias{ip_address}
+\alias{as_ip_address}
 \alias{is_ip_address}
 \alias{format.ip_address}
 \alias{as.character.ip_address}
 \title{Vector of IP addresses}
 \usage{
 ip_address(ip = character())
+
+as_ip_address(x)
 
 is_ip_address(x)
 
@@ -28,6 +31,8 @@ An \code{ip_address} vector
 }
 \description{
 \code{ip_address()} constructs a vector of IP addresses.
+
+\code{as_ip_address()} casts an object to \code{ip_address}.
 
 \code{is_ip_address()} checks if an object is of class \code{ip_address}.
 }

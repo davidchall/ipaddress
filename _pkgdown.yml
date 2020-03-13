@@ -8,6 +8,7 @@ reference:
     contents:
       - ip_address
       - ip_network
+      - ip_interface
   - title: "Binary representation"
     contents:
       - packed

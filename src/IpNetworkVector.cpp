@@ -8,7 +8,8 @@
  *  Constructors  *
  *----------------*/
 
-IpNetworkVector::IpNetworkVector(CharacterVector input, bool strict) {
+IpNetworkVector::IpNetworkVector(CharacterVector input,
+                                 bool strict, bool is_interface) {
   std::size_t vsize = input.size();
 
   // initialize vectors
@@ -29,7 +30,9 @@ IpNetworkVector::IpNetworkVector(CharacterVector input, bool strict) {
       // Parse IPv4
       tmp_v4 = asio::ip::make_network_v4(input[i], ec);
       if (!ec) {
-        if (tmp_v4 == tmp_v4.canonical()) {
+        if (is_interface) {
+          network_v4[i] = tmp_v4;
+        } else if (tmp_v4 == tmp_v4.canonical()) {
           network_v4[i] = tmp_v4;
         } else if (strict) {
           is_na[i] = true;
@@ -43,7 +46,10 @@ IpNetworkVector::IpNetworkVector(CharacterVector input, bool strict) {
       else {
         tmp_v6 = asio::ip::make_network_v6(input[i], ec);
         if (!ec) {
-          if (tmp_v6 == tmp_v6.canonical()) {
+          if (is_interface) {
+            network_v6[i] = tmp_v6;
+            is_ipv6[i] = true;
+          } else if (tmp_v6 == tmp_v6.canonical()) {
             network_v6[i] = tmp_v6;
             is_ipv6[i] = true;
           } else if (strict) {
@@ -95,7 +101,8 @@ IpNetworkVector::IpNetworkVector(List input) {
   }
 }
 
-IpNetworkVector::IpNetworkVector(IpAddressVector address, IntegerVector prefix_length, bool strict) {
+IpNetworkVector::IpNetworkVector(IpAddressVector address, IntegerVector prefix_length,
+                                 bool strict, bool is_interface) {
   std::size_t vsize = address.is_na.size();
 
   // initialize vectors
@@ -116,7 +123,10 @@ IpNetworkVector::IpNetworkVector(IpAddressVector address, IntegerVector prefix_l
         warnInvalidInput(i, cidr);
       } else {
         asio::ip::network_v6 tmp_v6(address.address_v6[i], prefix_length[i]);
-        if (tmp_v6 == tmp_v6.canonical()) {
+        if (is_interface) {
+          network_v6[i] = tmp_v6;
+          is_ipv6[i] = true;
+        } else if (tmp_v6 == tmp_v6.canonical()) {
           network_v6[i] = tmp_v6;
           is_ipv6[i] = true;
         } else if (strict) {
@@ -137,7 +147,9 @@ IpNetworkVector::IpNetworkVector(IpAddressVector address, IntegerVector prefix_l
         warnInvalidInput(i, cidr);
       } else {
         asio::ip::network_v4 tmp_v4(address.address_v4[i], prefix_length[i]);
-        if (tmp_v4 == tmp_v4.canonical()) {
+        if (is_interface) {
+          network_v4[i] = tmp_v4;
+        } else if (tmp_v4 == tmp_v4.canonical()) {
           network_v4[i] = tmp_v4;
         } else if (strict) {
           is_na[i] = true;

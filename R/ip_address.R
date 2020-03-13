@@ -101,6 +101,14 @@ new_ip_address <- function(address1 = integer(), address2 = integer(), address3 
   ), class = "ip_address")
 }
 
+#' `as_ip_address()`
+#'
+#' `as_ip_address()` casts an object to `ip_address`.
+#'
+#' @rdname ip_address
+#' @export
+as_ip_address <- function(x) vec_cast(x, ip_address())
+
 #' `is_ip_address()`
 #'
 #' `is_ip_address()` checks if an object is of class `ip_address`.

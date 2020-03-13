@@ -5,6 +5,8 @@
 \alias{hostmask}
 \alias{netmask.ip_network}
 \alias{hostmask.ip_network}
+\alias{netmask.ip_interface}
+\alias{hostmask.ip_interface}
 \alias{netmask.default}
 \alias{hostmask.default}
 \title{Subnet masking}
@@ -17,6 +19,10 @@ hostmask(...)
 
 \method{hostmask}{ip_network}(network, ...)
 
+\method{netmask}{ip_interface}(interface, ...)
+
+\method{hostmask}{ip_interface}(interface, ...)
+
 \method{netmask}{default}(prefix_length = integer(), is_ipv6 = logical(), ...)
 
 \method{hostmask}{default}(prefix_length = integer(), is_ipv6 = logical(), ...)
@@ -25,6 +31,8 @@ hostmask(...)
 \item{...}{Arguments to be passed to other methods}
 
 \item{network}{An \code{\link{ip_network}} vector}
+
+\item{interface}{An \code{\link{ip_interface}} vector}
 
 \item{prefix_length}{An integer vector}
 

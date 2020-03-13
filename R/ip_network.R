@@ -48,7 +48,8 @@ NULL
 #' @param prefix_length An integer vector
 #' @param strict If `TRUE` (the default) and the input has host bits set,
 #'   then a warning is emitted and `NA` is returned. If `FALSE`, the
-#'   host bits are set to zero and a valid IP network is returned.
+#'   host bits are set to zero and a valid IP network is returned. If you need
+#'   to retain the host bits, consider using `ip_interface()` instead.
 #' @return An `ip_network` vector
 #'
 #' @examples
@@ -127,6 +128,14 @@ new_ip_network <- function(address1 = integer(), address2 = integer(), address3 
   ), class = "ip_network")
 }
 
+#' `as_ip_network()`
+#'
+#' `as_ip_network()` casts an object to `ip_network`.
+#'
+#' @rdname ip_network
+#' @export
+as_ip_network <- function(x) vec_cast(x, ip_network())
+
 #' `is_ip_network()`
 #'
 #' `is_ip_network()` checks if an object is of class `ip_network`.
@@ -195,7 +204,7 @@ NULL
 #' @rdname network_info
 #' @export
 prefix_length <- function(x) {
-  assertthat::assert_that(is_ip_network(x))
+  assertthat::assert_that(is_ip_network(x) || is_ip_interface(x))
   field(x, "prefix")
 }
 

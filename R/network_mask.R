@@ -5,6 +5,7 @@
 #' @param prefix_length An integer vector
 #' @param is_ipv6 A logical vector
 #' @param network An \code{\link{ip_network}} vector
+#' @param interface An \code{\link{ip_interface}} vector
 #' @param ... Arguments to be passed to other methods
 #' @return An \code{\link{ip_address}} vector
 #'
@@ -50,6 +51,24 @@ hostmask.ip_network <- function(network, ...) {
   new_ip_address_encode(hostmask_wrapper(
     field(network, "prefix"),
     field(network, "is_ipv6")
+  ))
+}
+
+#' @rdname netmask
+#' @export
+netmask.ip_interface <- function(interface, ...) {
+  new_ip_address_encode(netmask_wrapper(
+    field(interface, "prefix"),
+    field(interface, "is_ipv6")
+  ))
+}
+
+#' @rdname netmask
+#' @export
+hostmask.ip_interface <- function(interface, ...) {
+  new_ip_address_encode(hostmask_wrapper(
+    field(interface, "prefix"),
+    field(interface, "is_ipv6")
   ))
 }
 

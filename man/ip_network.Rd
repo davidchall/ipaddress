@@ -4,6 +4,7 @@
 \alias{ip_network}
 \alias{ip_network.default}
 \alias{ip_network.ip_address}
+\alias{as_ip_network}
 \alias{is_ip_network}
 \alias{format.ip_network}
 \alias{as.character.ip_network}
@@ -14,6 +15,8 @@ ip_network(...)
 \method{ip_network}{default}(ip = character(), strict = TRUE, ...)
 
 \method{ip_network}{ip_address}(address, prefix_length, strict = TRUE, ...)
+
+as_ip_network(x)
 
 is_ip_network(x)
 
@@ -28,7 +31,8 @@ is_ip_network(x)
 
 \item{strict}{If \code{TRUE} (the default) and the input has host bits set,
 then a warning is emitted and \code{NA} is returned. If \code{FALSE}, the
-host bits are set to zero and a valid IP network is returned.}
+host bits are set to zero and a valid IP network is returned. If you need
+to retain the host bits, consider using \code{ip_interface()} instead.}
 
 \item{address}{An \code{\link{ip_address}} vector}
 
@@ -41,6 +45,8 @@ An \code{ip_network} vector
 }
 \description{
 \code{ip_network()} constructs a vector of IP networks.
+
+\code{as_ip_network()} casts an object to \code{ip_network}.
 
 \code{is_ip_network()} checks if an object is of class \code{ip_network}.
 }
