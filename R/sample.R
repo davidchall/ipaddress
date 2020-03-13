@@ -103,13 +103,13 @@ sample_ipv4_character <- function(size, n_bits_to_sample) {
 sample_ipv6_character <- function(size, n_bits_to_sample) {
   sample_nibble <- function(i) {
     n_bits_nibble <- pmin(pmax(n_bits_to_sample - 4L * i, 0L), 4L)
-    max_decimal <- 2^n_bits_nibble - 1
+    max_decimal <- 2 ^ n_bits_nibble - 1
     range_nibble <- c(0:pmin(max_decimal, 9), letters[0:(pmax(max_decimal - 9, 0))])
     sample(range_nibble, size, replace = TRUE)
   }
 
   sample_hextet <- function(i) {
-    i_nibbles <- seq.int(4*i+3, by = -1, length.out = 4)
+    i_nibbles <- seq.int(4 * i + 3, by = -1, length.out = 4)
     Reduce(paste0, Map(sample_nibble, i_nibbles))
   }
 
