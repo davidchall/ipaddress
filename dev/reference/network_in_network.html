@@ -10,12 +10,12 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous" />
@@ -36,8 +36,9 @@
 
 
 <meta property="og:title" content="Network membership of other IP networks — network_in_network" />
-<meta property="og:description" content="These functions check if an IP network is a subnet or supernet
-of another network." />
+<meta property="og:description" content="overlaps() checks for any overlap between two networks.
+is_subnet() and is_supernet() check if one network is a true
+subnet or supernet of another network." />
 
 
 <meta name="robots" content="noindex">
@@ -114,23 +115,26 @@ of another network." />
     </div>
 
     <div class="ref-description">
-    <p>These functions check if an IP network is a subnet or supernet
-of another network.</p>
+    <p><code>overlaps()</code> checks for any overlap between two networks.</p>
+<p><code>is_subnet()</code> and <code>is_supernet()</code> check if one network is a true
+subnet or supernet of another network.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>is_subnet</span>(<span class='no'>network1</span>, <span class='no'>network2</span>)
+    <pre class="usage"><span class='fu'>overlaps</span>(<span class='no'>network</span>, <span class='no'>other</span>)
 
-<span class='fu'>is_supernet</span>(<span class='no'>network1</span>, <span class='no'>network2</span>)</pre>
+<span class='fu'>is_subnet</span>(<span class='no'>network</span>, <span class='no'>other</span>)
+
+<span class='fu'>is_supernet</span>(<span class='no'>network</span>, <span class='no'>other</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>network1</th>
+      <th>network</th>
       <td><p>An <code><a href='ip_network.html'>ip_network</a></code> vector</p></td>
     </tr>
     <tr>
-      <th>network2</th>
+      <th>other</th>
       <td><p>An <code><a href='ip_network.html'>ip_network</a></code> vector</p></td>
     </tr>
     </table>
@@ -138,19 +142,25 @@ of another network.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A logical vector</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Use <code><a href='address_in_network.html'>is_within()</a></code> to check if an <code><a href='ip_address.html'>ip_address</a></code> is within
+an <code><a href='ip_network.html'>ip_network</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>net1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>"192.168.1.0/24"</span>)
-<span class='no'>net2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>"192.168.1.128/30"</span>)
+    <pre class="examples"><div class='input'><span class='no'>net1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>"192.168.1.128/30"</span>)
+<span class='no'>net2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>"192.168.1.0/24"</span>)
 
-<span class='fu'>is_subnet</span>(<span class='no'>net2</span>, <span class='no'>net1</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
-<span class='fu'>is_supernet</span>(<span class='no'>net1</span>, <span class='no'>net2</span>)</div><div class='output co'>#&gt; [1] TRUE</div></pre>
+<span class='fu'>overlaps</span>(<span class='no'>net1</span>, <span class='no'>net2</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='fu'>is_subnet</span>(<span class='no'>net1</span>, <span class='no'>net2</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='fu'>is_supernet</span>(<span class='no'>net1</span>, <span class='no'>net2</span>)</div><div class='output co'>#&gt; [1] FALSE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
