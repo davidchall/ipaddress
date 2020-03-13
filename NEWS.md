@@ -6,6 +6,7 @@
 * New `seq.ip_network()` and `hosts()` functions to list all addresses within a network.
 * New functions to randomly sample addresses: `sample_ipv4()`, `sample_ipv6()` and `sample_network()`.
 * New `packed()` and `unpack()` functions to encode and decode addresses as raw bytes.
+* New `overlaps()` function to check for any overlap between networks.
 * New `is_ipv4_mapped()` and `extract_ipv4_mapped()` functions for transitioning to IPv6.
 * New functions to provide basic information about a network: `num_addresses()`, `network_address()` and `broadcast_address()`.
 * New functions to check if addresses or networks are reserved for special use: `is_multicast()`, `is_unspecified()`, `is_loopback()`, `is_link_local()`.

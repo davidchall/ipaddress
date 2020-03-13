@@ -54,7 +54,7 @@ test_that("is_within_any works", {
   )
 })
 
-test_that("is_subnet and is_supernet work", {
+test_that("network-in-network works", {
   net1 <- ip_network(c(
     "192.167.255.255/32",
     "192.168.0.0/32",
@@ -64,10 +64,8 @@ test_that("is_subnet and is_supernet work", {
   ))
   net2 <- ip_network("192.168.0.0/22")
 
-  expect_equal(is_subnet(net1, rep(net2, 5)), c(FALSE, TRUE, TRUE, FALSE, FALSE))
-  expect_equal(is_subnet(rep(net2, 5), net1), c(FALSE, FALSE, FALSE, FALSE, TRUE))
-  expect_equal(is_supernet(net1, rep(net2, 5)), c(FALSE, FALSE, FALSE, FALSE, TRUE))
-  expect_equal(is_supernet(rep(net2, 5), net1), c(FALSE, TRUE, TRUE, FALSE, FALSE))
+  expect_equal(overlaps(net1, net2), c(FALSE, TRUE, TRUE, FALSE, TRUE))
+  expect_equal(overlaps(net2, net1), c(FALSE, TRUE, TRUE, FALSE, TRUE))
   expect_equal(is_subnet(net1, net2), c(FALSE, TRUE, TRUE, FALSE, FALSE))
   expect_equal(is_subnet(net2, net1), c(FALSE, FALSE, FALSE, FALSE, TRUE))
   expect_equal(is_supernet(net1, net2), c(FALSE, FALSE, FALSE, FALSE, TRUE))
@@ -82,10 +80,8 @@ test_that("is_subnet and is_supernet work", {
   ))
   net2 <- ip_network("2001:db8::/36")
 
-  expect_equal(is_subnet(net1, rep(net2, 5)), c(FALSE, TRUE, TRUE, FALSE, FALSE))
-  expect_equal(is_subnet(rep(net2, 5), net1), c(FALSE, FALSE, FALSE, FALSE, TRUE))
-  expect_equal(is_supernet(net1, rep(net2, 5)), c(FALSE, FALSE, FALSE, FALSE, TRUE))
-  expect_equal(is_supernet(rep(net2, 5), net1), c(FALSE, TRUE, TRUE, FALSE, FALSE))
+  expect_equal(overlaps(net1, net2), c(FALSE, TRUE, TRUE, FALSE, TRUE))
+  expect_equal(overlaps(net2, net1), c(FALSE, TRUE, TRUE, FALSE, TRUE))
   expect_equal(is_subnet(net1, net2), c(FALSE, TRUE, TRUE, FALSE, FALSE))
   expect_equal(is_subnet(net2, net1), c(FALSE, FALSE, FALSE, FALSE, TRUE))
   expect_equal(is_supernet(net1, net2), c(FALSE, FALSE, FALSE, FALSE, TRUE))
@@ -99,6 +95,9 @@ test_that("multi-space comparisons fail", {
   expect_true(is_within_any(ip_address("192.168.0.1"), ip_network(c("2001:db8::/36", "192.168.0.0/22"))))
   expect_false(is_within_any(ip_address("192.168.0.1"), ip_network(c("2001:db8::/36", "192.168.0.0/32"))))
   expect_false(is_within_any(ip_address("192.168.0.1"), ip_network(c("2001:db8::/36", "2001:db8::/64"))))
+
+  expect_false(overlaps(ip_network("2001:db8::/36"), ip_network("192.168.0.0/22")))
+  expect_false(overlaps(ip_network("192.168.0.0/22"), ip_network("2001:db8::/36")))
 
   expect_false(is_subnet(ip_network("2001:db8::/36"), ip_network("192.168.0.0/22")))
   expect_false(is_subnet(ip_network("192.168.0.0/22"), ip_network("2001:db8::/36")))
@@ -114,6 +113,9 @@ test_that("missing values work", {
   expect_equal(is_within_any(ip_address(NA), ip_network(c("192.168.0.0/24", "1.2.3.4/31"))), NA)
   expect_true(is_within_any(ip_address("192.168.0.1"), ip_network(c("192.168.0.0/24", NA))))
   expect_false(is_within_any(ip_address("192.168.0.1"), ip_network(c("192.168.0.0/32", NA))))
+
+  expect_equal(overlaps(ip_network(NA), ip_network("192.168.0.0/24")), NA)
+  expect_equal(overlaps(ip_network("192.168.0.0/24"), ip_network(NA)), NA)
 
   expect_equal(is_subnet(ip_network(NA), ip_network("192.168.0.0/24")), NA)
   expect_equal(is_subnet(ip_network("192.168.0.0/24"), ip_network(NA)), NA)
