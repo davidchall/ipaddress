@@ -4,6 +4,7 @@
 \alias{ip_interface}
 \alias{ip_interface.default}
 \alias{ip_interface.ip_address}
+\alias{as_ip_interface}
 \alias{is_ip_interface}
 \alias{format.ip_interface}
 \alias{as.character.ip_interface}
@@ -14,6 +15,8 @@ ip_interface(...)
 \method{ip_interface}{default}(ip = character(), ...)
 
 \method{ip_interface}{ip_address}(address, prefix_length, ...)
+
+as_ip_interface(x)
 
 is_ip_interface(x)
 
@@ -38,6 +41,8 @@ An \code{ip_interface} vector
 }
 \description{
 \code{ip_interface()} constructs a vector of IP interfaces.
+
+\code{as_ip_interface()} casts an object to \code{ip_interface}.
 
 \code{is_ip_interface()} checks if an object is of class \code{ip_interface}.
 }

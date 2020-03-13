@@ -75,6 +75,14 @@ new_ip_interface <- function(address1 = integer(), address2 = integer(), address
   ), class = c("ip_interface", "ip_address"))
 }
 
+#' `as_ip_interface()`
+#'
+#' `as_ip_interface()` casts an object to `ip_interface`.
+#'
+#' @rdname ip_interface
+#' @export
+as_ip_interface <- function(x) vec_cast(x, ip_interface())
+
 #' `is_ip_interface()`
 #'
 #' `is_ip_interface()` checks if an object is of class `ip_interface`.
