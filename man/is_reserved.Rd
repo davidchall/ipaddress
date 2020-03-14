@@ -42,7 +42,6 @@ is_unspecified(ip_network(c("0.0.0.0/32", "::/128")))
 is_loopback(ip_network(c("127.0.0.0/8", "::1/128")))
 
 is_link_local(ip_network(c("169.254.0.0/16", "fe80::/10")))
-
 }
 \seealso{
 Addresses reserved by IPv6 transition mechanisms can be identified

@@ -17,11 +17,11 @@ methods::setOldClass(c("ip_interface", "vctrs_vctr"))
 #' * It cannot be compared to `ip_address` vectors
 #'
 #' The `ip_interface` class additionally supports a few functions typically
-#' reserved for `ip_network` vectors: `prefix_length()`, `netmask()` and
-#' `hostmask()`.
+#' reserved for `ip_network` vectors: [prefix_length()], [netmask()] and
+#' [hostmask()].
 #'
 #' For other purposes, you can extract the address and network components using
-#' `as_ip_address()` and `as_ip_network()`.
+#' [as_ip_address()] and [as_ip_network()].
 #'
 #' @param x An `ip_interface` vector
 #' @param ... Arguments to be passed to other methods

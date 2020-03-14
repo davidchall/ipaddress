@@ -61,11 +61,11 @@ is expected. A few exceptions to this rule are:
 }
 
 The \code{ip_interface} class additionally supports a few functions typically
-reserved for \code{ip_network} vectors: \code{prefix_length()}, \code{netmask()} and
-\code{hostmask()}.
+reserved for \code{ip_network} vectors: \code{\link[=prefix_length]{prefix_length()}}, \code{\link[=netmask]{netmask()}} and
+\code{\link[=hostmask]{hostmask()}}.
 
 For other purposes, you can extract the address and network components using
-\code{as_ip_address()} and \code{as_ip_network()}.
+\code{\link[=as_ip_address]{as_ip_address()}} and \code{\link[=as_ip_network]{as_ip_network()}}.
 }
 \examples{
 # construct from character vector
