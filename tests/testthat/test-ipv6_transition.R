@@ -14,7 +14,7 @@ test_that("IPv4-mapped IPv6 addresses work", {
   )
   expect_equal(
     extract_ipv4_mapped(ip_address(c("192.168.0.1", "::ffff:192.0.2.128", "2001:db8::"))),
-    ip_address(c("192.168.0.1", "192.0.2.128", NA))
+    ip_address(c(NA, "192.0.2.128", NA))
   )
 
   expect_equal(is_ipv4_mapped(ip_address()), logical())
@@ -47,7 +47,7 @@ test_that("6to4 IPv6 addresses work", {
   )
   expect_equal(
     extract_6to4(ip_address(c("192.168.0.1", "2002:c000:0280::", "2001:db8::"))),
-    ip_address(c("192.168.0.1", "192.0.2.128", NA))
+    ip_address(c(NA, "192.0.2.128", NA))
   )
 
   expect_equal(is_6to4(ip_address()), logical())
@@ -80,11 +80,11 @@ test_that("Teredo IPv6 addresses work", {
   )
   expect_equal(
     extract_teredo_server(ip_address(c("192.168.0.1", "2001:0000:4136:e378:8000:63bf:3fff:fdd2", "2001:db8::"))),
-    ip_address(c("192.168.0.1", "65.54.227.120", NA))
+    ip_address(c(NA, "65.54.227.120", NA))
   )
   expect_equal(
     extract_teredo_client(ip_address(c("192.168.0.1", "2001:0000:4136:e378:8000:63bf:3fff:fdd2", "2001:db8::"))),
-    ip_address(c("192.168.0.1", "192.0.2.45", NA))
+    ip_address(c(NA, "192.0.2.45", NA))
   )
 
   expect_equal(is_teredo(ip_address()), logical())

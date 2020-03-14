@@ -5,10 +5,6 @@
 #' within an IPv6 address. These functions make it possible to extract
 #' the embedded IPv4 addresses.
 #'
-#' @details
-#' Addresses already in the target address space are unaffected by
-#' these functions.
-#'
 #' @param x An \code{\link{ip_address}} vector
 #' @return An \code{\link{ip_address}} vector
 #'

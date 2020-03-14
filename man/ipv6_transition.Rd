@@ -37,10 +37,6 @@ from IPv4 to IPv6, which usually involve embedding an IPv4 address
 within an IPv6 address. These functions make it possible to extract
 the embedded IPv4 addresses.
 }
-\details{
-Addresses already in the target address space are unaffected by
-these functions.
-}
 \examples{
 is_ipv4_mapped(ip_network("::ffff:0.0.0.0/96"))
 

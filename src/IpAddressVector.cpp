@@ -640,16 +640,10 @@ IpAddressVector IpAddressVector::extractIPv4Mapped() const {
   std::vector<bool> out_is_na(vsize, false);
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (is_na[i]) {
-      out_is_na[i] = true;
-    } else if (is_ipv6[i]) {
-      if (address_v6[i].is_v4_mapped()) {
-        out_address_v4[i] = asio::ip::make_address_v4(asio::ip::v4_mapped, address_v6[i]);
-      } else {
-        out_is_na[i] = true;
-      }
+    if (is_ipv6[i] && address_v6[i].is_v4_mapped()) {
+      out_address_v4[i] = asio::ip::make_address_v4(asio::ip::v4_mapped, address_v6[i]);
     } else {
-      out_address_v4[i] = address_v4[i];
+      out_is_na[i] = true;
     }
   }
 
@@ -685,16 +679,10 @@ IpAddressVector IpAddressVector::extract6to4() const {
   std::vector<bool> out_is_na(vsize, false);
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (is_na[i]) {
-      out_is_na[i] = true;
-    } else if (is_ipv6[i]) {
-      if (is_6to4(address_v6[i])) {
-        out_address_v4[i] = extract_6to4(address_v6[i]);
-      } else {
-        out_is_na[i] = true;
-      }
+    if (is_ipv6[i] && is_6to4(address_v6[i])) {
+      out_address_v4[i] = extract_6to4(address_v6[i]);
     } else {
-      out_address_v4[i] = address_v4[i];
+      out_is_na[i] = true;
     }
   }
 
@@ -730,16 +718,10 @@ IpAddressVector IpAddressVector::extractTeredoServer() const {
   std::vector<bool> out_is_na(vsize, false);
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (is_na[i]) {
-      out_is_na[i] = true;
-    } else if (is_ipv6[i]) {
-      if (is_teredo(address_v6[i])) {
-        out_address_v4[i] = extract_teredo_server(address_v6[i]);
-      } else {
-        out_is_na[i] = true;
-      }
+    if (is_ipv6[i] && is_teredo(address_v6[i])) {
+      out_address_v4[i] = extract_teredo_server(address_v6[i]);
     } else {
-      out_address_v4[i] = address_v4[i];
+      out_is_na[i] = true;
     }
   }
 
@@ -756,16 +738,10 @@ IpAddressVector IpAddressVector::extractTeredoClient() const {
   std::vector<bool> out_is_na(vsize, false);
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (is_na[i]) {
-      out_is_na[i] = true;
-    } else if (is_ipv6[i]) {
-      if (is_teredo(address_v6[i])) {
-        out_address_v4[i] = extract_teredo_client(address_v6[i]);
-      } else {
-        out_is_na[i] = true;
-      }
+    if (is_ipv6[i] && is_teredo(address_v6[i])) {
+      out_address_v4[i] = extract_teredo_client(address_v6[i]);
     } else {
-      out_address_v4[i] = address_v4[i];
+      out_is_na[i] = true;
     }
   }
 
