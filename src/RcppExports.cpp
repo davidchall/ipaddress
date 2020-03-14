@@ -360,14 +360,90 @@ BEGIN_RCPP
 END_RCPP
 }
 // extract_ipv4_mapped_wrapper
-List extract_ipv4_mapped_wrapper(List address_r, bool keep_ipv6);
-RcppExport SEXP _ipaddress_extract_ipv4_mapped_wrapper(SEXP address_rSEXP, SEXP keep_ipv6SEXP) {
+List extract_ipv4_mapped_wrapper(List address_r);
+RcppExport SEXP _ipaddress_extract_ipv4_mapped_wrapper(SEXP address_rSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< List >::type address_r(address_rSEXP);
-    Rcpp::traits::input_parameter< bool >::type keep_ipv6(keep_ipv6SEXP);
-    rcpp_result_gen = Rcpp::wrap(extract_ipv4_mapped_wrapper(address_r, keep_ipv6));
+    rcpp_result_gen = Rcpp::wrap(extract_ipv4_mapped_wrapper(address_r));
+    return rcpp_result_gen;
+END_RCPP
+}
+// is_6to4_address_wrapper
+LogicalVector is_6to4_address_wrapper(List address_r);
+RcppExport SEXP _ipaddress_is_6to4_address_wrapper(SEXP address_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type address_r(address_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(is_6to4_address_wrapper(address_r));
+    return rcpp_result_gen;
+END_RCPP
+}
+// is_6to4_network_wrapper
+LogicalVector is_6to4_network_wrapper(List network_r);
+RcppExport SEXP _ipaddress_is_6to4_network_wrapper(SEXP network_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type network_r(network_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(is_6to4_network_wrapper(network_r));
+    return rcpp_result_gen;
+END_RCPP
+}
+// extract_6to4_wrapper
+List extract_6to4_wrapper(List address_r);
+RcppExport SEXP _ipaddress_extract_6to4_wrapper(SEXP address_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type address_r(address_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(extract_6to4_wrapper(address_r));
+    return rcpp_result_gen;
+END_RCPP
+}
+// is_teredo_address_wrapper
+LogicalVector is_teredo_address_wrapper(List address_r);
+RcppExport SEXP _ipaddress_is_teredo_address_wrapper(SEXP address_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type address_r(address_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(is_teredo_address_wrapper(address_r));
+    return rcpp_result_gen;
+END_RCPP
+}
+// is_teredo_network_wrapper
+LogicalVector is_teredo_network_wrapper(List network_r);
+RcppExport SEXP _ipaddress_is_teredo_network_wrapper(SEXP network_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type network_r(network_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(is_teredo_network_wrapper(network_r));
+    return rcpp_result_gen;
+END_RCPP
+}
+// extract_teredo_server_wrapper
+List extract_teredo_server_wrapper(List address_r);
+RcppExport SEXP _ipaddress_extract_teredo_server_wrapper(SEXP address_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type address_r(address_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(extract_teredo_server_wrapper(address_r));
+    return rcpp_result_gen;
+END_RCPP
+}
+// extract_teredo_client_wrapper
+List extract_teredo_client_wrapper(List address_r);
+RcppExport SEXP _ipaddress_extract_teredo_client_wrapper(SEXP address_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type address_r(address_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(extract_teredo_client_wrapper(address_r));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -404,7 +480,14 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_is_link_local_network_wrapper", (DL_FUNC) &_ipaddress_is_link_local_network_wrapper, 1},
     {"_ipaddress_is_ipv4_mapped_address_wrapper", (DL_FUNC) &_ipaddress_is_ipv4_mapped_address_wrapper, 1},
     {"_ipaddress_is_ipv4_mapped_network_wrapper", (DL_FUNC) &_ipaddress_is_ipv4_mapped_network_wrapper, 1},
-    {"_ipaddress_extract_ipv4_mapped_wrapper", (DL_FUNC) &_ipaddress_extract_ipv4_mapped_wrapper, 2},
+    {"_ipaddress_extract_ipv4_mapped_wrapper", (DL_FUNC) &_ipaddress_extract_ipv4_mapped_wrapper, 1},
+    {"_ipaddress_is_6to4_address_wrapper", (DL_FUNC) &_ipaddress_is_6to4_address_wrapper, 1},
+    {"_ipaddress_is_6to4_network_wrapper", (DL_FUNC) &_ipaddress_is_6to4_network_wrapper, 1},
+    {"_ipaddress_extract_6to4_wrapper", (DL_FUNC) &_ipaddress_extract_6to4_wrapper, 1},
+    {"_ipaddress_is_teredo_address_wrapper", (DL_FUNC) &_ipaddress_is_teredo_address_wrapper, 1},
+    {"_ipaddress_is_teredo_network_wrapper", (DL_FUNC) &_ipaddress_is_teredo_network_wrapper, 1},
+    {"_ipaddress_extract_teredo_server_wrapper", (DL_FUNC) &_ipaddress_extract_teredo_server_wrapper, 1},
+    {"_ipaddress_extract_teredo_client_wrapper", (DL_FUNC) &_ipaddress_extract_teredo_client_wrapper, 1},
     {NULL, NULL, 0}
 };
 

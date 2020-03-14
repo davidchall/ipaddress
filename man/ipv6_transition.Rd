@@ -4,18 +4,29 @@
 \alias{ipv6_transition}
 \alias{is_ipv4_mapped}
 \alias{extract_ipv4_mapped}
+\alias{is_6to4}
+\alias{extract_6to4}
+\alias{is_teredo}
+\alias{extract_teredo_server}
+\alias{extract_teredo_client}
 \title{IPv6 transition mechanisms}
 \usage{
 is_ipv4_mapped(x)
 
-extract_ipv4_mapped(x, keep_ipv6 = FALSE)
+extract_ipv4_mapped(x)
+
+is_6to4(x)
+
+extract_6to4(x)
+
+is_teredo(x)
+
+extract_teredo_server(x)
+
+extract_teredo_client(x)
 }
 \arguments{
 \item{x}{An \code{\link{ip_address}} vector}
-
-\item{keep_ipv6}{A logical indicating whether IPv6 addresses that are
-not IPv4-mapped should be kept or converted to \code{NA}. If \code{FALSE}
-(the default), the returned vector will only contain IPv4 addresses.}
 }
 \value{
 An \code{\link{ip_address}} vector
@@ -34,4 +45,14 @@ these functions.
 is_ipv4_mapped(ip_network("::ffff:0.0.0.0/96"))
 
 extract_ipv4_mapped(ip_address("::ffff:192.0.2.128"))
+
+is_6to4(ip_network("2002::/16"))
+
+extract_6to4(ip_address("2002:c000:0204::"))
+
+is_teredo(ip_network("2001::/32"))
+
+extract_teredo_server(ip_address("2001:0000:4136:e378:8000:63bf:3fff:fdd2"))
+
+extract_teredo_client(ip_address("2001:0000:4136:e378:8000:63bf:3fff:fdd2"))
 }

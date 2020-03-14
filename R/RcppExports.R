@@ -125,7 +125,35 @@ is_ipv4_mapped_network_wrapper <- function(network_r) {
     .Call(`_ipaddress_is_ipv4_mapped_network_wrapper`, network_r)
 }
 
-extract_ipv4_mapped_wrapper <- function(address_r, keep_ipv6) {
-    .Call(`_ipaddress_extract_ipv4_mapped_wrapper`, address_r, keep_ipv6)
+extract_ipv4_mapped_wrapper <- function(address_r) {
+    .Call(`_ipaddress_extract_ipv4_mapped_wrapper`, address_r)
+}
+
+is_6to4_address_wrapper <- function(address_r) {
+    .Call(`_ipaddress_is_6to4_address_wrapper`, address_r)
+}
+
+is_6to4_network_wrapper <- function(network_r) {
+    .Call(`_ipaddress_is_6to4_network_wrapper`, network_r)
+}
+
+extract_6to4_wrapper <- function(address_r) {
+    .Call(`_ipaddress_extract_6to4_wrapper`, address_r)
+}
+
+is_teredo_address_wrapper <- function(address_r) {
+    .Call(`_ipaddress_is_teredo_address_wrapper`, address_r)
+}
+
+is_teredo_network_wrapper <- function(network_r) {
+    .Call(`_ipaddress_is_teredo_network_wrapper`, network_r)
+}
+
+extract_teredo_server_wrapper <- function(address_r) {
+    .Call(`_ipaddress_extract_teredo_server_wrapper`, address_r)
+}
+
+extract_teredo_client_wrapper <- function(address_r) {
+    .Call(`_ipaddress_extract_teredo_client_wrapper`, address_r)
 }
 

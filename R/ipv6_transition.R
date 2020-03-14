@@ -10,15 +10,22 @@
 #' these functions.
 #'
 #' @param x An \code{\link{ip_address}} vector
-#' @param keep_ipv6 A logical indicating whether IPv6 addresses that are
-#'   not IPv4-mapped should be kept or converted to `NA`. If `FALSE`
-#'   (the default), the returned vector will only contain IPv4 addresses.
 #' @return An \code{\link{ip_address}} vector
 #'
 #' @examples
 #' is_ipv4_mapped(ip_network("::ffff:0.0.0.0/96"))
 #'
 #' extract_ipv4_mapped(ip_address("::ffff:192.0.2.128"))
+#'
+#' is_6to4(ip_network("2002::/16"))
+#'
+#' extract_6to4(ip_address("2002:c000:0204::"))
+#'
+#' is_teredo(ip_network("2001::/32"))
+#'
+#' extract_teredo_server(ip_address("2001:0000:4136:e378:8000:63bf:3fff:fdd2"))
+#'
+#' extract_teredo_client(ip_address("2001:0000:4136:e378:8000:63bf:3fff:fdd2"))
 #' @name ipv6_transition
 NULL
 
@@ -36,12 +43,56 @@ is_ipv4_mapped <- function(x) {
 
 #' @rdname ipv6_transition
 #' @export
-extract_ipv4_mapped <- function(x, keep_ipv6 = FALSE) {
-  assertthat::assert_that(
-    is_ip_address(x),
-    assertthat::is.flag(keep_ipv6),
-    assertthat::noNA(keep_ipv6)
-  )
+extract_ipv4_mapped <- function(x) {
+  assertthat::assert_that(is_ip_address(x))
 
-  new_ip_address_encode(extract_ipv4_mapped_wrapper(x, keep_ipv6))
+  new_ip_address_encode(extract_ipv4_mapped_wrapper(x))
+}
+
+#' @rdname ipv6_transition
+#' @export
+is_6to4 <- function(x) {
+  if (is_ip_address(x)) {
+    is_6to4_address_wrapper(x)
+  } else if (is_ip_network(x)) {
+    is_6to4_network_wrapper(x)
+  } else {
+    stop("argument must be an ip_address vector or an ip_network vector")
+  }
+}
+
+#' @rdname ipv6_transition
+#' @export
+extract_6to4 <- function(x) {
+  assertthat::assert_that(is_ip_address(x))
+
+  new_ip_address_encode(extract_6to4_wrapper(x))
+}
+
+#' @rdname ipv6_transition
+#' @export
+is_teredo <- function(x) {
+  if (is_ip_address(x)) {
+    is_teredo_address_wrapper(x)
+  } else if (is_ip_network(x)) {
+    is_teredo_network_wrapper(x)
+  } else {
+    stop("argument must be an ip_address vector or an ip_network vector")
+  }
+}
+
+#' @rdname ipv6_transition
+#' @export
+extract_teredo_server <- function(x) {
+  assertthat::assert_that(is_ip_address(x))
+
+  new_ip_address_encode(extract_teredo_server_wrapper(x))
+}
+
+#' @rdname ipv6_transition
+#' @export
+extract_teredo_client <- function(x) {
+  assertthat::assert_that(is_ip_address(x))
+
+  new_ip_address_encode(extract_teredo_client_wrapper(x))
 }
