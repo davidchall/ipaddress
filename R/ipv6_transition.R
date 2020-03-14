@@ -1,12 +1,18 @@
 #' IPv6 transition mechanisms
 #'
 #' There are multiple mechanisms designed to help with the transition
-#' from IPv4 to IPv6, which usually involve embedding an IPv4 address
-#' within an IPv6 address. These functions make it possible to extract
-#' the embedded IPv4 addresses.
+#' from IPv4 to IPv6. These functions make it possible to extract the
+#' embedded IPv4 address from an IPv6 address.
+#'
+#' @details
+#' The IPv6 transition mechanisms are described in the IETF memos:
+#' * IPv4-mapped: [RFC 4291](https://tools.ietf.org/html/rfc4291)
+#' * 6to4: [RFC 3056](https://tools.ietf.org/html/rfc3056.html)
+#' * Teredo: [RFC 4380](https://tools.ietf.org/html/rfc4380)
 #'
 #' @param x An \code{\link{ip_address}} vector
-#' @return An \code{\link{ip_address}} vector
+#' @return The `is_xxx()` functions return a logical vector and the
+#'   `extract_xxx()` functions return an \code{\link{ip_address}} vector.
 #'
 #' @examples
 #' is_ipv4_mapped(ip_network("::ffff:0.0.0.0/96"))

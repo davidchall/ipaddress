@@ -29,13 +29,21 @@ extract_teredo_client(x)
 \item{x}{An \code{\link{ip_address}} vector}
 }
 \value{
-An \code{\link{ip_address}} vector
+The \code{is_xxx()} functions return a logical vector and the
+\code{extract_xxx()} functions return an \code{\link{ip_address}} vector.
 }
 \description{
 There are multiple mechanisms designed to help with the transition
-from IPv4 to IPv6, which usually involve embedding an IPv4 address
-within an IPv6 address. These functions make it possible to extract
-the embedded IPv4 addresses.
+from IPv4 to IPv6. These functions make it possible to extract the
+embedded IPv4 address from an IPv6 address.
+}
+\details{
+The IPv6 transition mechanisms are described in the IETF memos:
+\itemize{
+\item IPv4-mapped: \href{https://tools.ietf.org/html/rfc4291}{RFC 4291}
+\item 6to4: \href{https://tools.ietf.org/html/rfc3056.html}{RFC 3056}
+\item Teredo: \href{https://tools.ietf.org/html/rfc4380}{RFC 4380}
+}
 }
 \examples{
 is_ipv4_mapped(ip_network("::ffff:0.0.0.0/96"))
