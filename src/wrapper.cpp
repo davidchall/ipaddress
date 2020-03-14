@@ -194,6 +194,41 @@ LogicalVector is_ipv4_mapped_network_wrapper(List network_r) {
 }
 
 // [[Rcpp::export]]
-List extract_ipv4_mapped_wrapper(List address_r, bool keep_ipv6) {
-  return IpAddressVector(address_r).extractIPv4Mapped(keep_ipv6).encodeR();
+List extract_ipv4_mapped_wrapper(List address_r) {
+  return IpAddressVector(address_r).extractIPv4Mapped().encodeR();
+}
+
+// [[Rcpp::export]]
+LogicalVector is_6to4_address_wrapper(List address_r) {
+  return IpAddressVector(address_r).is6to4();
+}
+
+// [[Rcpp::export]]
+LogicalVector is_6to4_network_wrapper(List network_r) {
+  return IpNetworkVector(network_r).is6to4();
+}
+
+// [[Rcpp::export]]
+List extract_6to4_wrapper(List address_r) {
+  return IpAddressVector(address_r).extract6to4().encodeR();
+}
+
+// [[Rcpp::export]]
+LogicalVector is_teredo_address_wrapper(List address_r) {
+  return IpAddressVector(address_r).isTeredo();
+}
+
+// [[Rcpp::export]]
+LogicalVector is_teredo_network_wrapper(List network_r) {
+  return IpNetworkVector(network_r).isTeredo();
+}
+
+// [[Rcpp::export]]
+List extract_teredo_server_wrapper(List address_r) {
+  return IpAddressVector(address_r).extractTeredoServer().encodeR();
+}
+
+// [[Rcpp::export]]
+List extract_teredo_client_wrapper(List address_r) {
+  return IpAddressVector(address_r).extractTeredoClient().encodeR();
 }

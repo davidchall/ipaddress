@@ -95,7 +95,12 @@ public:
    *  IPv6 transition mechanisms  *
    * -----------------------------*/
   LogicalVector isIPv4Mapped() const;
-  IpAddressVector extractIPv4Mapped(bool keep_ipv6) const;
+  IpAddressVector extractIPv4Mapped() const;
+  LogicalVector is6to4() const;
+  IpAddressVector extract6to4() const;
+  LogicalVector isTeredo() const;
+  IpAddressVector extractTeredoServer() const;
+  IpAddressVector extractTeredoClient() const;
 };
 
 #endif

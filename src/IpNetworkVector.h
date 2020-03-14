@@ -72,6 +72,8 @@ public:
   LogicalVector isLoopback() const;
   LogicalVector isLinkLocal() const;
   LogicalVector isIPv4Mapped() const;
+  LogicalVector is6to4() const;
+  LogicalVector isTeredo() const;
 };
 
 #endif

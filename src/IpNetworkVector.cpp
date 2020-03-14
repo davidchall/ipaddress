@@ -2,6 +2,7 @@
 #include "IpAddressVector.h"
 #include "encoding.h"
 #include "masking.h"
+#include "utils.h"
 
 
 /*----------------*
@@ -437,6 +438,48 @@ LogicalVector IpNetworkVector::isIPv4Mapped() const {
       asio::ip::address_v6 first = network_v6[i].address();
       asio::ip::address_v6 last = broadcast_address<asio::ip::address_v6>(network_v6[i]);
       output[i] = first.is_v4_mapped() && last.is_v4_mapped();
+    } else {
+      output[i] = false;
+    }
+  }
+
+  return output;
+}
+
+LogicalVector IpNetworkVector::is6to4() const {
+  std::size_t vsize = is_na.size();
+
+  // initialize vectors
+  LogicalVector output(vsize);
+
+  for (std::size_t i=0; i<vsize; ++i) {
+    if (is_na[i]) {
+      output[i] = NA_LOGICAL;
+    } else if (is_ipv6[i]) {
+      asio::ip::address_v6 first = network_v6[i].address();
+      asio::ip::address_v6 last = broadcast_address<asio::ip::address_v6>(network_v6[i]);
+      output[i] = is_6to4(first) && is_6to4(last);
+    } else {
+      output[i] = false;
+    }
+  }
+
+  return output;
+}
+
+LogicalVector IpNetworkVector::isTeredo() const {
+  std::size_t vsize = is_na.size();
+
+  // initialize vectors
+  LogicalVector output(vsize);
+
+  for (std::size_t i=0; i<vsize; ++i) {
+    if (is_na[i]) {
+      output[i] = NA_LOGICAL;
+    } else if (is_ipv6[i]) {
+      asio::ip::address_v6 first = network_v6[i].address();
+      asio::ip::address_v6 last = broadcast_address<asio::ip::address_v6>(network_v6[i]);
+      output[i] = is_teredo(first) && is_teredo(last);
     } else {
       output[i] = false;
     }
