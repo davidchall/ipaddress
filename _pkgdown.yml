@@ -11,7 +11,7 @@ reference:
       - ip_interface
   - title: "Other representations"
     contents:
-      - packed
+      - as_packed
   - title: "Address spaces"
     contents:
       - is_ipv4

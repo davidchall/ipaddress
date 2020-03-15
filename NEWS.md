@@ -11,7 +11,7 @@
 
 ### Other representations
 
-* New `packed()` and `unpack()` functions to encode and decode addresses as raw bytes
+* New `as_packed()` and `from_packed()` functions to encode and decode addresses as raw bytes
 
 ### Address spaces
 
