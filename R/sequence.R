@@ -29,7 +29,7 @@
 #' hosts(ip_network("2001:db8::/126"))
 #' @seealso
 #' Use [network_address()] and [broadcast_address()] to get the first and last
-#' address of a network without generating all addresses in between.
+#' address of a network.
 #'
 #' Use [sample_network()] to randomly sample addresses from a network.
 #' @name sequence

@@ -2,21 +2,38 @@
 
 ## New features
 
-* New `ip_interface()` class to simultaneously store the address and the network it is on.
-* New `seq.ip_network()` and `hosts()` functions to list all addresses within a network.
-* New functions to randomly sample addresses: `sample_ipv4()`, `sample_ipv6()` and `sample_network()`.
-* New `packed()` and `unpack()` functions to encode and decode addresses as raw bytes.
-* New `overlaps()` function to check for any overlap between networks.
-* New functions for IPv6 transition mechanisms: `is_ipv4_mapped()`, `extract_ipv4_mapped()`, `is_6to4()`, `extract_6to4()`, `is_teredo()`, `extract_teredo_server()`, `extract_teredo_client()`
-* New functions to provide basic information about a network: `num_addresses()`, `network_address()` and `broadcast_address()`.
-* New functions to check if addresses or networks are reserved for special use: `is_multicast()`, `is_unspecified()`, `is_loopback()`, `is_link_local()`.
-* New `max_prefix_length()` function to get the size of the address space (32-bit for IPv4 and 128-bit for IPv6).
-* Added bitwise operations to `ip_address()` vectors (`!`, `&`, `|` and `^`).
-* Support addition and subtraction of integers to/from `ip_address()` vectors.
-* `netmask()` and `hostmask()` are now generics, so they can now accept either a vector of `ip_network` objects or prefix lengths. Previously they only accepted an `ip_network` vector.
-* Added an `ip_network()` constructor that accepts `ip_address` and prefix length vectors.
-* Improved input validation warnings. They now report the row number involved and no longer mentioned internal function names.
-* Performance improvements.
+### Classes
+
+* New `ip_interface()` class to simultaneously store the address and the network it is on
+* `ip_address()` vectors now support bitwise operations (`!`, `&`, `|` and `^`)
+* `ip_address()` vectors now support addition and subtraction of integers
+* Added an `ip_network()` constructor that accepts `ip_address` and prefix length vectors
+
+### Other representations
+
+* New `packed()` and `unpack()` functions to encode and decode addresses as raw bytes
+
+### Address spaces
+
+* New `max_prefix_length()` function to get the size of the address space (32-bit for IPv4 and 128-bit for IPv6)
+* New functions to check if addresses or networks are reserved for special use: `is_multicast()`, `is_unspecified()`, `is_loopback()`, `is_link_local()`
+* New functions for IPv6 transition mechanisms: `is_ipv4_mapped()`, `is_6to4()`, `is_teredo()`, `extract_ipv4_mapped()`, `extract_6to4()`, `extract_teredo_server()`, `extract_teredo_client()`
+
+### Network membership
+
+* New functions about the size of a network: `num_addresses()`, `network_address()` and `broadcast_address()`
+* New `overlaps()` function to check for _any_ overlap between networks
+* `netmask()` and `hostmask()` are now generics, so they can now accept either an `ip_network` vector or a vector of prefix lengths. Previously they only accepted an `ip_network` vector.
+
+### Generating addresses
+
+* New `seq.ip_network()` and `hosts()` functions to list all addresses within a network
+* New functions to randomly sample addresses: `sample_ipv4()`, `sample_ipv6()` and `sample_network()`
+
+## Minor improvements
+
+* Improved input validation warnings. They now report the row number involved and no longer mention internal function names.
+* Performance improvements
 
 
 # ipaddress 0.1.2

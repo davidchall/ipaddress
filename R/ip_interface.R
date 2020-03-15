@@ -6,18 +6,18 @@ methods::setOldClass(c("ip_interface", "vctrs_vctr"))
 #' This hybrid class stores both the host address and the network it is on.
 #'
 #' @details
-#' Conceptually, constructing an `ip_interface` vector is like constructing an
+#' Constructing an `ip_interface` vector is conceptually like constructing an
 #' \code{\link{ip_network}} vector, except the host bits are retained.
 #'
 #' The `ip_interface` class inherits from the \code{\link{ip_address}} class.
-#' This means it can generally be used in places where an `ip_address` vector
-#' is expected. A few exceptions to this rule are:
+#' This means it can generally be used in places where an \code{\link{ip_address}}
+#' vector is expected. A few exceptions to this rule are:
 #' * It does not support addition and subtraction of integers
 #' * It does not support bitwise operations
-#' * It cannot be compared to `ip_address` vectors
+#' * It cannot be compared to \code{\link{ip_address}} vectors
 #'
 #' The `ip_interface` class additionally supports a few functions typically
-#' reserved for `ip_network` vectors: [prefix_length()], [netmask()] and
+#' reserved for \code{\link{ip_network}} vectors: [prefix_length()], [netmask()] and
 #' [hostmask()].
 #'
 #' For other purposes, you can extract the address and network components using

@@ -49,7 +49,7 @@ hosts(ip_network("2001:db8::/126"))
 }
 \seealso{
 Use \code{\link[=network_address]{network_address()}} and \code{\link[=broadcast_address]{broadcast_address()}} to get the first and last
-address of a network without generating all addresses in between.
+address of a network.
 
 Use \code{\link[=sample_network]{sample_network()}} to randomly sample addresses from a network.
 }

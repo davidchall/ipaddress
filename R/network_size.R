@@ -18,6 +18,8 @@
 #' broadcast_address(x)
 #'
 #' num_addresses(x)
+#' @seealso
+#' Use [seq.ip_network()] to generate all addresses in a network.
 #' @name network_size
 NULL
 

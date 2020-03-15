@@ -48,20 +48,20 @@ This hybrid class stores both the host address and the network it is on.
 \code{is_ip_interface()} checks if an object is of class \code{ip_interface}.
 }
 \details{
-Conceptually, constructing an \code{ip_interface} vector is like constructing an
+Constructing an \code{ip_interface} vector is conceptually like constructing an
 \code{\link{ip_network}} vector, except the host bits are retained.
 
 The \code{ip_interface} class inherits from the \code{\link{ip_address}} class.
-This means it can generally be used in places where an \code{ip_address} vector
-is expected. A few exceptions to this rule are:
+This means it can generally be used in places where an \code{\link{ip_address}}
+vector is expected. A few exceptions to this rule are:
 \itemize{
 \item It does not support addition and subtraction of integers
 \item It does not support bitwise operations
-\item It cannot be compared to \code{ip_address} vectors
+\item It cannot be compared to \code{\link{ip_address}} vectors
 }
 
 The \code{ip_interface} class additionally supports a few functions typically
-reserved for \code{ip_network} vectors: \code{\link[=prefix_length]{prefix_length()}}, \code{\link[=netmask]{netmask()}} and
+reserved for \code{\link{ip_network}} vectors: \code{\link[=prefix_length]{prefix_length()}}, \code{\link[=netmask]{netmask()}} and
 \code{\link[=hostmask]{hostmask()}}.
 
 For other purposes, you can extract the address and network components using

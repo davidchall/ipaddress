@@ -61,3 +61,6 @@ netmask(c(22L, 26L), c(FALSE, TRUE))
 
 hostmask(c(22L, 26L), c(FALSE, TRUE))
 }
+\seealso{
+\code{\link[=max_prefix_length]{max_prefix_length()}}
+}

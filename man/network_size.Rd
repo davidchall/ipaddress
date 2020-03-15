@@ -45,3 +45,6 @@ broadcast_address(x)
 
 num_addresses(x)
 }
+\seealso{
+Use \code{\link[=seq.ip_network]{seq.ip_network()}} to generate all addresses in a network.
+}

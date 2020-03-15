@@ -22,6 +22,8 @@
 #' netmask(c(22L, 26L), c(FALSE, TRUE))
 #'
 #' hostmask(c(22L, 26L), c(FALSE, TRUE))
+#' @seealso
+#' [max_prefix_length()]
 #' @name netmask
 NULL
 
