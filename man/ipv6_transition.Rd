@@ -3,23 +3,23 @@
 \name{ipv6_transition}
 \alias{ipv6_transition}
 \alias{is_ipv4_mapped}
-\alias{extract_ipv4_mapped}
 \alias{is_6to4}
-\alias{extract_6to4}
 \alias{is_teredo}
+\alias{extract_ipv4_mapped}
+\alias{extract_6to4}
 \alias{extract_teredo_server}
 \alias{extract_teredo_client}
 \title{IPv6 transition mechanisms}
 \usage{
 is_ipv4_mapped(x)
 
-extract_ipv4_mapped(x)
-
 is_6to4(x)
 
-extract_6to4(x)
-
 is_teredo(x)
+
+extract_ipv4_mapped(x)
+
+extract_6to4(x)
 
 extract_teredo_server(x)
 
@@ -29,8 +29,8 @@ extract_teredo_client(x)
 \item{x}{An \code{\link{ip_address}} vector}
 }
 \value{
-The \code{is_xxx()} functions return a logical vector and the
-\code{extract_xxx()} functions return an \code{\link{ip_address}} vector.
+\code{is_xxx()} functions return a logical vector; \code{extract_xxx()}
+functions return an \code{\link{ip_address}} vector.
 }
 \description{
 There are multiple mechanisms designed to help with the transition
@@ -46,15 +46,19 @@ The IPv6 transition mechanisms are described in the IETF memos:
 }
 }
 \examples{
-is_ipv4_mapped(ip_network("::ffff:0.0.0.0/96"))
+# these examples show the reserved networks
 
-extract_ipv4_mapped(ip_address("::ffff:192.0.2.128"))
+is_ipv4_mapped(ip_network("::ffff:0.0.0.0/96"))
 
 is_6to4(ip_network("2002::/16"))
 
-extract_6to4(ip_address("2002:c000:0204::"))
-
 is_teredo(ip_network("2001::/32"))
+
+# these examples show embedded IPv4 addresses
+
+extract_ipv4_mapped(ip_address("::ffff:192.0.2.128"))
+
+extract_6to4(ip_address("2002:c000:0204::"))
 
 extract_teredo_server(ip_address("2001:0000:4136:e378:8000:63bf:3fff:fdd2"))
 

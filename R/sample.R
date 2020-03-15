@@ -1,6 +1,7 @@
-#' Sample addresses within a network
+#' Sample random addresses
 #'
-#' Generates random addresses within an IP network.
+#' `sample_ipv4()` and `sample_ipv6()` sample addresses from the entire
+#' address space; `sample_network()` samples addressesfrom a specific network.
 #'
 #' @param x An \code{\link{ip_network}} scalar
 #' @param size Integer specifying the number of addresses to return
@@ -10,13 +11,30 @@
 #' @seealso
 #' Use [seq.ip_network()] to generate _all_ addresses in a network.
 #'
-#' Use [sample_ipv4()] or [sample_ipv6()] to sample addresses from
-#' the entire address space.
-#'
 #' @examples
+#' sample_ipv4(5)
+#'
+#' sample_ipv6(5)
+#'
 #' sample_network(ip_network("192.168.0.0/16"), 5)
 #'
 #' sample_network(ip_network("2001:db8::/48"), 5)
+#' @name sample
+NULL
+
+#' @rdname sample
+#' @export
+sample_ipv4 <- function(size, replace = FALSE) {
+  sample_network(ip_network("0.0.0.0/0"), size, replace)
+}
+
+#' @rdname sample
+#' @export
+sample_ipv6 <- function(size, replace = FALSE) {
+  sample_network(ip_network("::/0"), size, replace)
+}
+
+#' @rdname sample
 #' @export
 sample_network <- function(x, size, replace = FALSE) {
   assertthat::assert_that(
@@ -60,34 +78,6 @@ sample_network <- function(x, size, replace = FALSE) {
   }
 
   rep(network_address(x), size) | ip_address(result)
-}
-
-
-#' Sample random addresses
-#'
-#' Generates random IPv4 or IPv6 addresses.
-#'
-#' @inherit sample_network return params
-#'
-#' @seealso
-#' Use [sample_network()] to sample addresses from a specific IP network.
-#' @examples
-#' sample_ipv4(5)
-#'
-#' sample_ipv6(5)
-#' @name sample_ip
-NULL
-
-#' @rdname sample_ip
-#' @export
-sample_ipv4 <- function(size, replace = FALSE) {
-  sample_network(ip_network("0.0.0.0/0"), size, replace)
-}
-
-#' @rdname sample_ip
-#' @export
-sample_ipv6 <- function(size, replace = FALSE) {
-  sample_network(ip_network("::/0"), size, replace)
 }
 
 sample_ipv4_character <- function(size, n_bits_to_sample) {

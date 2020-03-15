@@ -11,19 +11,23 @@
 #' * Teredo: [RFC 4380](https://tools.ietf.org/html/rfc4380)
 #'
 #' @param x An \code{\link{ip_address}} vector
-#' @return The `is_xxx()` functions return a logical vector and the
-#'   `extract_xxx()` functions return an \code{\link{ip_address}} vector.
+#' @return `is_xxx()` functions return a logical vector; `extract_xxx()`
+#'   functions return an \code{\link{ip_address}} vector.
 #'
 #' @examples
-#' is_ipv4_mapped(ip_network("::ffff:0.0.0.0/96"))
+#' # these examples show the reserved networks
 #'
-#' extract_ipv4_mapped(ip_address("::ffff:192.0.2.128"))
+#' is_ipv4_mapped(ip_network("::ffff:0.0.0.0/96"))
 #'
 #' is_6to4(ip_network("2002::/16"))
 #'
-#' extract_6to4(ip_address("2002:c000:0204::"))
-#'
 #' is_teredo(ip_network("2001::/32"))
+#'
+#' # these examples show embedded IPv4 addresses
+#'
+#' extract_ipv4_mapped(ip_address("::ffff:192.0.2.128"))
+#'
+#' extract_6to4(ip_address("2002:c000:0204::"))
 #'
 #' extract_teredo_server(ip_address("2001:0000:4136:e378:8000:63bf:3fff:fdd2"))
 #'
@@ -45,14 +49,6 @@ is_ipv4_mapped <- function(x) {
 
 #' @rdname ipv6_transition
 #' @export
-extract_ipv4_mapped <- function(x) {
-  assertthat::assert_that(is_ip_address(x))
-
-  new_ip_address_encode(extract_ipv4_mapped_wrapper(x))
-}
-
-#' @rdname ipv6_transition
-#' @export
 is_6to4 <- function(x) {
   if (is_ip_address(x)) {
     is_6to4_address_wrapper(x)
@@ -65,14 +61,6 @@ is_6to4 <- function(x) {
 
 #' @rdname ipv6_transition
 #' @export
-extract_6to4 <- function(x) {
-  assertthat::assert_that(is_ip_address(x))
-
-  new_ip_address_encode(extract_6to4_wrapper(x))
-}
-
-#' @rdname ipv6_transition
-#' @export
 is_teredo <- function(x) {
   if (is_ip_address(x)) {
     is_teredo_address_wrapper(x)
@@ -81,6 +69,22 @@ is_teredo <- function(x) {
   } else {
     stop("argument must be an ip_address vector or an ip_network vector")
   }
+}
+
+#' @rdname ipv6_transition
+#' @export
+extract_ipv4_mapped <- function(x) {
+  assertthat::assert_that(is_ip_address(x))
+
+  new_ip_address_encode(extract_ipv4_mapped_wrapper(x))
+}
+
+#' @rdname ipv6_transition
+#' @export
+extract_6to4 <- function(x) {
+  assertthat::assert_that(is_ip_address(x))
+
+  new_ip_address_encode(extract_6to4_wrapper(x))
 }
 
 #' @rdname ipv6_transition

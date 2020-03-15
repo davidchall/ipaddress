@@ -9,35 +9,22 @@ reference:
       - ip_address
       - ip_network
       - ip_interface
-  - title: "Binary representation"
+  - title: "Other representations"
     contents:
       - packed
-      - unpack
   - title: "Address spaces"
     contents:
       - is_ipv4
-      - is_ipv6
-      - sample_ipv4
-      - sample_ipv6
       - max_prefix_length
       - is_multicast
-      - is_unspecified
-      - is_loopback
-      - is_link_local
       - is_ipv4_mapped
-      - extract_ipv4_mapped
   - title: "Network membership"
     contents:
       - prefix_length
-      - num_addresses
-      - network_address
-      - broadcast_address
       - netmask
-      - hostmask
-      - seq.ip_network
-      - hosts
-      - sample_network
       - is_within
-      - is_within_any
       - is_subnet
-      - is_supernet
+  - title: "Generating addresses"
+    contents:
+      - starts_with("sample")
+      - seq.ip_network
