@@ -146,7 +146,7 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-binary-representation" class="hasAnchor"><a href="#section-binary-representation" class="anchor"></a>Binary representation</h2>
+          <h2 id="section-other-representations" class="hasAnchor"><a href="#section-other-representations" class="anchor"></a>Other representations</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -173,12 +173,6 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="sample_ip.html">sample_ipv4()</a></code> <code><a href="sample_ip.html">sample_ipv6()</a></code> </p>
-        </td>
-        <td><p>Sample random addresses</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="max_prefix_length.html">max_prefix_length()</a></code> </p>
         </td>
         <td><p>Size of the address space</p></td>
@@ -191,7 +185,7 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="ipv6_transition.html">is_ipv4_mapped()</a></code> <code><a href="ipv6_transition.html">extract_ipv4_mapped()</a></code> <code><a href="ipv6_transition.html">is_6to4()</a></code> <code><a href="ipv6_transition.html">extract_6to4()</a></code> <code><a href="ipv6_transition.html">is_teredo()</a></code> <code><a href="ipv6_transition.html">extract_teredo_server()</a></code> <code><a href="ipv6_transition.html">extract_teredo_client()</a></code> </p>
+          <p><code><a href="ipv6_transition.html">is_ipv4_mapped()</a></code> <code><a href="ipv6_transition.html">is_6to4()</a></code> <code><a href="ipv6_transition.html">is_teredo()</a></code> <code><a href="ipv6_transition.html">extract_ipv4_mapped()</a></code> <code><a href="ipv6_transition.html">extract_6to4()</a></code> <code><a href="ipv6_transition.html">extract_teredo_server()</a></code> <code><a href="ipv6_transition.html">extract_teredo_client()</a></code> </p>
         </td>
         <td><p>IPv6 transition mechanisms</p></td>
       </tr>
@@ -217,18 +211,6 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="sequence.html">seq(&lt;i&gt;&amp;lt;ip_network&amp;gt;&lt;/i&gt;)</a></code> <code><a href="sequence.html">hosts()</a></code> </p>
-        </td>
-        <td><p>List addresses within a network</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sample_network.html">sample_network()</a></code> </p>
-        </td>
-        <td><p>Sample addresses within a network</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="address_in_network.html">is_within()</a></code> <code><a href="address_in_network.html">is_within_any()</a></code> </p>
         </td>
         <td><p>Network membership of IP addresses</p></td>
@@ -239,6 +221,26 @@
         </td>
         <td><p>Network membership of other IP networks</p></td>
       </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-generating-addresses" class="hasAnchor"><a href="#section-generating-addresses" class="anchor"></a>Generating addresses</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="sample.html">sample_ipv4()</a></code> <code><a href="sample.html">sample_ipv6()</a></code> <code><a href="sample.html">sample_network()</a></code> </p>
+        </td>
+        <td><p>Sample random addresses</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sequence.html">seq(&lt;i&gt;&amp;lt;ip_network&amp;gt;&lt;/i&gt;)</a></code> <code><a href="sequence.html">hosts()</a></code> </p>
+        </td>
+        <td><p>List addresses within a network</p></td>
+      </tr>
     </tbody>
     </table>
   </div>
@@ -247,9 +249,10 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#section-classes">Classes</a></li>
-      <li><a href="#section-binary-representation">Binary representation</a></li>
+      <li><a href="#section-other-representations">Other representations</a></li>
       <li><a href="#section-address-spaces">Address spaces</a></li>
       <li><a href="#section-network-membership">Network membership</a></li>
+      <li><a href="#section-generating-addresses">Generating addresses</a></li>
     </ul>
   </div>
 </div>
