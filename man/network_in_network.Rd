@@ -5,7 +5,7 @@
 \alias{overlaps}
 \alias{is_subnet}
 \alias{is_supernet}
-\title{Network membership of other IP networks}
+\title{Network membership of other networks}
 \usage{
 overlaps(network, other)
 
@@ -22,10 +22,9 @@ is_supernet(network, other)
 A logical vector
 }
 \description{
-\code{overlaps()} checks for any overlap between two networks.
-
-\code{is_subnet()} and \code{is_supernet()} check if one network is a true
-subnet or supernet of another network.
+\code{overlaps()} checks for any overlap between two networks; \code{is_subnet()} and
+\code{is_supernet()} check if one network is a true subnet or supernet of another
+network.
 }
 \examples{
 net1 <- ip_network("192.168.1.128/30")

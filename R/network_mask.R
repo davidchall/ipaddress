@@ -1,16 +1,19 @@
-#' Subnet masking
+#' Network mask
 #'
-#' These functions yield different representations of the IP network mask.
+#' These functions yield equivalent representations of the network mask.
 #'
+#' @param x An \code{\link{ip_network}} or \code{\link{ip_interface}} vector
 #' @param prefix_length An integer vector
 #' @param is_ipv6 A logical vector
-#' @param network An \code{\link{ip_network}} vector
-#' @param interface An \code{\link{ip_interface}} vector
 #' @param ... Arguments to be passed to other methods
-#' @return An \code{\link{ip_address}} vector
+#' @return
+#' * `prefix_length()` returns an integer vector
+#' * `netmask()` and `hostmask()` return an \code{\link{ip_address}} vector
 #'
 #' @examples
 #' x <- ip_network(c("192.168.0.0/22", "2001:db00::0/26"))
+#'
+#' prefix_length(x)
 #'
 #' netmask(x)
 #'
@@ -19,10 +22,15 @@
 #' netmask(c(22L, 26L), c(FALSE, TRUE))
 #'
 #' hostmask(c(22L, 26L), c(FALSE, TRUE))
-#' @seealso The netmask can equivalently be represented by the [prefix_length()].
-#'
 #' @name netmask
 NULL
+
+#' @rdname netmask
+#' @export
+prefix_length <- function(x) {
+  assertthat::assert_that(is_ip_network(x) || is_ip_interface(x))
+  field(x, "prefix")
+}
 
 #' @rdname netmask
 #' @export
@@ -38,37 +46,37 @@ hostmask <- function(...) {
 
 #' @rdname netmask
 #' @export
-netmask.ip_network <- function(network, ...) {
+netmask.ip_network <- function(x, ...) {
   new_ip_address_encode(netmask_wrapper(
-    field(network, "prefix"),
-    field(network, "is_ipv6")
+    field(x, "prefix"),
+    field(x, "is_ipv6")
   ))
 }
 
 #' @rdname netmask
 #' @export
-hostmask.ip_network <- function(network, ...) {
+hostmask.ip_network <- function(x, ...) {
   new_ip_address_encode(hostmask_wrapper(
-    field(network, "prefix"),
-    field(network, "is_ipv6")
+    field(x, "prefix"),
+    field(x, "is_ipv6")
   ))
 }
 
 #' @rdname netmask
 #' @export
-netmask.ip_interface <- function(interface, ...) {
+netmask.ip_interface <- function(x, ...) {
   new_ip_address_encode(netmask_wrapper(
-    field(interface, "prefix"),
-    field(interface, "is_ipv6")
+    field(x, "prefix"),
+    field(x, "is_ipv6")
   ))
 }
 
 #' @rdname netmask
 #' @export
-hostmask.ip_interface <- function(interface, ...) {
+hostmask.ip_interface <- function(x, ...) {
   new_ip_address_encode(hostmask_wrapper(
-    field(interface, "prefix"),
-    field(interface, "is_ipv6")
+    field(x, "prefix"),
+    field(x, "is_ipv6")
   ))
 }
 

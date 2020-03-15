@@ -1,7 +1,6 @@
-#' Network membership of IP addresses
+#' Network membership of addresses
 #'
-#' These functions check whether an IP address falls within the range
-#' of an IP network.
+#' These functions check whether an address falls within a network.
 #'
 #' @param address An \code{\link{ip_address}} vector
 #' @param network An \code{\link{ip_network}} vector
@@ -13,6 +12,9 @@
 #' is_within(ip_address("192.0.3.6"), ip_network("192.0.2.0/28"))
 #'
 #' is_within_any(ip_address("192.0.3.6"), ip_network(c("192.0.2.0/28", "192.0.3.0/28")))
+#' @seealso
+#' Use [is_subnet()] to check if an \code{\link{ip_network}} is within another
+#' \code{\link{ip_network}}.
 #' @name address_in_network
 NULL
 
@@ -37,7 +39,7 @@ is_within <- function(address, network) {
 
 #' `is_within_any()`
 #'
-#' `is_within_any()` checks if each IP address falls within _any_ of the IP networks.
+#' `is_within_any()` checks if each address falls within _any_ of the networks.
 #' @rdname address_in_network
 #' @export
 is_within_any <- function(address, network) {
@@ -50,13 +52,11 @@ is_within_any <- function(address, network) {
 }
 
 
-#' Network membership of other IP networks
+#' Network membership of other networks
 #'
-#' @description
-#' `overlaps()` checks for any overlap between two networks.
-#'
-#' `is_subnet()` and `is_supernet()` check if one network is a true
-#' subnet or supernet of another network.
+#' `overlaps()` checks for any overlap between two networks; `is_subnet()` and
+#' `is_supernet()` check if one network is a true subnet or supernet of another
+#' network.
 #'
 #' @param network An \code{\link{ip_network}} vector
 #' @param other An \code{\link{ip_network}} vector

@@ -20,8 +20,8 @@ reference:
       - is_ipv4_mapped
   - title: "Network membership"
     contents:
+      - num_addresses
       - prefix_length
-      - netmask
       - is_within
       - is_subnet
   - title: "Generating addresses"
