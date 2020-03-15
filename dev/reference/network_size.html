@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Reserved addresses — is_reserved • ipaddress</title>
+<title>Network size — network_size • ipaddress</title>
 
 
 <!-- jquery -->
@@ -35,10 +35,10 @@
 
 
 
-<meta property="og:title" content="Reserved addresses — is_reserved" />
-<meta property="og:description" content="Check if an address or network is reserved for special use.
-A network is considered reserved if both the network_address()
-and broadcast_address() are reserved." />
+<meta property="og:title" content="Network size — network_size" />
+<meta property="og:description" content="network_address() and broadcast_address() yield the first and last
+addresses of the network; num_addresses() gives the total number of
+addresses in the network." />
 
 
 <meta name="robots" content="noindex">
@@ -109,54 +109,59 @@ and broadcast_address() are reserved." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Reserved addresses</h1>
-    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/reserved.R'><code>R/reserved.R</code></a></small>
-    <div class="hidden name"><code>is_reserved.Rd</code></div>
+    <h1>Network size</h1>
+    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/network_size.R'><code>R/network_size.R</code></a></small>
+    <div class="hidden name"><code>network_size.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Check if an address or network is reserved for special use.
-A network is considered reserved if both the <code><a href='network_size.html'>network_address()</a></code>
-and <code><a href='network_size.html'>broadcast_address()</a></code> are reserved.</p>
+    <p><code>network_address()</code> and <code>broadcast_address()</code> yield the first and last
+addresses of the network; <code>num_addresses()</code> gives the total number of
+addresses in the network.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>is_multicast</span>(<span class='no'>x</span>)
+    <pre class="usage"><span class='fu'>network_address</span>(<span class='no'>x</span>)
 
-<span class='fu'>is_unspecified</span>(<span class='no'>x</span>)
+<span class='fu'>broadcast_address</span>(<span class='no'>x</span>)
 
-<span class='fu'>is_loopback</span>(<span class='no'>x</span>)
-
-<span class='fu'>is_link_local</span>(<span class='no'>x</span>)</pre>
+<span class='fu'>num_addresses</span>(<span class='no'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>An <code><a href='ip_address.html'>ip_address</a></code> or <code><a href='ip_network.html'>ip_network</a></code> vector</p></td>
+      <td><p>An <code><a href='ip_network.html'>ip_network</a></code> vector</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A logical vector</p>
+    
+<ul>
+<li><p><code>network_address()</code> and <code>broadcast_address()</code> return an
+<code><a href='ip_address.html'>ip_address</a></code> vector</p></li>
+<li><p><code>num_addresses()</code> returns a numeric vector</p></li>
+</ul>
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>These special use addresses are documented in IETF documents
-<a href='https://tools.ietf.org/html/rfc5735.html'>RFC 5735</a> (for IPv4) and
-<a href='https://tools.ietf.org/html/rfc4291'>RFC 4291</a> (for IPv6).</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Addresses reserved by IPv6 transition mechanisms can be identified
-by functions described in <a href='ipv6_transition.html'>ipv6_transition</a>.</p></div>
+    <p>The broadcast address is a special address at which any host connected
+to the network can receive messages. That is, packets sent to this address
+are received by all hosts on the network.
+In IPv4, the last address of a network is the broadcast address.
+Although IPv6 does not follow this approach to broadcast addresses, the
+<code>broadcast_address()</code> function still returns the last address of the network.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># these examples show the reserved networks</span>
+    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.0/22"</span>, <span class='st'>"2001:db00::0/26"</span>))
 
-<span class='fu'>is_multicast</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"224.0.0.0/4"</span>, <span class='st'>"ff00::/8"</span>)))</div><div class='output co'>#&gt; [1] TRUE TRUE</div><div class='input'>
-<span class='fu'>is_unspecified</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"0.0.0.0/32"</span>, <span class='st'>"::/128"</span>)))</div><div class='output co'>#&gt; [1] TRUE TRUE</div><div class='input'>
-<span class='fu'>is_loopback</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"127.0.0.0/8"</span>, <span class='st'>"::1/128"</span>)))</div><div class='output co'>#&gt; [1] TRUE TRUE</div><div class='input'>
-<span class='fu'>is_link_local</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"169.254.0.0/16"</span>, <span class='st'>"fe80::/10"</span>)))</div><div class='output co'>#&gt; [1] TRUE TRUE</div></pre>
+<span class='fu'>network_address</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
+#&gt; [1] 192.168.0.0 2001:db00::</div><div class='input'>
+<span class='fu'>broadcast_address</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
+#&gt; [1] 192.168.3.255                          
+#&gt; [2] 2001:db3f:ffff:ffff:ffff:ffff:ffff:ffff</div><div class='input'>
+<span class='fu'>num_addresses</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] 1.024000e+03 5.070602e+30</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <h2>Contents</h2>
@@ -164,7 +169,6 @@ by functions described in <a href='ipv6_transition.html'>ipv6_transition</a>.</p
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
       <li><a href="#details">Details</a></li>
-      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

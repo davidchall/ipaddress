@@ -125,7 +125,7 @@
 <li>New <code><a href="../reference/network_in_network.html">overlaps()</a></code> function to check for any overlap between networks.</li>
 <li>New functions for IPv6 transition mechanisms: <code><a href="../reference/ipv6_transition.html">is_ipv4_mapped()</a></code>, <code><a href="../reference/ipv6_transition.html">extract_ipv4_mapped()</a></code>, <code><a href="../reference/ipv6_transition.html">is_6to4()</a></code>, <code><a href="../reference/ipv6_transition.html">extract_6to4()</a></code>, <code><a href="../reference/ipv6_transition.html">is_teredo()</a></code>, <code><a href="../reference/ipv6_transition.html">extract_teredo_server()</a></code>, <code><a href="../reference/ipv6_transition.html">extract_teredo_client()</a></code>
 </li>
-<li>New functions to provide basic information about a network: <code><a href="../reference/network_info.html">num_addresses()</a></code>, <code><a href="../reference/network_info.html">network_address()</a></code> and <code><a href="../reference/network_info.html">broadcast_address()</a></code>.</li>
+<li>New functions to provide basic information about a network: <code><a href="../reference/network_size.html">num_addresses()</a></code>, <code><a href="../reference/network_size.html">network_address()</a></code> and <code><a href="../reference/network_size.html">broadcast_address()</a></code>.</li>
 <li>New functions to check if addresses or networks are reserved for special use: <code><a href="../reference/is_reserved.html">is_multicast()</a></code>, <code><a href="../reference/is_reserved.html">is_unspecified()</a></code>, <code><a href="../reference/is_reserved.html">is_loopback()</a></code>, <code><a href="../reference/is_reserved.html">is_link_local()</a></code>.</li>
 <li>New <code><a href="../reference/max_prefix_length.html">max_prefix_length()</a></code> function to get the size of the address space (32-bit for IPv4 and 128-bit for IPv6).</li>
 <li>Added bitwise operations to <code><a href="../reference/ip_address.html">ip_address()</a></code> vectors (<code>!</code>, <code><a href="https://rdrr.io/r/base/Logic.html">&amp;</a></code>, <code><a href="https://rdrr.io/r/base/Logic.html">|</a></code> and <code><a href="https://rdrr.io/r/base/Arithmetic.html">^</a></code>).</li>
@@ -186,7 +186,7 @@
 <li>
 <code><a href="../reference/is_ipv6.html">is_ipv4()</a></code> and <code><a href="../reference/is_ipv6.html">is_ipv6()</a></code> classify the address space</li>
 <li>
-<code><a href="../reference/network_info.html">prefix_length()</a></code>, <code><a href="../reference/netmask.html">netmask()</a></code> and <code><a href="../reference/netmask.html">hostmask()</a></code> yield different representations of the network mask</li>
+<code><a href="../reference/netmask.html">prefix_length()</a></code>, <code><a href="../reference/netmask.html">netmask()</a></code> and <code><a href="../reference/netmask.html">hostmask()</a></code> yield different representations of the network mask</li>
 </ul>
 </li>
 <li>Calculations performed in C++ (using <code>Rcpp</code> and <code>AsioHeaders</code> packages) for improved performance</li>
