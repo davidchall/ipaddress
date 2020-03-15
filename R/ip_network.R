@@ -169,5 +169,5 @@ vec_proxy_compare.ip_network <- function(x, ...) {
 
 #' @export
 vec_ptype_abbr.ip_network <- function(x, ...) {
-  "ip_netw"
+  "ip_netwk"
 }
