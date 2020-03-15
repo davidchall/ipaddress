@@ -117,24 +117,63 @@
 <div id="new-features" class="section level2">
 <h2 class="hasAnchor">
 <a href="#new-features" class="anchor"></a>New features</h2>
+<div id="classes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#classes" class="anchor"></a>Classes</h3>
 <ul>
-<li>New <code><a href="../reference/ip_interface.html">ip_interface()</a></code> class to simultaneously store the address and the network it is on.</li>
-<li>New <code><a href="../reference/sequence.html">seq.ip_network()</a></code> and <code><a href="../reference/sequence.html">hosts()</a></code> functions to list all addresses within a network.</li>
-<li>New functions to randomly sample addresses: <code><a href="../reference/sample.html">sample_ipv4()</a></code>, <code><a href="../reference/sample.html">sample_ipv6()</a></code> and <code><a href="../reference/sample.html">sample_network()</a></code>.</li>
-<li>New <code><a href="../reference/packed.html">packed()</a></code> and <code><a href="../reference/packed.html">unpack()</a></code> functions to encode and decode addresses as raw bytes.</li>
-<li>New <code><a href="../reference/network_in_network.html">overlaps()</a></code> function to check for any overlap between networks.</li>
-<li>New functions for IPv6 transition mechanisms: <code><a href="../reference/ipv6_transition.html">is_ipv4_mapped()</a></code>, <code><a href="../reference/ipv6_transition.html">extract_ipv4_mapped()</a></code>, <code><a href="../reference/ipv6_transition.html">is_6to4()</a></code>, <code><a href="../reference/ipv6_transition.html">extract_6to4()</a></code>, <code><a href="../reference/ipv6_transition.html">is_teredo()</a></code>, <code><a href="../reference/ipv6_transition.html">extract_teredo_server()</a></code>, <code><a href="../reference/ipv6_transition.html">extract_teredo_client()</a></code>
-</li>
-<li>New functions to provide basic information about a network: <code><a href="../reference/network_size.html">num_addresses()</a></code>, <code><a href="../reference/network_size.html">network_address()</a></code> and <code><a href="../reference/network_size.html">broadcast_address()</a></code>.</li>
-<li>New functions to check if addresses or networks are reserved for special use: <code><a href="../reference/is_reserved.html">is_multicast()</a></code>, <code><a href="../reference/is_reserved.html">is_unspecified()</a></code>, <code><a href="../reference/is_reserved.html">is_loopback()</a></code>, <code><a href="../reference/is_reserved.html">is_link_local()</a></code>.</li>
-<li>New <code><a href="../reference/max_prefix_length.html">max_prefix_length()</a></code> function to get the size of the address space (32-bit for IPv4 and 128-bit for IPv6).</li>
-<li>Added bitwise operations to <code><a href="../reference/ip_address.html">ip_address()</a></code> vectors (<code>!</code>, <code><a href="https://rdrr.io/r/base/Logic.html">&amp;</a></code>, <code><a href="https://rdrr.io/r/base/Logic.html">|</a></code> and <code><a href="https://rdrr.io/r/base/Arithmetic.html">^</a></code>).</li>
-<li>Support addition and subtraction of integers to/from <code><a href="../reference/ip_address.html">ip_address()</a></code> vectors.</li>
+<li>New <code><a href="../reference/ip_interface.html">ip_interface()</a></code> class to simultaneously store the address and the network it is on</li>
 <li>
-<code><a href="../reference/netmask.html">netmask()</a></code> and <code><a href="../reference/netmask.html">hostmask()</a></code> are now generics, so they can now accept either a vector of <code>ip_network</code> objects or prefix lengths. Previously they only accepted an <code>ip_network</code> vector.</li>
-<li>Added an <code><a href="../reference/ip_network.html">ip_network()</a></code> constructor that accepts <code>ip_address</code> and prefix length vectors.</li>
-<li>Improved input validation warnings. They now report the row number involved and no longer mentioned internal function names.</li>
-<li>Performance improvements.</li>
+<code><a href="../reference/ip_address.html">ip_address()</a></code> vectors now support bitwise operations (<code>!</code>, <code><a href="https://rdrr.io/r/base/Logic.html">&amp;</a></code>, <code><a href="https://rdrr.io/r/base/Logic.html">|</a></code> and <code><a href="https://rdrr.io/r/base/Arithmetic.html">^</a></code>)</li>
+<li>
+<code><a href="../reference/ip_address.html">ip_address()</a></code> vectors now support addition and subtraction of integers</li>
+<li>Added an <code><a href="../reference/ip_network.html">ip_network()</a></code> constructor that accepts <code>ip_address</code> and prefix length vectors</li>
+</ul>
+</div>
+<div id="other-representations" class="section level3">
+<h3 class="hasAnchor">
+<a href="#other-representations" class="anchor"></a>Other representations</h3>
+<ul>
+<li>New <code><a href="../reference/packed.html">packed()</a></code> and <code><a href="../reference/packed.html">unpack()</a></code> functions to encode and decode addresses as raw bytes</li>
+</ul>
+</div>
+<div id="address-spaces" class="section level3">
+<h3 class="hasAnchor">
+<a href="#address-spaces" class="anchor"></a>Address spaces</h3>
+<ul>
+<li>New <code><a href="../reference/max_prefix_length.html">max_prefix_length()</a></code> function to get the size of the address space (32-bit for IPv4 and 128-bit for IPv6)</li>
+<li>New functions to check if addresses or networks are reserved for special use: <code><a href="../reference/is_reserved.html">is_multicast()</a></code>, <code><a href="../reference/is_reserved.html">is_unspecified()</a></code>, <code><a href="../reference/is_reserved.html">is_loopback()</a></code>, <code><a href="../reference/is_reserved.html">is_link_local()</a></code>
+</li>
+<li>New functions for IPv6 transition mechanisms: <code><a href="../reference/ipv6_transition.html">is_ipv4_mapped()</a></code>, <code><a href="../reference/ipv6_transition.html">is_6to4()</a></code>, <code><a href="../reference/ipv6_transition.html">is_teredo()</a></code>, <code><a href="../reference/ipv6_transition.html">extract_ipv4_mapped()</a></code>, <code><a href="../reference/ipv6_transition.html">extract_6to4()</a></code>, <code><a href="../reference/ipv6_transition.html">extract_teredo_server()</a></code>, <code><a href="../reference/ipv6_transition.html">extract_teredo_client()</a></code>
+</li>
+</ul>
+</div>
+<div id="network-membership" class="section level3">
+<h3 class="hasAnchor">
+<a href="#network-membership" class="anchor"></a>Network membership</h3>
+<ul>
+<li>New functions about the size of a network: <code><a href="../reference/network_size.html">num_addresses()</a></code>, <code><a href="../reference/network_size.html">network_address()</a></code> and <code><a href="../reference/network_size.html">broadcast_address()</a></code>
+</li>
+<li>New <code><a href="../reference/network_in_network.html">overlaps()</a></code> function to check for <em>any</em> overlap between networks</li>
+<li>
+<code><a href="../reference/netmask.html">netmask()</a></code> and <code><a href="../reference/netmask.html">hostmask()</a></code> are now generics, so they can now accept either an <code>ip_network</code> vector or a vector of prefix lengths. Previously they only accepted an <code>ip_network</code> vector.</li>
+</ul>
+</div>
+<div id="generating-addresses" class="section level3">
+<h3 class="hasAnchor">
+<a href="#generating-addresses" class="anchor"></a>Generating addresses</h3>
+<ul>
+<li>New <code><a href="../reference/sequence.html">seq.ip_network()</a></code> and <code><a href="../reference/sequence.html">hosts()</a></code> functions to list all addresses within a network</li>
+<li>New functions to randomly sample addresses: <code><a href="../reference/sample.html">sample_ipv4()</a></code>, <code><a href="../reference/sample.html">sample_ipv6()</a></code> and <code><a href="../reference/sample.html">sample_network()</a></code>
+</li>
+</ul>
+</div>
+</div>
+<div id="minor-improvements" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-improvements" class="anchor"></a>Minor improvements</h2>
+<ul>
+<li>Improved input validation warnings. They now report the row number involved and no longer mention internal function names.</li>
+<li>Performance improvements</li>
 </ul>
 </div>
 </div>

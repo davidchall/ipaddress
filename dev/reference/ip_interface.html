@@ -170,18 +170,18 @@ is_ip_interface() checks if an object is of class ip_interface." />
     <p>An <code>ip_interface</code> vector</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Conceptually, constructing an <code>ip_interface</code> vector is like constructing an
+    <p>Constructing an <code>ip_interface</code> vector is conceptually like constructing an
 <code><a href='ip_network.html'>ip_network</a></code> vector, except the host bits are retained.</p>
 <p>The <code>ip_interface</code> class inherits from the <code><a href='ip_address.html'>ip_address</a></code> class.
-This means it can generally be used in places where an <code>ip_address</code> vector
-is expected. A few exceptions to this rule are:</p><ul>
+This means it can generally be used in places where an <code><a href='ip_address.html'>ip_address</a></code>
+vector is expected. A few exceptions to this rule are:</p><ul>
 <li><p>It does not support addition and subtraction of integers</p></li>
 <li><p>It does not support bitwise operations</p></li>
-<li><p>It cannot be compared to <code>ip_address</code> vectors</p></li>
+<li><p>It cannot be compared to <code><a href='ip_address.html'>ip_address</a></code> vectors</p></li>
 </ul>
 
 <p>The <code>ip_interface</code> class additionally supports a few functions typically
-reserved for <code>ip_network</code> vectors: <code><a href='netmask.html'>prefix_length()</a></code>, <code><a href='netmask.html'>netmask()</a></code> and
+reserved for <code><a href='ip_network.html'>ip_network</a></code> vectors: <code><a href='netmask.html'>prefix_length()</a></code>, <code><a href='netmask.html'>netmask()</a></code> and
 <code><a href='netmask.html'>hostmask()</a></code>.</p>
 <p>For other purposes, you can extract the address and network components using
 <code><a href='ip_address.html'>as_ip_address()</a></code> and <code><a href='ip_network.html'>as_ip_network()</a></code>.</p>
