@@ -5,6 +5,30 @@
 #include "utils.h"
 
 
+LogicalVector IpNetworkVector::isTrue(
+    const std::function<bool(const asio::ip::address_v4&)>& decide_fn_v4,
+    const std::function<bool(const asio::ip::address_v6&)>& decide_fn_v6
+) const {
+  std::size_t vsize = is_na.size();
+  LogicalVector output(vsize);
+
+  for (std::size_t i=0; i<vsize; ++i) {
+    if (is_na[i]) {
+      output[i] = NA_LOGICAL;
+    } else if (is_ipv6[i]) {
+      asio::ip::address_v6 first = network_v6[i].address();
+      asio::ip::address_v6 last = broadcast_address<asio::ip::address_v6>(network_v6[i]);
+      output[i] = decide_fn_v6(first) && decide_fn_v6(last);
+    } else {
+      asio::ip::address_v4 first = network_v4[i].address();
+      asio::ip::address_v4 last = broadcast_address<asio::ip::address_v4>(network_v4[i]);
+      output[i] = decide_fn_v4(first) && decide_fn_v4(last);
+    }
+  }
+
+  return output;
+}
+
 /*----------------*
  *  Constructors  *
  *----------------*/
@@ -332,158 +356,50 @@ IpAddressVector IpNetworkVector::hosts(bool exclude_unusable) const {
  *  Reserved addresses  *
  * ---------------------*/
 LogicalVector IpNetworkVector::isMulticast() const {
-  std::size_t vsize = is_na.size();
-
-  // initialize vectors
-  LogicalVector output(vsize);
-
-  for (std::size_t i=0; i<vsize; ++i) {
-    if (is_na[i]) {
-      output[i] = NA_LOGICAL;
-    } else if (is_ipv6[i]) {
-      asio::ip::address_v6 first = network_v6[i].address();
-      asio::ip::address_v6 last = broadcast_address<asio::ip::address_v6>(network_v6[i]);
-      output[i] = first.is_multicast() && last.is_multicast();
-    } else {
-      asio::ip::address_v4 first = network_v4[i].address();
-      asio::ip::address_v4 last = broadcast_address<asio::ip::address_v4>(network_v4[i]);
-      output[i] = first.is_multicast() && last.is_multicast();
-    }
-  }
-
-  return output;
+  return isTrue(
+    [](const asio::ip::address_v4 &x) { return x.is_multicast(); },
+    [](const asio::ip::address_v6 &x) { return x.is_multicast(); }
+  );
 }
 
 LogicalVector IpNetworkVector::isUnspecified() const {
-  std::size_t vsize = is_na.size();
-
-  // initialize vectors
-  LogicalVector output(vsize);
-
-  for (std::size_t i=0; i<vsize; ++i) {
-    if (is_na[i]) {
-      output[i] = NA_LOGICAL;
-    } else if (is_ipv6[i]) {
-      asio::ip::address_v6 first = network_v6[i].address();
-      asio::ip::address_v6 last = broadcast_address<asio::ip::address_v6>(network_v6[i]);
-      output[i] = first.is_unspecified() && last.is_unspecified();
-    } else {
-      asio::ip::address_v4 first = network_v4[i].address();
-      asio::ip::address_v4 last = broadcast_address<asio::ip::address_v4>(network_v4[i]);
-      output[i] = first.is_unspecified() && last.is_unspecified();
-    }
-  }
-
-  return output;
+  return isTrue(
+    [](const asio::ip::address_v4 &x) { return x.is_unspecified(); },
+    [](const asio::ip::address_v6 &x) { return x.is_unspecified(); }
+  );
 }
 
 LogicalVector IpNetworkVector::isLoopback() const {
-  std::size_t vsize = is_na.size();
-
-  // initialize vectors
-  LogicalVector output(vsize);
-
-  for (std::size_t i=0; i<vsize; ++i) {
-    if (is_na[i]) {
-      output[i] = NA_LOGICAL;
-    } else if (is_ipv6[i]) {
-      asio::ip::address_v6 first = network_v6[i].address();
-      asio::ip::address_v6 last = broadcast_address<asio::ip::address_v6>(network_v6[i]);
-      output[i] = first.is_loopback() && last.is_loopback();
-    } else {
-      asio::ip::address_v4 first = network_v4[i].address();
-      asio::ip::address_v4 last = broadcast_address<asio::ip::address_v4>(network_v4[i]);
-      output[i] = first.is_loopback() && last.is_loopback();
-    }
-  }
-
-  return output;
+  return isTrue(
+    [](const asio::ip::address_v4 &x) { return x.is_loopback(); },
+    [](const asio::ip::address_v6 &x) { return x.is_loopback(); }
+  );
 }
 
 LogicalVector IpNetworkVector::isLinkLocal() const {
-  std::size_t vsize = is_na.size();
-
-  // initialize vectors
-  LogicalVector output(vsize);
-
-  for (std::size_t i=0; i<vsize; ++i) {
-    if (is_na[i]) {
-      output[i] = NA_LOGICAL;
-    } else if (is_ipv6[i]) {
-      asio::ip::address_v6 first = network_v6[i].address();
-      asio::ip::address_v6 last = broadcast_address<asio::ip::address_v6>(network_v6[i]);
-      output[i] = first.is_link_local() && last.is_link_local();
-    } else {
-      asio::ip::address_v4 first = network_v4[i].address();
-      asio::ip::address_v4 last = broadcast_address<asio::ip::address_v4>(network_v4[i]);
-      // asio::ip::address_v4::is_link_local() doesn't exist
-      output[i] = ((first.to_uint() & 0xFFFF0000) == 0xA9FE0000) &&
-        ((last.to_uint() & 0xFFFF0000) == 0xA9FE0000);
-    }
-  }
-
-  return output;
+  return isTrue(
+    [](const asio::ip::address_v4 &x) { return (x.to_uint() & 0xFFFF0000) == 0xA9FE0000; },
+    [](const asio::ip::address_v6 &x) { return x.is_link_local(); }
+  );
 }
 
 LogicalVector IpNetworkVector::isIPv4Mapped() const {
-  std::size_t vsize = is_na.size();
-
-  // initialize vectors
-  LogicalVector output(vsize);
-
-  for (std::size_t i=0; i<vsize; ++i) {
-    if (is_na[i]) {
-      output[i] = NA_LOGICAL;
-    } else if (is_ipv6[i]) {
-      asio::ip::address_v6 first = network_v6[i].address();
-      asio::ip::address_v6 last = broadcast_address<asio::ip::address_v6>(network_v6[i]);
-      output[i] = first.is_v4_mapped() && last.is_v4_mapped();
-    } else {
-      output[i] = false;
-    }
-  }
-
-  return output;
+  return isTrue(
+    [](const asio::ip::address_v4 &x) { return false; },
+    [](const asio::ip::address_v6 &x) { return x.is_v4_mapped(); }
+  );
 }
 
 LogicalVector IpNetworkVector::is6to4() const {
-  std::size_t vsize = is_na.size();
-
-  // initialize vectors
-  LogicalVector output(vsize);
-
-  for (std::size_t i=0; i<vsize; ++i) {
-    if (is_na[i]) {
-      output[i] = NA_LOGICAL;
-    } else if (is_ipv6[i]) {
-      asio::ip::address_v6 first = network_v6[i].address();
-      asio::ip::address_v6 last = broadcast_address<asio::ip::address_v6>(network_v6[i]);
-      output[i] = is_6to4(first) && is_6to4(last);
-    } else {
-      output[i] = false;
-    }
-  }
-
-  return output;
+  return isTrue(
+    [](const asio::ip::address_v4 &x) { return false; },
+    [](const asio::ip::address_v6 &x) { return is_6to4(x); }
+  );
 }
 
 LogicalVector IpNetworkVector::isTeredo() const {
-  std::size_t vsize = is_na.size();
-
-  // initialize vectors
-  LogicalVector output(vsize);
-
-  for (std::size_t i=0; i<vsize; ++i) {
-    if (is_na[i]) {
-      output[i] = NA_LOGICAL;
-    } else if (is_ipv6[i]) {
-      asio::ip::address_v6 first = network_v6[i].address();
-      asio::ip::address_v6 last = broadcast_address<asio::ip::address_v6>(network_v6[i]);
-      output[i] = is_teredo(first) && is_teredo(last);
-    } else {
-      output[i] = false;
-    }
-  }
-
-  return output;
+  return isTrue(
+    [](const asio::ip::address_v4 &x) { return false; },
+    [](const asio::ip::address_v6 &x) { return is_teredo(x); }
+  );
 }

@@ -25,6 +25,11 @@ private:
     std::vector<bool> in_is_na
   ) : network_v4(in_network_v4), network_v6(in_network_v6), is_ipv6(in_is_ipv6), is_na(in_is_na) { };
 
+  LogicalVector isTrue(
+      const std::function<bool(const asio::ip::address_v4&)>& decide_fn_v4,
+      const std::function<bool(const asio::ip::address_v6&)>& decide_fn_v6
+  ) const;
+
 public:
   /*----------------*
    *  Constructors  *
