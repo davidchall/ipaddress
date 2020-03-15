@@ -24,8 +24,8 @@ sample_network(x, size, replace = FALSE)
 An \code{\link{ip_address}} vector
 }
 \description{
-\code{sample_ipv4()} and \code{sample_ipv6()} sample addresses from the entire
-address space; \code{sample_network()} samples addressesfrom a specific network.
+\code{sample_ipv4()} and \code{sample_ipv6()} sample from the entire address space;
+\code{sample_network()} samples from a specific network.
 }
 \examples{
 sample_ipv4(5)

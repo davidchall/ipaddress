@@ -1,7 +1,7 @@
 #' Sample random addresses
 #'
-#' `sample_ipv4()` and `sample_ipv6()` sample addresses from the entire
-#' address space; `sample_network()` samples addressesfrom a specific network.
+#' `sample_ipv4()` and `sample_ipv6()` sample from the entire address space;
+#' `sample_network()` samples from a specific network.
 #'
 #' @param x An \code{\link{ip_network}} scalar
 #' @param size Integer specifying the number of addresses to return
