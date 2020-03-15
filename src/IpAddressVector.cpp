@@ -6,8 +6,8 @@
 
 
 LogicalVector IpAddressVector::isAddress(
-  const std::function<bool(const asio::ip::address_v4&)>& decision_v4,
-  const std::function<bool(const asio::ip::address_v6&)>& decision_v6
+    const std::function<bool(const asio::ip::address_v4&)>& decide_fn_v4,
+    const std::function<bool(const asio::ip::address_v6&)>& decide_fn_v6
 ) const {
   std::size_t vsize = is_na.size();
   LogicalVector output(vsize);
@@ -16,13 +16,36 @@ LogicalVector IpAddressVector::isAddress(
     if (is_na[i]) {
       output[i] = NA_LOGICAL;
     } else if (is_ipv6[i]) {
-      output[i] = decision_v6(address_v6[i]);
+      output[i] = decide_fn_v6(address_v6[i]);
     } else {
-      output[i] = decision_v4(address_v4[i]);
+      output[i] = decide_fn_v4(address_v4[i]);
     }
   }
 
   return output;
+}
+
+IpAddressVector IpAddressVector::map6to4(
+    const std::function<bool(const asio::ip::address_v6&)>& filter_fn,
+    const std::function<asio::ip::address_v4(const asio::ip::address_v6&)>& map_fn
+) const {
+  std::size_t vsize = is_na.size();
+
+  // initialize vectors
+  std::vector<asio::ip::address_v4> out_address_v4(vsize);
+  std::vector<asio::ip::address_v6> out_address_v6(vsize);
+  std::vector<bool> out_is_ipv6(vsize, false);
+  std::vector<bool> out_is_na(vsize, false);
+
+  for (std::size_t i=0; i<vsize; ++i) {
+    if (is_ipv6[i] && filter_fn(address_v6[i])) {
+      out_address_v4[i] = map_fn(address_v6[i]);
+    } else {
+      out_is_na[i] = true;
+    }
+  }
+
+  return IpAddressVector(out_address_v4, out_address_v6, out_is_ipv6, out_is_na);
 }
 
 /*----------------*
@@ -552,29 +575,29 @@ LogicalVector IpAddressVector::isWithinAny(const IpNetworkVector &network) const
  * ---------------------*/
 LogicalVector IpAddressVector::isMulticast() const {
   return isAddress(
-    [](const asio::ip::address_v4 &x) -> bool { return x.is_multicast(); },
-    [](const asio::ip::address_v6 &x) -> bool { return x.is_multicast(); }
+    [](const asio::ip::address_v4 &x) { return x.is_multicast(); },
+    [](const asio::ip::address_v6 &x) { return x.is_multicast(); }
   );
 }
 
 LogicalVector IpAddressVector::isUnspecified() const {
   return isAddress(
-    [](const asio::ip::address_v4 &x) -> bool { return x.is_unspecified(); },
-    [](const asio::ip::address_v6 &x) -> bool { return x.is_unspecified(); }
+    [](const asio::ip::address_v4 &x) { return x.is_unspecified(); },
+    [](const asio::ip::address_v6 &x) { return x.is_unspecified(); }
   );
 }
 
 LogicalVector IpAddressVector::isLoopback() const {
   return isAddress(
-    [](const asio::ip::address_v4 &x) -> bool { return x.is_loopback(); },
-    [](const asio::ip::address_v6 &x) -> bool { return x.is_loopback(); }
+    [](const asio::ip::address_v4 &x) { return x.is_loopback(); },
+    [](const asio::ip::address_v6 &x) { return x.is_loopback(); }
   );
 }
 
 LogicalVector IpAddressVector::isLinkLocal() const {
   return isAddress(
-    [](const asio::ip::address_v4 &x) -> bool { return (x.to_uint() & 0xFFFF0000) == 0xA9FE0000; },
-    [](const asio::ip::address_v6 &x) -> bool { return x.is_link_local(); }
+    [](const asio::ip::address_v4 &x) { return (x.to_uint() & 0xFFFF0000) == 0xA9FE0000; },
+    [](const asio::ip::address_v6 &x) { return x.is_link_local(); }
   );
 }
 
@@ -584,101 +607,49 @@ LogicalVector IpAddressVector::isLinkLocal() const {
  * -----------------------------*/
 LogicalVector IpAddressVector::isIPv4Mapped() const {
   return isAddress(
-    [](const asio::ip::address_v4 &x) -> bool { return false; },
-    [](const asio::ip::address_v6 &x) -> bool { return x.is_v4_mapped(); }
+    [](const asio::ip::address_v4 &x) { return false; },
+    [](const asio::ip::address_v6 &x) { return x.is_v4_mapped(); }
   );
 }
 
 IpAddressVector IpAddressVector::extractIPv4Mapped() const {
-  std::size_t vsize = is_na.size();
-
-  // initialize vectors
-  std::vector<asio::ip::address_v4> out_address_v4(vsize);
-  std::vector<asio::ip::address_v6> out_address_v6(vsize);
-  std::vector<bool> out_is_ipv6(vsize, false);
-  std::vector<bool> out_is_na(vsize, false);
-
-  for (std::size_t i=0; i<vsize; ++i) {
-    if (is_ipv6[i] && address_v6[i].is_v4_mapped()) {
-      out_address_v4[i] = asio::ip::make_address_v4(asio::ip::v4_mapped, address_v6[i]);
-    } else {
-      out_is_na[i] = true;
-    }
-  }
-
-  return IpAddressVector(out_address_v4, out_address_v6, out_is_ipv6, out_is_na);
+  return map6to4(
+    [](const asio::ip::address_v6 &x) { return x.is_v4_mapped(); },
+    [](const asio::ip::address_v6 &x) { return asio::ip::make_address_v4(asio::ip::v4_mapped, x); }
+  );
 }
 
 LogicalVector IpAddressVector::is6to4() const {
   return isAddress(
-    [](const asio::ip::address_v4 &x) -> bool { return false; },
-    [](const asio::ip::address_v6 &x) -> bool { return is_6to4(x); }
+    [](const asio::ip::address_v4 &x) { return false; },
+    [](const asio::ip::address_v6 &x) { return is_6to4(x); }
   );
 }
 
 IpAddressVector IpAddressVector::extract6to4() const {
-  std::size_t vsize = is_na.size();
-
-  // initialize vectors
-  std::vector<asio::ip::address_v4> out_address_v4(vsize);
-  std::vector<asio::ip::address_v6> out_address_v6(vsize);
-  std::vector<bool> out_is_ipv6(vsize, false);
-  std::vector<bool> out_is_na(vsize, false);
-
-  for (std::size_t i=0; i<vsize; ++i) {
-    if (is_ipv6[i] && is_6to4(address_v6[i])) {
-      out_address_v4[i] = extract_6to4(address_v6[i]);
-    } else {
-      out_is_na[i] = true;
-    }
-  }
-
-  return IpAddressVector(out_address_v4, out_address_v6, out_is_ipv6, out_is_na);
+  return map6to4(
+    [](const asio::ip::address_v6 &x) { return is_6to4(x); },
+    [](const asio::ip::address_v6 &x) { return extract_6to4(x); }
+  );
 }
 
 LogicalVector IpAddressVector::isTeredo() const {
   return isAddress(
-    [](const asio::ip::address_v4 &x) -> bool { return false; },
-    [](const asio::ip::address_v6 &x) -> bool { return is_teredo(x); }
+    [](const asio::ip::address_v4 &x) { return false; },
+    [](const asio::ip::address_v6 &x) { return is_teredo(x); }
   );
 }
 
 IpAddressVector IpAddressVector::extractTeredoServer() const {
-  std::size_t vsize = is_na.size();
-
-  // initialize vectors
-  std::vector<asio::ip::address_v4> out_address_v4(vsize);
-  std::vector<asio::ip::address_v6> out_address_v6(vsize);
-  std::vector<bool> out_is_ipv6(vsize, false);
-  std::vector<bool> out_is_na(vsize, false);
-
-  for (std::size_t i=0; i<vsize; ++i) {
-    if (is_ipv6[i] && is_teredo(address_v6[i])) {
-      out_address_v4[i] = extract_teredo_server(address_v6[i]);
-    } else {
-      out_is_na[i] = true;
-    }
-  }
-
-  return IpAddressVector(out_address_v4, out_address_v6, out_is_ipv6, out_is_na);
+  return map6to4(
+    [](const asio::ip::address_v6 &x) { return is_teredo(x); },
+    [](const asio::ip::address_v6 &x) { return extract_teredo_server(x); }
+  );
 }
 
 IpAddressVector IpAddressVector::extractTeredoClient() const {
-  std::size_t vsize = is_na.size();
-
-  // initialize vectors
-  std::vector<asio::ip::address_v4> out_address_v4(vsize);
-  std::vector<asio::ip::address_v6> out_address_v6(vsize);
-  std::vector<bool> out_is_ipv6(vsize, false);
-  std::vector<bool> out_is_na(vsize, false);
-
-  for (std::size_t i=0; i<vsize; ++i) {
-    if (is_ipv6[i] && is_teredo(address_v6[i])) {
-      out_address_v4[i] = extract_teredo_client(address_v6[i]);
-    } else {
-      out_is_na[i] = true;
-    }
-  }
-
-  return IpAddressVector(out_address_v4, out_address_v6, out_is_ipv6, out_is_na);
+  return map6to4(
+    [](const asio::ip::address_v6 &x) { return is_teredo(x); },
+    [](const asio::ip::address_v6 &x) { return extract_teredo_client(x); }
+  );
 }
