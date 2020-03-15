@@ -112,19 +112,19 @@
 <span id="cb3-8"><a href="#cb3-8"></a>x</span>
 <span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt; # A tibble: 2 x 2</span></span>
 <span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt;                   address          network</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt;                 &lt;ip_addr&gt;        &lt;ip_netw&gt;</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt;                 &lt;ip_addr&gt;       &lt;ip_netwk&gt;</span></span>
 <span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt; 1             192.168.0.1 192.168.100.0/22</span></span>
 <span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt; 2 2001:db8::8a2e:370:7334    2001:db8::/48</span></span></code></pre></div>
 <p>Input character vectors are validated as they are parsed. Invalid inputs raise a warning and are replaced with <code>NA</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="reference/ip_address.html">ip_address</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"0.0.0.0"</span>, <span class="st">"255.255.255.255"</span>, <span class="st">"255.255.255.256"</span>))</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; Warning: Invalid input in row 3: 255.255.255.256</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; Warning: Invalid value on row 3: 255.255.255.256</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; &lt;ip_address[3]&gt;</span></span>
 <span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt; [1] 0.0.0.0         255.255.255.255 &lt;NA&gt;</span></span></code></pre></div>
 <p>Functions are provided to enable common tasks:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">mutate</span>(x, <span class="dt">ipv6 =</span> <span class="kw"><a href="reference/is_ipv6.html">is_ipv6</a></span>(address), <span class="dt">in_net =</span> <span class="kw"><a href="reference/address_in_network.html">is_within</a></span>(address, network))</span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt; # A tibble: 2 x 4</span></span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt;                   address          network ipv6  in_net</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt;                 &lt;ip_addr&gt;        &lt;ip_netw&gt; &lt;lgl&gt; &lt;lgl&gt; </span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt;                 &lt;ip_addr&gt;       &lt;ip_netwk&gt; &lt;lgl&gt; &lt;lgl&gt; </span></span>
 <span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt; 1             192.168.0.1 192.168.100.0/22 FALSE FALSE </span></span>
 <span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt; 2 2001:db8::8a2e:370:7334    2001:db8::/48 TRUE  TRUE</span></span></code></pre></div>
 <hr>
