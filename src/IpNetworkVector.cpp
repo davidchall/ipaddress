@@ -5,30 +5,6 @@
 #include "utils.h"
 
 
-LogicalVector IpNetworkVector::isTrue(
-    const std::function<bool(const asio::ip::address_v4&)>& decide_fn_v4,
-    const std::function<bool(const asio::ip::address_v6&)>& decide_fn_v6
-) const {
-  std::size_t vsize = is_na.size();
-  LogicalVector output(vsize);
-
-  for (std::size_t i=0; i<vsize; ++i) {
-    if (is_na[i]) {
-      output[i] = NA_LOGICAL;
-    } else if (is_ipv6[i]) {
-      asio::ip::address_v6 first = network_v6[i].address();
-      asio::ip::address_v6 last = broadcast_address<asio::ip::address_v6>(network_v6[i]);
-      output[i] = decide_fn_v6(first) && decide_fn_v6(last);
-    } else {
-      asio::ip::address_v4 first = network_v4[i].address();
-      asio::ip::address_v4 last = broadcast_address<asio::ip::address_v4>(network_v4[i]);
-      output[i] = decide_fn_v4(first) && decide_fn_v4(last);
-    }
-  }
-
-  return output;
-}
-
 /*----------------*
  *  Constructors  *
  *----------------*/
@@ -402,4 +378,32 @@ LogicalVector IpNetworkVector::isTeredo() const {
     [](const asio::ip::address_v4 &x) { return false; },
     [](const asio::ip::address_v6 &x) { return is_teredo(x); }
   );
+}
+
+
+/*----------------*
+ *  Common tasks  *
+ * ---------------*/
+LogicalVector IpNetworkVector::isTrue(
+    const std::function<bool(const asio::ip::address_v4&)>& decide_fn_v4,
+    const std::function<bool(const asio::ip::address_v6&)>& decide_fn_v6
+) const {
+  std::size_t vsize = is_na.size();
+  LogicalVector output(vsize);
+
+  for (std::size_t i=0; i<vsize; ++i) {
+    if (is_na[i]) {
+      output[i] = NA_LOGICAL;
+    } else if (is_ipv6[i]) {
+      asio::ip::address_v6 first = network_v6[i].address();
+      asio::ip::address_v6 last = broadcast_address<asio::ip::address_v6>(network_v6[i]);
+      output[i] = decide_fn_v6(first) && decide_fn_v6(last);
+    } else {
+      asio::ip::address_v4 first = network_v4[i].address();
+      asio::ip::address_v4 last = broadcast_address<asio::ip::address_v4>(network_v4[i]);
+      output[i] = decide_fn_v4(first) && decide_fn_v4(last);
+    }
+  }
+
+  return output;
 }
