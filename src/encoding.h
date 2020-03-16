@@ -1,6 +1,7 @@
 #ifndef __IPADDRESS_ENCODING__
 #define __IPADDRESS_ENCODING__
 
+#include <bitset>
 #include <asio/ip/network_v4.hpp>
 #include <asio/ip/network_v6.hpp>
 
