@@ -86,6 +86,8 @@ as_binary <- function(ip) {
 #' @rdname binary
 #' @export
 from_binary <- function(bits) {
+  assertthat::assert_that(all(nchar(bits) %in% c(32L, 128L, NA)))
+
   binary_to_raw <- function(binary) {
     if (is.na(binary)) return(NULL)
 
