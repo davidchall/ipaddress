@@ -2,6 +2,14 @@ x <- ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334", NA))
 
 test_that("as_packed() and from_packed() work", {
   expect_s3_class(as_packed(x), c("blob", "vctrs_vctr"))
+  expect_equal(
+    as_packed(x),
+    blob::blob(
+      as.raw(c(0xc0, 0xa8, 0x00, 0x01)),
+      as.raw(c(0x20, 0x01, 0x0d, 0xb8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x8a, 0x2e, 0x03, 0x70, 0x73, 0x34)),
+      NULL
+    )
+  )
   expect_equal(from_packed(as_packed(x)), x)
 
   expect_warning(from_packed(blob::blob(as.raw(10))), "unable to decode")
