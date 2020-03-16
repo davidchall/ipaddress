@@ -8,16 +8,17 @@
 #' big-endian order), which is part of the IP standard.
 #'
 #' IPv4 addresses use 4 bytes, IPv6 addresses use 16 bytes,
-#' and missing values are stored as `NULL`.
+#' and missing values are encoded as `NULL`.
 #'
 #' @param ip An \code{\link{ip_address}} vector
-#' @param blob A \code{\link[blob]{blob}} vector
+#' @param bytes A \code{\link[blob]{blob}} vector
 #'
 #' @examples
 #' x <- ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334", NA))
 #' as_packed(x)
 #'
 #' from_packed(as_packed(x))
+#' @seealso Use `as_binary()` and `from_binary()` to encode/decode binary.
 #' @name packed
 NULL
 
@@ -30,7 +31,44 @@ as_packed <- function(ip) {
 
 #' @rdname packed
 #' @export
-from_packed <- function(blob) {
-  assertthat::assert_that(blob::is_blob(blob), msg = "argument is not a blob object")
-  vec_cast(blob, ip_address())
+from_packed <- function(bytes) {
+  assertthat::assert_that(blob::is_blob(bytes), msg = "argument is not a blob object")
+  vec_cast(bytes, ip_address())
+}
+
+
+#' Represent address as binary
+#'
+#' `as_binary()` and `from_binary()` encode and decode an \code{\link{ip_address}}
+#' vector to a character vector of bits.
+#'
+#' @details
+#' The bits are stored in network order (also known as big-endian order), which
+#' is part of the IP standard.
+#'
+#' IPv4 addresses use 32 bits, IPv6 addresses use 128 bits, and missing values
+#' are encoded as `NA`.
+#'
+#' @param ip An \code{\link{ip_address}} vector
+#' @param bits A character vector containing only `0` and `1` characters
+#'
+#' @examples
+#' x <- ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334", NA))
+#' as_binary(x)
+#'
+#' from_binary(as_binary(x))
+#' @seealso Use `as_packed()` and `from_packed()` to encode/decode raw bytes.
+#' @name binary
+NULL
+
+#' @rdname binary
+#' @export
+as_binary <- function(ip) {
+  to_binary_address_wrapper(ip)
+}
+
+#' @rdname binary
+#' @export
+from_binary <- function(bits) {
+  new_ip_address_encode(from_binary_address_wrapper(bits))
 }

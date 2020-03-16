@@ -12,6 +12,7 @@ reference:
   - title: "Other representations"
     contents:
       - as_packed
+      - as_binary
   - title: "Address spaces"
     contents:
       - is_ipv4
