@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Represent address as raw bytes — packed • ipaddress</title>
+<title>Represent address as binary — binary • ipaddress</title>
 
 
 <!-- jquery -->
@@ -35,9 +35,9 @@
 
 
 
-<meta property="og:title" content="Represent address as raw bytes — packed" />
-<meta property="og:description" content="as_packed() and from_packed() encode and decode an ip_address
-vector to a blob vector." />
+<meta property="og:title" content="Represent address as binary — binary" />
+<meta property="og:description" content="as_binary() and from_binary() encode and decode an ip_address
+vector to a character vector of bits." />
 
 
 <meta name="robots" content="noindex">
@@ -108,19 +108,19 @@ vector to a blob vector." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Represent address as raw bytes</h1>
+    <h1>Represent address as binary</h1>
     <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/binary.R'><code>R/binary.R</code></a></small>
-    <div class="hidden name"><code>packed.Rd</code></div>
+    <div class="hidden name"><code>binary.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>as_packed()</code> and <code>from_packed()</code> encode and decode an <code><a href='ip_address.html'>ip_address</a></code>
-vector to a <code><a href='https://rdrr.io/pkg/blob/man/blob.html'>blob</a></code> vector.</p>
+    <p><code>as_binary()</code> and <code>from_binary()</code> encode and decode an <code><a href='ip_address.html'>ip_address</a></code>
+vector to a character vector of bits.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>as_packed</span>(<span class='no'>ip</span>)
+    <pre class="usage"><span class='fu'>as_binary</span>(<span class='no'>ip</span>)
 
-<span class='fu'>from_packed</span>(<span class='no'>bytes</span>)</pre>
+<span class='fu'>from_binary</span>(<span class='no'>bits</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -130,26 +130,27 @@ vector to a <code><a href='https://rdrr.io/pkg/blob/man/blob.html'>blob</a></cod
       <td><p>An <code><a href='ip_address.html'>ip_address</a></code> vector</p></td>
     </tr>
     <tr>
-      <th>bytes</th>
-      <td><p>A <code><a href='https://rdrr.io/pkg/blob/man/blob.html'>blob</a></code> vector</p></td>
+      <th>bits</th>
+      <td><p>A character vector containing only <code>0</code> and <code>1</code> characters</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The bytes are stored in network order (also known as
-big-endian order), which is part of the IP standard.</p>
-<p>IPv4 addresses use 4 bytes, IPv6 addresses use 16 bytes,
-and missing values are encoded as <code>NULL</code>.</p>
+    <p>The bits are stored in network order (also known as big-endian order), which
+is part of the IP standard.</p>
+<p>IPv4 addresses use 32 bits, IPv6 addresses use 128 bits, and missing values
+are encoded as <code>NA</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Use <code><a href='binary.html'>as_binary()</a></code> and <code><a href='binary.html'>from_binary()</a></code> to encode/decode binary.</p></div>
+    <div class='dont-index'><p>Use <code><a href='packed.html'>as_packed()</a></code> and <code><a href='packed.html'>from_packed()</a></code> to encode/decode raw bytes.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.1"</span>, <span class='st'>"2001:db8::8a2e:370:7334"</span>, <span class='fl'>NA</span>))
-<span class='fu'>as_packed</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; &lt;blob[3]&gt;
-#&gt; [1] blob[4 B]  blob[16 B] &lt;NA&gt;      </div><div class='input'>
-<span class='fu'>from_packed</span>(<span class='fu'>as_packed</span>(<span class='no'>x</span>))</div><div class='output co'>#&gt; &lt;ip_address[3]&gt;
+<span class='fu'>as_binary</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] "11000000101010000000000000000001"                                                                                                
+#&gt; [2] "00100000000000010000110110111000000000000000000000000000000000000000000000000000100010100010111000000011011100000111001100110100"
+#&gt; [3] NA                                                                                                                                </div><div class='input'>
+<span class='fu'>from_binary</span>(<span class='fu'>as_binary</span>(<span class='no'>x</span>))</div><div class='output co'>#&gt; &lt;ip_address[3]&gt;
 #&gt; [1] 192.168.0.1             2001:db8::8a2e:370:7334 &lt;NA&gt;                   </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
