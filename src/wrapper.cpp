@@ -38,6 +38,16 @@ List construct_network_wrapper(List address, IntegerVector prefix_length, bool s
 }
 
 // [[Rcpp::export]]
+List parse_interface_wrapper(CharacterVector x) {
+  return IpNetworkVector(x, false, true).encodeR();
+}
+
+// [[Rcpp::export]]
+List construct_interface_wrapper(List address, IntegerVector prefix_length) {
+  return IpNetworkVector(IpAddressVector(address), prefix_length, false, true).encodeR();
+}
+
+// [[Rcpp::export]]
 CharacterVector print_network_wrapper(List x) {
   return IpNetworkVector(x).encodeStrings();
 }
@@ -52,24 +62,36 @@ DataFrame compare_address_wrapper(List x) {
 }
 
 
-/*---------------------*
- *  Bitwise operators  *
- *---------------------*/
+/*-------------*
+ *  Operators  *
+ *-------------*/
 // [[Rcpp::export]]
-List bitwise_and_wrapper(List addr1, List addr2) {
-  IpAddressVector result = IpAddressVector(addr1) & IpAddressVector(addr2);
+List bitwise_not_wrapper(List lhs) {
+  IpAddressVector result = ~IpAddressVector(lhs);
   return result.encodeR();
 }
 
 // [[Rcpp::export]]
-List bitwise_or_wrapper(List addr1, List addr2) {
-  IpAddressVector result = IpAddressVector(addr1) | IpAddressVector(addr2);
+List bitwise_and_wrapper(List lhs, List rhs) {
+  IpAddressVector result = IpAddressVector(lhs) & IpAddressVector(rhs);
   return result.encodeR();
 }
 
 // [[Rcpp::export]]
-List bitwise_not_wrapper(List addr1) {
-  IpAddressVector result = ~IpAddressVector(addr1);
+List bitwise_or_wrapper(List lhs, List rhs) {
+  IpAddressVector result = IpAddressVector(lhs) | IpAddressVector(rhs);
+  return result.encodeR();
+}
+
+// [[Rcpp::export]]
+List bitwise_xor_wrapper(List lhs, List rhs) {
+  IpAddressVector result = IpAddressVector(lhs) ^ IpAddressVector(rhs);
+  return result.encodeR();
+}
+
+// [[Rcpp::export]]
+List addition_wrapper(List lhs, IntegerVector rhs) {
+  IpAddressVector result = IpAddressVector(lhs) + rhs;
   return result.encodeR();
 }
 
@@ -155,4 +177,58 @@ LogicalVector is_link_local_address_wrapper(List address_r) {
 // [[Rcpp::export]]
 LogicalVector is_link_local_network_wrapper(List network_r) {
   return IpNetworkVector(network_r).isLinkLocal();
+}
+
+
+/*------------------------------*
+ *  IPv6 transition mechanisms  *
+ * -----------------------------*/
+// [[Rcpp::export]]
+LogicalVector is_ipv4_mapped_address_wrapper(List address_r) {
+  return IpAddressVector(address_r).isIPv4Mapped();
+}
+
+// [[Rcpp::export]]
+LogicalVector is_ipv4_mapped_network_wrapper(List network_r) {
+  return IpNetworkVector(network_r).isIPv4Mapped();
+}
+
+// [[Rcpp::export]]
+List extract_ipv4_mapped_wrapper(List address_r) {
+  return IpAddressVector(address_r).extractIPv4Mapped().encodeR();
+}
+
+// [[Rcpp::export]]
+LogicalVector is_6to4_address_wrapper(List address_r) {
+  return IpAddressVector(address_r).is6to4();
+}
+
+// [[Rcpp::export]]
+LogicalVector is_6to4_network_wrapper(List network_r) {
+  return IpNetworkVector(network_r).is6to4();
+}
+
+// [[Rcpp::export]]
+List extract_6to4_wrapper(List address_r) {
+  return IpAddressVector(address_r).extract6to4().encodeR();
+}
+
+// [[Rcpp::export]]
+LogicalVector is_teredo_address_wrapper(List address_r) {
+  return IpAddressVector(address_r).isTeredo();
+}
+
+// [[Rcpp::export]]
+LogicalVector is_teredo_network_wrapper(List network_r) {
+  return IpNetworkVector(network_r).isTeredo();
+}
+
+// [[Rcpp::export]]
+List extract_teredo_server_wrapper(List address_r) {
+  return IpAddressVector(address_r).extractTeredoServer().encodeR();
+}
+
+// [[Rcpp::export]]
+List extract_teredo_client_wrapper(List address_r) {
+  return IpAddressVector(address_r).extractTeredoClient().encodeR();
 }

@@ -1,7 +1,9 @@
 ## Release summary
 
-This is a patch release to fix CRAN errors on Solaris.
-I've checked that the errors were resolved by building on RHub.
+This is a patch release to fix a few bugs:
+* CRAN errors on OSX (due to dual IPv6 representation of IPv4-compatible IPv6 addresses)
+* decoding failed for a small number of IP addresses
+* comparing IP networks did not consider prefix lengths
 
 
 ## Test environments
@@ -18,14 +20,7 @@ I've checked that the errors were resolved by building on RHub.
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
-
-Possibly mis-spelled words in DESCRIPTION:
-  IP (2:13, 10:53)
-  IPv (12:43, 12:52)
-
-The acronyms IP, IPv4 and IPv6 are spelled correctly.
-
+0 errors | 0 warnings | 0 notes
 
 ## Reverse dependencies
 There are currently no reverse dependencies for this package.

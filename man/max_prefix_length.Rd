@@ -22,5 +22,5 @@ x <- ip_address(c("192.168.0.1", "2001:db8::7334"))
 max_prefix_length(x)
 }
 \seealso{
-\code{\link[=is_ipv6]{is_ipv6()}}, \code{\link[=prefix_length]{prefix_length()}}
+\code{\link[=is_ipv4]{is_ipv4()}}, \code{\link[=is_ipv6]{is_ipv6()}}, \code{\link[=prefix_length]{prefix_length()}}
 }

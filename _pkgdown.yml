@@ -1,37 +1,31 @@
-destination: docs
+development:
+  mode: auto
+
+url: https://davidchall.github.io/ipaddress
 
 reference:
   - title: "Classes"
     contents:
       - ip_address
       - ip_network
-  - title: "Binary representation"
+      - ip_interface
+  - title: "Other representations"
     contents:
-      - packed
-      - unpack
+      - as_packed
       - as_binary
-      - from_binary
   - title: "Address spaces"
     contents:
       - is_ipv4
-      - is_ipv6
       - max_prefix_length
       - is_multicast
-      - is_unspecified
-      - is_loopback
-      - is_link_local
+      - is_ipv4_mapped
   - title: "Network membership"
     contents:
-      - prefix_length
       - num_addresses
-      - network_address
-      - broadcast_address
-      - netmask
-      - hostmask
-      - seq.ip_network
-      - hosts
-      - sample_ip
+      - prefix_length
       - is_within
-      - is_within_any
       - is_subnet
-      - is_supernet
+  - title: "Generating addresses"
+    contents:
+      - starts_with("sample")
+      - seq.ip_network

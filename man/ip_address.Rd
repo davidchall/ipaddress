@@ -2,12 +2,15 @@
 % Please edit documentation in R/ip_address.R
 \name{ip_address}
 \alias{ip_address}
+\alias{as_ip_address}
 \alias{is_ip_address}
 \alias{format.ip_address}
 \alias{as.character.ip_address}
-\title{Class for storing IP addresses}
+\title{Vector of IP addresses}
 \usage{
 ip_address(ip = character())
+
+as_ip_address(x)
 
 is_ip_address(x)
 
@@ -28,6 +31,8 @@ An \code{ip_address} vector
 }
 \description{
 \code{ip_address()} constructs a vector of IP addresses.
+
+\code{as_ip_address()} casts an object to \code{ip_address}.
 
 \code{is_ip_address()} checks if an object is of class \code{ip_address}.
 }
@@ -51,8 +56,12 @@ a warning is emitted and \code{NA} is stored instead.
 
 When casting an \code{ip_address} object back to a character vector using
 \code{as.character()}, IPv6 addresses are reduced to their compressed representation.
+A special case is IPv4-mapped IPv6 addresses, which are returned in their
+dual representation (e.g. \verb{::ffff:192.0.2.128}).
 
-This class also supports bitwise operations: \code{&} (AND), \code{|} (OR) and \code{!} (NOT).
+Integers can be added to or subtracted from \code{ip_address} vectors.
+This class also supports bitwise operations: \code{!} (NOT), \code{&} (AND),
+\code{|} (OR) and \code{^} (XOR).
 }
 \examples{
 # supports IPv4 and IPv6 simultaneously
@@ -61,6 +70,12 @@ ip_address(c("0.0.0.1", "192.168.0.1", "2001:db8::8a2e:370:7334"))
 # validates inputs and replaces with NA
 ip_address(c("1.2.3.4", "255.255.255.256", "1.2.3.4/5"))
 
+# addition
+ip_address("192.168.0.1") + 12L
+
+# subtraction
+ip_address("192.168.0.1") - 12L
+
 # bitwise NOT
 !ip_address("192.168.0.1")
 
@@ -68,5 +83,8 @@ ip_address(c("1.2.3.4", "255.255.255.256", "1.2.3.4/5"))
 ip_address("192.168.0.1") & ip_address("255.0.0.255")
 
 # bitwise OR
-ip_address("192.168.0.0") | ip_address("0.0.0.1")
+ip_address("192.168.0.0") | ip_address("255.0.0.255")
+
+# bitwise XOR
+ip_address("192.168.0.0") ^ ip_address("255.0.0.255")
 }

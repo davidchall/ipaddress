@@ -1,4 +1,7 @@
-#' Encode or decode address as raw bytes
+#' Represent address as raw bytes
+#'
+#' `as_packed()` and `from_packed()` encode and decode an \code{\link{ip_address}}
+#' vector to a \code{\link[blob]{blob}} vector.
 #'
 #' @details
 #' The bytes are stored in network order (also known as
@@ -12,31 +15,23 @@
 #'
 #' @examples
 #' x <- ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334", NA))
-#' packed(x)
+#' as_packed(x)
 #'
-#' unpack(packed(x))
+#' from_packed(as_packed(x))
 #' @seealso Use `as_binary()` and `from_binary()` to encode/decode binary.
 #' @name packed
 NULL
 
-#' `packed()`
-#'
-#' `packed()` encodes an `ip_address` vector to a `blob`
-#'
 #' @rdname packed
 #' @export
-packed <- function(ip) {
+as_packed <- function(ip) {
   assertthat::assert_that(is_ip_address(ip))
   blob::as_blob(ip)
 }
 
-#' `unpack()`
-#'
-#' `unpack()` decodes a `blob` to an `ip_address` vector
-#'
 #' @rdname packed
 #' @export
-unpack <- function(blob) {
+from_packed <- function(blob) {
   assertthat::assert_that(blob::is_blob(blob), msg = "argument is not a blob object")
   vec_cast(blob, ip_address())
 }
@@ -59,7 +54,7 @@ unpack <- function(blob) {
 #' as_binary(x)
 #'
 #' from_binary(as_binary(x))
-#' @seealso Use `packed()` and `unpack()` to encode/decode raw bytes.
+#' @seealso Use `as_packed()` and `from_packed()` to encode/decode raw bytes.
 #' @name binary
 NULL
 
@@ -81,7 +76,7 @@ as_binary <- function(ip) {
     paste(as.integer(bits), collapse = "")
   }
 
-  vapply(packed(ip), raw_to_binary, "")
+  vapply(as_packed(ip), raw_to_binary, "")
 }
 
 #' `from_binary()`
@@ -102,5 +97,5 @@ from_binary <- function(bits) {
     packBits(bits)
   }
 
-  unpack(blob::as_blob(lapply(bits, binary_to_raw)))
+  from_packed(blob::as_blob(lapply(bits, binary_to_raw)))
 }

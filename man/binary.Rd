@@ -34,5 +34,5 @@ as_binary(x)
 from_binary(as_binary(x))
 }
 \seealso{
-Use \code{packed()} and \code{unpack()} to encode/decode raw bytes.
+Use \code{as_packed()} and \code{from_packed()} to encode/decode raw bytes.
 }

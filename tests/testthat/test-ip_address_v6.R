@@ -1,4 +1,4 @@
-x <- c("::", "::256", "2001:db8::8a2e:370:7334", "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff")
+x <- c("::", "256::", "2001:db8::8a2e:370:7334", "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff")
 
 test_that("alternative formats accepted", {
   expect_equal(ip_address("2001:0db8:85a3:0000:0000:8a2e:0370:7334"), ip_address("2001:db8:85a3::8a2e:370:7334"))
@@ -12,14 +12,14 @@ test_that("formats correctly", {
 })
 
 test_that("invalid inputs are caught", {
-  expect_warning(ip_address("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"), "Invalid input")
-  expect_warning(ip_address("1::g"), "Invalid input")
-  expect_warning(ip_address("1::-2"), "Invalid input")
-  expect_warning(ip_address("1::2.5"), "Invalid input")
+  expect_warning(ip_address("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"), "Invalid value")
+  expect_warning(ip_address("1::g"), "Invalid value")
+  expect_warning(ip_address("1::-2"), "Invalid value")
+  expect_warning(ip_address("1::2.5"), "Invalid value")
 
   # Windows accepts IP addresses in alternative formats: https://superuser.com/a/486936
   skip_on_os("windows")
-  expect_warning(ip_address("1:2"), "Invalid input")
+  expect_warning(ip_address("1:2"), "Invalid value")
 })
 
 test_that("equality operations work", {

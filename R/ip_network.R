@@ -1,7 +1,7 @@
 #' @importFrom methods setOldClass
 methods::setOldClass(c("ip_network", "vctrs_vctr"))
 
-#' Class for storing IP networks
+#' Vector of IP networks
 #'
 #' @details
 #' An IP network corresponds to a range of contiguous IP addresses
@@ -46,9 +46,10 @@ NULL
 #' @param ip Character vector of IP networks, in CIDR notation (IPv4 or IPv6).
 #' @param address An \code{\link{ip_address}} vector
 #' @param prefix_length An integer vector
-#' @param strict If `strict = TRUE` (the default) and the input has host bits set,
+#' @param strict If `TRUE` (the default) and the input has host bits set,
 #'   then a warning is emitted and `NA` is returned. If `FALSE`, the
-#'   host bits are set to zero and a valid IP network is returned.
+#'   host bits are set to zero and a valid IP network is returned. If you need
+#'   to retain the host bits, consider using `ip_interface()` instead.
 #' @return An `ip_network` vector
 #'
 #' @examples
@@ -89,9 +90,13 @@ ip_network.ip_address <- function(address, prefix_length, strict = TRUE, ...) {
   assertthat::assert_that(
     assertthat::is.flag(strict),
     assertthat::noNA(strict),
-    is.integer(prefix_length),
-    length(address) == length(prefix_length)
+    is.integer(prefix_length)
   )
+
+  # vector recycling
+  args <- vec_recycle_common(address, prefix_length)
+  address <- args[[1L]]
+  prefix_length <- args[[2L]]
 
   new_ip_network_encode(construct_network_wrapper(address, prefix_length, strict))
 }
@@ -122,6 +127,14 @@ new_ip_network <- function(address1 = integer(), address2 = integer(), address3 
     is_ipv6 = is_ipv6
   ), class = "ip_network")
 }
+
+#' `as_ip_network()`
+#'
+#' `as_ip_network()` casts an object to `ip_network`.
+#'
+#' @rdname ip_network
+#' @export
+as_ip_network <- function(x) vec_cast(x, ip_network())
 
 #' `is_ip_network()`
 #'
@@ -156,91 +169,5 @@ vec_proxy_compare.ip_network <- function(x, ...) {
 
 #' @export
 vec_ptype_abbr.ip_network <- function(x, ...) {
-  "ip_netw"
-}
-
-
-#' Basic information about a network
-#'
-#' @param x An \code{\link{ip_network}} vector
-#' @return
-#' * `prefix_length()` returns an integer vector
-#' * `num_addresses()` returns a numeric vector
-#' * `network_address()` and `broadcast_address()` return an \code{\link{ip_address}} vector
-#'
-#' @examples
-#' x <- ip_network(c("192.168.0.0/22", "2001:db00::0/26"))
-#'
-#' prefix_length(x)
-#'
-#' num_addresses(x)
-#'
-#' network_address(x)
-#'
-#' broadcast_address(x)
-#' @seealso
-#' The prefix length can equivalently be represented by the [netmask()] or [hostmask()].
-#'
-#' @name network_info
-NULL
-
-#' `prefix_length()`
-#'
-#' `prefix_length()` gives the prefix length
-#'
-#' @rdname network_info
-#' @export
-prefix_length <- function(x) {
-  assertthat::assert_that(is_ip_network(x))
-  field(x, "prefix")
-}
-
-#' `num_addresses()`
-#'
-#' `num_addresses()` gives the total number of addresses
-#'
-#' @rdname network_info
-#' @export
-num_addresses <- function(x) {
-  assertthat::assert_that(is_ip_network(x))
-
-  2L^(max_prefix_length(x) - field(x, "prefix"))
-}
-
-#' `network_address()`
-#'
-#' `network_address()` gives the first address
-#'
-#' @rdname network_info
-#' @export
-network_address <- function(x) {
-  assertthat::assert_that(is_ip_network(x))
-
-  new_ip_address(
-    field(x, "address1"),
-    field(x, "address2"),
-    field(x, "address3"),
-    field(x, "address4"),
-    field(x, "is_ipv6")
-  )
-}
-
-#' `broadcast_address()`
-#'
-#' `broadcast_address()` gives the last address
-#'
-#' @details
-#' The broadcast address is a special address at which any host connected
-#' to the network can receive messages. That is, packets sent to this address
-#' are received by all hosts on the network.
-#' In IPv4, the last address of a network is the broadcast address.
-#' Although IPv6 does not follow this approach to broadcast addresses, the
-#' `broadcast_address()` function still returns the last address of the network.
-#'
-#' @rdname network_info
-#' @export
-broadcast_address <- function(x) {
-  assertthat::assert_that(is_ip_network(x))
-
-  new_ip_address_encode(broadcast_address_wrapper(x))
+  "ip_netwk"
 }
