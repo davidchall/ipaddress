@@ -8,12 +8,12 @@
 \usage{
 as_packed(ip)
 
-from_packed(blob)
+from_packed(bytes)
 }
 \arguments{
 \item{ip}{An \code{\link{ip_address}} vector}
 
-\item{blob}{A \code{\link[blob]{blob}} vector}
+\item{bytes}{A \code{\link[blob]{blob}} vector}
 }
 \description{
 \code{as_packed()} and \code{from_packed()} encode and decode an \code{\link{ip_address}}

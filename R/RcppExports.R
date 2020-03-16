@@ -17,6 +17,14 @@ from_packed_address_wrapper <- function(x) {
     .Call(`_ipaddress_from_packed_address_wrapper`, x)
 }
 
+to_binary_address_wrapper <- function(x) {
+    .Call(`_ipaddress_to_binary_address_wrapper`, x)
+}
+
+from_binary_address_wrapper <- function(x) {
+    .Call(`_ipaddress_from_binary_address_wrapper`, x)
+}
+
 parse_network_wrapper <- function(x, strict) {
     .Call(`_ipaddress_parse_network_wrapper`, x, strict)
 }

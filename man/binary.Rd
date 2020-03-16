@@ -4,7 +4,7 @@
 \alias{binary}
 \alias{as_binary}
 \alias{from_binary}
-\title{Encode or decode address as binary}
+\title{Represent address as binary}
 \usage{
 as_binary(ip)
 
@@ -16,16 +16,15 @@ from_binary(bits)
 \item{bits}{A character vector containing only \code{0} and \code{1} characters}
 }
 \description{
-\code{as_binary()} encodes an \code{ip_address} vector to a character vector of bits
-
-\code{from_binary()} decodes a character vector of bits to an \code{ip_address} vector
+\code{as_binary()} and \code{from_binary()} encode and decode an \code{\link{ip_address}}
+vector to a character vector of bits.
 }
 \details{
-The bits are stored in network order (also known as
-big-endian order), which is part of the IP standard.
+The bits are stored in network order (also known as big-endian order), which
+is part of the IP standard.
 
-IPv4 addresses use 32 bits, IPv6 addresses use 128 bits,
-and missing values are encoded as \code{NA}.
+IPv4 addresses use 32 bits, IPv6 addresses use 128 bits, and missing values
+are encoded as \code{NA}.
 }
 \examples{
 x <- ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334", NA))

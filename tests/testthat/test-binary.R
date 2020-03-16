@@ -16,7 +16,7 @@ test_that("as_binary() and from_binary() work", {
   ))
   expect_equal(from_binary(as_binary(x)), x)
 
-  expect_error(from_binary("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"))
-  expect_error(from_binary("11000000"))
-  expect_error(from_binary("110000001010100000000000000000010"))
+  expect_warning(from_binary("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"), "contains non-binary characters")
+  expect_warning(from_binary("11000000"), "incorrect number of bits")
+  expect_warning(from_binary("110000001010100000000000000000010"), "incorrect number of bits")
 })

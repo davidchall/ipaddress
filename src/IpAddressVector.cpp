@@ -102,6 +102,39 @@ IpAddressVector IpAddressVector::decodePacked(List input) {
   return IpAddressVector(address_v4, address_v6, is_ipv6, is_na);
 }
 
+IpAddressVector IpAddressVector::decodeBinary(CharacterVector input) {
+  std::size_t vsize = input.size();
+
+  // initialize vectors
+  std::vector<asio::ip::address_v4> address_v4(vsize);
+  std::vector<asio::ip::address_v6> address_v6(vsize);
+  std::vector<bool> is_ipv6(vsize, false);
+  std::vector<bool> is_na(vsize, false);
+
+  for (std::size_t i=0; i<vsize; ++i) {
+    if (input[i] == NA_STRING) {
+      is_na[i] = true;
+      continue;
+    }
+
+    std::string bit_string(input[i]);
+    if (bit_string.find_first_not_of("01") != std::string::npos) {
+      is_na[i] = true;
+      warnInvalidInput(i, "contains non-binary characters");
+    } else if (bit_string.size() == 128) {
+      address_v6[i] = decode_binary<asio::ip::address_v6>(bit_string);
+      is_ipv6[i] = true;
+    } else if (bit_string.size() == 32) {
+      address_v4[i] = decode_binary<asio::ip::address_v4>(bit_string);
+    } else {
+      is_na[i] = true;
+      warnInvalidInput(i, "incorrect number of bits");
+    }
+  }
+
+  return IpAddressVector(address_v4, address_v6, is_ipv6, is_na);
+}
+
 IpAddressVector IpAddressVector::createNetmask(IntegerVector in_pfx, LogicalVector in_v6) {
   std::size_t vsize = in_v6.size();
 
@@ -239,6 +272,25 @@ List IpAddressVector::encodePacked() const {
       RawVector raw(bytes.size());
       std::copy(bytes.begin(), bytes.end(), raw.begin());
       output[i] = raw;
+    }
+  }
+
+  return output;
+}
+
+CharacterVector IpAddressVector::encodeBinary() const {
+  std::size_t vsize = is_na.size();
+
+  // initialize vectors
+  CharacterVector output(vsize);
+
+  for (std::size_t i=0; i<vsize; ++i) {
+    if (is_na[i]) {
+      output[i] = NA_STRING;
+    } else if (is_ipv6[i]) {
+      output[i] = encode_binary(address_v6[i]);
+    } else {
+      output[i] = encode_binary(address_v4[i]);
     }
   }
 

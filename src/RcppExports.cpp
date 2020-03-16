@@ -49,6 +49,28 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// to_binary_address_wrapper
+CharacterVector to_binary_address_wrapper(List x);
+RcppExport SEXP _ipaddress_to_binary_address_wrapper(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(to_binary_address_wrapper(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// from_binary_address_wrapper
+List from_binary_address_wrapper(CharacterVector x);
+RcppExport SEXP _ipaddress_from_binary_address_wrapper(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(from_binary_address_wrapper(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // parse_network_wrapper
 List parse_network_wrapper(CharacterVector x, bool strict);
 RcppExport SEXP _ipaddress_parse_network_wrapper(SEXP xSEXP, SEXP strictSEXP) {
@@ -453,6 +475,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_print_address_wrapper", (DL_FUNC) &_ipaddress_print_address_wrapper, 1},
     {"_ipaddress_to_packed_address_wrapper", (DL_FUNC) &_ipaddress_to_packed_address_wrapper, 1},
     {"_ipaddress_from_packed_address_wrapper", (DL_FUNC) &_ipaddress_from_packed_address_wrapper, 1},
+    {"_ipaddress_to_binary_address_wrapper", (DL_FUNC) &_ipaddress_to_binary_address_wrapper, 1},
+    {"_ipaddress_from_binary_address_wrapper", (DL_FUNC) &_ipaddress_from_binary_address_wrapper, 1},
     {"_ipaddress_parse_network_wrapper", (DL_FUNC) &_ipaddress_parse_network_wrapper, 2},
     {"_ipaddress_construct_network_wrapper", (DL_FUNC) &_ipaddress_construct_network_wrapper, 3},
     {"_ipaddress_parse_interface_wrapper", (DL_FUNC) &_ipaddress_parse_interface_wrapper, 1},
