@@ -1,6 +1,13 @@
 development:
   mode: auto
 
+template:
+  params:
+    docsearch:
+      api_key: a959f56e56e76081c6ebdec4073adbaf
+      index_name: ipaddress
+    ganalytics: UA-160789885-1
+
 reference:
   - title: "Classes"
     contents:
