@@ -4,8 +4,6 @@
 #include "masking.h"
 #include "utils.h"
 
-using namespace Rcpp;
-
 
 /*----------------*
  *  Constructors  *

@@ -5,6 +5,7 @@
 #include <asio/ip/network_v4.hpp>
 #include <asio/ip/network_v6.hpp>
 
+using namespace Rcpp;
 
 class IpAddressVector;
 
@@ -24,7 +25,7 @@ private:
     std::vector<bool> in_is_na
   ) : network_v4(in_network_v4), network_v6(in_network_v6), is_ipv6(in_is_ipv6), is_na(in_is_na) { };
 
-  Rcpp::LogicalVector isTrue(
+  LogicalVector isTrue(
       const std::function<bool(const asio::ip::address_v4&)>& decide_fn_v4,
       const std::function<bool(const asio::ip::address_v6&)>& decide_fn_v6
   ) const;
@@ -34,14 +35,14 @@ public:
    *  Constructors  *
    *----------------*/
   // Parse strings (CIDR format)
-  IpNetworkVector(Rcpp::CharacterVector input,
+  IpNetworkVector(CharacterVector input,
                   bool strict, bool is_interface = false);
 
   // Decode from R class
-  IpNetworkVector(Rcpp::List input);
+  IpNetworkVector(List input);
 
   // Construct from address + prefix length
-  IpNetworkVector(IpAddressVector address, Rcpp::IntegerVector prefix_length,
+  IpNetworkVector(IpAddressVector address, IntegerVector prefix_length,
                   bool strict, bool is_interface = false);
 
   // Warn about invalid input
@@ -52,10 +53,10 @@ public:
    *  Output  *
    *----------*/
   // Encode to strings
-  Rcpp::CharacterVector encodeStrings() const;
+  CharacterVector encodeStrings() const;
 
   // Encode to R class
-  Rcpp::List encodeR() const;
+  List encodeR() const;
 
 
   /*-----------------------*
@@ -74,13 +75,13 @@ public:
   /*----------------------*
    *  Reserved addresses  *
    * ---------------------*/
-  Rcpp::LogicalVector isMulticast() const;
-  Rcpp::LogicalVector isUnspecified() const;
-  Rcpp::LogicalVector isLoopback() const;
-  Rcpp::LogicalVector isLinkLocal() const;
-  Rcpp::LogicalVector isIPv4Mapped() const;
-  Rcpp::LogicalVector is6to4() const;
-  Rcpp::LogicalVector isTeredo() const;
+  LogicalVector isMulticast() const;
+  LogicalVector isUnspecified() const;
+  LogicalVector isLoopback() const;
+  LogicalVector isLinkLocal() const;
+  LogicalVector isIPv4Mapped() const;
+  LogicalVector is6to4() const;
+  LogicalVector isTeredo() const;
 };
 
 #endif
