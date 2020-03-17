@@ -5,6 +5,8 @@
 #include "sample.h"
 #include "utils.h"
 
+using namespace Rcpp;
+
 
 /*----------------*
  *  Constructors  *
