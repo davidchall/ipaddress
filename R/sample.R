@@ -51,7 +51,7 @@ sample_network <- function(x, size, replace = FALSE) {
   }
 
   # in some cases it's quicker to generate all addresses
-  if (size >= num_addresses(x) || num_addresses(x) < 1e6) {
+  if (size >= num_addresses(x) || num_addresses(x) < 1e4) {
     return(sample(seq(x), size, replace))
   }
 
