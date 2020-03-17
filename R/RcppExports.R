@@ -49,6 +49,14 @@ compare_address_wrapper <- function(x) {
     .Call(`_ipaddress_compare_address_wrapper`, x)
 }
 
+hosts_wrapper <- function(network_r, exclude_unusable) {
+    .Call(`_ipaddress_hosts_wrapper`, network_r, exclude_unusable)
+}
+
+sample_wrapper <- function(network_r, size) {
+    .Call(`_ipaddress_sample_wrapper`, network_r, size)
+}
+
 bitwise_not_wrapper <- function(lhs) {
     .Call(`_ipaddress_bitwise_not_wrapper`, lhs)
 }
@@ -79,10 +87,6 @@ hostmask_wrapper <- function(prefix_length, is_ipv6) {
 
 broadcast_address_wrapper <- function(network_r) {
     .Call(`_ipaddress_broadcast_address_wrapper`, network_r)
-}
-
-hosts_wrapper <- function(network_r, exclude_unusable) {
-    .Call(`_ipaddress_hosts_wrapper`, network_r, exclude_unusable)
 }
 
 is_within_wrapper <- function(address_r, network_r) {

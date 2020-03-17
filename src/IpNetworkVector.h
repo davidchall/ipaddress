@@ -68,6 +68,9 @@ public:
   // List all addresses in network
   IpAddressVector hosts(bool exclude_unusable) const;
 
+  // Sample random addresses in network
+  IpAddressVector sample(unsigned int size) const;
+
 
   /*----------------------*
    *  Reserved addresses  *

@@ -71,6 +71,16 @@ DataFrame compare_address_wrapper(List x) {
   return IpAddressVector(x).encodeComparable();
 }
 
+// [[Rcpp::export]]
+List hosts_wrapper(List network_r, bool exclude_unusable) {
+  return IpNetworkVector(network_r).hosts(exclude_unusable).encodeR();
+}
+
+// [[Rcpp::export]]
+List sample_wrapper(List network_r, unsigned int size) {
+  return IpNetworkVector(network_r).sample(size).encodeR();
+}
+
 
 /*-------------*
  *  Operators  *
@@ -122,11 +132,6 @@ List hostmask_wrapper(IntegerVector prefix_length, LogicalVector is_ipv6) {
 // [[Rcpp::export]]
 List broadcast_address_wrapper(List network_r) {
   return IpNetworkVector(network_r).broadcastAddress().encodeR();
-}
-
-// [[Rcpp::export]]
-List hosts_wrapper(List network_r, bool exclude_unusable) {
-  return IpNetworkVector(network_r).hosts(exclude_unusable).encodeR();
 }
 
 // [[Rcpp::export]]
