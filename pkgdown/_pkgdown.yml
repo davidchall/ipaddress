@@ -20,7 +20,7 @@ reference:
     contents:
       - as_packed
       - as_binary
-  - title: "Address spaces"
+  - title: "Address space"
     contents:
       - is_ipv4
       - max_prefix_length
