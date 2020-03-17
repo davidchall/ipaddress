@@ -38,6 +38,7 @@ sample_ipv6 <- function(size, replace = FALSE) {
 #' @export
 sample_network <- function(x, size, replace = FALSE) {
   assertthat::assert_that(
+    is_ip_network(x),
     assertthat::is.scalar(x),
     assertthat::noNA(x),
     assertthat::is.count(size),
@@ -49,20 +50,12 @@ sample_network <- function(x, size, replace = FALSE) {
     stop("cannot take a sample larger than the network size when 'replace = FALSE'")
   }
 
-  # if generating all addresses, use C++ for performance
-  if (size >= num_addresses(x)) {
+  # in some cases it's quicker to generate all addresses
+  if (size >= num_addresses(x) || num_addresses(x) < 1e4) {
     return(sample(seq(x), size, replace))
   }
 
-  # for small networks it's quicker to generate all addresses
-  if (num_addresses(x) < 1e6) {
-    return(sample(seq(x), size, replace))
-  }
-
-  n_bits_to_sample <- max_prefix_length(x) - prefix_length(x)
-  sample_func <- ifelse(is_ipv6(x), sample_ipv6_character, sample_ipv4_character)
-
-  result <- do.call(sample_func, list(size, n_bits_to_sample))
+  result <- new_ip_address_encode(sample_wrapper(x, size))
 
   if (!replace) {
     unique <- FALSE
@@ -72,36 +65,10 @@ sample_network <- function(x, size, replace = FALSE) {
       if (n_dupes == 0) {
         unique <- TRUE
       } else {
-        result[dupes] <- do.call(sample_func, list(sum(dupes), n_bits_to_sample))
+        result[dupes] <- new_ip_address_encode(sample_wrapper(x, sum(dupes)))
       }
     }
   }
 
-  rep(network_address(x), size) | ip_address(result)
-}
-
-sample_ipv4_character <- function(size, n_bits_to_sample) {
-  sample_octet <- function(i) {
-    n_bits_octet <- pmin(pmax(n_bits_to_sample - 8L * i, 0L), 8L)
-    range_octet <- 0L:(2L^n_bits_octet - 1L)
-    sample(range_octet, size, replace = TRUE)
-  }
-
-  Reduce(function(x, y) paste(x, y, sep = "."), Map(sample_octet, 3:0))
-}
-
-sample_ipv6_character <- function(size, n_bits_to_sample) {
-  sample_nibble <- function(i) {
-    n_bits_nibble <- pmin(pmax(n_bits_to_sample - 4L * i, 0L), 4L)
-    max_decimal <- 2 ^ n_bits_nibble - 1
-    range_nibble <- c(0:pmin(max_decimal, 9), letters[0:(pmax(max_decimal - 9, 0))])
-    sample(range_nibble, size, replace = TRUE)
-  }
-
-  sample_hextet <- function(i) {
-    i_nibbles <- seq.int(4 * i + 3, by = -1, length.out = 4)
-    Reduce(paste0, Map(sample_nibble, i_nibbles))
-  }
-
-  Reduce(function(x, y) paste(x, y, sep = ":"), Map(sample_hextet, 7:0))
+  result
 }

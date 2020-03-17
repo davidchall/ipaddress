@@ -2,6 +2,7 @@
 #include "IpAddressVector.h"
 #include "encoding.h"
 #include "masking.h"
+#include "sample.h"
 #include "utils.h"
 
 
@@ -322,6 +323,30 @@ IpAddressVector IpNetworkVector::hosts(bool exclude_unusable) const {
     out_address_v6.resize(vsize);
     out_is_ipv6.resize(vsize, false);
     out_is_na.resize(vsize, false);
+  }
+
+  return IpAddressVector(out_address_v4, out_address_v6, out_is_ipv6, out_is_na);
+}
+
+IpAddressVector IpNetworkVector::sample(unsigned int size) const {
+  // initialize vectors
+  std::vector<asio::ip::address_v4> out_address_v4;
+  std::vector<asio::ip::address_v6> out_address_v6;
+  std::vector<bool> out_is_ipv6;
+  std::vector<bool> out_is_na;
+
+  if (is_na.size() != 1 || is_na[0]) {
+    // pass
+  } else if (is_ipv6[0]) {
+    out_address_v6 = sample_network<asio::ip::address_v6>(network_v6[0], size);
+    out_address_v4.resize(size);
+    out_is_ipv6.resize(size, true);
+    out_is_na.resize(size, false);
+  } else {
+    out_address_v4 = sample_network<asio::ip::address_v4>(network_v4[0], size);
+    out_address_v6.resize(size);
+    out_is_ipv6.resize(size, false);
+    out_is_na.resize(size, false);
   }
 
   return IpAddressVector(out_address_v4, out_address_v6, out_is_ipv6, out_is_na);
