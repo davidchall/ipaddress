@@ -335,13 +335,8 @@ IpAddressVector IpNetworkVector::sample(unsigned int size) const {
   std::vector<bool> out_is_ipv6;
   std::vector<bool> out_is_na;
 
-  if (is_na.size() != 1) {
+  if (is_na.size() != 1 || is_na[0]) {
     // pass
-  } else if (is_na[0]) {
-    out_address_v4.resize(1);
-    out_address_v6.resize(1);
-    out_is_ipv6.resize(1);
-    out_is_na.resize(1, true);
   } else if (is_ipv6[0]) {
     out_address_v6 = sample_network<asio::ip::address_v6>(network_v6[0], size);
     out_address_v4.resize(size);
