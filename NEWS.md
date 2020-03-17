@@ -14,7 +14,7 @@
 * New `as_packed()` and `from_packed()` functions to encode and decode addresses as raw bytes
 * New `as_binary()` and `from_binary()` functions to encode and decode addresses as binary strings
 
-### Address spaces
+### Address space
 
 * New `max_prefix_length()` function to get the size of the address space (32-bit for IPv4 and 128-bit for IPv6)
 * New functions to check if addresses or networks are reserved for special use: `is_multicast()`, `is_unspecified()`, `is_loopback()`, `is_link_local()`
