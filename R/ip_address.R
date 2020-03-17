@@ -1,7 +1,7 @@
 #' @importFrom methods setOldClass
 methods::setOldClass(c("ip_address", "vctrs_vctr"))
 
-#' Class for storing IP addresses
+#' Vector of IP addresses
 #'
 #' @details
 #' An address in IPv4 space uses 32-bits. It is usually represented
@@ -23,8 +23,12 @@ methods::setOldClass(c("ip_address", "vctrs_vctr"))
 #'
 #' When casting an `ip_address` object back to a character vector using
 #' `as.character()`, IPv6 addresses are reduced to their compressed representation.
+#' A special case is IPv4-mapped IPv6 addresses, which are returned in their
+#' dual representation (e.g. `::ffff:192.0.2.128`).
 #'
-#' This class also supports bitwise operations: `&` (AND), `|` (OR) and `!` (NOT).
+#' Integers can be added to or subtracted from `ip_address` vectors.
+#' This class also supports bitwise operations: `!` (NOT), `&` (AND),
+#' `|` (OR) and `^` (XOR).
 #'
 #' @param x An `ip_address` vector
 #' @param ... Arguments to be passed to other methods
@@ -50,6 +54,12 @@ NULL
 #' # validates inputs and replaces with NA
 #' ip_address(c("1.2.3.4", "255.255.255.256", "1.2.3.4/5"))
 #'
+#' # addition
+#' ip_address("192.168.0.1") + 12L
+#'
+#' # subtraction
+#' ip_address("192.168.0.1") - 12L
+#'
 #' # bitwise NOT
 #' !ip_address("192.168.0.1")
 #'
@@ -57,7 +67,10 @@ NULL
 #' ip_address("192.168.0.1") & ip_address("255.0.0.255")
 #'
 #' # bitwise OR
-#' ip_address("192.168.0.0") | ip_address("0.0.0.1")
+#' ip_address("192.168.0.0") | ip_address("255.0.0.255")
+#'
+#' # bitwise XOR
+#' ip_address("192.168.0.0") ^ ip_address("255.0.0.255")
 #' @rdname ip_address
 #' @export
 ip_address <- function(ip = character()) {
@@ -87,6 +100,14 @@ new_ip_address <- function(address1 = integer(), address2 = integer(), address3 
     is_ipv6 = is_ipv6
   ), class = "ip_address")
 }
+
+#' `as_ip_address()`
+#'
+#' `as_ip_address()` casts an object to `ip_address`.
+#'
+#' @rdname ip_address
+#' @export
+as_ip_address <- function(x) vec_cast(x, ip_address())
 
 #' `is_ip_address()`
 #'

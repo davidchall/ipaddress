@@ -25,3 +25,6 @@ is_ipv4(ip)
 
 is_ipv6(ip)
 }
+\seealso{
+\code{\link[=max_prefix_length]{max_prefix_length()}}
+}

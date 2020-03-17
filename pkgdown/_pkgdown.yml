@@ -1,0 +1,38 @@
+development:
+  mode: auto
+
+url: https://davidchall.github.io/ipaddress
+
+template:
+  params:
+    docsearch:
+      api_key: a959f56e56e76081c6ebdec4073adbaf
+      index_name: ipaddress
+    ganalytics: UA-160789885-1
+
+reference:
+  - title: "Classes"
+    contents:
+      - ip_address
+      - ip_network
+      - ip_interface
+  - title: "Other representations"
+    contents:
+      - as_packed
+      - as_binary
+  - title: "Address space"
+    contents:
+      - is_ipv4
+      - max_prefix_length
+      - is_multicast
+      - is_ipv4_mapped
+  - title: "Network membership"
+    contents:
+      - num_addresses
+      - prefix_length
+      - is_within
+      - is_subnet
+  - title: "Generating addresses"
+    contents:
+      - starts_with("sample")
+      - seq.ip_network

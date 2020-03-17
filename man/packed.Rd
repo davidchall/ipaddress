@@ -2,33 +2,36 @@
 % Please edit documentation in R/binary.R
 \name{packed}
 \alias{packed}
-\alias{unpack}
-\title{Encode or decode address as raw bytes}
+\alias{as_packed}
+\alias{from_packed}
+\title{Represent address as raw bytes}
 \usage{
-packed(ip)
+as_packed(ip)
 
-unpack(blob)
+from_packed(bytes)
 }
 \arguments{
 \item{ip}{An \code{\link{ip_address}} vector}
 
-\item{blob}{A \code{\link[blob]{blob}} vector}
+\item{bytes}{A \code{\link[blob]{blob}} vector}
 }
 \description{
-\code{packed()} encodes an \code{ip_address} vector to a \code{blob}
-
-\code{unpack()} decodes a \code{blob} to an \code{ip_address} vector
+\code{as_packed()} and \code{from_packed()} encode and decode an \code{\link{ip_address}}
+vector to a \code{\link[blob]{blob}} vector.
 }
 \details{
 The bytes are stored in network order (also known as
 big-endian order), which is part of the IP standard.
 
 IPv4 addresses use 4 bytes, IPv6 addresses use 16 bytes,
-and missing values are stored as \code{NULL}.
+and missing values are encoded as \code{NULL}.
 }
 \examples{
 x <- ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334", NA))
-packed(x)
+as_packed(x)
 
-unpack(packed(x))
+from_packed(as_packed(x))
+}
+\seealso{
+Use \code{as_binary()} and \code{from_binary()} to encode/decode binary.
 }

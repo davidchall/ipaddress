@@ -41,6 +41,28 @@ test_that("masking works", {
   )
 })
 
+test_that("vector recycling works", {
+  expect_equal(
+    netmask(c(0L, 22L, 24L, 32L), FALSE),
+    netmask(ip_network(ipv4))
+  )
+  expect_equal(
+    hostmask(c(0L, 22L, 24L, 32L), FALSE),
+    hostmask(ip_network(ipv4))
+  )
+  expect_equal(
+    netmask(10L, c(TRUE, FALSE)),
+    ip_address(c("ffc0::", "255.192.0.0"))
+  )
+  expect_equal(
+    hostmask(10L, c(TRUE, FALSE)),
+    ip_address(c("3f:ffff:ffff:ffff:ffff:ffff:ffff:ffff", "0.63.255.255"))
+  )
+
+  expect_error(netmask(rep(0L, 3), rep(TRUE, 2)))
+  expect_error(hostmask(rep(0L, 3), rep(TRUE, 2)))
+})
+
 test_that("input validation works", {
   expect_error(netmask(ip_address("1.2.3.4")))
   expect_error(hostmask(ip_address("1.2.3.4")))
@@ -49,8 +71,6 @@ test_that("input validation works", {
   expect_error(hostmask(1, FALSE))
   expect_error(netmask(1L, "yes"))
   expect_error(hostmask(1L, "yes"))
-  expect_error(netmask(c(1L), c(FALSE, TRUE)))
-  expect_error(hostmask(c(1L), c(FALSE, TRUE)))
 
   expect_error(netmask(-1L, FALSE))
   expect_error(hostmask(-1L, FALSE))

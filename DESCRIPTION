@@ -1,6 +1,6 @@
 Package: ipaddress
 Title: Tidy IP Addresses
-Version: 0.1.1.9000
+Version: 0.1.2.9000
 Authors@R: 
     person(given = "David",
            family = "Hall",
@@ -36,5 +36,5 @@ VignetteBuilder:
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 SystemRequirements: C++11
