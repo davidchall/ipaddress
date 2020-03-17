@@ -13,6 +13,7 @@ std::vector<Address> sample_bits(int n_bits_to_sample, int n_sample) {
   typedef typename Address::bytes_type Bytes;
   std::vector<Bytes> result_bytes(n_sample);
 
+  // fill bytes right to left
   for (std::size_t i=sizeof(Bytes)-1; i>=0; --i) {
     int ingest_bits = std::min(n_bits_to_sample, 8);
     n_bits_to_sample -= ingest_bits;
@@ -28,9 +29,8 @@ std::vector<Address> sample_bits(int n_bits_to_sample, int n_sample) {
 
   std::vector<Address> result;
   result.reserve(n_sample);
-  for (std::size_t j=0; j<result_bytes.size(); ++j) {
-    result.push_back(Address(result_bytes[j]));
-  }
+  std::transform(result_bytes.begin(), result_bytes.end(), std::back_inserter(result),
+                 [](const Bytes &b) { return Address(b); });
 
   return result;
 }
