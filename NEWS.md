@@ -34,6 +34,7 @@
 ## Minor improvements
 
 * Improved input validation warnings. They now report the row number involved and no longer mention internal function names.
+* Many functions now support [tidy vector recyling](https://vctrs.r-lib.org/reference/vec_recycle.html)
 * Performance improvements
 
 
