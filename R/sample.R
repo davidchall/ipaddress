@@ -55,7 +55,7 @@ sample_network <- function(x, size, replace = FALSE) {
     return(sample(seq(x), size, replace))
   }
 
-  result <- new_ip_address_encode(sample_wrapper(x, size))
+  result <- sample_wrapper(x, size)
 
   if (!replace) {
     unique <- FALSE
@@ -65,7 +65,7 @@ sample_network <- function(x, size, replace = FALSE) {
       if (n_dupes == 0) {
         unique <- TRUE
       } else {
-        result[dupes] <- new_ip_address_encode(sample_wrapper(x, sum(dupes)))
+        result[dupes] <- sample_wrapper(x, sum(dupes))
       }
     }
   }

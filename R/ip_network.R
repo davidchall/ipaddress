@@ -81,7 +81,7 @@ ip_network.default <- function(ip = character(), strict = TRUE, ...) {
     assertthat::noNA(strict)
   )
 
-  new_ip_network_encode(parse_network_wrapper(ip, strict))
+  parse_network_wrapper(ip, strict)
 }
 
 #' @rdname ip_network
@@ -98,17 +98,7 @@ ip_network.ip_address <- function(address, prefix_length, strict = TRUE, ...) {
   address <- args[[1L]]
   prefix_length <- args[[2L]]
 
-  new_ip_network_encode(construct_network_wrapper(address, prefix_length, strict))
-}
-
-#' Low-level constructor that accepts the encoded data from C++
-#' @noRd
-new_ip_network_encode <- function(x) {
-  new_ip_network(
-    x$address1, x$address2, x$address3, x$address4,
-    x$prefix,
-    x$is_ipv6
-  )
+  construct_network_wrapper(address, prefix_length, strict)
 }
 
 #' Low-level constructor that accepts the underlying data types being stored

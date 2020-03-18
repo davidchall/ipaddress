@@ -228,13 +228,21 @@ List IpAddressVector::encodeR() const {
     }
   }
 
-  return List::create(
+  List result = List::create(
     _["address1"] = out_addr1,
     _["address2"] = out_addr2,
     _["address3"] = out_addr3,
     _["address4"] = out_addr4,
     _["is_ipv6"] = out_v6
   );
+
+  result.attr("class") = CharacterVector::create(
+    "ip_address",
+    "vctrs_rcrd",
+    "vctrs_vctr"
+  );
+
+  return result;
 }
 
 CharacterVector IpAddressVector::encodeStrings() const {

@@ -74,16 +74,7 @@ NULL
 #' @rdname ip_address
 #' @export
 ip_address <- function(ip = character()) {
-  new_ip_address_encode(parse_address_wrapper(ip))
-}
-
-#' Low-level constructor that accepts the encoded data from C++
-#' @noRd
-new_ip_address_encode <- function(x) {
-  new_ip_address(
-    x$address1, x$address2, x$address3, x$address4,
-    x$is_ipv6
-  )
+  parse_address_wrapper(ip)
 }
 
 #' Low-level constructor that accepts the underlying data types being stored

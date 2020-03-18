@@ -76,7 +76,7 @@ is_teredo <- function(x) {
 extract_ipv4_mapped <- function(x) {
   assertthat::assert_that(is_ip_address(x))
 
-  new_ip_address_encode(extract_ipv4_mapped_wrapper(x))
+  extract_ipv4_mapped_wrapper(x)
 }
 
 #' @rdname ipv6_transition
@@ -84,7 +84,7 @@ extract_ipv4_mapped <- function(x) {
 extract_6to4 <- function(x) {
   assertthat::assert_that(is_ip_address(x))
 
-  new_ip_address_encode(extract_6to4_wrapper(x))
+  extract_6to4_wrapper(x)
 }
 
 #' @rdname ipv6_transition
@@ -92,7 +92,7 @@ extract_6to4 <- function(x) {
 extract_teredo_server <- function(x) {
   assertthat::assert_that(is_ip_address(x))
 
-  new_ip_address_encode(extract_teredo_server_wrapper(x))
+  extract_teredo_server_wrapper(x)
 }
 
 #' @rdname ipv6_transition
@@ -100,5 +100,5 @@ extract_teredo_server <- function(x) {
 extract_teredo_client <- function(x) {
   assertthat::assert_that(is_ip_address(x))
 
-  new_ip_address_encode(extract_teredo_client_wrapper(x))
+  extract_teredo_client_wrapper(x)
 }

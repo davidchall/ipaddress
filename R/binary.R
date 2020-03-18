@@ -70,5 +70,5 @@ as_binary <- function(ip) {
 #' @rdname binary
 #' @export
 from_binary <- function(bits) {
-  new_ip_address_encode(from_binary_address_wrapper(bits))
+  from_binary_address_wrapper(bits)
 }

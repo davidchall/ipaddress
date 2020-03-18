@@ -50,7 +50,7 @@ network_address <- function(x) {
 broadcast_address <- function(x) {
   assertthat::assert_that(is_ip_network(x))
 
-  new_ip_address_encode(broadcast_address_wrapper(x))
+  broadcast_address_wrapper(x)
 }
 
 #' @rdname network_size

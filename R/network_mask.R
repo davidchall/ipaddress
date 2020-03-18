@@ -49,37 +49,37 @@ hostmask <- function(...) {
 #' @rdname netmask
 #' @export
 netmask.ip_network <- function(x, ...) {
-  new_ip_address_encode(netmask_wrapper(
+  netmask_wrapper(
     field(x, "prefix"),
     field(x, "is_ipv6")
-  ))
+  )
 }
 
 #' @rdname netmask
 #' @export
 hostmask.ip_network <- function(x, ...) {
-  new_ip_address_encode(hostmask_wrapper(
+  hostmask_wrapper(
     field(x, "prefix"),
     field(x, "is_ipv6")
-  ))
+  )
 }
 
 #' @rdname netmask
 #' @export
 netmask.ip_interface <- function(x, ...) {
-  new_ip_address_encode(netmask_wrapper(
+  netmask_wrapper(
     field(x, "prefix"),
     field(x, "is_ipv6")
-  ))
+  )
 }
 
 #' @rdname netmask
 #' @export
 hostmask.ip_interface <- function(x, ...) {
-  new_ip_address_encode(hostmask_wrapper(
+  hostmask_wrapper(
     field(x, "prefix"),
     field(x, "is_ipv6")
-  ))
+  )
 }
 
 #' @rdname netmask
@@ -120,6 +120,5 @@ subnet_mask <- function(prefix_length, is_ipv6, mask_func) {
     msg = "Found IPv6 prefix length greater than 128"
   )
 
-  x <- do.call(mask_func, list(prefix_length, is_ipv6))
-  new_ip_address_encode(x)
+  do.call(mask_func, list(prefix_length, is_ipv6))
 }
