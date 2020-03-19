@@ -45,6 +45,10 @@ print_network_wrapper <- function(x) {
     .Call(`_ipaddress_print_network_wrapper`, x)
 }
 
+translate_to_hostnames <- function(x) {
+    .Call(`_ipaddress_translate_to_hostnames`, x)
+}
+
 compare_address_wrapper <- function(x) {
     .Call(`_ipaddress_compare_address_wrapper`, x)
 }

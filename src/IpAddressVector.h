@@ -75,6 +75,9 @@ public:
   // Encode to binary string
   Rcpp::CharacterVector encodeBinary() const;
 
+  // Translate to hostnames
+  Rcpp::List translateHostname() const;
+
   // Encode to R dataframe for direct comparisons
   Rcpp::DataFrame encodeComparable() const;
 

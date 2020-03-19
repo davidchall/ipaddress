@@ -4,6 +4,9 @@
 #include "masking.h"
 #include "utils.h"
 
+#include <algorithm>
+#include <asio.hpp>
+
 using namespace Rcpp;
 
 
@@ -301,6 +304,43 @@ CharacterVector IpAddressVector::encodeBinary() const {
       output[i] = encode_binary(address_v6[i]);
     } else {
       output[i] = encode_binary(address_v4[i]);
+    }
+  }
+
+  return output;
+}
+
+List IpAddressVector::translateHostname() const {
+  std::size_t vsize = is_na.size();
+  List output(vsize);
+
+  asio::io_context io_context;
+  asio::ip::tcp::resolver resolver(io_context);
+  asio::ip::tcp::endpoint endpoint;
+  asio::error_code ec;
+
+  for (std::size_t i=0; i<vsize; ++i) {
+    if (is_na[i]) {
+      output[i] = R_NilValue;
+      continue;
+    } else if (is_ipv6[i]) {
+      endpoint.address(address_v6[i]);
+    } else {
+      endpoint.address(address_v4[i]);
+    }
+
+    // reverse resolution
+    auto results = resolver.resolve(endpoint, ec);
+
+    if (ec) {
+      warnInvalidInput(i, endpoint.address().to_string());
+      output[i] = R_NilValue;
+    } else {
+      CharacterVector host_names(results.size());
+      std::transform(results.begin(), results.end(), host_names.begin(),
+                     [](decltype(*results.begin()) &x) { return x.host_name(); });
+
+      output[i] = host_names;
     }
   }
 
