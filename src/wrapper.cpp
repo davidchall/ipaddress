@@ -64,7 +64,12 @@ CharacterVector print_network_wrapper(List x) {
 
 // [[Rcpp::export]]
 List translate_to_hostnames(List x) {
-  return IpAddressVector(x).translateHostname();
+  return IpAddressVector(x).encodeHostnames();
+}
+
+// [[Rcpp::export]]
+List translate_from_hostname(CharacterVector x) {
+  return IpAddressVector::decodeHostname(x);
 }
 
 

@@ -49,6 +49,10 @@ translate_to_hostnames <- function(x) {
     .Call(`_ipaddress_translate_to_hostnames`, x)
 }
 
+translate_from_hostname <- function(x) {
+    .Call(`_ipaddress_translate_from_hostname`, x)
+}
+
 compare_address_wrapper <- function(x) {
     .Call(`_ipaddress_compare_address_wrapper`, x)
 }

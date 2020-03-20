@@ -50,6 +50,9 @@ public:
   // Decode from binary string
   static IpAddressVector decodeBinary(Rcpp::CharacterVector input);
 
+  // Decode from hostname
+  static Rcpp::List decodeHostname(Rcpp::CharacterVector input);
+
   // Construct netmask from prefix length
   static IpAddressVector createNetmask(Rcpp::IntegerVector prefix_length, Rcpp::LogicalVector is_ipv6);
 
@@ -75,8 +78,8 @@ public:
   // Encode to binary string
   Rcpp::CharacterVector encodeBinary() const;
 
-  // Translate to hostnames
-  Rcpp::List translateHostname() const;
+  // Encode to hostnames
+  Rcpp::List encodeHostnames() const;
 
   // Encode to R dataframe for direct comparisons
   Rcpp::DataFrame encodeComparable() const;
