@@ -23,8 +23,8 @@ test_that("DNS resolution works", {
 
   # localhost is a reserved top-level domain (suitable for unit testing?)
   expect_true(is_loopback(from_hostname("localhost")))
-  expect_equal(as_hostname(ip_address("127.0.0.1")), "localhost")
-  expect_equal(as_hostname(ip_address("::1")), "localhost")
+  expect_match(as_hostname(ip_address("127.0.0.1")), "localhost")
+  expect_match(as_hostname(ip_address("::1")), "localhost")
 })
 
 test_that("internal pluck_first_of_each() function works", {
