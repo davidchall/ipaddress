@@ -6,18 +6,36 @@
 \alias{from_hostname}
 \title{Represent address as hostname}
 \usage{
-as_hostname(ip, simplify = TRUE)
+as_hostname(ip, multiple = FALSE)
 
-from_hostname(host, simplify = TRUE)
+from_hostname(host, multiple = FALSE)
 }
 \arguments{
 \item{ip}{An \code{\link{ip_address}} vector}
 
+\item{multiple}{A logical scalar indicating if \emph{all} resolved endpoints are
+returned, or just the first endpoint (the default). This determines whether
+a vector or list of vectors is returned.}
+
 \item{host}{A character vector of hostnames}
+}
+\value{
+\itemize{
+\item \code{as_hostname()} returns a character vector or a list of character vectors
+(depending upon the \code{multiple} argument)
+\item \code{from_hostname()} returns a \code{\link{ip_address}} vector or a list of
+\code{\link{ip_address}} vectors (depending upon the \code{multiple} argument)
+}
 }
 \description{
 Represent address as hostname
 }
+\examples{
+from_hostname("r-project.org")
+
+as_hostname(from_hostname("r-project.org"))
+}
 \seealso{
-\code{\link[=nsl]{nsl()}}
+The base function \code{\link[=nsl]{nsl()}} provides forward DNS resolution to IPv4 addresses,
+but only on Unix-like systems.
 }

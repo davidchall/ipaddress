@@ -2,38 +2,60 @@
 #'
 #' @param ip An \code{\link{ip_address}} vector
 #' @param host A character vector of hostnames
+#' @param multiple A logical scalar indicating if _all_ resolved endpoints are
+#'   returned, or just the first endpoint (the default). This determines whether
+#'   a vector or list of vectors is returned.
 #' @return
-#' * `as_hostname()` returns a list of character vectors
-#' * `from_hostname()` returns a list of \code{\link{ip_address}} vectors
+#' * `as_hostname()` returns a character vector or a list of character vectors
+#'   (depending upon the `multiple` argument)
+#' * `from_hostname()` returns a \code{\link{ip_address}} vector or a list of
+#'   \code{\link{ip_address}} vectors (depending upon the `multiple` argument)
+#' @examples
+#' from_hostname("r-project.org")
 #'
-#' @seealso [nsl()]
+#' as_hostname(from_hostname("r-project.org"))
+#' @seealso
+#' The base function [nsl()] provides forward DNS resolution to IPv4 addresses,
+#' but only on Unix-like systems.
 #' @name hostname
 NULL
 
 #' @rdname hostname
 #' @export
-as_hostname <- function(ip, simplify = TRUE) {
-  assertthat::assert_that(is_ip_address(ip))
+as_hostname <- function(ip, multiple = FALSE) {
+  assertthat::assert_that(
+    is_ip_address(ip),
+    assertthat::is.flag(multiple),
+    assertthat::noNA(multiple)
+  )
 
   res <- translate_to_hostnames(ip)
 
-  if (simplify && all(lengths(res)) == 1L) {
-    res <- unlist(res)
+  if (multiple) {
+    res
+  } else {
+    pluck_first_of_each(res)
   }
-
-  res
 }
 
 #' @rdname hostname
 #' @export
-from_hostname <- function(host, simplify = TRUE) {
-  assertthat::assert_that(is.character(host))
+from_hostname <- function(host, multiple = FALSE) {
+  assertthat::assert_that(
+    is.character(host),
+    assertthat::is.flag(multiple),
+    assertthat::noNA(multiple)
+  )
 
   res <- translate_from_hostname(host)
 
-  if (simplify && all(lengths(res)) == 1L) {
-    res <- do.call(Map, c(c, res))[[1]]
+  if (multiple) {
+    res
+  } else {
+    pluck_first_of_each(res)
   }
+}
 
-  res
+pluck_first_of_each <- function(x) {
+  do.call(Map, c(c, x))[[1]]
 }
