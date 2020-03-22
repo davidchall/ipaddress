@@ -216,6 +216,14 @@ List IpNetworkVector::encodeR() const {
     }
   }
 
+  if (out_addr1.size() != out_v6.size() ||
+      out_addr2.size() != out_v6.size() ||
+      out_addr3.size() != out_v6.size() ||
+      out_addr4.size() != out_v6.size() ||
+      out_pfx.size() != out_v6.size()) {
+    throw Rcpp::exception("Consistuent vectors have unequal sizes (please file bug report)", false);
+  }
+
   List result = List::create(
     _["address1"] = out_addr1,
     _["address2"] = out_addr2,

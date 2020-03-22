@@ -292,6 +292,13 @@ List IpAddressVector::encodeR() const {
     }
   }
 
+  if (out_addr1.size() != out_v6.size() ||
+      out_addr2.size() != out_v6.size() ||
+      out_addr3.size() != out_v6.size() ||
+      out_addr4.size() != out_v6.size()) {
+    throw Rcpp::exception("Consistuent vectors have unequal sizes (please file bug report)", false);
+  }
+
   List result = List::create(
     _["address1"] = out_addr1,
     _["address2"] = out_addr2,
@@ -464,6 +471,17 @@ DataFrame IpAddressVector::encodeComparable() const {
       out_addr1[i] = (bytes[0] & left_mask) >> 16;
       out_addr2[i] = (bytes[0] & right_mask);
     }
+  }
+
+  if (out_addr1.size() != out_v6.size() ||
+      out_addr2.size() != out_v6.size() ||
+      out_addr3.size() != out_v6.size() ||
+      out_addr4.size() != out_v6.size() ||
+      out_addr5.size() != out_v6.size() ||
+      out_addr6.size() != out_v6.size() ||
+      out_addr7.size() != out_v6.size() ||
+      out_addr8.size() != out_v6.size()) {
+    throw Rcpp::exception("Consistuent vectors have unequal sizes (please file bug report)", false);
   }
 
   return DataFrame::create(
