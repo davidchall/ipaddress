@@ -170,7 +170,9 @@ List IpAddressVector::decodeHostname(CharacterVector input) {
       auto results = resolver.resolve(hostname, "http", ec);
 
       if (ec) {
-        warnInvalidInput(i, hostname, ec.message());
+        if (ec != asio::error::host_not_found) {
+          warnInvalidInput(i, hostname, ec.message());
+        }
         address_v4.resize(1);
         address_v6.resize(1);
         is_ipv6.resize(1);

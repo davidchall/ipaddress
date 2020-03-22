@@ -32,7 +32,8 @@ test_that("input validation works", {
 test_that("DNS resolution works", {
   skip_if_offline()
 
-  expect_warning(from_hostname("unknown"))
+  expect_equal(from_hostname("unknown"), ip_address(NA))
+  expect_equal(as_hostname(ip_address("0.0.0.0")), NA_character_)
 
   # localhost is a reserved top-level domain (suitable for unit testing?)
   expect_true(is_loopback(from_hostname("localhost")))

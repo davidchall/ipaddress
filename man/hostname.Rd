@@ -37,8 +37,11 @@ IP addresses)
 \details{
 These functions require an internet connection. Before processing the input
 vector, we first check that a known hostname can be resolved. If this fails,
-an error is raised. If DNS resolution subsequently fails for one of the
-inputs, a warning is emitted and \code{NA} is stored.
+an error is raised.
+
+If DNS lookup cannot resolve an input, then \code{NA} is returned for that input.
+If an error occurs during DNS lookup, then a warning is emitted and \code{NA} is
+returned for that input.
 
 DNS resolution performs a many-to-many mapping between IP addresses and
 hostnames. For this reason, these two functions can potentially return
