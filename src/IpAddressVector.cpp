@@ -4,7 +4,6 @@
 #include "masking.h"
 #include "utils.h"
 
-#include <algorithm>
 #include <asio.hpp>
 
 using namespace Rcpp;
