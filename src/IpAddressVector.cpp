@@ -401,6 +401,7 @@ List IpAddressVector::encodeHostnames() const {
         hostnames.push_back(NA_STRING);
       } else {
         for (auto const& entry : results) {
+          // unresolved hostnames often returned as original IP address
           if (entry.host_name() != endpoint.address().to_string()) {
             hostnames.push_back(entry.host_name());
           }
