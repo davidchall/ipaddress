@@ -74,7 +74,7 @@ from_hostname <- function(host, multiple = FALSE) {
     abort("'multiple' must be TRUE or FALSE")
   }
   if (is_offline()) {
-    stop("DNS resolution requires an internet connection")
+    abort("DNS resolution requires an internet connection")
   }
 
   res <- wrap_decode_hostname(host)
