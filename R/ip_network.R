@@ -81,7 +81,7 @@ ip_network.default <- function(ip = character(), strict = TRUE, ...) {
     assertthat::noNA(strict)
   )
 
-  parse_network_wrapper(ip, strict)
+  wrap_parse_network(ip, strict)
 }
 
 #' @rdname ip_network
@@ -98,7 +98,7 @@ ip_network.ip_address <- function(address, prefix_length, strict = TRUE, ...) {
   address <- args[[1L]]
   prefix_length <- args[[2L]]
 
-  construct_network_wrapper(address, prefix_length, strict)
+  wrap_construct_network_from_address(address, prefix_length, strict)
 }
 
 #' Low-level constructor that accepts the underlying data types being stored
@@ -151,7 +151,7 @@ as.character.ip_network <- function(x, ...) vec_cast(x, character())
 
 #' @export
 vec_proxy_compare.ip_network <- function(x, ...) {
-  compare_address_wrapper(network_address(x))
+  wrap_compare_address(network_address(x))
 }
 
 

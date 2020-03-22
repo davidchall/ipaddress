@@ -26,9 +26,9 @@ vec_arith.ip_address.ip_address <- function(op, x, y, ...) {
 
   switch(
     op,
-    "&" = bitwise_and_wrapper(x, y),
-    "|" = bitwise_or_wrapper(x, y),
-    "^" = bitwise_xor_wrapper(x, y),
+    "&" = wrap_bitwise_and(x, y),
+    "|" = wrap_bitwise_or(x, y),
+    "^" = wrap_bitwise_xor(x, y),
     stop_incompatible_op(op, x, y)
   )
 }
@@ -42,8 +42,8 @@ vec_arith.ip_address.integer <- function(op, x, y, ...) {
 
   switch(
     op,
-    "+" = addition_wrapper(x, y),
-    "-" = addition_wrapper(x, -y),
+    "+" = wrap_add_integer(x, y),
+    "-" = wrap_add_integer(x, -y),
     stop_incompatible_op(op, x, y)
   )
 }
@@ -53,7 +53,7 @@ vec_arith.ip_address.integer <- function(op, x, y, ...) {
 vec_arith.ip_address.MISSING <- function(op, x, y, ...) {
   switch(
     op,
-    "!" = bitwise_not_wrapper(x),
+    "!" = wrap_bitwise_not(x),
     stop_incompatible_op(op, x, y)
   )
 }

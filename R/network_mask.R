@@ -49,7 +49,7 @@ hostmask <- function(...) {
 #' @rdname netmask
 #' @export
 netmask.ip_network <- function(x, ...) {
-  netmask_wrapper(
+  wrap_netmask(
     field(x, "prefix"),
     field(x, "is_ipv6")
   )
@@ -58,7 +58,7 @@ netmask.ip_network <- function(x, ...) {
 #' @rdname netmask
 #' @export
 hostmask.ip_network <- function(x, ...) {
-  hostmask_wrapper(
+  wrap_hostmask(
     field(x, "prefix"),
     field(x, "is_ipv6")
   )
@@ -67,7 +67,7 @@ hostmask.ip_network <- function(x, ...) {
 #' @rdname netmask
 #' @export
 netmask.ip_interface <- function(x, ...) {
-  netmask_wrapper(
+  wrap_netmask(
     field(x, "prefix"),
     field(x, "is_ipv6")
   )
@@ -76,7 +76,7 @@ netmask.ip_interface <- function(x, ...) {
 #' @rdname netmask
 #' @export
 hostmask.ip_interface <- function(x, ...) {
-  hostmask_wrapper(
+  wrap_hostmask(
     field(x, "prefix"),
     field(x, "is_ipv6")
   )
@@ -85,13 +85,13 @@ hostmask.ip_interface <- function(x, ...) {
 #' @rdname netmask
 #' @export
 netmask.default <- function(prefix_length = integer(), is_ipv6 = logical(), ...) {
-  subnet_mask(prefix_length, is_ipv6, netmask_wrapper)
+  subnet_mask(prefix_length, is_ipv6, wrap_netmask)
 }
 
 #' @rdname netmask
 #' @export
 hostmask.default <- function(prefix_length = integer(), is_ipv6 = logical(), ...) {
-  subnet_mask(prefix_length, is_ipv6, hostmask_wrapper)
+  subnet_mask(prefix_length, is_ipv6, wrap_hostmask)
 }
 
 subnet_mask <- function(prefix_length, is_ipv6, mask_func) {

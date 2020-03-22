@@ -38,37 +38,22 @@ NULL
 #' @rdname ipv6_transition
 #' @export
 is_ipv4_mapped <- function(x) {
-  if (is_ip_address(x)) {
-    is_ipv4_mapped_address_wrapper(x)
-  } else if (is_ip_network(x)) {
-    is_ipv4_mapped_network_wrapper(x)
-  } else {
-    stop("argument must be an ip_address vector or an ip_network vector")
-  }
+  assertthat::assert_that(is_ip_address(x) || is_ip_network(x))
+  wrap_is_ipv4_mapped(x)
 }
 
 #' @rdname ipv6_transition
 #' @export
 is_6to4 <- function(x) {
-  if (is_ip_address(x)) {
-    is_6to4_address_wrapper(x)
-  } else if (is_ip_network(x)) {
-    is_6to4_network_wrapper(x)
-  } else {
-    stop("argument must be an ip_address vector or an ip_network vector")
-  }
+  assertthat::assert_that(is_ip_address(x) || is_ip_network(x))
+  wrap_is_6to4(x)
 }
 
 #' @rdname ipv6_transition
 #' @export
 is_teredo <- function(x) {
-  if (is_ip_address(x)) {
-    is_teredo_address_wrapper(x)
-  } else if (is_ip_network(x)) {
-    is_teredo_network_wrapper(x)
-  } else {
-    stop("argument must be an ip_address vector or an ip_network vector")
-  }
+  assertthat::assert_that(is_ip_address(x) || is_ip_network(x))
+  wrap_is_teredo(x)
 }
 
 #' @rdname ipv6_transition
@@ -76,7 +61,7 @@ is_teredo <- function(x) {
 extract_ipv4_mapped <- function(x) {
   assertthat::assert_that(is_ip_address(x))
 
-  extract_ipv4_mapped_wrapper(x)
+  wrap_extract_ipv4_mapped(x)
 }
 
 #' @rdname ipv6_transition
@@ -84,7 +69,7 @@ extract_ipv4_mapped <- function(x) {
 extract_6to4 <- function(x) {
   assertthat::assert_that(is_ip_address(x))
 
-  extract_6to4_wrapper(x)
+  wrap_extract_6to4(x)
 }
 
 #' @rdname ipv6_transition
@@ -92,7 +77,7 @@ extract_6to4 <- function(x) {
 extract_teredo_server <- function(x) {
   assertthat::assert_that(is_ip_address(x))
 
-  extract_teredo_server_wrapper(x)
+  wrap_extract_teredo_server(x)
 }
 
 #' @rdname ipv6_transition
@@ -100,5 +85,5 @@ extract_teredo_server <- function(x) {
 extract_teredo_client <- function(x) {
   assertthat::assert_that(is_ip_address(x))
 
-  extract_teredo_client_wrapper(x)
+  wrap_extract_teredo_client(x)
 }

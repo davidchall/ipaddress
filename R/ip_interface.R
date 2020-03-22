@@ -63,7 +63,7 @@ ip_interface <- function(...) {
 #' @rdname ip_interface
 #' @export
 ip_interface.default <- function(ip = character(), ...) {
-  new_ip_interface_reclass(parse_interface_wrapper(ip))
+  new_ip_interface_reclass(wrap_parse_interface(ip))
 }
 
 #' @rdname ip_interface
@@ -76,7 +76,7 @@ ip_interface.ip_address <- function(address, prefix_length, ...) {
   address <- args[[1L]]
   prefix_length <- args[[2L]]
 
-  new_ip_interface_reclass(construct_interface_wrapper(address, prefix_length))
+  new_ip_interface_reclass(wrap_construct_interface_from_address(address, prefix_length))
 }
 
 #' Low-level constructor that accepts the encoded data from C++.

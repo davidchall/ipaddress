@@ -64,11 +64,11 @@ NULL
 #' @rdname binary
 #' @export
 as_binary <- function(ip) {
-  to_binary_address_wrapper(ip)
+  wrap_encode_binary(ip)
 }
 
 #' @rdname binary
 #' @export
 from_binary <- function(bits) {
-  from_binary_address_wrapper(bits)
+  wrap_decode_binary(bits)
 }

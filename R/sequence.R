@@ -47,7 +47,7 @@ seq.ip_network <- function(x, ...) {
     msg = "Network too large"
   )
 
-  hosts_wrapper(x, FALSE)
+  wrap_network_hosts(x, FALSE)
 }
 
 #' `hosts()`
@@ -65,5 +65,5 @@ hosts <- function(x) {
     msg = "Network too large"
   )
 
-  hosts_wrapper(x, TRUE)
+  wrap_network_hosts(x, TRUE)
 }

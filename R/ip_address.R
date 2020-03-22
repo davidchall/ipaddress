@@ -74,7 +74,7 @@ NULL
 #' @rdname ip_address
 #' @export
 ip_address <- function(ip = character()) {
-  parse_address_wrapper(ip)
+  wrap_parse_address(ip)
 }
 
 #' Low-level constructor that accepts the underlying data types being stored
@@ -125,7 +125,7 @@ as.character.ip_address <- function(x, ...) vec_cast(x, character())
 # Comparison ------------------------------------------------------------
 
 #' @export
-vec_proxy_compare.ip_address <- function(x, ...) compare_address_wrapper(x)
+vec_proxy_compare.ip_address <- function(x, ...) wrap_compare_address(x)
 
 
 # Other ------------------------------------------------------------

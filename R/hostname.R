@@ -55,7 +55,7 @@ as_hostname <- function(ip, multiple = FALSE) {
     stop("DNS resolution requires an internet connection")
   }
 
-  res <- encode_hostname_wrapper(ip)
+  res <- wrap_encode_hostname(ip)
 
   if (multiple) {
     res
@@ -77,7 +77,7 @@ from_hostname <- function(host, multiple = FALSE) {
     stop("DNS resolution requires an internet connection")
   }
 
-  res <- decode_hostname_wrapper(host)
+  res <- wrap_decode_hostname(host)
 
   if (multiple) {
     res
@@ -87,7 +87,7 @@ from_hostname <- function(host, multiple = FALSE) {
 }
 
 is_offline <- function() {
-  is.na(suppressWarnings(decode_hostname_wrapper("www.r-project.org")))
+  is.na(suppressWarnings(wrap_decode_hostname("www.r-project.org")))
 }
 
 pluck_first_of_each <- function(x) {

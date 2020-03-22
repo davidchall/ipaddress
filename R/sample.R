@@ -55,7 +55,7 @@ sample_network <- function(x, size, replace = FALSE) {
     return(sample(seq(x), size, replace))
   }
 
-  result <- sample_wrapper(x, size)
+  result <- wrap_sample_network(x, size)
 
   if (!replace) {
     unique <- FALSE
@@ -65,7 +65,7 @@ sample_network <- function(x, size, replace = FALSE) {
       if (n_dupes == 0) {
         unique <- TRUE
       } else {
-        result[dupes] <- sample_wrapper(x, sum(dupes))
+        result[dupes] <- wrap_sample_network(x, sum(dupes))
       }
     }
   }

@@ -34,7 +34,7 @@ is_within <- function(address, network) {
   address <- args[[1L]]
   network <- args[[2L]]
 
-  is_within_wrapper(address, network)
+  wrap_is_within(address, network)
 }
 
 #' `is_within_any()`
@@ -48,7 +48,7 @@ is_within_any <- function(address, network) {
     is_ip_network(network)
   )
 
-  is_within_any_wrapper(address, network)
+  wrap_is_within_any(address, network)
 }
 
 
@@ -90,7 +90,7 @@ overlaps <- function(network, other) {
   network <- args[[1L]]
   other <- args[[2L]]
 
-  is_within_wrapper(network_address(network), other) | is_within_wrapper(network_address(other), network)
+  wrap_is_within(network_address(network), other) | wrap_is_within(network_address(other), network)
 }
 
 #' @rdname network_in_network
@@ -106,7 +106,7 @@ is_subnet <- function(network, other) {
   network <- args[[1L]]
   other <- args[[2L]]
 
-  is_within_wrapper(network_address(network), other) & (prefix_length(network) >= prefix_length(other))
+  wrap_is_within(network_address(network), other) & (prefix_length(network) >= prefix_length(other))
 }
 
 #' @rdname network_in_network
@@ -122,5 +122,5 @@ is_supernet <- function(network, other) {
   network <- args[[1L]]
   other <- args[[2L]]
 
-  is_within_wrapper(network_address(other), network) & (prefix_length(other) >= prefix_length(network))
+  wrap_is_within(network_address(other), network) & (prefix_length(other) >= prefix_length(network))
 }
