@@ -54,11 +54,8 @@ NULL
 #' # validates inputs and replaces with NA
 #' ip_address(c("255.255.255.256", "192.168.0.1/32"))
 #'
-#' # addition
+#' # addition of integers
 #' ip_address("192.168.0.1") + -2:2
-#'
-#' # subtraction
-#' ip_address("192.168.0.1") - -2:2
 #'
 #' # bitwise NOT
 #' !ip_address("192.168.0.1")

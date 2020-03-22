@@ -11,8 +11,10 @@
 #' * Teredo: [RFC 4380](https://tools.ietf.org/html/rfc4380)
 #'
 #' @param x An \code{\link{ip_address}} vector
-#' @return `is_xxx()` functions return a logical vector; `extract_xxx()`
-#'   functions return an \code{\link{ip_address}} vector.
+#'
+#' @return
+#' * `is_xxx()` functions return a logical vector
+#' * `extract_xxx()` functions return an \code{\link{ip_address}} vector.
 #'
 #' @examples
 #' # these examples show the reserved networks

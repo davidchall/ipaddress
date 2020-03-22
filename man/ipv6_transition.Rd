@@ -29,8 +29,10 @@ extract_teredo_client(x)
 \item{x}{An \code{\link{ip_address}} vector}
 }
 \value{
-\code{is_xxx()} functions return a logical vector; \code{extract_xxx()}
-functions return an \code{\link{ip_address}} vector.
+\itemize{
+\item \code{is_xxx()} functions return a logical vector
+\item \code{extract_xxx()} functions return an \code{\link{ip_address}} vector.
+}
 }
 \description{
 There are multiple mechanisms designed to help with the transition

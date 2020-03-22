@@ -27,11 +27,13 @@
 #' @param multiple A logical scalar indicating if _all_ resolved endpoints are
 #'   returned, or just the first endpoint (the default). This determines whether
 #'   a vector or list of vectors is returned.
+#'
 #' @return
 #' * `as_hostname()` returns a character vector or a list of character vectors
 #'   (depending upon the `multiple` argument)
 #' * `from_hostname()` returns a \code{\link{ip_address}} vector or a list of
 #'   \code{\link{ip_address}} vectors (depending upon the `multiple` argument)
+#'
 #' @examples
 #' from_hostname("r-project.org")
 #'

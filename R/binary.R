@@ -13,6 +13,10 @@
 #' @param ip An \code{\link{ip_address}} vector
 #' @param bytes A \code{\link[blob]{blob}} vector
 #'
+#' @return
+#' * `as_packed()` returns a \code{\link[blob]{blob}} vector
+#' * `from_packed()` returns an \code{\link{ip_address}} vector
+#'
 #' @examples
 #' x <- ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334", NA))
 #' as_packed(x)
@@ -57,6 +61,10 @@ from_packed <- function(bytes) {
 #'
 #' @param ip An \code{\link{ip_address}} vector
 #' @param bits A character vector containing only `0` and `1` characters
+#'
+#' @return
+#' * `as_binary()` returns a character vector
+#' * `from_binary()` returns an \code{\link{ip_address}} vector
 #'
 #' @examples
 #' x <- ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334", NA))
