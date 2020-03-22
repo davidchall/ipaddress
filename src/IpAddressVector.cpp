@@ -150,6 +150,10 @@ List IpAddressVector::decodeHostname(CharacterVector input) {
   asio::error_code ec;
 
   for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 100 == 0) {
+      checkUserInterrupt();
+    }
+
     // initialize vectors
     std::vector<asio::ip::address_v4> address_v4;
     std::vector<asio::ip::address_v6> address_v6;
@@ -376,6 +380,10 @@ List IpAddressVector::encodeHostnames() const {
   asio::error_code ec;
 
   for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 100 == 0) {
+      checkUserInterrupt();
+    }
+
     CharacterVector hostnames;
     if (is_na[i]) {
       hostnames.push_back(NA_STRING);
