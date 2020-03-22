@@ -4,6 +4,8 @@
 #include "masking.h"
 #include "utils.h"
 
+#include <asio.hpp>
+
 using namespace Rcpp;
 
 
@@ -135,6 +137,68 @@ IpAddressVector IpAddressVector::decodeBinary(CharacterVector input) {
   }
 
   return IpAddressVector(address_v4, address_v6, is_ipv6, is_na);
+}
+
+List IpAddressVector::decodeHostname(CharacterVector input) {
+  std::size_t vsize = input.size();
+  List output(vsize);
+
+  asio::io_context io_context;
+  asio::ip::tcp::resolver resolver(io_context);
+  asio::ip::tcp::endpoint endpoint;
+  asio::error_code ec;
+
+  for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 100 == 0) {
+      checkUserInterrupt();
+    }
+
+    // initialize vectors
+    std::vector<asio::ip::address_v4> address_v4;
+    std::vector<asio::ip::address_v6> address_v6;
+    std::vector<bool> is_ipv6;
+    std::vector<bool> is_na;
+
+    if (input[i] == NA_STRING) {
+      address_v4.resize(1);
+      address_v6.resize(1);
+      is_ipv6.resize(1);
+      is_na.resize(1, true);
+    } else {
+      std::string hostname(input[i]);
+      // forward DNS resolution
+      auto results = resolver.resolve(hostname, "http", ec);
+
+      if (ec) {
+        if (ec != asio::error::host_not_found) {
+          warnInvalidInput(i, hostname, ec.message());
+        }
+        address_v4.resize(1);
+        address_v6.resize(1);
+        is_ipv6.resize(1);
+        is_na.resize(1, true);
+      } else {
+        for (auto const& entry : results) {
+          auto address = entry.endpoint().address();
+          if (address.is_v4()) {
+            address_v4.push_back(address.to_v4());
+            address_v6.push_back(asio::ip::address_v6());
+            is_ipv6.push_back(false);
+            is_na.push_back(false);
+          } else {
+            address_v6.push_back(address.to_v6());
+            address_v4.push_back(asio::ip::address_v4());
+            is_ipv6.push_back(true);
+            is_na.push_back(false);
+          }
+        }
+      }
+    }
+
+    output[i] = IpAddressVector(address_v4, address_v6, is_ipv6, is_na).encodeR();
+  }
+
+  return output;
 }
 
 IpAddressVector IpAddressVector::createNetmask(IntegerVector in_pfx, LogicalVector in_v6) {
@@ -302,6 +366,55 @@ CharacterVector IpAddressVector::encodeBinary() const {
     } else {
       output[i] = encode_binary(address_v4[i]);
     }
+  }
+
+  return output;
+}
+
+List IpAddressVector::encodeHostnames() const {
+  std::size_t vsize = is_na.size();
+  List output(vsize);
+
+  asio::io_context io_context;
+  asio::ip::tcp::resolver resolver(io_context);
+  asio::ip::tcp::endpoint endpoint;
+  asio::error_code ec;
+
+  for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 100 == 0) {
+      checkUserInterrupt();
+    }
+
+    CharacterVector hostnames;
+    if (is_na[i]) {
+      hostnames.push_back(NA_STRING);
+    } else {
+      if (is_ipv6[i]) {
+        endpoint.address(address_v6[i]);
+      } else {
+        endpoint.address(address_v4[i]);
+      }
+
+      // reverse DNS resolution
+      auto results = resolver.resolve(endpoint, ec);
+
+      if (ec) {
+        warnInvalidInput(i, endpoint.address().to_string(), ec.message());
+        hostnames.push_back(NA_STRING);
+      } else {
+        for (auto const& entry : results) {
+          // unresolved hostnames often returned as original IP address
+          if (entry.host_name() != endpoint.address().to_string()) {
+            hostnames.push_back(entry.host_name());
+          }
+        }
+        if (hostnames.size() == 0) {
+          hostnames.push_back(NA_STRING);
+        }
+      }
+    }
+
+    output[i] = hostnames;
   }
 
   return output;
