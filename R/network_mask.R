@@ -30,8 +30,8 @@ NULL
 #' @rdname netmask
 #' @export
 prefix_length <- function(x) {
-  if (!(is_ip_address(x) || is_ip_network(x))) {
-    abort("'x' must be an ip_address or ip_network vector")
+  if (!(is_ip_network(x) || is_ip_interface(x))) {
+    abort("'x' must be an ip_network or ip_interface vector")
   }
 
   field(x, "prefix")
