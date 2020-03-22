@@ -206,14 +206,10 @@ This class also supports bitwise operations: <code>!</code> (NOT), <code>&amp;</
 <span class='co'># validates inputs and replaces with NA</span>
 <span class='fu'>ip_address</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"255.255.255.256"</span>, <span class='st'>"192.168.0.1/32"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: Invalid value on row 1: 255.255.255.256</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Invalid value on row 2: 192.168.0.1/32</span></div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
 #&gt; [1] &lt;NA&gt; &lt;NA&gt;</div><div class='input'>
-<span class='co'># addition</span>
+<span class='co'># addition of integers</span>
 <span class='fu'>ip_address</span>(<span class='st'>"192.168.0.1"</span>) + -<span class='fl'>2</span>:<span class='fl'>2</span></div><div class='output co'>#&gt; &lt;ip_address[5]&gt;
 #&gt; [1] 192.167.255.255 192.168.0.0     192.168.0.1     192.168.0.2    
 #&gt; [5] 192.168.0.3    </div><div class='input'>
-<span class='co'># subtraction</span>
-<span class='fu'>ip_address</span>(<span class='st'>"192.168.0.1"</span>) - -<span class='fl'>2</span>:<span class='fl'>2</span></div><div class='output co'>#&gt; &lt;ip_address[5]&gt;
-#&gt; [1] 192.168.0.3     192.168.0.2     192.168.0.1     192.168.0.0    
-#&gt; [5] 192.167.255.255</div><div class='input'>
 <span class='co'># bitwise NOT</span>
 !<span class='fu'>ip_address</span>(<span class='st'>"192.168.0.1"</span>)</div><div class='output co'>#&gt; &lt;ip_address[1]&gt;
 #&gt; [1] 63.87.255.254</div><div class='input'>
