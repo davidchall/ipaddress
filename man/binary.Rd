@@ -15,6 +15,12 @@ from_binary(bits)
 
 \item{bits}{A character vector containing only \code{0} and \code{1} characters}
 }
+\value{
+\itemize{
+\item \code{as_binary()} returns a character vector
+\item \code{from_binary()} returns an \code{\link{ip_address}} vector
+}
+}
 \description{
 \code{as_binary()} and \code{from_binary()} encode and decode an \code{\link{ip_address}}
 vector to a character vector of bits.

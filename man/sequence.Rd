@@ -39,11 +39,11 @@ to prefix lengths less than 2 (for IPv4) or 98 (for IPv6). However, you
 might find that machine memory imposes stricter limitations.
 }
 \examples{
-seq(ip_network("192.0.2.0/30"))
+seq(ip_network("192.168.0.0/30"))
 
 seq(ip_network("2001:db8::/126"))
 
-hosts(ip_network("192.0.2.0/30"))
+hosts(ip_network("192.168.0.0/30"))
 
 hosts(ip_network("2001:db8::/126"))
 }

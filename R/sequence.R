@@ -20,11 +20,11 @@
 #' might find that machine memory imposes stricter limitations.
 #'
 #' @examples
-#' seq(ip_network("192.0.2.0/30"))
+#' seq(ip_network("192.168.0.0/30"))
 #'
 #' seq(ip_network("2001:db8::/126"))
 #'
-#' hosts(ip_network("192.0.2.0/30"))
+#' hosts(ip_network("192.168.0.0/30"))
 #'
 #' hosts(ip_network("2001:db8::/126"))
 #' @seealso
@@ -41,13 +41,14 @@ NULL
 #' @rdname sequence
 #' @export
 seq.ip_network <- function(x, ...) {
-  assertthat::assert_that(assertthat::is.scalar(x))
-  assertthat::assert_that(
-    all(field(x, "prefix") >= (max_prefix_length(x) - 30L), na.rm = TRUE),
-    msg = "Network too large"
-  )
+  if (length(x) != 1) {
+    abort("'x' must be an ip_network scalar")
+  }
+  if (any(prefix_length(x) < (max_prefix_length(x) - 30L), na.rm = TRUE)) {
+    abort("Network too large")
+  }
 
-  new_ip_address_encode(hosts_wrapper(x, FALSE))
+  wrap_network_hosts(x, FALSE)
 }
 
 #' `hosts()`
@@ -56,14 +57,12 @@ seq.ip_network <- function(x, ...) {
 #' @rdname sequence
 #' @export
 hosts <- function(x) {
-  assertthat::assert_that(
-    is_ip_network(x),
-    assertthat::is.scalar(x)
-  )
-  assertthat::assert_that(
-    all(field(x, "prefix") >= (max_prefix_length(x) - 30L), na.rm = TRUE),
-    msg = "Network too large"
-  )
+  if (!(is_ip_network(x) && length(x) == 1)) {
+    abort("'x' must be an ip_network scalar")
+  }
+  if (any(prefix_length(x) < (max_prefix_length(x) - 30L), na.rm = TRUE)) {
+    abort("Network too large")
+  }
 
-  new_ip_address_encode(hosts_wrapper(x, TRUE))
+  wrap_network_hosts(x, TRUE)
 }

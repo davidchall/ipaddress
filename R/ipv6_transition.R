@@ -11,12 +11,13 @@
 #' * Teredo: [RFC 4380](https://tools.ietf.org/html/rfc4380)
 #'
 #' @param x An \code{\link{ip_address}} vector
-#' @return `is_xxx()` functions return a logical vector; `extract_xxx()`
-#'   functions return an \code{\link{ip_address}} vector.
+#'
+#' @return
+#' * `is_xxx()` functions return a logical vector
+#' * `extract_xxx()` functions return an \code{\link{ip_address}} vector.
 #'
 #' @examples
 #' # these examples show the reserved networks
-#'
 #' is_ipv4_mapped(ip_network("::ffff:0.0.0.0/96"))
 #'
 #' is_6to4(ip_network("2002::/16"))
@@ -24,8 +25,7 @@
 #' is_teredo(ip_network("2001::/32"))
 #'
 #' # these examples show embedded IPv4 addresses
-#'
-#' extract_ipv4_mapped(ip_address("::ffff:192.0.2.128"))
+#' extract_ipv4_mapped(ip_address("::ffff:192.168.0.1"))
 #'
 #' extract_6to4(ip_address("2002:c000:0204::"))
 #'
@@ -38,67 +38,69 @@ NULL
 #' @rdname ipv6_transition
 #' @export
 is_ipv4_mapped <- function(x) {
-  if (is_ip_address(x)) {
-    is_ipv4_mapped_address_wrapper(x)
-  } else if (is_ip_network(x)) {
-    is_ipv4_mapped_network_wrapper(x)
-  } else {
-    stop("argument must be an ip_address vector or an ip_network vector")
+  if (!(is_ip_address(x) || is_ip_network(x))) {
+    abort("'x' must be an ip_address or ip_network vector")
   }
+
+  wrap_is_ipv4_mapped(x)
 }
 
 #' @rdname ipv6_transition
 #' @export
 is_6to4 <- function(x) {
-  if (is_ip_address(x)) {
-    is_6to4_address_wrapper(x)
-  } else if (is_ip_network(x)) {
-    is_6to4_network_wrapper(x)
-  } else {
-    stop("argument must be an ip_address vector or an ip_network vector")
+  if (!(is_ip_address(x) || is_ip_network(x))) {
+    abort("'x' must be an ip_address or ip_network vector")
   }
+
+  wrap_is_6to4(x)
 }
 
 #' @rdname ipv6_transition
 #' @export
 is_teredo <- function(x) {
-  if (is_ip_address(x)) {
-    is_teredo_address_wrapper(x)
-  } else if (is_ip_network(x)) {
-    is_teredo_network_wrapper(x)
-  } else {
-    stop("argument must be an ip_address vector or an ip_network vector")
+  if (!(is_ip_address(x) || is_ip_network(x))) {
+    abort("'x' must be an ip_address or ip_network vector")
   }
+
+  wrap_is_teredo(x)
 }
 
 #' @rdname ipv6_transition
 #' @export
 extract_ipv4_mapped <- function(x) {
-  assertthat::assert_that(is_ip_address(x))
+  if (!is_ip_address(x)) {
+    abort("'x' must be an ip_address vector")
+  }
 
-  new_ip_address_encode(extract_ipv4_mapped_wrapper(x))
+  wrap_extract_ipv4_mapped(x)
 }
 
 #' @rdname ipv6_transition
 #' @export
 extract_6to4 <- function(x) {
-  assertthat::assert_that(is_ip_address(x))
+  if (!is_ip_address(x)) {
+    abort("'x' must be an ip_address vector")
+  }
 
-  new_ip_address_encode(extract_6to4_wrapper(x))
+  wrap_extract_6to4(x)
 }
 
 #' @rdname ipv6_transition
 #' @export
 extract_teredo_server <- function(x) {
-  assertthat::assert_that(is_ip_address(x))
+  if (!is_ip_address(x)) {
+    abort("'x' must be an ip_address vector")
+  }
 
-  new_ip_address_encode(extract_teredo_server_wrapper(x))
+  wrap_extract_teredo_server(x)
 }
 
 #' @rdname ipv6_transition
 #' @export
 extract_teredo_client <- function(x) {
-  assertthat::assert_that(is_ip_address(x))
+  if (!is_ip_address(x)) {
+    abort("'x' must be an ip_address vector")
+  }
 
-  new_ip_address_encode(extract_teredo_client_wrapper(x))
+  wrap_extract_teredo_client(x)
 }

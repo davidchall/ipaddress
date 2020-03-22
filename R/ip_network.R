@@ -60,7 +60,7 @@ NULL
 #' ip_network(ip_address(c("192.168.0.0", "2001:db8::")), c(24L, 48L))
 #'
 #' # validates inputs and replaces with NA
-#' ip_network(c("192.168.0.0/24", "192.168.0.0/33", "1.2.3.4"))
+#' ip_network(c("192.168.0.0/33", "192.168.0.0"))
 #'
 #' # IP networks should not have any host bits set
 #' ip_network("192.168.0.1/22")
@@ -76,39 +76,29 @@ ip_network <- function(...) {
 #' @rdname ip_network
 #' @export
 ip_network.default <- function(ip = character(), strict = TRUE, ...) {
-  assertthat::assert_that(
-    assertthat::is.flag(strict),
-    assertthat::noNA(strict)
-  )
+  if (!is_bool(strict)) {
+    abort("'strict' be must TRUE or FALSE")
+  }
 
-  new_ip_network_encode(parse_network_wrapper(ip, strict))
+  wrap_parse_network(ip, strict)
 }
 
 #' @rdname ip_network
 #' @export
 ip_network.ip_address <- function(address, prefix_length, strict = TRUE, ...) {
-  assertthat::assert_that(
-    assertthat::is.flag(strict),
-    assertthat::noNA(strict),
-    is.integer(prefix_length)
-  )
+  if (!is_integer(prefix_length)) {
+    abort("'prefix_length' must be an integer vector")
+  }
+  if (!is_bool(strict)) {
+    abort("'strict' be must TRUE or FALSE")
+  }
 
   # vector recycling
   args <- vec_recycle_common(address, prefix_length)
   address <- args[[1L]]
   prefix_length <- args[[2L]]
 
-  new_ip_network_encode(construct_network_wrapper(address, prefix_length, strict))
-}
-
-#' Low-level constructor that accepts the encoded data from C++
-#' @noRd
-new_ip_network_encode <- function(x) {
-  new_ip_network(
-    x$address1, x$address2, x$address3, x$address4,
-    x$prefix,
-    x$is_ipv6
-  )
+  wrap_construct_network_from_address(address, prefix_length, strict)
 }
 
 #' Low-level constructor that accepts the underlying data types being stored
@@ -144,10 +134,6 @@ as_ip_network <- function(x) vec_cast(x, ip_network())
 #' @export
 is_ip_network <- function(x) inherits(x, "ip_network")
 
-assertthat::on_failure(is_ip_network) <- function(call, env) {
-  paste0(deparse(call$x), " is not an ip_network vector")
-}
-
 #' @rdname ip_network
 #' @export
 format.ip_network <- function(x, ...) as.character(x)
@@ -161,7 +147,7 @@ as.character.ip_network <- function(x, ...) vec_cast(x, character())
 
 #' @export
 vec_proxy_compare.ip_network <- function(x, ...) {
-  compare_address_wrapper(network_address(x))
+  wrap_compare_address(network_address(x))
 }
 
 

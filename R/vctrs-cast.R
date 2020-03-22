@@ -23,16 +23,16 @@ vec_cast.ip_address.character <- function(x, to, ...) ip_address(x)
 
 #' @method vec_cast.character ip_address
 #' @export
-vec_cast.character.ip_address <- function(x, to, ...) print_address_wrapper(x)
+vec_cast.character.ip_address <- function(x, to, ...) wrap_print_address(x)
 
 #' @method vec_cast.ip_address blob
 #' @export
-vec_cast.ip_address.blob <- function(x, to, ...) new_ip_address_encode(from_packed_address_wrapper(x))
+vec_cast.ip_address.blob <- function(x, to, ...) wrap_decode_packed(x)
 
 #' @importFrom blob vec_cast.blob
 #' @method vec_cast.blob ip_address
 #' @export
-vec_cast.blob.ip_address <- function(x, to, ...) blob::new_blob(to_packed_address_wrapper(x))
+vec_cast.blob.ip_address <- function(x, to, ...) blob::new_blob(wrap_encode_packed(x))
 
 
 #' Casting
@@ -60,7 +60,7 @@ vec_cast.ip_network.character <- function(x, to, ...) ip_network(x)
 
 #' @method vec_cast.character ip_network
 #' @export
-vec_cast.character.ip_network <- function(x, to, ...) print_network_wrapper(x)
+vec_cast.character.ip_network <- function(x, to, ...) wrap_print_network(x)
 
 
 #' Casting
@@ -106,4 +106,4 @@ vec_cast.ip_interface.character <- function(x, to, ...) ip_interface(x)
 
 #' @method vec_cast.character ip_interface
 #' @export
-vec_cast.character.ip_interface <- function(x, to, ...) print_network_wrapper(x)
+vec_cast.character.ip_interface <- function(x, to, ...) wrap_print_network(x)

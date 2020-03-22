@@ -63,30 +63,31 @@ ip_interface <- function(...) {
 #' @rdname ip_interface
 #' @export
 ip_interface.default <- function(ip = character(), ...) {
-  new_ip_interface_encode(parse_interface_wrapper(ip))
+  new_ip_interface_reclass(wrap_parse_interface(ip))
 }
 
 #' @rdname ip_interface
 #' @export
 ip_interface.ip_address <- function(address, prefix_length, ...) {
-  assertthat::assert_that(is.integer(prefix_length))
+  if (!is_integer(prefix_length)) {
+    abort("'prefix_length' must be an integer vector")
+  }
 
   # vector recycling
   args <- vec_recycle_common(address, prefix_length)
   address <- args[[1L]]
   prefix_length <- args[[2L]]
 
-  new_ip_interface_encode(construct_interface_wrapper(address, prefix_length))
+  new_ip_interface_reclass(wrap_construct_interface_from_address(address, prefix_length))
 }
 
-#' Low-level constructor that accepts the encoded data from C++
+#' Low-level constructor that accepts the encoded data from C++.
+#' This has already been validated to conform to vctrs_rcrd requirements,
+#' so we just need to convert the class from ip_network to ip_interface.
 #' @noRd
-new_ip_interface_encode <- function(x) {
-  new_ip_interface(
-    x$address1, x$address2, x$address3, x$address4,
-    x$prefix,
-    x$is_ipv6
-  )
+new_ip_interface_reclass <- function(x) {
+  class(x) <- c("ip_interface", "ip_address", "vctrs_rcrd", "vctrs_vctr")
+  x
 }
 
 #' Low-level constructor that accepts the underlying data types being stored
@@ -121,10 +122,6 @@ as_ip_interface <- function(x) vec_cast(x, ip_interface())
 #' @rdname ip_interface
 #' @export
 is_ip_interface <- function(x) inherits(x, "ip_interface")
-
-assertthat::on_failure(is_ip_interface) <- function(call, env) {
-  paste0(deparse(call$x), " is not an ip_interface vector")
-}
 
 #' @rdname ip_interface
 #' @export

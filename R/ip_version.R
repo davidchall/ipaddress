@@ -4,7 +4,7 @@
 #' @return A logical vector
 #'
 #' @examples
-#' ip <- ip_address(c("0.0.0.1", "192.168.0.1", "2001:db8::7334"))
+#' ip <- ip_address(c("192.168.0.1", "2001:db8::7334"))
 #'
 #' is_ipv4(ip)
 #'
@@ -17,7 +17,9 @@ NULL
 #' @rdname is_ipv6
 #' @export
 is_ipv4 <- function(x) {
-  assertthat::assert_that(is_ip_address(x) || is_ip_network(x))
+  if (!(is_ip_address(x) || is_ip_network(x))) {
+    abort("'x' must be an ip_address or ip_network vector")
+  }
 
   !field(x, "is_ipv6")
 }
@@ -25,7 +27,9 @@ is_ipv4 <- function(x) {
 #' @rdname is_ipv6
 #' @export
 is_ipv6 <- function(x) {
-  assertthat::assert_that(is_ip_address(x) || is_ip_network(x))
+  if (!(is_ip_address(x) || is_ip_network(x))) {
+    abort("'x' must be an ip_address or ip_network vector")
+  }
 
   field(x, "is_ipv6")
 }
@@ -45,7 +49,9 @@ is_ipv6 <- function(x) {
 #' @seealso [is_ipv4()], [is_ipv6()], [prefix_length()]
 #' @export
 max_prefix_length <- function(x) {
-  assertthat::assert_that(is_ip_address(x) || is_ip_network(x))
+  if (!(is_ip_address(x) || is_ip_network(x))) {
+    abort("'x' must be an ip_address or ip_network vector")
+  }
 
   ifelse(field(x, "is_ipv6"), 128L, 32L)
 }

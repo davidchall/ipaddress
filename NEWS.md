@@ -13,6 +13,7 @@
 
 * New `as_packed()` and `from_packed()` functions to encode and decode addresses as raw bytes
 * New `as_binary()` and `from_binary()` functions to encode and decode addresses as binary strings
+* New `as_hostname()` and `from_hostname()` functions translate addresses to and from hostnames
 
 ### Address space
 

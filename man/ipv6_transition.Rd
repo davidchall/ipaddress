@@ -29,8 +29,10 @@ extract_teredo_client(x)
 \item{x}{An \code{\link{ip_address}} vector}
 }
 \value{
-\code{is_xxx()} functions return a logical vector; \code{extract_xxx()}
-functions return an \code{\link{ip_address}} vector.
+\itemize{
+\item \code{is_xxx()} functions return a logical vector
+\item \code{extract_xxx()} functions return an \code{\link{ip_address}} vector.
+}
 }
 \description{
 There are multiple mechanisms designed to help with the transition
@@ -47,7 +49,6 @@ The IPv6 transition mechanisms are described in the IETF memos:
 }
 \examples{
 # these examples show the reserved networks
-
 is_ipv4_mapped(ip_network("::ffff:0.0.0.0/96"))
 
 is_6to4(ip_network("2002::/16"))
@@ -55,8 +56,7 @@ is_6to4(ip_network("2002::/16"))
 is_teredo(ip_network("2001::/32"))
 
 # these examples show embedded IPv4 addresses
-
-extract_ipv4_mapped(ip_address("::ffff:192.0.2.128"))
+extract_ipv4_mapped(ip_address("::ffff:192.168.0.1"))
 
 extract_6to4(ip_address("2002:c000:0204::"))
 

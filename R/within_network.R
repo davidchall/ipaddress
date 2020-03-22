@@ -7,11 +7,11 @@
 #' @return A logical vector
 #'
 #' @examples
-#' is_within(ip_address("192.0.2.6"), ip_network("192.0.2.0/28"))
+#' is_within(ip_address("192.168.2.6"), ip_network("192.168.2.0/28"))
 #'
-#' is_within(ip_address("192.0.3.6"), ip_network("192.0.2.0/28"))
+#' is_within(ip_address("192.168.3.6"), ip_network("192.168.2.0/28"))
 #'
-#' is_within_any(ip_address("192.0.3.6"), ip_network(c("192.0.2.0/28", "192.0.3.0/28")))
+#' is_within_any(ip_address("192.168.3.6"), ip_network(c("192.168.2.0/28", "192.168.3.0/28")))
 #' @seealso
 #' Use [is_subnet()] to check if an \code{\link{ip_network}} is within another
 #' \code{\link{ip_network}}.
@@ -24,17 +24,19 @@ NULL
 #' @rdname address_in_network
 #' @export
 is_within <- function(address, network) {
-  assertthat::assert_that(
-    is_ip_address(address),
-    is_ip_network(network)
-  )
+  if (!is_ip_address(address)) {
+    abort("'address' must be an ip_address vector")
+  }
+  if (!is_ip_network(network)) {
+    abort("'network' must be an ip_network vector")
+  }
 
   # vector recycling
   args <- vec_recycle_common(address, network)
   address <- args[[1L]]
   network <- args[[2L]]
 
-  is_within_wrapper(address, network)
+  wrap_is_within(address, network)
 }
 
 #' `is_within_any()`
@@ -43,12 +45,14 @@ is_within <- function(address, network) {
 #' @rdname address_in_network
 #' @export
 is_within_any <- function(address, network) {
-  assertthat::assert_that(
-    is_ip_address(address),
-    is_ip_network(network)
-  )
+  if (!is_ip_address(address)) {
+    abort("'address' must be an ip_address vector")
+  }
+  if (!is_ip_network(network)) {
+    abort("'network' must be an ip_network vector")
+  }
 
-  is_within_any_wrapper(address, network)
+  wrap_is_within_any(address, network)
 }
 
 
@@ -80,47 +84,53 @@ NULL
 #' @rdname network_in_network
 #' @export
 overlaps <- function(network, other) {
-  assertthat::assert_that(
-    is_ip_network(network),
-    is_ip_network(other)
-  )
+  if (!is_ip_network(network)) {
+    abort("'network' must be an ip_network vector")
+  }
+  if (!is_ip_network(other)) {
+    abort("'other' must be an ip_network vector")
+  }
 
   # vector recycling
   args <- vec_recycle_common(network, other)
   network <- args[[1L]]
   other <- args[[2L]]
 
-  is_within_wrapper(network_address(network), other) | is_within_wrapper(network_address(other), network)
+  wrap_is_within(network_address(network), other) | wrap_is_within(network_address(other), network)
 }
 
 #' @rdname network_in_network
 #' @export
 is_subnet <- function(network, other) {
-  assertthat::assert_that(
-    is_ip_network(network),
-    is_ip_network(other)
-  )
+  if (!is_ip_network(network)) {
+    abort("'network' must be an ip_network vector")
+  }
+  if (!is_ip_network(other)) {
+    abort("'other' must be an ip_network vector")
+  }
 
   # vector recycling
   args <- vec_recycle_common(network, other)
   network <- args[[1L]]
   other <- args[[2L]]
 
-  is_within_wrapper(network_address(network), other) & (prefix_length(network) >= prefix_length(other))
+  wrap_is_within(network_address(network), other) & (prefix_length(network) >= prefix_length(other))
 }
 
 #' @rdname network_in_network
 #' @export
 is_supernet <- function(network, other) {
-  assertthat::assert_that(
-    is_ip_network(network),
-    is_ip_network(other)
-  )
+  if (!is_ip_network(network)) {
+    abort("'network' must be an ip_network vector")
+  }
+  if (!is_ip_network(other)) {
+    abort("'other' must be an ip_network vector")
+  }
 
   # vector recycling
   args <- vec_recycle_common(network, other)
   network <- args[[1L]]
   other <- args[[2L]]
 
-  is_within_wrapper(network_address(other), network) & (prefix_length(other) >= prefix_length(network))
+  wrap_is_within(network_address(other), network) & (prefix_length(other) >= prefix_length(network))
 }

@@ -26,11 +26,11 @@ These functions check whether an address falls within a network.
 \code{is_within_any()} checks if each address falls within \emph{any} of the networks.
 }
 \examples{
-is_within(ip_address("192.0.2.6"), ip_network("192.0.2.0/28"))
+is_within(ip_address("192.168.2.6"), ip_network("192.168.2.0/28"))
 
-is_within(ip_address("192.0.3.6"), ip_network("192.0.2.0/28"))
+is_within(ip_address("192.168.3.6"), ip_network("192.168.2.0/28"))
 
-is_within_any(ip_address("192.0.3.6"), ip_network(c("192.0.2.0/28", "192.0.3.0/28")))
+is_within_any(ip_address("192.168.3.6"), ip_network(c("192.168.2.0/28", "192.168.3.0/28")))
 }
 \seealso{
 Use \code{\link[=is_subnet]{is_subnet()}} to check if an \code{\link{ip_network}} is within another

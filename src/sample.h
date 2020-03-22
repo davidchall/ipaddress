@@ -5,8 +5,6 @@
 #include <Rcpp.h>
 #include "masking.h"
 
-using namespace Rcpp;
-
 
 template<class Address>
 std::vector<Address> sample_bits(int n_bits_to_sample, int n_sample) {
@@ -21,7 +19,8 @@ std::vector<Address> sample_bits(int n_bits_to_sample, int n_sample) {
       break;
     }
 
-    IntegerVector byte_vector = sample(1 << ingest_bits, n_sample, true, R_NilValue, false);
+    Rcpp::IntegerVector byte_vector = Rcpp::sample(1 << ingest_bits, n_sample, true, R_NilValue, false);
+
     for (std::size_t j=0; j<n_sample; ++j) {
       result_bytes[j][i] = byte_vector[j];
     }

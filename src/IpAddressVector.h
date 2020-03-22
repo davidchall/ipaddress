@@ -5,7 +5,6 @@
 #include <asio/ip/address_v4.hpp>
 #include <asio/ip/address_v6.hpp>
 
-using namespace Rcpp;
 
 class IpNetworkVector;
 
@@ -25,7 +24,7 @@ private:
     std::vector<bool> &in_is_na
   ) : address_v4(in_address_v4), address_v6(in_address_v6), is_ipv6(in_is_ipv6), is_na(in_is_na) { };
 
-  LogicalVector isTrue(
+  Rcpp::LogicalVector isTrue(
       const std::function<bool(const asio::ip::address_v4&)>& decide_fn_v4,
       const std::function<bool(const asio::ip::address_v6&)>& decide_fn_v6
   ) const;
@@ -40,22 +39,25 @@ public:
    *  Constructors  *
    *----------------*/
   // Parse strings (dotted-decimal or dotted-hexidecimal format)
-  IpAddressVector(CharacterVector input);
+  IpAddressVector(Rcpp::CharacterVector input);
 
   // Decode from R class
-  IpAddressVector(List input);
+  IpAddressVector(Rcpp::List input);
 
   // Decode from R blob (list of raw vectors)
-  static IpAddressVector decodePacked(List input);
+  static IpAddressVector decodePacked(Rcpp::List input);
 
   // Decode from binary string
-  static IpAddressVector decodeBinary(CharacterVector input);
+  static IpAddressVector decodeBinary(Rcpp::CharacterVector input);
+
+  // Decode from hostname
+  static Rcpp::List decodeHostname(Rcpp::CharacterVector input);
 
   // Construct netmask from prefix length
-  static IpAddressVector createNetmask(IntegerVector prefix_length, LogicalVector is_ipv6);
+  static IpAddressVector createNetmask(Rcpp::IntegerVector prefix_length, Rcpp::LogicalVector is_ipv6);
 
   // Construct hostmask from prefix length
-  static IpAddressVector createHostmask(IntegerVector prefix_length, LogicalVector is_ipv6);
+  static IpAddressVector createHostmask(Rcpp::IntegerVector prefix_length, Rcpp::LogicalVector is_ipv6);
 
   // Warn about invalid input
   static void warnInvalidInput(unsigned int index, const std::string &input, const std::string &reason = "");
@@ -65,19 +67,22 @@ public:
    *  Output  *
    *----------*/
   // Encode to strings
-  CharacterVector encodeStrings() const;
+  Rcpp::CharacterVector encodeStrings() const;
 
   // Encode to R class
-  List encodeR() const;
+  Rcpp::List encodeR() const;
 
   // Encode to R blob (list of raw vectors)
-  List encodePacked() const;
+  Rcpp::List encodePacked() const;
 
   // Encode to binary string
-  CharacterVector encodeBinary() const;
+  Rcpp::CharacterVector encodeBinary() const;
+
+  // Encode to hostnames
+  Rcpp::List encodeHostnames() const;
 
   // Encode to R dataframe for direct comparisons
-  DataFrame encodeComparable() const;
+  Rcpp::DataFrame encodeComparable() const;
 
 
   /*-------------*
@@ -87,34 +92,34 @@ public:
   IpAddressVector operator&(const IpAddressVector &rhs) const;
   IpAddressVector operator|(const IpAddressVector &rhs) const;
   IpAddressVector operator^(const IpAddressVector &rhs) const;
-  IpAddressVector operator+(const IntegerVector &rhs) const;
-  IpAddressVector operator-(const IntegerVector &rhs) const;
+  IpAddressVector operator+(const Rcpp::IntegerVector &rhs) const;
+  IpAddressVector operator-(const Rcpp::IntegerVector &rhs) const;
 
 
   /*-----------------------*
    *  Other functionality  *
    *-----------------------*/
-  LogicalVector isWithin(const IpNetworkVector &network) const;
-  LogicalVector isWithinAny(const IpNetworkVector &network) const;
+  Rcpp::LogicalVector isWithin(const IpNetworkVector &network) const;
+  Rcpp::LogicalVector isWithinAny(const IpNetworkVector &network) const;
 
 
   /*----------------------*
    *  Reserved addresses  *
    * ---------------------*/
-  LogicalVector isMulticast() const;
-  LogicalVector isUnspecified() const;
-  LogicalVector isLoopback() const;
-  LogicalVector isLinkLocal() const;
+  Rcpp::LogicalVector isMulticast() const;
+  Rcpp::LogicalVector isUnspecified() const;
+  Rcpp::LogicalVector isLoopback() const;
+  Rcpp::LogicalVector isLinkLocal() const;
 
 
   /*------------------------------*
    *  IPv6 transition mechanisms  *
    * -----------------------------*/
-  LogicalVector isIPv4Mapped() const;
+  Rcpp::LogicalVector isIPv4Mapped() const;
   IpAddressVector extractIPv4Mapped() const;
-  LogicalVector is6to4() const;
+  Rcpp::LogicalVector is6to4() const;
   IpAddressVector extract6to4() const;
-  LogicalVector isTeredo() const;
+  Rcpp::LogicalVector isTeredo() const;
   IpAddressVector extractTeredoServer() const;
   IpAddressVector extractTeredoClient() const;
 };

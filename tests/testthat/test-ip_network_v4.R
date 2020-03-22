@@ -69,14 +69,16 @@ test_that("invalid inputs are caught", {
   expect_warning(ip_network("1.2.3.4/a"), "Invalid value")
   expect_warning(ip_network("1.2.3.4/24/24"), "Invalid value")
 
-  expect_error(ip_network(ip_address("1.2.3.4"), 24), "not an integer")
+  expect_error(ip_network(ip_address("1.2.3.4"), 24))
   expect_warning(ip_network(ip_address("1.2.3.4"), -1L), "Invalid value")
   expect_warning(ip_network(ip_address("1.2.3.4"), 33L), "Invalid value")
 })
 
 test_that("strict argument works", {
-  expect_error(ip_network("1.2.3.4/32", strict = "yes"), "not a flag")
-  expect_error(ip_network("1.2.3.4/32", strict = NA), "contains 1 missing values")
+  expect_error(ip_network("1.2.3.4/32", strict = "yes"))
+  expect_error(ip_network("1.2.3.4/32", strict = NA))
+  expect_error(ip_network(ip_address("1.2.3.4"), prefix_length = 32L, strict = "yes"))
+  expect_error(ip_network(ip_address("1.2.3.4"), prefix_length = 32L, strict = NA))
 
   expect_warning(ip_network("255.255.255.255/21"), "host bits set")
   expect_equal(ip_network("255.255.255.255/21", strict = FALSE), ip_network("255.255.248.0/21"))
@@ -118,10 +120,10 @@ test_that("extracting basic info works", {
     ip_address(c("0.0.0.0", "192.168.255.255", "192.168.103.255", "255.255.255.255"))
   )
 
-  expect_error(prefix_length(ip_address("192.168.0.1")), "not an ip_network")
-  expect_error(num_addresses(ip_address("192.168.0.1")), "not an ip_network")
-  expect_error(network_address(ip_address("192.168.0.1")), "not an ip_network")
-  expect_error(broadcast_address(ip_address("192.168.0.1")), "not an ip_network")
+  expect_error(prefix_length(ip_address("192.168.0.1")))
+  expect_error(num_addresses(ip_address("192.168.0.1")))
+  expect_error(network_address(ip_address("192.168.0.1")))
+  expect_error(broadcast_address(ip_address("192.168.0.1")))
 
   expect_equal(prefix_length(ip_network(NA)), NA_integer_)
   expect_equal(num_addresses(ip_network(NA)), NA_real_)

@@ -37,7 +37,7 @@ Although IPv6 does not follow this approach to broadcast addresses, the
 \code{broadcast_address()} function still returns the last address of the network.
 }
 \examples{
-x <- ip_network(c("192.168.0.0/22", "2001:db00::0/26"))
+x <- ip_network(c("192.168.0.0/22", "2001:db8::/33"))
 
 network_address(x)
 

@@ -37,17 +37,17 @@ sample_ipv6 <- function(size, replace = FALSE) {
 #' @rdname sample
 #' @export
 sample_network <- function(x, size, replace = FALSE) {
-  assertthat::assert_that(
-    is_ip_network(x),
-    assertthat::is.scalar(x),
-    assertthat::noNA(x),
-    assertthat::is.count(size),
-    assertthat::is.flag(replace),
-    assertthat::noNA(replace)
-  )
-
+  if (!(is_ip_network(x) && length(x) == 1)) {
+    abort("'x' must be an ip_network scalar")
+  }
+  if (!(is_scalar_integerish(size) && size > 0)) {
+    abort("'size' must be an positive integer scalar")
+  }
+  if (!is_bool(replace)) {
+    abort("'replace' must be TRUE or FALSE")
+  }
   if (!replace && size > num_addresses(x)) {
-    stop("cannot take a sample larger than the network size when 'replace = FALSE'")
+    abort("cannot take a sample larger than the network size when 'replace = FALSE'")
   }
 
   # in some cases it's quicker to generate all addresses
@@ -55,7 +55,7 @@ sample_network <- function(x, size, replace = FALSE) {
     return(sample(seq(x), size, replace))
   }
 
-  result <- new_ip_address_encode(sample_wrapper(x, size))
+  result <- wrap_sample_network(x, size)
 
   if (!replace) {
     unique <- FALSE
@@ -65,7 +65,7 @@ sample_network <- function(x, size, replace = FALSE) {
       if (n_dupes == 0) {
         unique <- TRUE
       } else {
-        result[dupes] <- new_ip_address_encode(sample_wrapper(x, sum(dupes)))
+        result[dupes] <- wrap_sample_network(x, sum(dupes))
       }
     }
   }

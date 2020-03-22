@@ -31,47 +31,39 @@ NULL
 #' @rdname is_reserved
 #' @export
 is_multicast <- function(x) {
-  if (is_ip_address(x)) {
-    is_multicast_address_wrapper(x)
-  } else if (is_ip_network(x)) {
-    is_multicast_network_wrapper(x)
-  } else {
-    stop("argument must be an ip_address vector or an ip_network vector")
+  if (!(is_ip_address(x) || is_ip_network(x))) {
+    abort("'x' must be an ip_address or ip_network vector")
   }
+
+  wrap_is_multicast(x)
 }
 
 #' @rdname is_reserved
 #' @export
 is_unspecified <- function(x) {
-  if (is_ip_address(x)) {
-    is_unspecified_address_wrapper(x)
-  } else if (is_ip_network(x)) {
-    is_unspecified_network_wrapper(x)
-  } else {
-    stop("argument must be an ip_address vector or an ip_network vector")
+  if (!(is_ip_address(x) || is_ip_network(x))) {
+    abort("'x' must be an ip_address or ip_network vector")
   }
+
+  wrap_is_unspecified(x)
 }
 
 #' @rdname is_reserved
 #' @export
 is_loopback <- function(x) {
-  if (is_ip_address(x)) {
-    is_loopback_address_wrapper(x)
-  } else if (is_ip_network(x)) {
-    is_loopback_network_wrapper(x)
-  } else {
-    stop("argument must be an ip_address vector or an ip_network vector")
+  if (!(is_ip_address(x) || is_ip_network(x))) {
+    abort("'x' must be an ip_address or ip_network vector")
   }
+
+  wrap_is_loopback(x)
 }
 
 #' @rdname is_reserved
 #' @export
 is_link_local <- function(x) {
-  if (is_ip_address(x)) {
-    is_link_local_address_wrapper(x)
-  } else if (is_ip_network(x)) {
-    is_link_local_network_wrapper(x)
-  } else {
-    stop("argument must be an ip_address vector or an ip_network vector")
+  if (!(is_ip_address(x) || is_ip_network(x))) {
+    abort("'x' must be an ip_address or ip_network vector")
   }
+
+  wrap_is_link_local(x)
 }

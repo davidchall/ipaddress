@@ -4,6 +4,10 @@
 #include "masking.h"
 #include "utils.h"
 
+#include <asio.hpp>
+
+using namespace Rcpp;
+
 
 /*----------------*
  *  Constructors  *
@@ -59,11 +63,11 @@ IpAddressVector::IpAddressVector(List input) {
       is_na[i] = true;
     } else if (in_v6[i]) {
       r_address_v6_type bytes = {in_addr1[i], in_addr2[i], in_addr3[i], in_addr4[i]};
-      address_v6[i] = decode<asio::ip::address_v6>(bytes);
+      address_v6[i] = decode_r<asio::ip::address_v6>(bytes);
       is_ipv6[i] = true;
     } else {
       r_address_v4_type bytes = {in_addr1[i]};
-      address_v4[i] = decode<asio::ip::address_v4>(bytes);
+      address_v4[i] = decode_r<asio::ip::address_v4>(bytes);
     }
   }
 }
@@ -133,6 +137,68 @@ IpAddressVector IpAddressVector::decodeBinary(CharacterVector input) {
   }
 
   return IpAddressVector(address_v4, address_v6, is_ipv6, is_na);
+}
+
+List IpAddressVector::decodeHostname(CharacterVector input) {
+  std::size_t vsize = input.size();
+  List output(vsize);
+
+  asio::io_context io_context;
+  asio::ip::tcp::resolver resolver(io_context);
+  asio::ip::tcp::endpoint endpoint;
+  asio::error_code ec;
+
+  for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 100 == 0) {
+      checkUserInterrupt();
+    }
+
+    // initialize vectors
+    std::vector<asio::ip::address_v4> address_v4;
+    std::vector<asio::ip::address_v6> address_v6;
+    std::vector<bool> is_ipv6;
+    std::vector<bool> is_na;
+
+    if (input[i] == NA_STRING) {
+      address_v4.resize(1);
+      address_v6.resize(1);
+      is_ipv6.resize(1);
+      is_na.resize(1, true);
+    } else {
+      std::string hostname(input[i]);
+      // forward DNS resolution
+      auto results = resolver.resolve(hostname, "http", ec);
+
+      if (ec) {
+        if (ec != asio::error::host_not_found) {
+          warnInvalidInput(i, hostname, ec.message());
+        }
+        address_v4.resize(1);
+        address_v6.resize(1);
+        is_ipv6.resize(1);
+        is_na.resize(1, true);
+      } else {
+        for (auto const& entry : results) {
+          auto address = entry.endpoint().address();
+          if (address.is_v4()) {
+            address_v4.push_back(address.to_v4());
+            address_v6.push_back(asio::ip::address_v6());
+            is_ipv6.push_back(false);
+            is_na.push_back(false);
+          } else {
+            address_v6.push_back(address.to_v6());
+            address_v4.push_back(asio::ip::address_v4());
+            is_ipv6.push_back(true);
+            is_na.push_back(false);
+          }
+        }
+      }
+    }
+
+    output[i] = IpAddressVector(address_v4, address_v6, is_ipv6, is_na).encodeR();
+  }
+
+  return output;
 }
 
 IpAddressVector IpAddressVector::createNetmask(IntegerVector in_pfx, LogicalVector in_v6) {
@@ -214,25 +280,40 @@ List IpAddressVector::encodeR() const {
       out_addr4[i] = NA_INTEGER;
       out_v6[i] = NA_LOGICAL;
     } else if (is_ipv6[i]) {
-      r_address_v6_type bytes = encode<r_address_v6_type>(address_v6[i]);
+      r_address_v6_type bytes = encode_r<r_address_v6_type>(address_v6[i]);
       out_addr1[i] = bytes[0];
       out_addr2[i] = bytes[1];
       out_addr3[i] = bytes[2];
       out_addr4[i] = bytes[3];
       out_v6[i] = true;
     } else {
-      r_address_v4_type bytes = encode<r_address_v4_type>(address_v4[i]);
+      r_address_v4_type bytes = encode_r<r_address_v4_type>(address_v4[i]);
       out_addr1[i] = bytes[0];
     }
   }
 
-  return List::create(
+  if (out_addr1.size() != out_v6.size() ||
+      out_addr2.size() != out_v6.size() ||
+      out_addr3.size() != out_v6.size() ||
+      out_addr4.size() != out_v6.size()) {
+    stop("Consistuent vectors have unequal sizes");
+  }
+
+  List result = List::create(
     _["address1"] = out_addr1,
     _["address2"] = out_addr2,
     _["address3"] = out_addr3,
     _["address4"] = out_addr4,
     _["is_ipv6"] = out_v6
   );
+
+  result.attr("class") = CharacterVector::create(
+    "ip_address",
+    "vctrs_rcrd",
+    "vctrs_vctr"
+  );
+
+  return result;
 }
 
 CharacterVector IpAddressVector::encodeStrings() const {
@@ -297,6 +378,55 @@ CharacterVector IpAddressVector::encodeBinary() const {
   return output;
 }
 
+List IpAddressVector::encodeHostnames() const {
+  std::size_t vsize = is_na.size();
+  List output(vsize);
+
+  asio::io_context io_context;
+  asio::ip::tcp::resolver resolver(io_context);
+  asio::ip::tcp::endpoint endpoint;
+  asio::error_code ec;
+
+  for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 100 == 0) {
+      checkUserInterrupt();
+    }
+
+    CharacterVector hostnames;
+    if (is_na[i]) {
+      hostnames.push_back(NA_STRING);
+    } else {
+      if (is_ipv6[i]) {
+        endpoint.address(address_v6[i]);
+      } else {
+        endpoint.address(address_v4[i]);
+      }
+
+      // reverse DNS resolution
+      auto results = resolver.resolve(endpoint, ec);
+
+      if (ec) {
+        warnInvalidInput(i, endpoint.address().to_string(), ec.message());
+        hostnames.push_back(NA_STRING);
+      } else {
+        for (auto const& entry : results) {
+          // unresolved hostnames often returned as original IP address
+          if (entry.host_name() != endpoint.address().to_string()) {
+            hostnames.push_back(entry.host_name());
+          }
+        }
+        if (hostnames.size() == 0) {
+          hostnames.push_back(NA_STRING);
+        }
+      }
+    }
+
+    output[i] = hostnames;
+  }
+
+  return output;
+}
+
 DataFrame IpAddressVector::encodeComparable() const {
   std::size_t vsize = is_na.size();
 
@@ -326,7 +456,7 @@ DataFrame IpAddressVector::encodeComparable() const {
       out_addr8[i] = NA_INTEGER;
       out_v6[i] = NA_LOGICAL;
     } else if (is_ipv6[i]) {
-      r_address_v6_type bytes = encode<r_address_v6_type>(address_v6[i]);
+      r_address_v6_type bytes = encode_r<r_address_v6_type>(address_v6[i]);
       out_addr1[i] = (bytes[0] & left_mask) >> 16;
       out_addr2[i] = (bytes[0] & right_mask);
       out_addr3[i] = (bytes[1] & left_mask) >> 16;
@@ -337,10 +467,21 @@ DataFrame IpAddressVector::encodeComparable() const {
       out_addr8[i] = (bytes[3] & right_mask);
       out_v6[i] = true;
     } else {
-      r_address_v4_type bytes = encode<r_address_v4_type>(address_v4[i]);
+      r_address_v4_type bytes = encode_r<r_address_v4_type>(address_v4[i]);
       out_addr1[i] = (bytes[0] & left_mask) >> 16;
       out_addr2[i] = (bytes[0] & right_mask);
     }
+  }
+
+  if (out_addr1.size() != out_v6.size() ||
+      out_addr2.size() != out_v6.size() ||
+      out_addr3.size() != out_v6.size() ||
+      out_addr4.size() != out_v6.size() ||
+      out_addr5.size() != out_v6.size() ||
+      out_addr6.size() != out_v6.size() ||
+      out_addr7.size() != out_v6.size() ||
+      out_addr8.size() != out_v6.size()) {
+    stop("Consistuent vectors have unequal sizes");
   }
 
   return DataFrame::create(
