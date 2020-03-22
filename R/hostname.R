@@ -48,6 +48,10 @@ as_hostname <- function(ip, multiple = FALSE) {
     assertthat::noNA(multiple)
   )
 
+  if (is_offline()) {
+    stop("DNS resolution requires an internet connection")
+  }
+
   res <- translate_to_hostnames(ip)
 
   if (multiple) {
@@ -66,6 +70,10 @@ from_hostname <- function(host, multiple = FALSE) {
     assertthat::noNA(multiple)
   )
 
+  if (is_offline()) {
+    stop("DNS resolution requires an internet connection")
+  }
+
   res <- translate_from_hostname(host)
 
   if (multiple) {
@@ -73,6 +81,10 @@ from_hostname <- function(host, multiple = FALSE) {
   } else {
     pluck_first_of_each(res)
   }
+}
+
+is_offline <- function() {
+  is.na(suppressWarnings(translate_from_hostname("www.r-project.org")))
 }
 
 pluck_first_of_each <- function(x) {

@@ -40,6 +40,12 @@ test_that("DNS resolution works", {
   expect_match(as_hostname(ip_address("::1")), "localhost")
 })
 
+test_that("DNS resolution errors if offline", {
+  local_mock(is_offline = function() TRUE)
+  expect_error(as_hostname("127.0.0.1"))
+  expect_error(from_hostname("localhost"))
+})
+
 test_that("missing values work", {
   skip_if_offline()
 

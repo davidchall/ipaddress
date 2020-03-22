@@ -149,13 +149,6 @@ List IpAddressVector::decodeHostname(CharacterVector input) {
   asio::ip::tcp::endpoint endpoint;
   asio::error_code ec;
 
-  // Test internet connection
-  auto results = resolver.resolve("www.r-project.org", "http", ec);
-  if (ec) {
-    std::string msg = "DNS resolution requires an internet connection (unable to resolve www.r-project.org)";
-    throw Rcpp::exception(msg.c_str(), false);
-  }
-
   for (std::size_t i=0; i<vsize; ++i) {
     // initialize vectors
     std::vector<asio::ip::address_v4> address_v4;
@@ -381,13 +374,6 @@ List IpAddressVector::encodeHostnames() const {
   asio::ip::tcp::resolver resolver(io_context);
   asio::ip::tcp::endpoint endpoint;
   asio::error_code ec;
-
-  // Test internet connection
-  auto results = resolver.resolve("www.r-project.org", "http", ec);
-  if (ec) {
-    std::string msg = "DNS resolution requires an internet connection (unable to resolve www.r-project.org)";
-    throw Rcpp::exception(msg.c_str(), false);
-  }
 
   for (std::size_t i=0; i<vsize; ++i) {
     CharacterVector hostnames;
