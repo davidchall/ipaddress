@@ -228,8 +228,8 @@ integer vector containing the network address and prefix length, respectively.</
 <span class='fu'>ip_network</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.0"</span>, <span class='st'>"2001:db8::"</span>)), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>24L</span>, <span class='fl'>48L</span>))</div><div class='output co'>#&gt; &lt;ip_network[2]&gt;
 #&gt; [1] 192.168.0.0/24 2001:db8::/48 </div><div class='input'>
 <span class='co'># validates inputs and replaces with NA</span>
-<span class='fu'>ip_network</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.0/24"</span>, <span class='st'>"192.168.0.0/33"</span>, <span class='st'>"1.2.3.4"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: Invalid value on row 2: 192.168.0.0/33</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Invalid value on row 3: 1.2.3.4</span></div><div class='output co'>#&gt; &lt;ip_network[3]&gt;
-#&gt; [1] 192.168.0.0/24 &lt;NA&gt;           &lt;NA&gt;          </div><div class='input'>
+<span class='fu'>ip_network</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.0/33"</span>, <span class='st'>"192.168.0.0"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: Invalid value on row 1: 192.168.0.0/33</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Invalid value on row 2: 192.168.0.0</span></div><div class='output co'>#&gt; &lt;ip_network[2]&gt;
+#&gt; [1] &lt;NA&gt; &lt;NA&gt;</div><div class='input'>
 <span class='co'># IP networks should not have any host bits set</span>
 <span class='fu'>ip_network</span>(<span class='st'>"192.168.0.1/22"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Invalid value on row 1: 192.168.0.1/22 (host bits set)</span></div><div class='output co'>#&gt; &lt;ip_network[1]&gt;
 #&gt; [1] &lt;NA&gt;</div><div class='input'>
