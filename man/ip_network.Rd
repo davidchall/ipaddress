@@ -83,7 +83,7 @@ ip_network(c("192.168.0.0/24", "2001:db8::/48"))
 ip_network(ip_address(c("192.168.0.0", "2001:db8::")), c(24L, 48L))
 
 # validates inputs and replaces with NA
-ip_network(c("192.168.0.0/24", "192.168.0.0/33", "1.2.3.4"))
+ip_network(c("192.168.0.0/33", "192.168.0.0"))
 
 # IP networks should not have any host bits set
 ip_network("192.168.0.1/22")

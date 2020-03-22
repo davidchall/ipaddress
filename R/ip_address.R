@@ -23,8 +23,8 @@ methods::setOldClass(c("ip_address", "vctrs_vctr"))
 #'
 #' When casting an `ip_address` object back to a character vector using
 #' `as.character()`, IPv6 addresses are reduced to their compressed representation.
-#' A special case is IPv4-mapped IPv6 addresses, which are returned in their
-#' dual representation (e.g. `::ffff:192.0.2.128`).
+#' A special case is IPv4-mapped IPv6 addresses (see [is_ipv4_mapped()]), which
+#' are returned in the dual representation (e.g. `::ffff:192.168.0.1`).
 #'
 #' Integers can be added to or subtracted from `ip_address` vectors.
 #' This class also supports bitwise operations: `!` (NOT), `&` (AND),
@@ -49,16 +49,16 @@ NULL
 #'
 #' @examples
 #' # supports IPv4 and IPv6 simultaneously
-#' ip_address(c("0.0.0.1", "192.168.0.1", "2001:db8::8a2e:370:7334"))
+#' ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334"))
 #'
 #' # validates inputs and replaces with NA
-#' ip_address(c("1.2.3.4", "255.255.255.256", "1.2.3.4/5"))
+#' ip_address(c("255.255.255.256", "192.168.0.1/32"))
 #'
 #' # addition
-#' ip_address("192.168.0.1") + 12L
+#' ip_address("192.168.0.1") + -2:2
 #'
 #' # subtraction
-#' ip_address("192.168.0.1") - 12L
+#' ip_address("192.168.0.1") - -2:2
 #'
 #' # bitwise NOT
 #' !ip_address("192.168.0.1")

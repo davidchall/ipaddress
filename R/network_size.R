@@ -11,7 +11,7 @@
 #' * `num_addresses()` returns a numeric vector
 #'
 #' @examples
-#' x <- ip_network(c("192.168.0.0/22", "2001:db00::0/26"))
+#' x <- ip_network(c("192.168.0.0/22", "2001:db8::/33"))
 #'
 #' network_address(x)
 #'
