@@ -6,6 +6,10 @@ test_that("input validation works", {
   expect_error(is_within_any(ip_network(), ip_network()))
   expect_error(is_within_any(ip_address(), ip_address()))
 
+  expect_error(overlaps(ip_address(), ip_network()))
+  expect_error(overlaps(ip_network(), ip_address()))
+  expect_error(overlaps(ip_network(rep("1.2.3.4/32", 3)), ip_network(rep("1.2.3.4/32", 2))))
+
   expect_error(is_subnet(ip_address(), ip_network()))
   expect_error(is_subnet(ip_network(), ip_address()))
   expect_error(is_subnet(ip_network(rep("1.2.3.4/32", 3)), ip_network(rep("1.2.3.4/32", 2))))

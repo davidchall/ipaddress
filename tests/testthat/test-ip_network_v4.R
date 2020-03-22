@@ -77,6 +77,8 @@ test_that("invalid inputs are caught", {
 test_that("strict argument works", {
   expect_error(ip_network("1.2.3.4/32", strict = "yes"))
   expect_error(ip_network("1.2.3.4/32", strict = NA))
+  expect_error(ip_network(ip_address("1.2.3.4"), prefix_length = 32L, strict = "yes"))
+  expect_error(ip_network(ip_address("1.2.3.4"), prefix_length = 32L, strict = NA))
 
   expect_warning(ip_network("255.255.255.255/21"), "host bits set")
   expect_equal(ip_network("255.255.255.255/21", strict = FALSE), ip_network("255.255.248.0/21"))
