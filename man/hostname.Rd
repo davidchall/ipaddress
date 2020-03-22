@@ -4,7 +4,7 @@
 \alias{hostname}
 \alias{as_hostname}
 \alias{from_hostname}
-\title{Represent address as hostname}
+\title{Translate address to/from hostname}
 \usage{
 as_hostname(ip, multiple = FALSE)
 
@@ -28,7 +28,23 @@ a vector or list of vectors is returned.}
 }
 }
 \description{
-Represent address as hostname
+\code{as_hostname()} performs reverse DNS resolution (translating IP addresses
+to hostnames)
+
+\code{from_hostname()} performs forward DNS resolution (translating hostnames to
+IP addresses)
+}
+\details{
+These functions require an internet connection. Before processing the input
+vector, we first check that a known hostname can be resolved. If this fails,
+an error is raised. If DNS resolution subsequently fails for one of the
+inputs, a warning is emitted and \code{NA} is stored.
+
+DNS resolution performs a many-to-many mapping between IP addresses and
+hostnames. For this reason, these two functions can potentially return
+multiple values for each element of the input vector. The \code{multiple} argument
+control whether \emph{all} values are returned (a vector for each input), or
+just the first value (a scalar for each input).
 }
 \examples{
 from_hostname("r-project.org")
