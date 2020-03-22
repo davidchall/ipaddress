@@ -1,17 +1,17 @@
 test_that("input validation works", {
-  expect_error(is_within(ip_network(), ip_network()), "not an ip_address vector")
-  expect_error(is_within(ip_address(), ip_address()), "not an ip_network vector")
+  expect_error(is_within(ip_network(), ip_network()))
+  expect_error(is_within(ip_address(), ip_address()))
   expect_error(is_within(ip_address(rep("1.2.3.4", 3)), ip_network(rep("1.2.3.4/32", 2))))
 
-  expect_error(is_within_any(ip_network(), ip_network()), "not an ip_address vector")
-  expect_error(is_within_any(ip_address(), ip_address()), "not an ip_network vector")
+  expect_error(is_within_any(ip_network(), ip_network()))
+  expect_error(is_within_any(ip_address(), ip_address()))
 
-  expect_error(is_subnet(ip_address(), ip_network()), "not an ip_network vector")
-  expect_error(is_subnet(ip_network(), ip_address()), "not an ip_network vector")
+  expect_error(is_subnet(ip_address(), ip_network()))
+  expect_error(is_subnet(ip_network(), ip_address()))
   expect_error(is_subnet(ip_network(rep("1.2.3.4/32", 3)), ip_network(rep("1.2.3.4/32", 2))))
 
-  expect_error(is_supernet(ip_address(), ip_network()), "not an ip_network vector")
-  expect_error(is_supernet(ip_network(), ip_address()), "not an ip_network vector")
+  expect_error(is_supernet(ip_address(), ip_network()))
+  expect_error(is_supernet(ip_network(), ip_address()))
   expect_error(is_supernet(ip_network(rep("1.2.3.4/32", 3)), ip_network(rep("1.2.3.4/32", 2))))
 })
 

@@ -41,11 +41,12 @@ NULL
 #' @rdname sequence
 #' @export
 seq.ip_network <- function(x, ...) {
-  assertthat::assert_that(assertthat::is.scalar(x))
-  assertthat::assert_that(
-    all(field(x, "prefix") >= (max_prefix_length(x) - 30L), na.rm = TRUE),
-    msg = "Network too large"
-  )
+  if (length(x) != 1) {
+    abort("'x' must be an ip_network scalar")
+  }
+  if (any(prefix_length(x) < (max_prefix_length(x) - 30L), na.rm = TRUE)) {
+    abort("Network too large")
+  }
 
   wrap_network_hosts(x, FALSE)
 }
@@ -56,14 +57,12 @@ seq.ip_network <- function(x, ...) {
 #' @rdname sequence
 #' @export
 hosts <- function(x) {
-  assertthat::assert_that(
-    is_ip_network(x),
-    assertthat::is.scalar(x)
-  )
-  assertthat::assert_that(
-    all(field(x, "prefix") >= (max_prefix_length(x) - 30L), na.rm = TRUE),
-    msg = "Network too large"
-  )
+  if (!(is_ip_network(x) && length(x) == 1)) {
+    abort("'x' must be an ip_network scalar")
+  }
+  if (any(prefix_length(x) < (max_prefix_length(x) - 30L), na.rm = TRUE)) {
+    abort("Network too large")
+  }
 
   wrap_network_hosts(x, TRUE)
 }

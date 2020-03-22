@@ -30,7 +30,10 @@ NULL
 #' @rdname netmask
 #' @export
 prefix_length <- function(x) {
-  assertthat::assert_that(is_ip_network(x) || is_ip_interface(x))
+  if (!(is_ip_address(x) || is_ip_network(x))) {
+    abort("'x' must be an ip_address or ip_network vector")
+  }
+
   field(x, "prefix")
 }
 
@@ -95,30 +98,27 @@ hostmask.default <- function(prefix_length = integer(), is_ipv6 = logical(), ...
 }
 
 subnet_mask <- function(prefix_length, is_ipv6, mask_func) {
-  assertthat::assert_that(
-    is.integer(prefix_length),
-    is.logical(is_ipv6)
-  )
+  if (!is_integer(prefix_length)) {
+    abort("'prefix_length' must be an integer vector")
+  }
+  if (!is_logical(is_ipv6)) {
+    abort("'is_ipv6' must be a logical vector")
+  }
 
   # vector recycling
   args <- vec_recycle_common(prefix_length, is_ipv6)
   prefix_length <- args[[1L]]
   is_ipv6 <- args[[2L]]
 
-  assertthat::assert_that(
-    all(prefix_length >= 0L, na.rm = TRUE),
-    msg = "Found prefix length below zero"
-  )
-
-  assertthat::assert_that(
-    all(prefix_length[!is_ipv6] <= 32L, na.rm = TRUE),
-    msg = "Found IPv4 prefix length greater than 32"
-  )
-
-  assertthat::assert_that(
-    all(prefix_length[is_ipv6] <= 128L, na.rm = TRUE),
-    msg = "Found IPv6 prefix length greater than 128"
-  )
+  if (any(prefix_length < 0L, na.rm = TRUE)) {
+    abort("'prefix_length' cannot be negative")
+  }
+  if (any(prefix_length[!is_ipv6] > 32L, na.rm = TRUE)) {
+    abort("The maximum 'prefix_length' is 32 for IPv4")
+  }
+  if (any(prefix_length[is_ipv6] > 128L, na.rm = TRUE)) {
+    abort("The maximum 'prefix_length' is 128 for IPv6")
+  }
 
   do.call(mask_func, list(prefix_length, is_ipv6))
 }

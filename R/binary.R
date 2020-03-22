@@ -25,14 +25,20 @@ NULL
 #' @rdname packed
 #' @export
 as_packed <- function(ip) {
-  assertthat::assert_that(is_ip_address(ip))
+  if (!is_ip_address(ip)) {
+    abort("'ip' must be an ip_address vector")
+  }
+
   blob::as_blob(ip)
 }
 
 #' @rdname packed
 #' @export
 from_packed <- function(bytes) {
-  assertthat::assert_that(blob::is_blob(bytes), msg = "argument is not a blob object")
+  if (!blob::is_blob(bytes)) {
+    abort("'bytes' must be a blob object")
+  }
+
   vec_cast(bytes, ip_address())
 }
 
@@ -64,11 +70,19 @@ NULL
 #' @rdname binary
 #' @export
 as_binary <- function(ip) {
+  if (!is_ip_address(ip)) {
+    abort("'ip' must be an ip_address vector")
+  }
+
   wrap_encode_binary(ip)
 }
 
 #' @rdname binary
 #' @export
 from_binary <- function(bits) {
+  if (!is_character(bits)) {
+    abort("'bits' must be a character vector")
+  }
+
   wrap_decode_binary(bits)
 }

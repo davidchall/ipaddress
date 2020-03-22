@@ -26,7 +26,9 @@ NULL
 #' @rdname network_size
 #' @export
 network_address <- function(x) {
-  assertthat::assert_that(is_ip_network(x))
+  if (!is_ip_network(x)) {
+    abort("'x' must be an ip_network vector")
+  }
 
   new_ip_address(
     field(x, "address1"),
@@ -48,7 +50,9 @@ network_address <- function(x) {
 #' @rdname network_size
 #' @export
 broadcast_address <- function(x) {
-  assertthat::assert_that(is_ip_network(x))
+  if (!is_ip_network(x)) {
+    abort("'x' must be an ip_network vector")
+  }
 
   wrap_broadcast_address(x)
 }
@@ -56,7 +60,9 @@ broadcast_address <- function(x) {
 #' @rdname network_size
 #' @export
 num_addresses <- function(x) {
-  assertthat::assert_that(is_ip_network(x))
+  if (!is_ip_network(x)) {
+    abort("'x' must be an ip_network vector")
+  }
 
   2L^(max_prefix_length(x) - field(x, "prefix"))
 }

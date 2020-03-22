@@ -68,7 +68,7 @@ test_that("missing values work", {
 
 test_that("invalid inputs are caught", {
   expect_warning(ip_interface("192.168.0.1"))
-  expect_error(ip_interface(ip_address("192.168.0.1"), 24), "not an integer")
+  expect_error(ip_interface(ip_address("192.168.0.1"), 24))
   expect_warning(ip_interface(ip_address("192.168.0.1"), -1L))
 })
 

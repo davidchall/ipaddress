@@ -108,10 +108,6 @@ as_ip_address <- function(x) vec_cast(x, ip_address())
 #' @export
 is_ip_address <- function(x) inherits(x, "ip_address")
 
-assertthat::on_failure(is_ip_address) <- function(call, env) {
-  paste0(deparse(call$x), " is not an ip_address vector")
-}
-
 #' @rdname ip_address
 #' @export
 format.ip_address <- function(x, ...) as.character(x)

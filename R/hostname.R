@@ -45,14 +45,14 @@ NULL
 #' @rdname hostname
 #' @export
 as_hostname <- function(ip, multiple = FALSE) {
-  assertthat::assert_that(
-    is_ip_address(ip),
-    assertthat::is.flag(multiple),
-    assertthat::noNA(multiple)
-  )
-
+  if (!is_ip_address(ip)) {
+    abort("'ip' must be an ip_address vector")
+  }
+  if (!is_bool(multiple)) {
+    abort("'multiple' must be TRUE or FALSE")
+  }
   if (is_offline()) {
-    stop("DNS resolution requires an internet connection")
+    abort("DNS resolution requires an internet connection")
   }
 
   res <- wrap_encode_hostname(ip)
@@ -67,12 +67,12 @@ as_hostname <- function(ip, multiple = FALSE) {
 #' @rdname hostname
 #' @export
 from_hostname <- function(host, multiple = FALSE) {
-  assertthat::assert_that(
-    is.character(host),
-    assertthat::is.flag(multiple),
-    assertthat::noNA(multiple)
-  )
-
+  if (!is_character(host)) {
+    abort("'host' must be a character vector")
+  }
+  if (!is_bool(multiple)) {
+    abort("'multiple' must be TRUE or FALSE")
+  }
   if (is_offline()) {
     stop("DNS resolution requires an internet connection")
   }
