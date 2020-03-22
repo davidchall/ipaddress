@@ -41,7 +41,7 @@ test_that("DNS resolution works", {
 })
 
 test_that("DNS resolution errors if offline", {
-  local_mock(is_offline = function() TRUE)
+  local_mock("ipaddress:::is_offline" = function() TRUE)
   expect_error(as_hostname("127.0.0.1"))
   expect_error(from_hostname("localhost"))
 })
