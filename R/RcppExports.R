@@ -45,12 +45,12 @@ print_network_wrapper <- function(x) {
     .Call(`_ipaddress_print_network_wrapper`, x)
 }
 
-translate_to_hostnames <- function(x) {
-    .Call(`_ipaddress_translate_to_hostnames`, x)
+encode_hostname_wrapper <- function(x) {
+    .Call(`_ipaddress_encode_hostname_wrapper`, x)
 }
 
-translate_from_hostname <- function(x) {
-    .Call(`_ipaddress_translate_from_hostname`, x)
+decode_hostname_wrapper <- function(x) {
+    .Call(`_ipaddress_decode_hostname_wrapper`, x)
 }
 
 compare_address_wrapper <- function(x) {
