@@ -1,6 +1,10 @@
 x <- ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334", NA))
 
 test_that("as_packed() and from_packed() work", {
+  expect_error(as_packed("hello"))
+  expect_error(from_packed("hello"))
+  expect_error(from_packed(x))
+
   expect_s3_class(as_packed(x), c("blob", "vctrs_vctr"))
   expect_equal(
     as_packed(x),
@@ -16,6 +20,9 @@ test_that("as_packed() and from_packed() work", {
 })
 
 test_that("as_binary() and from_binary() work", {
+  expect_error(as_binary("hello"))
+  expect_error(from_binary(x))
+
   expect_type(as_binary(x), "character")
   expect_equal(as_binary(x), c(
     "11000000101010000000000000000001",

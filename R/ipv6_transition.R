@@ -38,28 +38,39 @@ NULL
 #' @rdname ipv6_transition
 #' @export
 is_ipv4_mapped <- function(x) {
-  assertthat::assert_that(is_ip_address(x) || is_ip_network(x))
+  if (!(is_ip_address(x) || is_ip_network(x))) {
+    abort("'x' must be an ip_address or ip_network vector")
+  }
+
   wrap_is_ipv4_mapped(x)
 }
 
 #' @rdname ipv6_transition
 #' @export
 is_6to4 <- function(x) {
-  assertthat::assert_that(is_ip_address(x) || is_ip_network(x))
+  if (!(is_ip_address(x) || is_ip_network(x))) {
+    abort("'x' must be an ip_address or ip_network vector")
+  }
+
   wrap_is_6to4(x)
 }
 
 #' @rdname ipv6_transition
 #' @export
 is_teredo <- function(x) {
-  assertthat::assert_that(is_ip_address(x) || is_ip_network(x))
+  if (!(is_ip_address(x) || is_ip_network(x))) {
+    abort("'x' must be an ip_address or ip_network vector")
+  }
+
   wrap_is_teredo(x)
 }
 
 #' @rdname ipv6_transition
 #' @export
 extract_ipv4_mapped <- function(x) {
-  assertthat::assert_that(is_ip_address(x))
+  if (!is_ip_address(x)) {
+    abort("'x' must be an ip_address vector")
+  }
 
   wrap_extract_ipv4_mapped(x)
 }
@@ -67,7 +78,9 @@ extract_ipv4_mapped <- function(x) {
 #' @rdname ipv6_transition
 #' @export
 extract_6to4 <- function(x) {
-  assertthat::assert_that(is_ip_address(x))
+  if (!is_ip_address(x)) {
+    abort("'x' must be an ip_address vector")
+  }
 
   wrap_extract_6to4(x)
 }
@@ -75,7 +88,9 @@ extract_6to4 <- function(x) {
 #' @rdname ipv6_transition
 #' @export
 extract_teredo_server <- function(x) {
-  assertthat::assert_that(is_ip_address(x))
+  if (!is_ip_address(x)) {
+    abort("'x' must be an ip_address vector")
+  }
 
   wrap_extract_teredo_server(x)
 }
@@ -83,7 +98,9 @@ extract_teredo_server <- function(x) {
 #' @rdname ipv6_transition
 #' @export
 extract_teredo_client <- function(x) {
-  assertthat::assert_that(is_ip_address(x))
+  if (!is_ip_address(x)) {
+    abort("'x' must be an ip_address vector")
+  }
 
   wrap_extract_teredo_client(x)
 }

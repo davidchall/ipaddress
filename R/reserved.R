@@ -31,27 +31,39 @@ NULL
 #' @rdname is_reserved
 #' @export
 is_multicast <- function(x) {
-  assertthat::assert_that(is_ip_address(x) || is_ip_network(x))
+  if (!(is_ip_address(x) || is_ip_network(x))) {
+    abort("'x' must be an ip_address or ip_network vector")
+  }
+
   wrap_is_multicast(x)
 }
 
 #' @rdname is_reserved
 #' @export
 is_unspecified <- function(x) {
-  assertthat::assert_that(is_ip_address(x) || is_ip_network(x))
+  if (!(is_ip_address(x) || is_ip_network(x))) {
+    abort("'x' must be an ip_address or ip_network vector")
+  }
+
   wrap_is_unspecified(x)
 }
 
 #' @rdname is_reserved
 #' @export
 is_loopback <- function(x) {
-  assertthat::assert_that(is_ip_address(x) || is_ip_network(x))
+  if (!(is_ip_address(x) || is_ip_network(x))) {
+    abort("'x' must be an ip_address or ip_network vector")
+  }
+
   wrap_is_loopback(x)
 }
 
 #' @rdname is_reserved
 #' @export
 is_link_local <- function(x) {
-  assertthat::assert_that(is_ip_address(x) || is_ip_network(x))
+  if (!(is_ip_address(x) || is_ip_network(x))) {
+    abort("'x' must be an ip_address or ip_network vector")
+  }
+
   wrap_is_link_local(x)
 }

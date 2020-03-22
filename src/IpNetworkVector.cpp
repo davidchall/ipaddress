@@ -221,7 +221,7 @@ List IpNetworkVector::encodeR() const {
       out_addr3.size() != out_v6.size() ||
       out_addr4.size() != out_v6.size() ||
       out_pfx.size() != out_v6.size()) {
-    throw Rcpp::exception("Consistuent vectors have unequal sizes (please file bug report)", false);
+    stop("Consistuent vectors have unequal sizes");
   }
 
   List result = List::create(

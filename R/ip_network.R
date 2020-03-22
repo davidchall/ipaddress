@@ -76,10 +76,9 @@ ip_network <- function(...) {
 #' @rdname ip_network
 #' @export
 ip_network.default <- function(ip = character(), strict = TRUE, ...) {
-  assertthat::assert_that(
-    assertthat::is.flag(strict),
-    assertthat::noNA(strict)
-  )
+  if (!is_bool(strict)) {
+    abort("'strict' be must TRUE or FALSE")
+  }
 
   wrap_parse_network(ip, strict)
 }
@@ -87,11 +86,12 @@ ip_network.default <- function(ip = character(), strict = TRUE, ...) {
 #' @rdname ip_network
 #' @export
 ip_network.ip_address <- function(address, prefix_length, strict = TRUE, ...) {
-  assertthat::assert_that(
-    assertthat::is.flag(strict),
-    assertthat::noNA(strict),
-    is.integer(prefix_length)
-  )
+  if (!is_integer(prefix_length)) {
+    abort("'prefix_length' must be an integer vector")
+  }
+  if (!is_bool(strict)) {
+    abort("'strict' be must TRUE or FALSE")
+  }
 
   # vector recycling
   args <- vec_recycle_common(address, prefix_length)
@@ -133,10 +133,6 @@ as_ip_network <- function(x) vec_cast(x, ip_network())
 #' @rdname ip_network
 #' @export
 is_ip_network <- function(x) inherits(x, "ip_network")
-
-assertthat::on_failure(is_ip_network) <- function(call, env) {
-  paste0(deparse(call$x), " is not an ip_network vector")
-}
 
 #' @rdname ip_network
 #' @export

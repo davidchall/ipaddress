@@ -69,7 +69,9 @@ ip_interface.default <- function(ip = character(), ...) {
 #' @rdname ip_interface
 #' @export
 ip_interface.ip_address <- function(address, prefix_length, ...) {
-  assertthat::assert_that(is.integer(prefix_length))
+  if (!is_integer(prefix_length)) {
+    abort("'prefix_length' must be an integer vector")
+  }
 
   # vector recycling
   args <- vec_recycle_common(address, prefix_length)
@@ -120,10 +122,6 @@ as_ip_interface <- function(x) vec_cast(x, ip_interface())
 #' @rdname ip_interface
 #' @export
 is_ip_interface <- function(x) inherits(x, "ip_interface")
-
-assertthat::on_failure(is_ip_interface) <- function(call, env) {
-  paste0(deparse(call$x), " is not an ip_interface vector")
-}
 
 #' @rdname ip_interface
 #' @export

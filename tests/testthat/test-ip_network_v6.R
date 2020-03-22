@@ -35,14 +35,14 @@ test_that("invalid inputs are caught", {
   expect_warning(ip_network("1::2/a"), "Invalid value")
   expect_warning(ip_network("1::2/24/24"), "Invalid value")
 
-  expect_error(ip_network(ip_address("2001:db8::"), 24), "not an integer")
+  expect_error(ip_network(ip_address("2001:db8::"), 24))
   expect_warning(ip_network(ip_address("2001:db8::"), -1L), "Invalid value")
   expect_warning(ip_network(ip_address("2001:db8::"), 129L), "Invalid value")
 })
 
 test_that("strict argument works", {
-  expect_error(ip_network("2001:db8::/36", strict = "yes"), "not a flag")
-  expect_error(ip_network("2001:db8::/36", strict = NA), "contains 1 missing values")
+  expect_error(ip_network("2001:db8::/36", strict = "yes"))
+  expect_error(ip_network("2001:db8::/36", strict = NA))
 
   expect_warning(ip_network("2001:db8::8a2e:370:7334/36"), "host bits set")
   expect_equal(ip_network("2001:db8::8a2e:370:7334/36", strict = FALSE), ip_network("2001:db8::/36"))

@@ -13,7 +13,7 @@ test_that("max_prefix_length works", {
 })
 
 test_that("input validation works", {
-  expect_error(is_ipv4(1L), "not an ip_address vector or (.*) is not an ip_network vector")
-  expect_error(is_ipv6(1L), "not an ip_address vector or (.*) is not an ip_network vector")
-  expect_error(max_prefix_length(1L), "not an ip_address vector or (.*) is not an ip_network vector")
+  expect_error(is_ipv4(1L))
+  expect_error(is_ipv6(1L))
+  expect_error(max_prefix_length(1L))
 })
