@@ -87,7 +87,9 @@ from_hostname <- function(host, multiple = FALSE) {
 }
 
 is_offline <- function() {
-  is.na(suppressWarnings(wrap_decode_hostname("www.r-project.org")))
+  res <- suppressWarnings(wrap_decode_hostname("www.r-project.org"))
+  res <- pluck_first_of_each(res)
+  is.na(res)
 }
 
 pluck_first_of_each <- function(x) {
