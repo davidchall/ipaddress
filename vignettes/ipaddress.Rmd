@@ -14,6 +14,53 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, include = FALSE}
 library(ipaddress)
 ```
+
+The ipaddress R package was heavily influenced by the design of the [`ipaddress`](https://docs.python.org/library/ipaddress.html) module in the Python Standard Library.
+For this reason, the package is centered around 3 data classes: `ip_address()`, `ip_network()` and `ip_interface()`.
+This vignette introduces you to these classes, which are then used by functions throughout the package.
+
+
+# IP Addresses
+
+IP addresses are used to facilitate communications between computers connected to the internet.
+At this highest level, an IP address is analogous to a mailing address.
+
+It's important to know there are two versions of the Internet Protocol in wide usage today.
+IPv4 stores addresses using 32 bits, which provides `r format(2^32, big.mark = ",")` unique addresses.
+But given the rapid growth of the internet, this address space was quickly depleted.
+The replacement protocol (known as IPv6) stores addresses using 128 bits, which provides a far greater number of unique addresses (sufficient for the foreseeable future).
+The transition to IPv6 is currently ongoing, so it is still very common to see IPv4 addresses.
+
+To make IP addresses easier for humans to interpret, they are usually represented as character strings.
+
+* An IPv4 address is represented as 4 groups of decimal numbers from `0` to `255` separated by periods (e.g. `192.168.0.1`). Each group corresponds to 8 bits.
+* An IPv6 address is represented as 8 groups of hexadecimal numbers from `0000` to `ffff` separated by colons (e.g. `2001:0db8:85a3:0000:0000:8a2e:0370:7334`). Each group corresponds to 16 bits. This representation can also be compressed by removing leading zeros and replacing consecutive groups of zeros with double-colon (e.g. `2001:db8:85a3::8a2e:370:7334`).
+
+The `ip_address()` class is constructed using a character vector of these strings.
+Note that a vector of the `ip_address()` class can handle IPv4 and IPv6 addresses simultaneously:
+
+```{r}
+ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334"))
+```
+
+Although it looks like we've just stored the character vector, this constructor has actually validated the input addresses and stored the native bit representation of each address.
+The `print()` function has then converted them back to the human-readable character representation.
+We can see this in action by passing an invalid address:
+
+```{r}
+ip_address("255.255.255.256")
+```
+
+Unlike the Python [`ipaddress`](https://docs.python.org/library/ipaddress.html) module, we don't provide a way to construct an IP address from an integer.
+This is because the R integer data type does not support the necessary range of values.
+However, if you have addresses stored as raw bytes, you can construct an `ip_address()` vector using the `from_packed()` function.
+
+
+# IP Networks
+
+
+# IP Interfaces
+
