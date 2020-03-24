@@ -25,6 +25,9 @@
     <loc>https://davidchall.github.io/ipaddress/reference/ipaddress-package.html</loc>
   </url>
   <url>
+    <loc>https://davidchall.github.io/ipaddress/reference/ipaddress-vctrs.html</loc>
+  </url>
+  <url>
     <loc>https://davidchall.github.io/ipaddress/reference/ipv6_transition.html</loc>
   </url>
   <url>
@@ -53,30 +56,6 @@
   </url>
   <url>
     <loc>https://davidchall.github.io/ipaddress/reference/sequence.html</loc>
-  </url>
-  <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/vec_arith.ip_address.html</loc>
-  </url>
-  <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/vec_arith.ip_interface.html</loc>
-  </url>
-  <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/vec_cast.ip_address.html</loc>
-  </url>
-  <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/vec_cast.ip_interface.html</loc>
-  </url>
-  <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/vec_cast.ip_network.html</loc>
-  </url>
-  <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/vec_ptype2.ip_address.html</loc>
-  </url>
-  <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/vec_ptype2.ip_interface.html</loc>
-  </url>
-  <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/vec_ptype2.ip_network.html</loc>
   </url>
   <url>
     <loc>https://davidchall.github.io/ipaddress/articles/ipaddress.html</loc>

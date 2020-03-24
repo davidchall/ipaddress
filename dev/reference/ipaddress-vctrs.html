@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Vector of IP interfaces — ip_interface • ipaddress</title>
+<title>Internal vctrs methods — ipaddress-vctrs • ipaddress</title>
 
 
 <!-- jquery -->
@@ -45,11 +45,8 @@
 
 
 
-<meta property="og:title" content="Vector of IP interfaces — ip_interface" />
-<meta property="og:description" content="This hybrid class stores both the host address and the network it is on.
-ip_interface() constructs a vector of IP interfaces.
-as_ip_interface() casts an object to ip_interface.
-is_ip_interface() checks if an object is of class ip_interface." />
+<meta property="og:title" content="Internal vctrs methods — ipaddress-vctrs" />
+<meta property="og:description" content="Internal vctrs methods" />
 
 
 <meta name="robots" content="noindex">
@@ -139,96 +136,41 @@ is_ip_interface() checks if an object is of class ip_interface." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Vector of IP interfaces</h1>
-    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/ip_interface.R'><code>R/ip_interface.R</code></a></small>
-    <div class="hidden name"><code>ip_interface.Rd</code></div>
+    <h1>Internal vctrs methods</h1>
+    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/ipaddress-package.R'><code>R/ipaddress-package.R</code></a>, <a href='https://github.com/davidchall/ipaddress/blob/master/R/vctrs-arithmetic.R'><code>R/vctrs-arithmetic.R</code></a>, <a href='https://github.com/davidchall/ipaddress/blob/master/R/vctrs-cast.R'><code>R/vctrs-cast.R</code></a>, and 1 more</small>
+    <div class="hidden name"><code>ipaddress-vctrs.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This hybrid class stores both the host address and the network it is on.</p>
-<p><code>ip_interface()</code> constructs a vector of IP interfaces.</p>
-<p><code>as_ip_interface()</code> casts an object to <code>ip_interface</code>.</p>
-<p><code>is_ip_interface()</code> checks if an object is of class <code>ip_interface</code>.</p>
+    <p>Internal vctrs methods</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ip_interface</span>(<span class='no'>...</span>)
+    <pre class="usage"><span class='co'># S3 method for ip_address</span>
+<span class='fu'>vec_arith</span>(<span class='no'>op</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>...</span>)
 
-<span class='co'># S3 method for default</span>
-<span class='fu'>ip_interface</span>(<span class='kw'>ip</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(), <span class='no'>...</span>)
+<span class='co'># S3 method for ip_interface</span>
+<span class='fu'>vec_arith</span>(<span class='no'>op</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for ip_address</span>
-<span class='fu'>ip_interface</span>(<span class='no'>address</span>, <span class='no'>prefix_length</span>, <span class='no'>...</span>)
+<span class='fu'>vec_cast</span>(<span class='no'>x</span>, <span class='no'>to</span>, <span class='no'>...</span>)
 
-<span class='fu'>as_ip_interface</span>(<span class='no'>x</span>)
-
-<span class='fu'>is_ip_interface</span>(<span class='no'>x</span>)
-
-<span class='co'># S3 method for ip_interface</span>
-<span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='co'># S3 method for ip_network</span>
+<span class='fu'>vec_cast</span>(<span class='no'>x</span>, <span class='no'>to</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for ip_interface</span>
-<span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>vec_cast</span>(<span class='no'>x</span>, <span class='no'>to</span>, <span class='no'>...</span>)
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>...</th>
-      <td><p>Arguments to be passed to other methods</p></td>
-    </tr>
-    <tr>
-      <th>ip</th>
-      <td><p>Character vector of IP interfaces, in CIDR notation (IPv4 or IPv6).</p></td>
-    </tr>
-    <tr>
-      <th>address</th>
-      <td><p>An <code><a href='ip_address.html'>ip_address</a></code> vector</p></td>
-    </tr>
-    <tr>
-      <th>prefix_length</th>
-      <td><p>An integer vector</p></td>
-    </tr>
-    <tr>
-      <th>x</th>
-      <td><p>An <code>ip_interface</code> vector</p></td>
-    </tr>
-    </table>
+<span class='co'># S3 method for ip_address</span>
+<span class='fu'>vec_ptype2</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>...</span>)
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+<span class='co'># S3 method for ip_network</span>
+<span class='fu'>vec_ptype2</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>...</span>)
 
-    <p>An S3 vector of class  <code>ip_interface</code></p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+<span class='co'># S3 method for ip_interface</span>
+<span class='fu'>vec_ptype2</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>...</span>)</pre>
 
-    <p>Constructing an <code>ip_interface</code> vector is conceptually like constructing an
-<code><a href='ip_network.html'>ip_network</a></code> vector, except the host bits are retained.</p>
-<p>The <code>ip_interface</code> class inherits from the <code><a href='ip_address.html'>ip_address</a></code> class.
-This means it can generally be used in places where an <code><a href='ip_address.html'>ip_address</a></code>
-vector is expected. A few exceptions to this rule are:</p><ul>
-<li><p>It does not support addition and subtraction of integers</p></li>
-<li><p>It does not support bitwise operations</p></li>
-<li><p>It cannot be compared to <code><a href='ip_address.html'>ip_address</a></code> vectors</p></li>
-</ul>
 
-<p>The <code>ip_interface</code> class additionally supports a few functions typically
-reserved for <code><a href='ip_network.html'>ip_network</a></code> vectors: <code><a href='netmask.html'>prefix_length()</a></code>, <code><a href='netmask.html'>netmask()</a></code> and
-<code><a href='netmask.html'>hostmask()</a></code>.</p>
-<p>For other purposes, you can extract the address and network components using
-<code><a href='ip_address.html'>as_ip_address()</a></code> and <code><a href='ip_network.html'>as_ip_network()</a></code>.</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># construct from character vector</span>
-<span class='fu'>ip_interface</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.1/10"</span>, <span class='st'>"2001:db8:c3::abcd/45"</span>))</div><div class='output co'>#&gt; &lt;ip_interface[2]&gt;
-#&gt; [1] 192.168.0.1/10       2001:db8:c3::abcd/45</div><div class='input'>
-<span class='co'># construct from address + prefix length objects</span>
-<span class='fu'>ip_interface</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.1"</span>, <span class='st'>"2001:db8:c3::abcd"</span>)), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10L</span>, <span class='fl'>45L</span>))</div><div class='output co'>#&gt; &lt;ip_interface[2]&gt;
-#&gt; [1] 192.168.0.1/10       2001:db8:c3::abcd/45</div><div class='input'>
-<span class='co'># extract IP address</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ip_interface</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.1/10"</span>, <span class='st'>"2001:db8:c3::abcd/45"</span>))
-<span class='fu'><a href='ip_address.html'>as_ip_address</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
-#&gt; [1] 192.168.0.1       2001:db8:c3::abcd</div><div class='input'>
-<span class='co'># extract IP network (with host bits masked)</span>
-<span class='fu'><a href='ip_network.html'>as_ip_network</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; &lt;ip_network[2]&gt;
-#&gt; [1] 192.128.0.0/10   2001:db8:c0::/45</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
