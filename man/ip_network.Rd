@@ -51,12 +51,12 @@ An \code{ip_network} vector
 \code{is_ip_network()} checks if an object is of class \code{ip_network}.
 }
 \details{
-An IP network corresponds to a range of contiguous IP addresses
+An IP network corresponds to a contiguous range of IP addresses
 (also known as an IP block). CIDR notation represents an
 IP network as the routing prefix address (which denotes the start
 of the range) and the prefix length (which indicates the size of
-the range) separated by a forward slash. For example, \verb{192.168.100.0/22}
-represents addresses from \verb{192.168.100.0} to \verb{192.168.103.255}.
+the range) separated by a forward slash. For example, \verb{192.168.0.0/24}
+represents addresses from \verb{192.168.0.0} to \verb{192.168.0.255}.
 
 The prefix length indicates the number of bits reserved by the
 routing prefix. This means that larger prefix lengths indicate

@@ -1,38 +1,37 @@
 # ipaddress (development version)
 
-## New features
+## Classes
 
-### Classes
-
+* Added `vignette("ipaddress")` to introduce the data classes provided by ipaddress
 * New `ip_interface()` class to simultaneously store the address and the network it is on
 * `ip_address()` vectors now support bitwise operations (`!`, `&`, `|` and `^`)
 * `ip_address()` vectors now support addition and subtraction of integers
 * Added an `ip_network()` constructor that accepts `ip_address` and prefix length vectors
 
-### Other representations
+## Other representations
 
 * New `as_packed()` and `from_packed()` functions to encode and decode addresses as raw bytes
 * New `as_binary()` and `from_binary()` functions to encode and decode addresses as binary strings
 * New `as_hostname()` and `from_hostname()` functions translate addresses to and from hostnames
 
-### Address space
+## Address space
 
 * New `max_prefix_length()` function to get the size of the address space (32-bit for IPv4 and 128-bit for IPv6)
 * New functions to check if addresses or networks are reserved for special use: `is_multicast()`, `is_unspecified()`, `is_loopback()`, `is_link_local()`
 * New functions for IPv6 transition mechanisms: `is_ipv4_mapped()`, `is_6to4()`, `is_teredo()`, `extract_ipv4_mapped()`, `extract_6to4()`, `extract_teredo_server()`, `extract_teredo_client()`
 
-### Network membership
+## Network membership
 
 * New functions about the size of a network: `num_addresses()`, `network_address()` and `broadcast_address()`
 * New `overlaps()` function to check for _any_ overlap between networks
 * `netmask()` and `hostmask()` are now generics, so they can now accept either an `ip_network` vector or a vector of prefix lengths. Previously they only accepted an `ip_network` vector.
 
-### Generating addresses
+## Generating addresses
 
 * New `seq.ip_network()` and `hosts()` functions to list all addresses within a network
 * New functions to randomly sample addresses: `sample_ipv4()`, `sample_ipv6()` and `sample_network()`
 
-## Minor improvements
+## Miscellaneous improvements
 
 * Improved input validation warnings. They now report the row number involved and no longer mention internal function names.
 * Many functions now support [tidy vector recyling](https://vctrs.r-lib.org/reference/vec_recycle.html)

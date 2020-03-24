@@ -4,12 +4,12 @@ methods::setOldClass(c("ip_network", "vctrs_vctr"))
 #' Vector of IP networks
 #'
 #' @details
-#' An IP network corresponds to a range of contiguous IP addresses
+#' An IP network corresponds to a contiguous range of IP addresses
 #' (also known as an IP block). CIDR notation represents an
 #' IP network as the routing prefix address (which denotes the start
 #' of the range) and the prefix length (which indicates the size of
-#' the range) separated by a forward slash. For example, `192.168.100.0/22`
-#' represents addresses from `192.168.100.0` to `192.168.103.255`.
+#' the range) separated by a forward slash. For example, `192.168.0.0/24`
+#' represents addresses from `192.168.0.0` to `192.168.0.255`.
 #'
 #' The prefix length indicates the number of bits reserved by the
 #' routing prefix. This means that larger prefix lengths indicate
