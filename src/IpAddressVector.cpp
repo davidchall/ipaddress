@@ -33,7 +33,7 @@ IpAddressVector::IpAddressVector(CharacterVector input) {
         address_v6[i] = asio::ip::make_address_v6(input[i], ec);
         if (ec) {
           is_na[i] = true;
-          warnInvalidInput(i, as<std::string>(input[i]));
+          warnInvalidInput(i, Rcpp::as<std::string>(input[i]));
         } else {
           is_ipv6[i] = true;
         }

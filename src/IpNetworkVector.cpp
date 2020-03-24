@@ -40,7 +40,7 @@ IpNetworkVector::IpNetworkVector(CharacterVector input,
           network_v4[i] = tmp_v4;
         } else if (strict) {
           is_na[i] = true;
-          warnInvalidInput(i, as<std::string>(input[i]), "host bits set");
+          warnInvalidInput(i, Rcpp::as<std::string>(input[i]), "host bits set");
         } else {
           network_v4[i] = tmp_v4.canonical();
         }
@@ -58,14 +58,14 @@ IpNetworkVector::IpNetworkVector(CharacterVector input,
             is_ipv6[i] = true;
           } else if (strict) {
             is_na[i] = true;
-            warnInvalidInput(i, as<std::string>(input[i]), "host bits set");
+            warnInvalidInput(i, Rcpp::as<std::string>(input[i]), "host bits set");
           } else {
             network_v6[i] = tmp_v6.canonical();
             is_ipv6[i] = true;
           }
         } else {
           is_na[i] = true;
-          warnInvalidInput(i, as<std::string>(input[i]));
+          warnInvalidInput(i, Rcpp::as<std::string>(input[i]));
         }
       }
     }
