@@ -1,7 +1,7 @@
 x <- c("0.0.0.0/32", "192.168.0.0/16", "192.168.100.0/22", "255.255.255.255/32")
 
 test_that("construction works", {
-  expect_s3_class(ip_network(), c("ip_network", "vctrs_vctr"))
+  expect_s3_class(ip_network(), c("ip_network", "vctrs_rcrd", "vctrs_vctr"), exact = TRUE)
   expect_true(is_ip_network(ip_network(x)))
   expect_length(ip_network(), 0)
   expect_length(ip_network(x), length(x))
@@ -29,23 +29,15 @@ test_that("formats correctly", {
 })
 
 test_that("casting works", {
-  expect_equal(vctrs::vec_cast(ip_network("198.51.100.0/24"), ip_network()), ip_network("198.51.100.0/24"))
-  expect_equal(vctrs::vec_cast("198.51.100.0/24", ip_network()), ip_network("198.51.100.0/24"))
-  expect_equal(vctrs::vec_cast(ip_network("198.51.100.0/24"), character()), "198.51.100.0/24")
-
-  # since R only provides signed integers, we don't support integer casting
-  expect_error(vctrs::vec_cast(ip_network("198.51.100.0/24"), integer()), class = "vctrs_error_incompatible_cast")
-  expect_error(vctrs::vec_cast(1L, ip_network()), class = "vctrs_error_incompatible_cast")
+  expect_equal(vec_cast(ip_network("198.51.100.0/24"), ip_network()), ip_network("198.51.100.0/24"))
+  expect_equal(vec_cast("198.51.100.0/24", ip_network()), ip_network("198.51.100.0/24"))
+  expect_equal(vec_cast(ip_network("198.51.100.0/24"), character()), "198.51.100.0/24")
 })
 
 test_that("coercion works", {
-  expect_equal(vctrs::vec_ptype2(ip_network(), ip_network()), ip_network())
-  expect_equal(vctrs::vec_ptype2(ip_network(), "198.51.100.0/24"), character())
-  expect_equal(vctrs::vec_ptype2("198.51.100.0/24", ip_network()), character())
-
-  # since R only provides signed integers, we don't support integer coercion
-  expect_error(vctrs::vec_ptype2(ip_network("198.51.100.0/24"), integer()), class = "vctrs_error_incompatible_type")
-  expect_error(vctrs::vec_ptype2(1L, ip_network()), class = "vctrs_error_incompatible_type")
+  expect_s3_class(vec_c(ip_network(), ip_network()), "ip_network")
+  expect_type(vec_c(character(), ip_network()), "character")
+  expect_type(vec_c(ip_network(), character()), "character")
 })
 
 test_that("missing values work", {
@@ -88,9 +80,9 @@ test_that("strict argument works", {
 })
 
 test_that("equality operations work", {
-  expect_true(all(vctrs::vec_equal(ip_network(x), ip_network(x))))
-  expect_false(any(vctrs::vec_equal(ip_network(x), ip_network(rev(x)))))
-  expect_false(vctrs::vec_equal(ip_network("192.168.0.0/16"), ip_network("192.168.0.0/20")))
+  expect_true(all(ip_network(x) == ip_network(x)))
+  expect_false(any(ip_network(x) == ip_network(rev(x))))
+  expect_false(ip_network("192.168.0.0/16") == ip_network("192.168.0.0/20"))
 })
 
 test_that("comparison operations work", {
@@ -98,11 +90,11 @@ test_that("comparison operations work", {
     if (n == 0) x else c(tail(x, -n), head(x, n))
   }
   expect_equal(
-    vctrs::vec_compare(ip_network(x), ip_network(shifter(x, 1L))),
+    vec_compare(ip_network(x), ip_network(shifter(x, 1L))),
     c(rep(-1L, length(x) - 1L), 1L)
   )
   expect_equal(
-    vctrs::vec_compare(ip_network(x), ip_network(shifter(x, -1L))),
+    vec_compare(ip_network(x), ip_network(shifter(x, -1L))),
     c(-1L, rep(1L, length(x) - 1L))
   )
   expect_equal(vec_compare(ip_network("192.168.0.0/16"), ip_network(NA)), NA_integer_)

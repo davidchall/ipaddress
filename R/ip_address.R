@@ -45,7 +45,7 @@ NULL
 #'
 #' @param ip Character vector of IP addresses, in dot-decimal notation (IPv4)
 #'   or hexadecimal notation (IPv6).
-#' @return An `ip_address` vector
+#' @return An S3 vector of class `ip_address`
 #'
 #' @examples
 #' # supports IPv4 and IPv6 simultaneously

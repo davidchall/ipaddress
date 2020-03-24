@@ -36,7 +36,7 @@ is_ip_interface(x)
 \item{x}{An \code{ip_interface} vector}
 }
 \value{
-An \code{ip_interface} vector
+An S3 vector of class  \code{ip_interface}
 }
 \description{
 This hybrid class stores both the host address and the network it is on.

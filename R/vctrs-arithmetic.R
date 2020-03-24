@@ -1,12 +1,7 @@
-#' Arithmetic operations
-#'
-#' Double dispatch methods to support [vctrs::vec_arith()].
-#'
-#' @inherit vctrs::vec_arith return params
-#' @keywords internal
 #' @method vec_arith ip_address
 #' @export
 #' @export vec_arith.ip_address
+#' @rdname ipaddress-vctrs
 vec_arith.ip_address <- function(op, x, y, ...) {
   UseMethod("vec_arith.ip_address", y)
 }
@@ -61,15 +56,10 @@ vec_arith.ip_address.MISSING <- function(op, x, y, ...) {
 
 # Disable operators for ip_interface class ------------------------------------
 
-#' Arithmetic operations
-#'
-#' Double dispatch methods to support [vctrs::vec_arith()].
-#'
-#' @inherit vctrs::vec_arith return params
-#' @keywords internal
 #' @method vec_arith ip_interface
 #' @export
 #' @export vec_arith.ip_interface
+#' @rdname ipaddress-vctrs
 vec_arith.ip_interface <- function(op, x, y, ...) {
   stop_incompatible_op(op, x, y)
 }

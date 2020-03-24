@@ -41,7 +41,7 @@ to retain the host bits, consider using \code{ip_interface()} instead.}
 \item{x}{An \code{ip_network} vector}
 }
 \value{
-An \code{ip_network} vector
+An S3 vector of class \code{ip_network}
 }
 \description{
 \code{ip_network()} constructs a vector of IP networks.

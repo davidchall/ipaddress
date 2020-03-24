@@ -1,12 +1,7 @@
-#' Casting
-#'
-#' Double dispatch methods to support [vctrs::vec_cast()].
-#'
-#' @inherit vctrs::vec_cast return params
-#' @keywords internal
 #' @method vec_cast ip_address
 #' @export
 #' @export vec_cast.ip_address
+#' @rdname ipaddress-vctrs
 vec_cast.ip_address <- function(x, to, ...) UseMethod("vec_cast.ip_address")
 
 #' @method vec_cast.ip_address default
@@ -35,15 +30,11 @@ vec_cast.ip_address.blob <- function(x, to, ...) wrap_decode_packed(x)
 vec_cast.blob.ip_address <- function(x, to, ...) blob::new_blob(wrap_encode_packed(x))
 
 
-#' Casting
-#'
-#' Double dispatch methods to support [vctrs::vec_cast()].
-#'
-#' @inherit vctrs::vec_cast return params
-#' @keywords internal
+
 #' @method vec_cast ip_network
 #' @export
 #' @export vec_cast.ip_network
+#' @rdname ipaddress-vctrs
 vec_cast.ip_network <- function(x, to, ...) UseMethod("vec_cast.ip_network")
 
 #' @method vec_cast.ip_network default
@@ -63,15 +54,11 @@ vec_cast.ip_network.character <- function(x, to, ...) ip_network(x)
 vec_cast.character.ip_network <- function(x, to, ...) wrap_print_network(x)
 
 
-#' Casting
-#'
-#' Double dispatch methods to support [vctrs::vec_cast()].
-#'
-#' @inherit vctrs::vec_cast return params
-#' @keywords internal
+
 #' @method vec_cast ip_interface
 #' @export
 #' @export vec_cast.ip_interface
+#' @rdname ipaddress-vctrs
 vec_cast.ip_interface <- function(x, to, ...) UseMethod("vec_cast.ip_interface")
 
 #' @method vec_cast.ip_interface default

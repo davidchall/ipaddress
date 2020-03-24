@@ -23,8 +23,8 @@ test_that("invalid inputs are caught", {
 })
 
 test_that("equality operations work", {
-  expect_true(all(vctrs::vec_equal(ip_address(x), ip_address(x))))
-  expect_false(any(vctrs::vec_equal(ip_address(x), ip_address(rev(x)))))
+  expect_true(all(ip_address(x) == ip_address(x)))
+  expect_false(any(ip_address(x) == ip_address(rev(x))))
 })
 
 test_that("comparison operations work", {
@@ -32,11 +32,11 @@ test_that("comparison operations work", {
     if (n == 0) x else c(tail(x, -n), head(x, n))
   }
   expect_equal(
-    vctrs::vec_compare(ip_address(x), ip_address(shifter(x, 1L))),
+    vec_compare(ip_address(x), ip_address(shifter(x, 1L))),
     c(rep(-1L, length(x) - 1L), 1L)
   )
   expect_equal(
-    vctrs::vec_compare(ip_address(x), ip_address(shifter(x, -1L))),
+    vec_compare(ip_address(x), ip_address(shifter(x, -1L))),
     c(-1L, rep(1L, length(x) - 1L))
   )
   expect_equal(vec_compare(ip_address("2001:db8::8a2e:370:7334"), ip_address(NA)), NA_integer_)

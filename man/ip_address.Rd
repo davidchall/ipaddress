@@ -27,7 +27,7 @@ or hexadecimal notation (IPv6).}
 \item{...}{Arguments to be passed to other methods}
 }
 \value{
-An \code{ip_address} vector
+An S3 vector of class \code{ip_address}
 }
 \description{
 \code{ip_address()} constructs a vector of IP addresses.

@@ -1,7 +1,13 @@
 #' @keywords internal
 #' @import rlang
-#' @import vctrs
 "_PACKAGE"
+
+#' Internal vctrs methods
+#'
+#' @import vctrs
+#' @keywords internal
+#' @name ipaddress-vctrs
+NULL
 
 # The following block is used by usethis to automatically manage
 # roxygen namespace tags. Modify with care!

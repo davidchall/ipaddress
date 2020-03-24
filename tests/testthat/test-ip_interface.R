@@ -1,7 +1,7 @@
 x <- c("192.168.0.1/10", "2001:db8::abcd/32")
 
 test_that("construction works", {
-  expect_s3_class(ip_interface(), c("ip_interface", "ip_address", "vctrs_vctr"))
+  expect_s3_class(ip_interface(), c("ip_interface", "ip_address", "vctrs_rcrd", "vctrs_vctr"), exact = TRUE)
   expect_true(is_ip_interface(ip_interface(x)))
   expect_length(ip_interface(), 0)
   expect_length(ip_interface(x), length(x))
@@ -37,13 +37,14 @@ test_that("casting works", {
 })
 
 test_that("coercion works", {
-  expect_equal(vec_ptype2(ip_interface(), ip_interface()), ip_interface())
-  expect_equal(vec_ptype2(ip_interface(), character()), character())
-  expect_equal(vec_ptype2(character(), ip_interface()), character())
+  expect_s3_class(vec_c(ip_interface(), ip_interface()), "ip_interface")
+  expect_type(vec_c(character(), ip_interface()), "character")
+  expect_type(vec_c(ip_interface(), character()), "character")
 
-  # since R only provides signed integers, we don't support integer coercion
-  expect_error(vec_ptype2(ip_interface(), integer()), class = "vctrs_error_incompatible_type")
-  expect_error(vec_ptype2(integer(), ip_interface()), class = "vctrs_error_incompatible_type")
+  expect_error(vec_c(ip_address(), ip_interface()), class = "vctrs_error_incompatible_type")
+  expect_error(vec_c(ip_interface(), ip_address()), class = "vctrs_error_incompatible_type")
+  expect_error(vec_c(ip_network(), ip_interface()), class = "vctrs_error_incompatible_type")
+  expect_error(vec_c(ip_interface(), ip_network()), class = "vctrs_error_incompatible_type")
 })
 
 test_that("can extract address and network", {

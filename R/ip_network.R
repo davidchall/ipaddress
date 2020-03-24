@@ -50,7 +50,7 @@ NULL
 #'   then a warning is emitted and `NA` is returned. If `FALSE`, the
 #'   host bits are set to zero and a valid IP network is returned. If you need
 #'   to retain the host bits, consider using `ip_interface()` instead.
-#' @return An `ip_network` vector
+#' @return An S3 vector of class `ip_network`
 #'
 #' @examples
 #' # construct from character vector

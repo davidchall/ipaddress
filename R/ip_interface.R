@@ -52,7 +52,7 @@ NULL
 #' @param ip Character vector of IP interfaces, in CIDR notation (IPv4 or IPv6).
 #' @param address An \code{\link{ip_address}} vector
 #' @param prefix_length An integer vector
-#' @return An `ip_interface` vector
+#' @return An S3 vector of class  `ip_interface`
 #'
 #' @rdname ip_interface
 #' @export

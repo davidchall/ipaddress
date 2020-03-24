@@ -1,14 +1,7 @@
-#' Coercion
-#'
-#' Double dispatch methods to support [vctrs::vec_ptype2()].
-#'
-#' @inheritParams vctrs::vec_ptype2
-#' @return A prototype if `x` and `y` can be safely coerced to the same
-#'   prototype; otherwise it returns an error.
-#' @keywords internal
 #' @method vec_ptype2 ip_address
 #' @export
 #' @export vec_ptype2.ip_address
+#' @rdname ipaddress-vctrs
 vec_ptype2.ip_address <- function(x, y, ...) UseMethod("vec_ptype2.ip_address", y)
 
 #' @method vec_ptype2.ip_address default
@@ -30,17 +23,11 @@ vec_ptype2.ip_address.character <- function(x, y, ...) character()
 vec_ptype2.character.ip_address <- function(x, y, ...) character()
 
 
-#' Coercion
-#'
-#' Double dispatch methods to support [vctrs::vec_ptype2()].
-#'
-#' @inheritParams vctrs::vec_ptype2
-#' @return A prototype if `x` and `y` can be safely coerced to the same
-#'   prototype; otherwise it returns an error.
-#' @keywords internal
+
 #' @method vec_ptype2 ip_network
 #' @export
 #' @export vec_ptype2.ip_network
+#' @rdname ipaddress-vctrs
 vec_ptype2.ip_network <- function(x, y, ...) UseMethod("vec_ptype2.ip_network", y)
 
 #' @method vec_ptype2.ip_network default
@@ -62,17 +49,11 @@ vec_ptype2.ip_network.character <- function(x, y, ...) character()
 vec_ptype2.character.ip_network <- function(x, y, ...) character()
 
 
-#' Coercion
-#'
-#' Double dispatch methods to support [vctrs::vec_ptype2()].
-#'
-#' @inheritParams vctrs::vec_ptype2
-#' @return A prototype if `x` and `y` can be safely coerced to the same
-#'   prototype; otherwise it returns an error.
-#' @keywords internal
+
 #' @method vec_ptype2 ip_interface
 #' @export
 #' @export vec_ptype2.ip_interface
+#' @rdname ipaddress-vctrs
 vec_ptype2.ip_interface <- function(x, y, ...) UseMethod("vec_ptype2.ip_interface", y)
 
 #' @method vec_ptype2.ip_interface default
