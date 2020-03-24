@@ -40,8 +40,8 @@ test_that("casting works", {
 
 test_that("coercion works", {
   expect_equal(vctrs::vec_ptype2(ip_network(), ip_network()), ip_network())
-  expect_equal(vctrs::vec_ptype2(ip_network(), "198.51.100.0/24"), ip_network())
-  expect_equal(vctrs::vec_ptype2("198.51.100.0/24", ip_network()), ip_network())
+  expect_equal(vctrs::vec_ptype2(ip_network(), "198.51.100.0/24"), character())
+  expect_equal(vctrs::vec_ptype2("198.51.100.0/24", ip_network()), character())
 
   # since R only provides signed integers, we don't support integer coercion
   expect_error(vctrs::vec_ptype2(ip_network("198.51.100.0/24"), integer()), class = "vctrs_error_incompatible_type")
