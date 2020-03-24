@@ -10,3 +10,4 @@
 ^bench$
 ^CRAN-RELEASE$
 ^codecov\.yml$
+[.]mmd$
