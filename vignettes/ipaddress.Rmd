@@ -157,5 +157,5 @@ An `ip_interface()` class is also provided, which is a hybrid class describing a
 Although most functions treat this class like an `ip_address()`, the constituent address and network components can be extracted using `as_ip_address()` and `as_ip_network()`.
 
 ```{r, echo = FALSE, fig.cap="Summary of ipaddress classes"}
-knitr::include_graphics("ipaddress_classes.png", dpi = 300)
+knitr::include_graphics("ipaddress_classes.png")
 ```
