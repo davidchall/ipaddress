@@ -50,9 +50,11 @@ control whether \emph{all} values are returned (a vector for each input), or
 just the first value (a scalar for each input).
 }
 \examples{
+\dontrun{
 from_hostname("r-project.org")
 
 as_hostname(from_hostname("r-project.org"))
+}
 }
 \seealso{
 The base function \code{\link[=nsl]{nsl()}} provides forward DNS resolution to IPv4 addresses,

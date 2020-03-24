@@ -35,9 +35,11 @@
 #'   \code{\link{ip_address}} vectors (depending upon the `multiple` argument)
 #'
 #' @examples
+#' \dontrun{
 #' from_hostname("r-project.org")
 #'
 #' as_hostname(from_hostname("r-project.org"))
+#' }
 #' @seealso
 #' The base function [nsl()] provides forward DNS resolution to IPv4 addresses,
 #' but only on Unix-like systems.
