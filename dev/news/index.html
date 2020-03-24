@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/v4-shims.min.css" integrity="sha256-A6jcAdwFD48VMjlI3GDxUd+eCQa7/KWy6G9oe/ovaPA=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -35,7 +39,7 @@
 
 <!-- docsearch -->
 <script src="../docsearch.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.3/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous" />
 <link href="../docsearch.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
 
@@ -69,7 +73,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -96,6 +100,9 @@
   </a>
 </li>
 <li>
+  <a href="../articles/ipaddress.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -104,7 +111,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/davidchall/ipaddress">
+  <a href="https://github.com/davidchall/ipaddress/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -128,21 +135,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
+      <h1 data-toc-skip>Changelog <small></small></h1>
       <small>Source: <a href='https://github.com/davidchall/ipaddress/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
     <div id="ipaddress-development-version" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="development version">
 <a href="#ipaddress-development-version" class="anchor"></a>ipaddress (development version)<small> Unreleased </small>
 </h1>
-<div id="new-features" class="section level2">
+<div id="classes" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features" class="anchor"></a>New features</h2>
-<div id="classes" class="section level3">
-<h3 class="hasAnchor">
-<a href="#classes" class="anchor"></a>Classes</h3>
+<a href="#classes" class="anchor"></a>Classes</h2>
 <ul>
+<li>Added <code><a href="../articles/ipaddress.html">vignette("ipaddress")</a></code> to introduce the data classes provided by ipaddress</li>
 <li>New <code><a href="../reference/ip_interface.html">ip_interface()</a></code> class to simultaneously store the address and the network it is on</li>
 <li>
 <code><a href="../reference/ip_address.html">ip_address()</a></code> vectors now support bitwise operations (<code>!</code>, <code><a href="https://rdrr.io/r/base/Logic.html">&amp;</a></code>, <code><a href="https://rdrr.io/r/base/Logic.html">|</a></code> and <code><a href="https://rdrr.io/r/base/Arithmetic.html">^</a></code>)</li>
@@ -151,18 +156,18 @@
 <li>Added an <code><a href="../reference/ip_network.html">ip_network()</a></code> constructor that accepts <code>ip_address</code> and prefix length vectors</li>
 </ul>
 </div>
-<div id="other-representations" class="section level3">
-<h3 class="hasAnchor">
-<a href="#other-representations" class="anchor"></a>Other representations</h3>
+<div id="other-representations" class="section level2">
+<h2 class="hasAnchor">
+<a href="#other-representations" class="anchor"></a>Other representations</h2>
 <ul>
 <li>New <code><a href="../reference/packed.html">as_packed()</a></code> and <code><a href="../reference/packed.html">from_packed()</a></code> functions to encode and decode addresses as raw bytes</li>
 <li>New <code><a href="../reference/binary.html">as_binary()</a></code> and <code><a href="../reference/binary.html">from_binary()</a></code> functions to encode and decode addresses as binary strings</li>
 <li>New <code><a href="../reference/hostname.html">as_hostname()</a></code> and <code><a href="../reference/hostname.html">from_hostname()</a></code> functions translate addresses to and from hostnames</li>
 </ul>
 </div>
-<div id="address-space" class="section level3">
-<h3 class="hasAnchor">
-<a href="#address-space" class="anchor"></a>Address space</h3>
+<div id="address-space" class="section level2">
+<h2 class="hasAnchor">
+<a href="#address-space" class="anchor"></a>Address space</h2>
 <ul>
 <li>New <code><a href="../reference/max_prefix_length.html">max_prefix_length()</a></code> function to get the size of the address space (32-bit for IPv4 and 128-bit for IPv6)</li>
 <li>New functions to check if addresses or networks are reserved for special use: <code><a href="../reference/is_reserved.html">is_multicast()</a></code>, <code><a href="../reference/is_reserved.html">is_unspecified()</a></code>, <code><a href="../reference/is_reserved.html">is_loopback()</a></code>, <code><a href="../reference/is_reserved.html">is_link_local()</a></code>
@@ -171,9 +176,9 @@
 </li>
 </ul>
 </div>
-<div id="network-membership" class="section level3">
-<h3 class="hasAnchor">
-<a href="#network-membership" class="anchor"></a>Network membership</h3>
+<div id="network-membership" class="section level2">
+<h2 class="hasAnchor">
+<a href="#network-membership" class="anchor"></a>Network membership</h2>
 <ul>
 <li>New functions about the size of a network: <code><a href="../reference/network_size.html">num_addresses()</a></code>, <code><a href="../reference/network_size.html">network_address()</a></code> and <code><a href="../reference/network_size.html">broadcast_address()</a></code>
 </li>
@@ -182,19 +187,18 @@
 <code><a href="../reference/netmask.html">netmask()</a></code> and <code><a href="../reference/netmask.html">hostmask()</a></code> are now generics, so they can now accept either an <code>ip_network</code> vector or a vector of prefix lengths. Previously they only accepted an <code>ip_network</code> vector.</li>
 </ul>
 </div>
-<div id="generating-addresses" class="section level3">
-<h3 class="hasAnchor">
-<a href="#generating-addresses" class="anchor"></a>Generating addresses</h3>
+<div id="generating-addresses" class="section level2">
+<h2 class="hasAnchor">
+<a href="#generating-addresses" class="anchor"></a>Generating addresses</h2>
 <ul>
 <li>New <code><a href="../reference/sequence.html">seq.ip_network()</a></code> and <code><a href="../reference/sequence.html">hosts()</a></code> functions to list all addresses within a network</li>
 <li>New functions to randomly sample addresses: <code><a href="../reference/sample.html">sample_ipv4()</a></code>, <code><a href="../reference/sample.html">sample_ipv6()</a></code> and <code><a href="../reference/sample.html">sample_network()</a></code>
 </li>
 </ul>
 </div>
-</div>
-<div id="minor-improvements" class="section level2">
+<div id="miscellaneous-improvements" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-improvements" class="anchor"></a>Minor improvements</h2>
+<a href="#miscellaneous-improvements" class="anchor"></a>Miscellaneous improvements</h2>
 <ul>
 <li>Improved input validation warnings. They now report the row number involved and no longer mention internal function names.</li>
 <li>Many functions now support <a href="https://vctrs.r-lib.org/reference/vec_recycle.html">tidy vector recyling</a>
@@ -204,7 +208,7 @@
 </div>
 </div>
     <div id="ipaddress-012" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.1.2">
 <a href="#ipaddress-012" class="anchor"></a>ipaddress 0.1.2<small> 2020-03-10 </small>
 </h1>
 <ul>
@@ -220,13 +224,13 @@
 </ul>
 </div>
     <div id="ipaddress-011" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.1.1">
 <a href="#ipaddress-011" class="anchor"></a>ipaddress 0.1.1<small> 2020-03-06 </small>
 </h1>
 <p>Hotfix for CRAN errors on Solaris.</p>
 </div>
     <div id="ipaddress-010" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.1.0">
 <a href="#ipaddress-010" class="anchor"></a>ipaddress 0.1.0<small> 2020-03-05 </small>
 </h1>
 <p>First CRAN release</p>
@@ -260,15 +264,9 @@
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#ipaddress-development-version">development version</a></li>
-        <li><a href="#ipaddress-012">0.1.2</a></li>
-        <li><a href="#ipaddress-011">0.1.1</a></li>
-        <li><a href="#ipaddress-010">0.1.0</a></li>
-      </ul>
-    </div>
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 
 </div>
