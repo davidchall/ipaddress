@@ -1,11 +1,3 @@
-## Release summary
-
-This is a patch release to fix a few bugs:
-* CRAN errors on OSX (due to dual IPv6 representation of IPv4-compatible IPv6 addresses)
-* decoding failed for a small number of IP addresses
-* comparing IP networks did not consider prefix lengths
-
-
 ## Test environments
 * macOS 10.15 (local), R 3.6.2
 * macOS 10.15 (GitHub Actions), R 3.6.2
