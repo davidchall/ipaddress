@@ -1,4 +1,4 @@
-# ipaddress (development version)
+# ipaddress 0.2.0
 
 ## Classes
 
