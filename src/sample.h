@@ -7,13 +7,14 @@
 
 
 template<class Address>
-std::vector<Address> sample_bits(int n_bits_to_sample, int n_sample) {
+std::vector<Address> sample_bits(unsigned int n_bits_to_sample, unsigned int n_sample) {
   typedef typename Address::bytes_type Bytes;
   std::vector<Bytes> result_bytes(n_sample);
+  unsigned int n_bits_in_byte = 8;
 
   // fill bytes right to left
   for (std::size_t i=sizeof(Bytes)-1; i>=0; --i) {
-    int ingest_bits = std::min(n_bits_to_sample, 8);
+    unsigned int ingest_bits = std::min(n_bits_to_sample, n_bits_in_byte);
     n_bits_to_sample -= ingest_bits;
     if (ingest_bits == 0) {
       break;

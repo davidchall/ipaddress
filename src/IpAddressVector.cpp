@@ -614,7 +614,7 @@ IpAddressVector IpAddressVector::operator^(const IpAddressVector &rhs) const {
 IpAddressVector IpAddressVector::operator+(const IntegerVector &rhs) const {
   std::size_t vsize = is_na.size();
 
-  if (rhs.size() != vsize) {
+  if (rhs.size() != static_cast<R_xlen_t>(vsize)) {
     stop("Addresses must have same length");
   }
 
