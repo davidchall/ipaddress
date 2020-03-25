@@ -33,8 +33,6 @@ LinkingTo:
     Rcpp
 VignetteBuilder: 
     knitr
-Remotes: 
-    RcppCore/Rcpp@20e462f
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
