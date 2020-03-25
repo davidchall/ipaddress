@@ -91,5 +91,6 @@ mutate(x, ipv6 = is_ipv6(address), in_net = is_within(address, network))
 -----
 
 Please note that the ‘ipaddress’ project is released with a [Contributor
-Code of Conduct](.github/CODE_OF_CONDUCT.md). By contributing to this
-project, you agree to abide by its terms.
+Code of
+Conduct](https://davidchall.github.io/ipaddress/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
