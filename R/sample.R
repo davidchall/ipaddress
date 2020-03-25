@@ -3,10 +3,10 @@
 #' `sample_ipv4()` and `sample_ipv6()` sample from the entire address space;
 #' `sample_network()` samples from a specific network.
 #'
-#' @param x An \code{\link{ip_network}} scalar
+#' @param x An [`ip_network`] scalar
 #' @param size Integer specifying the number of addresses to return
 #' @param replace Should sampling be with replacement?
-#' @return An \code{\link{ip_address}} vector
+#' @return An [`ip_address`] vector
 #'
 #' @seealso
 #' Use [seq.ip_network()] to generate _all_ addresses in a network.

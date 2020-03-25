@@ -13,17 +13,17 @@ from_packed(bytes)
 \arguments{
 \item{ip}{An \code{\link{ip_address}} vector}
 
-\item{bytes}{A \code{\link[blob]{blob}} vector}
+\item{bytes}{A \code{\link[blob:blob]{blob::blob}} vector}
 }
 \value{
 \itemize{
-\item \code{as_packed()} returns a \code{\link[blob]{blob}} vector
+\item \code{as_packed()} returns a \code{\link[blob:blob]{blob::blob}} vector
 \item \code{from_packed()} returns an \code{\link{ip_address}} vector
 }
 }
 \description{
 \code{as_packed()} and \code{from_packed()} encode and decode an \code{\link{ip_address}}
-vector to a \code{\link[blob]{blob}} vector.
+vector to a \code{\link[blob:blob]{blob::blob}} vector.
 }
 \details{
 The bytes are stored in network order (also known as

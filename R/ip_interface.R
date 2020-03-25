@@ -7,17 +7,17 @@ methods::setOldClass(c("ip_interface", "vctrs_vctr"))
 #'
 #' @details
 #' Constructing an `ip_interface` vector is conceptually like constructing an
-#' \code{\link{ip_network}} vector, except the host bits are retained.
+#' [`ip_network`] vector, except the host bits are retained.
 #'
-#' The `ip_interface` class inherits from the \code{\link{ip_address}} class.
-#' This means it can generally be used in places where an \code{\link{ip_address}}
+#' The `ip_interface` class inherits from the [`ip_address`] class.
+#' This means it can generally be used in places where an [`ip_address`]
 #' vector is expected. A few exceptions to this rule are:
 #' * It does not support addition and subtraction of integers
 #' * It does not support bitwise operations
-#' * It cannot be compared to \code{\link{ip_address}} vectors
+#' * It cannot be compared to [`ip_address`] vectors
 #'
 #' The `ip_interface` class additionally supports a few functions typically
-#' reserved for \code{\link{ip_network}} vectors: [prefix_length()], [netmask()] and
+#' reserved for [`ip_network`] vectors: [prefix_length()], [netmask()] and
 #' [hostmask()].
 #'
 #' For other purposes, you can extract the address and network components using
@@ -50,7 +50,7 @@ NULL
 #' `ip_interface()` constructs a vector of IP interfaces.
 #'
 #' @param ip Character vector of IP interfaces, in CIDR notation (IPv4 or IPv6).
-#' @param address An \code{\link{ip_address}} vector
+#' @param address An [`ip_address`] vector
 #' @param prefix_length An integer vector
 #' @return An S3 vector of class  `ip_interface`
 #'

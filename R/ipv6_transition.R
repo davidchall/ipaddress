@@ -10,11 +10,11 @@
 #' * 6to4: [RFC 3056](https://tools.ietf.org/html/rfc3056.html)
 #' * Teredo: [RFC 4380](https://tools.ietf.org/html/rfc4380)
 #'
-#' @param x An \code{\link{ip_address}} vector
+#' @param x An [`ip_address`] vector
 #'
 #' @return
 #' * `is_xxx()` functions return a logical vector
-#' * `extract_xxx()` functions return an \code{\link{ip_address}} vector.
+#' * `extract_xxx()` functions return an [`ip_address`] vector.
 #'
 #' @examples
 #' # these examples show the reserved networks
@@ -32,10 +32,10 @@
 #' extract_teredo_server(ip_address("2001:0000:4136:e378:8000:63bf:3fff:fdd2"))
 #'
 #' extract_teredo_client(ip_address("2001:0000:4136:e378:8000:63bf:3fff:fdd2"))
-#' @name ipv6_transition
+#' @name ipv6-transition
 NULL
 
-#' @rdname ipv6_transition
+#' @rdname ipv6-transition
 #' @export
 is_ipv4_mapped <- function(x) {
   if (!(is_ip_address(x) || is_ip_network(x))) {
@@ -45,7 +45,7 @@ is_ipv4_mapped <- function(x) {
   wrap_is_ipv4_mapped(x)
 }
 
-#' @rdname ipv6_transition
+#' @rdname ipv6-transition
 #' @export
 is_6to4 <- function(x) {
   if (!(is_ip_address(x) || is_ip_network(x))) {
@@ -55,7 +55,7 @@ is_6to4 <- function(x) {
   wrap_is_6to4(x)
 }
 
-#' @rdname ipv6_transition
+#' @rdname ipv6-transition
 #' @export
 is_teredo <- function(x) {
   if (!(is_ip_address(x) || is_ip_network(x))) {
@@ -65,7 +65,7 @@ is_teredo <- function(x) {
   wrap_is_teredo(x)
 }
 
-#' @rdname ipv6_transition
+#' @rdname ipv6-transition
 #' @export
 extract_ipv4_mapped <- function(x) {
   if (!is_ip_address(x)) {
@@ -75,7 +75,7 @@ extract_ipv4_mapped <- function(x) {
   wrap_extract_ipv4_mapped(x)
 }
 
-#' @rdname ipv6_transition
+#' @rdname ipv6-transition
 #' @export
 extract_6to4 <- function(x) {
   if (!is_ip_address(x)) {
@@ -85,7 +85,7 @@ extract_6to4 <- function(x) {
   wrap_extract_6to4(x)
 }
 
-#' @rdname ipv6_transition
+#' @rdname ipv6-transition
 #' @export
 extract_teredo_server <- function(x) {
   if (!is_ip_address(x)) {
@@ -95,7 +95,7 @@ extract_teredo_server <- function(x) {
   wrap_extract_teredo_server(x)
 }
 
-#' @rdname ipv6_transition
+#' @rdname ipv6-transition
 #' @export
 extract_teredo_client <- function(x) {
   if (!is_ip_address(x)) {

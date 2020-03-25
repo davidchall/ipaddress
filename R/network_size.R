@@ -4,10 +4,10 @@
 #' addresses of the network; `num_addresses()` gives the total number of
 #' addresses in the network.
 #'
-#' @param x An \code{\link{ip_network}} vector
+#' @param x An [`ip_network`] vector
 #' @return
 #' * `network_address()` and `broadcast_address()` return an
-#'   \code{\link{ip_address}} vector
+#'   [`ip_address`] vector
 #' * `num_addresses()` returns a numeric vector
 #'
 #' @examples

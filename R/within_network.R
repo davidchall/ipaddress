@@ -2,8 +2,8 @@
 #'
 #' These functions check whether an address falls within a network.
 #'
-#' @param address An \code{\link{ip_address}} vector
-#' @param network An \code{\link{ip_network}} vector
+#' @param address An [`ip_address`] vector
+#' @param network An [`ip_network`] vector
 #' @return A logical vector
 #'
 #' @examples
@@ -13,8 +13,8 @@
 #'
 #' is_within_any(ip_address("192.168.3.6"), ip_network(c("192.168.2.0/28", "192.168.3.0/28")))
 #' @seealso
-#' Use [is_subnet()] to check if an \code{\link{ip_network}} is within another
-#' \code{\link{ip_network}}.
+#' Use [is_subnet()] to check if an [`ip_network`] is within another
+#' [`ip_network`].
 #' @name address_in_network
 NULL
 
@@ -62,8 +62,8 @@ is_within_any <- function(address, network) {
 #' `is_supernet()` check if one network is a true subnet or supernet of another
 #' network.
 #'
-#' @param network An \code{\link{ip_network}} vector
-#' @param other An \code{\link{ip_network}} vector
+#' @param network An [`ip_network`] vector
+#' @param other An [`ip_network`] vector
 #' @return A logical vector
 #'
 #' @examples
@@ -76,8 +76,8 @@ is_within_any <- function(address, network) {
 #'
 #' is_supernet(net1, net2)
 #' @seealso
-#' Use [is_within()] to check if an \code{\link{ip_address}} is within
-#' an \code{\link{ip_network}}.
+#' Use [is_within()] to check if an [`ip_address`] is within
+#' an [`ip_network`].
 #' @name network_in_network
 NULL
 

@@ -1,6 +1,6 @@
 #' Version of the address space
 #'
-#' @param x An \code{\link{ip_address}} or \code{\link{ip_network}} vector
+#' @param x An [`ip_address`] or [`ip_network`] vector
 #' @return A logical vector
 #'
 #' @examples
@@ -39,7 +39,7 @@ is_ipv6 <- function(x) {
 #' The total number of bits available in the address space. IPv4 uses
 #' 32-bit addresses and IPv6 uses 128-bit addresses.
 #'
-#' @param x An \code{\link{ip_address}} or \code{\link{ip_network}} vector
+#' @param x An [`ip_address`] or [`ip_network`] vector
 #' @return An integer vector
 #'
 #' @examples

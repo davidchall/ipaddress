@@ -1,7 +1,7 @@
 #' Represent address as raw bytes
 #'
-#' `as_packed()` and `from_packed()` encode and decode an \code{\link{ip_address}}
-#' vector to a \code{\link[blob]{blob}} vector.
+#' `as_packed()` and `from_packed()` encode and decode an [`ip_address`]
+#' vector to a [`blob::blob`] vector.
 #'
 #' @details
 #' The bytes are stored in network order (also known as
@@ -10,12 +10,12 @@
 #' IPv4 addresses use 4 bytes, IPv6 addresses use 16 bytes,
 #' and missing values are encoded as `NULL`.
 #'
-#' @param ip An \code{\link{ip_address}} vector
-#' @param bytes A \code{\link[blob]{blob}} vector
+#' @param ip An [`ip_address`] vector
+#' @param bytes A [`blob::blob`] vector
 #'
 #' @return
-#' * `as_packed()` returns a \code{\link[blob]{blob}} vector
-#' * `from_packed()` returns an \code{\link{ip_address}} vector
+#' * `as_packed()` returns a [`blob::blob`] vector
+#' * `from_packed()` returns an [`ip_address`] vector
 #'
 #' @examples
 #' x <- ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334", NA))
@@ -49,7 +49,7 @@ from_packed <- function(bytes) {
 
 #' Represent address as binary
 #'
-#' `as_binary()` and `from_binary()` encode and decode an \code{\link{ip_address}}
+#' `as_binary()` and `from_binary()` encode and decode an [`ip_address`]
 #' vector to a character vector of bits.
 #'
 #' @details
@@ -59,12 +59,12 @@ from_packed <- function(bytes) {
 #' IPv4 addresses use 32 bits, IPv6 addresses use 128 bits, and missing values
 #' are encoded as `NA`.
 #'
-#' @param ip An \code{\link{ip_address}} vector
+#' @param ip An [`ip_address`] vector
 #' @param bits A character vector containing only `0` and `1` characters
 #'
 #' @return
 #' * `as_binary()` returns a character vector
-#' * `from_binary()` returns an \code{\link{ip_address}} vector
+#' * `from_binary()` returns an [`ip_address`] vector
 #'
 #' @examples
 #' x <- ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334", NA))

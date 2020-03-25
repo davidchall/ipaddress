@@ -9,7 +9,7 @@
 #' [RFC 5735](https://tools.ietf.org/html/rfc5735.html) (for IPv4) and
 #' [RFC 4291](https://tools.ietf.org/html/rfc4291) (for IPv6).
 #'
-#' @param x An \code{\link{ip_address}} or \code{\link{ip_network}} vector
+#' @param x An [`ip_address`] or [`ip_network`] vector
 #' @return A logical vector
 #'
 #' @examples
@@ -24,7 +24,7 @@
 #' is_link_local(ip_network(c("169.254.0.0/16", "fe80::/10")))
 #' @seealso
 #' Addresses reserved by IPv6 transition mechanisms can be identified
-#' by functions described in \link{ipv6_transition}.
+#' by functions described in [ipv6-transition].
 #' @name is_reserved
 NULL
 

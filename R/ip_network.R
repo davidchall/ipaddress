@@ -22,7 +22,7 @@ methods::setOldClass(c("ip_network", "vctrs_vctr"))
 #' network, and converts it to an `ip_network` object. If the input is invalid,
 #' a warning is emitted and `NA` is stored instead.
 #'
-#' An alternative constructor accepts an \code{\link{ip_address}} vector and an
+#' An alternative constructor accepts an [`ip_address`] vector and an
 #' integer vector containing the network address and prefix length, respectively.
 #'
 #' When casting an `ip_network` object back to a character vector using
@@ -44,7 +44,7 @@ NULL
 #' `ip_network()` constructs a vector of IP networks.
 #'
 #' @param ip Character vector of IP networks, in CIDR notation (IPv4 or IPv6).
-#' @param address An \code{\link{ip_address}} vector
+#' @param address An [`ip_address`] vector
 #' @param prefix_length An integer vector
 #' @param strict If `TRUE` (the default) and the input has host bits set,
 #'   then a warning is emitted and `NA` is returned. If `FALSE`, the

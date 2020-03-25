@@ -1,8 +1,8 @@
 #' List addresses within a network
 #'
-#' @param x An \code{\link{ip_network}} scalar
+#' @param x An [`ip_network`] scalar
 #' @param ... Included for generic consistency
-#' @return An \code{\link{ip_address}} vector
+#' @return An [`ip_address`] vector
 #'
 #' @details
 #' In IPv4, the unusable hosts are the network address and the broadcast

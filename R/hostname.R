@@ -22,7 +22,7 @@
 #' control whether _all_ values are returned (a vector for each input), or
 #' just the first value (a scalar for each input).
 #'
-#' @param ip An \code{\link{ip_address}} vector
+#' @param ip An [`ip_address`] vector
 #' @param host A character vector of hostnames
 #' @param multiple A logical scalar indicating if _all_ resolved endpoints are
 #'   returned, or just the first endpoint (the default). This determines whether
@@ -31,8 +31,8 @@
 #' @return
 #' * `as_hostname()` returns a character vector or a list of character vectors
 #'   (depending upon the `multiple` argument)
-#' * `from_hostname()` returns a \code{\link{ip_address}} vector or a list of
-#'   \code{\link{ip_address}} vectors (depending upon the `multiple` argument)
+#' * `from_hostname()` returns a [`ip_address`] vector or a list of
+#'   [`ip_address`] vectors (depending upon the `multiple` argument)
 #'
 #' @examples
 #' \dontrun{

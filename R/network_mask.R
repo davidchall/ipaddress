@@ -2,13 +2,13 @@
 #'
 #' These functions yield equivalent representations of the network mask.
 #'
-#' @param x An \code{\link{ip_network}} or \code{\link{ip_interface}} vector
+#' @param x An [`ip_network`] or [`ip_interface`] vector
 #' @param prefix_length An integer vector
 #' @param is_ipv6 A logical vector
 #' @param ... Arguments to be passed to other methods
 #' @return
 #' * `prefix_length()` returns an integer vector
-#' * `netmask()` and `hostmask()` return an \code{\link{ip_address}} vector
+#' * `netmask()` and `hostmask()` return an [`ip_address`] vector
 #'
 #' @examples
 #' x <- ip_network(c("192.168.0.0/22", "2001:db00::0/26"))
