@@ -16,7 +16,7 @@ status](https://codecov.io/gh/davidchall/ipaddress/branch/master/graph/badge.svg
 <!-- badges: end -->
 
 This package provides classes for working with IP addresses, inspired by
-the Python [`ipaddress`](https://docs.python.org/library/ipaddress.html)
+the Python [ipaddress](https://docs.python.org/library/ipaddress.html)
 module.
 
 Here are some of the features:
@@ -26,6 +26,7 @@ Here are some of the features:
     of bits)
   - Calculations are performed in C++ for **improved performance**
   - Classes are **compatible with the tidyverse**
+  - Functions for **generation and analysis of IP data**
 
 ## Installation
 
@@ -57,6 +58,7 @@ x <- tibble(
   address = ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334")),
   network = ip_network(c("192.168.100.0/22", "2001:db8::/48"))
 )
+
 x
 #> # A tibble: 2 x 2
 #>                   address          network
@@ -69,10 +71,10 @@ Input character vectors are validated as they are parsed. Invalid inputs
 raise a warning and are replaced with `NA`.
 
 ``` r
-ip_address(c("0.0.0.0", "255.255.255.255", "255.255.255.256"))
-#> Warning: Invalid value on row 3: 255.255.255.256
-#> <ip_address[3]>
-#> [1] 0.0.0.0         255.255.255.255 <NA>
+ip_address(c("255.255.255.255", "255.255.255.256"))
+#> Warning: Invalid value on row 2: 255.255.255.256
+#> <ip_address[2]>
+#> [1] 255.255.255.255 <NA>
 ```
 
 Functions are provided to enable common tasks:
