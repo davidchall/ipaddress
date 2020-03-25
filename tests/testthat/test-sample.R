@@ -6,7 +6,7 @@ test_that("input validation works", {
   expect_error(sample_network(ip_network(), 1))
   expect_error(sample_network(ip_address("192.168.0.0"), 1))
   expect_error(sample_network(ip_network("0.0.0.0/32"), 0))
-  expect_error(sample_network(ip_network("0.0.0.0/32"), 2^31))
+  expect_error(sample_network(ip_network("0.0.0.0/32"), 2^31, replace = TRUE), "'size' must be less than 2^31")
   expect_error(sample_network(ip_network("0.0.0.0/32"), NA))
   expect_error(sample_network(ip_network("0.0.0.0/32"), 1, NA))
   expect_error(sample_network(ip_network("0.0.0.0/32"), 1, 1))
