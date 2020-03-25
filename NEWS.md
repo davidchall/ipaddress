@@ -18,13 +18,18 @@
 
 * New `max_prefix_length()` function to get the size of the address space (32-bit for IPv4 and 128-bit for IPv6)
 * New functions to check if addresses or networks are reserved for special use: `is_multicast()`, `is_unspecified()`, `is_loopback()`, `is_link_local()`
-* New functions for IPv6 transition mechanisms: `is_ipv4_mapped()`, `is_6to4()`, `is_teredo()`, `extract_ipv4_mapped()`, `extract_6to4()`, `extract_teredo_server()`, `extract_teredo_client()`
+* New functions for IPv6 transition mechanisms:
+  * `is_ipv4_mapped()`, `is_6to4()`, `is_teredo()`
+  * `extract_ipv4_mapped()`, `extract_6to4()`, `extract_teredo_server()`, `extract_teredo_client()`
 
 ## Network membership
 
 * New functions about the size of a network: `num_addresses()`, `network_address()` and `broadcast_address()`
 * New `overlaps()` function to check for _any_ overlap between networks
-* `netmask()` and `hostmask()` are now generics, so they can now accept either an `ip_network` vector or a vector of prefix lengths. Previously they only accepted an `ip_network` vector.
+* `netmask()` and `hostmask()` are now generics, so they can now accept:
+  * an `ip_network()` vector (existing behavior)
+  * an `ip_interface()` vector
+  * a vector of prefix lengths
 
 ## Generating addresses
 
