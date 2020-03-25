@@ -6,39 +6,48 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Encode or decode address as raw bytes — packed • ipaddress</title>
+<title>Represent address as raw bytes — packed • ipaddress</title>
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script>
 
 
+<!-- docsearch -->
+<script src="../docsearch.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.3/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous" />
+<link href="../docsearch.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
 
 
-<meta property="og:title" content="Encode or decode address as raw bytes — packed" />
-<meta property="og:description" content="packed() encodes an ip_address vector to a blob
-unpack() decodes a blob to an ip_address vector" />
-<meta name="twitter:card" content="summary" />
+
+<meta property="og:title" content="Represent address as raw bytes — packed" />
+<meta property="og:description" content="as_packed() and from_packed() encode and decode an ip_address
+vector to a blob::blob vector." />
 
 
 
@@ -53,10 +62,20 @@ unpack() decodes a blob to an ip_address vector" />
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-160789885-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-160789885-1');
+</script>
+
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -70,7 +89,7 @@ unpack() decodes a blob to an ip_address vector" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -83,6 +102,9 @@ unpack() decodes a blob to an ip_address vector" />
   </a>
 </li>
 <li>
+  <a href="../articles/ipaddress.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -91,12 +113,18 @@ unpack() decodes a blob to an ip_address vector" />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/davidchall/ipaddress">
+  <a href="https://github.com/davidchall/ipaddress/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul>
+      
+      <form class="navbar-form navbar-right hidden-xs hidden-sm" role="search">
+        <div class="form-group">
+          <input type="search" class="form-control" name="search-input" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off">
+        </div>
+      </form>
       
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -109,19 +137,19 @@ unpack() decodes a blob to an ip_address vector" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Encode or decode address as raw bytes</h1>
+    <h1>Represent address as raw bytes</h1>
     <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/binary.R'><code>R/binary.R</code></a></small>
     <div class="hidden name"><code>packed.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>packed()</code> encodes an <code>ip_address</code> vector to a <code>blob</code></p>
-<p><code>unpack()</code> decodes a <code>blob</code> to an <code>ip_address</code> vector</p>
+    <p><code>as_packed()</code> and <code>from_packed()</code> encode and decode an <code><a href='ip_address.html'>ip_address</a></code>
+vector to a <code><a href='https://rdrr.io/pkg/blob/man/blob.html'>blob::blob</a></code> vector.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>packed</span>(<span class='no'>ip</span>)
+    <pre class="usage"><span class='fu'>as_packed</span>(<span class='no'>ip</span>)
 
-<span class='fu'>unpack</span>(<span class='no'>blob</span>)</pre>
+<span class='fu'>from_packed</span>(<span class='no'>bytes</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -131,33 +159,40 @@ unpack() decodes a blob to an ip_address vector" />
       <td><p>An <code><a href='ip_address.html'>ip_address</a></code> vector</p></td>
     </tr>
     <tr>
-      <th>blob</th>
-      <td><p>A <code><a href='https://rdrr.io/pkg/blob/man/blob.html'>blob</a></code> vector</p></td>
+      <th>bytes</th>
+      <td><p>A <code><a href='https://rdrr.io/pkg/blob/man/blob.html'>blob::blob</a></code> vector</p></td>
     </tr>
     </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    
+<ul>
+<li><p><code>as_packed()</code> returns a <code><a href='https://rdrr.io/pkg/blob/man/blob.html'>blob::blob</a></code> vector</p></li>
+<li><p><code>from_packed()</code> returns an <code><a href='ip_address.html'>ip_address</a></code> vector</p></li>
+</ul>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The bytes are stored in network order (also known as
 big-endian order), which is part of the IP standard.</p>
 <p>IPv4 addresses use 4 bytes, IPv6 addresses use 16 bytes,
-and missing values are stored as <code>NULL</code>.</p>
+and missing values are encoded as <code>NULL</code>.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Use <code><a href='binary.html'>as_binary()</a></code> and <code><a href='binary.html'>from_binary()</a></code> to encode/decode binary.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.1"</span>, <span class='st'>"2001:db8::8a2e:370:7334"</span>, <span class='fl'>NA</span>))
-<span class='fu'>packed</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; &lt;blob[3]&gt;
+<span class='fu'>as_packed</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; &lt;blob[3]&gt;
 #&gt; [1] blob[4 B]  blob[16 B] &lt;NA&gt;      </div><div class='input'>
-<span class='fu'>unpack</span>(<span class='fu'>packed</span>(<span class='no'>x</span>))</div><div class='output co'>#&gt; &lt;ip_address[3]&gt;
+<span class='fu'>from_packed</span>(<span class='fu'>as_packed</span>(<span class='no'>x</span>))</div><div class='output co'>#&gt; &lt;ip_address[3]&gt;
 #&gt; [1] 192.168.0.1             2001:db8::8a2e:370:7334 &lt;NA&gt;                   </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -168,13 +203,30 @@ and missing values are stored as <code>NULL</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.9000.</p>
 </div>
 
       </footer>
    </div>
 
   
+<script src="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.js" integrity="sha256-GKvGqXDznoRYHCwKXGnuchvKSwmx9SRMrZOTh2g4Sb0=" crossorigin="anonymous"></script>
+<script>
+  docsearch({
+    
+    
+    apiKey: 'a959f56e56e76081c6ebdec4073adbaf',
+    indexName: 'ipaddress',
+    inputSelector: 'input#search-input.form-control',
+    transformData: function(hits) {
+      return hits.map(function (hit) {
+        hit.url = updateHitURL(hit);
+        return hit;
+      });
+    }
+  });
+</script>
+
 
 
   </body>

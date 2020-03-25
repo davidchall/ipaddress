@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Network mask — netmask • ipaddress</title>
+<title>Articles • ipaddress</title>
 
 
 <!-- jquery -->
@@ -45,8 +45,7 @@
 
 
 
-<meta property="og:title" content="Network mask — netmask" />
-<meta property="og:description" content="These functions yield equivalent representations of the network mask." />
+<meta property="og:title" content="Articles" />
 
 
 
@@ -75,7 +74,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-topic">
+    <div class="container template-article-index">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -136,89 +135,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Network mask</h1>
-    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/network_mask.R'><code>R/network_mask.R</code></a></small>
-    <div class="hidden name"><code>netmask.Rd</code></div>
+      <h1>Articles</h1>
     </div>
 
-    <div class="ref-description">
-    <p>These functions yield equivalent representations of the network mask.</p>
+    <div class="section ">
+      <h3>All vignettes</h3>
+      <p class="section-desc"></p>
+
+      <dl>
+        <dt><a href="ipaddress.html">Introduction to ipaddress</a></dt>
+        <dd></dt>
+      </dl>
     </div>
-
-    <pre class="usage"><span class='fu'>prefix_length</span>(<span class='no'>x</span>)
-
-<span class='fu'>netmask</span>(<span class='no'>...</span>)
-
-<span class='fu'>hostmask</span>(<span class='no'>...</span>)
-
-<span class='co'># S3 method for ip_network</span>
-<span class='fu'>netmask</span>(<span class='no'>x</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for ip_network</span>
-<span class='fu'>hostmask</span>(<span class='no'>x</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for ip_interface</span>
-<span class='fu'>netmask</span>(<span class='no'>x</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for ip_interface</span>
-<span class='fu'>hostmask</span>(<span class='no'>x</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for default</span>
-<span class='fu'>netmask</span>(<span class='kw'>prefix_length</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>integer</a></span>(), <span class='kw'>is_ipv6</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/logical.html'>logical</a></span>(), <span class='no'>...</span>)
-
-<span class='co'># S3 method for default</span>
-<span class='fu'>hostmask</span>(<span class='kw'>prefix_length</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>integer</a></span>(), <span class='kw'>is_ipv6</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/logical.html'>logical</a></span>(), <span class='no'>...</span>)</pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p>An <code><a href='ip_network.html'>ip_network</a></code> or <code><a href='ip_interface.html'>ip_interface</a></code> vector</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Arguments to be passed to other methods</p></td>
-    </tr>
-    <tr>
-      <th>prefix_length</th>
-      <td><p>An integer vector</p></td>
-    </tr>
-    <tr>
-      <th>is_ipv6</th>
-      <td><p>A logical vector</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    
-<ul>
-<li><p><code>prefix_length()</code> returns an integer vector</p></li>
-<li><p><code>netmask()</code> and <code>hostmask()</code> return an <code><a href='ip_address.html'>ip_address</a></code> vector</p></li>
-</ul>
-
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='max_prefix_length.html'>max_prefix_length()</a></code></p></div>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.0/22"</span>, <span class='st'>"2001:db00::0/26"</span>))
-
-<span class='fu'>prefix_length</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] 22 26</div><div class='input'>
-<span class='fu'>netmask</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
-#&gt; [1] 255.255.252.0 ffff:ffc0::  </div><div class='input'>
-<span class='fu'>hostmask</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
-#&gt; [1] 0.0.3.255                          0:3f:ffff:ffff:ffff:ffff:ffff:ffff</div><div class='input'>
-<span class='fu'>netmask</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>22L</span>, <span class='fl'>26L</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>FALSE</span>, <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
-#&gt; [1] 255.255.252.0 ffff:ffc0::  </div><div class='input'>
-<span class='fu'>hostmask</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>22L</span>, <span class='fl'>26L</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>FALSE</span>, <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
-#&gt; [1] 0.0.3.255                          0:3f:ffff:ffff:ffff:ffff:ffff:ffff</div></pre>
-  </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <nav id="toc" data-toggle="toc" class="sticky-top">
-      <h2 data-toc-skip>Contents</h2>
-    </nav>
   </div>
 </div>
 

@@ -2,21 +2,21 @@
   "index_name": "ipaddress",
   "start_urls": [
     {
-      "url": "/index.html",
+      "url": "https://davidchall.github.io/ipaddress/index.html",
       "selectors_key": "homepage",
       "tags": [
         "homepage"
       ]
     },
     {
-      "url": "/reference",
+      "url": "https://davidchall.github.io/ipaddress/reference",
       "selectors_key": "reference",
       "tags": [
         "reference"
       ]
     },
     {
-      "url": "/articles",
+      "url": "https://davidchall.github.io/ipaddress/articles",
       "selectors_key": "articles",
       "tags": [
         "articles"
@@ -30,7 +30,7 @@
     "/articles/index.html"
   ],
   "sitemap_urls": [
-    "/sitemap.xml"
+    "https://davidchall.github.io/ipaddress/sitemap.xml"
   ],
   "selectors": {
     "homepage": {
@@ -74,7 +74,7 @@
         "selector": ".contents h2, .contents h3",
         "default_value": "Context"
       },
-      "text": ".contents p, .contents li, .tempate-article .contents .pre"
+      "text": ".contents p, .contents li"
     }
   },
   "selectors_exclude": [
