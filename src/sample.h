@@ -13,7 +13,7 @@ std::vector<Address> sample_bits(unsigned int n_bits_to_sample, unsigned int n_s
   unsigned int n_bits_in_byte = 8;
 
   // fill bytes right to left
-  for (std::size_t i=sizeof(Bytes)-1; i>=0; --i) {
+  for (std::size_t i=0; i<sizeof(Bytes); ++i) {
     unsigned int ingest_bits = std::min(n_bits_to_sample, n_bits_in_byte);
     n_bits_to_sample -= ingest_bits;
     if (ingest_bits == 0) {
@@ -23,7 +23,7 @@ std::vector<Address> sample_bits(unsigned int n_bits_to_sample, unsigned int n_s
     Rcpp::IntegerVector byte_vector = Rcpp::sample(1 << ingest_bits, n_sample, true, R_NilValue, false);
 
     for (std::size_t j=0; j<n_sample; ++j) {
-      result_bytes[j][i] = byte_vector[j];
+      result_bytes[j][sizeof(Bytes)-1-i] = byte_vector[j];
     }
   }
 
