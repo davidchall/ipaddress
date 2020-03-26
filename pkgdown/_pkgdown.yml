@@ -1,5 +1,5 @@
 development:
-  mode: auto
+  mode: release
 
 url: https://davidchall.github.io/ipaddress
 
