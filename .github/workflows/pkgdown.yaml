@@ -13,9 +13,8 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@master
       - name: Install dependencies
         run: |
-          install.packages("remotes")
+          install.packages(c("remotes", "pkgdown"))
           remotes::install_deps(dependencies = TRUE)
-          remotes::install_github("r-lib/pkgdown")
         shell: Rscript {0}
       - name: Install package
         run: R CMD INSTALL .
