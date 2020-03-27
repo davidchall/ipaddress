@@ -1,5 +1,8 @@
 # ipaddress (development version)
 
+* Added hex logo
+
+
 # ipaddress 0.2.0
 
 ## Classes
