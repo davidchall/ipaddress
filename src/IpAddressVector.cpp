@@ -4,7 +4,7 @@
 #include "masking.h"
 #include "utils.h"
 
-#include <asio.hpp>
+#include <asio/ip/tcp.hpp>
 
 using namespace Rcpp;
 
