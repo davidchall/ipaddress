@@ -25,7 +25,9 @@ Imports:
     rlang (>= 0.4.0),
     vctrs (>= 0.2.2)
 Suggests: 
+    crayon,
     knitr,
+    pillar (>= 1.4.0),
     rmarkdown,
     testthat (>= 2.1.0)
 LinkingTo: 
