@@ -13,12 +13,9 @@ align <- function(x, width = NULL, align = c("left", "right")) {
   }
 }
 
-# Dynamically exported, see zzz.R
-pillar_shaft.ip_network <- function(x, ...) {
-
-  # decompose
-  addr <- as.character(network_address(x))
-  pfx <- as.character(prefix_length(x))
+colorize_cidr <- function(addr, pfx) {
+  addr <- as.character(addr)
+  pfx <- as.character(pfx)
 
   out <- paste0(
     align(addr, align = "right"),
@@ -26,6 +23,17 @@ pillar_shaft.ip_network <- function(x, ...) {
     crayon::green(align(pfx, align = "left"))
   )
 
-  out[is.na(x)] <- NA
+  out[is.na(addr)] <- NA
+  out
+}
+
+# Dynamically exported, see zzz.R
+pillar_shaft.ip_network <- function(x, ...) {
+  out <- colorize_cidr(network_address(x), prefix_length(x))
+  pillar::new_pillar_shaft_simple(out, align = "right")
+}
+
+pillar_shaft.ip_interface <- function(x, ...) {
+  out <- colorize_cidr(as_ip_address(x), prefix_length(x))
   pillar::new_pillar_shaft_simple(out, align = "right")
 }
