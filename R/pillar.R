@@ -19,8 +19,10 @@ colorize_cidr <- function(addr, pfx) {
 
   out <- paste0(
     align(addr, align = "right"),
-    crayon::green("/"),
-    crayon::green(align(pfx, align = "left"))
+    crayon::green(paste0(
+      "/",
+      align(pfx, align = "left")
+    ))
   )
 
   out[is.na(addr)] <- NA
