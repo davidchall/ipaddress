@@ -6,6 +6,8 @@
 \alias{ipaddress-package}
 \title{ipaddress: Tidy IP Addresses}
 \description{
+\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+
 Classes and functions for working with IP (Internet
     Protocol) addresses and networks, inspired by the Python 'ipaddress'
     module.  Offers full support for both IPv4 and IPv6 (Internet Protocol
