@@ -7,13 +7,7 @@ test_that("pretty printing works", {
     "2642:2f46:2d65:b800::/55"
   ))
 
-  verify_output(test_path("test-pillar-crayon-off.txt"), {
-    pillar::pillar_shaft(x)
-    pillar::pillar_shaft(as_ip_network(x))
-    pillar::pillar_shaft(as_ip_address(x))
-  })
-
-  verify_output(test_path("test-pillar-crayon-on.txt"), crayon = TRUE, {
+  verify_output(test_path("test-pillar.txt"), {
     pillar::pillar_shaft(x)
     pillar::pillar_shaft(as_ip_network(x))
     pillar::pillar_shaft(as_ip_address(x))
