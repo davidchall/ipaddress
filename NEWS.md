@@ -1,6 +1,7 @@
 # ipaddress (development version)
 
 * Added hex logo
+* Support pretty printing in tibbles (`ip_network()` and `ip_interface()` vectors now align on the forward slash and distinguish the prefix length in green)
 
 
 # ipaddress 0.2.0
