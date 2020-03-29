@@ -13,8 +13,17 @@ align <- function(x, width = NULL, align = c("left", "right")) {
   }
 }
 
-pretty_cidr <- function(addr, pfx) {
+pretty_address <- function(addr) {
   addr <- as.character(addr)
+
+  addr <- gsub(".", pillar::style_subtle("."), addr, fixed = TRUE)
+  addr <- gsub(":", pillar::style_subtle(":"), addr, fixed = TRUE)
+
+  addr
+}
+
+pretty_cidr <- function(addr, pfx) {
+  addr <- pretty_address(addr)
   pfx <- as.character(pfx)
 
   out <- paste0(
@@ -30,6 +39,11 @@ pretty_cidr <- function(addr, pfx) {
 }
 
 # Dynamically exported, see zzz.R
+pillar_shaft.ip_address <- function(x, ...) {
+  out <- pretty_address(x)
+  pillar::new_pillar_shaft_simple(out, align = "right")
+}
+
 pillar_shaft.ip_network <- function(x, ...) {
   out <- pretty_cidr(network_address(x), prefix_length(x))
   pillar::new_pillar_shaft_simple(out, align = "right")

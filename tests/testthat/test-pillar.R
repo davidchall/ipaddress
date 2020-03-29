@@ -13,5 +13,3 @@ test_that("pretty printing works", {
     pillar::pillar_shaft(as_ip_address(x))
   })
 })
-
-
