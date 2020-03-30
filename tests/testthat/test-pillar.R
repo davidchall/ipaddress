@@ -8,8 +8,16 @@ test_that("pretty printing works", {
   ))
 
   verify_output(test_path("test-pillar.txt"), {
+    "# Without truncation"
     pillar::pillar_shaft(x)
     pillar::pillar_shaft(as_ip_network(x))
     pillar::pillar_shaft(as_ip_address(x))
+
+    "# With truncation"
+    print(pillar::pillar_shaft(x), width = 20)
+    print(pillar::pillar_shaft(as_ip_network(x)), width = 20)
+    print(pillar::pillar_shaft(as_ip_address(x)), width = 20)
   })
+
+  expect_error(print(pillar::pillar_shaft(x), width = 5))
 })
