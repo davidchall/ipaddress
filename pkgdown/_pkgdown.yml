@@ -15,7 +15,7 @@ template:
     ganalytics: UA-160789885-1
   opengraph:
     twitter:
-      creator: @hall_davidc
+      creator: "@hall_davidc"
       card: summary_large_image
 
 reference:
