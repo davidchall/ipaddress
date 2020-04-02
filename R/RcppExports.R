@@ -17,6 +17,14 @@ wrap_decode_packed <- function(x) {
     .Call(`_ipaddress_wrap_decode_packed`, x)
 }
 
+wrap_encode_integer <- function(x) {
+    .Call(`_ipaddress_wrap_encode_integer`, x)
+}
+
+wrap_decode_integer <- function(x, is_ipv6) {
+    .Call(`_ipaddress_wrap_decode_integer`, x, is_ipv6)
+}
+
 wrap_encode_binary <- function(x) {
     .Call(`_ipaddress_wrap_encode_binary`, x)
 }

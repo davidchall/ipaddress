@@ -28,6 +28,16 @@ List wrap_decode_packed(List x) {
 }
 
 // [[Rcpp::export]]
+CharacterVector wrap_encode_integer(List x) {
+  return IpAddressVector(x).encodeInteger();
+}
+
+// [[Rcpp::export]]
+List wrap_decode_integer(CharacterVector x, LogicalVector is_ipv6) {
+  return IpAddressVector::decodeInteger(x, is_ipv6).encodeR();
+}
+
+// [[Rcpp::export]]
 CharacterVector wrap_encode_binary(List x) {
   return IpAddressVector(x).encodeBinary();
 }

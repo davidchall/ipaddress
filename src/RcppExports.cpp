@@ -49,6 +49,29 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// wrap_encode_integer
+CharacterVector wrap_encode_integer(List x);
+RcppExport SEXP _ipaddress_wrap_encode_integer(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(wrap_encode_integer(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// wrap_decode_integer
+List wrap_decode_integer(CharacterVector x, LogicalVector is_ipv6);
+RcppExport SEXP _ipaddress_wrap_decode_integer(SEXP xSEXP, SEXP is_ipv6SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< LogicalVector >::type is_ipv6(is_ipv6SEXP);
+    rcpp_result_gen = Rcpp::wrap(wrap_decode_integer(x, is_ipv6));
+    return rcpp_result_gen;
+END_RCPP
+}
 // wrap_encode_binary
 CharacterVector wrap_encode_binary(List x);
 RcppExport SEXP _ipaddress_wrap_encode_binary(SEXP xSEXP) {
@@ -432,6 +455,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_wrap_print_address", (DL_FUNC) &_ipaddress_wrap_print_address, 1},
     {"_ipaddress_wrap_encode_packed", (DL_FUNC) &_ipaddress_wrap_encode_packed, 1},
     {"_ipaddress_wrap_decode_packed", (DL_FUNC) &_ipaddress_wrap_decode_packed, 1},
+    {"_ipaddress_wrap_encode_integer", (DL_FUNC) &_ipaddress_wrap_encode_integer, 1},
+    {"_ipaddress_wrap_decode_integer", (DL_FUNC) &_ipaddress_wrap_decode_integer, 2},
     {"_ipaddress_wrap_encode_binary", (DL_FUNC) &_ipaddress_wrap_encode_binary, 1},
     {"_ipaddress_wrap_decode_binary", (DL_FUNC) &_ipaddress_wrap_decode_binary, 1},
     {"_ipaddress_wrap_encode_hostname", (DL_FUNC) &_ipaddress_wrap_encode_hostname, 1},

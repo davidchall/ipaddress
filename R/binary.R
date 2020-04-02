@@ -47,6 +47,54 @@ from_packed <- function(bytes) {
 }
 
 
+#' Represent address as integer
+#'
+#' `as_integer()` and `from_integer()` encode and decode an [`ip_address`]
+#' vector to a character vector of integer.
+#'
+#' @details
+#' The bits are stored in network order (also known as big-endian order), which
+#' is part of the IP standard.
+#'
+#' IPv4 addresses use 32 bits, IPv6 addresses use 128 bits, and missing values
+#' are encoded as `NA`.
+#'
+#' @param x An [`ip_address`] vector or character vector
+#'
+#' @return
+#' * `as_integer()` returns a character vector
+#' * `from_integer()` returns an [`ip_address`] vector
+#'
+#' @examples
+#' x <- ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334", NA))
+#' as_integer(x)
+#'
+#' from_integer(as_integer(x))
+#' @seealso Use `as_packed()` and `from_packed()` to encode/decode raw bytes.
+#' @name integer
+NULL
+
+#' @rdname integer
+#' @export
+as_integer <- function(x) {
+  if (!is_ip_address(x)) {
+    abort("'x' must be an ip_address vector")
+  }
+
+  wrap_encode_integer(x)
+}
+
+#' @rdname integer
+#' @export
+from_integer <- function(x) {
+  if (!is_character(x)) {
+    abort("'x' must be a character vector")
+  }
+
+  wrap_decode_integer(x, TRUE)
+}
+
+
 #' Represent address as binary
 #'
 #' `as_binary()` and `from_binary()` encode and decode an [`ip_address`]

@@ -30,6 +30,7 @@ Suggests:
     testthat (>= 2.1.0)
 LinkingTo: 
     AsioHeaders,
+    BH,
     Rcpp
 VignetteBuilder: 
     knitr
