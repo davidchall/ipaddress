@@ -2,7 +2,7 @@
 
 ##  Breaking changes
 
-* Renamed functions providing other representations of IP addresses:
+* Renamed functions that support other representations of IP addresses:
   * `as_packed()` and `from_packed()` become `ip_to_bytes()` and `bytes_to_ip()`
   * `as_binary()` and `from_binary()` become `ip_to_bits()` and `bits_to_ip()`
   * `as_hostname()` and `from_hostname()` become `ip_to_hostname()` and `hostname_to_ip()`

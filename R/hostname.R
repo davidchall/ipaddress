@@ -39,10 +39,6 @@
 #' @seealso
 #' The base function [nsl()] provides forward DNS resolution to IPv4 addresses,
 #' but only on Unix-like systems.
-#' @name ip_to_hostname
-NULL
-
-#' @rdname ip_to_hostname
 #' @export
 ip_to_hostname <- function(x, multiple = FALSE) {
   if (!is_ip_address(x)) {

@@ -55,10 +55,6 @@
 #' @seealso
 #'  * [ip_to_bytes()] and [bytes_to_ip()]
 #'  * [ip_to_bits()] and [bits_to_ip()]
-#' @name ip_to_integer
-NULL
-
-#' @rdname ip_to_integer
 #' @export
 ip_to_integer <- function(x) {
   if (!is_ip_address(x)) {
@@ -116,10 +112,6 @@ integer_to_ip <- function(x, is_ipv6 = NULL) {
 #' @seealso
 #'  * [ip_to_integer()] and [integer_to_ip()]
 #'  * [ip_to_bits()] and [bits_to_ip()]
-#' @name ip_to_bytes
-NULL
-
-#' @rdname ip_to_bytes
 #' @export
 ip_to_bytes <- function(x) {
   if (!is_ip_address(x)) {
@@ -167,10 +159,6 @@ bytes_to_ip <- function(x) {
 #' @seealso
 #'  * [ip_to_integer()] and [integer_to_ip()]
 #'  * [ip_to_bytes()] and [bytes_to_ip()]
-#' @name ip_to_bits
-NULL
-
-#' @rdname ip_to_bits
 #' @export
 ip_to_bits <- function(x) {
   if (!is_ip_address(x)) {
