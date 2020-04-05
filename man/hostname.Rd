@@ -57,6 +57,6 @@ as_hostname(from_hostname("r-project.org"))
 }
 }
 \seealso{
-The base function \code{\link[=nsl]{nsl()}} provides forward DNS resolution to IPv4 addresses,
+The base function \code{nsl()} provides forward DNS resolution to IPv4 addresses,
 but only on Unix-like systems.
 }
