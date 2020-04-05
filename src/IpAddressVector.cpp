@@ -72,7 +72,7 @@ IpAddressVector::IpAddressVector(List input) {
   }
 }
 
-IpAddressVector IpAddressVector::decodePacked(List input) {
+IpAddressVector IpAddressVector::decodeBytes(List input) {
   std::size_t vsize = input.size();
 
   // initialize vectors
@@ -100,6 +100,57 @@ IpAddressVector IpAddressVector::decodePacked(List input) {
     } else {
       is_na[i] = true;
       warnInvalidInput(i, "unable to decode");
+    }
+  }
+
+  return IpAddressVector(address_v4, address_v6, is_ipv6, is_na);
+}
+
+IpAddressVector IpAddressVector::decodeInteger(CharacterVector input, Nullable<LogicalVector> in_v6) {
+  std::size_t vsize = input.size();
+
+  // initialize vectors
+  std::vector<asio::ip::address_v4> address_v4(vsize);
+  std::vector<asio::ip::address_v6> address_v6(vsize);
+  std::vector<bool> is_ipv6(vsize, false);
+  std::vector<bool> is_na(vsize, false);
+
+  bool guess_ipv6 = in_v6.isNull();
+
+  for (std::size_t i=0; i<vsize; ++i) {
+    if (input[i] == NA_STRING) {
+      is_na[i] = true;
+      continue;
+    }
+
+    std::string integer_string(input[i]);
+    if (guess_ipv6) {
+      try {
+        address_v4[i] = decode_integer<asio::ip::address_v4>(integer_string);
+      } catch (...) {
+        try {
+          address_v6[i] = decode_integer<asio::ip::address_v6>(integer_string);
+          is_ipv6[i] = true;
+        } catch (...) {
+          warnInvalidInput(i, integer_string);
+          is_na[i] = true;
+        }
+      }
+    } else if (in_v6.as().at(i)) {
+      try {
+        address_v6[i] = decode_integer<asio::ip::address_v6>(integer_string);
+        is_ipv6[i] = true;
+      } catch (...) {
+        warnInvalidInput(i, integer_string);
+        is_na[i] = true;
+      }
+    } else {
+      try {
+        address_v4[i] = decode_integer<asio::ip::address_v4>(integer_string);
+      } catch (...) {
+        warnInvalidInput(i, integer_string);
+        is_na[i] = true;
+      }
     }
   }
 
@@ -335,7 +386,7 @@ CharacterVector IpAddressVector::encodeStrings() const {
   return output;
 }
 
-List IpAddressVector::encodePacked() const {
+List IpAddressVector::encodeBytes() const {
   std::size_t vsize = is_na.size();
 
   List output(vsize);
@@ -353,6 +404,25 @@ List IpAddressVector::encodePacked() const {
       RawVector raw(bytes.size());
       std::copy(bytes.begin(), bytes.end(), raw.begin());
       output[i] = raw;
+    }
+  }
+
+  return output;
+}
+
+CharacterVector IpAddressVector::encodeInteger() const {
+  std::size_t vsize = is_na.size();
+
+  // initialize vectors
+  CharacterVector output(vsize);
+
+  for (std::size_t i=0; i<vsize; ++i) {
+    if (is_na[i]) {
+      output[i] = NA_STRING;
+    } else if (is_ipv6[i]) {
+      output[i] = encode_integer(address_v6[i]);
+    } else {
+      output[i] = encode_integer(address_v4[i]);
     }
   }
 
