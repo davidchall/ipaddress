@@ -17,6 +17,8 @@ test_that("integer encoding/decoding works", {
 
   expect_warning(integer_to_ip("hello"))
   expect_warning(integer_to_ip("-1"))
+  expect_warning(integer_to_ip(as.character(2^32), is_ipv6 = FALSE))
+  expect_warning(integer_to_ip("-1", is_ipv6 = TRUE))
 })
 
 test_that("bytes encoding/decoding works", {
