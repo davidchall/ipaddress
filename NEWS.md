@@ -1,5 +1,18 @@
 # ipaddress (development version)
 
+##  Breaking changes
+
+* Renamed functions providing other representations of IP addresses:
+  * `as_packed()` and `from_packed()` become `ip_to_bytes()` and `bytes_to_ip()`
+  * `as_binary()` and `from_binary()` become `ip_to_bits()` and `bits_to_ip()`
+  * `as_hostname()` and `from_hostname()` become `ip_to_hostname()` and `hostname_to_ip()`
+
+## New features
+
+* New `ip_to_integer()` and `integer_to_ip()` functions to encode and decode addresses as integers. Note that the integers are contained within a character vector. Please see the function documentation for an explanation.
+
+## Minor improvements
+
 * Added hex logo
 
 
