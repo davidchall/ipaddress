@@ -157,7 +157,7 @@ IpAddressVector IpAddressVector::decodeInteger(CharacterVector input, Nullable<L
   return IpAddressVector(address_v4, address_v6, is_ipv6, is_na);
 }
 
-IpAddressVector IpAddressVector::decodeBits(CharacterVector input) {
+IpAddressVector IpAddressVector::decodeBinary(CharacterVector input) {
   std::size_t vsize = input.size();
 
   // initialize vectors
@@ -429,7 +429,7 @@ CharacterVector IpAddressVector::encodeInteger() const {
   return output;
 }
 
-CharacterVector IpAddressVector::encodeBits() const {
+CharacterVector IpAddressVector::encodeBinary() const {
   std::size_t vsize = is_na.size();
 
   // initialize vectors

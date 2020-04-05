@@ -28,7 +28,7 @@ reference:
     contents:
       - ip_to_integer
       - ip_to_bytes
-      - ip_to_bits
+      - ip_to_binary
       - ip_to_hostname
   - title: "Address space"
     contents:

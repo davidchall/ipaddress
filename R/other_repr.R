@@ -54,7 +54,7 @@
 #' integer_to_ip(ip_to_integer(x))
 #' @seealso
 #'  * [ip_to_bytes()] and [bytes_to_ip()]
-#'  * [ip_to_bits()] and [bits_to_ip()]
+#'  * [ip_to_binary()] and [binary_to_ip()]
 #' @export
 ip_to_integer <- function(x) {
   if (!is_ip_address(x)) {
@@ -87,7 +87,7 @@ integer_to_ip <- function(x, is_ipv6 = NULL) {
 
 #' Represent address as raw bytes
 #'
-#' Encode or decode an [`ip_address`] vector to a vector of raw bytes.
+#' Encode or decode an [`ip_address`] as a vector of raw bytes.
 #'
 #' @details
 #' The bytes are stored in network order (also known as
@@ -111,7 +111,7 @@ integer_to_ip <- function(x, is_ipv6 = NULL) {
 #' bytes_to_ip(ip_to_bytes(x))
 #' @seealso
 #'  * [ip_to_integer()] and [integer_to_ip()]
-#'  * [ip_to_bits()] and [bits_to_ip()]
+#'  * [ip_to_binary()] and [binary_to_ip()]
 #' @export
 ip_to_bytes <- function(x) {
   if (!is_ip_address(x)) {
@@ -132,9 +132,9 @@ bytes_to_ip <- function(x) {
 }
 
 
-#' Represent address as sequence of bits
+#' Represent address as binary
 #'
-#' Encode or decode an [`ip_address`] vector to a character vector of bits.
+#' Encode or decode an [`ip_address`] as a binary bit string.
 #'
 #' @details
 #' The bits are stored in network order (also known as big-endian order), which
@@ -144,36 +144,36 @@ bytes_to_ip <- function(x) {
 #' are encoded as `NA`.
 #'
 #' @param x
-#'  * For `ip_to_bits()`: An [`ip_address`] vector
-#'  * For `bits_to_ip()`: A character vector containing only `0` and `1` characters
+#'  * For `ip_to_binary()`: An [`ip_address`] vector
+#'  * For `binary_to_ip()`: A character vector containing only `0` and `1` characters
 #'
 #' @return
-#'  * For `ip_to_bits()`: A character vector
-#'  * For `bits_to_ip()`: An [`ip_address`] vector
+#'  * For `ip_to_binary()`: A character vector
+#'  * For `binary_to_ip()`: An [`ip_address`] vector
 #'
 #' @examples
 #' x <- ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334", NA))
-#' ip_to_bits(x)
+#' ip_to_binary(x)
 #'
-#' bits_to_ip(ip_to_bits(x))
+#' binary_to_ip(ip_to_binary(x))
 #' @seealso
 #'  * [ip_to_integer()] and [integer_to_ip()]
 #'  * [ip_to_bytes()] and [bytes_to_ip()]
 #' @export
-ip_to_bits <- function(x) {
+ip_to_binary <- function(x) {
   if (!is_ip_address(x)) {
     abort("'x' must be an ip_address vector")
   }
 
-  wrap_encode_bits(x)
+  wrap_encode_binary(x)
 }
 
-#' @rdname ip_to_bits
+#' @rdname ip_to_binary
 #' @export
-bits_to_ip <- function(x) {
+binary_to_ip <- function(x) {
   if (!is_character(x)) {
     abort("'x' must be a character vector")
   }
 
-  wrap_decode_bits(x)
+  wrap_decode_binary(x)
 }

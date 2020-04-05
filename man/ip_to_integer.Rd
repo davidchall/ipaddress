@@ -72,6 +72,6 @@ integer_to_ip(ip_to_integer(x))
 \seealso{
 \itemize{
 \item \code{\link[=ip_to_bytes]{ip_to_bytes()}} and \code{\link[=bytes_to_ip]{bytes_to_ip()}}
-\item \code{\link[=ip_to_bits]{ip_to_bits()}} and \code{\link[=bits_to_ip]{bits_to_ip()}}
+\item \code{\link[=ip_to_binary]{ip_to_binary()}} and \code{\link[=binary_to_ip]{binary_to_ip()}}
 }
 }

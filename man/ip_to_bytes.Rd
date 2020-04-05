@@ -22,7 +22,7 @@ bytes_to_ip(x)
 }
 }
 \description{
-Encode or decode an \code{\link{ip_address}} vector to a vector of raw bytes.
+Encode or decode an \code{\link{ip_address}} as a vector of raw bytes.
 }
 \details{
 The bytes are stored in network order (also known as
@@ -40,6 +40,6 @@ bytes_to_ip(ip_to_bytes(x))
 \seealso{
 \itemize{
 \item \code{\link[=ip_to_integer]{ip_to_integer()}} and \code{\link[=integer_to_ip]{integer_to_ip()}}
-\item \code{\link[=ip_to_bits]{ip_to_bits()}} and \code{\link[=bits_to_ip]{bits_to_ip()}}
+\item \code{\link[=ip_to_binary]{ip_to_binary()}} and \code{\link[=binary_to_ip]{binary_to_ip()}}
 }
 }

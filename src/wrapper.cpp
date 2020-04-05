@@ -38,13 +38,13 @@ List wrap_decode_integer(CharacterVector x, Nullable<LogicalVector> is_ipv6) {
 }
 
 // [[Rcpp::export]]
-CharacterVector wrap_encode_bits(List x) {
-  return IpAddressVector(x).encodeBits();
+CharacterVector wrap_encode_binary(List x) {
+  return IpAddressVector(x).encodeBinary();
 }
 
 // [[Rcpp::export]]
-List wrap_decode_bits(CharacterVector x) {
-  return IpAddressVector::decodeBits(x).encodeR();
+List wrap_decode_binary(CharacterVector x) {
+  return IpAddressVector::decodeBinary(x).encodeR();
 }
 
 // [[Rcpp::export]]

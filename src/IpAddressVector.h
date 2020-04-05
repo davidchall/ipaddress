@@ -51,7 +51,7 @@ public:
   static IpAddressVector decodeInteger(Rcpp::CharacterVector input, Rcpp::Nullable<Rcpp::LogicalVector> is_ipv6);
 
   // Decode from bit string
-  static IpAddressVector decodeBits(Rcpp::CharacterVector input);
+  static IpAddressVector decodeBinary(Rcpp::CharacterVector input);
 
   // Decode from hostname
   static Rcpp::List decodeHostname(Rcpp::CharacterVector input);
@@ -82,7 +82,7 @@ public:
   Rcpp::CharacterVector encodeInteger() const;
 
   // Encode to bit string
-  Rcpp::CharacterVector encodeBits() const;
+  Rcpp::CharacterVector encodeBinary() const;
 
   // Encode to hostnames
   Rcpp::List encodeHostnames() const;
