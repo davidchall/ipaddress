@@ -37,7 +37,7 @@
 #' ip_to_hostname(hostname_to_ip("r-project.org"))
 #' }
 #' @seealso
-#' The base function [nsl()] provides forward DNS resolution to IPv4 addresses,
+#' The base function `nsl()` provides forward DNS resolution to IPv4 addresses,
 #' but only on Unix-like systems.
 #' @export
 ip_to_hostname <- function(x, multiple = FALSE) {
