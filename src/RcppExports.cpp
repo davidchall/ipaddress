@@ -61,13 +61,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // wrap_decode_integer
-List wrap_decode_integer(CharacterVector x, LogicalVector is_ipv6);
+List wrap_decode_integer(CharacterVector x, Nullable<LogicalVector> is_ipv6);
 RcppExport SEXP _ipaddress_wrap_decode_integer(SEXP xSEXP, SEXP is_ipv6SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< LogicalVector >::type is_ipv6(is_ipv6SEXP);
+    Rcpp::traits::input_parameter< Nullable<LogicalVector> >::type is_ipv6(is_ipv6SEXP);
     rcpp_result_gen = Rcpp::wrap(wrap_decode_integer(x, is_ipv6));
     return rcpp_result_gen;
 END_RCPP

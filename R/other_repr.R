@@ -39,6 +39,9 @@
 #' @param x
 #'  * For `ip_to_integer()`: An [`ip_address`] vector
 #'  * For `integer_to_ip()`: A character vector
+#' @param is_ipv6 A logical vector indicating whether to construct an IPv4 or
+#'   IPv6 address. If `NULL` (the default), then integers less than 2^32 will
+#'   construct an IPv4 address and anything larger will construct an IPv6 address.
 #'
 #' @return
 #'  * For `ip_to_integer()`: A character vector
@@ -67,12 +70,22 @@ ip_to_integer <- function(x) {
 
 #' @rdname ip_to_integer
 #' @export
-integer_to_ip <- function(x) {
+integer_to_ip <- function(x, is_ipv6 = NULL) {
   if (!is_character(x)) {
     abort("'x' must be a character vector")
   }
+  if (!(is_null(is_ipv6) || is_logical(is_ipv6))) {
+    abort("'is_ipv6' must be a logical vector or NULL")
+  }
 
-  wrap_decode_integer(x, TRUE)
+  # vector recycling
+  if (!is_null(is_ipv6)) {
+    args <- vec_recycle_common(x, is_ipv6)
+    x <- args[[1L]]
+    is_ipv6 <- args[[2L]]
+  }
+
+  wrap_decode_integer(x, is_ipv6)
 }
 
 

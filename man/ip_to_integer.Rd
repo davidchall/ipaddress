@@ -7,13 +7,17 @@
 \usage{
 ip_to_integer(x)
 
-integer_to_ip(x)
+integer_to_ip(x, is_ipv6 = NULL)
 }
 \arguments{
 \item{x}{\itemize{
 \item For \code{ip_to_integer()}: An \code{\link{ip_address}} vector
 \item For \code{integer_to_ip()}: A character vector
 }}
+
+\item{is_ipv6}{A logical vector indicating whether to construct an IPv4 or
+IPv6 address. If \code{NULL} (the default), then integers less than 2^32 will
+construct an IPv4 address and anything larger will construct an IPv6 address.}
 }
 \value{
 \itemize{

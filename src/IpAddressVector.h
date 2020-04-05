@@ -48,7 +48,7 @@ public:
   static IpAddressVector decodePacked(Rcpp::List input);
 
   // Decode from integer string
-  static IpAddressVector decodeInteger(Rcpp::CharacterVector input, Rcpp::LogicalVector is_ipv6);
+  static IpAddressVector decodeInteger(Rcpp::CharacterVector input, Rcpp::Nullable<Rcpp::LogicalVector> is_ipv6);
 
   // Decode from binary string
   static IpAddressVector decodeBinary(Rcpp::CharacterVector input);

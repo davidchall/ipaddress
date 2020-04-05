@@ -33,7 +33,7 @@ CharacterVector wrap_encode_integer(List x) {
 }
 
 // [[Rcpp::export]]
-List wrap_decode_integer(CharacterVector x, LogicalVector is_ipv6) {
+List wrap_decode_integer(CharacterVector x, Nullable<LogicalVector> is_ipv6) {
   return IpAddressVector::decodeInteger(x, is_ipv6).encodeR();
 }
 
