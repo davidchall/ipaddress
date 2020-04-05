@@ -9,12 +9,12 @@ wrap_print_address <- function(x) {
     .Call(`_ipaddress_wrap_print_address`, x)
 }
 
-wrap_encode_packed <- function(x) {
-    .Call(`_ipaddress_wrap_encode_packed`, x)
+wrap_encode_bytes <- function(x) {
+    .Call(`_ipaddress_wrap_encode_bytes`, x)
 }
 
-wrap_decode_packed <- function(x) {
-    .Call(`_ipaddress_wrap_decode_packed`, x)
+wrap_decode_bytes <- function(x) {
+    .Call(`_ipaddress_wrap_decode_bytes`, x)
 }
 
 wrap_encode_integer <- function(x) {
@@ -25,12 +25,12 @@ wrap_decode_integer <- function(x, is_ipv6) {
     .Call(`_ipaddress_wrap_decode_integer`, x, is_ipv6)
 }
 
-wrap_encode_binary <- function(x) {
-    .Call(`_ipaddress_wrap_encode_binary`, x)
+wrap_encode_bits <- function(x) {
+    .Call(`_ipaddress_wrap_encode_bits`, x)
 }
 
-wrap_decode_binary <- function(x) {
-    .Call(`_ipaddress_wrap_decode_binary`, x)
+wrap_decode_bits <- function(x) {
+    .Call(`_ipaddress_wrap_decode_bits`, x)
 }
 
 wrap_encode_hostname <- function(x) {

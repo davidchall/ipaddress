@@ -177,7 +177,7 @@ ip_to_bits <- function(x) {
     abort("'x' must be an ip_address vector")
   }
 
-  wrap_encode_binary(x)
+  wrap_encode_bits(x)
 }
 
 #' @rdname ip_to_bits
@@ -187,5 +187,5 @@ bits_to_ip <- function(x) {
     abort("'x' must be a character vector")
   }
 
-  wrap_decode_binary(x)
+  wrap_decode_bits(x)
 }

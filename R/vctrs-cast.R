@@ -22,12 +22,12 @@ vec_cast.character.ip_address <- function(x, to, ...) wrap_print_address(x)
 
 #' @method vec_cast.ip_address blob
 #' @export
-vec_cast.ip_address.blob <- function(x, to, ...) wrap_decode_packed(x)
+vec_cast.ip_address.blob <- function(x, to, ...) wrap_decode_bytes(x)
 
 #' @importFrom blob vec_cast.blob
 #' @method vec_cast.blob ip_address
 #' @export
-vec_cast.blob.ip_address <- function(x, to, ...) blob::new_blob(wrap_encode_packed(x))
+vec_cast.blob.ip_address <- function(x, to, ...) blob::new_blob(wrap_encode_bytes(x))
 
 
 

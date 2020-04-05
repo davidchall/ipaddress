@@ -27,25 +27,25 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// wrap_encode_packed
-List wrap_encode_packed(List x);
-RcppExport SEXP _ipaddress_wrap_encode_packed(SEXP xSEXP) {
+// wrap_encode_bytes
+List wrap_encode_bytes(List x);
+RcppExport SEXP _ipaddress_wrap_encode_bytes(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< List >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(wrap_encode_packed(x));
+    rcpp_result_gen = Rcpp::wrap(wrap_encode_bytes(x));
     return rcpp_result_gen;
 END_RCPP
 }
-// wrap_decode_packed
-List wrap_decode_packed(List x);
-RcppExport SEXP _ipaddress_wrap_decode_packed(SEXP xSEXP) {
+// wrap_decode_bytes
+List wrap_decode_bytes(List x);
+RcppExport SEXP _ipaddress_wrap_decode_bytes(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< List >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(wrap_decode_packed(x));
+    rcpp_result_gen = Rcpp::wrap(wrap_decode_bytes(x));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -72,25 +72,25 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// wrap_encode_binary
-CharacterVector wrap_encode_binary(List x);
-RcppExport SEXP _ipaddress_wrap_encode_binary(SEXP xSEXP) {
+// wrap_encode_bits
+CharacterVector wrap_encode_bits(List x);
+RcppExport SEXP _ipaddress_wrap_encode_bits(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< List >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(wrap_encode_binary(x));
+    rcpp_result_gen = Rcpp::wrap(wrap_encode_bits(x));
     return rcpp_result_gen;
 END_RCPP
 }
-// wrap_decode_binary
-List wrap_decode_binary(CharacterVector x);
-RcppExport SEXP _ipaddress_wrap_decode_binary(SEXP xSEXP) {
+// wrap_decode_bits
+List wrap_decode_bits(CharacterVector x);
+RcppExport SEXP _ipaddress_wrap_decode_bits(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(wrap_decode_binary(x));
+    rcpp_result_gen = Rcpp::wrap(wrap_decode_bits(x));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -453,12 +453,12 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_wrap_parse_address", (DL_FUNC) &_ipaddress_wrap_parse_address, 1},
     {"_ipaddress_wrap_print_address", (DL_FUNC) &_ipaddress_wrap_print_address, 1},
-    {"_ipaddress_wrap_encode_packed", (DL_FUNC) &_ipaddress_wrap_encode_packed, 1},
-    {"_ipaddress_wrap_decode_packed", (DL_FUNC) &_ipaddress_wrap_decode_packed, 1},
+    {"_ipaddress_wrap_encode_bytes", (DL_FUNC) &_ipaddress_wrap_encode_bytes, 1},
+    {"_ipaddress_wrap_decode_bytes", (DL_FUNC) &_ipaddress_wrap_decode_bytes, 1},
     {"_ipaddress_wrap_encode_integer", (DL_FUNC) &_ipaddress_wrap_encode_integer, 1},
     {"_ipaddress_wrap_decode_integer", (DL_FUNC) &_ipaddress_wrap_decode_integer, 2},
-    {"_ipaddress_wrap_encode_binary", (DL_FUNC) &_ipaddress_wrap_encode_binary, 1},
-    {"_ipaddress_wrap_decode_binary", (DL_FUNC) &_ipaddress_wrap_decode_binary, 1},
+    {"_ipaddress_wrap_encode_bits", (DL_FUNC) &_ipaddress_wrap_encode_bits, 1},
+    {"_ipaddress_wrap_decode_bits", (DL_FUNC) &_ipaddress_wrap_decode_bits, 1},
     {"_ipaddress_wrap_encode_hostname", (DL_FUNC) &_ipaddress_wrap_encode_hostname, 1},
     {"_ipaddress_wrap_decode_hostname", (DL_FUNC) &_ipaddress_wrap_decode_hostname, 1},
     {"_ipaddress_wrap_parse_network", (DL_FUNC) &_ipaddress_wrap_parse_network, 2},
