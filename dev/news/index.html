@@ -154,9 +154,39 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#ipaddress-development-version" class="anchor"></a>ipaddress (development version)<small> Unreleased </small>
 </h1>
+<div id="breaking-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
+<ul>
+<li>Renamed functions that support other representations of IP addresses:
+<ul>
+<li>
+<code>as_packed()</code> and <code>from_packed()</code> become <code><a href="../reference/ip_to_bytes.html">ip_to_bytes()</a></code> and <code><a href="../reference/ip_to_bytes.html">bytes_to_ip()</a></code>
+</li>
+<li>
+<code>as_binary()</code> and <code>from_binary()</code> become <code><a href="../reference/ip_to_binary.html">ip_to_binary()</a></code> and <code><a href="../reference/ip_to_binary.html">binary_to_ip()</a></code>
+</li>
+<li>
+<code>as_hostname()</code> and <code>from_hostname()</code> become <code><a href="../reference/ip_to_hostname.html">ip_to_hostname()</a></code> and <code><a href="../reference/ip_to_hostname.html">hostname_to_ip()</a></code>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New features</h2>
+<ul>
+<li>New <code><a href="../reference/ip_to_integer.html">ip_to_integer()</a></code> and <code><a href="../reference/ip_to_integer.html">integer_to_ip()</a></code> functions to encode and decode addresses as integers. Note that the integers are contained within a character vector. Please see the function documentation for an explanation.</li>
+</ul>
+</div>
+<div id="minor-improvements" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-improvements" class="anchor"></a>Minor improvements</h2>
 <ul>
 <li>Added hex logo</li>
 </ul>
+</div>
 </div>
     <div id="ipaddress-020" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.0">
@@ -179,9 +209,9 @@
 <h2 class="hasAnchor">
 <a href="#other-representations" class="anchor"></a>Other representations</h2>
 <ul>
-<li>New <code><a href="../reference/packed.html">as_packed()</a></code> and <code><a href="../reference/packed.html">from_packed()</a></code> functions to encode and decode addresses as raw bytes</li>
-<li>New <code><a href="../reference/binary.html">as_binary()</a></code> and <code><a href="../reference/binary.html">from_binary()</a></code> functions to encode and decode addresses as binary strings</li>
-<li>New <code><a href="../reference/hostname.html">as_hostname()</a></code> and <code><a href="../reference/hostname.html">from_hostname()</a></code> functions translate addresses to and from hostnames</li>
+<li>New <code>as_packed()</code> and <code>from_packed()</code> functions to encode and decode addresses as raw bytes</li>
+<li>New <code>as_binary()</code> and <code>from_binary()</code> functions to encode and decode addresses as binary strings</li>
+<li>New <code>as_hostname()</code> and <code>from_hostname()</code> functions translate addresses to and from hostnames</li>
 </ul>
 </div>
 <div id="address-space" class="section level2">
