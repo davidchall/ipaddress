@@ -32,8 +32,8 @@ test_that("casting works", {
   expect_equal(vec_cast(ip_interface("192.168.0.1/10"), character()), "192.168.0.1/10")
   expect_equal(vec_cast("192.168.0.1/10", ip_interface()), ip_interface("192.168.0.1/10"))
 
-  expect_error(vec_cast(ip_address("192.168.0.1"), ip_interface()), class = "vctrs_error_incompatible_cast")
-  expect_error(vec_cast(ip_network("192.128.0.0/10"), ip_interface()), class = "vctrs_error_incompatible_cast")
+  expect_error(vec_cast(ip_address("192.168.0.1"), ip_interface()), class = "vctrs_error_incompatible_type")
+  expect_error(vec_cast(ip_network("192.128.0.0/10"), ip_interface()), class = "vctrs_error_incompatible_type")
 })
 
 test_that("coercion works", {
