@@ -207,11 +207,11 @@ just the first value (a scalar for each input).</p>
 but only on Unix-like systems.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
-<span class='fu'>hostname_to_ip</span>(<span class='st'>"r-project.org"</span>)</div><div class='output co'>#&gt; &lt;ip_address[1]&gt;
-#&gt; [1] 137.208.57.37</div><div class='input'>
-<span class='fu'>ip_to_hostname</span>(<span class='fu'>hostname_to_ip</span>(<span class='st'>"r-project.org"</span>))</div><div class='output co'>#&gt; [1] "cran.wu-wien.ac.at"</div><div class='input'># }
-</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>hostname_to_ip</span>(<span class='st'>"r-project.org"</span>)
+
+<span class='fu'>ip_to_hostname</span>(<span class='fu'>hostname_to_ip</span>(<span class='st'>"r-project.org"</span>))
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -227,7 +227,7 @@ but only on Unix-like systems.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>
