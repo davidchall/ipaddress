@@ -35,7 +35,6 @@ LinkingTo:
 VignetteBuilder: 
     knitr
 Remotes: 
-    RcppCore/Rcpp@20e462f,
     r-lib/vctrs
 Encoding: UTF-8
 LazyData: true
