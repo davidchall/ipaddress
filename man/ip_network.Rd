@@ -4,8 +4,11 @@
 \alias{ip_network}
 \alias{ip_network.default}
 \alias{ip_network.ip_address}
-\alias{as_ip_network}
 \alias{is_ip_network}
+\alias{as_ip_network}
+\alias{as_ip_network.default}
+\alias{as_ip_network.character}
+\alias{as_ip_network.ip_interface}
 \alias{format.ip_network}
 \alias{as.character.ip_network}
 \title{Vector of IP networks}
@@ -16,9 +19,15 @@ ip_network(...)
 
 \method{ip_network}{ip_address}(address, prefix_length, strict = TRUE, ...)
 
+is_ip_network(x)
+
 as_ip_network(x)
 
-is_ip_network(x)
+\method{as_ip_network}{default}(x)
+
+\method{as_ip_network}{character}(x)
+
+\method{as_ip_network}{ip_interface}(x)
 
 \method{format}{ip_network}(x, ...)
 
@@ -46,9 +55,9 @@ An S3 vector of class \code{ip_network}
 \description{
 \code{ip_network()} constructs a vector of IP networks.
 
-\code{as_ip_network()} casts an object to \code{ip_network}.
-
 \code{is_ip_network()} checks if an object is of class \code{ip_network}.
+
+\code{as_ip_network()} casts an object to \code{ip_network}.
 }
 \details{
 An IP network corresponds to a contiguous range of IP addresses

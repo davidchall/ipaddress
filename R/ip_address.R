@@ -89,14 +89,6 @@ new_ip_address <- function(address1 = integer(), address2 = integer(), address3 
   ), class = "ip_address")
 }
 
-#' `as_ip_address()`
-#'
-#' `as_ip_address()` casts an object to `ip_address`.
-#'
-#' @rdname ip_address
-#' @export
-as_ip_address <- function(x) vec_cast(x, ip_address())
-
 #' `is_ip_address()`
 #'
 #' `is_ip_address()` checks if an object is of class `ip_address`.
@@ -105,14 +97,44 @@ as_ip_address <- function(x) vec_cast(x, ip_address())
 #' @export
 is_ip_address <- function(x) inherits(x, "ip_address")
 
+
+# Casting ------------------------------------------------------------
+
+#' `as_ip_address()`
+#'
+#' `as_ip_address()` casts an object to `ip_address`.
+#'
+#' @rdname ip_address
+#' @export
+as_ip_address <- function(x) UseMethod("as_ip_address")
+
+#' @rdname ip_address
+#' @export
+as_ip_address.default <- function(x) vec_cast(x, new_ip_address())
+
+#' @rdname ip_address
+#' @export
+as_ip_address.character <- function(x) ip_address(x)
+
+#' @rdname ip_address
+#' @export
+as_ip_address.ip_interface <- function(x) {
+  new_ip_address(
+    field(x, "address1"),
+    field(x, "address2"),
+    field(x, "address3"),
+    field(x, "address4"),
+    field(x, "is_ipv6")
+  )
+}
+
 #' @rdname ip_address
 #' @export
 format.ip_address <- function(x, ...) as.character(x)
 
 #' @rdname ip_address
 #' @export
-as.character.ip_address <- function(x, ...) vec_cast(x, character())
-
+as.character.ip_address <- function(x, ...) wrap_print_address(x)
 
 
 # Comparison ------------------------------------------------------------

@@ -2,17 +2,26 @@
 % Please edit documentation in R/ip_address.R
 \name{ip_address}
 \alias{ip_address}
-\alias{as_ip_address}
 \alias{is_ip_address}
+\alias{as_ip_address}
+\alias{as_ip_address.default}
+\alias{as_ip_address.character}
+\alias{as_ip_address.ip_interface}
 \alias{format.ip_address}
 \alias{as.character.ip_address}
 \title{Vector of IP addresses}
 \usage{
 ip_address(ip = character())
 
+is_ip_address(x)
+
 as_ip_address(x)
 
-is_ip_address(x)
+\method{as_ip_address}{default}(x)
+
+\method{as_ip_address}{character}(x)
+
+\method{as_ip_address}{ip_interface}(x)
 
 \method{format}{ip_address}(x, ...)
 
@@ -32,9 +41,9 @@ An S3 vector of class \code{ip_address}
 \description{
 \code{ip_address()} constructs a vector of IP addresses.
 
-\code{as_ip_address()} casts an object to \code{ip_address}.
-
 \code{is_ip_address()} checks if an object is of class \code{ip_address}.
+
+\code{as_ip_address()} casts an object to \code{ip_address}.
 }
 \details{
 An address in IPv4 space uses 32-bits. It is usually represented

@@ -5,6 +5,7 @@ test_that("construction works", {
   expect_true(is_ip_interface(ip_interface(x)))
   expect_length(ip_interface(), 0)
   expect_length(ip_interface(x), length(x))
+  expect_equal(ip_interface(x), as_ip_interface(x))
   expect_equal(as.character(ip_interface(x)), x)
   expect_equal(format(ip_interface(x)), x)
 
@@ -23,28 +24,6 @@ test_that("construction works", {
     ip_interface(rep("0.0.0.0/24", 3))
   )
   expect_error(ip_interface(ip_address(rep("0.0.0.0", 3)), rep(24L, 2)))
-})
-
-test_that("casting works", {
-  expect_equal(vec_cast(ip_interface("192.168.0.1/10"), ip_interface()), ip_interface("192.168.0.1/10"))
-  expect_equal(vec_cast(ip_interface("192.168.0.1/10"), ip_address()), ip_address("192.168.0.1"))
-  expect_equal(vec_cast(ip_interface("192.168.0.1/10"), ip_network()), ip_network("192.128.0.0/10"))
-  expect_equal(vec_cast(ip_interface("192.168.0.1/10"), character()), "192.168.0.1/10")
-  expect_equal(vec_cast("192.168.0.1/10", ip_interface()), ip_interface("192.168.0.1/10"))
-
-  expect_error(vec_cast(ip_address("192.168.0.1"), ip_interface()), class = "vctrs_error_incompatible_type")
-  expect_error(vec_cast(ip_network("192.128.0.0/10"), ip_interface()), class = "vctrs_error_incompatible_type")
-})
-
-test_that("coercion works", {
-  expect_s3_class(vec_c(ip_interface(), ip_interface()), "ip_interface")
-  expect_type(vec_c(character(), ip_interface()), "character")
-  expect_type(vec_c(ip_interface(), character()), "character")
-
-  expect_error(vec_c(ip_address(), ip_interface()), class = "vctrs_error_incompatible_type")
-  expect_error(vec_c(ip_interface(), ip_address()), class = "vctrs_error_incompatible_type")
-  expect_error(vec_c(ip_network(), ip_interface()), class = "vctrs_error_incompatible_type")
-  expect_error(vec_c(ip_interface(), ip_network()), class = "vctrs_error_incompatible_type")
 })
 
 test_that("can extract address and network", {

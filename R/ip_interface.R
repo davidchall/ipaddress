@@ -107,14 +107,6 @@ new_ip_interface <- function(address1 = integer(), address2 = integer(), address
   ), class = c("ip_interface", "ip_address"))
 }
 
-#' `as_ip_interface()`
-#'
-#' `as_ip_interface()` casts an object to `ip_interface`.
-#'
-#' @rdname ip_interface
-#' @export
-as_ip_interface <- function(x) vec_cast(x, ip_interface())
-
 #' `is_ip_interface()`
 #'
 #' `is_ip_interface()` checks if an object is of class `ip_interface`.
@@ -123,13 +115,32 @@ as_ip_interface <- function(x) vec_cast(x, ip_interface())
 #' @export
 is_ip_interface <- function(x) inherits(x, "ip_interface")
 
+
+# Casting ------------------------------------------------------------
+
+#' `as_ip_interface()`
+#'
+#' `as_ip_interface()` casts an object to `ip_interface`.
+#'
+#' @rdname ip_interface
+#' @export
+as_ip_interface <- function(x) UseMethod("as_ip_interface")
+
+#' @rdname ip_interface
+#' @export
+as_ip_interface.default <- function(x) vec_cast(x, new_ip_interface())
+
+#' @rdname ip_interface
+#' @export
+as_ip_interface.character <- function(x) ip_interface(x)
+
 #' @rdname ip_interface
 #' @export
 format.ip_interface <- function(x, ...) as.character(x)
 
 #' @rdname ip_interface
 #' @export
-as.character.ip_interface <- function(x, ...) vec_cast(x, character())
+as.character.ip_interface <- function(x, ...) wrap_print_network(x)
 
 
 # Other ------------------------------------------------------------

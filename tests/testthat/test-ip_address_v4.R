@@ -5,26 +5,12 @@ test_that("construction works", {
   expect_true(is_ip_address(ip_address(x)))
   expect_length(ip_address(), 0)
   expect_length(ip_address(x), length(x))
+  expect_equal(ip_address(x), as_ip_address(x))
   expect_equal(as.character(ip_address(x)), x)
 })
 
 test_that("formats correctly", {
   expect_equal(format(ip_address(x)), x)
-})
-
-test_that("casting works", {
-  expect_equal(vec_cast(ip_address("1.2.3.4"), ip_address()), ip_address("1.2.3.4"))
-  expect_equal(vec_cast("1.2.3.4", ip_address()), ip_address("1.2.3.4"))
-  expect_equal(vec_cast(ip_address("1.2.3.4"), character()), "1.2.3.4")
-})
-
-test_that("coercion works", {
-  expect_s3_class(vec_c(ip_address(), ip_address()), "ip_address")
-  expect_type(vec_c(character(), ip_address()), "character")
-  expect_type(vec_c(ip_address(), character()), "character")
-
-  expect_error(vec_c(ip_address(), ip_network()), class = "vctrs_error_incompatible_type")
-  expect_error(vec_c(ip_network(), ip_address()), class = "vctrs_error_incompatible_type")
 })
 
 test_that("missing values work", {
