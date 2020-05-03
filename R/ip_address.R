@@ -110,10 +110,6 @@ as_ip_address <- function(x) UseMethod("as_ip_address")
 
 #' @rdname ip_address
 #' @export
-as_ip_address.default <- function(x) vec_cast(x, new_ip_address())
-
-#' @rdname ip_address
-#' @export
 as_ip_address.character <- function(x) ip_address(x)
 
 #' @rdname ip_address

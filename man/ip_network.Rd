@@ -6,7 +6,6 @@
 \alias{ip_network.ip_address}
 \alias{is_ip_network}
 \alias{as_ip_network}
-\alias{as_ip_network.default}
 \alias{as_ip_network.character}
 \alias{as_ip_network.ip_interface}
 \alias{format.ip_network}
@@ -22,8 +21,6 @@ ip_network(...)
 is_ip_network(x)
 
 as_ip_network(x)
-
-\method{as_ip_network}{default}(x)
 
 \method{as_ip_network}{character}(x)
 

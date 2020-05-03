@@ -139,10 +139,6 @@ as_ip_network <- function(x) UseMethod("as_ip_network")
 
 #' @rdname ip_network
 #' @export
-as_ip_network.default <- function(x) vec_cast(x, new_ip_network())
-
-#' @rdname ip_network
-#' @export
 as_ip_network.character <- function(x) ip_network(x)
 
 #' @rdname ip_network

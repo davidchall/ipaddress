@@ -6,7 +6,6 @@
 \alias{ip_interface.ip_address}
 \alias{is_ip_interface}
 \alias{as_ip_interface}
-\alias{as_ip_interface.default}
 \alias{as_ip_interface.character}
 \alias{format.ip_interface}
 \alias{as.character.ip_interface}
@@ -21,8 +20,6 @@ ip_interface(...)
 is_ip_interface(x)
 
 as_ip_interface(x)
-
-\method{as_ip_interface}{default}(x)
 
 \method{as_ip_interface}{character}(x)
 

@@ -8,6 +8,8 @@ test_that("construction works", {
   expect_equal(ip_network(x), as_ip_network(x))
   expect_equal(as.character(ip_network(x)), x)
 
+  expect_error(as_ip_network(1L))
+
   expect_equal(
     ip_network(x),
     ip_network(ip_address(c("0.0.0.0", "192.168.0.0", "192.168.100.0", "255.255.255.255")), c(32L, 16L, 22L, 32L))

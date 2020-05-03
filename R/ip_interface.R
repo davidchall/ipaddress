@@ -128,10 +128,6 @@ as_ip_interface <- function(x) UseMethod("as_ip_interface")
 
 #' @rdname ip_interface
 #' @export
-as_ip_interface.default <- function(x) vec_cast(x, new_ip_interface())
-
-#' @rdname ip_interface
-#' @export
 as_ip_interface.character <- function(x) ip_interface(x)
 
 #' @rdname ip_interface

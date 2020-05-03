@@ -9,6 +9,8 @@ test_that("construction works", {
   expect_equal(as.character(ip_interface(x)), x)
   expect_equal(format(ip_interface(x)), x)
 
+  expect_error(as_ip_interface(1L))
+
   expect_equal(
     ip_interface(x),
     ip_interface(ip_address(c("192.168.0.1", "2001:db8::abcd")), c(10L, 32L))

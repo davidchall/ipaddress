@@ -4,7 +4,6 @@
 \alias{ip_address}
 \alias{is_ip_address}
 \alias{as_ip_address}
-\alias{as_ip_address.default}
 \alias{as_ip_address.character}
 \alias{as_ip_address.ip_interface}
 \alias{format.ip_address}
@@ -16,8 +15,6 @@ ip_address(ip = character())
 is_ip_address(x)
 
 as_ip_address(x)
-
-\method{as_ip_address}{default}(x)
 
 \method{as_ip_address}{character}(x)
 
