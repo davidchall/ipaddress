@@ -5,7 +5,10 @@ test_that("construction works", {
   expect_true(is_ip_network(ip_network(x)))
   expect_length(ip_network(), 0)
   expect_length(ip_network(x), length(x))
+  expect_equal(ip_network(x), as_ip_network(x))
   expect_equal(as.character(ip_network(x)), x)
+
+  expect_error(as_ip_network(1L))
 
   expect_equal(
     ip_network(x),
@@ -26,18 +29,6 @@ test_that("construction works", {
 
 test_that("formats correctly", {
   expect_equal(format(ip_network(x)), x)
-})
-
-test_that("casting works", {
-  expect_equal(vec_cast(ip_network("198.51.100.0/24"), ip_network()), ip_network("198.51.100.0/24"))
-  expect_equal(vec_cast("198.51.100.0/24", ip_network()), ip_network("198.51.100.0/24"))
-  expect_equal(vec_cast(ip_network("198.51.100.0/24"), character()), "198.51.100.0/24")
-})
-
-test_that("coercion works", {
-  expect_s3_class(vec_c(ip_network(), ip_network()), "ip_network")
-  expect_type(vec_c(character(), ip_network()), "character")
-  expect_type(vec_c(ip_network(), character()), "character")
 })
 
 test_that("missing values work", {

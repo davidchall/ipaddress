@@ -18,13 +18,23 @@ CharacterVector wrap_print_address(List x) {
 }
 
 // [[Rcpp::export]]
-List wrap_encode_packed(List x) {
-  return IpAddressVector(x).encodePacked();
+List wrap_encode_bytes(List x) {
+  return IpAddressVector(x).encodeBytes();
 }
 
 // [[Rcpp::export]]
-List wrap_decode_packed(List x) {
-  return IpAddressVector::decodePacked(x).encodeR();
+List wrap_decode_bytes(List x) {
+  return IpAddressVector::decodeBytes(x).encodeR();
+}
+
+// [[Rcpp::export]]
+CharacterVector wrap_encode_integer(List x) {
+  return IpAddressVector(x).encodeInteger();
+}
+
+// [[Rcpp::export]]
+List wrap_decode_integer(CharacterVector x, Nullable<LogicalVector> is_ipv6) {
+  return IpAddressVector::decodeInteger(x, is_ipv6).encodeR();
 }
 
 // [[Rcpp::export]]

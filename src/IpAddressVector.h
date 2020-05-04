@@ -45,7 +45,10 @@ public:
   IpAddressVector(Rcpp::List input);
 
   // Decode from R blob (list of raw vectors)
-  static IpAddressVector decodePacked(Rcpp::List input);
+  static IpAddressVector decodeBytes(Rcpp::List input);
+
+  // Decode from integer string
+  static IpAddressVector decodeInteger(Rcpp::CharacterVector input, Rcpp::Nullable<Rcpp::LogicalVector> is_ipv6);
 
   // Decode from binary string
   static IpAddressVector decodeBinary(Rcpp::CharacterVector input);
@@ -73,7 +76,10 @@ public:
   Rcpp::List encodeR() const;
 
   // Encode to R blob (list of raw vectors)
-  Rcpp::List encodePacked() const;
+  Rcpp::List encodeBytes() const;
+
+  // Encode to integer string
+  Rcpp::CharacterVector encodeInteger() const;
 
   // Encode to binary string
   Rcpp::CharacterVector encodeBinary() const;

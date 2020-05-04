@@ -3,6 +3,13 @@ methods::setOldClass(c("ip_address", "vctrs_vctr"))
 
 #' Vector of IP addresses
 #'
+#' @description
+#' `ip_address()` constructs a vector of IP addresses.
+#'
+#' `is_ip_address()` checks if an object is of class `ip_address`.
+#'
+#' `as_ip_address()` casts an object to `ip_address`.
+#'
 #' @details
 #' An address in IPv4 space uses 32-bits. It is usually represented
 #' as 4 groups of 8 bits, each shown as decimal digits (e.g. `192.168.0.1`).
@@ -30,21 +37,13 @@ methods::setOldClass(c("ip_address", "vctrs_vctr"))
 #' This class also supports bitwise operations: `!` (NOT), `&` (AND),
 #' `|` (OR) and `^` (XOR).
 #'
-#' @param x An `ip_address` vector
-#' @param ... Arguments to be passed to other methods
-#'
-#' @name ip_address
-NULL
-
-
-# Construction ------------------------------------------------------------
-
-#' `ip_address()`
-#'
-#' `ip_address()` constructs a vector of IP addresses.
-#'
-#' @param ip Character vector of IP addresses, in dot-decimal notation (IPv4)
-#'   or hexadecimal notation (IPv6).
+#' @param x
+#' * For `ip_address()`: A character vector of IP addresses, in dot-decimal
+#'   notation (IPv4) or hexadecimal notation (IPv6)
+#' * For `is_ip_address()`: An object to test
+#' * For `as_ip_address()`: An object to cast
+#' * For `as.character()`: An `ip_address` vector
+#' @param ... Included for S3 generic consistency
 #' @return An S3 vector of class `ip_address`
 #'
 #' @examples
@@ -68,10 +67,16 @@ NULL
 #'
 #' # bitwise XOR
 #' ip_address("192.168.0.0") ^ ip_address("255.0.0.255")
+#' @name ip_address
+NULL
+
+
+# Construction ------------------------------------------------------------
+
 #' @rdname ip_address
 #' @export
-ip_address <- function(ip = character()) {
-  wrap_parse_address(ip)
+ip_address <- function(x = character()) {
+  wrap_parse_address(x)
 }
 
 #' Low-level constructor that accepts the underlying data types being stored
@@ -89,30 +94,40 @@ new_ip_address <- function(address1 = integer(), address2 = integer(), address3 
   ), class = "ip_address")
 }
 
-#' `as_ip_address()`
-#'
-#' `as_ip_address()` casts an object to `ip_address`.
-#'
-#' @rdname ip_address
-#' @export
-as_ip_address <- function(x) vec_cast(x, ip_address())
-
-#' `is_ip_address()`
-#'
-#' `is_ip_address()` checks if an object is of class `ip_address`.
-#'
 #' @rdname ip_address
 #' @export
 is_ip_address <- function(x) inherits(x, "ip_address")
 
+
+# Casting ------------------------------------------------------------
+
+#' @rdname ip_address
+#' @export
+as_ip_address <- function(x) UseMethod("as_ip_address")
+
+#' @rdname ip_address
+#' @export
+as_ip_address.character <- function(x) ip_address(x)
+
+#' @rdname ip_address
+#' @export
+as_ip_address.ip_interface <- function(x) {
+  new_ip_address(
+    field(x, "address1"),
+    field(x, "address2"),
+    field(x, "address3"),
+    field(x, "address4"),
+    field(x, "is_ipv6")
+  )
+}
+
+#' @rdname ip_address
+#' @export
+as.character.ip_address <- function(x, ...) wrap_print_address(x)
+
 #' @rdname ip_address
 #' @export
 format.ip_address <- function(x, ...) as.character(x)
-
-#' @rdname ip_address
-#' @export
-as.character.ip_address <- function(x, ...) vec_cast(x, character())
-
 
 
 # Comparison ------------------------------------------------------------

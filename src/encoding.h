@@ -1,9 +1,11 @@
 #ifndef __IPADDRESS_ENCODING__
 #define __IPADDRESS_ENCODING__
 
+#include <algorithm>
 #include <bitset>
 #include <asio/ip/network_v4.hpp>
 #include <asio/ip/network_v6.hpp>
+#include <boost/multiprecision/cpp_int.hpp>
 
 
 typedef std::array<int32_t, 1> r_address_v4_type;
@@ -52,6 +54,43 @@ Address decode_binary(const std::string &bit_string) {
   }
 
   return Address(bytes);
+}
+
+template<class Address>
+std::string encode_integer(const Address &x) {
+  typename Address::bytes_type x_bytes = x.to_bytes();
+
+  boost::multiprecision::number<boost::multiprecision::cpp_int_backend<
+    8*sizeof(x_bytes), 8*sizeof(x_bytes),
+    boost::multiprecision::unsigned_magnitude,
+    boost::multiprecision::checked,
+    void
+  >> x_int;
+
+  // import most-significant byte first (x_bytes stored in network order)
+  import_bits(x_int, x_bytes.begin(), x_bytes.end(), 8, true);
+
+  return x_int.str();
+}
+
+template<class Address>
+Address decode_integer(const std::string& x_int_string) {
+  typename Address::bytes_type x_bytes = {};
+
+  boost::multiprecision::number<boost::multiprecision::cpp_int_backend<
+    8*sizeof(x_bytes), 8*sizeof(x_bytes),
+    boost::multiprecision::unsigned_magnitude,
+    boost::multiprecision::checked,
+    void
+  >> x_int(x_int_string);
+
+  // must export least-significant byte first because boost::multiprecision is
+  // aggressively optimized and does not reserve space for unused bits,
+  // even though I've declared the size of the integer as 32-bit or 128-bit
+  export_bits(x_int, x_bytes.begin(), 8, false);
+  std::reverse(x_bytes.begin(), x_bytes.end());
+
+  return Address(x_bytes);
 }
 
 #endif

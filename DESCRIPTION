@@ -17,13 +17,13 @@ URL: https://davidchall.github.io/ipaddress,
     https://github.com/davidchall/ipaddress
 BugReports: https://github.com/davidchall/ipaddress/issues
 Depends: 
-    R (>= 3.2.0)
+    R (>= 3.3.0)
 Imports: 
     blob (>= 1.2.0),
     methods,
     Rcpp,
     rlang (>= 0.4.0),
-    vctrs (>= 0.2.2)
+    vctrs (>= 0.2.99.9011)
 Suggests: 
     crayon,
     knitr,
@@ -32,11 +32,12 @@ Suggests:
     testthat (>= 2.2.0)
 LinkingTo: 
     AsioHeaders,
+    BH,
     Rcpp
 VignetteBuilder: 
     knitr
 Remotes: 
-    RcppCore/Rcpp@20e462f
+    r-lib/vctrs
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

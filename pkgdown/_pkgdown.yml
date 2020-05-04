@@ -1,7 +1,11 @@
 development:
-  mode: release
+  mode: auto
 
 url: https://davidchall.github.io/ipaddress
+
+home:
+  title: ipaddress
+  description: R package for working with IP addresses and networks
 
 template:
   params:
@@ -9,6 +13,10 @@ template:
       api_key: a959f56e56e76081c6ebdec4073adbaf
       index_name: ipaddress
     ganalytics: UA-160789885-1
+  opengraph:
+    twitter:
+      creator: "@hall_davidc"
+      card: summary
 
 reference:
   - title: "Classes"
@@ -18,9 +26,10 @@ reference:
       - ip_interface
   - title: "Other representations"
     contents:
-      - as_packed
-      - as_binary
-      - as_hostname
+      - ip_to_integer
+      - ip_to_bytes
+      - ip_to_binary
+      - ip_to_hostname
   - title: "Address space"
     contents:
       - is_ipv4

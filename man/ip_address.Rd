@@ -2,29 +2,38 @@
 % Please edit documentation in R/ip_address.R
 \name{ip_address}
 \alias{ip_address}
-\alias{as_ip_address}
 \alias{is_ip_address}
-\alias{format.ip_address}
+\alias{as_ip_address}
+\alias{as_ip_address.character}
+\alias{as_ip_address.ip_interface}
 \alias{as.character.ip_address}
+\alias{format.ip_address}
 \title{Vector of IP addresses}
 \usage{
-ip_address(ip = character())
-
-as_ip_address(x)
+ip_address(x = character())
 
 is_ip_address(x)
 
-\method{format}{ip_address}(x, ...)
+as_ip_address(x)
+
+\method{as_ip_address}{character}(x)
+
+\method{as_ip_address}{ip_interface}(x)
 
 \method{as.character}{ip_address}(x, ...)
+
+\method{format}{ip_address}(x, ...)
 }
 \arguments{
-\item{ip}{Character vector of IP addresses, in dot-decimal notation (IPv4)
-or hexadecimal notation (IPv6).}
+\item{x}{\itemize{
+\item For \code{ip_address()}: A character vector of IP addresses, in dot-decimal
+notation (IPv4) or hexadecimal notation (IPv6)
+\item For \code{is_ip_address()}: An object to test
+\item For \code{as_ip_address()}: An object to cast
+\item For \code{as.character()}: An \code{ip_address} vector
+}}
 
-\item{x}{An \code{ip_address} vector}
-
-\item{...}{Arguments to be passed to other methods}
+\item{...}{Included for S3 generic consistency}
 }
 \value{
 An S3 vector of class \code{ip_address}
@@ -32,9 +41,9 @@ An S3 vector of class \code{ip_address}
 \description{
 \code{ip_address()} constructs a vector of IP addresses.
 
-\code{as_ip_address()} casts an object to \code{ip_address}.
-
 \code{is_ip_address()} checks if an object is of class \code{ip_address}.
+
+\code{as_ip_address()} casts an object to \code{ip_address}.
 }
 \details{
 An address in IPv4 space uses 32-bits. It is usually represented

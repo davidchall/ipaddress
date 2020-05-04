@@ -11,3 +11,4 @@
 ^CRAN-RELEASE$
 ^codecov\.yml$
 [.]mmd$
+^man/figures/logo_large\.png$

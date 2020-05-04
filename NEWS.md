@@ -1,7 +1,21 @@
 # ipaddress (development version)
 
+##  Breaking changes
+
+* Renamed functions for converting to and from alternative representations of IP addresses:
+  * `as_packed()` and `from_packed()` become `ip_to_bytes()` and `bytes_to_ip()`
+  * `as_binary()` and `from_binary()` become `ip_to_binary()` and `binary_to_ip()`
+  * `as_hostname()` and `from_hostname()` become `ip_to_hostname()` and `hostname_to_ip()`
+
+## New features
+
+* New `ip_to_integer()` and `integer_to_ip()` functions to encode and decode addresses as integers. Note that the integers are contained within a character vector. Please see the function documentation for an explanation.
+
+## Minor improvements
+
 * Added hex logo
 * Support pretty printing in tibbles (`ip_network()` and `ip_interface()` vectors now align on the forward slash and distinguish the prefix length in green)
+* Compatible with vctrs 0.3.0
 
 
 # ipaddress 0.2.0
