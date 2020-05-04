@@ -54,8 +54,8 @@
 
 <meta property="og:title" content="Vector of IP networks — ip_network" />
 <meta property="og:description" content="ip_network() constructs a vector of IP networks.
-as_ip_network() casts an object to ip_network.
-is_ip_network() checks if an object is of class ip_network." />
+is_ip_network() checks if an object is of class ip_network.
+as_ip_network() casts an object to ip_network." />
 <meta property="og:image" content="https://davidchall.github.io/ipaddress/logo.png" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="@hall_davidc" />
@@ -156,8 +156,8 @@ is_ip_network() checks if an object is of class ip_network." />
 
     <div class="ref-description">
     <p><code>ip_network()</code> constructs a vector of IP networks.</p>
-<p><code>as_ip_network()</code> casts an object to <code>ip_network</code>.</p>
 <p><code>is_ip_network()</code> checks if an object is of class <code>ip_network</code>.</p>
+<p><code>as_ip_network()</code> casts an object to <code>ip_network</code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>ip_network</span>(<span class='no'>...</span>)
@@ -168,9 +168,15 @@ is_ip_network() checks if an object is of class ip_network." />
 <span class='co'># S3 method for ip_address</span>
 <span class='fu'>ip_network</span>(<span class='no'>address</span>, <span class='no'>prefix_length</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
+<span class='fu'>is_ip_network</span>(<span class='no'>x</span>)
+
 <span class='fu'>as_ip_network</span>(<span class='no'>x</span>)
 
-<span class='fu'>is_ip_network</span>(<span class='no'>x</span>)
+<span class='co'># S3 method for character</span>
+<span class='fu'>as_ip_network</span>(<span class='no'>x</span>)
+
+<span class='co'># S3 method for ip_interface</span>
+<span class='fu'>as_ip_network</span>(<span class='no'>x</span>)
 
 <span class='co'># S3 method for ip_network</span>
 <span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
