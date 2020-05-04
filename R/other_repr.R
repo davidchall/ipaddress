@@ -118,7 +118,7 @@ ip_to_bytes <- function(x) {
     abort("'x' must be an ip_address vector")
   }
 
-  blob::as_blob(x)
+  blob::new_blob(wrap_encode_bytes(x))
 }
 
 #' @rdname ip_to_bytes
@@ -128,7 +128,7 @@ bytes_to_ip <- function(x) {
     abort("'x' must be a blob object")
   }
 
-  vec_cast(x, ip_address())
+  wrap_decode_bytes(x)
 }
 
 

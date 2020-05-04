@@ -2,7 +2,7 @@
 
 ##  Breaking changes
 
-* Renamed functions that support other representations of IP addresses:
+* Renamed functions for converting to and from alternative representations of IP addresses:
   * `as_packed()` and `from_packed()` become `ip_to_bytes()` and `bytes_to_ip()`
   * `as_binary()` and `from_binary()` become `ip_to_binary()` and `binary_to_ip()`
   * `as_hostname()` and `from_hostname()` become `ip_to_hostname()` and `hostname_to_ip()`
@@ -14,6 +14,7 @@
 ## Minor improvements
 
 * Added hex logo
+* Compatible with vctrs 0.3.0
 
 
 # ipaddress 0.2.0

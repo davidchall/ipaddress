@@ -4,8 +4,9 @@
 \alias{ip_interface}
 \alias{ip_interface.default}
 \alias{ip_interface.ip_address}
-\alias{as_ip_interface}
 \alias{is_ip_interface}
+\alias{as_ip_interface}
+\alias{as_ip_interface.character}
 \alias{format.ip_interface}
 \alias{as.character.ip_interface}
 \title{Vector of IP interfaces}
@@ -16,9 +17,11 @@ ip_interface(...)
 
 \method{ip_interface}{ip_address}(address, prefix_length, ...)
 
+is_ip_interface(x)
+
 as_ip_interface(x)
 
-is_ip_interface(x)
+\method{as_ip_interface}{character}(x)
 
 \method{format}{ip_interface}(x, ...)
 
@@ -43,9 +46,9 @@ This hybrid class stores both the host address and the network it is on.
 
 \code{ip_interface()} constructs a vector of IP interfaces.
 
-\code{as_ip_interface()} casts an object to \code{ip_interface}.
-
 \code{is_ip_interface()} checks if an object is of class \code{ip_interface}.
+
+\code{as_ip_interface()} casts an object to \code{ip_interface}.
 }
 \details{
 Constructing an \code{ip_interface} vector is conceptually like constructing an
