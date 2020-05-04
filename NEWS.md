@@ -13,6 +13,11 @@
 
 ## Minor improvements
 
+* Support pretty printing in tibbles
+  * CIDRs aligned on forward slash separator
+  * Prefix length displayed in green to increase prominence
+  * Dots and colons displayed in gray to reduce prominence
+  * IPv6 addresses can be automatically truncated, to fit more columns into the console width
 * Added hex logo
 * Compatible with vctrs 0.3.0
 
