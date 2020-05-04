@@ -1,6 +1,6 @@
 # taken from pillar package
 align <- function(x, width = NULL, align = c("left", "right")) {
-  align <- match.arg(align)
+  align <- arg_match(align)
   extent <- pillar::get_extent(x)
   if (is.null(width)) {
     width <- max(extent)
@@ -14,7 +14,7 @@ align <- function(x, width = NULL, align = c("left", "right")) {
 }
 
 truncate_address <- function(x, max_width, ellipsis) {
-  width_ellipsis <- nchar(ellipsis)
+  width_ellipsis <- pillar::get_extent(ellipsis)
   width_x <- pillar::get_extent(x)
   width_shown <- max_width - width_ellipsis
 
