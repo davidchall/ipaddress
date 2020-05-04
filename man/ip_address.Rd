@@ -6,11 +6,11 @@
 \alias{as_ip_address}
 \alias{as_ip_address.character}
 \alias{as_ip_address.ip_interface}
-\alias{format.ip_address}
 \alias{as.character.ip_address}
+\alias{format.ip_address}
 \title{Vector of IP addresses}
 \usage{
-ip_address(ip = character())
+ip_address(x = character())
 
 is_ip_address(x)
 
@@ -20,17 +20,20 @@ as_ip_address(x)
 
 \method{as_ip_address}{ip_interface}(x)
 
-\method{format}{ip_address}(x, ...)
-
 \method{as.character}{ip_address}(x, ...)
+
+\method{format}{ip_address}(x, ...)
 }
 \arguments{
-\item{ip}{Character vector of IP addresses, in dot-decimal notation (IPv4)
-or hexadecimal notation (IPv6).}
+\item{x}{\itemize{
+\item For \code{ip_address()}: A character vector of IP addresses, in dot-decimal
+notation (IPv4) or hexadecimal notation (IPv6)
+\item For \code{is_ip_address()}: An object to test
+\item For \code{as_ip_address()}: An object to cast
+\item For \code{as.character()}: An \code{ip_address} vector
+}}
 
-\item{x}{An \code{ip_address} vector}
-
-\item{...}{Arguments to be passed to other methods}
+\item{...}{Included for S3 generic consistency}
 }
 \value{
 An S3 vector of class \code{ip_address}

@@ -8,13 +8,13 @@
 \alias{as_ip_network}
 \alias{as_ip_network.character}
 \alias{as_ip_network.ip_interface}
-\alias{format.ip_network}
 \alias{as.character.ip_network}
+\alias{format.ip_network}
 \title{Vector of IP networks}
 \usage{
 ip_network(...)
 
-\method{ip_network}{default}(ip = character(), strict = TRUE, ...)
+\method{ip_network}{default}(x = character(), strict = TRUE, ...)
 
 \method{ip_network}{ip_address}(address, prefix_length, strict = TRUE, ...)
 
@@ -26,25 +26,29 @@ as_ip_network(x)
 
 \method{as_ip_network}{ip_interface}(x)
 
-\method{format}{ip_network}(x, ...)
-
 \method{as.character}{ip_network}(x, ...)
+
+\method{format}{ip_network}(x, ...)
 }
 \arguments{
-\item{...}{Arguments to be passed to other methods}
+\item{...}{Included for S3 generic consistency}
 
-\item{ip}{Character vector of IP networks, in CIDR notation (IPv4 or IPv6).}
+\item{x}{\itemize{
+\item For \code{ip_network()}: A character vector of IP networks, in CIDR notation
+(IPv4 or IPv6)
+\item For \code{is_ip_network()}: An object to test
+\item For \code{as_ip_network()}: An object to cast
+\item For \code{as.character()}: An \code{ip_network} vector
+}}
 
 \item{strict}{If \code{TRUE} (the default) and the input has host bits set,
 then a warning is emitted and \code{NA} is returned. If \code{FALSE}, the
 host bits are set to zero and a valid IP network is returned. If you need
-to retain the host bits, consider using \code{ip_interface()} instead.}
+to retain the host bits, consider using \code{\link[=ip_interface]{ip_interface()}} instead.}
 
 \item{address}{An \code{\link{ip_address}} vector}
 
 \item{prefix_length}{An integer vector}
-
-\item{x}{An \code{ip_network} vector}
 }
 \value{
 An S3 vector of class \code{ip_network}

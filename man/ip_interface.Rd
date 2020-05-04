@@ -7,13 +7,13 @@
 \alias{is_ip_interface}
 \alias{as_ip_interface}
 \alias{as_ip_interface.character}
-\alias{format.ip_interface}
 \alias{as.character.ip_interface}
+\alias{format.ip_interface}
 \title{Vector of IP interfaces}
 \usage{
 ip_interface(...)
 
-\method{ip_interface}{default}(ip = character(), ...)
+\method{ip_interface}{default}(x = character(), ...)
 
 \method{ip_interface}{ip_address}(address, prefix_length, ...)
 
@@ -23,23 +23,27 @@ as_ip_interface(x)
 
 \method{as_ip_interface}{character}(x)
 
-\method{format}{ip_interface}(x, ...)
-
 \method{as.character}{ip_interface}(x, ...)
+
+\method{format}{ip_interface}(x, ...)
 }
 \arguments{
-\item{...}{Arguments to be passed to other methods}
+\item{...}{Included for S3 generic consistency}
 
-\item{ip}{Character vector of IP interfaces, in CIDR notation (IPv4 or IPv6).}
+\item{x}{\itemize{
+\item For \code{ip_interface()}: A character vector of IP interfaces, in CIDR notation
+(IPv4 or IPv6)
+\item For \code{is_ip_interface()}: An object to test
+\item For \code{as_ip_interface()}: An object to cast
+\item For \code{as.character()}: An \code{ip_interface} vector
+}}
 
 \item{address}{An \code{\link{ip_address}} vector}
 
 \item{prefix_length}{An integer vector}
-
-\item{x}{An \code{ip_interface} vector}
 }
 \value{
-An S3 vector of class  \code{ip_interface}
+An S3 vector of class \code{ip_interface}
 }
 \description{
 This hybrid class stores both the host address and the network it is on.

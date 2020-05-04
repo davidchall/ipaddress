@@ -3,7 +3,14 @@ methods::setOldClass(c("ip_interface", "vctrs_vctr"))
 
 #' Vector of IP interfaces
 #'
+#' @description
 #' This hybrid class stores both the host address and the network it is on.
+#'
+#' `ip_interface()` constructs a vector of IP interfaces.
+#'
+#' `is_ip_interface()` checks if an object is of class `ip_interface`.
+#'
+#' `as_ip_interface()` casts an object to `ip_interface`.
 #'
 #' @details
 #' Constructing an `ip_interface` vector is conceptually like constructing an
@@ -23,8 +30,16 @@ methods::setOldClass(c("ip_interface", "vctrs_vctr"))
 #' For other purposes, you can extract the address and network components using
 #' [as_ip_address()] and [as_ip_network()].
 #'
-#' @param x An `ip_interface` vector
-#' @param ... Arguments to be passed to other methods
+#' @param ... Included for S3 generic consistency
+#' @param x
+#' * For `ip_interface()`: A character vector of IP interfaces, in CIDR notation
+#'   (IPv4 or IPv6)
+#' * For `is_ip_interface()`: An object to test
+#' * For `as_ip_interface()`: An object to cast
+#' * For `as.character()`: An `ip_interface` vector
+#' @param address An [`ip_address`] vector
+#' @param prefix_length An integer vector
+#' @return An S3 vector of class `ip_interface`
 #'
 #' @examples
 #' # construct from character vector
@@ -45,15 +60,6 @@ NULL
 
 # Construction ------------------------------------------------------------
 
-#' `ip_interface()`
-#'
-#' `ip_interface()` constructs a vector of IP interfaces.
-#'
-#' @param ip Character vector of IP interfaces, in CIDR notation (IPv4 or IPv6).
-#' @param address An [`ip_address`] vector
-#' @param prefix_length An integer vector
-#' @return An S3 vector of class  `ip_interface`
-#'
 #' @rdname ip_interface
 #' @export
 ip_interface <- function(...) {
@@ -62,8 +68,8 @@ ip_interface <- function(...) {
 
 #' @rdname ip_interface
 #' @export
-ip_interface.default <- function(ip = character(), ...) {
-  new_ip_interface_reclass(wrap_parse_interface(ip))
+ip_interface.default <- function(x = character(), ...) {
+  new_ip_interface_reclass(wrap_parse_interface(x))
 }
 
 #' @rdname ip_interface
@@ -107,10 +113,6 @@ new_ip_interface <- function(address1 = integer(), address2 = integer(), address
   ), class = c("ip_interface", "ip_address"))
 }
 
-#' `is_ip_interface()`
-#'
-#' `is_ip_interface()` checks if an object is of class `ip_interface`.
-#'
 #' @rdname ip_interface
 #' @export
 is_ip_interface <- function(x) inherits(x, "ip_interface")
@@ -118,10 +120,6 @@ is_ip_interface <- function(x) inherits(x, "ip_interface")
 
 # Casting ------------------------------------------------------------
 
-#' `as_ip_interface()`
-#'
-#' `as_ip_interface()` casts an object to `ip_interface`.
-#'
 #' @rdname ip_interface
 #' @export
 as_ip_interface <- function(x) UseMethod("as_ip_interface")
@@ -132,11 +130,11 @@ as_ip_interface.character <- function(x) ip_interface(x)
 
 #' @rdname ip_interface
 #' @export
-format.ip_interface <- function(x, ...) as.character(x)
+as.character.ip_interface <- function(x, ...) wrap_print_network(x)
 
 #' @rdname ip_interface
 #' @export
-as.character.ip_interface <- function(x, ...) wrap_print_network(x)
+format.ip_interface <- function(x, ...) as.character(x)
 
 
 # Other ------------------------------------------------------------
