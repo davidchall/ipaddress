@@ -13,8 +13,12 @@
 
 ## Minor improvements
 
+* Support pretty printing in tibbles
+  * CIDRs aligned on forward slash separator
+  * Prefix length displayed in green to increase prominence
+  * Dots and colons displayed in gray to reduce prominence
+  * IPv6 addresses can be automatically truncated, to fit more columns into the console width
 * Added hex logo
-* Support pretty printing in tibbles (`ip_network()` and `ip_interface()` vectors now align on the forward slash and distinguish the prefix length in green)
 * Compatible with vctrs 0.3.0
 
 
