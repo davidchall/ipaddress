@@ -165,7 +165,7 @@ as_ip_interface() casts an object to ip_interface." />
     <pre class="usage"><span class='fu'>ip_interface</span>(<span class='no'>...</span>)
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>ip_interface</span>(<span class='kw'>ip</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(), <span class='no'>...</span>)
+<span class='fu'>ip_interface</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(), <span class='no'>...</span>)
 
 <span class='co'># S3 method for ip_address</span>
 <span class='fu'>ip_interface</span>(<span class='no'>address</span>, <span class='no'>prefix_length</span>, <span class='no'>...</span>)
@@ -178,21 +178,27 @@ as_ip_interface() casts an object to ip_interface." />
 <span class='fu'>as_ip_interface</span>(<span class='no'>x</span>)
 
 <span class='co'># S3 method for ip_interface</span>
-<span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for ip_interface</span>
-<span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>...</th>
-      <td><p>Arguments to be passed to other methods</p></td>
+      <td><p>Included for S3 generic consistency</p></td>
     </tr>
     <tr>
-      <th>ip</th>
-      <td><p>Character vector of IP interfaces, in CIDR notation (IPv4 or IPv6).</p></td>
+      <th>x</th>
+      <td><ul>
+<li><p>For <code>ip_interface()</code>: A character vector of IP interfaces, in CIDR notation
+(IPv4 or IPv6)</p></li>
+<li><p>For <code>is_ip_interface()</code>: An object to test</p></li>
+<li><p>For <code>as_ip_interface()</code>: An object to cast</p></li>
+<li><p>For <code><a href='https://rdrr.io/r/base/character.html'>as.character()</a></code>: An <code>ip_interface</code> vector</p></li>
+</ul></td>
     </tr>
     <tr>
       <th>address</th>
@@ -202,15 +208,11 @@ as_ip_interface() casts an object to ip_interface." />
       <th>prefix_length</th>
       <td><p>An integer vector</p></td>
     </tr>
-    <tr>
-      <th>x</th>
-      <td><p>An <code>ip_interface</code> vector</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An S3 vector of class  <code>ip_interface</code></p>
+    <p>An S3 vector of class <code>ip_interface</code></p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Constructing an <code>ip_interface</code> vector is conceptually like constructing an
