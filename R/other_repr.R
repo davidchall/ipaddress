@@ -52,6 +52,11 @@
 #' ip_to_integer(x)
 #'
 #' integer_to_ip(ip_to_integer(x))
+#'
+#' # with IPv4 only, we can use numeric data type
+#' as.numeric(ip_to_integer(ip_address("192.168.0.1")))
+#'
+#' integer_to_ip(as.character(3232235521))
 #' @seealso
 #'  * [ip_to_bytes()] and [bytes_to_ip()]
 #'  * [ip_to_binary()] and [binary_to_ip()]
