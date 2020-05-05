@@ -52,9 +52,9 @@ It can handle IPv4 and IPv6 addresses simultaneously:
 ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334"))
 ```
 
-Unlike the Python [ipaddress](https://docs.python.org/library/ipaddress.html) module, we don't provide a way to construct an IP address from an integer.
-This is because the R integer data type does not support the necessary range of values.
-However, if you have addresses stored as raw bytes, you can construct an `ip_address()` vector using the `from_packed()` function.
+IP addresses are often stored as integers for convenience, so you might need to encode or decode this format.
+The `ip_to_integer()` and `integer_to_ip()` functions are provided for this purpose.
+We recommend reading the documentation before use, because these functions can be slightly counter-intuitive (due to circumventing limitations of the R integer data type).
 
 ## Data storage
 
