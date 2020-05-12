@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Vector of IP interfaces — ip_interface • ipaddress</title>
+<title>Represent address as integer — ip_to_integer • ipaddress</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -52,11 +52,10 @@
 
 
 
-<meta property="og:title" content="Vector of IP interfaces — ip_interface" />
-<meta property="og:description" content="This hybrid class stores both the host address and the network it is on.
-ip_interface() constructs a vector of IP interfaces.
-is_ip_interface() checks if an object is of class ip_interface.
-as_ip_interface() casts an object to ip_interface." />
+<meta property="og:title" content="Represent address as integer — ip_to_integer" />
+<meta property="og:description" content="Encode or decode an ip_address as an integer.
+Note: The result is a character vector (see below for why). This can be
+converted using as.numeric() for IPv4 addresses." />
 <meta property="og:image" content="https://davidchall.github.io/ipaddress/logo.png" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="@hall_davidc" />
@@ -150,101 +149,97 @@ as_ip_interface() casts an object to ip_interface." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Vector of IP interfaces</h1>
-    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/ip_interface.R'><code>R/ip_interface.R</code></a></small>
-    <div class="hidden name"><code>ip_interface.Rd</code></div>
+    <h1>Represent address as integer</h1>
+    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/other_repr.R'><code>R/other_repr.R</code></a></small>
+    <div class="hidden name"><code>ip_to_integer.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This hybrid class stores both the host address and the network it is on.</p>
-<p><code>ip_interface()</code> constructs a vector of IP interfaces.</p>
-<p><code>is_ip_interface()</code> checks if an object is of class <code>ip_interface</code>.</p>
-<p><code>as_ip_interface()</code> casts an object to <code>ip_interface</code>.</p>
+    <p>Encode or decode an <code><a href='ip_address.html'>ip_address</a></code> as an integer.</p>
+<p><strong>Note:</strong> The result is a character vector (see below for why). This can be
+converted using <code><a href='https://rdrr.io/r/base/numeric.html'>as.numeric()</a></code> for IPv4 addresses.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ip_interface</span>(<span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>ip_to_integer</span>(<span class='no'>x</span>)
 
-<span class='co'># S3 method for default</span>
-<span class='fu'>ip_interface</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(), <span class='no'>...</span>)
-
-<span class='co'># S3 method for ip_address</span>
-<span class='fu'>ip_interface</span>(<span class='no'>address</span>, <span class='no'>prefix_length</span>, <span class='no'>...</span>)
-
-<span class='fu'>is_ip_interface</span>(<span class='no'>x</span>)
-
-<span class='fu'>as_ip_interface</span>(<span class='no'>x</span>)
-
-<span class='co'># S3 method for character</span>
-<span class='fu'>as_ip_interface</span>(<span class='no'>x</span>)
-
-<span class='co'># S3 method for ip_interface</span>
-<span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for ip_interface</span>
-<span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>integer_to_ip</span>(<span class='no'>x</span>, <span class='kw'>is_ipv6</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>...</th>
-      <td><p>Included for S3 generic consistency</p></td>
-    </tr>
-    <tr>
       <th>x</th>
       <td><ul>
-<li><p>For <code>ip_interface()</code>: A character vector of IP interfaces, in CIDR notation
-(IPv4 or IPv6)</p></li>
-<li><p>For <code>is_ip_interface()</code>: An object to test</p></li>
-<li><p>For <code>as_ip_interface()</code>: An object to cast</p></li>
-<li><p>For <code><a href='https://rdrr.io/r/base/character.html'>as.character()</a></code>: An <code>ip_interface</code> vector</p></li>
+<li><p>For <code>ip_to_integer()</code>: An <code><a href='ip_address.html'>ip_address</a></code> vector</p></li>
+<li><p>For <code>integer_to_ip()</code>: A character vector</p></li>
 </ul></td>
     </tr>
     <tr>
-      <th>address</th>
-      <td><p>An <code><a href='ip_address.html'>ip_address</a></code> vector</p></td>
-    </tr>
-    <tr>
-      <th>prefix_length</th>
-      <td><p>An integer vector</p></td>
+      <th>is_ipv6</th>
+      <td><p>A logical vector indicating whether to construct an IPv4 or
+IPv6 address. If <code>NULL</code> (the default), then integers less than 2^32 will
+construct an IPv4 address and anything larger will construct an IPv6 address.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An S3 vector of class <code>ip_interface</code></p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Constructing an <code>ip_interface</code> vector is conceptually like constructing an
-<code><a href='ip_network.html'>ip_network</a></code> vector, except the host bits are retained.</p>
-<p>The <code>ip_interface</code> class inherits from the <code><a href='ip_address.html'>ip_address</a></code> class.
-This means it can generally be used in places where an <code><a href='ip_address.html'>ip_address</a></code>
-vector is expected. A few exceptions to this rule are:</p><ul>
-<li><p>It does not support addition and subtraction of integers</p></li>
-<li><p>It does not support bitwise operations</p></li>
-<li><p>It cannot be compared to <code><a href='ip_address.html'>ip_address</a></code> vectors</p></li>
+    
+<ul>
+<li><p>For <code>ip_to_integer()</code>: A character vector</p></li>
+<li><p>For <code>integer_to_ip()</code>: An <code><a href='ip_address.html'>ip_address</a></code> vector</p></li>
 </ul>
 
-<p>The <code>ip_interface</code> class additionally supports a few functions typically
-reserved for <code><a href='ip_network.html'>ip_network</a></code> vectors: <code><a href='netmask.html'>prefix_length()</a></code>, <code><a href='netmask.html'>netmask()</a></code> and
-<code><a href='netmask.html'>hostmask()</a></code>.</p>
-<p>For other purposes, you can extract the address and network components using
-<code><a href='ip_address.html'>as_ip_address()</a></code> and <code><a href='ip_network.html'>as_ip_network()</a></code>.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>It is common to represent an IP address as an integer, by reinterpreting
+the bit sequence as a big-endian unsigned integer. This means IPv4 and IPv6
+addresses can be represented by 32-bit and 128-bit unsigned integers.
+In this way, the IPv4 addresses <code>0.0.0.0</code> and <code>255.255.255.255</code> would be
+represented as 0 and 4,294,967,295.</p>
+    <h2 class="hasAnchor" id="why-is-a-character-vector-returned-"><a class="anchor" href="#why-is-a-character-vector-returned-"></a>Why is a character vector returned?</h2>
+
+    
+
+<p>Base R provides two data types that can store integers: <code><a href='https://rdrr.io/r/base/integer.html'>integer</a></code> and
+<code><a href='https://rdrr.io/r/base/double.html'>double</a></code> (also known as <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code>). The former is a fixed-point data
+format (32-bit) and the latter is a floating-point data format (64-bit).
+Both types are signed, and R does not offer unsigned variants.</p>
+<p>For the purpose of storing IP addresses as integers, we need to be able to
+store a large range of positive integers without losing integer precision.
+Under these circumstances, the <code><a href='https://rdrr.io/r/base/integer.html'>integer</a></code> type can store integers up to
+2^31 - 1 and the <code><a href='https://rdrr.io/r/base/double.html'>double</a></code> type can store integers up to 2^53. However,
+for IPv4 and IPv6 addresses we need to store integers up to 2^32 - 1 and
+2^128 - 1, respectively. This means an IPv4 address can be stored in a
+<code><a href='https://rdrr.io/r/base/double.html'>double</a></code>, but an IPv6 address cannot be stored in either R data type.</p>
+<p>Although the integer representation of an IPv6 address cannot be stored in
+a numeric R data type, it can be stored as a character string instead.
+This allows the integer to be written to disk or used by other software that
+<em>does</em> support 128-bit unsigned integers. To treat IPv4 and IPv6 equally,
+<code>ip_to_integer()</code> will always return a <code><a href='https://rdrr.io/r/base/character.html'>character</a></code> vector. With IPv4
+addresses, this output can be converted to a <code><a href='https://rdrr.io/r/base/double.html'>double</a></code> vector using
+<code><a href='https://rdrr.io/r/base/double.html'>as.double()</a></code> or <code><a href='https://rdrr.io/r/base/numeric.html'>as.numeric()</a></code>. With IPv6 addresses, this conversion loses
+the distinction between individual addresses because integer precision is lost.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'>
+<ul>
+<li><p><code><a href='ip_to_bytes.html'>ip_to_bytes()</a></code> and <code><a href='ip_to_bytes.html'>bytes_to_ip()</a></code></p></li>
+<li><p><code><a href='ip_to_binary.html'>ip_to_binary()</a></code> and <code><a href='ip_to_binary.html'>binary_to_ip()</a></code></p></li>
+</ul>
+</div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># construct from character vector</span>
-<span class='fu'>ip_interface</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.1/10"</span>, <span class='st'>"2001:db8:c3::abcd/45"</span>))</div><div class='output co'>#&gt; &lt;ip_interface[2]&gt;
-#&gt; [1] 192.168.0.1/10       2001:db8:c3::abcd/45</div><div class='input'>
-<span class='co'># construct from address + prefix length objects</span>
-<span class='fu'>ip_interface</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.1"</span>, <span class='st'>"2001:db8:c3::abcd"</span>)), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10L</span>, <span class='fl'>45L</span>))</div><div class='output co'>#&gt; &lt;ip_interface[2]&gt;
-#&gt; [1] 192.168.0.1/10       2001:db8:c3::abcd/45</div><div class='input'>
-<span class='co'># extract IP address</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ip_interface</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.1/10"</span>, <span class='st'>"2001:db8:c3::abcd/45"</span>))
-<span class='fu'><a href='ip_address.html'>as_ip_address</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
-#&gt; [1] 192.168.0.1       2001:db8:c3::abcd</div><div class='input'>
-<span class='co'># extract IP network (with host bits masked)</span>
-<span class='fu'><a href='ip_network.html'>as_ip_network</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; &lt;ip_network[2]&gt;
-#&gt; [1] 192.128.0.0/10   2001:db8:c0::/45</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.1"</span>, <span class='st'>"2001:db8::8a2e:370:7334"</span>, <span class='fl'>NA</span>))
+<span class='fu'>ip_to_integer</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] "3232235521"                            
+#&gt; [2] "42540766411282592856904136881884656436"
+#&gt; [3] NA                                      </div><div class='input'>
+<span class='fu'>integer_to_ip</span>(<span class='fu'>ip_to_integer</span>(<span class='no'>x</span>))</div><div class='output co'>#&gt; &lt;ip_address[3]&gt;
+#&gt; [1] 192.168.0.1             2001:db8::8a2e:370:7334 &lt;NA&gt;                   </div><div class='input'>
+<span class='co'># with IPv4 only, we can use numeric data type</span>
+<span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='fu'>ip_to_integer</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"192.168.0.1"</span>)))</div><div class='output co'>#&gt; [1] 3232235521</div><div class='input'>
+<span class='fu'>integer_to_ip</span>(<span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='fl'>3232235521</span>))</div><div class='output co'>#&gt; &lt;ip_address[1]&gt;
+#&gt; [1] 192.168.0.1</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

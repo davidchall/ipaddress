@@ -98,7 +98,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -150,13 +150,52 @@
       <small>Source: <a href='https://github.com/davidchall/ipaddress/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="ipaddress-development-version" class="section level1">
-<h1 class="page-header" data-toc-text="development version">
-<a href="#ipaddress-development-version" class="anchor"></a>ipaddress (development version)<small> Unreleased </small>
+    <div id="ipaddress-030" class="section level1">
+<h1 class="page-header" data-toc-text="0.3.0">
+<a href="#ipaddress-030" class="anchor"></a>ipaddress 0.3.0<small> Unreleased </small>
 </h1>
+<div id="breaking-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
 <ul>
-<li>Added hex logo</li>
+<li>Renamed functions for converting to and from alternative representations of IP addresses:
+<ul>
+<li>
+<code>as_packed()</code> and <code>from_packed()</code> become <code><a href="../reference/ip_to_bytes.html">ip_to_bytes()</a></code> and <code><a href="../reference/ip_to_bytes.html">bytes_to_ip()</a></code>
+</li>
+<li>
+<code>as_binary()</code> and <code>from_binary()</code> become <code><a href="../reference/ip_to_binary.html">ip_to_binary()</a></code> and <code><a href="../reference/ip_to_binary.html">binary_to_ip()</a></code>
+</li>
+<li>
+<code>as_hostname()</code> and <code>from_hostname()</code> become <code><a href="../reference/ip_to_hostname.html">ip_to_hostname()</a></code> and <code><a href="../reference/ip_to_hostname.html">hostname_to_ip()</a></code>
+</li>
 </ul>
+</li>
+</ul>
+</div>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New features</h2>
+<ul>
+<li>New <code><a href="../reference/ip_to_integer.html">ip_to_integer()</a></code> and <code><a href="../reference/ip_to_integer.html">integer_to_ip()</a></code> functions to encode and decode addresses as integers. Note that the integers are contained within a character vector. Please see the function documentation for an explanation.</li>
+</ul>
+</div>
+<div id="minor-improvements" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-improvements" class="anchor"></a>Minor improvements</h2>
+<ul>
+<li>Support pretty printing in tibbles
+<ul>
+<li>CIDRs aligned on forward slash separator</li>
+<li>Prefix length displayed in green to increase prominence</li>
+<li>Dots and colons displayed in gray to reduce prominence</li>
+<li>IPv6 addresses can be automatically truncated, to fit more columns into the console width</li>
+</ul>
+</li>
+<li>Added hex logo</li>
+<li>Compatible with vctrs 0.3.0</li>
+</ul>
+</div>
 </div>
     <div id="ipaddress-020" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.0">
@@ -179,9 +218,9 @@
 <h2 class="hasAnchor">
 <a href="#other-representations" class="anchor"></a>Other representations</h2>
 <ul>
-<li>New <code><a href="../reference/packed.html">as_packed()</a></code> and <code><a href="../reference/packed.html">from_packed()</a></code> functions to encode and decode addresses as raw bytes</li>
-<li>New <code><a href="../reference/binary.html">as_binary()</a></code> and <code><a href="../reference/binary.html">from_binary()</a></code> functions to encode and decode addresses as binary strings</li>
-<li>New <code><a href="../reference/hostname.html">as_hostname()</a></code> and <code><a href="../reference/hostname.html">from_hostname()</a></code> functions translate addresses to and from hostnames</li>
+<li>New <code>as_packed()</code> and <code>from_packed()</code> functions to encode and decode addresses as raw bytes</li>
+<li>New <code>as_binary()</code> and <code>from_binary()</code> functions to encode and decode addresses as binary strings</li>
+<li>New <code>as_hostname()</code> and <code>from_hostname()</code> functions translate addresses to and from hostnames</li>
 </ul>
 </div>
 <div id="address-space" class="section level2">
@@ -311,7 +350,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

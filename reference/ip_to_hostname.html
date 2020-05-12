@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Vector of IP interfaces — ip_interface • ipaddress</title>
+<title>Translate address to/from hostname — ip_to_hostname • ipaddress</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -52,11 +52,8 @@
 
 
 
-<meta property="og:title" content="Vector of IP interfaces — ip_interface" />
-<meta property="og:description" content="This hybrid class stores both the host address and the network it is on.
-ip_interface() constructs a vector of IP interfaces.
-is_ip_interface() checks if an object is of class ip_interface.
-as_ip_interface() casts an object to ip_interface." />
+<meta property="og:title" content="Translate address to/from hostname — ip_to_hostname" />
+<meta property="og:description" content="Perform reverse and forward DNS resolution" />
 <meta property="og:image" content="https://davidchall.github.io/ipaddress/logo.png" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="@hall_davidc" />
@@ -150,101 +147,71 @@ as_ip_interface() casts an object to ip_interface." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Vector of IP interfaces</h1>
-    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/ip_interface.R'><code>R/ip_interface.R</code></a></small>
-    <div class="hidden name"><code>ip_interface.Rd</code></div>
+    <h1>Translate address to/from hostname</h1>
+    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/hostname.R'><code>R/hostname.R</code></a></small>
+    <div class="hidden name"><code>ip_to_hostname.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This hybrid class stores both the host address and the network it is on.</p>
-<p><code>ip_interface()</code> constructs a vector of IP interfaces.</p>
-<p><code>is_ip_interface()</code> checks if an object is of class <code>ip_interface</code>.</p>
-<p><code>as_ip_interface()</code> casts an object to <code>ip_interface</code>.</p>
+    <p>Perform reverse and forward DNS resolution</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ip_interface</span>(<span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>ip_to_hostname</span>(<span class='no'>x</span>, <span class='kw'>multiple</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='co'># S3 method for default</span>
-<span class='fu'>ip_interface</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(), <span class='no'>...</span>)
-
-<span class='co'># S3 method for ip_address</span>
-<span class='fu'>ip_interface</span>(<span class='no'>address</span>, <span class='no'>prefix_length</span>, <span class='no'>...</span>)
-
-<span class='fu'>is_ip_interface</span>(<span class='no'>x</span>)
-
-<span class='fu'>as_ip_interface</span>(<span class='no'>x</span>)
-
-<span class='co'># S3 method for character</span>
-<span class='fu'>as_ip_interface</span>(<span class='no'>x</span>)
-
-<span class='co'># S3 method for ip_interface</span>
-<span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for ip_interface</span>
-<span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>hostname_to_ip</span>(<span class='no'>x</span>, <span class='kw'>multiple</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>...</th>
-      <td><p>Included for S3 generic consistency</p></td>
-    </tr>
-    <tr>
       <th>x</th>
       <td><ul>
-<li><p>For <code>ip_interface()</code>: A character vector of IP interfaces, in CIDR notation
-(IPv4 or IPv6)</p></li>
-<li><p>For <code>is_ip_interface()</code>: An object to test</p></li>
-<li><p>For <code>as_ip_interface()</code>: An object to cast</p></li>
-<li><p>For <code><a href='https://rdrr.io/r/base/character.html'>as.character()</a></code>: An <code>ip_interface</code> vector</p></li>
+<li><p>For <code>ip_to_hostname()</code>: An <code><a href='ip_address.html'>ip_address</a></code> vector</p></li>
+<li><p>For <code>hostname_to_ip()</code>: A character vector of hostnames</p></li>
 </ul></td>
     </tr>
     <tr>
-      <th>address</th>
-      <td><p>An <code><a href='ip_address.html'>ip_address</a></code> vector</p></td>
-    </tr>
-    <tr>
-      <th>prefix_length</th>
-      <td><p>An integer vector</p></td>
+      <th>multiple</th>
+      <td><p>A logical scalar indicating if <em>all</em> resolved endpoints are
+returned, or just the first endpoint (the default). This determines whether
+a vector or list of vectors is returned.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An S3 vector of class <code>ip_interface</code></p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Constructing an <code>ip_interface</code> vector is conceptually like constructing an
-<code><a href='ip_network.html'>ip_network</a></code> vector, except the host bits are retained.</p>
-<p>The <code>ip_interface</code> class inherits from the <code><a href='ip_address.html'>ip_address</a></code> class.
-This means it can generally be used in places where an <code><a href='ip_address.html'>ip_address</a></code>
-vector is expected. A few exceptions to this rule are:</p><ul>
-<li><p>It does not support addition and subtraction of integers</p></li>
-<li><p>It does not support bitwise operations</p></li>
-<li><p>It cannot be compared to <code><a href='ip_address.html'>ip_address</a></code> vectors</p></li>
+    
+<ul>
+<li><p>For <code>ip_to_hostname()</code>: A character vector (<code>multiple = FALSE</code>) or
+a list of character vectors (<code>multiple = TRUE</code>)</p></li>
+<li><p>For <code>hostname_to_ip()</code>: A <code><a href='ip_address.html'>ip_address</a></code> vector (<code>multiple = FALSE</code>) or
+a list of <code><a href='ip_address.html'>ip_address</a></code> vectors (<code>multiple = TRUE</code>)</p></li>
 </ul>
 
-<p>The <code>ip_interface</code> class additionally supports a few functions typically
-reserved for <code><a href='ip_network.html'>ip_network</a></code> vectors: <code><a href='netmask.html'>prefix_length()</a></code>, <code><a href='netmask.html'>netmask()</a></code> and
-<code><a href='netmask.html'>hostmask()</a></code>.</p>
-<p>For other purposes, you can extract the address and network components using
-<code><a href='ip_address.html'>as_ip_address()</a></code> and <code><a href='ip_network.html'>as_ip_network()</a></code>.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>These functions require an internet connection. Before processing the input
+vector, we first check that a known hostname can be resolved. If this fails,
+an error is raised.</p>
+<p>If DNS lookup cannot resolve an input, then <code>NA</code> is returned for that input.
+If an error occurs during DNS lookup, then a warning is emitted and <code>NA</code> is
+returned for that input.</p>
+<p>DNS resolution performs a many-to-many mapping between IP addresses and
+hostnames. For this reason, these two functions can potentially return
+multiple values for each element of the input vector. The <code>multiple</code> argument
+control whether <em>all</em> values are returned (a vector for each input), or
+just the first value (a scalar for each input).</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>The base function <code><a href='https://rdrr.io/r/utils/nsl.html'>nsl()</a></code> provides forward DNS resolution to IPv4 addresses,
+but only on Unix-like systems.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># construct from character vector</span>
-<span class='fu'>ip_interface</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.1/10"</span>, <span class='st'>"2001:db8:c3::abcd/45"</span>))</div><div class='output co'>#&gt; &lt;ip_interface[2]&gt;
-#&gt; [1] 192.168.0.1/10       2001:db8:c3::abcd/45</div><div class='input'>
-<span class='co'># construct from address + prefix length objects</span>
-<span class='fu'>ip_interface</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.1"</span>, <span class='st'>"2001:db8:c3::abcd"</span>)), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10L</span>, <span class='fl'>45L</span>))</div><div class='output co'>#&gt; &lt;ip_interface[2]&gt;
-#&gt; [1] 192.168.0.1/10       2001:db8:c3::abcd/45</div><div class='input'>
-<span class='co'># extract IP address</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>ip_interface</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.1/10"</span>, <span class='st'>"2001:db8:c3::abcd/45"</span>))
-<span class='fu'><a href='ip_address.html'>as_ip_address</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
-#&gt; [1] 192.168.0.1       2001:db8:c3::abcd</div><div class='input'>
-<span class='co'># extract IP network (with host bits masked)</span>
-<span class='fu'><a href='ip_network.html'>as_ip_network</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; &lt;ip_network[2]&gt;
-#&gt; [1] 192.128.0.0/10   2001:db8:c0::/45</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>hostname_to_ip</span>(<span class='st'>"r-project.org"</span>)
+
+<span class='fu'>ip_to_hostname</span>(<span class='fu'>hostname_to_ip</span>(<span class='st'>"r-project.org"</span>))
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

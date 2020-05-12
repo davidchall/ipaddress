@@ -54,8 +54,8 @@
 
 <meta property="og:title" content="Vector of IP networks — ip_network" />
 <meta property="og:description" content="ip_network() constructs a vector of IP networks.
-as_ip_network() casts an object to ip_network.
-is_ip_network() checks if an object is of class ip_network." />
+is_ip_network() checks if an object is of class ip_network.
+as_ip_network() casts an object to ip_network." />
 <meta property="og:image" content="https://davidchall.github.io/ipaddress/logo.png" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="@hall_davidc" />
@@ -101,7 +101,7 @@ is_ip_network() checks if an object is of class ip_network." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -156,38 +156,50 @@ is_ip_network() checks if an object is of class ip_network." />
 
     <div class="ref-description">
     <p><code>ip_network()</code> constructs a vector of IP networks.</p>
-<p><code>as_ip_network()</code> casts an object to <code>ip_network</code>.</p>
 <p><code>is_ip_network()</code> checks if an object is of class <code>ip_network</code>.</p>
+<p><code>as_ip_network()</code> casts an object to <code>ip_network</code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>ip_network</span>(<span class='no'>...</span>)
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>ip_network</span>(<span class='kw'>ip</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(), <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
+<span class='fu'>ip_network</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(), <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for ip_address</span>
 <span class='fu'>ip_network</span>(<span class='no'>address</span>, <span class='no'>prefix_length</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
-<span class='fu'>as_ip_network</span>(<span class='no'>x</span>)
-
 <span class='fu'>is_ip_network</span>(<span class='no'>x</span>)
 
-<span class='co'># S3 method for ip_network</span>
-<span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>as_ip_network</span>(<span class='no'>x</span>)
+
+<span class='co'># S3 method for character</span>
+<span class='fu'>as_ip_network</span>(<span class='no'>x</span>)
+
+<span class='co'># S3 method for ip_interface</span>
+<span class='fu'>as_ip_network</span>(<span class='no'>x</span>)
 
 <span class='co'># S3 method for ip_network</span>
-<span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for ip_network</span>
+<span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>...</th>
-      <td><p>Arguments to be passed to other methods</p></td>
+      <td><p>Included for S3 generic consistency</p></td>
     </tr>
     <tr>
-      <th>ip</th>
-      <td><p>Character vector of IP networks, in CIDR notation (IPv4 or IPv6).</p></td>
+      <th>x</th>
+      <td><ul>
+<li><p>For <code>ip_network()</code>: A character vector of IP networks, in CIDR notation
+(IPv4 or IPv6)</p></li>
+<li><p>For <code>is_ip_network()</code>: An object to test</p></li>
+<li><p>For <code>as_ip_network()</code>: An object to cast</p></li>
+<li><p>For <code><a href='https://rdrr.io/r/base/character.html'>as.character()</a></code>: An <code>ip_network</code> vector</p></li>
+</ul></td>
     </tr>
     <tr>
       <th>strict</th>
@@ -203,10 +215,6 @@ to retain the host bits, consider using <code><a href='ip_interface.html'>ip_int
     <tr>
       <th>prefix_length</th>
       <td><p>An integer vector</p></td>
-    </tr>
-    <tr>
-      <th>x</th>
-      <td><p>An <code>ip_network</code> vector</p></td>
     </tr>
     </table>
 
@@ -269,7 +277,7 @@ integer vector containing the network address and prefix length, respectively.</
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>
