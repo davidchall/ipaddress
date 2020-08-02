@@ -789,6 +789,43 @@ LogicalVector IpAddressVector::isWithinAny(const IpNetworkVector &network) const
   return output;
 }
 
+IntegerVector IpAddressVector::prefixFromMask() const {
+  std::size_t vsize = is_na.size();
+
+  // initialize vectors
+  IntegerVector output(vsize);
+
+  for (std::size_t i=0; i<vsize; ++i) {
+    if (is_na[i]) {
+      output[i] = NA_INTEGER;
+    } else if (is_ipv6[i]) {
+      int prefix = netmask_to_prefix(address_v6[i]);
+      if (prefix == -1) {
+        prefix = hostmask_to_prefix(address_v6[i]);
+      }
+      if (prefix == -1) {
+        warnInvalidInput(i, address_v6[i].to_string(), "invalid netmask/hostmask");
+        output[i] = NA_INTEGER;
+      } else {
+        output[i] = prefix;
+      }
+    } else {
+      int prefix = netmask_to_prefix(address_v4[i]);
+      if (prefix == -1) {
+        prefix = hostmask_to_prefix(address_v4[i]);
+      }
+      if (prefix == -1) {
+        warnInvalidInput(i, address_v4[i].to_string(), "invalid netmask/hostmask");
+        output[i] = NA_INTEGER;
+      } else {
+        output[i] = prefix;
+      }
+    }
+  }
+
+  return output;
+}
+
 
 /*----------------------*
  *  Reserved addresses  *

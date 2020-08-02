@@ -293,6 +293,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// wrap_prefix_from_mask
+IntegerVector wrap_prefix_from_mask(List address_r);
+RcppExport SEXP _ipaddress_wrap_prefix_from_mask(SEXP address_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type address_r(address_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(wrap_prefix_from_mask(address_r));
+    return rcpp_result_gen;
+END_RCPP
+}
 // wrap_broadcast_address
 List wrap_broadcast_address(List network_r);
 RcppExport SEXP _ipaddress_wrap_broadcast_address(SEXP network_rSEXP) {
@@ -476,6 +487,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_wrap_add_integer", (DL_FUNC) &_ipaddress_wrap_add_integer, 2},
     {"_ipaddress_wrap_netmask", (DL_FUNC) &_ipaddress_wrap_netmask, 2},
     {"_ipaddress_wrap_hostmask", (DL_FUNC) &_ipaddress_wrap_hostmask, 2},
+    {"_ipaddress_wrap_prefix_from_mask", (DL_FUNC) &_ipaddress_wrap_prefix_from_mask, 1},
     {"_ipaddress_wrap_broadcast_address", (DL_FUNC) &_ipaddress_wrap_broadcast_address, 1},
     {"_ipaddress_wrap_is_within", (DL_FUNC) &_ipaddress_wrap_is_within, 2},
     {"_ipaddress_wrap_is_within_any", (DL_FUNC) &_ipaddress_wrap_is_within_any, 2},

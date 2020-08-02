@@ -109,6 +109,23 @@ int count_trailing_zero_bits(const Address &address) {
   return tz;
 }
 
+template<class Address>
+int netmask_to_prefix(const Address &address) {
+  typedef typename Address::bytes_type Bytes;
+
+  int trailing_zeros = count_trailing_zero_bits(address);
+  int prefix = (8 * sizeof(Bytes)) - trailing_zeros;
+
+  // catch non-mask addresses (mixed zeros and ones)
+  Address netmask = prefix_to_netmask<Address>(prefix);
+  return address == netmask ? prefix: -1;
+}
+
+template<class Address>
+int hostmask_to_prefix(const Address &address) {
+  return netmask_to_prefix(bitwise_not(address));
+}
+
 template<class Address, class Network>
 Address broadcast_address(const Network &network) {
   Address hostmask = prefix_to_hostmask<Address>(network.prefix_length());

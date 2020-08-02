@@ -107,6 +107,7 @@ public:
    *-----------------------*/
   Rcpp::LogicalVector isWithin(const IpNetworkVector &network) const;
   Rcpp::LogicalVector isWithinAny(const IpNetworkVector &network) const;
+  Rcpp::IntegerVector prefixFromMask() const;
 
 
   /*----------------------*
