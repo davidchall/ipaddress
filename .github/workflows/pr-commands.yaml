@@ -7,6 +7,8 @@ jobs:
     if: startsWith(github.event.comment.body, '/document')
     name: document
     runs-on: macOS-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - uses: r-lib/actions/pr-fetch@master
@@ -19,6 +21,8 @@ jobs:
         run: Rscript -e 'roxygen2::roxygenise()'
       - name: commit
         run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
           git add man/\* NAMESPACE
           git commit -m 'Document'
       - uses: r-lib/actions/pr-push@master
@@ -28,6 +32,8 @@ jobs:
     if: startsWith(github.event.comment.body, '/style')
     name: style
     runs-on: macOS-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - uses: r-lib/actions/pr-fetch@master
@@ -40,6 +46,8 @@ jobs:
         run: Rscript -e 'styler::style_pkg(style = function() styler::tidyverse_style(math_token_spacing = styler::specify_math_token_spacing(zero = NULL)))'
       - name: commit
         run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
           git add \*.R
           git commit -m 'Style'
       - uses: r-lib/actions/pr-push@master
