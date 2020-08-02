@@ -65,7 +65,7 @@ Address bitwise_xor(const Address &addr1, const Address &addr2) {
  *--------------*/
 
 template<class Address>
-Address get_netmask(int prefix_length) {
+Address prefix_to_netmask(int prefix_length) {
   typedef typename Address::bytes_type Bytes;
   Bytes result_bytes;
 
@@ -81,19 +81,60 @@ Address get_netmask(int prefix_length) {
 }
 
 template<class Address>
-Address get_hostmask(int prefix_length) {
-  return bitwise_not(get_netmask<Address>(prefix_length));
+Address prefix_to_hostmask(int prefix_length) {
+  return bitwise_not(prefix_to_netmask<Address>(prefix_length));
+}
+
+template<class Address>
+int count_trailing_zero_bits(const Address &address) {
+  typedef typename Address::bytes_type Bytes;
+
+  if (address == Address()) {
+    return 8 * sizeof(Bytes);
+  }
+
+  Bytes addr_bytes = address.to_bytes();
+  int tz = 0;
+  for (std::size_t i=0; i<sizeof(Bytes); ++i) {
+    uint32_t ingest = addr_bytes[sizeof(Bytes)-1-i];
+
+    if (ingest == 0) {
+      tz += 8;
+    } else {
+      tz += __builtin_ctz(ingest);
+      break;
+    }
+  }
+
+  return tz;
+}
+
+template<class Address>
+int netmask_to_prefix(const Address &address) {
+  typedef typename Address::bytes_type Bytes;
+
+  int trailing_zeros = count_trailing_zero_bits(address);
+  int prefix = (8 * sizeof(Bytes)) - trailing_zeros;
+
+  // catch non-mask addresses (mixed zeros and ones)
+  Address netmask = prefix_to_netmask<Address>(prefix);
+  return address == netmask ? prefix: -1;
+}
+
+template<class Address>
+int hostmask_to_prefix(const Address &address) {
+  return netmask_to_prefix(bitwise_not(address));
 }
 
 template<class Address, class Network>
 Address broadcast_address(const Network &network) {
-  Address hostmask = get_hostmask<Address>(network.prefix_length());
+  Address hostmask = prefix_to_hostmask<Address>(network.prefix_length());
   return bitwise_or(network.address(), hostmask);
 }
 
 template<class Address, class Network>
 bool address_in_network(const Address &address, const Network &network) {
-  Address netmask = get_netmask<Address>(network.prefix_length());
+  Address netmask = prefix_to_netmask<Address>(network.prefix_length());
   return bitwise_and(address, netmask) == network.address();
 }
 

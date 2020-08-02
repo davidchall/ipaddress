@@ -1,5 +1,11 @@
 # ipaddress (development version)
 
+## New features
+
+* `prefix_length()` can now accept an `ip_address()` vector of netmasks and/or hostmasks. This makes it possible to construct an `ip_network()` or `ip_interface()` from non-CIDR notation.
+  * E.g. `ip_network(ip_address("192.0.2.0"), prefix_length(ip_address("255.255.255.0")))`
+
+
 # ipaddress 0.3.0
 
 ##  Breaking changes

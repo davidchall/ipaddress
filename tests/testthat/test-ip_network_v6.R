@@ -73,7 +73,6 @@ test_that("comparison operations work", {
 })
 
 test_that("component extraction works", {
-  expect_equal(prefix_length(ip_network(x)), c(128L, 72L, 36L, 128L))
   expect_equal(num_addresses(ip_network(x)), c(1, 2^56, 2^92, 1))
   expect_equal(
     network_address(ip_network(x)),

@@ -158,6 +158,11 @@ List wrap_hostmask(IntegerVector prefix_length, LogicalVector is_ipv6) {
 }
 
 // [[Rcpp::export]]
+IntegerVector wrap_prefix_from_mask(List address_r) {
+  return IpAddressVector(address_r).prefixFromMask();
+}
+
+// [[Rcpp::export]]
 List wrap_broadcast_address(List network_r) {
   return IpNetworkVector(network_r).broadcastAddress().encodeR();
 }
