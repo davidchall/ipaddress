@@ -82,18 +82,3 @@ test_that("arithmetic operations disabled", {
   expect_error(ip_interface("192.168.0.1/10") & ip_address("192.168.0.1"))
   expect_error(ip_address("192.168.0.1") & ip_interface("192.168.0.1/10"))
 })
-
-test_that("network masking works", {
-  expect_equal(
-    prefix_length(ip_interface(x)),
-    c(10L, 32L)
-  )
-  expect_equal(
-    netmask(ip_interface(x)),
-    ip_address(c("255.192.0.0", "ffff:ffff::"))
-  )
-  expect_equal(
-    hostmask(ip_interface(x)),
-    ip_address(c("0.63.255.255", "::ffff:ffff:ffff:ffff:ffff:ffff"))
-  )
-})

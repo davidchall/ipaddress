@@ -4,36 +4,48 @@
 \alias{netmask}
 \alias{prefix_length}
 \alias{hostmask}
+\alias{prefix_length.ip_network}
 \alias{netmask.ip_network}
 \alias{hostmask.ip_network}
+\alias{prefix_length.ip_interface}
 \alias{netmask.ip_interface}
 \alias{hostmask.ip_interface}
+\alias{prefix_length.default}
 \alias{netmask.default}
 \alias{hostmask.default}
 \title{Network mask}
 \usage{
-prefix_length(x)
+prefix_length(...)
 
 netmask(...)
 
 hostmask(...)
 
+\method{prefix_length}{ip_network}(x, ...)
+
 \method{netmask}{ip_network}(x, ...)
 
 \method{hostmask}{ip_network}(x, ...)
 
+\method{prefix_length}{ip_interface}(x, ...)
+
 \method{netmask}{ip_interface}(x, ...)
 
 \method{hostmask}{ip_interface}(x, ...)
+
+\method{prefix_length}{default}(mask = ip_address(), ...)
 
 \method{netmask}{default}(prefix_length = integer(), is_ipv6 = logical(), ...)
 
 \method{hostmask}{default}(prefix_length = integer(), is_ipv6 = logical(), ...)
 }
 \arguments{
+\item{...}{Arguments to be passed to other methods}
+
 \item{x}{An \code{\link{ip_network}} or \code{\link{ip_interface}} vector}
 
-\item{...}{Arguments to be passed to other methods}
+\item{mask}{An \code{\link{ip_address}} vector of netmasks and/or hostmasks. Ambiguous
+cases (all zeros, all ones) are treated as netmasks.}
 
 \item{prefix_length}{An integer vector}
 
@@ -46,7 +58,14 @@ hostmask(...)
 }
 }
 \description{
-These functions yield equivalent representations of the network mask.
+\code{prefix_length()}, \code{netmask()} and \code{hostmask()} extract different (but
+equivalent) representations of the network mask. They accept an
+\code{\link{ip_network}} or \code{\link{ip_interface}} vector.
+
+The functions can also convert between these alternative representations.
+For example, \code{prefix_length()} can infer the prefix length from an
+\code{\link{ip_address}} vector of netmasks and/or hostmasks, while \code{netmask()} and
+\code{hostmask()} can accept a vector of prefix lengths.
 }
 \examples{
 x <- ip_network(c("192.168.0.0/22", "2001:db00::0/26"))
@@ -57,9 +76,16 @@ netmask(x)
 
 hostmask(x)
 
+# construct netmask/hostmask from prefix length
 netmask(c(22L, 26L), c(FALSE, TRUE))
 
 hostmask(c(22L, 26L), c(FALSE, TRUE))
+
+# extract prefix length from netmask/hostmask
+prefix_length(ip_address(c("255.255.255.0", "0.255.255.255")))
+
+# invalid netmask/hostmask raise a warning and return NA
+prefix_length(ip_address("255.255.255.1"))
 }
 \seealso{
 \code{\link[=max_prefix_length]{max_prefix_length()}}

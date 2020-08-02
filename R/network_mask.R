@@ -1,8 +1,18 @@
 #' Network mask
 #'
-#' These functions yield equivalent representations of the network mask.
+#' @description
+#' `prefix_length()`, `netmask()` and `hostmask()` extract different (but
+#' equivalent) representations of the network mask. They accept an
+#' [`ip_network`] or [`ip_interface`] vector.
+#'
+#' The functions can also convert between these alternative representations.
+#' For example, `prefix_length()` can infer the prefix length from an
+#' [`ip_address`] vector of netmasks and/or hostmasks, while `netmask()` and
+#' `hostmask()` can accept a vector of prefix lengths.
 #'
 #' @param x An [`ip_network`] or [`ip_interface`] vector
+#' @param mask An [`ip_address`] vector of netmasks and/or hostmasks. Ambiguous
+#'   cases (all zeros, all ones) are treated as netmasks.
 #' @param prefix_length An integer vector
 #' @param is_ipv6 A logical vector
 #' @param ... Arguments to be passed to other methods
@@ -19,9 +29,16 @@
 #'
 #' hostmask(x)
 #'
+#' # construct netmask/hostmask from prefix length
 #' netmask(c(22L, 26L), c(FALSE, TRUE))
 #'
 #' hostmask(c(22L, 26L), c(FALSE, TRUE))
+#'
+#' # extract prefix length from netmask/hostmask
+#' prefix_length(ip_address(c("255.255.255.0", "0.255.255.255")))
+#'
+#' # invalid netmask/hostmask raise a warning and return NA
+#' prefix_length(ip_address("255.255.255.1"))
 #' @seealso
 #' [max_prefix_length()]
 #' @name netmask
@@ -29,12 +46,8 @@ NULL
 
 #' @rdname netmask
 #' @export
-prefix_length <- function(x) {
-  if (!(is_ip_network(x) || is_ip_interface(x))) {
-    abort("'x' must be an ip_network or ip_interface vector")
-  }
-
-  field(x, "prefix")
+prefix_length <- function(...) {
+  UseMethod("prefix_length")
 }
 
 #' @rdname netmask
@@ -47,6 +60,12 @@ netmask <- function(...) {
 #' @export
 hostmask <- function(...) {
   UseMethod("hostmask")
+}
+
+#' @rdname netmask
+#' @export
+prefix_length.ip_network <- function(x, ...) {
+  field(x, "prefix")
 }
 
 #' @rdname netmask
@@ -69,6 +88,12 @@ hostmask.ip_network <- function(x, ...) {
 
 #' @rdname netmask
 #' @export
+prefix_length.ip_interface <- function(x, ...) {
+  field(x, "prefix")
+}
+
+#' @rdname netmask
+#' @export
 netmask.ip_interface <- function(x, ...) {
   wrap_netmask(
     field(x, "prefix"),
@@ -83,6 +108,16 @@ hostmask.ip_interface <- function(x, ...) {
     field(x, "prefix"),
     field(x, "is_ipv6")
   )
+}
+
+#' @rdname netmask
+#' @export
+prefix_length.default <- function(mask = ip_address(), ...) {
+  if (!is_ip_address(mask)) {
+    abort("prefix_length() accepts an ip_address, ip_network or ip_interface vector")
+  }
+
+  wrap_prefix_from_mask(mask)
 }
 
 #' @rdname netmask
