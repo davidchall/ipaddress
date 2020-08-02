@@ -85,6 +85,30 @@ Address prefix_to_hostmask(int prefix_length) {
   return bitwise_not(prefix_to_netmask<Address>(prefix_length));
 }
 
+template<class Address>
+int count_trailing_zero_bits(const Address &address) {
+  typedef typename Address::bytes_type Bytes;
+
+  if (address == Address()) {
+    return 8 * sizeof(Bytes);
+  }
+
+  Bytes addr_bytes = address.to_bytes();
+  int tz = 0;
+  for (std::size_t i=0; i<sizeof(Bytes); ++i) {
+    uint32_t ingest = addr_bytes[sizeof(Bytes)-1-i];
+
+    if (ingest == 0) {
+      tz += 8;
+    } else {
+      tz += __builtin_ctz(ingest);
+      break;
+    }
+  }
+
+  return tz;
+}
+
 template<class Address, class Network>
 Address broadcast_address(const Network &network) {
   Address hostmask = prefix_to_hostmask<Address>(network.prefix_length());
