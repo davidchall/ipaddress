@@ -65,7 +65,7 @@ Address bitwise_xor(const Address &addr1, const Address &addr2) {
  *--------------*/
 
 template<class Address>
-Address get_netmask(int prefix_length) {
+Address prefix_to_netmask(int prefix_length) {
   typedef typename Address::bytes_type Bytes;
   Bytes result_bytes;
 
@@ -81,19 +81,19 @@ Address get_netmask(int prefix_length) {
 }
 
 template<class Address>
-Address get_hostmask(int prefix_length) {
-  return bitwise_not(get_netmask<Address>(prefix_length));
+Address prefix_to_hostmask(int prefix_length) {
+  return bitwise_not(prefix_to_netmask<Address>(prefix_length));
 }
 
 template<class Address, class Network>
 Address broadcast_address(const Network &network) {
-  Address hostmask = get_hostmask<Address>(network.prefix_length());
+  Address hostmask = prefix_to_hostmask<Address>(network.prefix_length());
   return bitwise_or(network.address(), hostmask);
 }
 
 template<class Address, class Network>
 bool address_in_network(const Address &address, const Network &network) {
-  Address netmask = get_netmask<Address>(network.prefix_length());
+  Address netmask = prefix_to_netmask<Address>(network.prefix_length());
   return bitwise_and(address, netmask) == network.address();
 }
 
