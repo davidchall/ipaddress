@@ -139,9 +139,6 @@ subnet_mask <- function(prefix_length, is_ipv6, mask_func) {
   if (!is_logical(is_ipv6)) {
     abort("'is_ipv6' must be a logical vector")
   }
-  if (xor(length(prefix_length) == 0, length(is_ipv6) == 0)) {
-    abort("must specify both 'prefix_length' and 'is_ipv6' arguments")
-  }
 
   # vector recycling
   args <- vec_recycle_common(prefix_length, is_ipv6)
