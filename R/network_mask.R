@@ -112,7 +112,7 @@ hostmask.ip_interface <- function(x, ...) {
 
 #' @rdname netmask
 #' @export
-prefix_length.default <- function(mask = ip_address(), ...) {
+prefix_length.default <- function(mask, ...) {
   if (!is_ip_address(mask)) {
     abort("prefix_length() accepts an ip_address, ip_network or ip_interface vector")
   }
@@ -122,13 +122,13 @@ prefix_length.default <- function(mask = ip_address(), ...) {
 
 #' @rdname netmask
 #' @export
-netmask.default <- function(prefix_length = integer(), is_ipv6 = logical(), ...) {
+netmask.default <- function(prefix_length, is_ipv6, ...) {
   subnet_mask(prefix_length, is_ipv6, wrap_netmask)
 }
 
 #' @rdname netmask
 #' @export
-hostmask.default <- function(prefix_length = integer(), is_ipv6 = logical(), ...) {
+hostmask.default <- function(prefix_length, is_ipv6, ...) {
   subnet_mask(prefix_length, is_ipv6, wrap_hostmask)
 }
 

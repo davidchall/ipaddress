@@ -62,6 +62,11 @@ test_that("vector recycling works", {
 
   expect_error(netmask(rep(0L, 3), rep(TRUE, 2)))
   expect_error(hostmask(rep(0L, 3), rep(TRUE, 2)))
+
+  expect_error(netmask(1L))
+  expect_error(netmask(c(1L, 2L)))
+  expect_error(hostmask(1L))
+  expect_error(hostmask(c(1L, 2L)))
 })
 
 test_that("input validation works", {
@@ -80,12 +85,6 @@ test_that("input validation works", {
   expect_error(hostmask(33L, FALSE))
   expect_error(netmask(129L, TRUE))
   expect_error(hostmask(129L, TRUE))
-})
-
-test_that("empty arguments work", {
-  expect_equal(prefix_length(), integer())
-  expect_equal(netmask(), ip_address())
-  expect_equal(hostmask(), ip_address())
 })
 
 test_that("missing values work", {
