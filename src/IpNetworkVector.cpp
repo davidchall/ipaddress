@@ -170,6 +170,10 @@ IpNetworkVector::IpNetworkVector(IpAddressVector address, IntegerVector prefix_l
 IpNetworkVector IpNetworkVector::smallestCommonNetwork(const IpAddressVector &address1, const IpAddressVector &address2) {
   std::size_t vsize = address1.is_na.size();
 
+  if (address2.is_na.size() != vsize) {
+    stop("Addresses must have same length");
+  }
+
   // initialize vectors
   std::vector<asio::ip::network_v4> network_v4(vsize);
   std::vector<asio::ip::network_v6> network_v6(vsize);
