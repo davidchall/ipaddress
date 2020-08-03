@@ -161,7 +161,7 @@
 <a href="#related-work" class="anchor"></a>Related work</h2>
 <ul>
 <li>
-<a href="https://hrbrmstr.github.io/iptools/"><strong>iptools</strong></a> – A well established R package for working with IP addresses and networks. Unfortunately IPv6 support is severely limited, and addresses are stored as character vectors (so they must be parsed to their native bit representation for every operation). It served as an excellent guide and motivation for the ipaddress package.</li>
+<a href="https://hrbrmstr.github.io/iptools/"><strong>iptools</strong></a> – A well established R package for working with IP addresses and networks. Unfortunately IPv6 support is severely limited. Also, addresses and networks are stored as character vectors, so they must be parsed to their native bit representation for every operation. It served as an excellent guide and motivation for the ipaddress package.</li>
 <li>
 <a href="https://cyberpandas.readthedocs.io"><strong>cyberpandas</strong></a> – A Python package for using IP addresses in a <a href="https://pandas.pydata.org">pandas</a> DataFrame. This offers full support for IPv6 and stores addresses in the native bit representation. However, most “interesting” operations must deserialize each address to a Python <a href="https://docs.python.org/library/ipaddress.html">ipaddress</a> object, which is slow. It also doesn’t support IP networks.</li>
 </ul>
