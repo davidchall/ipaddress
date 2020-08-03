@@ -117,6 +117,10 @@ wrap_is_within_any <- function(address_r, network_r) {
     .Call(`_ipaddress_wrap_is_within_any`, address_r, network_r)
 }
 
+wrap_smallest_common_network <- function(address1_r, address2_r) {
+    .Call(`_ipaddress_wrap_smallest_common_network`, address1_r, address2_r)
+}
+
 wrap_is_multicast <- function(x) {
     .Call(`_ipaddress_wrap_is_multicast`, x)
 }

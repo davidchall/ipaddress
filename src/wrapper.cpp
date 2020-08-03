@@ -183,6 +183,14 @@ LogicalVector wrap_is_within_any(List address_r, List network_r) {
   return address.isWithinAny(network);
 }
 
+// [[Rcpp::export]]
+List wrap_smallest_common_network(List address1_r, List address2_r) {
+  IpAddressVector address1(address1_r);
+  IpAddressVector address2(address2_r);
+
+  return IpNetworkVector::smallestCommonNetwork(address1, address2).encodeR();
+}
+
 
 /*----------------------*
  *  Reserved addresses  *
