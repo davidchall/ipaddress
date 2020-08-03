@@ -4,6 +4,7 @@ test_that("integer encoding/decoding works", {
   expect_error(ip_to_integer("hello"))
   expect_error(integer_to_ip(1.5))
   expect_error(integer_to_ip(x))
+  expect_error(integer_to_ip("1", is_ipv6 = "true"))
 
   expect_type(ip_to_integer(x), "character")
   expect_s3_class(integer_to_ip("1"), "ip_address")

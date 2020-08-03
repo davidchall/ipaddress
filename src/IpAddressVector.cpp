@@ -347,7 +347,7 @@ List IpAddressVector::encodeR() const {
       out_addr2.size() != out_v6.size() ||
       out_addr3.size() != out_v6.size() ||
       out_addr4.size() != out_v6.size()) {
-    stop("Consistuent vectors have unequal sizes");
+    stop("Constituent vectors have unequal sizes"); // # nocov
   }
 
   List result = List::create(
@@ -551,7 +551,7 @@ DataFrame IpAddressVector::encodeComparable() const {
       out_addr6.size() != out_v6.size() ||
       out_addr7.size() != out_v6.size() ||
       out_addr8.size() != out_v6.size()) {
-    stop("Consistuent vectors have unequal sizes");
+    stop("Constituent vectors have unequal sizes"); // # nocov
   }
 
   return DataFrame::create(
@@ -598,7 +598,7 @@ IpAddressVector IpAddressVector::operator&(const IpAddressVector &rhs) const {
   std::size_t vsize = is_na.size();
 
   if (rhs.is_na.size() != vsize) {
-    stop("Addresses must have same length");
+    stop("Addresses must have same length"); // # nocov
   }
 
   // initialize vectors
@@ -627,7 +627,7 @@ IpAddressVector IpAddressVector::operator|(const IpAddressVector &rhs) const {
   std::size_t vsize = is_na.size();
 
   if (rhs.is_na.size() != vsize) {
-    stop("Addresses must have same length");
+    stop("Addresses must have same length"); // # nocov
   }
 
   // initialize vectors
@@ -656,7 +656,7 @@ IpAddressVector IpAddressVector::operator^(const IpAddressVector &rhs) const {
   std::size_t vsize = is_na.size();
 
   if (rhs.is_na.size() != vsize) {
-    stop("Addresses must have same length");
+    stop("Addresses must have same length"); // # nocov
   }
 
   // initialize vectors
@@ -685,7 +685,7 @@ IpAddressVector IpAddressVector::operator+(const IntegerVector &rhs) const {
   std::size_t vsize = is_na.size();
 
   if (rhs.size() != static_cast<R_xlen_t>(vsize)) {
-    stop("Addresses must have same length");
+    stop("Addresses must have same length"); // # nocov
   }
 
   // initialize vectors
@@ -741,7 +741,7 @@ LogicalVector IpAddressVector::isWithin(const IpNetworkVector &network) const {
   std::size_t vsize = is_na.size();
 
   if (network.is_na.size() != vsize) {
-    stop("Address and network must have same length");
+    stop("Address and network must have same length"); // # nocov
   }
 
   // initialize vectors
