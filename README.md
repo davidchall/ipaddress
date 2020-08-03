@@ -92,10 +92,10 @@ mutate(x, ipv6 = is_ipv6(address), in_net = is_within(address, network))
 
   - [**iptools**](https://hrbrmstr.github.io/iptools/) – A well
     established R package for working with IP addresses and networks.
-    Unfortunately IPv6 support is severely limited, and addresses are
-    stored as character vectors (so they must be parsed to their native
-    bit representation for every operation). It served as an excellent
-    guide and motivation for the ipaddress package.
+    Unfortunately IPv6 support is severely limited. Also, addresses and
+    networks are stored as character vectors, so they must be parsed to
+    their native bit representation for every operation. It served as an
+    excellent guide and motivation for the ipaddress package.
   - [**cyberpandas**](https://cyberpandas.readthedocs.io) – A Python
     package for using IP addresses in a
     [pandas](https://pandas.pydata.org) DataFrame. This offers full
