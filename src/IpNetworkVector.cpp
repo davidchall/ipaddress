@@ -167,6 +167,41 @@ IpNetworkVector::IpNetworkVector(IpAddressVector address, IntegerVector prefix_l
   }
 }
 
+IpNetworkVector IpNetworkVector::smallestCommonNetwork(const IpAddressVector &address1, const IpAddressVector &address2) {
+  std::size_t vsize = address1.is_na.size();
+
+  if (address2.is_na.size() != vsize) {
+    stop("Addresses must have same length");
+  }
+
+  // initialize vectors
+  std::vector<asio::ip::network_v4> network_v4(vsize);
+  std::vector<asio::ip::network_v6> network_v6(vsize);
+  std::vector<bool> is_ipv6(vsize, false);
+  std::vector<bool> is_na(vsize, false);
+
+  for (std::size_t i=0; i<vsize; ++i) {
+    if (address1.is_na[i] || address2.is_na[i]) {
+      is_na[i] = true;
+    } else if (address1.is_ipv6[i] != address2.is_ipv6[i]) {
+      is_na[i] = true;
+    } else if (address1.is_ipv6[i]) {
+      int prefix = common_network_prefix(address1.address_v6[i], address2.address_v6[i]);
+      asio::ip::address_v6 start_addr = bitwise_and(address1.address_v6[i], prefix_to_netmask<asio::ip::address_v6>(prefix));
+
+      network_v6[i] = asio::ip::network_v6(start_addr, prefix);
+      is_ipv6[i] = true;
+    } else {
+      int prefix = common_network_prefix(address1.address_v4[i], address2.address_v4[i]);
+      asio::ip::address_v4 start_addr = bitwise_and(address1.address_v4[i], prefix_to_netmask<asio::ip::address_v4>(prefix));
+
+      network_v4[i] = asio::ip::network_v4(start_addr, prefix);
+    }
+  }
+
+  return IpNetworkVector(network_v4, network_v6, is_ipv6, is_na);
+}
+
 void IpNetworkVector::warnInvalidInput(unsigned int index, const std::string &input, const std::string &reason) {
   // Indexes are 1-based in R
   std::string msg = "Invalid value on row " + std::to_string(index + 1) + ": " + input;

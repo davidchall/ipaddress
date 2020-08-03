@@ -339,6 +339,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// wrap_smallest_common_network
+List wrap_smallest_common_network(List address1_r, List address2_r);
+RcppExport SEXP _ipaddress_wrap_smallest_common_network(SEXP address1_rSEXP, SEXP address2_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type address1_r(address1_rSEXP);
+    Rcpp::traits::input_parameter< List >::type address2_r(address2_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(wrap_smallest_common_network(address1_r, address2_r));
+    return rcpp_result_gen;
+END_RCPP
+}
 // wrap_is_multicast
 LogicalVector wrap_is_multicast(List x);
 RcppExport SEXP _ipaddress_wrap_is_multicast(SEXP xSEXP) {
@@ -491,6 +503,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_wrap_broadcast_address", (DL_FUNC) &_ipaddress_wrap_broadcast_address, 1},
     {"_ipaddress_wrap_is_within", (DL_FUNC) &_ipaddress_wrap_is_within, 2},
     {"_ipaddress_wrap_is_within_any", (DL_FUNC) &_ipaddress_wrap_is_within_any, 2},
+    {"_ipaddress_wrap_smallest_common_network", (DL_FUNC) &_ipaddress_wrap_smallest_common_network, 2},
     {"_ipaddress_wrap_is_multicast", (DL_FUNC) &_ipaddress_wrap_is_multicast, 1},
     {"_ipaddress_wrap_is_unspecified", (DL_FUNC) &_ipaddress_wrap_is_unspecified, 1},
     {"_ipaddress_wrap_is_loopback", (DL_FUNC) &_ipaddress_wrap_is_loopback, 1},

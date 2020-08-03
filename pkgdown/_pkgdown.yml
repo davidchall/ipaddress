@@ -42,6 +42,7 @@ reference:
       - prefix_length
       - is_within
       - is_subnet
+      - common_network
   - title: "Generating addresses"
     contents:
       - starts_with("sample")

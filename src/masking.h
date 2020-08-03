@@ -94,36 +94,66 @@ int count_trailing_zero_bits(const Address &address) {
   }
 
   Bytes addr_bytes = address.to_bytes();
-  int tz = 0;
+  int zeros = 0;
   for (std::size_t i=0; i<sizeof(Bytes); ++i) {
     uint32_t ingest = addr_bytes[sizeof(Bytes)-1-i];
 
     if (ingest == 0) {
-      tz += 8;
+      zeros += 8;
     } else {
-      tz += __builtin_ctz(ingest);
+      zeros += __builtin_ctz(ingest);
       break;
     }
   }
 
-  return tz;
+  return zeros;
 }
 
 template<class Address>
-int netmask_to_prefix(const Address &address) {
+int count_leading_zero_bits(const Address &address) {
   typedef typename Address::bytes_type Bytes;
 
-  int trailing_zeros = count_trailing_zero_bits(address);
+  if (address == Address()) {
+    return 8 * sizeof(Bytes);
+  }
+
+  Bytes addr_bytes = address.to_bytes();
+  int zeros = 0;
+  for (std::size_t i=0; i<sizeof(Bytes); ++i) {
+    uint32_t ingest = addr_bytes[i];
+
+    if (ingest == 0) {
+      zeros += 8;
+    } else {
+      // ingest is 32-bits but only uses final 8-bits
+      zeros += __builtin_clz(ingest) - 24;
+      break;
+    }
+  }
+
+  return zeros;
+}
+
+template<class Address>
+int netmask_to_prefix(const Address &mask) {
+  typedef typename Address::bytes_type Bytes;
+
+  int trailing_zeros = count_trailing_zero_bits(mask);
   int prefix = (8 * sizeof(Bytes)) - trailing_zeros;
 
   // catch non-mask addresses (mixed zeros and ones)
-  Address netmask = prefix_to_netmask<Address>(prefix);
-  return address == netmask ? prefix: -1;
+  Address valid_mask = prefix_to_netmask<Address>(prefix);
+  return mask == valid_mask ? prefix: -1;
 }
 
 template<class Address>
-int hostmask_to_prefix(const Address &address) {
-  return netmask_to_prefix(bitwise_not(address));
+int hostmask_to_prefix(const Address &mask) {
+  return netmask_to_prefix(bitwise_not(mask));
+}
+
+template<class Address>
+int common_network_prefix(const Address &addr1, const Address &addr2) {
+  return count_leading_zero_bits(bitwise_xor(addr1, addr2));
 }
 
 template<class Address, class Network>
