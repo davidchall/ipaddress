@@ -3,7 +3,7 @@ pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
   ipaddress: ipaddress.html
-last_built: 2020-08-03T00:40Z
+last_built: 2020-08-03T17:41Z
 urls:
   reference: https://davidchall.github.io/ipaddress/reference
   article: https://davidchall.github.io/ipaddress/articles
