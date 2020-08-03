@@ -48,3 +48,12 @@ test_that("sampling is random but reproducible", {
   expect_false(all(x1 == x2))
   expect_true(all(x1 == x3))
 })
+
+test_that("optimize performance for small networks", {
+  small_network <- ip_network("192.128.0.0/20")
+  expect_true(all(is_within_any(sample_network(small_network, 1000, replace = FALSE), small_network)))
+  expect_true(all(is_within_any(sample_network(small_network, 1000, replace = TRUE), small_network)))
+
+  expect_true(any(duplicated(sample_network(small_network, 1000, replace = TRUE))))
+  expect_false(any(duplicated(sample_network(small_network, 1000, replace = FALSE))))
+})

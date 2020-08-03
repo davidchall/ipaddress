@@ -171,7 +171,7 @@ IpNetworkVector IpNetworkVector::smallestCommonNetwork(const IpAddressVector &ad
   std::size_t vsize = address1.is_na.size();
 
   if (address2.is_na.size() != vsize) {
-    stop("Addresses must have same length");
+    stop("Addresses must have same length"); // # nocov
   }
 
   // initialize vectors
@@ -256,7 +256,7 @@ List IpNetworkVector::encodeR() const {
       out_addr3.size() != out_v6.size() ||
       out_addr4.size() != out_v6.size() ||
       out_pfx.size() != out_v6.size()) {
-    stop("Consistuent vectors have unequal sizes");
+    stop("Constituent vectors have unequal sizes"); // # nocov
   }
 
   List result = List::create(
