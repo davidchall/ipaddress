@@ -33,11 +33,11 @@ hostmask(...)
 
 \method{hostmask}{ip_interface}(x, ...)
 
-\method{prefix_length}{default}(mask = ip_address(), ...)
+\method{prefix_length}{default}(mask, ...)
 
-\method{netmask}{default}(prefix_length = integer(), is_ipv6 = logical(), ...)
+\method{netmask}{default}(prefix_length, is_ipv6, ...)
 
-\method{hostmask}{default}(prefix_length = integer(), is_ipv6 = logical(), ...)
+\method{hostmask}{default}(prefix_length, is_ipv6, ...)
 }
 \arguments{
 \item{...}{Arguments to be passed to other methods}
