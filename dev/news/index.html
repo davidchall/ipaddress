@@ -157,13 +157,15 @@
 <div id="new-features" class="section level2">
 <h2 class="hasAnchor">
 <a href="#new-features" class="anchor"></a>New features</h2>
+<p>This release adds support for constructing <code><a href="../reference/ip_network.html">ip_network()</a></code> vectors without using CIDR notation.</p>
 <ul>
-<li>New <code><a href="../reference/common_network.html">common_network()</a></code> function to find the smallest network containing two addresses</li>
+<li>New <code><a href="../reference/common_network.html">common_network()</a></code> function finds the smallest network containing two addresses</li>
+<li>New <code><a href="../reference/summarize_address_range.html">summarize_address_range()</a></code> function lists the constituent networks of an address range</li>
 <li>
-<code><a href="../reference/netmask.html">prefix_length()</a></code> can now accept an <code><a href="../reference/ip_address.html">ip_address()</a></code> vector of netmasks and/or hostmasks. This makes it possible to construct an <code><a href="../reference/ip_network.html">ip_network()</a></code> or <code><a href="../reference/ip_interface.html">ip_interface()</a></code> from non-CIDR notation.
+<code><a href="../reference/netmask.html">prefix_length()</a></code> can now infer the prefix length from an <code><a href="../reference/ip_address.html">ip_address()</a></code> vector of netmasks and/or hostmasks. This makes it possible to construct an <code><a href="../reference/ip_network.html">ip_network()</a></code> vector like so:
 <ul>
-<li>E.g. <code><a href="../reference/ip_network.html">ip_network(ip_address("192.0.2.0"), prefix_length(ip_address("255.255.255.0")))</a></code>
-</li>
+<li><code><a href="../reference/ip_network.html">ip_network(ip_address("192.0.2.0"), prefix_length(ip_address("255.255.255.0")))</a></code></li>
+<li><code><a href="../reference/ip_network.html">ip_network(ip_address("192.0.2.0"), prefix_length(ip_address("0.0.0.255")))</a></code></li>
 </ul>
 </li>
 </ul>
