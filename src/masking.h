@@ -2,6 +2,7 @@
 #define __IPADDRESS_MASKING__
 
 #include <algorithm>
+#include <vector>
 
 
 /*---------------------*
