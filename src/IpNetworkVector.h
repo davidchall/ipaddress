@@ -44,8 +44,11 @@ public:
   IpNetworkVector(IpAddressVector address, Rcpp::IntegerVector prefix_length,
                   bool strict, bool is_interface = false);
 
-  // Construct from two addresses
+  // Construct from two addresses (single network)
   static IpNetworkVector smallestCommonNetwork(const IpAddressVector &address1, const IpAddressVector &address2);
+
+  // Construct from two addresses (multiple networks)
+  static Rcpp::List summarizeAddressRange(const IpAddressVector &address1, const IpAddressVector &address2);
 
   // Warn about invalid input
   static void warnInvalidInput(unsigned int index, const std::string &input, const std::string &reason = "");

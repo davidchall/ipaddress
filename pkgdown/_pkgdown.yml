@@ -43,6 +43,7 @@ reference:
       - is_within
       - is_subnet
       - common_network
+      - summarize_address_range
   - title: "Generating addresses"
     contents:
       - starts_with("sample")

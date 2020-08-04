@@ -121,6 +121,10 @@ wrap_smallest_common_network <- function(address1_r, address2_r) {
     .Call(`_ipaddress_wrap_smallest_common_network`, address1_r, address2_r)
 }
 
+wrap_summarize_address_range <- function(address1_r, address2_r) {
+    .Call(`_ipaddress_wrap_summarize_address_range`, address1_r, address2_r)
+}
+
 wrap_is_multicast <- function(x) {
     .Call(`_ipaddress_wrap_is_multicast`, x)
 }

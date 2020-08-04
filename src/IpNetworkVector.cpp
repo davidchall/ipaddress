@@ -186,20 +186,59 @@ IpNetworkVector IpNetworkVector::smallestCommonNetwork(const IpAddressVector &ad
     } else if (address1.is_ipv6[i] != address2.is_ipv6[i]) {
       is_na[i] = true;
     } else if (address1.is_ipv6[i]) {
-      int prefix = common_network_prefix(address1.address_v6[i], address2.address_v6[i]);
-      asio::ip::address_v6 start_addr = bitwise_and(address1.address_v6[i], prefix_to_netmask<asio::ip::address_v6>(prefix));
-
-      network_v6[i] = asio::ip::network_v6(start_addr, prefix);
+      network_v6[i] = common_network<asio::ip::network_v6>(address1.address_v6[i], address2.address_v6[i]);
       is_ipv6[i] = true;
     } else {
-      int prefix = common_network_prefix(address1.address_v4[i], address2.address_v4[i]);
-      asio::ip::address_v4 start_addr = bitwise_and(address1.address_v4[i], prefix_to_netmask<asio::ip::address_v4>(prefix));
-
-      network_v4[i] = asio::ip::network_v4(start_addr, prefix);
+      network_v4[i] = common_network<asio::ip::network_v4>(address1.address_v4[i], address2.address_v4[i]);
     }
   }
 
   return IpNetworkVector(network_v4, network_v6, is_ipv6, is_na);
+}
+
+List IpNetworkVector::summarizeAddressRange(const IpAddressVector &address1, const IpAddressVector &address2) {
+  std::size_t vsize = address1.is_na.size();
+  List output(vsize);
+
+  if (address2.is_na.size() != vsize) {
+    stop("Addresses must have same length"); // # nocov
+  }
+
+  for (std::size_t i=0; i<vsize; ++i) {
+    // initialize vectors
+    std::vector<asio::ip::network_v4> network_v4;
+    std::vector<asio::ip::network_v6> network_v6;
+    std::vector<bool> is_ipv6;
+    std::vector<bool> is_na;
+
+    if (address1.is_na[i] || address2.is_na[i]) {
+      network_v4.resize(1);
+      network_v6.resize(1);
+      is_ipv6.resize(1);
+      is_na.resize(1, true);
+    } else if (address1.is_ipv6[i] != address2.is_ipv6[i]) {
+      network_v4.resize(1);
+      network_v6.resize(1);
+      is_ipv6.resize(1);
+      is_na.resize(1, true);
+    } else if (address1.is_ipv6[i]) {
+      network_v6 = summarize_address_range<asio::ip::network_v6>(address1.address_v6[i], address2.address_v6[i]);
+
+      network_v4.resize(network_v6.size());
+      is_ipv6.resize(network_v6.size(), true);
+      is_na.resize(network_v6.size());
+    } else {
+      network_v4 = summarize_address_range<asio::ip::network_v4>(address1.address_v4[i], address2.address_v4[i]);
+
+      network_v6.resize(network_v4.size());
+      is_ipv6.resize(network_v4.size());
+      is_na.resize(network_v4.size());
+    }
+
+    output[i] = IpNetworkVector(network_v4, network_v6, is_ipv6, is_na).encodeR();
+  }
+
+  return output;
 }
 
 void IpNetworkVector::warnInvalidInput(unsigned int index, const std::string &input, const std::string &reason) {

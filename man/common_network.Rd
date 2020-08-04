@@ -17,13 +17,18 @@ An \code{\link{ip_network}} vector
 \description{
 Returns the smallest network that contains both addresses.
 
-This is a simple way to construct a network from its first and last addresses.
-However, if the addresses do not correspond to network boundaries, then the
-returned network will extend beyond their address range.
+This can construct a network from its first and last addresses. However, if
+the address range does not match the network boundaries, then the result
+extends beyond the original address range. Use \code{\link[=summarize_address_range]{summarize_address_range()}}
+to receive a list of networks that exactly match the address range.
 }
 \examples{
-first <- ip_address(c("192.168.0.0", "224.0.0.0"))
-last <- ip_address(c("192.168.0.15", "239.255.255.255"))
+# address range matches network boundaries
+common_network(ip_address("192.168.0.0"), ip_address("192.168.0.15"))
 
-common_network(first, last)
+# address range does not match network boundaries
+common_network(ip_address("192.167.255.255"), ip_address("192.168.0.16"))
+}
+\seealso{
+\code{\link[=summarize_address_range]{summarize_address_range()}}
 }

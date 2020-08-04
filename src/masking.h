@@ -60,6 +60,28 @@ Address bitwise_xor(const Address &addr1, const Address &addr2) {
 }
 
 
+/*------------------------*
+ *  Arithmetic operators  *
+ *------------------------*/
+
+template<class Address>
+Address advance_ip(const Address &address, int n) {
+  if (n == 0)
+    return address;
+
+  asio::ip::basic_address_iterator<Address> iter(address);
+
+  if (n > 0)
+    while (n--)
+      ++iter;
+  else
+    while (n++)
+      --iter;
+
+  return *iter;
+}
+
+
 /*--------------*
  *  IP masking  *
  *--------------*/
@@ -151,9 +173,12 @@ int hostmask_to_prefix(const Address &mask) {
   return netmask_to_prefix(bitwise_not(mask));
 }
 
-template<class Address>
-int common_network_prefix(const Address &addr1, const Address &addr2) {
-  return count_leading_zero_bits(bitwise_xor(addr1, addr2));
+template<class Network, class Address>
+Network common_network(const Address &addr1, const Address &addr2) {
+  int prefix = count_leading_zero_bits(bitwise_xor(addr1, addr2));
+  Address start_address = bitwise_and(addr1, prefix_to_netmask<Address>(prefix));
+
+  return Network(start_address, prefix);
 }
 
 template<class Address, class Network>
@@ -166,6 +191,45 @@ template<class Address, class Network>
 bool address_in_network(const Address &address, const Network &network) {
   Address netmask = prefix_to_netmask<Address>(network.prefix_length());
   return bitwise_and(address, netmask) == network.address();
+}
+
+template<class Network, class Address>
+std::vector<Network> summarize_address_range(const Address &addr1, const Address &addr2) {
+  typedef typename Address::bytes_type Bytes;
+  int max_prefix = (8 * sizeof(Bytes));
+  std::vector<Network> networks;
+
+  // range is covered by 1+ blocks
+  Address range_start = addr1 < addr2 ? addr1 : addr2;
+  Address range_end = addr1 > addr2 ? addr1 : addr2;
+  Address block_start = range_start;
+
+  while (block_start <= range_end) {
+    int prefix = max_prefix;
+    if (block_start != range_end) {
+      Address diff_bits = bitwise_xor(block_start, range_end);
+
+      prefix = max_prefix - std::min(
+        count_trailing_zero_bits(block_start),
+        std::max(
+          max_prefix - count_leading_zero_bits(diff_bits) - 1,
+          count_trailing_zero_bits(bitwise_not(diff_bits))
+        )
+      );
+    }
+
+    Network network(block_start, prefix);
+    networks.push_back(network);
+
+    // advance to next block
+    Address block_end = broadcast_address<Address>(network);
+    block_start = advance_ip(block_end, 1);
+
+    // if block ends on all-ones, then increment operator wraps around to all-zeros
+    if (block_start <= range_start) break;
+  }
+
+  return networks;
 }
 
 #endif
