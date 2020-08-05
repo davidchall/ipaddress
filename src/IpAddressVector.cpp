@@ -26,6 +26,10 @@ IpAddressVector::IpAddressVector(CharacterVector input) {
   asio::error_code ec;
 
   for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 10000 == 0) {
+      checkUserInterrupt();
+    }
+
     if (input[i] == NA_STRING) {
       is_na[i] = true;
     } else {
@@ -60,6 +64,10 @@ IpAddressVector::IpAddressVector(List input) {
   is_na.assign(vsize, false);
 
   for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 10000 == 0) {
+      checkUserInterrupt();
+    }
+
     if (in_v6[i] == NA_LOGICAL) {
       is_na[i] = true;
     } else if (in_v6[i]) {
@@ -83,6 +91,10 @@ IpAddressVector IpAddressVector::decodeBytes(List input) {
   std::vector<bool> is_na(vsize, false);
 
   for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 10000 == 0) {
+      checkUserInterrupt();
+    }
+
     if (input[i] == R_NilValue) {
       is_na[i] = true;
       continue;
@@ -119,6 +131,10 @@ IpAddressVector IpAddressVector::decodeInteger(CharacterVector input, Nullable<L
   bool guess_ipv6 = in_v6.isNull();
 
   for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 10000 == 0) {
+      checkUserInterrupt();
+    }
+
     if (input[i] == NA_STRING) {
       is_na[i] = true;
       continue;
@@ -168,6 +184,10 @@ IpAddressVector IpAddressVector::decodeBinary(CharacterVector input) {
   std::vector<bool> is_na(vsize, false);
 
   for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 10000 == 0) {
+      checkUserInterrupt();
+    }
+
     if (input[i] == NA_STRING) {
       is_na[i] = true;
       continue;
@@ -263,6 +283,10 @@ IpAddressVector IpAddressVector::createNetmask(IntegerVector in_pfx, LogicalVect
   std::vector<bool> is_na(vsize, false);
 
   for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 10000 == 0) {
+      checkUserInterrupt();
+    }
+
     if (in_v6[i] == NA_LOGICAL || in_pfx[i] == NA_INTEGER) {
       is_na[i] = true;
     } else if (in_v6[i]) {
@@ -286,6 +310,10 @@ IpAddressVector IpAddressVector::createHostmask(IntegerVector in_pfx, LogicalVec
   std::vector<bool> is_na(vsize, false);
 
   for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 10000 == 0) {
+      checkUserInterrupt();
+    }
+
     if (in_v6[i] == NA_LOGICAL || in_pfx[i] == NA_INTEGER) {
       is_na[i] = true;
     } else if (in_v6[i]) {
@@ -325,6 +353,10 @@ List IpAddressVector::encodeR() const {
   LogicalVector out_v6(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 10000 == 0) {
+      checkUserInterrupt();
+    }
+
     if (is_na[i]) {
       out_addr1[i] = NA_INTEGER;
       out_addr2[i] = NA_INTEGER;
@@ -375,6 +407,10 @@ CharacterVector IpAddressVector::encodeStrings() const {
   CharacterVector output(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 10000 == 0) {
+      checkUserInterrupt();
+    }
+
     if (is_na[i]) {
       output[i] = NA_STRING;
     } else if (is_ipv6[i]) {
@@ -393,6 +429,10 @@ List IpAddressVector::encodeBytes() const {
   List output(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 10000 == 0) {
+      checkUserInterrupt();
+    }
+
     if (is_na[i]) {
       output[i] = R_NilValue;
     } else if (is_ipv6[i]) {
@@ -418,6 +458,10 @@ CharacterVector IpAddressVector::encodeInteger() const {
   CharacterVector output(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 10000 == 0) {
+      checkUserInterrupt();
+    }
+
     if (is_na[i]) {
       output[i] = NA_STRING;
     } else if (is_ipv6[i]) {
@@ -437,6 +481,10 @@ CharacterVector IpAddressVector::encodeBinary() const {
   CharacterVector output(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 10000 == 0) {
+      checkUserInterrupt();
+    }
+
     if (is_na[i]) {
       output[i] = NA_STRING;
     } else if (is_ipv6[i]) {
@@ -516,6 +564,10 @@ DataFrame IpAddressVector::encodeComparable() const {
   uint32_t left_mask = ~right_mask;
 
   for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 10000 == 0) {
+      checkUserInterrupt();
+    }
+
     if (is_na[i]) {
       out_addr1[i] = NA_INTEGER;
       out_addr2[i] = NA_INTEGER;
@@ -582,6 +634,10 @@ IpAddressVector IpAddressVector::operator~() const {
   std::vector<bool> out_is_na(vsize, false);
 
   for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 10000 == 0) {
+      checkUserInterrupt();
+    }
+
     if (is_na[i]) {
       out_is_na[i] = true;
     } else if (is_ipv6[i]) {
@@ -609,6 +665,10 @@ IpAddressVector IpAddressVector::operator&(const IpAddressVector &rhs) const {
   std::vector<bool> out_is_na(vsize, false);
 
   for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 10000 == 0) {
+      checkUserInterrupt();
+    }
+
     if (is_na[i] || rhs.is_na[i]) {
       out_is_na[i] = true;
     } else if (is_ipv6[i] != rhs.is_ipv6[i]) {
@@ -638,6 +698,10 @@ IpAddressVector IpAddressVector::operator|(const IpAddressVector &rhs) const {
   std::vector<bool> out_is_na(vsize, false);
 
   for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 10000 == 0) {
+      checkUserInterrupt();
+    }
+
     if (is_na[i] || rhs.is_na[i]) {
       out_is_na[i] = true;
     } else if (is_ipv6[i] != rhs.is_ipv6[i]) {
@@ -667,6 +731,10 @@ IpAddressVector IpAddressVector::operator^(const IpAddressVector &rhs) const {
   std::vector<bool> out_is_na(vsize, false);
 
   for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 10000 == 0) {
+      checkUserInterrupt();
+    }
+
     if (is_na[i] || rhs.is_na[i]) {
       out_is_na[i] = true;
     } else if (is_ipv6[i] != rhs.is_ipv6[i]) {
@@ -696,6 +764,10 @@ IpAddressVector IpAddressVector::operator+(const IntegerVector &rhs) const {
   std::vector<bool> out_is_na(vsize, false);
 
   for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 10000 == 0) {
+      checkUserInterrupt();
+    }
+
     if (is_na[i]) {
       out_is_na[i] = true;
     } else if (is_ipv6[i]) {
@@ -745,6 +817,10 @@ LogicalVector IpAddressVector::isWithin(const IpNetworkVector &network) const {
   LogicalVector output(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 10000 == 0) {
+      checkUserInterrupt();
+    }
+
     if (is_na[i] || network.is_na[i]) {
       output[i] = NA_LOGICAL;
     } else if (is_ipv6[i] != network.is_ipv6[i]) {
@@ -766,12 +842,17 @@ LogicalVector IpAddressVector::isWithinAny(const IpNetworkVector &network) const
   // initialize vectors
   LogicalVector output(address_size);
 
+  unsigned int i = 0;
   for (std::size_t i_addr=0; i_addr<address_size; ++i_addr) {
     if (is_na[i_addr]) {
       output[i_addr] = NA_LOGICAL;
     } else {
       output[i_addr] = false;
       for (std::size_t i_netw=0; i_netw<network_size; ++i_netw) {
+        if (i++ % 10000 == 0) {
+          checkUserInterrupt();
+        }
+
         if (network.is_na[i_netw] || is_ipv6[i_addr] != network.is_ipv6[i_netw]) {
           continue;
         } else if (is_ipv6[i_addr] && address_in_network(address_v6[i_addr], network.network_v6[i_netw])) {
@@ -793,6 +874,10 @@ IntegerVector IpAddressVector::prefixFromMask() const {
   IntegerVector output(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 10000 == 0) {
+      checkUserInterrupt();
+    }
+
     if (is_na[i]) {
       output[i] = NA_INTEGER;
     } else if (is_ipv6[i]) {
@@ -920,6 +1005,10 @@ LogicalVector IpAddressVector::checkCondition(
   LogicalVector output(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 10000 == 0) {
+      checkUserInterrupt();
+    }
+
     if (is_na[i]) {
       output[i] = NA_LOGICAL;
     } else if (is_ipv6[i]) {
@@ -945,6 +1034,10 @@ IpAddressVector IpAddressVector::map6to4(
   std::vector<bool> out_is_na(vsize, false);
 
   for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 10000 == 0) {
+      checkUserInterrupt();
+    }
+
     if (is_ipv6[i] && filter_fn(address_v6[i])) {
       out_address_v4[i] = map_fn(address_v6[i]);
     } else {
