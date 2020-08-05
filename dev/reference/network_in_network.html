@@ -53,9 +53,9 @@
 
 
 <meta property="og:title" content="Network membership of other networks — network_in_network" />
-<meta property="og:description" content="overlaps() checks for any overlap between two networks; is_supernet() and
-is_subnet() check if one network is a true supernet or subnet of another
-network." />
+<meta property="og:description" content="is_supernet() and is_subnet() check if one network is a true supernet or
+subnet of another network; overlaps() checks for any overlap between two
+networks." />
 <meta property="og:image" content="https://davidchall.github.io/ipaddress/logo.png" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="@hall_davidc" />
@@ -164,16 +164,16 @@ network." />
     </div>
 
     <div class="ref-description">
-    <p><code>overlaps()</code> checks for any overlap between two networks; <code>is_supernet()</code> and
-<code>is_subnet()</code> check if one network is a true supernet or subnet of another
-network.</p>
+    <p><code>is_supernet()</code> and <code>is_subnet()</code> check if one network is a true supernet or
+subnet of another network; <code>overlaps()</code> checks for any overlap between two
+networks.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>overlaps</span>(<span class='no'>network</span>, <span class='no'>other</span>)
+    <pre class="usage"><span class='fu'>is_supernet</span>(<span class='no'>network</span>, <span class='no'>other</span>)
 
-<span class='fu'>is_supernet</span>(<span class='no'>network</span>, <span class='no'>other</span>)
+<span class='fu'>is_subnet</span>(<span class='no'>network</span>, <span class='no'>other</span>)
 
-<span class='fu'>is_subnet</span>(<span class='no'>network</span>, <span class='no'>other</span>)</pre>
+<span class='fu'>overlaps</span>(<span class='no'>network</span>, <span class='no'>other</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -200,9 +200,9 @@ network.</p>
     <pre class="examples"><div class='input'><span class='no'>net1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>"192.168.1.128/30"</span>)
 <span class='no'>net2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>"192.168.1.0/24"</span>)
 
-<span class='fu'>overlaps</span>(<span class='no'>net1</span>, <span class='no'>net2</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 <span class='fu'>is_supernet</span>(<span class='no'>net1</span>, <span class='no'>net2</span>)</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
-<span class='fu'>is_subnet</span>(<span class='no'>net1</span>, <span class='no'>net2</span>)</div><div class='output co'>#&gt; [1] TRUE</div></pre>
+<span class='fu'>is_subnet</span>(<span class='no'>net1</span>, <span class='no'>net2</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='fu'>overlaps</span>(<span class='no'>net1</span>, <span class='no'>net2</span>)</div><div class='output co'>#&gt; [1] TRUE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
