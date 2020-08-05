@@ -143,29 +143,30 @@
 
 <span class="fu">tibble</span>(
   <span class="kw">address</span> <span class="kw">=</span> <span class="fu"><a href="reference/ip_address.html">ip_address</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"192.168.0.1"</span>, <span class="st">"2001:db8::8a2e:370:7334"</span>)),
-  <span class="kw">network</span> <span class="kw">=</span> <span class="fu"><a href="reference/ip_network.html">ip_network</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"192.168.100.0/22"</span>, <span class="st">"2001:db8::/48"</span>))
+  <span class="kw">network</span> <span class="kw">=</span> <span class="fu"><a href="reference/ip_network.html">ip_network</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"192.168.100.0/22"</span>, <span class="st">"2001:db8::/80"</span>))
 )
 <span class="co">#&gt; # A tibble: 2 x 2</span>
 <span class="co">#&gt;                   address          network</span>
 <span class="co">#&gt;                 &lt;ip_addr&gt;       &lt;ip_netwk&gt;</span>
 <span class="co">#&gt; 1             192.168.0.1 192.168.100.0/22</span>
-<span class="co">#&gt; 2 2001:db8::8a2e:370:7334    2001:db8::/48</span></pre></div>
+<span class="co">#&gt; 2 2001:db8::8a2e:370:7334    2001:db8::/80</span></pre></div>
 <p>Input character vectors are validated as they are parsed. Invalid inputs raise a warning and are replaced with <code>NA</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="r"><span class="fu"><a href="reference/ip_address.html">ip_address</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"255.255.255.255"</span>, <span class="st">"255.255.255.256"</span>))
 <span class="co">#&gt; Warning: Problem on row 2: 255.255.255.256</span>
 <span class="co">#&gt; &lt;ip_address[2]&gt;</span>
 <span class="co">#&gt; [1] 255.255.255.255 &lt;NA&gt;</span></pre></div>
 <p>Functions are provided to enable common tasks:</p>
-<div class="sourceCode" id="cb5"><pre class="r"><span class="fu">tibble</span>(<span class="kw">network</span> <span class="kw">=</span> <span class="fu"><a href="reference/ip_network.html">ip_network</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"192.168.100.0/22"</span>, <span class="st">"2001:db8::/48"</span>))) <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb5"><pre class="r"><span class="fu">tibble</span>(<span class="kw">network</span> <span class="kw">=</span> <span class="fu"><a href="reference/ip_network.html">ip_network</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"192.168.100.0/22"</span>, <span class="st">"2001:db8::/80"</span>))) <span class="kw">%&gt;%</span>
   <span class="fu">mutate</span>(
     <span class="kw">first</span> <span class="kw">=</span> <span class="fu"><a href="reference/network_size.html">network_address</a></span>(<span class="no">network</span>),
-    <span class="kw">last</span> <span class="kw">=</span> <span class="fu"><a href="reference/network_size.html">broadcast_address</a></span>(<span class="no">network</span>)
+    <span class="kw">last</span> <span class="kw">=</span> <span class="fu"><a href="reference/network_size.html">broadcast_address</a></span>(<span class="no">network</span>),
+    <span class="kw">ipv6</span> <span class="kw">=</span> <span class="fu"><a href="reference/is_ipv6.html">is_ipv6</a></span>(<span class="no">network</span>)
   )
-<span class="co">#&gt; # A tibble: 2 x 3</span>
-<span class="co">#&gt;            network         first                                last</span>
-<span class="co">#&gt;         &lt;ip_netwk&gt;     &lt;ip_addr&gt;                           &lt;ip_addr&gt;</span>
-<span class="co">#&gt; 1 192.168.100.0/22 192.168.100.0                     192.168.103.255</span>
-<span class="co">#&gt; 2    2001:db8::/48    2001:db8:: 2001:db8:0:ffff:ffff:ffff:ffff:ffff</span></pre></div>
+<span class="co">#&gt; # A tibble: 2 x 4</span>
+<span class="co">#&gt;            network         first                     last ipv6 </span>
+<span class="co">#&gt;         &lt;ip_netwk&gt;     &lt;ip_addr&gt;                &lt;ip_addr&gt; &lt;lgl&gt;</span>
+<span class="co">#&gt; 1 192.168.100.0/22 192.168.100.0          192.168.103.255 FALSE</span>
+<span class="co">#&gt; 2    2001:db8::/80    2001:db8:: 2001:db8::ffff:ffff:ffff TRUE</span></pre></div>
 </div>
 <div id="related-work" class="section level2">
 <h2 class="hasAnchor">
