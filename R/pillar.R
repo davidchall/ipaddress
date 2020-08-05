@@ -1,18 +1,3 @@
-# taken from pillar package
-align <- function(x, width = NULL, align = c("left", "right")) {
-  align <- arg_match(align)
-  extent <- pillar::get_extent(x)
-  if (is.null(width)) {
-    width <- max(extent)
-  }
-  spaces <- pmax(width - extent, 0L)
-  if (align == "left") {
-    paste0(x, strrep(" ", spaces))
-  } else {
-    paste0(strrep(" ", spaces), x)
-  }
-}
-
 truncate_address <- function(x, max_width, ellipsis) {
   width_ellipsis <- pillar::get_extent(ellipsis)
   width_x <- pillar::get_extent(x)
@@ -37,10 +22,10 @@ pretty_address <- function(addr) {
 
 pretty_cidr <- function(addr, pfx) {
   out <- paste0(
-    align(pretty_address(addr), align = "right"),
+    pillar::align(pretty_address(addr), align = "right"),
     crayon::green(paste0(
       "/",
-      align(pfx, align = "left")
+      pillar::align(pfx, align = "left")
     ))
   )
 

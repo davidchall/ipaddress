@@ -27,7 +27,7 @@ Imports:
 Suggests: 
     crayon,
     knitr,
-    pillar (>= 1.4.0),
+    pillar (>= 1.4.5),
     rmarkdown,
     testthat (>= 2.2.0)
 LinkingTo: 
@@ -39,5 +39,5 @@ VignetteBuilder:
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 SystemRequirements: C++11
