@@ -33,6 +33,18 @@ The \code{ipaddress} package does not support \link[base:LongVectors]{long vecto
 subnetworks that \code{subnets()} can return. However, you might find that machine
 memory imposes stricter limitations.
 }
+\examples{
+supernet(ip_network("192.168.0.0/24"))
+
+supernet(ip_network("192.168.0.0/24"), new_prefix = 10L)
+
+subnets(ip_network("192.168.0.0/24"))
+
+subnets(ip_network("192.168.0.0/24"), new_prefix = 27L)
+}
 \seealso{
 Use \code{\link[=seq.ip_network]{seq.ip_network()}} to list the addresses within a network.
+
+Use \code{\link[=is_supernet]{is_supernet()}} and \code{\link[=is_subnet]{is_subnet()}} to check if one network is contained
+within another.
 }

@@ -17,8 +17,19 @@
 #' subnetworks that `subnets()` can return. However, you might find that machine
 #' memory imposes stricter limitations.
 #'
+#' @examples
+#' supernet(ip_network("192.168.0.0/24"))
+#'
+#' supernet(ip_network("192.168.0.0/24"), new_prefix = 10L)
+#'
+#' subnets(ip_network("192.168.0.0/24"))
+#'
+#' subnets(ip_network("192.168.0.0/24"), new_prefix = 27L)
 #' @seealso
 #' Use [seq.ip_network()] to list the addresses within a network.
+#'
+#' Use [is_supernet()] and [is_subnet()] to check if one network is contained
+#' within another.
 #' @name traverse_hierarchy
 NULL
 

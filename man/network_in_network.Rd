@@ -3,15 +3,15 @@
 \name{network_in_network}
 \alias{network_in_network}
 \alias{overlaps}
-\alias{is_subnet}
 \alias{is_supernet}
+\alias{is_subnet}
 \title{Network membership of other networks}
 \usage{
 overlaps(network, other)
 
-is_subnet(network, other)
-
 is_supernet(network, other)
+
+is_subnet(network, other)
 }
 \arguments{
 \item{network}{An \code{\link{ip_network}} vector}
@@ -22,8 +22,8 @@ is_supernet(network, other)
 A logical vector
 }
 \description{
-\code{overlaps()} checks for any overlap between two networks; \code{is_subnet()} and
-\code{is_supernet()} check if one network is a true subnet or supernet of another
+\code{overlaps()} checks for any overlap between two networks; \code{is_supernet()} and
+\code{is_subnet()} check if one network is a true supernet or subnet of another
 network.
 }
 \examples{
@@ -32,11 +32,12 @@ net2 <- ip_network("192.168.1.0/24")
 
 overlaps(net1, net2)
 
-is_subnet(net1, net2)
-
 is_supernet(net1, net2)
+
+is_subnet(net1, net2)
 }
 \seealso{
-Use \code{\link[=is_within]{is_within()}} to check if an \code{\link{ip_address}} is within
-an \code{\link{ip_network}}.
+Use \code{\link[=is_within]{is_within()}} to check if an \code{\link{ip_address}} is within an \code{\link{ip_network}}.
+
+Use \code{\link[=supernet]{supernet()}} and \code{\link[=subnets]{subnets()}} to traverse the network hierarchy.
 }
