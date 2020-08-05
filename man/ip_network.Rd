@@ -89,9 +89,6 @@ When casting an \code{ip_network} object back to a character vector using
 # construct from character vector
 ip_network(c("192.168.0.0/24", "2001:db8::/48"))
 
-# construct from address + prefix length objects
-ip_network(ip_address(c("192.168.0.0", "2001:db8::")), c(24L, 48L))
-
 # validates inputs and replaces with NA
 ip_network(c("192.168.0.0/33", "192.168.0.0"))
 
@@ -100,7 +97,18 @@ ip_network("192.168.0.1/22")
 
 # but we can mask the host bits if desired
 ip_network("192.168.0.1/22", strict = FALSE)
+
+# construct from address + prefix length
+ip_network(ip_address("192.168.0.0"), 24L)
+
+# construct from address + netmask
+ip_network(ip_address("192.168.0.0"), prefix_length(ip_address("255.255.255.0")))
+
+# construct from address + hostmask
+ip_network(ip_address("192.168.0.0"), prefix_length(ip_address("0.0.0.255")))
 }
 \seealso{
 \code{\link[=prefix_length]{prefix_length()}}, \code{\link[=network_address]{network_address()}}, \code{\link[=netmask]{netmask()}}, \code{\link[=hostmask]{hostmask()}}
+
+\code{vignette("ipaddress-classes")}
 }

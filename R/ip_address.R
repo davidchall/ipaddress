@@ -67,6 +67,8 @@ methods::setOldClass(c("ip_address", "vctrs_vctr"))
 #'
 #' # bitwise XOR
 #' ip_address("192.168.0.0") ^ ip_address("255.0.0.255")
+#' @seealso
+#' `vignette("ipaddress-classes")`
 #' @name ip_address
 NULL
 

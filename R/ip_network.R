@@ -35,8 +35,6 @@ methods::setOldClass(c("ip_network", "vctrs_vctr"))
 #' When casting an `ip_network` object back to a character vector using
 #' `as.character()`, IPv6 addresses are reduced to their compressed representation.
 #'
-#' @seealso [prefix_length()], [network_address()], [netmask()], [hostmask()]
-#'
 #' @param ... Included for S3 generic consistency
 #' @param x
 #' * For `ip_network()`: A character vector of IP networks, in CIDR notation
@@ -56,9 +54,6 @@ methods::setOldClass(c("ip_network", "vctrs_vctr"))
 #' # construct from character vector
 #' ip_network(c("192.168.0.0/24", "2001:db8::/48"))
 #'
-#' # construct from address + prefix length objects
-#' ip_network(ip_address(c("192.168.0.0", "2001:db8::")), c(24L, 48L))
-#'
 #' # validates inputs and replaces with NA
 #' ip_network(c("192.168.0.0/33", "192.168.0.0"))
 #'
@@ -67,6 +62,19 @@ methods::setOldClass(c("ip_network", "vctrs_vctr"))
 #'
 #' # but we can mask the host bits if desired
 #' ip_network("192.168.0.1/22", strict = FALSE)
+#'
+#' # construct from address + prefix length
+#' ip_network(ip_address("192.168.0.0"), 24L)
+#'
+#' # construct from address + netmask
+#' ip_network(ip_address("192.168.0.0"), prefix_length(ip_address("255.255.255.0")))
+#'
+#' # construct from address + hostmask
+#' ip_network(ip_address("192.168.0.0"), prefix_length(ip_address("0.0.0.255")))
+#' @seealso
+#' [prefix_length()], [network_address()], [netmask()], [hostmask()]
+#'
+#' `vignette("ipaddress-classes")`
 #' @name ip_network
 NULL
 

@@ -54,6 +54,8 @@ methods::setOldClass(c("ip_interface", "vctrs_vctr"))
 #'
 #' # extract IP network (with host bits masked)
 #' as_ip_network(x)
+#' @seealso
+#' `vignette("ipaddress-classes")`
 #' @name ip_interface
 NULL
 

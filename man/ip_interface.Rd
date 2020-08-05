@@ -88,3 +88,6 @@ as_ip_address(x)
 # extract IP network (with host bits masked)
 as_ip_network(x)
 }
+\seealso{
+\code{vignette("ipaddress-classes")}
+}
