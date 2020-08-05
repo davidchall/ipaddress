@@ -40,10 +40,11 @@ reference:
     contents:
       - num_addresses
       - prefix_length
-      - is_within
-      - is_subnet
       - common_network
       - summarize_address_range
+      - is_within
+      - is_subnet
+      - subnets
   - title: "Generating addresses"
     contents:
       - starts_with("sample")

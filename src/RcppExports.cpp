@@ -186,6 +186,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// wrap_subnets
+List wrap_subnets(List network_r, IntegerVector new_prefix);
+RcppExport SEXP _ipaddress_wrap_subnets(SEXP network_rSEXP, SEXP new_prefixSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type network_r(network_rSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type new_prefix(new_prefixSEXP);
+    rcpp_result_gen = Rcpp::wrap(wrap_subnets(network_r, new_prefix));
+    return rcpp_result_gen;
+END_RCPP
+}
 // wrap_network_hosts
 List wrap_network_hosts(List network_r, bool exclude_unusable);
 RcppExport SEXP _ipaddress_wrap_network_hosts(SEXP network_rSEXP, SEXP exclude_unusableSEXP) {
@@ -502,6 +514,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_wrap_parse_interface", (DL_FUNC) &_ipaddress_wrap_parse_interface, 1},
     {"_ipaddress_wrap_construct_interface_from_address", (DL_FUNC) &_ipaddress_wrap_construct_interface_from_address, 2},
     {"_ipaddress_wrap_compare_address", (DL_FUNC) &_ipaddress_wrap_compare_address, 1},
+    {"_ipaddress_wrap_subnets", (DL_FUNC) &_ipaddress_wrap_subnets, 2},
     {"_ipaddress_wrap_network_hosts", (DL_FUNC) &_ipaddress_wrap_network_hosts, 2},
     {"_ipaddress_wrap_sample_network", (DL_FUNC) &_ipaddress_wrap_sample_network, 2},
     {"_ipaddress_wrap_bitwise_not", (DL_FUNC) &_ipaddress_wrap_bitwise_not, 1},

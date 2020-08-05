@@ -70,6 +70,9 @@ public:
   // Return last address in network
   IpAddressVector broadcastAddress() const;
 
+  // List subnetworks in network
+  IpNetworkVector subnets(Rcpp::IntegerVector new_prefix) const;
+
   // List all addresses in network
   IpAddressVector hosts(bool exclude_unusable) const;
 

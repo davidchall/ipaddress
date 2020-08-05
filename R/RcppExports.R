@@ -65,6 +65,10 @@ wrap_compare_address <- function(x) {
     .Call(`_ipaddress_wrap_compare_address`, x)
 }
 
+wrap_subnets <- function(network_r, new_prefix) {
+    .Call(`_ipaddress_wrap_subnets`, network_r, new_prefix)
+}
+
 wrap_network_hosts <- function(network_r, exclude_unusable) {
     .Call(`_ipaddress_wrap_network_hosts`, network_r, exclude_unusable)
 }

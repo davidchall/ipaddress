@@ -32,6 +32,8 @@
 #' address of a network.
 #'
 #' Use [sample_network()] to randomly sample addresses from a network.
+#'
+#' Use [subnets()] to list the subnetworks within a network.
 #' @name sequence
 NULL
 
@@ -44,7 +46,7 @@ seq.ip_network <- function(x, ...) {
   if (length(x) != 1) {
     abort("'x' must be an ip_network scalar")
   }
-  if (any(prefix_length(x) < (max_prefix_length(x) - 30L), na.rm = TRUE)) {
+  if (any(max_prefix_length(x) - prefix_length(x) > 30L, na.rm = TRUE)) {
     abort("Network too large")
   }
 
@@ -60,7 +62,7 @@ hosts <- function(x) {
   if (!(is_ip_network(x) && length(x) == 1)) {
     abort("'x' must be an ip_network scalar")
   }
-  if (any(prefix_length(x) < (max_prefix_length(x) - 30L), na.rm = TRUE)) {
+  if (any(max_prefix_length(x) - prefix_length(x) > 30L, na.rm = TRUE)) {
     abort("Network too large")
   }
 

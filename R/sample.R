@@ -41,7 +41,7 @@ sample_network <- function(x, size, replace = FALSE) {
     abort("'x' must be an ip_network scalar")
   }
   if (!(is_scalar_integerish(size) && size > 0)) {
-    abort("'size' must be an positive integer scalar")
+    abort("'size' must be a positive integer scalar")
   }
   if (size >= 2^31) {
     abort("'size' must be less than 2^31")

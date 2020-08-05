@@ -52,4 +52,6 @@ Use \code{\link[=network_address]{network_address()}} and \code{\link[=broadcast
 address of a network.
 
 Use \code{\link[=sample_network]{sample_network()}} to randomly sample addresses from a network.
+
+Use \code{\link[=subnets]{subnets()}} to list the subnetworks within a network.
 }
