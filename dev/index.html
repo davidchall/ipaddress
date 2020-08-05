@@ -154,7 +154,7 @@
 <span class="co">#&gt; 2 2001:db8::8a2e:370:7334    2001:db8::/48</span></pre></div>
 <p>Input character vectors are validated as they are parsed. Invalid inputs raise a warning and are replaced with <code>NA</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="r"><span class="fu"><a href="reference/ip_address.html">ip_address</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"255.255.255.255"</span>, <span class="st">"255.255.255.256"</span>))
-<span class="co">#&gt; Warning: Invalid value on row 2: 255.255.255.256</span>
+<span class="co">#&gt; Warning: Problem on row 2: 255.255.255.256</span>
 <span class="co">#&gt; &lt;ip_address[2]&gt;</span>
 <span class="co">#&gt; [1] 255.255.255.255 &lt;NA&gt;</span></pre></div>
 <p>Functions are provided to enable common tasks:</p>

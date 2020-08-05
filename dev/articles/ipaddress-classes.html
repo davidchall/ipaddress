@@ -147,7 +147,7 @@
 <a href="#data-storage" class="anchor"></a>Data storage</h2>
 <p>The above example looks like we’ve simply stored the character vector. However, the constructor has actually validated each input and stored the native bit representation of each address. The <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> function has then converted them back to the human-readable character representation. We can see this in action by passing an invalid address:</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/ip_address.html">ip_address</a></span>(<span class="st">"255.255.255.256"</span>)
-<span class="co">#&gt; Warning: Invalid value on row 1: 255.255.255.256</span>
+<span class="co">#&gt; Warning: Problem on row 1: 255.255.255.256</span>
 <span class="co">#&gt; &lt;ip_address[1]&gt;</span>
 <span class="co">#&gt; [1] &lt;NA&gt;</span></pre></body></html></div>
 <p>There are two main advantages to storing IP data in their native bit representation:</p>
@@ -178,7 +178,7 @@
 <p>An IP network cannot have any host bits set. If host bits were set, this would refer to a specific host on the network and not the network as a whole – this is the purpose of the <code><a href="../reference/ip_interface.html">ip_interface()</a></code> class (see below).</p>
 <p>The <code><a href="../reference/ip_network.html">ip_network()</a></code> constructor enforces this rule during input validation. If an input has host bits set, a warning is emitted and <code>NA</code> is returned. However, you can mask out the host bits using <code>strict = FALSE</code>.</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/ip_network.html">ip_network</a></span>(<span class="st">"192.168.0.1/24"</span>)
-<span class="co">#&gt; Warning: Invalid value on row 1: 192.168.0.1/24 (host bits set)</span>
+<span class="co">#&gt; Warning: Problem on row 1: 192.168.0.1/24 (host bits set)</span>
 <span class="co">#&gt; &lt;ip_network[1]&gt;</span>
 <span class="co">#&gt; [1] &lt;NA&gt;</span>
 

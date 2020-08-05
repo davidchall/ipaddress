@@ -264,7 +264,7 @@ cases (all zeros, all ones) are treated as netmasks.</p></td>
 <span class='co'># extract prefix length from netmask/hostmask</span>
 <span class='fu'>prefix_length</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"255.255.255.0"</span>, <span class='st'>"0.255.255.255"</span>)))</div><div class='output co'>#&gt; [1] 24  8</div><div class='input'>
 <span class='co'># invalid netmask/hostmask raise a warning and return NA</span>
-<span class='fu'>prefix_length</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"255.255.255.1"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: Invalid value on row 1: 255.255.255.1 (invalid netmask/hostmask)</span></div><div class='output co'>#&gt; [1] NA</div></pre>
+<span class='fu'>prefix_length</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"255.255.255.1"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: Problem on row 1: 255.255.255.1 (invalid netmask/hostmask)</span></div><div class='output co'>#&gt; [1] NA</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
