@@ -2,16 +2,16 @@
 % Please edit documentation in R/within_network.R
 \name{network_in_network}
 \alias{network_in_network}
-\alias{overlaps}
 \alias{is_supernet}
 \alias{is_subnet}
+\alias{overlaps}
 \title{Network membership of other networks}
 \usage{
-overlaps(network, other)
-
 is_supernet(network, other)
 
 is_subnet(network, other)
+
+overlaps(network, other)
 }
 \arguments{
 \item{network}{An \code{\link{ip_network}} vector}
@@ -22,19 +22,19 @@ is_subnet(network, other)
 A logical vector
 }
 \description{
-\code{overlaps()} checks for any overlap between two networks; \code{is_supernet()} and
-\code{is_subnet()} check if one network is a true supernet or subnet of another
-network.
+\code{is_supernet()} and \code{is_subnet()} check if one network is a true supernet or
+subnet of another network; \code{overlaps()} checks for any overlap between two
+networks.
 }
 \examples{
 net1 <- ip_network("192.168.1.128/30")
 net2 <- ip_network("192.168.1.0/24")
 
-overlaps(net1, net2)
-
 is_supernet(net1, net2)
 
 is_subnet(net1, net2)
+
+overlaps(net1, net2)
 }
 \seealso{
 Use \code{\link[=is_within]{is_within()}} to check if an \code{\link{ip_address}} is within an \code{\link{ip_network}}.
