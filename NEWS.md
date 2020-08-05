@@ -2,16 +2,17 @@
 
 ## New features
 
-This release adds support for constructing `ip_network()` vectors without using CIDR notation.
-
-* New `common_network()` function finds the smallest network containing two addresses
-* New `summarize_address_range()` function lists the constituent networks of an address range
-* `prefix_length()` can now infer the prefix length from an `ip_address()` vector of netmasks and/or hostmasks. This makes it possible to construct an `ip_network()` vector like so:
-  * `ip_network(ip_address("192.0.2.0"), prefix_length(ip_address("255.255.255.0")))`
-  * `ip_network(ip_address("192.0.2.0"), prefix_length(ip_address("0.0.0.255")))`
+* Add support for constructing `ip_network()` vectors without using CIDR notation
+  * New `common_network()` function finds the smallest network containing two addresses
+  * New `summarize_address_range()` function lists the constituent networks of an address range
+  * `prefix_length()` can now infer the prefix length from an `ip_address()` vector of netmasks and/or hostmasks. This makes it possible to construct an `ip_network()` vector like so:
+    * `ip_network(ip_address("192.0.2.0"), prefix_length(ip_address("255.255.255.0")))`
+    * `ip_network(ip_address("192.0.2.0"), prefix_length(ip_address("0.0.0.255")))`
+* New `supernet()` and `subnets()` functions for traversing the network hierarchy
 
 ## Minor improvements and fixes
 
+* Check for user interrupts when processing large data sets
 * `netmask()` and `hostmask()` now raise an error if the `prefix_length` and `is_ipv6` arguments are not both specified
 
 

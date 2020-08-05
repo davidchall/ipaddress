@@ -65,7 +65,9 @@ hostmask <- function(...) {
 #' @rdname netmask
 #' @export
 prefix_length.ip_network <- function(x, ...) {
-  field(x, "prefix")
+  # directly returning field enables assignment
+  result <- field(x, "prefix")
+  result
 }
 
 #' @rdname netmask
@@ -89,7 +91,9 @@ hostmask.ip_network <- function(x, ...) {
 #' @rdname netmask
 #' @export
 prefix_length.ip_interface <- function(x, ...) {
-  field(x, "prefix")
+  # directly returning field enables assignment
+  result <- field(x, "prefix")
+  result
 }
 
 #' @rdname netmask

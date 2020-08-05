@@ -2,6 +2,7 @@
 #include "IpNetworkVector.h"
 #include "encoding.h"
 #include "masking.h"
+#include "iterative.h"
 #include "utils.h"
 
 #include <asio/ip/tcp.hpp>

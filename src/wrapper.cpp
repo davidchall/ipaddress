@@ -100,6 +100,11 @@ DataFrame wrap_compare_address(List x) {
 }
 
 // [[Rcpp::export]]
+List wrap_subnets(List network_r, IntegerVector new_prefix) {
+  return IpNetworkVector(network_r).subnets(new_prefix).encodeR();
+}
+
+// [[Rcpp::export]]
 List wrap_network_hosts(List network_r, bool exclude_unusable) {
   return IpNetworkVector(network_r).hosts(exclude_unusable).encodeR();
 }

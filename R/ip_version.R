@@ -21,7 +21,9 @@ is_ipv4 <- function(x) {
     abort("'x' must be an ip_address or ip_network vector")
   }
 
-  !field(x, "is_ipv6")
+  # directly returning field enables assignment
+  result <- !field(x, "is_ipv6")
+  result
 }
 
 #' @rdname is_ipv6
@@ -31,7 +33,9 @@ is_ipv6 <- function(x) {
     abort("'x' must be an ip_address or ip_network vector")
   }
 
-  field(x, "is_ipv6")
+  # directly returning field enables assignment
+  result <- field(x, "is_ipv6")
+  result
 }
 
 #' Size of the address space
