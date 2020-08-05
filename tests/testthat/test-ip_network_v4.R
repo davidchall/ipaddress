@@ -41,20 +41,20 @@ test_that("missing values work", {
 })
 
 test_that("invalid inputs are caught", {
-  expect_warning(ip_network("abc"), "Invalid value")
-  expect_warning(ip_network("1.2.3.4"), "Invalid value")
-  expect_warning(ip_network("1.2.3.256/24"), "Invalid value")
-  expect_warning(ip_network("1.2.3.-1/24"), "Invalid value")
-  expect_warning(ip_network("1.2.3/24"), "Invalid value")
-  expect_warning(ip_network("1.2.3.4.5/24"), "Invalid value")
-  expect_warning(ip_network("1.2.3.4/-1"), "Invalid value")
-  expect_warning(ip_network("1.2.3.4/33"), "Invalid value")
-  expect_warning(ip_network("1.2.3.4/a"), "Invalid value")
-  expect_warning(ip_network("1.2.3.4/24/24"), "Invalid value")
+  expect_warning(ip_network("abc"))
+  expect_warning(ip_network("1.2.3.4"))
+  expect_warning(ip_network("1.2.3.256/24"))
+  expect_warning(ip_network("1.2.3.-1/24"))
+  expect_warning(ip_network("1.2.3/24"))
+  expect_warning(ip_network("1.2.3.4.5/24"))
+  expect_warning(ip_network("1.2.3.4/-1"))
+  expect_warning(ip_network("1.2.3.4/33"))
+  expect_warning(ip_network("1.2.3.4/a"))
+  expect_warning(ip_network("1.2.3.4/24/24"))
 
   expect_error(ip_network(ip_address("1.2.3.4"), 24))
-  expect_warning(ip_network(ip_address("1.2.3.4"), -1L), "Invalid value")
-  expect_warning(ip_network(ip_address("1.2.3.4"), 33L), "Invalid value")
+  expect_warning(ip_network(ip_address("1.2.3.4"), -1L))
+  expect_warning(ip_network(ip_address("1.2.3.4"), 33L))
 })
 
 test_that("strict argument works", {

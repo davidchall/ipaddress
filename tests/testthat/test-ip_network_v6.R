@@ -24,20 +24,20 @@ test_that("formats correctly", {
 })
 
 test_that("invalid inputs are caught", {
-  expect_warning(ip_network("1::2"), "Invalid value")
-  expect_warning(ip_address("1::g/24"), "Invalid value")
-  expect_warning(ip_network("1::-2/24"), "Invalid value")
-  expect_warning(ip_network("1:2/24"), "Invalid value")
-  expect_warning(ip_network("1::2::3/24"), "Invalid value")
-  expect_warning(ip_network("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff/24"), "Invalid value")
-  expect_warning(ip_network("1::2/-1"), "Invalid value")
-  expect_warning(ip_network("1::2/129"), "Invalid value")
-  expect_warning(ip_network("1::2/a"), "Invalid value")
-  expect_warning(ip_network("1::2/24/24"), "Invalid value")
+  expect_warning(ip_network("1::2"))
+  expect_warning(ip_address("1::g/24"))
+  expect_warning(ip_network("1::-2/24"))
+  expect_warning(ip_network("1:2/24"))
+  expect_warning(ip_network("1::2::3/24"))
+  expect_warning(ip_network("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff/24"))
+  expect_warning(ip_network("1::2/-1"))
+  expect_warning(ip_network("1::2/129"))
+  expect_warning(ip_network("1::2/a"))
+  expect_warning(ip_network("1::2/24/24"))
 
   expect_error(ip_network(ip_address("2001:db8::"), 24))
-  expect_warning(ip_network(ip_address("2001:db8::"), -1L), "Invalid value")
-  expect_warning(ip_network(ip_address("2001:db8::"), 129L), "Invalid value")
+  expect_warning(ip_network(ip_address("2001:db8::"), -1L))
+  expect_warning(ip_network(ip_address("2001:db8::"), 129L))
 })
 
 test_that("strict argument works", {
