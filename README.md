@@ -21,12 +21,11 @@ module.
 
 Here are some of the features:
 
-  - Fully supports both **IPv4 and IPv6** address spaces
-  - **Efficiently stores** addresses in their native format (a sequence
-    of bits)
-  - Calculations are performed in C++ for **improved performance**
-  - Classes are **compatible with the tidyverse**
   - Functions for **generation and analysis of IP data**
+  - Full support for both **IPv4 and IPv6** address spaces
+  - **Memory footprint:** data stored in native format
+  - **Performance:** calculations performed in C++
+  - Compatible with the **tidyverse**
 
 ## Installation
 
@@ -54,12 +53,10 @@ and tibbles.
 library(tidyverse)
 library(ipaddress)
 
-x <- tibble(
+tibble(
   address = ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334")),
   network = ip_network(c("192.168.100.0/22", "2001:db8::/48"))
 )
-
-x
 #> # A tibble: 2 x 2
 #>                   address          network
 #>                 <ip_addr>       <ip_netwk>
@@ -80,12 +77,16 @@ ip_address(c("255.255.255.255", "255.255.255.256"))
 Functions are provided to enable common tasks:
 
 ``` r
-mutate(x, ipv6 = is_ipv6(address), in_net = is_within(address, network))
-#> # A tibble: 2 x 4
-#>                   address          network ipv6  in_net
-#>                 <ip_addr>       <ip_netwk> <lgl> <lgl> 
-#> 1             192.168.0.1 192.168.100.0/22 FALSE FALSE 
-#> 2 2001:db8::8a2e:370:7334    2001:db8::/48 TRUE  TRUE
+tibble(network = ip_network(c("192.168.100.0/22", "2001:db8::/48"))) %>%
+  mutate(
+    first = network_address(network),
+    last = broadcast_address(network)
+  )
+#> # A tibble: 2 x 3
+#>            network         first                                last
+#>         <ip_netwk>     <ip_addr>                           <ip_addr>
+#> 1 192.168.100.0/22 192.168.100.0                     192.168.103.255
+#> 2    2001:db8::/48    2001:db8:: 2001:db8:0:ffff:ffff:ffff:ffff:ffff
 ```
 
 ## Related work
