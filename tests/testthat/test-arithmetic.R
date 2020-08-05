@@ -115,6 +115,10 @@ test_that("addition and subtraction work", {
   # missing values
   expect_equal(ip_address(NA) + 1L, ip_address(NA))
   expect_equal(ip_address(NA) - 1L, ip_address(NA))
+  expect_equal(ip_address("192.168.0.1") + NA_integer_, ip_address(NA))
+  expect_equal(ip_address("192.168.0.1") - NA_integer_, ip_address(NA))
+  expect_equal(ip_address("192.168.0.1") + NA_real_, ip_address(NA))
+  expect_equal(ip_address("192.168.0.1") - NA_real_, ip_address(NA))
 
   # invalid arguments
   expect_warning(ip_address("0.0.0.0") - 1L, "out-of-range")

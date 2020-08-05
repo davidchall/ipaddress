@@ -768,7 +768,7 @@ IpAddressVector IpAddressVector::operator+(const IntegerVector &rhs) const {
       checkUserInterrupt();
     }
 
-    if (is_na[i]) {
+    if (is_na[i] || rhs[i] == NA_INTEGER) {
       out_is_na[i] = true;
     } else if (is_ipv6[i]) {
       asio::ip::address_v6 tmp_addr = advance_ip(address_v6[i], rhs[i]);
