@@ -34,7 +34,7 @@ IpAddressVector::IpAddressVector(CharacterVector input) {
         address_v6[i] = asio::ip::make_address_v6(input[i], ec);
         if (ec) {
           is_na[i] = true;
-          warnInvalidInput(i, Rcpp::as<std::string>(input[i]));
+          warnOnRow(i, Rcpp::as<std::string>(input[i]));
         } else {
           is_ipv6[i] = true;
         }
@@ -100,7 +100,7 @@ IpAddressVector IpAddressVector::decodeBytes(List input) {
       is_ipv6[i] = true;
     } else {
       is_na[i] = true;
-      warnInvalidInput(i, "unable to decode");
+      warnOnRow(i, "unable to decode");
     }
   }
 
@@ -133,7 +133,7 @@ IpAddressVector IpAddressVector::decodeInteger(CharacterVector input, Nullable<L
           address_v6[i] = decode_integer<asio::ip::address_v6>(integer_string);
           is_ipv6[i] = true;
         } catch (...) {
-          warnInvalidInput(i, integer_string);
+          warnOnRow(i, integer_string);
           is_na[i] = true;
         }
       }
@@ -142,14 +142,14 @@ IpAddressVector IpAddressVector::decodeInteger(CharacterVector input, Nullable<L
         address_v6[i] = decode_integer<asio::ip::address_v6>(integer_string);
         is_ipv6[i] = true;
       } catch (...) {
-        warnInvalidInput(i, integer_string);
+        warnOnRow(i, integer_string);
         is_na[i] = true;
       }
     } else {
       try {
         address_v4[i] = decode_integer<asio::ip::address_v4>(integer_string);
       } catch (...) {
-        warnInvalidInput(i, integer_string);
+        warnOnRow(i, integer_string);
         is_na[i] = true;
       }
     }
@@ -176,7 +176,7 @@ IpAddressVector IpAddressVector::decodeBinary(CharacterVector input) {
     std::string bit_string(input[i]);
     if (bit_string.find_first_not_of("01") != std::string::npos) {
       is_na[i] = true;
-      warnInvalidInput(i, "contains non-binary characters");
+      warnOnRow(i, bit_string, "contains non-binary characters");
     } else if (bit_string.size() == 128) {
       address_v6[i] = decode_binary<asio::ip::address_v6>(bit_string);
       is_ipv6[i] = true;
@@ -184,7 +184,7 @@ IpAddressVector IpAddressVector::decodeBinary(CharacterVector input) {
       address_v4[i] = decode_binary<asio::ip::address_v4>(bit_string);
     } else {
       is_na[i] = true;
-      warnInvalidInput(i, "incorrect number of bits");
+      warnOnRow(i, bit_string, "incorrect number of bits");
     }
   }
 
@@ -223,7 +223,7 @@ List IpAddressVector::decodeHostname(CharacterVector input) {
 
       if (ec) {
         if (ec != asio::error::host_not_found) {
-          warnInvalidInput(i, hostname, ec.message());
+          warnOnRow(i, hostname, ec.message());
         }
         address_v4.resize(1);
         address_v6.resize(1);
@@ -299,7 +299,7 @@ IpAddressVector IpAddressVector::createHostmask(IntegerVector in_pfx, LogicalVec
   return IpAddressVector(address_v4, address_v6, is_ipv6, is_na);
 }
 
-void IpAddressVector::warnInvalidInput(unsigned int index, const std::string &input, const std::string &reason) {
+void IpAddressVector::warnOnRow(unsigned int index, const std::string &input, const std::string &reason) {
   // Indexes are 1-based in R
   std::string msg = "Invalid value on row " + std::to_string(index + 1) + ": " + input;
   if (!reason.empty()) {
@@ -477,7 +477,7 @@ List IpAddressVector::encodeHostnames() const {
       auto results = resolver.resolve(endpoint, ec);
 
       if (ec) {
-        warnInvalidInput(i, endpoint.address().to_string(), ec.message());
+        warnOnRow(i, endpoint.address().to_string(), ec.message());
         hostnames.push_back(NA_STRING);
       } else {
         for (auto const& entry : results) {
@@ -703,12 +703,10 @@ IpAddressVector IpAddressVector::operator+(const IntegerVector &rhs) const {
 
       if (rhs[i] > 0 && tmp_addr < address_v6[i]) {
         out_is_na[i] = true;
-        warnInvalidInput(i, address_v6[i].to_string() + " + " + std::to_string(rhs[i]),
-                         "out-of-range");
+        warnOnRow(i, address_v6[i].to_string() + " + " + std::to_string(rhs[i]), "out-of-range");
       } else if (rhs[i] < 0 && tmp_addr > address_v6[i]) {
         out_is_na[i] = true;
-        warnInvalidInput(i, address_v6[i].to_string() + " - " + std::to_string(-rhs[i]),
-                         "out-of-range");
+        warnOnRow(i, address_v6[i].to_string() + " - " + std::to_string(-rhs[i]), "out-of-range");
       } else {
         out_address_v6[i] = tmp_addr;
         out_is_ipv6[i] = true;
@@ -718,12 +716,10 @@ IpAddressVector IpAddressVector::operator+(const IntegerVector &rhs) const {
 
       if (rhs[i] > 0 && tmp_addr < address_v4[i]) {
         out_is_na[i] = true;
-        warnInvalidInput(i, address_v4[i].to_string() + " + " + std::to_string(rhs[i]),
-                         "out-of-range");
+        warnOnRow(i, address_v4[i].to_string() + " + " + std::to_string(rhs[i]), "out-of-range");
       } else if (rhs[i] < 0 && tmp_addr > address_v4[i]) {
         out_is_na[i] = true;
-        warnInvalidInput(i, address_v4[i].to_string() + " - " + std::to_string(-rhs[i]),
-                         "out-of-range");
+        warnOnRow(i, address_v4[i].to_string() + " - " + std::to_string(-rhs[i]), "out-of-range");
       } else {
         out_address_v4[i] = tmp_addr;
       }
@@ -805,7 +801,7 @@ IntegerVector IpAddressVector::prefixFromMask() const {
         prefix = hostmask_to_prefix(address_v6[i]);
       }
       if (prefix == -1) {
-        warnInvalidInput(i, address_v6[i].to_string(), "invalid netmask/hostmask");
+        warnOnRow(i, address_v6[i].to_string(), "invalid netmask/hostmask");
         output[i] = NA_INTEGER;
       } else {
         output[i] = prefix;
@@ -816,7 +812,7 @@ IntegerVector IpAddressVector::prefixFromMask() const {
         prefix = hostmask_to_prefix(address_v4[i]);
       }
       if (prefix == -1) {
-        warnInvalidInput(i, address_v4[i].to_string(), "invalid netmask/hostmask");
+        warnOnRow(i, address_v4[i].to_string(), "invalid netmask/hostmask");
         output[i] = NA_INTEGER;
       } else {
         output[i] = prefix;
@@ -832,28 +828,28 @@ IntegerVector IpAddressVector::prefixFromMask() const {
  *  Reserved addresses  *
  * ---------------------*/
 LogicalVector IpAddressVector::isMulticast() const {
-  return isTrue(
+  return checkCondition(
     [](const asio::ip::address_v4 &x) { return x.is_multicast(); },
     [](const asio::ip::address_v6 &x) { return x.is_multicast(); }
   );
 }
 
 LogicalVector IpAddressVector::isUnspecified() const {
-  return isTrue(
+  return checkCondition(
     [](const asio::ip::address_v4 &x) { return x.is_unspecified(); },
     [](const asio::ip::address_v6 &x) { return x.is_unspecified(); }
   );
 }
 
 LogicalVector IpAddressVector::isLoopback() const {
-  return isTrue(
+  return checkCondition(
     [](const asio::ip::address_v4 &x) { return x.is_loopback(); },
     [](const asio::ip::address_v6 &x) { return x.is_loopback(); }
   );
 }
 
 LogicalVector IpAddressVector::isLinkLocal() const {
-  return isTrue(
+  return checkCondition(
     [](const asio::ip::address_v4 &x) { return (x.to_uint() & 0xFFFF0000) == 0xA9FE0000; },
     [](const asio::ip::address_v6 &x) { return x.is_link_local(); }
   );
@@ -864,7 +860,7 @@ LogicalVector IpAddressVector::isLinkLocal() const {
  *  IPv6 transition mechanisms  *
  * -----------------------------*/
 LogicalVector IpAddressVector::isIPv4Mapped() const {
-  return isTrue(
+  return checkCondition(
     [](const asio::ip::address_v4 &x) { return false; },
     [](const asio::ip::address_v6 &x) { return x.is_v4_mapped(); }
   );
@@ -878,7 +874,7 @@ IpAddressVector IpAddressVector::extractIPv4Mapped() const {
 }
 
 LogicalVector IpAddressVector::is6to4() const {
-  return isTrue(
+  return checkCondition(
     [](const asio::ip::address_v4 &x) { return false; },
     [](const asio::ip::address_v6 &x) { return is_6to4(x); }
   );
@@ -892,7 +888,7 @@ IpAddressVector IpAddressVector::extract6to4() const {
 }
 
 LogicalVector IpAddressVector::isTeredo() const {
-  return isTrue(
+  return checkCondition(
     [](const asio::ip::address_v4 &x) { return false; },
     [](const asio::ip::address_v6 &x) { return is_teredo(x); }
   );
@@ -916,9 +912,9 @@ IpAddressVector IpAddressVector::extractTeredoClient() const {
 /*----------------*
  *  Common tasks  *
  * ---------------*/
-LogicalVector IpAddressVector::isTrue(
-    const std::function<bool(const asio::ip::address_v4&)>& decide_fn_v4,
-    const std::function<bool(const asio::ip::address_v6&)>& decide_fn_v6
+LogicalVector IpAddressVector::checkCondition(
+    const std::function<bool(const asio::ip::address_v4&)>& condition_v4,
+    const std::function<bool(const asio::ip::address_v6&)>& condition_v6
 ) const {
   std::size_t vsize = is_na.size();
   LogicalVector output(vsize);
@@ -927,9 +923,9 @@ LogicalVector IpAddressVector::isTrue(
     if (is_na[i]) {
       output[i] = NA_LOGICAL;
     } else if (is_ipv6[i]) {
-      output[i] = decide_fn_v6(address_v6[i]);
+      output[i] = condition_v6(address_v6[i]);
     } else {
-      output[i] = decide_fn_v4(address_v4[i]);
+      output[i] = condition_v4(address_v4[i]);
     }
   }
 

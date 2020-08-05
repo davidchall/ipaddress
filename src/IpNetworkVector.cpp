@@ -41,7 +41,7 @@ IpNetworkVector::IpNetworkVector(CharacterVector input,
           network_v4[i] = tmp_v4;
         } else if (strict) {
           is_na[i] = true;
-          warnInvalidInput(i, Rcpp::as<std::string>(input[i]), "host bits set");
+          warnOnRow(i, Rcpp::as<std::string>(input[i]), "host bits set");
         } else {
           network_v4[i] = tmp_v4.canonical();
         }
@@ -59,14 +59,14 @@ IpNetworkVector::IpNetworkVector(CharacterVector input,
             is_ipv6[i] = true;
           } else if (strict) {
             is_na[i] = true;
-            warnInvalidInput(i, Rcpp::as<std::string>(input[i]), "host bits set");
+            warnOnRow(i, Rcpp::as<std::string>(input[i]), "host bits set");
           } else {
             network_v6[i] = tmp_v6.canonical();
             is_ipv6[i] = true;
           }
         } else {
           is_na[i] = true;
-          warnInvalidInput(i, Rcpp::as<std::string>(input[i]));
+          warnOnRow(i, Rcpp::as<std::string>(input[i]));
         }
       }
     }
@@ -125,7 +125,7 @@ IpNetworkVector::IpNetworkVector(IpAddressVector address, IntegerVector prefix_l
       if (prefix_length[i] < 0 || prefix_length[i] > 128) {
         is_na[i] = true;
         std::string cidr = address.address_v6[i].to_string() + "/" + std::to_string(prefix_length[i]);
-        warnInvalidInput(i, cidr);
+        warnOnRow(i, cidr, "prefix length out-of-bounds");
       } else {
         asio::ip::network_v6 tmp_v6(address.address_v6[i], prefix_length[i]);
         if (is_interface) {
@@ -136,7 +136,7 @@ IpNetworkVector::IpNetworkVector(IpAddressVector address, IntegerVector prefix_l
           is_ipv6[i] = true;
         } else if (strict) {
           is_na[i] = true;
-          warnInvalidInput(i, tmp_v6.to_string(), "host bits set");
+          warnOnRow(i, tmp_v6.to_string(), "host bits set");
         } else {
           network_v6[i] = tmp_v6.canonical();
           is_ipv6[i] = true;
@@ -149,7 +149,7 @@ IpNetworkVector::IpNetworkVector(IpAddressVector address, IntegerVector prefix_l
       if (prefix_length[i] < 0 || prefix_length[i] > 32) {
         is_na[i] = true;
         std::string cidr = address.address_v4[i].to_string() + "/" + std::to_string(prefix_length[i]);
-        warnInvalidInput(i, cidr);
+        warnOnRow(i, cidr, "prefix length out-of-bounds");
       } else {
         asio::ip::network_v4 tmp_v4(address.address_v4[i], prefix_length[i]);
         if (is_interface) {
@@ -158,7 +158,7 @@ IpNetworkVector::IpNetworkVector(IpAddressVector address, IntegerVector prefix_l
           network_v4[i] = tmp_v4;
         } else if (strict) {
           is_na[i] = true;
-          warnInvalidInput(i, tmp_v4.to_string(), "host bits set");
+          warnOnRow(i, tmp_v4.to_string(), "host bits set");
         } else {
           network_v4[i] = tmp_v4.canonical();
         }
@@ -244,7 +244,7 @@ List IpNetworkVector::summarizeAddressRange(const IpAddressVector &address1, con
   return output;
 }
 
-void IpNetworkVector::warnInvalidInput(unsigned int index, const std::string &input, const std::string &reason) {
+void IpNetworkVector::warnOnRow(unsigned int index, const std::string &input, const std::string &reason) {
   // Indexes are 1-based in R
   std::string msg = "Invalid value on row " + std::to_string(index + 1) + ": " + input;
   if (!reason.empty()) {
@@ -464,49 +464,49 @@ IpAddressVector IpNetworkVector::sample(unsigned int size) const {
  *  Reserved addresses  *
  * ---------------------*/
 LogicalVector IpNetworkVector::isMulticast() const {
-  return isTrue(
+  return checkCondition(
     [](const asio::ip::address_v4 &x) { return x.is_multicast(); },
     [](const asio::ip::address_v6 &x) { return x.is_multicast(); }
   );
 }
 
 LogicalVector IpNetworkVector::isUnspecified() const {
-  return isTrue(
+  return checkCondition(
     [](const asio::ip::address_v4 &x) { return x.is_unspecified(); },
     [](const asio::ip::address_v6 &x) { return x.is_unspecified(); }
   );
 }
 
 LogicalVector IpNetworkVector::isLoopback() const {
-  return isTrue(
+  return checkCondition(
     [](const asio::ip::address_v4 &x) { return x.is_loopback(); },
     [](const asio::ip::address_v6 &x) { return x.is_loopback(); }
   );
 }
 
 LogicalVector IpNetworkVector::isLinkLocal() const {
-  return isTrue(
+  return checkCondition(
     [](const asio::ip::address_v4 &x) { return (x.to_uint() & 0xFFFF0000) == 0xA9FE0000; },
     [](const asio::ip::address_v6 &x) { return x.is_link_local(); }
   );
 }
 
 LogicalVector IpNetworkVector::isIPv4Mapped() const {
-  return isTrue(
+  return checkCondition(
     [](const asio::ip::address_v4 &x) { return false; },
     [](const asio::ip::address_v6 &x) { return x.is_v4_mapped(); }
   );
 }
 
 LogicalVector IpNetworkVector::is6to4() const {
-  return isTrue(
+  return checkCondition(
     [](const asio::ip::address_v4 &x) { return false; },
     [](const asio::ip::address_v6 &x) { return is_6to4(x); }
   );
 }
 
 LogicalVector IpNetworkVector::isTeredo() const {
-  return isTrue(
+  return checkCondition(
     [](const asio::ip::address_v4 &x) { return false; },
     [](const asio::ip::address_v6 &x) { return is_teredo(x); }
   );
@@ -516,9 +516,9 @@ LogicalVector IpNetworkVector::isTeredo() const {
 /*----------------*
  *  Common tasks  *
  * ---------------*/
-LogicalVector IpNetworkVector::isTrue(
-    const std::function<bool(const asio::ip::address_v4&)>& decide_fn_v4,
-    const std::function<bool(const asio::ip::address_v6&)>& decide_fn_v6
+LogicalVector IpNetworkVector::checkCondition(
+    const std::function<bool(const asio::ip::address_v4&)>& condition_v4,
+    const std::function<bool(const asio::ip::address_v6&)>& condition_v6
 ) const {
   std::size_t vsize = is_na.size();
   LogicalVector output(vsize);
@@ -529,11 +529,11 @@ LogicalVector IpNetworkVector::isTrue(
     } else if (is_ipv6[i]) {
       asio::ip::address_v6 first = network_v6[i].address();
       asio::ip::address_v6 last = broadcast_address<asio::ip::address_v6>(network_v6[i]);
-      output[i] = decide_fn_v6(first) && decide_fn_v6(last);
+      output[i] = condition_v6(first) && condition_v6(last);
     } else {
       asio::ip::address_v4 first = network_v4[i].address();
       asio::ip::address_v4 last = broadcast_address<asio::ip::address_v4>(network_v4[i]);
-      output[i] = decide_fn_v4(first) && decide_fn_v4(last);
+      output[i] = condition_v4(first) && condition_v4(last);
     }
   }
 
