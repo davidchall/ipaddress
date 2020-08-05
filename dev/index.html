@@ -115,14 +115,14 @@
 <p>This package provides classes for working with IP addresses, inspired by the Python <a href="https://docs.python.org/library/ipaddress.html">ipaddress</a> module.</p>
 <p>Here are some of the features:</p>
 <ul>
-<li>Fully supports both <strong>IPv4 and IPv6</strong> address spaces</li>
-<li>
-<strong>Efficiently stores</strong> addresses in their native format (a sequence of bits)</li>
-<li>Calculations are performed in C++ for <strong>improved performance</strong>
-</li>
-<li>Classes are <strong>compatible with the tidyverse</strong>
-</li>
 <li>Functions for <strong>generation and analysis of IP data</strong>
+</li>
+<li>Full support for both <strong>IPv4 and IPv6</strong> address spaces</li>
+<li>
+<strong>Memory footprint:</strong> data stored in native format</li>
+<li>
+<strong>Performance:</strong> calculations performed in C++</li>
+<li>Compatible with the <strong>tidyverse</strong>
 </li>
 </ul>
 <div id="installation" class="section level2">
@@ -141,12 +141,10 @@
 <div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ipaddress</span>)
 
-<span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu">tibble</span>(
+<span class="fu">tibble</span>(
   <span class="kw">address</span> <span class="kw">=</span> <span class="fu"><a href="reference/ip_address.html">ip_address</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"192.168.0.1"</span>, <span class="st">"2001:db8::8a2e:370:7334"</span>)),
   <span class="kw">network</span> <span class="kw">=</span> <span class="fu"><a href="reference/ip_network.html">ip_network</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"192.168.100.0/22"</span>, <span class="st">"2001:db8::/48"</span>))
 )
-
-<span class="no">x</span>
 <span class="co">#&gt; # A tibble: 2 x 2</span>
 <span class="co">#&gt;                   address          network</span>
 <span class="co">#&gt;                 &lt;ip_addr&gt;       &lt;ip_netwk&gt;</span>
@@ -158,12 +156,16 @@
 <span class="co">#&gt; &lt;ip_address[2]&gt;</span>
 <span class="co">#&gt; [1] 255.255.255.255 &lt;NA&gt;</span></pre></div>
 <p>Functions are provided to enable common tasks:</p>
-<div class="sourceCode" id="cb5"><pre class="r"><span class="fu">mutate</span>(<span class="no">x</span>, <span class="kw">ipv6</span> <span class="kw">=</span> <span class="fu"><a href="reference/is_ipv6.html">is_ipv6</a></span>(<span class="no">address</span>), <span class="kw">in_net</span> <span class="kw">=</span> <span class="fu"><a href="reference/address_in_network.html">is_within</a></span>(<span class="no">address</span>, <span class="no">network</span>))
-<span class="co">#&gt; # A tibble: 2 x 4</span>
-<span class="co">#&gt;                   address          network ipv6  in_net</span>
-<span class="co">#&gt;                 &lt;ip_addr&gt;       &lt;ip_netwk&gt; &lt;lgl&gt; &lt;lgl&gt; </span>
-<span class="co">#&gt; 1             192.168.0.1 192.168.100.0/22 FALSE FALSE </span>
-<span class="co">#&gt; 2 2001:db8::8a2e:370:7334    2001:db8::/48 TRUE  TRUE</span></pre></div>
+<div class="sourceCode" id="cb5"><pre class="r"><span class="fu">tibble</span>(<span class="kw">network</span> <span class="kw">=</span> <span class="fu"><a href="reference/ip_network.html">ip_network</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"192.168.100.0/22"</span>, <span class="st">"2001:db8::/48"</span>))) <span class="kw">%&gt;%</span>
+  <span class="fu">mutate</span>(
+    <span class="kw">first</span> <span class="kw">=</span> <span class="fu"><a href="reference/network_size.html">network_address</a></span>(<span class="no">network</span>),
+    <span class="kw">last</span> <span class="kw">=</span> <span class="fu"><a href="reference/network_size.html">broadcast_address</a></span>(<span class="no">network</span>)
+  )
+<span class="co">#&gt; # A tibble: 2 x 3</span>
+<span class="co">#&gt;            network         first                                last</span>
+<span class="co">#&gt;         &lt;ip_netwk&gt;     &lt;ip_addr&gt;                           &lt;ip_addr&gt;</span>
+<span class="co">#&gt; 1 192.168.100.0/22 192.168.100.0                     192.168.103.255</span>
+<span class="co">#&gt; 2    2001:db8::/48    2001:db8:: 2001:db8:0:ffff:ffff:ffff:ffff:ffff</span></pre></div>
 </div>
 <div id="related-work" class="section level2">
 <h2 class="hasAnchor">
