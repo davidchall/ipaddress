@@ -72,7 +72,7 @@ raise a warning and are replaced with `NA`.
 
 ``` r
 ip_address(c("255.255.255.255", "255.255.255.256"))
-#> Warning: Invalid value on row 2: 255.255.255.256
+#> Warning: Problem on row 2: 255.255.255.256
 #> <ip_address[2]>
 #> [1] 255.255.255.255 <NA>
 ```

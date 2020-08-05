@@ -266,7 +266,7 @@ List IpNetworkVector::summarizeAddressRange(const IpAddressVector &address1, con
 
 void IpNetworkVector::warnOnRow(unsigned int index, const std::string &input, const std::string &reason) {
   // Indexes are 1-based in R
-  std::string msg = "Invalid value on row " + std::to_string(index + 1) + ": " + input;
+  std::string msg = "Problem on row " + std::to_string(index + 1) + ": " + input;
   if (!reason.empty()) {
     msg += " (" + reason + ")";
   }
