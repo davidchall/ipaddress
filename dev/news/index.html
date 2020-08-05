@@ -157,7 +157,8 @@
 <div id="new-features" class="section level2">
 <h2 class="hasAnchor">
 <a href="#new-features" class="anchor"></a>New features</h2>
-<p>This release adds support for constructing <code><a href="../reference/ip_network.html">ip_network()</a></code> vectors without using CIDR notation.</p>
+<ul>
+<li>Add support for constructing <code><a href="../reference/ip_network.html">ip_network()</a></code> vectors without using CIDR notation
 <ul>
 <li>New <code><a href="../reference/common_network.html">common_network()</a></code> function finds the smallest network containing two addresses</li>
 <li>New <code><a href="../reference/summarize_address_range.html">summarize_address_range()</a></code> function lists the constituent networks of an address range</li>
@@ -169,11 +170,15 @@
 </ul>
 </li>
 </ul>
+</li>
+<li>New <code><a href="../reference/traverse_hierarchy.html">supernet()</a></code> and <code><a href="../reference/traverse_hierarchy.html">subnets()</a></code> functions for traversing the network hierarchy</li>
+</ul>
 </div>
 <div id="minor-improvements-and-fixes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#minor-improvements-and-fixes" class="anchor"></a>Minor improvements and fixes</h2>
 <ul>
+<li>Check for user interrupts when processing large data sets</li>
 <li>
 <code><a href="../reference/netmask.html">netmask()</a></code> and <code><a href="../reference/netmask.html">hostmask()</a></code> now raise an error if the <code>prefix_length</code> and <code>is_ipv6</code> arguments are not both specified</li>
 </ul>
