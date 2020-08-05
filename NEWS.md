@@ -13,6 +13,7 @@
 ## Minor improvements and fixes
 
 * Check for user interrupts when processing large data sets
+* Support addition/subtraction of integerish doubles to `ip_address()` vectors
 * `netmask()` and `hostmask()` now raise an error if the `prefix_length` and `is_ipv6` arguments are not both specified
 
 

@@ -43,6 +43,25 @@ vec_arith.ip_address.integer <- function(op, x, y, ...) {
   )
 }
 
+#' @method vec_arith.ip_address double
+#' @export
+vec_arith.ip_address.double <- function(op, x, y, ...) {
+  if (!is_integerish(y)) {
+    stop_incompatible_op(op, x, y)
+  }
+
+  args <- vec_recycle_common(x, y)
+  x <- args[[1L]]
+  y <- args[[2L]]
+
+  switch(
+    op,
+    "+" = wrap_add_integer(x, y),
+    "-" = wrap_add_integer(x, -y),
+    stop_incompatible_op(op, x, y)
+  )
+}
+
 #' @method vec_arith.ip_address MISSING
 #' @export
 vec_arith.ip_address.MISSING <- function(op, x, y, ...) {

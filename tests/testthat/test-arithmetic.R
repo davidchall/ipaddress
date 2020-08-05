@@ -97,6 +97,10 @@ test_that("addition and subtraction work", {
   expect_equal(ip_address("2001:db8::7334") + 5L, ip_address("2001:db8::7339"))
   expect_equal(ip_address("2001:db8::7334") - 5L, ip_address("2001:db8::732f"))
 
+  # integerish accepted
+  expect_equal(ip_address("192.168.0.1") + 5, ip_address("192.168.0.6"))
+  expect_equal(ip_address("192.168.0.1") - 5, ip_address("192.167.255.252"))
+
   # vector recycling
   expect_equal(
     ip_address("192.168.0.1") + -2:2,
@@ -125,6 +129,6 @@ test_that("addition and subtraction work", {
 test_that("other operations fail", {
   expect_error(ip_address() + ip_address())
   expect_error(-ip_address())
-  expect_error(ip_address() + 1)
+  expect_error(ip_address() + 1.5)
   expect_error(ip_address() * 1L)
 })
