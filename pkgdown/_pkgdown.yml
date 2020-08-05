@@ -19,7 +19,7 @@ template:
       card: summary
 
 reference:
-  - title: "Classes"
+  - title: "Data classes"
     contents:
       - ip_address
       - ip_network
