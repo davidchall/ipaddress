@@ -55,13 +55,13 @@ library(ipaddress)
 
 tibble(
   address = ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334")),
-  network = ip_network(c("192.168.100.0/22", "2001:db8::/48"))
+  network = ip_network(c("192.168.100.0/22", "2001:db8::/80"))
 )
 #> # A tibble: 2 x 2
 #>                   address          network
 #>                 <ip_addr>       <ip_netwk>
 #> 1             192.168.0.1 192.168.100.0/22
-#> 2 2001:db8::8a2e:370:7334    2001:db8::/48
+#> 2 2001:db8::8a2e:370:7334    2001:db8::/80
 ```
 
 Input character vectors are validated as they are parsed. Invalid inputs
@@ -77,16 +77,17 @@ ip_address(c("255.255.255.255", "255.255.255.256"))
 Functions are provided to enable common tasks:
 
 ``` r
-tibble(network = ip_network(c("192.168.100.0/22", "2001:db8::/48"))) %>%
+tibble(network = ip_network(c("192.168.100.0/22", "2001:db8::/80"))) %>%
   mutate(
     first = network_address(network),
-    last = broadcast_address(network)
+    last = broadcast_address(network),
+    ipv6 = is_ipv6(network)
   )
-#> # A tibble: 2 x 3
-#>            network         first                                last
-#>         <ip_netwk>     <ip_addr>                           <ip_addr>
-#> 1 192.168.100.0/22 192.168.100.0                     192.168.103.255
-#> 2    2001:db8::/48    2001:db8:: 2001:db8:0:ffff:ffff:ffff:ffff:ffff
+#> # A tibble: 2 x 4
+#>            network         first                     last ipv6 
+#>         <ip_netwk>     <ip_addr>                <ip_addr> <lgl>
+#> 1 192.168.100.0/22 192.168.100.0          192.168.103.255 FALSE
+#> 2    2001:db8::/80    2001:db8:: 2001:db8::ffff:ffff:ffff TRUE
 ```
 
 ## Related work
