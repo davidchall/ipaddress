@@ -56,6 +56,10 @@ test_that("is_within_any works", {
     ),
     c(TRUE, TRUE, FALSE)
   )
+  expect_equal(
+    is_within_any(ip_address("::1"), ip_network("2001:db8::/80")),
+    FALSE
+  )
 })
 
 test_that("network-in-network works", {

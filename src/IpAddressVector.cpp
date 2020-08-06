@@ -855,8 +855,10 @@ LogicalVector IpAddressVector::isWithinAny(const IpNetworkVector &network) const
 
         if (network.is_na[i_netw] || is_ipv6[i_addr] != network.is_ipv6[i_netw]) {
           continue;
-        } else if (is_ipv6[i_addr] && address_in_network(address_v6[i_addr], network.network_v6[i_netw])) {
-          output[i_addr] = true;
+        } else if (is_ipv6[i_addr]) {
+          if (address_in_network(address_v6[i_addr], network.network_v6[i_netw])) {
+            output[i_addr] = true;
+          }
         } else if (address_in_network(address_v4[i_addr], network.network_v4[i_netw])) {
           output[i_addr] = true;
         }

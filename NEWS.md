@@ -16,6 +16,7 @@
 * Addition/subtraction operators now support integerish doubles
 * Addition/subtraction operators now catch missing values in 2nd argument
 * `netmask()` and `hostmask()` now raise an error if the `prefix_length` and `is_ipv6` arguments are not both specified
+* Fix `is_within_any()` to correctly catch when IPv6 addresses are in zero networks
 * Rename `vignette("ipaddress")` as `vignette("ipaddress-classes")`
 
 
