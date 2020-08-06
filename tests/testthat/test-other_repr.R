@@ -15,6 +15,7 @@ test_that("integer encoding/decoding works", {
   expect_equal(integer_to_ip("1", is_ipv6 = NULL), ip_address("0.0.0.1"))
   expect_equal(integer_to_ip("1", is_ipv6 = c(FALSE, TRUE)), ip_address(c("0.0.0.1", "::1")))
   expect_equal(integer_to_ip(ip_to_integer(x)), x)
+  expect_equal(integer_to_ip(c(0, 3232235521, 4294967295)), ip_address(c("0.0.0.0", "192.168.0.1", "255.255.255.255")))
 
   expect_warning(integer_to_ip("hello"))
   expect_warning(integer_to_ip("-1"))
