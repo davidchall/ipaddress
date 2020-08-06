@@ -1,0 +1,95 @@
+---
+title: "Example usage"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Example usage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(collapse = T, comment = "#>")
+options(tibble.print_min = 5)
+
+library(dplyr)
+library(ipaddress)
+```
+
+This vignette demonstrates some typical use cases for the ipaddress package.
+
+
+## Addresses from integers
+
+Although IPv4 addresses are usually displayed in a human-readable format (e.g. `192.168.0.1`), they are often saved to disk as integers to reduce storage requirements.
+R is unable to store the entire range of IPv4 addresses in its integer data type, but they can instead be stored in its numeric data type.
+More details are found under `help("ip_to_integer")`.
+
+Given this, it's quite possible that you'll receive IPv4 addresses represented as integers, and we'll want to convert them to the `ip_address()` vector type. Here's an example of how to do that:
+
+```{r}
+integer_to_ip(c(0, 3232235521, 4294967295))
+```
+
+
+## Networks from address ranges
+
+There are multiple equivalent ways to represent an IP network:
+
+1. start address + prefix length (e.g. CIDR notation)
+2. start address + netmask
+3. start address + hostmask
+4. start address + end address
+
+Although the `ip_network()` function can handle the first 3 options, we use the `common_network()` function for the final option.
+
+```{r}
+tibble(
+  start = ip_address(c("192.168.0.0", "2001:db8::")),
+  end = ip_address(c("192.168.0.15", "2001:db8::ffff:ffff:ffff"))
+) %>%
+  mutate(network = common_network(start, end))
+```
+
+Note that this approach assumes the two addresses do actually correspond to the first and last addresses of the network, otherwise an expanded network will be returned (see `help("common_network")` for details).
+
+
+## Is an address in a network?
+
+A very common task is to check if an IP address is within an IP network, so the ipaddress package provides a couple of different functions to help with this workflow: `is_within()` and `is_within_any()`.
+We also provide `is_subnet()` and `is_supernet()` to test if a network is within another network.
+
+To see how these functions can be used in practice, let's consider a couple of IP networks:
+
+```{r}
+my_networks <- tibble(
+  network = ip_network(c("192.168.0.0/16", "2001:db8::/32")),
+  label = c("Private", "Documentation")
+)
+
+my_networks
+```
+
+and a handful of addresses:
+
+```{r}
+my_addresses <- tibble(
+  address = ip_address(c("192.168.100.1", "1.2.3.4", "2001:db8::8a2e:370:7334", "::1"))
+)
+```
+
+First, we'll check if each address is in _any_ of our networks.
+
+```{r}
+my_addresses %>%
+  mutate(in_network = is_within_any(address, my_networks$network))
+```
+
+But what if we need to know _which_ of our networks the address was found in?
+We can do that by performing a cross-join with the table of networks, and filtering those rows that match.
+
+```{r}
+my_addresses %>%
+  full_join(my_networks, by = character()) %>%
+  filter(is_within(address, network))
+```
+
