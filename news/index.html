@@ -98,7 +98,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -111,10 +111,22 @@
   </a>
 </li>
 <li>
-  <a href="../articles/ipaddress.html">Get started</a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/ipaddress-classes.html">Data classes</a>
+    </li>
+    <li>
+      <a href="../articles/ipaddress-examples.html">Example usage</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -150,9 +162,51 @@
       <small>Source: <a href='https://github.com/davidchall/ipaddress/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="ipaddress-040" class="section level1">
+<h1 class="page-header" data-toc-text="0.4.0">
+<a href="#ipaddress-040" class="anchor"></a>ipaddress 0.4.0<small> 2020-08-06 </small>
+</h1>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New features</h2>
+<ul>
+<li>Add support for constructing <code><a href="../reference/ip_network.html">ip_network()</a></code> vectors without using CIDR notation
+<ul>
+<li>New <code><a href="../reference/common_network.html">common_network()</a></code> function finds the smallest network containing two addresses</li>
+<li>New <code><a href="../reference/summarize_address_range.html">summarize_address_range()</a></code> function lists the constituent networks of an address range</li>
+<li>
+<code><a href="../reference/netmask.html">prefix_length()</a></code> can now infer the prefix length from an <code><a href="../reference/ip_address.html">ip_address()</a></code> vector of netmasks and/or hostmasks. This makes it possible to construct an <code><a href="../reference/ip_network.html">ip_network()</a></code> vector like so:
+<ul>
+<li><code><a href="../reference/ip_network.html">ip_network(ip_address("192.0.2.0"), prefix_length(ip_address("255.255.255.0")))</a></code></li>
+<li><code><a href="../reference/ip_network.html">ip_network(ip_address("192.0.2.0"), prefix_length(ip_address("0.0.0.255")))</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>New <code><a href="../reference/traverse_hierarchy.html">supernet()</a></code> and <code><a href="../reference/traverse_hierarchy.html">subnets()</a></code> functions for traversing the network hierarchy</li>
+<li>Added <code><a href="../articles/ipaddress-examples.html">vignette("ipaddress-examples")</a></code> to describe some typical usage patterns</li>
+</ul>
+</div>
+<div id="minor-improvements-and-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-improvements-and-fixes" class="anchor"></a>Minor improvements and fixes</h2>
+<ul>
+<li>Check for user interrupts when processing large data sets</li>
+<li>
+<code><a href="../reference/ip_to_integer.html">integer_to_ip()</a></code> now accepts integerish doubles</li>
+<li>Addition/subtraction operators now accept integerish doubles</li>
+<li>Addition/subtraction operators now catch missing values in 2nd argument</li>
+<li>
+<code><a href="../reference/netmask.html">netmask()</a></code> and <code><a href="../reference/netmask.html">hostmask()</a></code> now raise an error if the <code>prefix_length</code> and <code>is_ipv6</code> arguments are not both specified</li>
+<li>Fix <code><a href="../reference/address_in_network.html">is_within_any()</a></code> to correctly catch when IPv6 addresses are in zero networks</li>
+<li>Rename <code>vignette("ipaddress")</code> as <code><a href="../articles/ipaddress-classes.html">vignette("ipaddress-classes")</a></code>
+</li>
+</ul>
+</div>
+</div>
     <div id="ipaddress-030" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.0">
-<a href="#ipaddress-030" class="anchor"></a>ipaddress 0.3.0<small> Unreleased </small>
+<a href="#ipaddress-030" class="anchor"></a>ipaddress 0.3.0<small> 2020-05-12 </small>
 </h1>
 <div id="breaking-changes" class="section level2">
 <h2 class="hasAnchor">
@@ -173,9 +227,9 @@
 </li>
 </ul>
 </div>
-<div id="new-features" class="section level2">
+<div id="new-features-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features" class="anchor"></a>New features</h2>
+<a href="#new-features-1" class="anchor"></a>New features</h2>
 <ul>
 <li>New <code><a href="../reference/ip_to_integer.html">ip_to_integer()</a></code> and <code><a href="../reference/ip_to_integer.html">integer_to_ip()</a></code> functions to encode and decode addresses as integers. Note that the integers are contained within a character vector. Please see the function documentation for an explanation.</li>
 </ul>
@@ -205,7 +259,7 @@
 <h2 class="hasAnchor">
 <a href="#classes" class="anchor"></a>Classes</h2>
 <ul>
-<li>Added <code><a href="../articles/ipaddress.html">vignette("ipaddress")</a></code> to introduce the data classes provided by ipaddress</li>
+<li>Added <code>vignette("ipaddress")</code> to introduce the data classes provided by ipaddress</li>
 <li>New <code><a href="../reference/ip_interface.html">ip_interface()</a></code> class to simultaneously store the address and the network it is on</li>
 <li>
 <code><a href="../reference/ip_address.html">ip_address()</a></code> vectors now support bitwise operations (<code>!</code>, <code><a href="https://rdrr.io/r/base/Logic.html">&amp;</a></code>, <code><a href="https://rdrr.io/r/base/Logic.html">|</a></code> and <code><a href="https://rdrr.io/r/base/Arithmetic.html">^</a></code>)</li>
@@ -350,7 +404,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

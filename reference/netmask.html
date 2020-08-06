@@ -53,7 +53,13 @@
 
 
 <meta property="og:title" content="Network mask — netmask" />
-<meta property="og:description" content="These functions yield equivalent representations of the network mask." />
+<meta property="og:description" content="prefix_length(), netmask() and hostmask() extract different (but
+equivalent) representations of the network mask. They accept an
+ip_network or ip_interface vector.
+The functions can also convert between these alternative representations.
+For example, prefix_length() can infer the prefix length from an
+ip_address vector of netmasks and/or hostmasks, while netmask() and
+hostmask() can accept a vector of prefix lengths." />
 <meta property="og:image" content="https://davidchall.github.io/ipaddress/logo.png" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="@hall_davidc" />
@@ -99,7 +105,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -112,10 +118,22 @@
   </a>
 </li>
 <li>
-  <a href="../articles/ipaddress.html">Get started</a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/ipaddress-classes.html">Data classes</a>
+    </li>
+    <li>
+      <a href="../articles/ipaddress-examples.html">Example usage</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -153,43 +171,63 @@
     </div>
 
     <div class="ref-description">
-    <p>These functions yield equivalent representations of the network mask.</p>
+    <p><code>prefix_length()</code>, <code>netmask()</code> and <code>hostmask()</code> extract different (but
+equivalent) representations of the network mask. They accept an
+<code><a href='ip_network.html'>ip_network</a></code> or <code><a href='ip_interface.html'>ip_interface</a></code> vector.</p>
+<p>The functions can also convert between these alternative representations.
+For example, <code>prefix_length()</code> can infer the prefix length from an
+<code><a href='ip_address.html'>ip_address</a></code> vector of netmasks and/or hostmasks, while <code>netmask()</code> and
+<code>hostmask()</code> can accept a vector of prefix lengths.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>prefix_length</span>(<span class='no'>x</span>)
+    <pre class="usage"><span class='fu'>prefix_length</span>(<span class='no'>...</span>)
 
 <span class='fu'>netmask</span>(<span class='no'>...</span>)
 
 <span class='fu'>hostmask</span>(<span class='no'>...</span>)
 
 <span class='co'># S3 method for ip_network</span>
+<span class='fu'>prefix_length</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for ip_network</span>
 <span class='fu'>netmask</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for ip_network</span>
 <span class='fu'>hostmask</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for ip_interface</span>
+<span class='fu'>prefix_length</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for ip_interface</span>
 <span class='fu'>netmask</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for ip_interface</span>
 <span class='fu'>hostmask</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>netmask</span>(<span class='kw'>prefix_length</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>integer</a></span>(), <span class='kw'>is_ipv6</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/logical.html'>logical</a></span>(), <span class='no'>...</span>)
+<span class='fu'>prefix_length</span>(<span class='no'>mask</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>hostmask</span>(<span class='kw'>prefix_length</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>integer</a></span>(), <span class='kw'>is_ipv6</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/logical.html'>logical</a></span>(), <span class='no'>...</span>)</pre>
+<span class='fu'>netmask</span>(<span class='no'>prefix_length</span>, <span class='no'>is_ipv6</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for default</span>
+<span class='fu'>hostmask</span>(<span class='no'>prefix_length</span>, <span class='no'>is_ipv6</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>...</th>
+      <td><p>Arguments to be passed to other methods</p></td>
+    </tr>
+    <tr>
       <th>x</th>
       <td><p>An <code><a href='ip_network.html'>ip_network</a></code> or <code><a href='ip_interface.html'>ip_interface</a></code> vector</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Arguments to be passed to other methods</p></td>
+      <th>mask</th>
+      <td><p>An <code><a href='ip_address.html'>ip_address</a></code> vector of netmasks and/or hostmasks. Ambiguous
+cases (all zeros, all ones) are treated as netmasks.</p></td>
     </tr>
     <tr>
       <th>prefix_length</th>
@@ -221,10 +259,15 @@
 #&gt; [1] 255.255.252.0 ffff:ffc0::  </div><div class='input'>
 <span class='fu'>hostmask</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
 #&gt; [1] 0.0.3.255                          0:3f:ffff:ffff:ffff:ffff:ffff:ffff</div><div class='input'>
+<span class='co'># construct netmask/hostmask from prefix length</span>
 <span class='fu'>netmask</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>22L</span>, <span class='fl'>26L</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>FALSE</span>, <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
 #&gt; [1] 255.255.252.0 ffff:ffc0::  </div><div class='input'>
 <span class='fu'>hostmask</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>22L</span>, <span class='fl'>26L</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>FALSE</span>, <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
-#&gt; [1] 0.0.3.255                          0:3f:ffff:ffff:ffff:ffff:ffff:ffff</div></pre>
+#&gt; [1] 0.0.3.255                          0:3f:ffff:ffff:ffff:ffff:ffff:ffff</div><div class='input'>
+<span class='co'># extract prefix length from netmask/hostmask</span>
+<span class='fu'>prefix_length</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"255.255.255.0"</span>, <span class='st'>"0.255.255.255"</span>)))</div><div class='output co'>#&gt; [1] 24  8</div><div class='input'>
+<span class='co'># invalid netmask/hostmask raise a warning and return NA</span>
+<span class='fu'>prefix_length</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"255.255.255.1"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: Problem on row 1: 255.255.255.1 (invalid netmask/hostmask)</span></div><div class='output co'>#&gt; [1] NA</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -240,7 +283,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

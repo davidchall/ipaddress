@@ -101,7 +101,7 @@ as_ip_address() casts an object to ip_address." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -114,10 +114,22 @@ as_ip_address() casts an object to ip_address." />
   </a>
 </li>
 <li>
-  <a href="../articles/ipaddress.html">Get started</a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/ipaddress-classes.html">Data classes</a>
+    </li>
+    <li>
+      <a href="../articles/ipaddress-examples.html">Example usage</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -223,13 +235,16 @@ are returned in the dual representation (e.g. <code>::ffff:192.168.0.1</code>).<
 <p>Integers can be added to or subtracted from <code>ip_address</code> vectors.
 This class also supports bitwise operations: <code>!</code> (NOT), <code>&amp;</code> (AND),
 <code>|</code> (OR) and <code>^</code> (XOR).</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='../articles/ipaddress-classes.html'>vignette("ipaddress-classes")</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># supports IPv4 and IPv6 simultaneously</span>
 <span class='fu'>ip_address</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.1"</span>, <span class='st'>"2001:db8::8a2e:370:7334"</span>))</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
 #&gt; [1] 192.168.0.1             2001:db8::8a2e:370:7334</div><div class='input'>
 <span class='co'># validates inputs and replaces with NA</span>
-<span class='fu'>ip_address</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"255.255.255.256"</span>, <span class='st'>"192.168.0.1/32"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: Invalid value on row 1: 255.255.255.256</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Invalid value on row 2: 192.168.0.1/32</span></div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
+<span class='fu'>ip_address</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"255.255.255.256"</span>, <span class='st'>"192.168.0.1/32"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: Problem on row 1: 255.255.255.256</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Problem on row 2: 192.168.0.1/32</span></div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
 #&gt; [1] &lt;NA&gt; &lt;NA&gt;</div><div class='input'>
 <span class='co'># addition of integers</span>
 <span class='fu'>ip_address</span>(<span class='st'>"192.168.0.1"</span>) + -<span class='fl'>2</span>:<span class='fl'>2</span></div><div class='output co'>#&gt; &lt;ip_address[5]&gt;
@@ -262,7 +277,7 @@ This class also supports bitwise operations: <code>!</code> (NOT), <code>&amp;</
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

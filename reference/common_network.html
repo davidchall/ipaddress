@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Version of the address space — is_ipv6 • ipaddress</title>
+<title>Find the common network of two addresses — common_network • ipaddress</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -52,8 +52,12 @@
 
 
 
-<meta property="og:title" content="Version of the address space — is_ipv6" />
-<meta property="og:description" content="Version of the address space" />
+<meta property="og:title" content="Find the common network of two addresses — common_network" />
+<meta property="og:description" content="Returns the smallest network that contains both addresses.
+This can construct a network from its first and last addresses. However, if
+the address range does not match the network boundaries, then the result
+extends beyond the original address range. Use summarize_address_range()
+to receive a list of networks that exactly match the address range." />
 <meta property="og:image" content="https://davidchall.github.io/ipaddress/logo.png" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="@hall_davidc" />
@@ -159,40 +163,48 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Version of the address space</h1>
-    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/ip_version.R'><code>R/ip_version.R</code></a></small>
-    <div class="hidden name"><code>is_ipv6.Rd</code></div>
+    <h1>Find the common network of two addresses</h1>
+    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/common_network.R'><code>R/common_network.R</code></a></small>
+    <div class="hidden name"><code>common_network.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Version of the address space</p>
+    <p>Returns the smallest network that contains both addresses.</p>
+<p>This can construct a network from its first and last addresses. However, if
+the address range does not match the network boundaries, then the result
+extends beyond the original address range. Use <code><a href='summarize_address_range.html'>summarize_address_range()</a></code>
+to receive a list of networks that exactly match the address range.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>is_ipv4</span>(<span class='no'>x</span>)
-
-<span class='fu'>is_ipv6</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>common_network</span>(<span class='no'>address1</span>, <span class='no'>address2</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>An <code><a href='ip_address.html'>ip_address</a></code> or <code><a href='ip_network.html'>ip_network</a></code> vector</p></td>
+      <th>address1</th>
+      <td><p>An <code><a href='ip_address.html'>ip_address</a></code> vector</p></td>
+    </tr>
+    <tr>
+      <th>address2</th>
+      <td><p>An <code><a href='ip_address.html'>ip_address</a></code> vector</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A logical vector</p>
+    <p>An <code><a href='ip_network.html'>ip_network</a></code> vector</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='max_prefix_length.html'>max_prefix_length()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='summarize_address_range.html'>summarize_address_range()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>ip</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.1"</span>, <span class='st'>"2001:db8::7334"</span>))
-
-<span class='fu'>is_ipv4</span>(<span class='no'>ip</span>)</div><div class='output co'>#&gt; [1]  TRUE FALSE</div><div class='input'>
-<span class='fu'>is_ipv6</span>(<span class='no'>ip</span>)</div><div class='output co'>#&gt; [1] FALSE  TRUE</div></pre>
+    <pre class="examples"><div class='input'><span class='co'># address range matches network boundaries</span>
+<span class='fu'>common_network</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"192.168.0.0"</span>), <span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"192.168.0.15"</span>))</div><div class='output co'>#&gt; &lt;ip_network[1]&gt;
+#&gt; [1] 192.168.0.0/28</div><div class='input'>
+<span class='co'># address range does not match network boundaries</span>
+<span class='fu'>common_network</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"192.167.255.255"</span>), <span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"192.168.0.16"</span>))</div><div class='output co'>#&gt; &lt;ip_network[1]&gt;
+#&gt; [1] 192.160.0.0/12</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

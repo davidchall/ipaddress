@@ -7,6 +7,9 @@
     <loc>https://davidchall.github.io/ipaddress/reference/address_in_network.html</loc>
   </url>
   <url>
+    <loc>https://davidchall.github.io/ipaddress/reference/common_network.html</loc>
+  </url>
+  <url>
     <loc>https://davidchall.github.io/ipaddress/reference/ip_address.html</loc>
   </url>
   <url>
@@ -61,6 +64,15 @@
     <loc>https://davidchall.github.io/ipaddress/reference/sequence.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/articles/ipaddress.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/reference/summarize_address_range.html</loc>
+  </url>
+  <url>
+    <loc>https://davidchall.github.io/ipaddress/reference/traverse_hierarchy.html</loc>
+  </url>
+  <url>
+    <loc>https://davidchall.github.io/ipaddress/articles/ipaddress-classes.html</loc>
+  </url>
+  <url>
+    <loc>https://davidchall.github.io/ipaddress/articles/ipaddress-examples.html</loc>
   </url>
 </urlset>
