@@ -9,11 +9,13 @@
     * `ip_network(ip_address("192.0.2.0"), prefix_length(ip_address("255.255.255.0")))`
     * `ip_network(ip_address("192.0.2.0"), prefix_length(ip_address("0.0.0.255")))`
 * New `supernet()` and `subnets()` functions for traversing the network hierarchy
+* Added `vignette("ipaddress-examples")` to describe some typical usage patterns
 
 ## Minor improvements and fixes
 
 * Check for user interrupts when processing large data sets
-* Addition/subtraction operators now support integerish doubles
+* `integer_to_ip()` now accepts integerish doubles
+* Addition/subtraction operators now accept integerish doubles
 * Addition/subtraction operators now catch missing values in 2nd argument
 * `netmask()` and `hostmask()` now raise an error if the `prefix_length` and `is_ipv6` arguments are not both specified
 * Fix `is_within_any()` to correctly catch when IPv6 addresses are in zero networks

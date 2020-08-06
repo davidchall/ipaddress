@@ -72,6 +72,9 @@ ip_to_integer <- function(x) {
 #' @rdname ip_to_integer
 #' @export
 integer_to_ip <- function(x, is_ipv6 = NULL) {
+  if (is_integerish(x)) {
+    x <- as.character(x)
+  }
   if (!is_character(x)) {
     abort("'x' must be a character vector")
   }

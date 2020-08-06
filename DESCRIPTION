@@ -26,6 +26,7 @@ Imports:
     vctrs (>= 0.3.0)
 Suggests: 
     crayon,
+    dplyr (>= 1.0.0),
     knitr,
     pillar (>= 1.4.5),
     rmarkdown,

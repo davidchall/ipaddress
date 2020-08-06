@@ -25,9 +25,9 @@ This vignette is styled after the [official tutorial](https://docs.python.org/ho
 It introduces you to these classes, laying the groundwork for the rest of the package functionality.
 
 
-# IP Addresses
+## IP Addresses
 
-## Background
+### Background
 
 IP addresses are used to facilitate communications between computers connected to the internet.
 At this highest level, an IP address is analogous to a mailing address.
@@ -43,7 +43,7 @@ To make IP addresses easier for humans to interpret, they are usually represente
 * An IPv4 address is represented as 4 groups of decimal numbers from `0` to `255` separated by periods (e.g. `192.168.0.1`). Each group corresponds to 8 bits.
 * An IPv6 address is represented as 8 groups of hexadecimal numbers from `0000` to `ffff` separated by colons (e.g. `2001:0db8:85a3:0000:0000:8a2e:0370:7334`). Each group corresponds to 16 bits. This representation can also be compressed by removing leading zeros and replacing consecutive groups of zeros with double-colon (e.g. `2001:db8:85a3::8a2e:370:7334`).
 
-## Class constructor
+### Class constructor
 
 An `ip_address()` vector is constructed from a character vector of these human-readable strings.
 It can handle IPv4 and IPv6 addresses simultaneously:
@@ -56,7 +56,7 @@ IP addresses are often stored as integers for convenience, so you might need to 
 The `ip_to_integer()` and `integer_to_ip()` functions are provided for this purpose.
 We recommend reading the documentation before use, because these functions can be slightly counter-intuitive (due to circumventing limitations of the R integer data type).
 
-## Data storage
+### Data storage
 
 The above example looks like we've simply stored the character vector.
 However, the constructor has actually validated each input and stored the native bit representation of each address.
@@ -73,9 +73,9 @@ There are two main advantages to storing IP data in their native bit representat
 * Subsequent use is much faster, because we don't need to parse and validate the character vector again.
 
 
-# IP Networks
+## IP Networks
 
-## Background
+### Background
 
 An IP network is a contiguous range of IP addresses (also known as an IP block).
 These networks are very important to how address allocation and routing work.
@@ -91,7 +91,7 @@ This notation is used by both IPv4 and IPv6 networks.
 
 As an example, the `192.168.0.0/24` network represents the address range from `192.168.0.0` to `192.168.0.255`.
 
-## Class constructor
+### Class constructor
 
 An `ip_network()` vector is constructed from a character vector of these CIDR strings.
 For example:
@@ -114,9 +114,9 @@ ip_network("192.168.0.1/24", strict = FALSE)
 ```
 
 
-# IP Interfaces
+## IP Interfaces
 
-## Background
+### Background
 
 We've learned about host addresses and how they are grouped into networks.
 Unsurprisingly then, people often think about an IP address within the context of its network (i.e. storing both pieces of information simultaneously).
@@ -125,7 +125,7 @@ The ipaddress package refers to this concept as an IP interface.
 An IP interface could be represented in many different ways (e.g. two addresses containing the network bits and host bits separately).
 However, the most common representation is CIDR notation again.
 
-## Class constructor
+### Class constructor
 
 An `ip_interface()` vector is constructed from a character vector of CIDR strings, just like an `ip_network()` vector.
 However, unlike `ip_network()`, the `ip_interface()` class retains the host bits.
@@ -148,7 +148,7 @@ as_ip_network(x)
 ```
 
 
-# Summary
+## Summary
 
 The ipaddress package provides the `ip_address()` and `ip_network()` data classes, which represent the most fundamental aspects of IP networking.
 The majority of functions contained in this package use these classes.
