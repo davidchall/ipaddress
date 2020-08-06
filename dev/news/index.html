@@ -123,6 +123,9 @@
     <li>
       <a href="../articles/ipaddress-classes.html">Data classes</a>
     </li>
+    <li>
+      <a href="../articles/ipaddress-examples.html">Example usage</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -181,6 +184,7 @@
 </ul>
 </li>
 <li>New <code><a href="../reference/traverse_hierarchy.html">supernet()</a></code> and <code><a href="../reference/traverse_hierarchy.html">subnets()</a></code> functions for traversing the network hierarchy</li>
+<li>Added <code><a href="../articles/ipaddress-examples.html">vignette("ipaddress-examples")</a></code> to describe some typical usage patterns</li>
 </ul>
 </div>
 <div id="minor-improvements-and-fixes" class="section level2">
@@ -188,7 +192,9 @@
 <a href="#minor-improvements-and-fixes" class="anchor"></a>Minor improvements and fixes</h2>
 <ul>
 <li>Check for user interrupts when processing large data sets</li>
-<li>Addition/subtraction operators now support integerish doubles</li>
+<li>
+<code><a href="../reference/ip_to_integer.html">integer_to_ip()</a></code> now accepts integerish doubles</li>
+<li>Addition/subtraction operators now accept integerish doubles</li>
 <li>Addition/subtraction operators now catch missing values in 2nd argument</li>
 <li>
 <code><a href="../reference/netmask.html">netmask()</a></code> and <code><a href="../reference/netmask.html">hostmask()</a></code> now raise an error if the <code>prefix_length</code> and <code>is_ipv6</code> arguments are not both specified</li>
