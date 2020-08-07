@@ -35,6 +35,9 @@ methods::setOldClass(c("ip_network", "vctrs_vctr"))
 #' When casting an `ip_network` object back to a character vector using
 #' `as.character()`, IPv6 addresses are reduced to their compressed representation.
 #'
+#' When comparing and sorting `ip_network` vectors, the network address is
+#' compared before the prefix length.
+#'
 #' @param ... Included for S3 generic consistency
 #' @param x
 #' * For `ip_network()`: A character vector of IP networks, in CIDR notation
@@ -166,7 +169,9 @@ format.ip_network <- function(x, ...) as.character(x)
 
 #' @export
 vec_proxy_compare.ip_network <- function(x, ...) {
-  wrap_compare_address(network_address(x))
+  compare_df <- wrap_compare_address(network_address(x))
+  compare_df$prefix <- field(x, "prefix")
+  compare_df
 }
 
 

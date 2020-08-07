@@ -1,5 +1,10 @@
 # ipaddress (development version)
 
+* Fixed comparison operators for `ip_network()` and `ip_interface()`
+  * `ip_network()` vectors compare network address before prefix length
+  * `ip_interface()` vectors compare network before host address
+
+
 # ipaddress 0.4.0
 
 ## New features

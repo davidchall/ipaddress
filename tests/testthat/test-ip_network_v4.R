@@ -89,6 +89,10 @@ test_that("comparison operations work", {
     c(-1L, rep(1L, length(x) - 1L))
   )
   expect_equal(vec_compare(ip_network("192.168.0.0/16"), ip_network(NA)), NA_integer_)
+
+  # network address compared before prefix length
+  expect_true(ip_network("192.168.0.0/24") > ip_network("192.168.0.0/23"))
+  expect_true(ip_network("192.168.4.0/22") > ip_network("192.168.0.0/23"))
 })
 
 test_that("extracting basic info works", {

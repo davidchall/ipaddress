@@ -69,6 +69,10 @@ test_that("comparison operations work", {
   expect_true(ip_interface("192.168.0.1/10") > ip_interface("192.168.0.0/10"))
   expect_true(ip_interface("2001:db8::abcd/32") > ip_interface("2001:db8::abc0/32"))
 
+  # network compared before address
+  expect_true(ip_interface("192.168.0.0/24") > ip_interface("192.168.0.1/23"))
+  expect_true(ip_interface("192.168.0.1/23") > ip_interface("192.168.0.0/23"))
+
   expect_error(ip_interface("0.0.0.0/32") > ip_address("0.0.0.0"))
   expect_error(ip_address("0.0.0.0") > ip_interface("0.0.0.0/32"))
   expect_error(ip_interface("0.0.0.0/32") > ip_network("0.0.0.0/32"))

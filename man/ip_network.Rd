@@ -84,6 +84,9 @@ integer vector containing the network address and prefix length, respectively.
 
 When casting an \code{ip_network} object back to a character vector using
 \code{as.character()}, IPv6 addresses are reduced to their compressed representation.
+
+When comparing and sorting \code{ip_network} vectors, the network address is
+compared before the prefix length.
 }
 \examples{
 # construct from character vector

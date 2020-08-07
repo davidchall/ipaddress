@@ -73,6 +73,9 @@ reserved for \code{\link{ip_network}} vectors: \code{\link[=prefix_length]{prefi
 
 For other purposes, you can extract the address and network components using
 \code{\link[=as_ip_address]{as_ip_address()}} and \code{\link[=as_ip_network]{as_ip_network()}}.
+
+When comparing and sorting \code{ip_interface} vectors, the network is compared
+before the host address.
 }
 \examples{
 # construct from character vector
