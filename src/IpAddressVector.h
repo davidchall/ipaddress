@@ -117,6 +117,7 @@ public:
   Rcpp::LogicalVector isUnspecified() const;
   Rcpp::LogicalVector isLoopback() const;
   Rcpp::LogicalVector isLinkLocal() const;
+  Rcpp::LogicalVector isSiteLocal() const;
 
 
   /*------------------------------*

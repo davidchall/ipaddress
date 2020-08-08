@@ -244,6 +244,15 @@ LogicalVector wrap_is_link_local(List x) {
   }
 }
 
+// [[Rcpp::export]]
+LogicalVector wrap_is_site_local(List x) {
+  if (x.inherits("ip_address")) {
+    return IpAddressVector(x).isSiteLocal();
+  } else {
+    return IpNetworkVector(x).isSiteLocal();
+  }
+}
+
 
 /*------------------------------*
  *  IPv6 transition mechanisms  *

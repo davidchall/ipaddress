@@ -145,6 +145,10 @@ wrap_is_link_local <- function(x) {
     .Call(`_ipaddress_wrap_is_link_local`, x)
 }
 
+wrap_is_site_local <- function(x) {
+    .Call(`_ipaddress_wrap_is_site_local`, x)
+}
+
 wrap_is_ipv4_mapped <- function(x) {
     .Call(`_ipaddress_wrap_is_ipv4_mapped`, x)
 }

@@ -6,6 +6,7 @@
 \alias{is_unspecified}
 \alias{is_loopback}
 \alias{is_link_local}
+\alias{is_site_local}
 \title{Reserved addresses}
 \usage{
 is_multicast(x)
@@ -15,6 +16,8 @@ is_unspecified(x)
 is_loopback(x)
 
 is_link_local(x)
+
+is_site_local(x)
 }
 \arguments{
 \item{x}{An \code{\link{ip_address}} or \code{\link{ip_network}} vector}
@@ -42,6 +45,8 @@ is_unspecified(ip_network(c("0.0.0.0/32", "::/128")))
 is_loopback(ip_network(c("127.0.0.0/8", "::1/128")))
 
 is_link_local(ip_network(c("169.254.0.0/16", "fe80::/10")))
+
+is_site_local(ip_network("fec0::/10"))
 }
 \seealso{
 Addresses reserved by IPv6 transition mechanisms can be identified

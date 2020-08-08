@@ -22,6 +22,8 @@
 #' is_loopback(ip_network(c("127.0.0.0/8", "::1/128")))
 #'
 #' is_link_local(ip_network(c("169.254.0.0/16", "fe80::/10")))
+#'
+#' is_site_local(ip_network("fec0::/10"))
 #' @seealso
 #' Addresses reserved by IPv6 transition mechanisms can be identified
 #' by functions described in [ipv6-transition].
@@ -66,4 +68,14 @@ is_link_local <- function(x) {
   }
 
   wrap_is_link_local(x)
+}
+
+#' @rdname is_reserved
+#' @export
+is_site_local <- function(x) {
+  if (!(is_ip_address(x) || is_ip_network(x))) {
+    abort("'x' must be an ip_address or ip_network vector")
+  }
+
+  wrap_is_site_local(x)
 }

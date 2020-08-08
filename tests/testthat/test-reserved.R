@@ -49,3 +49,17 @@ test_that("is_link_local works", {
 
   expect_error(is_link_local("hello"))
 })
+
+test_that("is_site_local works", {
+  expect_false(is_site_local(ip_address("0.0.0.0")))
+  expect_false(is_site_local(ip_network("0.0.0.0/0")))
+  expect_reserved(is_site_local, ip_network("fec0::/10"))
+
+  expect_equal(is_site_local(ip_address()), logical())
+  expect_equal(is_site_local(ip_network()), logical())
+
+  expect_equal(is_site_local(ip_address(NA)), NA)
+  expect_equal(is_site_local(ip_network(NA)), NA)
+
+  expect_error(is_site_local("hello"))
+})
