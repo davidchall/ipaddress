@@ -109,7 +109,7 @@ tibble(network = ip_network(c("192.168.100.0/22", "2001:db8::/80"))) %>%
 
 -----
 
-Please note that the ‘ipaddress’ project is released with a [Contributor
+Please note that the ipaddress project is released with a [Contributor
 Code of
 Conduct](https://davidchall.github.io/ipaddress/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.
