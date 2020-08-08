@@ -1,3 +1,11 @@
+#' Expectation: does the function identify the reserved address range?
+#'
+#' This tests the addresses either side of the reserved network boundaries.
+#'
+#' @param reserved_func The function under test. This should return `TRUE` when
+#'   an [`ip_address`] is within the reserved network.
+#' @param network The reserved network
+#' @noRd
 expect_reserved_address_range <- function(reserved_func, network) {
   act <- quasi_label(enquo(reserved_func), arg = "reserved_func")
 
@@ -28,6 +36,14 @@ expect_reserved_address_range <- function(reserved_func, network) {
   invisible(act$val)
 }
 
+#' Expectation: does the function identify the reserved network?
+#'
+#' This tests the subnets and supernet of the reserved network.
+#'
+#' @param reserved_func The function under test. This should return `TRUE` when
+#'   an [`ip_network`] is within the reserved network.
+#' @param network The reserved network
+#' @noRd
 expect_reserved_network <- function(reserved_func, network) {
   act <- quasi_label(enquo(reserved_func), arg = "reserved_func")
 
@@ -50,6 +66,12 @@ expect_reserved_network <- function(reserved_func, network) {
   invisible(act$val)
 }
 
+#' Expectation: does the function identify reserved addresses and networks?
+#'
+#' @param reserved_func The function under test. This should return `TRUE` when
+#'   an [`ip_address`] or [`ip_network`] is within the reserved network.
+#' @param network The reserved network
+#' @noRd
 expect_reserved <- function(reserved_func, network) {
   func <- enquo(reserved_func)
   expect_reserved_address_range(!!func, network)
