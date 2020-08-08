@@ -13,6 +13,8 @@ is_multicast(x)
 
 is_unspecified(x)
 
+is_reserved(x)
+
 is_loopback(x)
 
 is_link_local(x)
@@ -31,9 +33,15 @@ A network is considered reserved if both the \code{network_address()}
 and \code{broadcast_address()} are reserved.
 }
 \details{
-These special use addresses are documented in IETF documents
-\href{https://tools.ietf.org/html/rfc5735.html}{RFC 5735} (for IPv4) and
-\href{https://tools.ietf.org/html/rfc4291}{RFC 4291} (for IPv6).
+Here are hyperlinks to the IANA registries of allocated address space:
+\itemize{
+\item \strong{IPv4:}
+\href{https://www.iana.org/assignments/ipv4-address-space/ipv4-address-space.xhtml}{allocations},
+\href{https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml}{special purpose}
+\item \strong{IPv6:}
+\href{https://www.iana.org/assignments/ipv6-address-space/ipv6-address-space.xhtml}{allocations},
+\href{https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml}{special purpose}
+}
 }
 \examples{
 # these examples show the reserved networks
@@ -41,6 +49,11 @@ These special use addresses are documented in IETF documents
 is_multicast(ip_network(c("224.0.0.0/4", "ff00::/8")))
 
 is_unspecified(ip_network(c("0.0.0.0/32", "::/128")))
+
+is_reserved(ip_network(c(
+  "240.0.0.0/4", "::/3", "4000::/2", "8000::/2", "c000::/3",
+  "e000::/4", "f000::/5", "f800::/6", "fe00::/9"
+)))
 
 is_loopback(ip_network(c("127.0.0.0/8", "::1/128")))
 

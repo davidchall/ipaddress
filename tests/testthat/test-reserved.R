@@ -24,6 +24,26 @@ test_that("is_unspecified works", {
   expect_error(is_unspecified("hello"))
 })
 
+test_that("is_reserved works", {
+  expect_reserved(is_reserved, ip_network("240.0.0.0/4"))
+  expect_reserved(is_reserved, ip_network("::/3"))
+  expect_reserved(is_reserved, ip_network("4000::/2"), ignore_end = TRUE, ignore_super = TRUE)
+  expect_reserved(is_reserved, ip_network("8000::/2"), ignore_start = TRUE, ignore_end = TRUE)
+  expect_reserved(is_reserved, ip_network("c000::/3"), ignore_start = TRUE, ignore_end = TRUE)
+  expect_reserved(is_reserved, ip_network("e000::/4"), ignore_start = TRUE, ignore_end = TRUE)
+  expect_reserved(is_reserved, ip_network("f000::/5"), ignore_start = TRUE, ignore_end = TRUE)
+  expect_reserved(is_reserved, ip_network("f800::/6"), ignore_start = TRUE)
+  expect_reserved(is_reserved, ip_network("fe00::/9"))
+
+  expect_equal(is_reserved(ip_address()), logical())
+  expect_equal(is_reserved(ip_network()), logical())
+
+  expect_equal(is_reserved(ip_address(NA)), NA)
+  expect_equal(is_reserved(ip_network(NA)), NA)
+
+  expect_error(is_reserved("hello"))
+})
+
 test_that("is_loopback works", {
   expect_reserved(is_loopback, ip_network("127.0.0.0/8"))
   expect_reserved(is_loopback, ip_network("::1/128"))
