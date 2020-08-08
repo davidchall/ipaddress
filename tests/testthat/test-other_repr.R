@@ -8,10 +8,21 @@ test_that("integer encoding/decoding works", {
 
   expect_type(ip_to_integer(x), "character")
   expect_s3_class(integer_to_ip("1"), "ip_address")
+
   expect_equal(
     ip_to_integer(x),
     c("3232235521", "42540766411282592856904136881884656436", NA)
   )
+  expect_equal(
+    ip_to_integer(x, base = "hex"),
+    c("0xC0A80001", "0x20010DB80000000000008A2E03707334", NA)
+  )
+  expect_equal(ip_to_integer(x, base = "bin"), ip_to_binary(x))
+
+  # zero padding
+  expect_equal(ip_to_integer(ip_address("0.0.0.0"), base = "hex"), paste0("0x", strrep("0", 8)))
+  expect_equal(ip_to_integer(ip_address("::"), base = "hex"), paste0("0x", strrep("0", 32)))
+
   expect_equal(integer_to_ip("1", is_ipv6 = NULL), ip_address("0.0.0.1"))
   expect_equal(integer_to_ip("1", is_ipv6 = c(FALSE, TRUE)), ip_address(c("0.0.0.1", "::1")))
   expect_equal(integer_to_ip(ip_to_integer(x)), x)
@@ -54,7 +65,11 @@ test_that("binary encoding/decoding works", {
   ))
   expect_equal(binary_to_ip(ip_to_binary(x)), x)
 
-  expect_warning(binary_to_ip("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"), "contains non-binary characters")
+  # zero padding
+  expect_equal(ip_to_binary(ip_address("0.0.0.0")), strrep("0", 32))
+  expect_equal(ip_to_binary(ip_address("::")), strrep("0", 128))
+
+  expect_warning(binary_to_ip(strrep("a", 32)), "contains non-binary characters")
   expect_warning(binary_to_ip("11000000"), "incorrect number of bits")
   expect_warning(binary_to_ip("110000001010100000000000000000010"), "incorrect number of bits")
 })

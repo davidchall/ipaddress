@@ -451,7 +451,7 @@ List IpAddressVector::encodeBytes() const {
   return output;
 }
 
-CharacterVector IpAddressVector::encodeInteger() const {
+CharacterVector IpAddressVector::encodeInteger(bool hex) const {
   std::size_t vsize = is_na.size();
 
   // initialize vectors
@@ -465,9 +465,9 @@ CharacterVector IpAddressVector::encodeInteger() const {
     if (is_na[i]) {
       output[i] = NA_STRING;
     } else if (is_ipv6[i]) {
-      output[i] = encode_integer(address_v6[i]);
+      output[i] = encode_integer(address_v6[i], hex);
     } else {
-      output[i] = encode_integer(address_v4[i]);
+      output[i] = encode_integer(address_v4[i], hex);
     }
   }
 

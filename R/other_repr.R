@@ -39,6 +39,8 @@
 #' @param x
 #'  * For `ip_to_integer()`: An [`ip_address`] vector
 #'  * For `integer_to_ip()`: A character vector
+#' @param base A string choosing the numeric base of the output. Choices are
+#'   decimal (`"dec"`; the default), hexadecimal (`"hex"`), and binary (`"bin"`).
 #' @param is_ipv6 A logical vector indicating whether to construct an IPv4 or
 #'   IPv6 address. If `NULL` (the default), then integers less than 2^32 will
 #'   construct an IPv4 address and anything larger will construct an IPv6 address.
@@ -56,17 +58,25 @@
 #' # with IPv4 only, we can use numeric data type
 #' as.numeric(ip_to_integer(ip_address("192.168.0.1")))
 #'
-#' integer_to_ip(as.character(3232235521))
+#' integer_to_ip(3232235521)
+#'
+#' # hex representation
+#' ip_to_integer(x, base = "hex")
 #' @seealso
 #'  * [ip_to_bytes()] and [bytes_to_ip()]
 #'  * [ip_to_binary()] and [binary_to_ip()]
 #' @export
-ip_to_integer <- function(x) {
+ip_to_integer <- function(x, base = c("dec", "hex", "bin")) {
   if (!is_ip_address(x)) {
     abort("'x' must be an ip_address vector")
   }
 
-  wrap_encode_integer(x)
+  switch(
+    arg_match(base),
+    dec = wrap_encode_integer(x, FALSE),
+    hex = wrap_encode_integer(x, TRUE),
+    bin = wrap_encode_binary(x)
+  )
 }
 
 #' @rdname ip_to_integer

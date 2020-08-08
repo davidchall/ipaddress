@@ -1,8 +1,9 @@
 # ipaddress (development version)
 
-* Fixed comparison operators for `ip_network()` and `ip_interface()`
-  * `ip_network()` vectors compare network address before prefix length
-  * `ip_interface()` vectors compare network before host address
+* Comparison of `ip_network()` and `ip_interface()` vectors is now consistent with the Python ipaddress module
+  * `ip_network()`: network address compared before prefix length
+  * `ip_interface()`: network compared before host address
+* `ip_to_integer()` gains a `base` parameter to select between decimal, hexadecimal and binary outputs
 
 
 # ipaddress 0.4.0

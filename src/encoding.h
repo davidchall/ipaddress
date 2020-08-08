@@ -57,11 +57,12 @@ Address decode_binary(const std::string &bit_string) {
 }
 
 template<class Address>
-std::string encode_integer(const Address &x) {
+std::string encode_integer(const Address &x, bool hex) {
   typename Address::bytes_type x_bytes = x.to_bytes();
+  const std::size_t n_bits = 8*sizeof(x_bytes);
 
   boost::multiprecision::number<boost::multiprecision::cpp_int_backend<
-    8*sizeof(x_bytes), 8*sizeof(x_bytes),
+    n_bits, n_bits,
     boost::multiprecision::unsigned_magnitude,
     boost::multiprecision::checked,
     void
@@ -70,7 +71,13 @@ std::string encode_integer(const Address &x) {
   // import most-significant byte first (x_bytes stored in network order)
   import_bits(x_int, x_bytes.begin(), x_bytes.end(), 8, true);
 
-  return x_int.str();
+  if (hex) {
+    std::stringstream ss;
+    ss << "0x" << std::hex << std::setfill('0') << std::setw(n_bits/4) << std::uppercase <<  x_int;
+    return ss.str();
+  } else {
+    return x_int.str();
+  }
 }
 
 template<class Address>
