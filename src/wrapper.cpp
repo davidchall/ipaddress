@@ -28,8 +28,8 @@ List wrap_decode_bytes(List x) {
 }
 
 // [[Rcpp::export]]
-CharacterVector wrap_encode_integer(List x) {
-  return IpAddressVector(x).encodeInteger();
+CharacterVector wrap_encode_integer(List x, bool hex) {
+  return IpAddressVector(x).encodeInteger(hex);
 }
 
 // [[Rcpp::export]]

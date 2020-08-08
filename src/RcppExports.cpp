@@ -50,13 +50,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // wrap_encode_integer
-CharacterVector wrap_encode_integer(List x);
-RcppExport SEXP _ipaddress_wrap_encode_integer(SEXP xSEXP) {
+CharacterVector wrap_encode_integer(List x, bool hex);
+RcppExport SEXP _ipaddress_wrap_encode_integer(SEXP xSEXP, SEXP hexSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< List >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(wrap_encode_integer(x));
+    Rcpp::traits::input_parameter< bool >::type hex(hexSEXP);
+    rcpp_result_gen = Rcpp::wrap(wrap_encode_integer(x, hex));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -502,7 +503,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_wrap_print_address", (DL_FUNC) &_ipaddress_wrap_print_address, 1},
     {"_ipaddress_wrap_encode_bytes", (DL_FUNC) &_ipaddress_wrap_encode_bytes, 1},
     {"_ipaddress_wrap_decode_bytes", (DL_FUNC) &_ipaddress_wrap_decode_bytes, 1},
-    {"_ipaddress_wrap_encode_integer", (DL_FUNC) &_ipaddress_wrap_encode_integer, 1},
+    {"_ipaddress_wrap_encode_integer", (DL_FUNC) &_ipaddress_wrap_encode_integer, 2},
     {"_ipaddress_wrap_decode_integer", (DL_FUNC) &_ipaddress_wrap_decode_integer, 2},
     {"_ipaddress_wrap_encode_binary", (DL_FUNC) &_ipaddress_wrap_encode_binary, 1},
     {"_ipaddress_wrap_decode_binary", (DL_FUNC) &_ipaddress_wrap_decode_binary, 1},

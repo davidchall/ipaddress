@@ -79,7 +79,7 @@ public:
   Rcpp::List encodeBytes() const;
 
   // Encode to integer string
-  Rcpp::CharacterVector encodeInteger() const;
+  Rcpp::CharacterVector encodeInteger(bool hex) const;
 
   // Encode to binary string
   Rcpp::CharacterVector encodeBinary() const;
