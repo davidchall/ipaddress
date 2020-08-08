@@ -167,14 +167,16 @@
 <a href="#ipaddress-development-version" class="anchor"></a>ipaddress (development version)<small> Unreleased </small>
 </h1>
 <ul>
-<li>Fixed comparison operators for <code><a href="../reference/ip_network.html">ip_network()</a></code> and <code><a href="../reference/ip_interface.html">ip_interface()</a></code>
+<li>Comparison of <code><a href="../reference/ip_network.html">ip_network()</a></code> and <code><a href="../reference/ip_interface.html">ip_interface()</a></code> vectors is now consistent with the Python ipaddress module
 <ul>
 <li>
-<code><a href="../reference/ip_network.html">ip_network()</a></code> vectors compare network address before prefix length</li>
+<code><a href="../reference/ip_network.html">ip_network()</a></code>: network address compared before prefix length</li>
 <li>
-<code><a href="../reference/ip_interface.html">ip_interface()</a></code> vectors compare network before host address</li>
+<code><a href="../reference/ip_interface.html">ip_interface()</a></code>: network compared before host address</li>
 </ul>
 </li>
+<li>
+<code><a href="../reference/ip_to_integer.html">ip_to_integer()</a></code> gains a <code>base</code> parameter to select between decimal, hexadecimal and binary outputs</li>
 </ul>
 </div>
     <div id="ipaddress-040" class="section level1">
