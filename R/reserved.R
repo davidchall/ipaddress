@@ -18,16 +18,13 @@
 #' @return A logical vector
 #'
 #' @examples
-#' # these examples show the reserved networks
-#'
 #' is_multicast(ip_network(c("224.0.0.0/4", "ff00::/8")))
+#'
+#' is_private(ip_network(c("192.168.0.0/16", "2001:db8::/32")))
 #'
 #' is_unspecified(ip_network(c("0.0.0.0/32", "::/128")))
 #'
-#' is_reserved(ip_network(c(
-#'   "240.0.0.0/4", "::/3", "4000::/2", "8000::/2", "c000::/3",
-#'   "e000::/4", "f000::/5", "f800::/6", "fe00::/9"
-#' )))
+#' is_reserved(ip_network(c("240.0.0.0/4", "f000::/5")))
 #'
 #' is_loopback(ip_network(c("127.0.0.0/8", "::1/128")))
 #'
@@ -48,6 +45,26 @@ is_multicast <- function(x) {
   }
 
   wrap_is_multicast(x)
+}
+
+#' @rdname is_reserved
+#' @export
+is_private <- function(x) {
+  networks <- ip_network(c(
+    "0.0.0.0/8", "10.0.0.0/8", "127.0.0.0/8", "169.254.0.0/16", "172.16.0.0/12",
+    "192.0.0.0/29", "192.0.0.170/31", "192.0.2.0/24", "192.168.0.0/16",
+    "198.18.0.0/15", "198.51.100.0/24", "203.0.113.0/24", "240.0.0.0/4",
+    "::/127", "::ffff:0:0/96", "100::/64", "2001::/23", "2001:db8::/32",
+    "fc00::/7", "fe80::/10"
+  ))
+
+  if (is_ip_address(x)) {
+    is_within_any(x, networks)
+  } else if (is_ip_network(x)) {
+    is_within_any(network_address(x), networks) & is_within_any(broadcast_address(x), networks)
+  } else {
+    abort("'x' must be an ip_address or ip_network vector")
+  }
 }
 
 #' @rdname is_reserved

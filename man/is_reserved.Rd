@@ -3,6 +3,7 @@
 \name{is_reserved}
 \alias{is_reserved}
 \alias{is_multicast}
+\alias{is_private}
 \alias{is_unspecified}
 \alias{is_loopback}
 \alias{is_link_local}
@@ -10,6 +11,8 @@
 \title{Reserved addresses}
 \usage{
 is_multicast(x)
+
+is_private(x)
 
 is_unspecified(x)
 
@@ -44,16 +47,13 @@ Here are hyperlinks to the IANA registries of allocated address space:
 }
 }
 \examples{
-# these examples show the reserved networks
-
 is_multicast(ip_network(c("224.0.0.0/4", "ff00::/8")))
+
+is_private(ip_network(c("192.168.0.0/16", "2001:db8::/32")))
 
 is_unspecified(ip_network(c("0.0.0.0/32", "::/128")))
 
-is_reserved(ip_network(c(
-  "240.0.0.0/4", "::/3", "4000::/2", "8000::/2", "c000::/3",
-  "e000::/4", "f000::/5", "f800::/6", "fe00::/9"
-)))
+is_reserved(ip_network(c("240.0.0.0/4", "f000::/5")))
 
 is_loopback(ip_network(c("127.0.0.0/8", "::1/128")))
 
