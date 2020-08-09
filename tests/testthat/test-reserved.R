@@ -1,16 +1,3 @@
-test_that("is_multicast works", {
-  expect_reserved(is_multicast, ip_network("224.0.0.0/4"))
-  expect_reserved(is_multicast, ip_network("ff00::/8"))
-
-  expect_equal(is_multicast(ip_address()), logical())
-  expect_equal(is_multicast(ip_network()), logical())
-
-  expect_equal(is_multicast(ip_address(NA)), NA)
-  expect_equal(is_multicast(ip_network(NA)), NA)
-
-  expect_error(is_multicast("hello"))
-})
-
 test_that("is_private works", {
   expect_reserved(is_private, ip_network("0.0.0.0/8"))
   expect_reserved(is_private, ip_network("10.0.0.0/8"))
@@ -56,6 +43,19 @@ test_that("is_global works", {
   expect_equal(is_global(ip_network(NA)), NA)
 
   expect_error(is_global("hello"))
+})
+
+test_that("is_multicast works", {
+  expect_reserved(is_multicast, ip_network("224.0.0.0/4"))
+  expect_reserved(is_multicast, ip_network("ff00::/8"))
+
+  expect_equal(is_multicast(ip_address()), logical())
+  expect_equal(is_multicast(ip_network()), logical())
+
+  expect_equal(is_multicast(ip_address(NA)), NA)
+  expect_equal(is_multicast(ip_network(NA)), NA)
+
+  expect_error(is_multicast("hello"))
 })
 
 test_that("is_unspecified works", {

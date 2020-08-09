@@ -18,11 +18,11 @@
 #' @return A logical vector
 #'
 #' @examples
-#' is_multicast(ip_network(c("224.0.0.0/4", "ff00::/8")))
-#'
 #' is_private(ip_network(c("192.168.0.0/16", "2001:db8::/32")))
 #'
 #' is_global(ip_network(c("1.0.0.0/8", "2002::/32")))
+#'
+#' is_multicast(ip_network(c("224.0.0.0/4", "ff00::/8")))
 #'
 #' is_unspecified(ip_network(c("0.0.0.0/32", "::/128")))
 #'
@@ -38,16 +38,6 @@
 #' by functions described in [ipv6-transition].
 #' @name is_reserved
 NULL
-
-#' @rdname is_reserved
-#' @export
-is_multicast <- function(x) {
-  if (!(is_ip_address(x) || is_ip_network(x))) {
-    abort("'x' must be an ip_address or ip_network vector")
-  }
-
-  wrap_is_multicast(x)
-}
 
 #' @rdname is_reserved
 #' @export
@@ -85,6 +75,16 @@ is_global <- function(x) {
   } else {
     abort("'x' must be an ip_address or ip_network vector")
   }
+}
+
+#' @rdname is_reserved
+#' @export
+is_multicast <- function(x) {
+  if (!(is_ip_address(x) || is_ip_network(x))) {
+    abort("'x' must be an ip_address or ip_network vector")
+  }
+
+  wrap_is_multicast(x)
 }
 
 #' @rdname is_reserved
