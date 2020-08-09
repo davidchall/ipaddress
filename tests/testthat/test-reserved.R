@@ -42,6 +42,22 @@ test_that("is_private works", {
   expect_error(is_private("hello"))
 })
 
+test_that("is_global works", {
+  expect_reserved(is_global, ip_network("1.0.0.0/8"), ignore_after = TRUE)
+  expect_reserved(is_global, ip_network("2.0.0.0/7"), ignore_before = TRUE, ignore_after = TRUE)
+  expect_reserved(is_global, ip_network("4.0.0.0/6"), ignore_before = TRUE, ignore_after = TRUE)
+  expect_reserved(is_global, ip_network("8.0.0.0/7"), ignore_before = TRUE, ignore_super = TRUE)
+  expect_reserved(is_global, ip_network("2001:db9::/32"), ignore_after = TRUE)
+
+  expect_equal(is_global(ip_address()), logical())
+  expect_equal(is_global(ip_network()), logical())
+
+  expect_equal(is_global(ip_address(NA)), NA)
+  expect_equal(is_global(ip_network(NA)), NA)
+
+  expect_error(is_global("hello"))
+})
+
 test_that("is_unspecified works", {
   expect_reserved(is_unspecified, ip_network("0.0.0.0/32"))
   expect_reserved(is_unspecified, ip_network("::/128"))

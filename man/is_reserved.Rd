@@ -4,6 +4,7 @@
 \alias{is_reserved}
 \alias{is_multicast}
 \alias{is_private}
+\alias{is_global}
 \alias{is_unspecified}
 \alias{is_loopback}
 \alias{is_link_local}
@@ -13,6 +14,8 @@
 is_multicast(x)
 
 is_private(x)
+
+is_global(x)
 
 is_unspecified(x)
 
@@ -50,6 +53,8 @@ Here are hyperlinks to the IANA registries of allocated address space:
 is_multicast(ip_network(c("224.0.0.0/4", "ff00::/8")))
 
 is_private(ip_network(c("192.168.0.0/16", "2001:db8::/32")))
+
+is_global(ip_network(c("1.0.0.0/8", "2002::/32")))
 
 is_unspecified(ip_network(c("0.0.0.0/32", "::/128")))
 
