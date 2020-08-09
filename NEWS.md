@@ -4,6 +4,8 @@
   * `ip_network()`: network address compared before prefix length
   * `ip_interface()`: network compared before host address
 * `ip_to_integer()` gains a `base` parameter to select between decimal, hexadecimal and binary outputs
+* Additional checks for reserved addresses/networks: `is_private()`, `is_reserved()`, `is_site_local()`
+* New `is_global()` checks if addresses or networks are *not* reserved
 
 
 # ipaddress 0.4.0

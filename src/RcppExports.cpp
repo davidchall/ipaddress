@@ -420,6 +420,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// wrap_is_site_local
+LogicalVector wrap_is_site_local(List x);
+RcppExport SEXP _ipaddress_wrap_is_site_local(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(wrap_is_site_local(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // wrap_is_ipv4_mapped
 LogicalVector wrap_is_ipv4_mapped(List x);
 RcppExport SEXP _ipaddress_wrap_is_ipv4_mapped(SEXP xSEXP) {
@@ -535,6 +546,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_wrap_is_unspecified", (DL_FUNC) &_ipaddress_wrap_is_unspecified, 1},
     {"_ipaddress_wrap_is_loopback", (DL_FUNC) &_ipaddress_wrap_is_loopback, 1},
     {"_ipaddress_wrap_is_link_local", (DL_FUNC) &_ipaddress_wrap_is_link_local, 1},
+    {"_ipaddress_wrap_is_site_local", (DL_FUNC) &_ipaddress_wrap_is_site_local, 1},
     {"_ipaddress_wrap_is_ipv4_mapped", (DL_FUNC) &_ipaddress_wrap_is_ipv4_mapped, 1},
     {"_ipaddress_wrap_extract_ipv4_mapped", (DL_FUNC) &_ipaddress_wrap_extract_ipv4_mapped, 1},
     {"_ipaddress_wrap_is_6to4", (DL_FUNC) &_ipaddress_wrap_is_6to4, 1},

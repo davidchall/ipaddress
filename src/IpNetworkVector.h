@@ -87,6 +87,7 @@ public:
   Rcpp::LogicalVector isUnspecified() const;
   Rcpp::LogicalVector isLoopback() const;
   Rcpp::LogicalVector isLinkLocal() const;
+  Rcpp::LogicalVector isSiteLocal() const;
   Rcpp::LogicalVector isIPv4Mapped() const;
   Rcpp::LogicalVector is6to4() const;
   Rcpp::LogicalVector isTeredo() const;

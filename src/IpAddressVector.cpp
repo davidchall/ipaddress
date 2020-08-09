@@ -3,7 +3,7 @@
 #include "encoding.h"
 #include "masking.h"
 #include "iterative.h"
-#include "utils.h"
+#include "reserved.h"
 
 #include <asio/ip/tcp.hpp>
 
@@ -939,6 +939,13 @@ LogicalVector IpAddressVector::isLinkLocal() const {
   return checkCondition(
     [](const asio::ip::address_v4 &x) { return (x.to_uint() & 0xFFFF0000) == 0xA9FE0000; },
     [](const asio::ip::address_v6 &x) { return x.is_link_local(); }
+  );
+}
+
+LogicalVector IpAddressVector::isSiteLocal() const {
+  return checkCondition(
+    [](const asio::ip::address_v4 &x) { return false; },
+    [](const asio::ip::address_v6 &x) { return x.is_site_local(); }
   );
 }
 

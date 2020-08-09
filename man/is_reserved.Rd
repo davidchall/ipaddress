@@ -2,19 +2,30 @@
 % Please edit documentation in R/reserved.R
 \name{is_reserved}
 \alias{is_reserved}
+\alias{is_private}
+\alias{is_global}
 \alias{is_multicast}
 \alias{is_unspecified}
 \alias{is_loopback}
 \alias{is_link_local}
+\alias{is_site_local}
 \title{Reserved addresses}
 \usage{
+is_private(x)
+
+is_global(x)
+
 is_multicast(x)
 
 is_unspecified(x)
 
+is_reserved(x)
+
 is_loopback(x)
 
 is_link_local(x)
+
+is_site_local(x)
 }
 \arguments{
 \item{x}{An \code{\link{ip_address}} or \code{\link{ip_network}} vector}
@@ -23,25 +34,40 @@ is_link_local(x)
 A logical vector
 }
 \description{
-Check if an address or network is reserved for special use.
+Most of these functions check if an address or network is reserved for
+special use. The exception is \code{is_global()}, which checks if it is \emph{not}
+reserved.
+
 A network is considered reserved if both the \code{network_address()}
 and \code{broadcast_address()} are reserved.
 }
 \details{
-These special use addresses are documented in IETF documents
-\href{https://tools.ietf.org/html/rfc5735.html}{RFC 5735} (for IPv4) and
-\href{https://tools.ietf.org/html/rfc4291}{RFC 4291} (for IPv6).
+Here are hyperlinks to the IANA registries of allocated address space:
+\itemize{
+\item \strong{IPv4:}
+\href{https://www.iana.org/assignments/ipv4-address-space/ipv4-address-space.xhtml}{allocations},
+\href{https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml}{special purpose}
+\item \strong{IPv6:}
+\href{https://www.iana.org/assignments/ipv6-address-space/ipv6-address-space.xhtml}{allocations},
+\href{https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml}{special purpose}
+}
 }
 \examples{
-# these examples show the reserved networks
+is_private(ip_network(c("192.168.0.0/16", "2001:db8::/32")))
+
+is_global(ip_network(c("1.0.0.0/8", "2002::/32")))
 
 is_multicast(ip_network(c("224.0.0.0/4", "ff00::/8")))
 
 is_unspecified(ip_network(c("0.0.0.0/32", "::/128")))
 
+is_reserved(ip_network(c("240.0.0.0/4", "f000::/5")))
+
 is_loopback(ip_network(c("127.0.0.0/8", "::1/128")))
 
 is_link_local(ip_network(c("169.254.0.0/16", "fe80::/10")))
+
+is_site_local(ip_network("fec0::/10"))
 }
 \seealso{
 Addresses reserved by IPv6 transition mechanisms can be identified
