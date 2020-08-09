@@ -34,7 +34,10 @@ is_site_local(x)
 A logical vector
 }
 \description{
-Check if an address or network is reserved for special use.
+Most of these functions check if an address or network is reserved for
+special use. The exception is \code{is_global()}, which checks if it is \emph{not}
+reserved.
+
 A network is considered reserved if both the \code{network_address()}
 and \code{broadcast_address()} are reserved.
 }

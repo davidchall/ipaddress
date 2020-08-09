@@ -1,6 +1,10 @@
 #' Reserved addresses
 #'
-#' Check if an address or network is reserved for special use.
+#' @description
+#' Most of these functions check if an address or network is reserved for
+#' special use. The exception is `is_global()`, which checks if it is *not*
+#' reserved.
+#'
 #' A network is considered reserved if both the `network_address()`
 #' and `broadcast_address()` are reserved.
 #'
