@@ -166,7 +166,21 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#ipaddress-development-version" class="anchor"></a>ipaddress (development version)<small> Unreleased </small>
 </h1>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New features</h2>
 <ul>
+<li>Additional checks for reserved addresses/networks: <code><a href="../reference/is_reserved.html">is_private()</a></code>, <code><a href="../reference/is_reserved.html">is_reserved()</a></code>, <code><a href="../reference/is_reserved.html">is_site_local()</a></code>
+</li>
+<li>New <code><a href="../reference/is_reserved.html">is_global()</a></code> checks if addresses or networks are <em>not</em> reserved</li>
+</ul>
+</div>
+<div id="minor-improvements-and-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-improvements-and-fixes" class="anchor"></a>Minor improvements and fixes</h2>
+<ul>
+<li>
+<code><a href="../reference/ip_to_integer.html">ip_to_integer()</a></code> gains a <code>base</code> parameter to select between decimal, hexadecimal and binary outputs</li>
 <li>Comparison of <code><a href="../reference/ip_network.html">ip_network()</a></code> and <code><a href="../reference/ip_interface.html">ip_interface()</a></code> vectors is now consistent with the Python ipaddress module
 <ul>
 <li>
@@ -175,20 +189,18 @@
 <code><a href="../reference/ip_interface.html">ip_interface()</a></code>: network compared before host address</li>
 </ul>
 </li>
-<li>
-<code><a href="../reference/ip_to_integer.html">ip_to_integer()</a></code> gains a <code>base</code> parameter to select between decimal, hexadecimal and binary outputs</li>
-<li>Additional checks for reserved addresses/networks: <code><a href="../reference/is_reserved.html">is_private()</a></code>, <code><a href="../reference/is_reserved.html">is_reserved()</a></code>, <code><a href="../reference/is_reserved.html">is_site_local()</a></code>
+<li>C++ code moved into <code>namespace ipaddress</code>
 </li>
-<li>New <code><a href="../reference/is_reserved.html">is_global()</a></code> checks if addresses or networks are <em>not</em> reserved</li>
 </ul>
+</div>
 </div>
     <div id="ipaddress-040" class="section level1">
 <h1 class="page-header" data-toc-text="0.4.0">
 <a href="#ipaddress-040" class="anchor"></a>ipaddress 0.4.0<small> 2020-08-06 </small>
 </h1>
-<div id="new-features" class="section level2">
+<div id="new-features-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features" class="anchor"></a>New features</h2>
+<a href="#new-features-1" class="anchor"></a>New features</h2>
 <ul>
 <li>Add support for constructing <code><a href="../reference/ip_network.html">ip_network()</a></code> vectors without using CIDR notation
 <ul>
@@ -207,9 +219,9 @@
 <li>Added <code><a href="../articles/ipaddress-examples.html">vignette("ipaddress-examples")</a></code> to describe some typical usage patterns</li>
 </ul>
 </div>
-<div id="minor-improvements-and-fixes" class="section level2">
+<div id="minor-improvements-and-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-improvements-and-fixes" class="anchor"></a>Minor improvements and fixes</h2>
+<a href="#minor-improvements-and-fixes-1" class="anchor"></a>Minor improvements and fixes</h2>
 <ul>
 <li>Check for user interrupts when processing large data sets</li>
 <li>
@@ -247,9 +259,9 @@
 </li>
 </ul>
 </div>
-<div id="new-features-1" class="section level2">
+<div id="new-features-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-1" class="anchor"></a>New features</h2>
+<a href="#new-features-2" class="anchor"></a>New features</h2>
 <ul>
 <li>New <code><a href="../reference/ip_to_integer.html">ip_to_integer()</a></code> and <code><a href="../reference/ip_to_integer.html">integer_to_ip()</a></code> functions to encode and decode addresses as integers. Note that the integers are contained within a character vector. Please see the function documentation for an explanation.</li>
 </ul>
