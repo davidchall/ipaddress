@@ -4,6 +4,8 @@
 #include <algorithm>
 
 
+namespace ipaddress {
+
 /*---------------------*
  *  Bitwise operators  *
  *---------------------*/
@@ -169,6 +171,8 @@ template<class Address, class Network>
 bool address_in_network(const Address &address, const Network &network) {
   Address netmask = prefix_to_netmask<Address>(network.prefix_length());
   return bitwise_and(address, netmask) == network.address();
+}
+
 }
 
 #endif

@@ -3,6 +3,7 @@
 #include "IpNetworkVector.h"
 
 using namespace Rcpp;
+using namespace ipaddress;
 
 /*-----------------------------------*
  *  Encoding and decoding addresses  *

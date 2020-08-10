@@ -10,6 +10,8 @@
 using namespace Rcpp;
 
 
+namespace ipaddress {
+
 /*----------------*
  *  Constructors  *
  *----------------*/
@@ -1055,4 +1057,6 @@ IpAddressVector IpAddressVector::map6to4(
   }
 
   return IpAddressVector(out_address_v4, out_address_v6, out_is_ipv6, out_is_na);
+}
+
 }
