@@ -6,6 +6,8 @@
 #include "masking.h"
 
 
+namespace ipaddress {
+
 template<class Address>
 std::vector<Address> sample_bits(unsigned int n_bits_to_sample, unsigned int n_sample) {
   typedef typename Address::bytes_type Bytes;
@@ -48,6 +50,8 @@ std::vector<Address> sample_network(const Network &network, unsigned int size) {
                  [&](Address addr) { return bitwise_or(addr, network.address()); });
 
   return result;
+}
+
 }
 
 #endif

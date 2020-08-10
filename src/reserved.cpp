@@ -1,6 +1,9 @@
 #include "reserved.h"
 #include "masking.h"
 
+
+namespace ipaddress {
+
 bool is_6to4(const asio::ip::address_v6 &address) {
   asio::ip::address_v6::bytes_type bytes = address.to_bytes();
   return ((bytes[0] == 0x20) && (bytes[1] == 0x02));
@@ -37,4 +40,6 @@ asio::ip::address_v4 extract_teredo_client(const asio::ip::address_v6 &address) 
   std::copy(bytes_v6.begin() + 12, bytes_v6.end(), bytes_v4.begin());
 
   return bitwise_not(asio::ip::make_address_v4(bytes_v4));
+}
+
 }

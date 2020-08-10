@@ -8,6 +8,8 @@
 #include "masking.h"
 
 
+namespace ipaddress {
+
 template<class Address>
 Address advance_ip(const Address &address, int n) {
   if (n == 0)
@@ -145,6 +147,8 @@ std::vector<Address> calculate_hosts(const Network &network, bool exclude_unusab
   }
 
   return hosts;
+}
+
 }
 
 #endif

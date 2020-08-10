@@ -6,6 +6,8 @@
 #include <asio/ip/network_v6.hpp>
 
 
+namespace ipaddress {
+
 class IpAddressVector;
 
 class IpNetworkVector {
@@ -92,5 +94,7 @@ public:
   Rcpp::LogicalVector is6to4() const;
   Rcpp::LogicalVector isTeredo() const;
 };
+
+}
 
 #endif

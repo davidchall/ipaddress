@@ -6,6 +6,8 @@
 #include <asio/ip/address_v6.hpp>
 
 
+namespace ipaddress {
+
 class IpNetworkVector;
 
 class IpAddressVector {
@@ -131,5 +133,7 @@ public:
   IpAddressVector extractTeredoServer() const;
   IpAddressVector extractTeredoClient() const;
 };
+
+}
 
 #endif

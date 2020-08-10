@@ -8,6 +8,8 @@
 #include <boost/multiprecision/cpp_int.hpp>
 
 
+namespace ipaddress {
+
 typedef std::array<int32_t, 1> r_address_v4_type;
 typedef std::array<int32_t, 4> r_address_v6_type;
 
@@ -98,6 +100,8 @@ Address decode_integer(const std::string& x_int_string) {
   std::reverse(x_bytes.begin(), x_bytes.end());
 
   return Address(x_bytes);
+}
+
 }
 
 #endif

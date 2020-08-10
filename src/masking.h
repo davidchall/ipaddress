@@ -2,67 +2,10 @@
 #define __IPADDRESS_MASKING__
 
 #include <algorithm>
+#include "bitwise.h"
 
 
-/*---------------------*
- *  Bitwise operators  *
- *---------------------*/
-
-template<class Address>
-Address bitwise_not(const Address &addr1) {
-  typedef typename Address::bytes_type Bytes;
-  Bytes addr1_bytes = addr1.to_bytes();
-  Bytes result_bytes;
-
-  std::transform(addr1_bytes.begin(), addr1_bytes.end(), result_bytes.begin(),
-                 [](unsigned char b1) { return ~b1; });
-
-  return Address(result_bytes);
-}
-
-template<class Address>
-Address bitwise_and(const Address &addr1, const Address &addr2) {
-  typedef typename Address::bytes_type Bytes;
-  Bytes addr1_bytes = addr1.to_bytes();
-  Bytes addr2_bytes = addr2.to_bytes();
-  Bytes result_bytes;
-
-  std::transform(addr1_bytes.begin(), addr1_bytes.end(), addr2_bytes.begin(), result_bytes.begin(),
-                 [](unsigned char b1, unsigned char b2) { return b1 & b2; });
-
-  return Address(result_bytes);
-}
-
-template<class Address>
-Address bitwise_or(const Address &addr1, const Address &addr2) {
-  typedef typename Address::bytes_type Bytes;
-  Bytes addr1_bytes = addr1.to_bytes();
-  Bytes addr2_bytes = addr2.to_bytes();
-  Bytes result_bytes;
-
-  std::transform(addr1_bytes.begin(), addr1_bytes.end(), addr2_bytes.begin(), result_bytes.begin(),
-                 [](unsigned char b1, unsigned char b2) { return b1 | b2; });
-
-  return Address(result_bytes);
-}
-
-template<class Address>
-Address bitwise_xor(const Address &addr1, const Address &addr2) {
-  typedef typename Address::bytes_type Bytes;
-  Bytes addr1_bytes = addr1.to_bytes();
-  Bytes addr2_bytes = addr2.to_bytes();
-  Bytes result_bytes;
-
-  std::transform(addr1_bytes.begin(), addr1_bytes.end(), addr2_bytes.begin(), result_bytes.begin(),
-                 [](unsigned char b1, unsigned char b2) { return b1 ^ b2; });
-
-  return Address(result_bytes);
-}
-
-
-/*--------------*
- *  IP masking  *
- *--------------*/
+namespace ipaddress {
 
 template<class Address>
 Address prefix_to_netmask(int prefix_length) {
@@ -169,6 +112,8 @@ template<class Address, class Network>
 bool address_in_network(const Address &address, const Network &network) {
   Address netmask = prefix_to_netmask<Address>(network.prefix_length());
   return bitwise_and(address, netmask) == network.address();
+}
+
 }
 
 #endif

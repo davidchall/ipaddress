@@ -9,6 +9,8 @@
 using namespace Rcpp;
 
 
+namespace ipaddress {
+
 /*----------------*
  *  Constructors  *
  *----------------*/
@@ -581,4 +583,6 @@ LogicalVector IpNetworkVector::checkCondition(
   }
 
   return output;
+}
+
 }
