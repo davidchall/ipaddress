@@ -12,7 +12,7 @@
 #' @noRd
 expect_reserved_address_range <- function(reserved_func, network,
                                           ignore_before = FALSE, ignore_after = FALSE) {
-  act <- quasi_label(enquo(reserved_func), arg = "reserved_func")
+  act <- testthat::quasi_label(enquo(reserved_func), arg = "reserved_func")
 
   block_start <- network_address(network)
   block_end <- broadcast_address(network)
@@ -33,7 +33,7 @@ expect_reserved_address_range <- function(reserved_func, network,
     if (!(ignore_after || any(block_end == space_end))) FALSE
   )
 
-  expect(
+  testthat::expect(
     all(act$val(boundaries) == expected),
     sprintf("%s doesn't match address range '%s'", act$lab, as.character(network))
   )
@@ -53,7 +53,7 @@ expect_reserved_address_range <- function(reserved_func, network,
 #' @noRd
 expect_reserved_network <- function(reserved_func, network,
                                     ignore_super = FALSE) {
-  act <- quasi_label(enquo(reserved_func), arg = "reserved_func")
+  act <- testthat::quasi_label(enquo(reserved_func), arg = "reserved_func")
 
   other_networks <- vec_c(
     network,
@@ -66,7 +66,7 @@ expect_reserved_network <- function(reserved_func, network,
     if (!(ignore_super || prefix_length(network) == 0)) FALSE
   )
 
-  expect(
+  testthat::expect(
     all(act$val(other_networks) == expected),
     sprintf("%s doesn't match network '%s'", act$lab, as.character(network))
   )
