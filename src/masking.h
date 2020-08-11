@@ -2,7 +2,7 @@
 #define __IPADDRESS_MASKING__
 
 #include <algorithm>
-#include "bitwise.h"
+#include <ipaddress/bitwise.h>
 
 
 namespace ipaddress {

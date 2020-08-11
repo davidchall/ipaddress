@@ -4,6 +4,7 @@
 
 * Additional checks for reserved addresses/networks: `is_private()`, `is_reserved()`, `is_site_local()`
 * New `is_global()` checks if addresses or networks are *not* reserved
+* Reorganized C++ code to expose `IpAddressVector` and `IpNetworkVector` classes to other packages (use `LinkingTo: AsioHeaders, ipaddress, Rcpp`). This does not effect the public R interface.
 
 ## Minor improvements and fixes
 
@@ -11,7 +12,6 @@
 * Comparison of `ip_network()` and `ip_interface()` vectors is now consistent with the Python ipaddress module
   * `ip_network()`: network address compared before prefix length
   * `ip_interface()`: network compared before host address
-* C++ code moved into `namespace ipaddress`
 
 
 # ipaddress 0.4.0
