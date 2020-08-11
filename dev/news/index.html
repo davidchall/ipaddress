@@ -173,6 +173,7 @@
 <li>Additional checks for reserved addresses/networks: <code><a href="../reference/is_reserved.html">is_private()</a></code>, <code><a href="../reference/is_reserved.html">is_reserved()</a></code>, <code><a href="../reference/is_reserved.html">is_site_local()</a></code>
 </li>
 <li>New <code><a href="../reference/is_reserved.html">is_global()</a></code> checks if addresses or networks are <em>not</em> reserved</li>
+<li>Reorganized C++ code to expose <code>IpAddressVector</code> and <code>IpNetworkVector</code> classes to other packages (use <code>LinkingTo: AsioHeaders, ipaddress, Rcpp</code>). This does not effect the public R interface.</li>
 </ul>
 </div>
 <div id="minor-improvements-and-fixes" class="section level2">
@@ -188,8 +189,6 @@
 <li>
 <code><a href="../reference/ip_interface.html">ip_interface()</a></code>: network compared before host address</li>
 </ul>
-</li>
-<li>C++ code moved into <code>namespace ipaddress</code>
 </li>
 </ul>
 </div>
