@@ -1,6 +1,6 @@
 #include <Rcpp.h>
 #include <asio/ip/tcp.hpp>
-#include <ipaddress/IpAddressVector.h>
+#include <ipaddress.h>
 #include "other_repr.h"
 
 using namespace Rcpp;

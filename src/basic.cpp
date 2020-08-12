@@ -1,6 +1,5 @@
 #include <Rcpp.h>
-#include <ipaddress/IpAddressVector.h>
-#include <ipaddress/IpNetworkVector.h>
+#include <ipaddress.h>
 
 using namespace Rcpp;
 using namespace ipaddress;
