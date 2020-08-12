@@ -22,8 +22,8 @@ test_that("IPv4-mapped IPv6 addresses work", {
 })
 
 test_that("6to4 IPv6 addresses work", {
-  expect_false(is_ipv4_mapped(ip_address("0.0.0.0")))
-  expect_false(is_ipv4_mapped(ip_network("0.0.0.0/0")))
+  expect_false(is_6to4(ip_address("0.0.0.0")))
+  expect_false(is_6to4(ip_network("0.0.0.0/0")))
   expect_reserved(is_6to4, ip_network("2002::/16"))
   expect_equal(
     extract_6to4(ip_address(c("192.168.0.1", "2002:c000:0280::", "2001:db8::"))),
@@ -45,8 +45,8 @@ test_that("6to4 IPv6 addresses work", {
 })
 
 test_that("Teredo IPv6 addresses work", {
-  expect_false(is_ipv4_mapped(ip_address("0.0.0.0")))
-  expect_false(is_ipv4_mapped(ip_network("0.0.0.0/0")))
+  expect_false(is_teredo(ip_address("0.0.0.0")))
+  expect_false(is_teredo(ip_network("0.0.0.0/0")))
   expect_reserved(is_teredo, ip_network("2001::/32"))
   expect_equal(
     extract_teredo_server(ip_address(c("192.168.0.1", "2001:0000:4136:e378:8000:63bf:3fff:fdd2", "2001:db8::"))),
