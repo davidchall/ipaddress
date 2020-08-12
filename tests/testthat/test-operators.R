@@ -100,6 +100,14 @@ test_that("bitwise shift works", {
     ip_address("128.0.0.0") %>>% c(1, 10, 31, 32),
     ip_address(c("64.0.0.0", "0.32.0.0", "0.0.0.1", "0.0.0.0"))
   )
+  expect_equal(
+    ip_address("::1") %<<% c(1, 10, 31, 127, 128),
+    ip_address(c("::2", "::400", "::8000:0", "8000::", "::"))
+  )
+  expect_equal(
+    ip_address("8000::") %>>% c(1, 10, 31, 127, 128),
+    ip_address(c("4000::", "20::", "0:1::", "::1", "::"))
+  )
 
   # integerish accepted
   expect_equal(ip_address("192.168.0.1") %<<% 5, ip_address("21.0.0.32"))
