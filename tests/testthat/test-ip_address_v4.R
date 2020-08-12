@@ -52,4 +52,7 @@ test_that("comparison operations work", {
     c(-1L, rep(1L, length(x) - 1L))
   )
   expect_equal(vec_compare(ip_address("192.168.0.1"), ip_address(NA)), NA_integer_)
+
+  # not effected by machine byte-endianness
+  expect_true(ip_address("255.128.0.0") > ip_address("0.0.128.255"))
 })
