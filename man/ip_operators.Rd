@@ -14,6 +14,8 @@
 }
 }
 \examples{
+# use ip_to_binary() to understand these examples better
+
 # bitwise NOT
 !ip_address("192.168.0.1")
 
