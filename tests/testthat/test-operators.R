@@ -91,6 +91,57 @@ test_that("bitwise XOR works", {
   expect_equal(ip_address("1.2.3.4") ^ ip_address("::1"), ip_address(NA))
 })
 
+test_that("bitwise shift works", {
+  expect_equal(
+    ip_address("0.0.0.1") %<<% c(1, 10, 31, 32),
+    ip_address(c("0.0.0.2", "0.0.4.0", "128.0.0.0", "0.0.0.0"))
+  )
+  expect_equal(
+    ip_address("128.0.0.0") %>>% c(1, 10, 31, 32),
+    ip_address(c("64.0.0.0", "0.32.0.0", "0.0.0.1", "0.0.0.0"))
+  )
+  expect_equal(
+    ip_address("::1") %<<% c(1, 10, 31, 127, 128),
+    ip_address(c("::2", "::400", "::8000:0", "8000::", "::"))
+  )
+  expect_equal(
+    ip_address("8000::") %>>% c(1, 10, 31, 127, 128),
+    ip_address(c("4000::", "20::", "0:1::", "::1", "::"))
+  )
+
+  # integerish accepted
+  expect_equal(ip_address("192.168.0.1") %<<% 5, ip_address("21.0.0.32"))
+  expect_equal(ip_address("192.168.0.1") %>>% 5, ip_address("6.5.64.0"))
+
+  # vector recycling
+  expect_equal(ip_address(rep("192.168.0.1", 2)) %<<% 1, ip_address(rep("129.80.0.2", 2)))
+  expect_equal(ip_address(rep("192.168.0.1", 2)) %>>% 1, ip_address(rep("96.84.0.0", 2)))
+  expect_error(ip_address(rep("192.168.0.1", 2)) %<<% c(1L, 2L, 3L))
+  expect_error(ip_address(rep("192.168.0.1", 2)) %>>% c(1L, 2L, 3L))
+
+  # missing values
+  expect_equal(ip_address(NA) %<<% 1L, ip_address(NA))
+  expect_equal(ip_address(NA) %>>% 1L, ip_address(NA))
+  expect_equal(ip_address("192.168.0.1") %<<% NA_integer_, ip_address(NA))
+  expect_equal(ip_address("192.168.0.1") %>>% NA_integer_, ip_address(NA))
+  expect_equal(ip_address("192.168.0.1") %<<% NA_real_, ip_address(NA))
+  expect_equal(ip_address("192.168.0.1") %>>% NA_real_, ip_address(NA))
+
+  # invalid arguments
+  expect_error(ip_network("192.168.0.0/24") %<<% 1L, "must be an ip_address vector")
+  expect_error(ip_network("192.168.0.0/24") %>>% 1L, "must be an ip_address vector")
+  expect_error(ip_interface("192.168.0.0/24") %<<% 1L, "must be an ip_address vector")
+  expect_error(ip_interface("192.168.0.0/24") %>>% 1L, "must be an ip_address vector")
+  expect_error(ip_address("192.168.0.1") %<<% 2.5, "must be a positive integer vector")
+  expect_error(ip_address("192.168.0.1") %>>% 2.5, "must be a positive integer vector")
+  expect_error(ip_address("192.168.0.1") %<<% -1L, "must be a positive integer vector")
+  expect_error(ip_address("192.168.0.1") %>>% -1L, "must be a positive integer vector")
+
+  # address must come first
+  expect_error(1L %>>% ip_address("0.0.0.0"))
+  expect_error(1L %<<% ip_address("0.0.0.0"))
+})
+
 test_that("addition and subtraction work", {
   expect_equal(ip_address("192.168.0.1") + 5L, ip_address("192.168.0.6"))
   expect_equal(ip_address("192.168.0.1") - 5L, ip_address("192.167.255.252"))

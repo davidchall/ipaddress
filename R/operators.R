@@ -1,3 +1,85 @@
+#' Operators for IP addresses
+#'
+#' @description
+#' [`ip_address`] vectors support the following operators:
+#'
+#' * bitwise logic operators: `!` (NOT), `&` (AND), `|` (OR), `^` (XOR)
+#' * bitwise shift operators: `%<<%` (left shift), `%>>%` (right shift)
+#' * arithmetic operators: `+` (addition), `-` (subtraction)
+#'
+#' @examples
+#' # use ip_to_binary() to understand these examples better
+#'
+#' # bitwise NOT
+#' !ip_address("192.168.0.1")
+#'
+#' # bitwise AND
+#' ip_address("192.168.0.1") & ip_address("255.0.0.255")
+#'
+#' # bitwise OR
+#' ip_address("192.168.0.0") | ip_address("255.0.0.255")
+#'
+#' # bitwise XOR
+#' ip_address("192.168.0.0") ^ ip_address("255.0.0.255")
+#'
+#' # bitwise shift left
+#' ip_address("192.168.0.1") %<<% 1
+#'
+#' # bitwise shift right
+#' ip_address("192.168.0.1") %>>% 1
+#'
+#' # addition of integers
+#' ip_address("192.168.0.1") + 10
+#'
+#' # subtraction of integers
+#' ip_address("192.168.0.1") - 10
+#' @name ip_operators
+NULL
+
+
+# bitwise shift operators -------------------------------------------
+
+#' @usage NULL
+#' @rdname ip_operators
+#' @export
+`%<<%` <- function(x, n) {
+  if (!is_ip_address(x) || is_ip_interface(x)) {
+    abort("'x' must be an ip_address vector")
+  }
+  if (!(is_integerish(n) && all(n >= 0, na.rm = TRUE))) {
+    abort("'n' must be a positive integer vector")
+  }
+
+  # vector recycling
+  args <- vec_recycle_common(x, n)
+  x <- args[[1L]]
+  n <- args[[2L]]
+
+  wrap_bitwise_shift_left(x, n)
+}
+
+#' @usage NULL
+#' @rdname ip_operators
+#' @export
+`%>>%` <- function(x, n) {
+  if (!is_ip_address(x) || is_ip_interface(x)) {
+    abort("'x' must be an ip_address vector")
+  }
+  if (!(is_integerish(n) && all(n >= 0, na.rm = TRUE))) {
+    abort("'n' must be a positive integer vector")
+  }
+
+  # vector recycling
+  args <- vec_recycle_common(x, n)
+  x <- args[[1L]]
+  n <- args[[2L]]
+
+  wrap_bitwise_shift_right(x, n)
+}
+
+
+# vctrs arithmetic operators --------------------------------------
+
 #' @method vec_arith ip_address
 #' @export
 #' @export vec_arith.ip_address

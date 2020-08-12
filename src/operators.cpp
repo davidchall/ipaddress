@@ -44,7 +44,7 @@ List wrap_bitwise_and(List lhs_r, List rhs_r) {
   std::size_t vsize = lhs.size();
 
   if (rhs.size() != vsize) {
-    stop("Addresses must have same length"); // # nocov
+    stop("Inputs must have same length"); // # nocov
   }
 
   // initialize vectors
@@ -81,7 +81,7 @@ List wrap_bitwise_or(List lhs_r, List rhs_r) {
   std::size_t vsize = lhs.size();
 
   if (rhs.size() != vsize) {
-    stop("Addresses must have same length"); // # nocov
+    stop("Inputs must have same length"); // # nocov
   }
 
   // initialize vectors
@@ -118,7 +118,7 @@ List wrap_bitwise_xor(List lhs_r, List rhs_r) {
   std::size_t vsize = lhs.size();
 
   if (rhs.size() != vsize) {
-    stop("Addresses must have same length"); // # nocov
+    stop("Inputs must have same length"); // # nocov
   }
 
   // initialize vectors
@@ -148,13 +148,81 @@ List wrap_bitwise_xor(List lhs_r, List rhs_r) {
 }
 
 // [[Rcpp::export]]
+List wrap_bitwise_shift_left(List lhs_r, IntegerVector rhs) {
+  IpAddressVector lhs(lhs_r);
+
+  std::size_t vsize = lhs.size();
+
+  if (rhs.size() != vsize) {
+    stop("Inputs must have same length"); // # nocov
+  }
+
+  // initialize vectors
+  std::vector<asio::ip::address_v4> out_address_v4(vsize);
+  std::vector<asio::ip::address_v6> out_address_v6(vsize);
+  std::vector<bool> out_is_ipv6(vsize, false);
+  std::vector<bool> out_is_na(vsize, false);
+
+  for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 10000 == 0) {
+      checkUserInterrupt();
+    }
+
+    if (lhs.is_na[i] || rhs[i] == NA_INTEGER) {
+      out_is_na[i] = true;
+    } else if (lhs.is_ipv6[i]) {
+      out_address_v6[i] = bitwise_shift_left(lhs.address_v6[i], rhs[i]);
+      out_is_ipv6[i] = true;
+    } else {
+      out_address_v4[i] = bitwise_shift_left(lhs.address_v4[i], rhs[i]);
+    }
+  }
+
+  return IpAddressVector(out_address_v4, out_address_v6, out_is_ipv6, out_is_na).encodeR();
+}
+
+// [[Rcpp::export]]
+List wrap_bitwise_shift_right(List lhs_r, IntegerVector rhs) {
+  IpAddressVector lhs(lhs_r);
+
+  std::size_t vsize = lhs.size();
+
+  if (rhs.size() != vsize) {
+    stop("Inputs must have same length"); // # nocov
+  }
+
+  // initialize vectors
+  std::vector<asio::ip::address_v4> out_address_v4(vsize);
+  std::vector<asio::ip::address_v6> out_address_v6(vsize);
+  std::vector<bool> out_is_ipv6(vsize, false);
+  std::vector<bool> out_is_na(vsize, false);
+
+  for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 10000 == 0) {
+      checkUserInterrupt();
+    }
+
+    if (lhs.is_na[i] || rhs[i] == NA_INTEGER) {
+      out_is_na[i] = true;
+    } else if (lhs.is_ipv6[i]) {
+      out_address_v6[i] = bitwise_shift_right(lhs.address_v6[i], rhs[i]);
+      out_is_ipv6[i] = true;
+    } else {
+      out_address_v4[i] = bitwise_shift_right(lhs.address_v4[i], rhs[i]);
+    }
+  }
+
+  return IpAddressVector(out_address_v4, out_address_v6, out_is_ipv6, out_is_na).encodeR();
+}
+
+// [[Rcpp::export]]
 List wrap_add_integer(List lhs_r, IntegerVector rhs) {
   IpAddressVector lhs(lhs_r);
 
   std::size_t vsize = lhs.size();
 
   if (rhs.size() != static_cast<R_xlen_t>(vsize)) {
-    stop("Addresses must have same length"); // # nocov
+    stop("Inputs must have same length"); // # nocov
   }
 
   // initialize vectors

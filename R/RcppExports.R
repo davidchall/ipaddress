@@ -93,6 +93,14 @@ wrap_bitwise_xor <- function(lhs_r, rhs_r) {
     .Call(`_ipaddress_wrap_bitwise_xor`, lhs_r, rhs_r)
 }
 
+wrap_bitwise_shift_left <- function(lhs_r, rhs) {
+    .Call(`_ipaddress_wrap_bitwise_shift_left`, lhs_r, rhs)
+}
+
+wrap_bitwise_shift_right <- function(lhs_r, rhs) {
+    .Call(`_ipaddress_wrap_bitwise_shift_right`, lhs_r, rhs)
+}
+
 wrap_add_integer <- function(lhs_r, rhs) {
     .Call(`_ipaddress_wrap_add_integer`, lhs_r, rhs)
 }

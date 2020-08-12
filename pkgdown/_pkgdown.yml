@@ -36,6 +36,7 @@ reference:
       - max_prefix_length
       - is_multicast
       - is_ipv4_mapped
+      - ip_operators
   - title: "Network membership"
     contents:
       - num_addresses
