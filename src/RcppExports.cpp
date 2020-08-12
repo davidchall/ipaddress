@@ -274,6 +274,30 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// wrap_bitwise_shift_left
+List wrap_bitwise_shift_left(List lhs_r, IntegerVector rhs);
+RcppExport SEXP _ipaddress_wrap_bitwise_shift_left(SEXP lhs_rSEXP, SEXP rhsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type lhs_r(lhs_rSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type rhs(rhsSEXP);
+    rcpp_result_gen = Rcpp::wrap(wrap_bitwise_shift_left(lhs_r, rhs));
+    return rcpp_result_gen;
+END_RCPP
+}
+// wrap_bitwise_shift_right
+List wrap_bitwise_shift_right(List lhs_r, IntegerVector rhs);
+RcppExport SEXP _ipaddress_wrap_bitwise_shift_right(SEXP lhs_rSEXP, SEXP rhsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type lhs_r(lhs_rSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type rhs(rhsSEXP);
+    rcpp_result_gen = Rcpp::wrap(wrap_bitwise_shift_right(lhs_r, rhs));
+    return rcpp_result_gen;
+END_RCPP
+}
 // wrap_add_integer
 List wrap_add_integer(List lhs_r, IntegerVector rhs);
 RcppExport SEXP _ipaddress_wrap_add_integer(SEXP lhs_rSEXP, SEXP rhsSEXP) {
@@ -533,6 +557,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_wrap_bitwise_and", (DL_FUNC) &_ipaddress_wrap_bitwise_and, 2},
     {"_ipaddress_wrap_bitwise_or", (DL_FUNC) &_ipaddress_wrap_bitwise_or, 2},
     {"_ipaddress_wrap_bitwise_xor", (DL_FUNC) &_ipaddress_wrap_bitwise_xor, 2},
+    {"_ipaddress_wrap_bitwise_shift_left", (DL_FUNC) &_ipaddress_wrap_bitwise_shift_left, 2},
+    {"_ipaddress_wrap_bitwise_shift_right", (DL_FUNC) &_ipaddress_wrap_bitwise_shift_right, 2},
     {"_ipaddress_wrap_add_integer", (DL_FUNC) &_ipaddress_wrap_add_integer, 2},
     {"_ipaddress_wrap_decode_bytes", (DL_FUNC) &_ipaddress_wrap_decode_bytes, 1},
     {"_ipaddress_wrap_encode_bytes", (DL_FUNC) &_ipaddress_wrap_encode_bytes, 1},

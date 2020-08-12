@@ -33,9 +33,7 @@ methods::setOldClass(c("ip_address", "vctrs_vctr"))
 #' A special case is IPv4-mapped IPv6 addresses (see [is_ipv4_mapped()]), which
 #' are returned in the dual representation (e.g. `::ffff:192.168.0.1`).
 #'
-#' Integers can be added to or subtracted from `ip_address` vectors.
-#' This class also supports bitwise operations: `!` (NOT), `&` (AND),
-#' `|` (OR) and `^` (XOR).
+#' `ip_address` vectors support a number of [operators][ip_operators].
 #'
 #' @param x
 #' * For `ip_address()`: A character vector of IP addresses, in dot-decimal
@@ -52,23 +50,8 @@ methods::setOldClass(c("ip_address", "vctrs_vctr"))
 #'
 #' # validates inputs and replaces with NA
 #' ip_address(c("255.255.255.256", "192.168.0.1/32"))
-#'
-#' # addition of integers
-#' ip_address("192.168.0.1") + -2:2
-#'
-#' # bitwise NOT
-#' !ip_address("192.168.0.1")
-#'
-#' # bitwise AND
-#' ip_address("192.168.0.1") & ip_address("255.0.0.255")
-#'
-#' # bitwise OR
-#' ip_address("192.168.0.0") | ip_address("255.0.0.255")
-#'
-#' # bitwise XOR
-#' ip_address("192.168.0.0") ^ ip_address("255.0.0.255")
 #' @seealso
-#' `vignette("ipaddress-classes")`
+#' [`ip_operators`], `vignette("ipaddress-classes")`
 #' @name ip_address
 NULL
 
