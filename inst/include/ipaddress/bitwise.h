@@ -58,6 +58,10 @@ Address bitwise_xor(const Address &addr1, const Address &addr2) {
 
 template<class Address>
 Address bitwise_shift_left(const Address &input, unsigned int n_bit_shifts) {
+  if (n_bit_shifts == 0) {
+    return input;
+  }
+
   typedef typename Address::bytes_type Bytes;
   Bytes in_bytes = input.to_bytes();
   Bytes out_bytes;
@@ -85,6 +89,10 @@ Address bitwise_shift_left(const Address &input, unsigned int n_bit_shifts) {
 
 template<class Address>
 Address bitwise_shift_right(const Address &input, unsigned int n_bit_shifts) {
+  if (n_bit_shifts == 0) {
+    return input;
+  }
+
   typedef typename Address::bytes_type Bytes;
   Bytes in_bytes = input.to_bytes();
   Bytes out_bytes;
