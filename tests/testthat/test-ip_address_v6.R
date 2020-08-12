@@ -40,4 +40,7 @@ test_that("comparison operations work", {
     c(-1L, rep(1L, length(x) - 1L))
   )
   expect_equal(vec_compare(ip_address("2001:db8::8a2e:370:7334"), ip_address(NA)), NA_integer_)
+
+  # not effected by machine byte-endianness
+  expect_true(ip_address("256::") > ip_address("0:128::"))
 })

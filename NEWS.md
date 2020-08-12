@@ -10,6 +10,7 @@
 ## Minor improvements and fixes
 
 * `ip_to_integer()` gains a `base` parameter to select between decimal, hexadecimal and binary outputs
+* Fixed comparison of `ip_address()` vectors (previously did not account for machine endianness)
 * Comparison of `ip_network()` and `ip_interface()` vectors is now consistent with the Python ipaddress module
   * `ip_network()`: network address compared before prefix length
   * `ip_interface()`: network compared before host address
