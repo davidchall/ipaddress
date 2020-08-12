@@ -1,5 +1,6 @@
 #include <Rcpp.h>
-#include <ipaddress.h>
+#include <ipaddress/IpAddressVector.h>
+#include <ipaddress/bitwise.h>
 #include "iterative.h"
 
 using namespace Rcpp;

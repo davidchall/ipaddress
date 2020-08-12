@@ -1,5 +1,7 @@
 #include <Rcpp.h>
-#include <ipaddress.h>
+#include <ipaddress/IpAddressVector.h>
+#include <ipaddress/IpNetworkVector.h>
+#include <ipaddress/masking.h>
 
 using namespace Rcpp;
 using namespace ipaddress;
