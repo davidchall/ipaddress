@@ -3,7 +3,7 @@
 
 #include <algorithm>
 #include <Rcpp.h>
-#include "masking.h"
+#include <ipaddress/masking.h>
 
 
 namespace ipaddress {

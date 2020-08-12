@@ -5,7 +5,7 @@
 #include <Rcpp/Interrupt.h>
 #include <asio/ip/network_v4.hpp>
 #include <asio/ip/network_v6.hpp>
-#include "masking.h"
+#include <ipaddress/masking.h>
 
 
 namespace ipaddress {
