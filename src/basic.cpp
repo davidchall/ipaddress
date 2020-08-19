@@ -15,8 +15,8 @@ List wrap_parse_address(CharacterVector x) {
 }
 
 // [[Rcpp::export]]
-CharacterVector wrap_print_address(List x) {
-  return IpAddressVector(x).encodeStrings();
+CharacterVector wrap_print_address(List x, bool exploded = false) {
+  return IpAddressVector(x).encodeStrings(exploded);
 }
 
 // [[Rcpp::export]]
@@ -113,8 +113,8 @@ List wrap_construct_network_from_address(List address_r, IntegerVector prefix_le
 }
 
 // [[Rcpp::export]]
-CharacterVector wrap_print_network(List x) {
-  return IpNetworkVector(x).encodeStrings();
+CharacterVector wrap_print_network(List x, bool exploded = false) {
+  return IpNetworkVector(x).encodeStrings(exploded);
 }
 
 

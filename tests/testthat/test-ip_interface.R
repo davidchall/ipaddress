@@ -28,6 +28,12 @@ test_that("construction works", {
   expect_error(ip_interface(ip_address(rep("0.0.0.0", 3)), rep(24L, 2)))
 })
 
+test_that("formats correctly", {
+  expect_equal(format(ip_interface(x)), x)
+  expect_equal(format(ip_interface("2001:0db8:85a3:0000:0000:8a2e:0370:7334/32")), "2001:db8:85a3::8a2e:370:7334/32")
+  expect_equal(format(ip_interface("2001:db8:85a3::8a2e:370:7334/32"), exploded = TRUE), "2001:0db8:85a3:0000:0000:8a2e:0370:7334/32")
+})
+
 test_that("can extract address and network", {
   expect_equal(
     as_ip_address(ip_interface(x)),

@@ -29,6 +29,7 @@ test_that("construction works", {
 
 test_that("formats correctly", {
   expect_equal(format(ip_network(x)), x)
+  expect_equal(format(ip_network(x), exploded = TRUE), x)
 })
 
 test_that("missing values work", {

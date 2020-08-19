@@ -5,8 +5,8 @@ wrap_parse_address <- function(x) {
     .Call(`_ipaddress_wrap_parse_address`, x)
 }
 
-wrap_print_address <- function(x) {
-    .Call(`_ipaddress_wrap_print_address`, x)
+wrap_print_address <- function(x, exploded = FALSE) {
+    .Call(`_ipaddress_wrap_print_address`, x, exploded)
 }
 
 wrap_compare_address <- function(address_r) {
@@ -21,8 +21,8 @@ wrap_construct_network_from_address <- function(address_r, prefix_length, strict
     .Call(`_ipaddress_wrap_construct_network_from_address`, address_r, prefix_length, strict)
 }
 
-wrap_print_network <- function(x) {
-    .Call(`_ipaddress_wrap_print_network`, x)
+wrap_print_network <- function(x, exploded = FALSE) {
+    .Call(`_ipaddress_wrap_print_network`, x, exploded)
 }
 
 wrap_parse_interface <- function(x) {

@@ -276,7 +276,7 @@ public:
 
 
   // Encode to strings
-  Rcpp::CharacterVector encodeStrings() const {
+  Rcpp::CharacterVector encodeStrings(bool exploded = false) const {
     std::size_t vsize = size();
 
     // initialize vectors
@@ -290,7 +290,21 @@ public:
       if (is_na[i]) {
         output[i] = NA_STRING;
       } else if (is_ipv6[i]) {
-        output[i] = network_v6[i].to_string();
+        if (exploded) {
+          char buffer[44];
+          auto bytes = network_v6[i].address().to_bytes();
+          sprintf(
+            buffer,
+            "%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x/%u",
+            bytes[0], bytes[1], bytes[2], bytes[3], bytes[4], bytes[5], bytes[6], bytes[7],
+            bytes[8], bytes[9], bytes[10], bytes[11], bytes[12], bytes[13], bytes[14], bytes[15],
+            network_v6[i].prefix_length()
+          );
+
+          output[i] = std::string(buffer);
+        } else {
+          output[i] = network_v6[i].to_string();
+        }
       } else {
         output[i] = network_v4[i].to_string();
       }

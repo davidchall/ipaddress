@@ -110,9 +110,13 @@ as_ip_address.ip_interface <- function(x) {
 #' @export
 as.character.ip_address <- function(x, ...) wrap_print_address(x)
 
+#' @param exploded Logical scalar. Should IPv6 addresses display leading zeros?
+#'   (default: `FALSE`)
 #' @rdname ip_address
 #' @export
-format.ip_address <- function(x, ...) as.character(x)
+format.ip_address <- function(x, exploded = FALSE, ...) {
+  wrap_print_address(x, exploded)
+}
 
 
 # Comparison ------------------------------------------------------------

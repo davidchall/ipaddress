@@ -28,7 +28,7 @@ as_ip_network(x)
 
 \method{as.character}{ip_network}(x, ...)
 
-\method{format}{ip_network}(x, ...)
+\method{format}{ip_network}(x, exploded = FALSE, ...)
 }
 \arguments{
 \item{...}{Included for S3 generic consistency}
@@ -49,6 +49,9 @@ to retain the host bits, consider using \code{\link[=ip_interface]{ip_interface(
 \item{address}{An \code{\link{ip_address}} vector}
 
 \item{prefix_length}{An integer vector}
+
+\item{exploded}{Logical scalar. Should IPv6 addresses display leading zeros?
+(default: \code{FALSE})}
 }
 \value{
 An S3 vector of class \code{ip_network}

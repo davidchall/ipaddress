@@ -22,7 +22,7 @@ as_ip_address(x)
 
 \method{as.character}{ip_address}(x, ...)
 
-\method{format}{ip_address}(x, ...)
+\method{format}{ip_address}(x, exploded = FALSE, ...)
 }
 \arguments{
 \item{x}{\itemize{
@@ -34,6 +34,9 @@ notation (IPv4) or hexadecimal notation (IPv6)
 }}
 
 \item{...}{Included for S3 generic consistency}
+
+\item{exploded}{Logical scalar. Should IPv6 addresses display leading zeros?
+(default: \code{FALSE})}
 }
 \value{
 An S3 vector of class \code{ip_address}

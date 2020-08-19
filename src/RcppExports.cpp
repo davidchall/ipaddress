@@ -17,13 +17,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // wrap_print_address
-CharacterVector wrap_print_address(List x);
-RcppExport SEXP _ipaddress_wrap_print_address(SEXP xSEXP) {
+CharacterVector wrap_print_address(List x, bool exploded);
+RcppExport SEXP _ipaddress_wrap_print_address(SEXP xSEXP, SEXP explodedSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< List >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(wrap_print_address(x));
+    Rcpp::traits::input_parameter< bool >::type exploded(explodedSEXP);
+    rcpp_result_gen = Rcpp::wrap(wrap_print_address(x, exploded));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -64,13 +65,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // wrap_print_network
-CharacterVector wrap_print_network(List x);
-RcppExport SEXP _ipaddress_wrap_print_network(SEXP xSEXP) {
+CharacterVector wrap_print_network(List x, bool exploded);
+RcppExport SEXP _ipaddress_wrap_print_network(SEXP xSEXP, SEXP explodedSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< List >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(wrap_print_network(x));
+    Rcpp::traits::input_parameter< bool >::type exploded(explodedSEXP);
+    rcpp_result_gen = Rcpp::wrap(wrap_print_network(x, exploded));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -546,11 +548,11 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_wrap_parse_address", (DL_FUNC) &_ipaddress_wrap_parse_address, 1},
-    {"_ipaddress_wrap_print_address", (DL_FUNC) &_ipaddress_wrap_print_address, 1},
+    {"_ipaddress_wrap_print_address", (DL_FUNC) &_ipaddress_wrap_print_address, 2},
     {"_ipaddress_wrap_compare_address", (DL_FUNC) &_ipaddress_wrap_compare_address, 1},
     {"_ipaddress_wrap_parse_network", (DL_FUNC) &_ipaddress_wrap_parse_network, 2},
     {"_ipaddress_wrap_construct_network_from_address", (DL_FUNC) &_ipaddress_wrap_construct_network_from_address, 3},
-    {"_ipaddress_wrap_print_network", (DL_FUNC) &_ipaddress_wrap_print_network, 1},
+    {"_ipaddress_wrap_print_network", (DL_FUNC) &_ipaddress_wrap_print_network, 2},
     {"_ipaddress_wrap_parse_interface", (DL_FUNC) &_ipaddress_wrap_parse_interface, 1},
     {"_ipaddress_wrap_construct_interface_from_address", (DL_FUNC) &_ipaddress_wrap_construct_interface_from_address, 2},
     {"_ipaddress_wrap_broadcast_address", (DL_FUNC) &_ipaddress_wrap_broadcast_address, 1},

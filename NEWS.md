@@ -11,6 +11,7 @@
 
 ## Minor improvements and fixes
 
+* `format.ip_address()`, `format.ip_network()` and `format.ip_interface()` gain an `exploded` parameter to display leading zeros for IPv6 addresses
 * `ip_to_integer()` gains a `base` parameter to select between decimal, hexadecimal and binary outputs
 * Fixed comparison of `ip_address()` vectors (previously did not account for machine endianness)
 * Comparison of `ip_network()` and `ip_interface()` vectors is now consistent with the Python ipaddress module
