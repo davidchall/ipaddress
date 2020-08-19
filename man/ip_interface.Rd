@@ -25,7 +25,7 @@ as_ip_interface(x)
 
 \method{as.character}{ip_interface}(x, ...)
 
-\method{format}{ip_interface}(x, ...)
+\method{format}{ip_interface}(x, exploded = FALSE, ...)
 }
 \arguments{
 \item{...}{Included for S3 generic consistency}
@@ -41,6 +41,9 @@ as_ip_interface(x)
 \item{address}{An \code{\link{ip_address}} vector}
 
 \item{prefix_length}{An integer vector}
+
+\item{exploded}{Logical scalar. Should IPv6 addresses display leading zeros?
+(default: \code{FALSE})}
 }
 \value{
 An S3 vector of class \code{ip_interface}

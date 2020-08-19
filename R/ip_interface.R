@@ -137,9 +137,12 @@ as_ip_interface.character <- function(x) ip_interface(x)
 #' @export
 as.character.ip_interface <- function(x, ...) wrap_print_network(x)
 
+#' @inheritParams format.ip_address
 #' @rdname ip_interface
 #' @export
-format.ip_interface <- function(x, ...) as.character(x)
+format.ip_interface <- function(x, exploded = FALSE, ...) {
+  wrap_print_network(x, exploded)
+}
 
 
 # Comparison ------------------------------------------------------------
