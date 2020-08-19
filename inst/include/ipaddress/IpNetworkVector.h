@@ -26,7 +26,13 @@ public:
     std::vector<asio::ip::network_v6> in_network_v6,
     std::vector<bool> in_is_ipv6,
     std::vector<bool> in_is_na
-  ) : network_v4(in_network_v4), network_v6(in_network_v6), is_ipv6(in_is_ipv6), is_na(in_is_na) { };
+  ) : network_v4(in_network_v4), network_v6(in_network_v6), is_ipv6(in_is_ipv6), is_na(in_is_na) {
+    if (network_v4.size() != is_na.size() ||
+        network_v6.size() != is_na.size() ||
+        is_ipv6.size() != is_na.size()) {
+      Rcpp::stop("Constituent vectors have unequal sizes"); // # nocov
+    }
+  }
 
 
   // Parse strings (CIDR format)
