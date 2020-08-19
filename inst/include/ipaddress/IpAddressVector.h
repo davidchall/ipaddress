@@ -185,7 +185,7 @@ public:
         output[i] = NA_STRING;
       } else if (is_ipv6[i]) {
         if (exploded) {
-          char buffer[39];
+          char buffer[40];
           auto bytes = address_v6[i].to_bytes();
           sprintf(
             buffer,
