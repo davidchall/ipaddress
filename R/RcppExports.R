@@ -77,6 +77,10 @@ wrap_summarize_address_range <- function(address1_r, address2_r) {
     .Call(`_ipaddress_wrap_summarize_address_range`, address1_r, address2_r)
 }
 
+wrap_collapse_networks <- function(network_r) {
+    .Call(`_ipaddress_wrap_collapse_networks`, network_r)
+}
+
 wrap_bitwise_not <- function(lhs_r) {
     .Call(`_ipaddress_wrap_bitwise_not`, lhs_r)
 }

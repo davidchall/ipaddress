@@ -227,6 +227,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// wrap_collapse_networks
+List wrap_collapse_networks(List network_r);
+RcppExport SEXP _ipaddress_wrap_collapse_networks(SEXP network_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type network_r(network_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(wrap_collapse_networks(network_r));
+    return rcpp_result_gen;
+END_RCPP
+}
 // wrap_bitwise_not
 List wrap_bitwise_not(List lhs_r);
 RcppExport SEXP _ipaddress_wrap_bitwise_not(SEXP lhs_rSEXP) {
@@ -553,6 +564,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_wrap_sample_network", (DL_FUNC) &_ipaddress_wrap_sample_network, 2},
     {"_ipaddress_wrap_smallest_common_network", (DL_FUNC) &_ipaddress_wrap_smallest_common_network, 2},
     {"_ipaddress_wrap_summarize_address_range", (DL_FUNC) &_ipaddress_wrap_summarize_address_range, 2},
+    {"_ipaddress_wrap_collapse_networks", (DL_FUNC) &_ipaddress_wrap_collapse_networks, 1},
     {"_ipaddress_wrap_bitwise_not", (DL_FUNC) &_ipaddress_wrap_bitwise_not, 1},
     {"_ipaddress_wrap_bitwise_and", (DL_FUNC) &_ipaddress_wrap_bitwise_and, 2},
     {"_ipaddress_wrap_bitwise_or", (DL_FUNC) &_ipaddress_wrap_bitwise_or, 2},
