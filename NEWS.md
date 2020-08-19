@@ -4,6 +4,7 @@
 
 * Additional checks for reserved addresses/networks: `is_private()`, `is_reserved()`, `is_site_local()`
 * New `is_global()` checks if addresses or networks are *not* reserved
+* New `collapse_networks()` collapses contiguous and overlapping networks
 * New bitwise shift operators: `%<<%` and `%>>%`
 * Reorganized C++ code to expose `IpAddressVector` and `IpNetworkVector` classes to other packages (use `LinkingTo: AsioHeaders, ipaddress, Rcpp`). This does not effect the public R interface.
 
