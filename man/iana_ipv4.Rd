@@ -10,12 +10,12 @@ A data frame with 122 rows and 3 variables:
 \item{network}{Address block (an \code{\link{ip_network}} vector)}
 \item{allocation}{There are three types of allocation:
 \itemize{
-\item reserved by protocol
+\item reserved
 \item managed by regional Internet registry (RIR)
 \item assigned to organization
 }
 }
-\item{organization}{The RIR or organization}
+\item{label}{The RIR, organization or purpose for reservation}
 }
 }
 \source{

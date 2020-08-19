@@ -17,12 +17,11 @@ iana_ipv4 <- csv_file %>%
   read_csv(col_names = names(csv_cols$cols), col_types = csv_cols, skip = 1) %>%
   transmute(
     network = ip_network(str_replace(prefix, "^(\\d+)\\/(\\d+)$", "\\1\\.0\\.0\\.0\\/\\2")),
-    organization = case_when(
+    label = case_when(
       designation == "Multicast" ~ designation,
       status == "RESERVED" ~ str_to_title(status),
       status == "UNALLOCATED" ~ str_to_title(status),
       status == "LEGACY" & str_detect(designation, "^Administered by") ~ "Various registries",
-      designation == "RIPE NCC" ~ "RIPE",
 
       # specific organizations
       str_detect(designation, "Army") ~ "US DoD",
@@ -42,15 +41,16 @@ iana_ipv4 <- csv_file %>%
 
       TRUE ~ designation
     ),
-    allocation = factor(case_when(
-      organization %in% c("Reserved", "Multicast") ~ "Reserved",
-      organization %in% c("AFRINIC", "APNIC", "ARIN", "LACNIC", "RIPE", "Various registries") ~ "Managed",
+    allocation = case_when(
+      label %in% c("Reserved", "Multicast") ~ "Reserved",
+      label %in% c("AFRINIC", "APNIC", "ARIN", "LACNIC", "RIPE NCC", "Various registries") ~ "Managed",
       TRUE ~ "Assigned"
-    ))
+    )
   ) %>%
-  group_by(allocation, organization) %>%
+  group_by(allocation, label) %>%
   summarize(network = collapse_networks(network), .groups = "drop") %>%
   arrange(network) %>%
-  select(network, allocation, organization)
+  mutate(allocation = factor(allocation)) %>%
+  select(network, allocation, label)
 
 usethis::use_data(iana_ipv4, overwrite = TRUE)
