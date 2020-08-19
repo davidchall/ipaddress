@@ -13,6 +13,7 @@ test_that("construction works", {
 
 test_that("formats correctly", {
   expect_equal(format(ip_address(x)), x)
+  expect_equal(format(ip_address(x), exploded = TRUE), x)
 })
 
 test_that("missing values work", {

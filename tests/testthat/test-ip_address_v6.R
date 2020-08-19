@@ -9,6 +9,7 @@ test_that("alternative formats accepted", {
 test_that("formats correctly", {
   expect_equal(format(ip_address(x)), x)
   expect_equal(format(ip_address("2001:0db8:85a3:0000:0000:8a2e:0370:7334")), "2001:db8:85a3::8a2e:370:7334")
+  expect_equal(format(ip_address("2001:db8:85a3::8a2e:370:7334"), exploded = TRUE), "2001:0db8:85a3:0000:0000:8a2e:0370:7334")
 })
 
 test_that("invalid inputs are caught", {
