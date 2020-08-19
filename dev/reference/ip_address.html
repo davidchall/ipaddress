@@ -188,7 +188,7 @@ as_ip_address() casts an object to ip_address." />
 <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for ip_address</span>
-<span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span>(<span class='no'>x</span>, <span class='kw'>exploded</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -206,6 +206,11 @@ notation (IPv4) or hexadecimal notation (IPv6)</p></li>
     <tr>
       <th>...</th>
       <td><p>Included for S3 generic consistency</p></td>
+    </tr>
+    <tr>
+      <th>exploded</th>
+      <td><p>Logical scalar. Should IPv6 addresses display leading zeros?
+(default: <code>FALSE</code>)</p></td>
     </tr>
     </table>
 

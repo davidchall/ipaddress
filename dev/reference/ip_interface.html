@@ -193,7 +193,7 @@ as_ip_interface() casts an object to ip_interface." />
 <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for ip_interface</span>
-<span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span>(<span class='no'>x</span>, <span class='kw'>exploded</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -219,6 +219,11 @@ as_ip_interface() casts an object to ip_interface." />
     <tr>
       <th>prefix_length</th>
       <td><p>An integer vector</p></td>
+    </tr>
+    <tr>
+      <th>exploded</th>
+      <td><p>Logical scalar. Should IPv6 addresses display leading zeros?
+(default: <code>FALSE</code>)</p></td>
     </tr>
     </table>
 
