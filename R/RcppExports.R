@@ -141,6 +141,10 @@ wrap_encode_hostname <- function(input) {
     .Call(`_ipaddress_wrap_encode_hostname`, input)
 }
 
+wrap_reverse_pointer <- function(input) {
+    .Call(`_ipaddress_wrap_reverse_pointer`, input)
+}
+
 wrap_is_multicast <- function(input) {
     .Call(`_ipaddress_wrap_is_multicast`, input)
 }
