@@ -413,6 +413,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// wrap_reverse_pointer
+CharacterVector wrap_reverse_pointer(List input);
+RcppExport SEXP _ipaddress_wrap_reverse_pointer(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type input(inputSEXP);
+    rcpp_result_gen = Rcpp::wrap(wrap_reverse_pointer(input));
+    return rcpp_result_gen;
+END_RCPP
+}
 // wrap_is_multicast
 LogicalVector wrap_is_multicast(List input);
 RcppExport SEXP _ipaddress_wrap_is_multicast(SEXP inputSEXP) {
@@ -582,6 +593,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_wrap_encode_binary", (DL_FUNC) &_ipaddress_wrap_encode_binary, 1},
     {"_ipaddress_wrap_decode_hostname", (DL_FUNC) &_ipaddress_wrap_decode_hostname, 1},
     {"_ipaddress_wrap_encode_hostname", (DL_FUNC) &_ipaddress_wrap_encode_hostname, 1},
+    {"_ipaddress_wrap_reverse_pointer", (DL_FUNC) &_ipaddress_wrap_reverse_pointer, 1},
     {"_ipaddress_wrap_is_multicast", (DL_FUNC) &_ipaddress_wrap_is_multicast, 1},
     {"_ipaddress_wrap_is_unspecified", (DL_FUNC) &_ipaddress_wrap_is_unspecified, 1},
     {"_ipaddress_wrap_is_loopback", (DL_FUNC) &_ipaddress_wrap_is_loopback, 1},

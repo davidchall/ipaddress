@@ -336,3 +336,52 @@ List wrap_encode_hostname(List input) {
 
   return output;
 }
+
+// [[Rcpp::export]]
+CharacterVector wrap_reverse_pointer(List input) {
+  IpAddressVector address(input);
+
+  std::size_t vsize = address.size();
+  std::ostringstream os;
+  char buffer[40];
+
+  // initialize vectors
+  CharacterVector output(vsize);
+
+  for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 10000 == 0) {
+      checkUserInterrupt();
+    }
+
+    if (address.is_na[i]) {
+      output[i] = NA_STRING;
+    } else if (address.is_ipv6[i]) {
+      auto bytes = address.address_v6[i].to_bytes();
+
+      sprintf(
+        buffer,
+        "%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
+        bytes[0], bytes[1], bytes[2], bytes[3], bytes[4], bytes[5], bytes[6], bytes[7],
+        bytes[8], bytes[9], bytes[10], bytes[11], bytes[12], bytes[13], bytes[14], bytes[15]
+      );
+      std::string str(buffer);
+      std::reverse(str.begin(), str.end());
+      std::copy(str.begin(), str.end(), std::ostream_iterator<char>(os, "."));
+      str = os.str();
+      str += "ip.arpa";
+
+      output[i] = str;
+    } else {
+      auto bytes = address.address_v4[i].to_bytes();
+      sprintf(
+        buffer,
+        "%i.%i.%i.%i.in-addr.arpa",
+        bytes[3], bytes[2], bytes[1], bytes[0]
+      );
+
+      output[i] = std::string(buffer);
+    }
+  }
+
+  return output;
+}

@@ -30,6 +30,7 @@ reference:
       - ip_to_bytes
       - ip_to_binary
       - ip_to_hostname
+      - reverse_pointer
   - title: "Address space"
     contents:
       - is_ipv4
