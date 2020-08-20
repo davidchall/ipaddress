@@ -152,7 +152,7 @@ vec_proxy_compare.ip_interface <- function(x, ...) {
   compare_network <- vec_proxy_compare(as_ip_network(x))
   compare_address <- vec_proxy_compare(as_ip_address(x))
 
-  cbind(compare_network,  compare_address)
+  cbind(compare_network, compare_address)
 }
 
 
