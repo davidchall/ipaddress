@@ -53,7 +53,9 @@
 
 
 <meta property="og:title" content="Translate address to/from hostname — ip_to_hostname" />
-<meta property="og:description" content="Perform reverse and forward DNS resolution" />
+<meta property="og:description" content="Perform reverse and forward DNS resolution.
+Note: These functions are significantly slower than others in the
+ipaddress package." />
 <meta property="og:image" content="https://davidchall.github.io/ipaddress/logo.png" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="@hall_davidc" />
@@ -160,12 +162,14 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Translate address to/from hostname</h1>
-    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/hostname.R'><code>R/hostname.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/other_repr.R'><code>R/other_repr.R</code></a></small>
     <div class="hidden name"><code>ip_to_hostname.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Perform reverse and forward DNS resolution</p>
+    <p>Perform reverse and forward DNS resolution.</p>
+<p><strong>Note:</strong> These functions are significantly slower than others in the
+ipaddress package.</p>
     </div>
 
     <pre class="usage"><span class='fu'>ip_to_hostname</span>(<span class='no'>x</span>, <span class='kw'>multiple</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
