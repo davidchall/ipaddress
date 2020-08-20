@@ -13,7 +13,7 @@
 #' For networks with a prefix length of 31 (for IPv4) or 127 (for IPv6),
 #' the unusable hosts are included in the results of `hosts()`.
 #'
-#' The `ipaddress` package does not support \link[base:LongVectors]{long vectors}
+#' The ipaddress package does not support \link[base:LongVectors]{long vectors}
 #' (i.e. vectors with more than 2^31 - 1 elements). As a result, these two
 #' functions do not support networks larger than this size. This corresponds
 #' to prefix lengths less than 2 (for IPv4) or 98 (for IPv6). However, you

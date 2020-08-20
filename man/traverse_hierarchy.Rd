@@ -28,7 +28,7 @@ the supernetwork containing the given network. \code{subnets()} returns the list
 of subnetworks which join to make the given network.
 }
 \details{
-The \code{ipaddress} package does not support \link[base:LongVectors]{long vectors}
+The ipaddress package does not support \link[base:LongVectors]{long vectors}
 (i.e. vectors with more than 2^31 - 1 elements). The limits the number of
 subnetworks that \code{subnets()} can return. However, you might find that machine
 memory imposes stricter limitations.

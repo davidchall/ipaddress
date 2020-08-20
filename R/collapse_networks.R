@@ -4,7 +4,7 @@
 #' to represent the same range of addresses.
 #'
 #' @param network An [`ip_network`] vector
-#' @return An [`ip_network`] vector (potentially a different size from the input)
+#' @return An [`ip_network`] vector (potentially shorter than the input)
 #' @examples
 #' collapse_networks(ip_network(c("192.168.0.0/24", "192.168.1.0/24")))
 #'

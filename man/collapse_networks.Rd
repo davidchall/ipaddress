@@ -10,7 +10,7 @@ collapse_networks(network)
 \item{network}{An \code{\link{ip_network}} vector}
 }
 \value{
-An \code{\link{ip_network}} vector (potentially a different size from the input)
+An \code{\link{ip_network}} vector (potentially shorter than the input)
 }
 \description{
 Given a vector of networks, this returns the minimal set of networks required

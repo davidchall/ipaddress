@@ -15,9 +15,9 @@ status](https://github.com/davidchall/ipaddress/workflows/R-CMD-check/badge.svg)
 status](https://codecov.io/gh/davidchall/ipaddress/branch/master/graph/badge.svg)](https://codecov.io/gh/davidchall/ipaddress?branch=master)
 <!-- badges: end -->
 
-This package provides classes for working with IP addresses, inspired by
-the Python [ipaddress](https://docs.python.org/library/ipaddress.html)
-module.
+{ipaddress} provides data classes and functions for working with IP
+addresses and networks, inspired by the Python
+[ipaddress](https://docs.python.org/library/ipaddress.html) module.
 
 Here are some of the features:
 
@@ -27,9 +27,12 @@ Here are some of the features:
   - **Performance:** calculations performed in C++
   - Compatible with the **tidyverse**
 
+For data visualization of IP addresses and networks, check out
+[{ggip}](https://davidchall.github.io/ggip).
+
 ## Installation
 
-You can install the released version of ipaddress from
+You can install the released version of {ipaddress} from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
@@ -45,9 +48,8 @@ remotes::install_github("davidchall/ipaddress")
 
 ## Usage
 
-This package provides the `ip_address()` and `ip_network()` classes,
-which can be used as standalone vectors or as columns within data frames
-and tibbles.
+Use `ip_address()` and `ip_network()` vectors either standalone or as
+columns in a data frame.
 
 ``` r
 library(tidyverse)
@@ -74,7 +76,7 @@ ip_address(c("255.255.255.255", "255.255.255.256"))
 #> [1] 255.255.255.255 <NA>
 ```
 
-Functions are provided to enable common tasks:
+A variety of functions are provided to enable common tasks.
 
 ``` r
 tibble(network = ip_network(c("192.168.100.0/22", "2001:db8::/80"))) %>%
@@ -92,12 +94,12 @@ tibble(network = ip_network(c("192.168.100.0/22", "2001:db8::/80"))) %>%
 
 ## Related work
 
-  - [**iptools**](https://hrbrmstr.github.io/iptools/) – A well
+  - [**{iptools}**](https://hrbrmstr.github.io/iptools/) – A well
     established R package for working with IP addresses and networks.
     Unfortunately IPv6 support is severely limited. Also, addresses and
     networks are stored as character vectors, so they must be parsed to
     their native bit representation for every operation. It served as an
-    excellent guide and motivation for the ipaddress package.
+    excellent guide and motivation for {ipaddress}.
   - [**cyberpandas**](https://cyberpandas.readthedocs.io) – A Python
     package for using IP addresses in a
     [pandas](https://pandas.pydata.org) DataFrame. This offers full

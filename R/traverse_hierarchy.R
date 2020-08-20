@@ -12,7 +12,7 @@
 #' @return An [`ip_network`] vector
 #'
 #' @details
-#' The `ipaddress` package does not support \link[base:LongVectors]{long vectors}
+#' The ipaddress package does not support \link[base:LongVectors]{long vectors}
 #' (i.e. vectors with more than 2^31 - 1 elements). The limits the number of
 #' subnetworks that `subnets()` can return. However, you might find that machine
 #' memory imposes stricter limitations.
