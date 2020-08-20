@@ -39,7 +39,7 @@ NULL
 #' @export
 is_ipv4_mapped <- function(x) {
   if (!(is_ip_address(x) || is_ip_network(x))) {
-    abort("'x' must be an ip_address or ip_network vector")
+    abort("`x` must be an ip_address or ip_network vector")
   }
 
   wrap_is_ipv4_mapped(x)
@@ -49,7 +49,7 @@ is_ipv4_mapped <- function(x) {
 #' @export
 is_6to4 <- function(x) {
   if (!(is_ip_address(x) || is_ip_network(x))) {
-    abort("'x' must be an ip_address or ip_network vector")
+    abort("`x` must be an ip_address or ip_network vector")
   }
 
   wrap_is_6to4(x)
@@ -59,7 +59,7 @@ is_6to4 <- function(x) {
 #' @export
 is_teredo <- function(x) {
   if (!(is_ip_address(x) || is_ip_network(x))) {
-    abort("'x' must be an ip_address or ip_network vector")
+    abort("`x` must be an ip_address or ip_network vector")
   }
 
   wrap_is_teredo(x)
@@ -69,7 +69,7 @@ is_teredo <- function(x) {
 #' @export
 extract_ipv4_mapped <- function(x) {
   if (!is_ip_address(x)) {
-    abort("'x' must be an ip_address vector")
+    abort("`x` must be an ip_address vector")
   }
 
   wrap_extract_ipv4_mapped(x)
@@ -79,7 +79,7 @@ extract_ipv4_mapped <- function(x) {
 #' @export
 extract_6to4 <- function(x) {
   if (!is_ip_address(x)) {
-    abort("'x' must be an ip_address vector")
+    abort("`x` must be an ip_address vector")
   }
 
   wrap_extract_6to4(x)
@@ -89,7 +89,7 @@ extract_6to4 <- function(x) {
 #' @export
 extract_teredo_server <- function(x) {
   if (!is_ip_address(x)) {
-    abort("'x' must be an ip_address vector")
+    abort("`x` must be an ip_address vector")
   }
 
   wrap_extract_teredo_server(x)
@@ -99,7 +99,7 @@ extract_teredo_server <- function(x) {
 #' @export
 extract_teredo_client <- function(x) {
   if (!is_ip_address(x)) {
-    abort("'x' must be an ip_address vector")
+    abort("`x` must be an ip_address vector")
   }
 
   wrap_extract_teredo_client(x)

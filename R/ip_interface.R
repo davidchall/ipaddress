@@ -81,7 +81,7 @@ ip_interface.default <- function(x = character(), ...) {
 #' @export
 ip_interface.ip_address <- function(address, prefix_length, ...) {
   if (!is_integer(prefix_length)) {
-    abort("'prefix_length' must be an integer vector")
+    abort("`prefix_length` must be an integer vector")
   }
 
   # vector recycling

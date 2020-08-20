@@ -13,7 +13,7 @@
 #' @export
 collapse_networks <- function(network) {
   if (!is_ip_network(network)) {
-    abort("'network' must be an ip_network vector")
+    abort("`network` must be an ip_network vector")
   }
 
   wrap_collapse_networks(network)

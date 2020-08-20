@@ -44,10 +44,10 @@ NULL
 #' @export
 `%<<%` <- function(x, n) {
   if (!is_ip_address(x) || is_ip_interface(x)) {
-    abort("'x' must be an ip_address vector")
+    abort("`x` must be an ip_address vector")
   }
   if (!(is_integerish(n) && all(n >= 0, na.rm = TRUE))) {
-    abort("'n' must be a positive integer vector")
+    abort("`n` must be a positive integer vector")
   }
 
   # vector recycling
@@ -63,10 +63,10 @@ NULL
 #' @export
 `%>>%` <- function(x, n) {
   if (!is_ip_address(x) || is_ip_interface(x)) {
-    abort("'x' must be an ip_address vector")
+    abort("`x` must be an ip_address vector")
   }
   if (!(is_integerish(n) && all(n >= 0, na.rm = TRUE))) {
-    abort("'n' must be a positive integer vector")
+    abort("`n` must be a positive integer vector")
   }
 
   # vector recycling

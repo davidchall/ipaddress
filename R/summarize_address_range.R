@@ -21,10 +21,10 @@
 #' @export
 summarize_address_range <- function(address1, address2) {
   if (!is_ip_address(address1)) {
-    abort("'address1' must be an ip_address vector")
+    abort("`address1` must be an ip_address vector")
   }
   if (!is_ip_address(address2)) {
-    abort("'address2' must be an ip_address vector")
+    abort("`address2` must be an ip_address vector")
   }
 
   # vector recycling

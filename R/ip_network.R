@@ -94,7 +94,7 @@ ip_network <- function(...) {
 #' @export
 ip_network.default <- function(x = character(), strict = TRUE, ...) {
   if (!is_bool(strict)) {
-    abort("'strict' be must TRUE or FALSE")
+    abort("`strict` be must TRUE or FALSE")
   }
 
   wrap_parse_network(x, strict)
@@ -104,10 +104,10 @@ ip_network.default <- function(x = character(), strict = TRUE, ...) {
 #' @export
 ip_network.ip_address <- function(address, prefix_length, strict = TRUE, ...) {
   if (!is_integer(prefix_length)) {
-    abort("'prefix_length' must be an integer vector")
+    abort("`prefix_length` must be an integer vector")
   }
   if (!is_bool(strict)) {
-    abort("'strict' be must TRUE or FALSE")
+    abort("`strict` be must TRUE or FALSE")
   }
 
   # vector recycling

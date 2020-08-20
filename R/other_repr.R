@@ -68,7 +68,7 @@
 #' @export
 ip_to_integer <- function(x, base = c("dec", "hex", "bin")) {
   if (!is_ip_address(x)) {
-    abort("'x' must be an ip_address vector")
+    abort("`x` must be an ip_address vector")
   }
 
   switch(
@@ -86,10 +86,10 @@ integer_to_ip <- function(x, is_ipv6 = NULL) {
     x <- as.character(x)
   }
   if (!is_character(x)) {
-    abort("'x' must be a character vector")
+    abort("`x` must be a character vector")
   }
   if (!(is_null(is_ipv6) || is_logical(is_ipv6))) {
-    abort("'is_ipv6' must be a logical vector or NULL")
+    abort("`is_ipv6` must be a logical vector or NULL")
   }
 
   # vector recycling
@@ -133,7 +133,7 @@ integer_to_ip <- function(x, is_ipv6 = NULL) {
 #' @export
 ip_to_bytes <- function(x) {
   if (!is_ip_address(x)) {
-    abort("'x' must be an ip_address vector")
+    abort("`x` must be an ip_address vector")
   }
 
   blob::new_blob(wrap_encode_bytes(x))
@@ -143,7 +143,7 @@ ip_to_bytes <- function(x) {
 #' @export
 bytes_to_ip <- function(x) {
   if (!blob::is_blob(x)) {
-    abort("'x' must be a blob object")
+    abort("`x` must be a blob object")
   }
 
   wrap_decode_bytes(x)
@@ -180,7 +180,7 @@ bytes_to_ip <- function(x) {
 #' @export
 ip_to_binary <- function(x) {
   if (!is_ip_address(x)) {
-    abort("'x' must be an ip_address vector")
+    abort("`x` must be an ip_address vector")
   }
 
   wrap_encode_binary(x)
@@ -190,7 +190,7 @@ ip_to_binary <- function(x) {
 #' @export
 binary_to_ip <- function(x) {
   if (!is_character(x)) {
-    abort("'x' must be a character vector")
+    abort("`x` must be a character vector")
   }
 
   wrap_decode_binary(x)
@@ -245,10 +245,10 @@ binary_to_ip <- function(x) {
 #' @export
 ip_to_hostname <- function(x, multiple = FALSE) {
   if (!is_ip_address(x)) {
-    abort("'x' must be an ip_address vector")
+    abort("`x` must be an ip_address vector")
   }
   if (!is_bool(multiple)) {
-    abort("'multiple' must be TRUE or FALSE")
+    abort("`multiple` must be TRUE or FALSE")
   }
   if (is_offline()) {
     abort("DNS resolution requires an internet connection")
@@ -267,10 +267,10 @@ ip_to_hostname <- function(x, multiple = FALSE) {
 #' @export
 hostname_to_ip <- function(x, multiple = FALSE) {
   if (!is_character(x)) {
-    abort("'x' must be a character vector")
+    abort("`x` must be a character vector")
   }
   if (!is_bool(multiple)) {
-    abort("'multiple' must be TRUE or FALSE")
+    abort("`multiple` must be TRUE or FALSE")
   }
   if (is_offline()) {
     abort("DNS resolution requires an internet connection")
@@ -316,7 +316,7 @@ pluck_first_of_each <- function(x) {
 #' @export
 reverse_pointer <- function(x) {
   if (!is_ip_address(x)) {
-    abort("'x' must be an ip_address vector")
+    abort("`x` must be an ip_address vector")
   }
 
   wrap_reverse_pointer(x)

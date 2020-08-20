@@ -25,10 +25,10 @@ NULL
 #' @export
 is_within <- function(address, network) {
   if (!is_ip_address(address)) {
-    abort("'address' must be an ip_address vector")
+    abort("`address` must be an ip_address vector")
   }
   if (!is_ip_network(network)) {
-    abort("'network' must be an ip_network vector")
+    abort("`network` must be an ip_network vector")
   }
 
   # vector recycling
@@ -46,10 +46,10 @@ is_within <- function(address, network) {
 #' @export
 is_within_any <- function(address, network) {
   if (!is_ip_address(address)) {
-    abort("'address' must be an ip_address vector")
+    abort("`address` must be an ip_address vector")
   }
   if (!is_ip_network(network)) {
-    abort("'network' must be an ip_network vector")
+    abort("`network` must be an ip_network vector")
   }
 
   wrap_is_within_any(address, network)
@@ -86,10 +86,10 @@ NULL
 #' @export
 is_supernet <- function(network, other) {
   if (!is_ip_network(network)) {
-    abort("'network' must be an ip_network vector")
+    abort("`network` must be an ip_network vector")
   }
   if (!is_ip_network(other)) {
-    abort("'other' must be an ip_network vector")
+    abort("`other` must be an ip_network vector")
   }
 
   # vector recycling
@@ -104,10 +104,10 @@ is_supernet <- function(network, other) {
 #' @export
 is_subnet <- function(network, other) {
   if (!is_ip_network(network)) {
-    abort("'network' must be an ip_network vector")
+    abort("`network` must be an ip_network vector")
   }
   if (!is_ip_network(other)) {
-    abort("'other' must be an ip_network vector")
+    abort("`other` must be an ip_network vector")
   }
 
   # vector recycling
@@ -122,10 +122,10 @@ is_subnet <- function(network, other) {
 #' @export
 overlaps <- function(network, other) {
   if (!is_ip_network(network)) {
-    abort("'network' must be an ip_network vector")
+    abort("`network` must be an ip_network vector")
   }
   if (!is_ip_network(other)) {
-    abort("'other' must be an ip_network vector")
+    abort("`other` must be an ip_network vector")
   }
 
   # vector recycling

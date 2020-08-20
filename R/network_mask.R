@@ -138,10 +138,10 @@ hostmask.default <- function(prefix_length, is_ipv6, ...) {
 
 subnet_mask <- function(prefix_length, is_ipv6, mask_func) {
   if (!is_integer(prefix_length)) {
-    abort("'prefix_length' must be an integer vector")
+    abort("`prefix_length` must be an integer vector")
   }
   if (!is_logical(is_ipv6)) {
-    abort("'is_ipv6' must be a logical vector")
+    abort("`is_ipv6` must be a logical vector")
   }
 
   # vector recycling
@@ -150,13 +150,13 @@ subnet_mask <- function(prefix_length, is_ipv6, mask_func) {
   is_ipv6 <- args[[2L]]
 
   if (any(prefix_length < 0L, na.rm = TRUE)) {
-    abort("'prefix_length' cannot be negative")
+    abort("`prefix_length` cannot be negative")
   }
   if (any(prefix_length[!is_ipv6] > 32L, na.rm = TRUE)) {
-    abort("The maximum 'prefix_length' is 32 for IPv4")
+    abort("The maximum `prefix_length` is 32 for IPv4")
   }
   if (any(prefix_length[is_ipv6] > 128L, na.rm = TRUE)) {
-    abort("The maximum 'prefix_length' is 128 for IPv6")
+    abort("The maximum `prefix_length` is 128 for IPv6")
   }
 
   do.call(mask_func, list(prefix_length, is_ipv6))

@@ -38,19 +38,19 @@ sample_ipv6 <- function(size, replace = FALSE) {
 #' @export
 sample_network <- function(x, size, replace = FALSE) {
   if (!(is_ip_network(x) && length(x) == 1)) {
-    abort("'x' must be an ip_network scalar")
+    abort("`x` must be an ip_network scalar")
   }
   if (!(is_scalar_integerish(size) && size > 0)) {
-    abort("'size' must be a positive integer scalar")
+    abort("`size` must be a positive integer scalar")
   }
   if (size >= 2^31) {
-    abort("'size' must be less than 2^31")
+    abort("`size` must be less than 2^31")
   }
   if (!is_bool(replace)) {
-    abort("'replace' must be TRUE or FALSE")
+    abort("`replace` must be TRUE or FALSE")
   }
   if (!replace && size > num_addresses(x)) {
-    abort("cannot take a sample larger than the network size when 'replace = FALSE'")
+    abort("cannot take a sample larger than the network size when `replace = FALSE`")
   }
 
   # in some cases it's quicker to generate all addresses

@@ -61,7 +61,7 @@ is_private <- function(x) {
     last <- broadcast_address(x)
     is_within_any(first, private) & is_within_any(last, private)
   } else {
-    abort("'x' must be an ip_address or ip_network vector")
+    abort("`x` must be an ip_address or ip_network vector")
   }
 }
 
@@ -77,7 +77,7 @@ is_global <- function(x) {
     last <- broadcast_address(x)
     !is_within_any(first, shared) & !is_within_any(last, shared) & !is_private(first) & !is_private(last)
   } else {
-    abort("'x' must be an ip_address or ip_network vector")
+    abort("`x` must be an ip_address or ip_network vector")
   }
 }
 
@@ -85,7 +85,7 @@ is_global <- function(x) {
 #' @export
 is_multicast <- function(x) {
   if (!(is_ip_address(x) || is_ip_network(x))) {
-    abort("'x' must be an ip_address or ip_network vector")
+    abort("`x` must be an ip_address or ip_network vector")
   }
 
   wrap_is_multicast(x)
@@ -95,7 +95,7 @@ is_multicast <- function(x) {
 #' @export
 is_unspecified <- function(x) {
   if (!(is_ip_address(x) || is_ip_network(x))) {
-    abort("'x' must be an ip_address or ip_network vector")
+    abort("`x` must be an ip_address or ip_network vector")
   }
 
   wrap_is_unspecified(x)
@@ -116,7 +116,7 @@ is_reserved <- function(x) {
     last <- broadcast_address(x)
     is_within_any(first, reserved) & is_within_any(last, reserved)
   } else {
-    abort("'x' must be an ip_address or ip_network vector")
+    abort("`x` must be an ip_address or ip_network vector")
   }
 }
 
@@ -124,7 +124,7 @@ is_reserved <- function(x) {
 #' @export
 is_loopback <- function(x) {
   if (!(is_ip_address(x) || is_ip_network(x))) {
-    abort("'x' must be an ip_address or ip_network vector")
+    abort("`x` must be an ip_address or ip_network vector")
   }
 
   wrap_is_loopback(x)
@@ -134,7 +134,7 @@ is_loopback <- function(x) {
 #' @export
 is_link_local <- function(x) {
   if (!(is_ip_address(x) || is_ip_network(x))) {
-    abort("'x' must be an ip_address or ip_network vector")
+    abort("`x` must be an ip_address or ip_network vector")
   }
 
   wrap_is_link_local(x)
@@ -144,7 +144,7 @@ is_link_local <- function(x) {
 #' @export
 is_site_local <- function(x) {
   if (!(is_ip_address(x) || is_ip_network(x))) {
-    abort("'x' must be an ip_address or ip_network vector")
+    abort("`x` must be an ip_address or ip_network vector")
   }
 
   wrap_is_site_local(x)

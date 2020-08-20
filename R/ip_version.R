@@ -18,7 +18,7 @@ NULL
 #' @export
 is_ipv4 <- function(x) {
   if (!(is_ip_address(x) || is_ip_network(x))) {
-    abort("'x' must be an ip_address or ip_network vector")
+    abort("`x` must be an ip_address or ip_network vector")
   }
 
   # directly returning field enables assignment
@@ -30,7 +30,7 @@ is_ipv4 <- function(x) {
 #' @export
 is_ipv6 <- function(x) {
   if (!(is_ip_address(x) || is_ip_network(x))) {
-    abort("'x' must be an ip_address or ip_network vector")
+    abort("`x` must be an ip_address or ip_network vector")
   }
 
   # directly returning field enables assignment
@@ -54,7 +54,7 @@ is_ipv6 <- function(x) {
 #' @export
 max_prefix_length <- function(x) {
   if (!(is_ip_address(x) || is_ip_network(x))) {
-    abort("'x' must be an ip_address or ip_network vector")
+    abort("`x` must be an ip_address or ip_network vector")
   }
 
   ifelse(field(x, "is_ipv6"), 128L, 32L)
