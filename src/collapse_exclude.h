@@ -123,11 +123,13 @@ std::vector<Network> exclude_networks(std::vector<Network> &include, std::vector
       break;
     case 2: // end include
       if (!is_exclude) {
-        // check this doesn't align with an exclude boundary
+        // doesn't align with next exclude boundary
         if ((i == boundaries.size()-1) || (boundaries[i].first != boundaries[i+1].first)) {
           auto networks = summarize_address_range<Network>(output_range_start, boundaries[i].first);
           std::copy(networks.begin(), networks.end(), std::back_inserter(output));
-        } else if (boundaries[i].first != output_range_start) {
+        }
+        // aligns with next exclude boundary
+        else if (boundaries[i].first != output_range_start) {
           auto networks = summarize_address_range<Network>(output_range_start, advance_ip(boundaries[i].first, -1));
           std::copy(networks.begin(), networks.end(), std::back_inserter(output));
         }
@@ -136,8 +138,11 @@ std::vector<Network> exclude_networks(std::vector<Network> &include, std::vector
       break;
     case 3: // start exclude
       if (is_include) {
-        auto networks = summarize_address_range<Network>(output_range_start, advance_ip(boundaries[i].first, -1));
-        std::copy(networks.begin(), networks.end(), std::back_inserter(output));
+        // doesn't align with include boundary
+        if (boundaries[i].first != output_range_start) {
+          auto networks = summarize_address_range<Network>(output_range_start, advance_ip(boundaries[i].first, -1));
+          std::copy(networks.begin(), networks.end(), std::back_inserter(output));
+        }
       }
       is_exclude = true;
       break;

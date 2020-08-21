@@ -1,5 +1,7 @@
 # ipaddress (development version)
 
+This release achieves feature parity with the Python [ipaddress](https://docs.python.org/library/ipaddress.html) module (#46).
+
 ## New features
 
 * Additional checks for reserved addresses/networks: `is_private()`, `is_reserved()`, `is_site_local()` (#49)

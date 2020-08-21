@@ -59,6 +59,14 @@ test_that("excluded networks are removed", {
     exclude_networks(ip_network("2001:db8::/32"), ip_network("2001:db8:f000::/36")),
     ip_network(c("2001:db8::/33", "2001:db8:8000::/34", "2001:db8:c000::/35", "2001:db8:e000::/36"))
   )
+  expect_equal(
+    exclude_networks(ip_network("192.0.2.0/32"), ip_network("192.0.2.0/32")),
+    ip_network()
+  )
+  expect_equal(
+    exclude_networks(ip_network("192.0.2.0/28"), ip_network("192.0.2.0/28")),
+    ip_network()
+  )
 })
 
 test_that("single network unaffected", {
