@@ -110,6 +110,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// wrap_exclude_networks
+List wrap_exclude_networks(List input_r, List exclude_r);
+RcppExport SEXP _ipaddress_wrap_exclude_networks(SEXP input_rSEXP, SEXP exclude_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type input_r(input_rSEXP);
+    Rcpp::traits::input_parameter< List >::type exclude_r(exclude_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(wrap_exclude_networks(input_r, exclude_r));
+    return rcpp_result_gen;
+END_RCPP
+}
 // wrap_broadcast_address
 List wrap_broadcast_address(List network_r);
 RcppExport SEXP _ipaddress_wrap_broadcast_address(SEXP network_rSEXP) {
@@ -567,6 +579,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_wrap_parse_interface", (DL_FUNC) &_ipaddress_wrap_parse_interface, 1},
     {"_ipaddress_wrap_construct_interface_from_address", (DL_FUNC) &_ipaddress_wrap_construct_interface_from_address, 2},
     {"_ipaddress_wrap_collapse_networks", (DL_FUNC) &_ipaddress_wrap_collapse_networks, 1},
+    {"_ipaddress_wrap_exclude_networks", (DL_FUNC) &_ipaddress_wrap_exclude_networks, 2},
     {"_ipaddress_wrap_broadcast_address", (DL_FUNC) &_ipaddress_wrap_broadcast_address, 1},
     {"_ipaddress_wrap_netmask", (DL_FUNC) &_ipaddress_wrap_netmask, 2},
     {"_ipaddress_wrap_hostmask", (DL_FUNC) &_ipaddress_wrap_hostmask, 2},

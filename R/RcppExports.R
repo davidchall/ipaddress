@@ -37,6 +37,10 @@ wrap_collapse_networks <- function(input_r) {
     .Call(`_ipaddress_wrap_collapse_networks`, input_r)
 }
 
+wrap_exclude_networks <- function(input_r, exclude_r) {
+    .Call(`_ipaddress_wrap_exclude_networks`, input_r, exclude_r)
+}
+
 wrap_broadcast_address <- function(network_r) {
     .Call(`_ipaddress_wrap_broadcast_address`, network_r)
 }

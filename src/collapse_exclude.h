@@ -47,6 +47,29 @@ std::vector<Network> collapse(std::vector<Network> &input) {
   return output;
 }
 
+
+template<class Network>
+std::vector<Network> exclude(std::vector<Network> &input, std::vector<Network> &exclude) {
+  std::vector<Network> output;
+
+  std::sort(input.begin(), input.end(), [](Network a, Network b) { return a.address() < b.address(); });
+  std::sort(exclude.begin(), exclude.end(), [](Network a, Network b) { return a.address() < b.address(); });
+
+  if (input.size() > 0) {
+    typedef typeof(input[0].address()) Address;
+
+    auto cur_start = input[0].address();
+    auto cur_end = broadcast_address<Address>(input[0]);
+
+    bool is_finished = false;
+    bool is_processing_exclude = false;
+    std::size_t i_input = 1;
+    std::size_t i_exclude = 0;
+  }
+
+  return output;
+}
+
 }
 
 #endif
