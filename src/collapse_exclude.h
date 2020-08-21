@@ -49,6 +49,9 @@ std::vector<Network> collapse_networks(std::vector<Network> &input) {
   if (input.size() == 0) {
     return std::vector<Network>();
   }
+  if (input.size() == 1) {
+    return input;
+  }
 
   typedef decltype(input[0].address()) Address;
   typedef std::pair<Address, Address> AddressRange;
