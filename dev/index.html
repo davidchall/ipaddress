@@ -115,7 +115,7 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>{ipaddress} provides data classes and functions for working with IP addresses and networks, inspired by the Python <a href="https://docs.python.org/library/ipaddress.html">ipaddress</a> module.</p>
+<p>ipaddress provides data classes and functions for working with IP addresses and networks. Its interface is inspired by the Python <a href="https://docs.python.org/library/ipaddress.html">ipaddress</a> module.</p>
 <p>Here are some of the features:</p>
 <ul>
 <li>Functions for <strong>generation and analysis of IP data</strong>
@@ -128,11 +128,11 @@
 <li>Compatible with the <strong>tidyverse</strong>
 </li>
 </ul>
-<p>For data visualization of IP addresses and networks, check out <a href="https://davidchall.github.io/ggip">{ggip}</a>.</p>
+<p>For data visualization of IP addresses and networks, check out the <a href="https://davidchall.github.io/ggip">ggip</a> package.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the released version of {ipaddress} from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
+<p>You can install the released version of ipaddress from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"ipaddress"</span>)</pre></div>
 <p>Or you can install the development version from GitHub:</p>
 <div class="sourceCode" id="cb2"><pre class="r"><span class="co"># install.packages("remotes")</span>
@@ -177,7 +177,7 @@
 <a href="#related-work" class="anchor"></a>Related work</h2>
 <ul>
 <li>
-<a href="https://hrbrmstr.github.io/iptools/"><strong>{iptools}</strong></a> – A well established R package for working with IP addresses and networks. Unfortunately IPv6 support is severely limited. Also, addresses and networks are stored as character vectors, so they must be parsed to their native bit representation for every operation. It served as an excellent guide and motivation for {ipaddress}.</li>
+<a href="https://hrbrmstr.github.io/iptools/"><strong>iptools</strong></a> – A well established R package for working with IP addresses and networks. Unfortunately IPv6 support is severely limited. Also, addresses and networks are stored as character vectors, so they must be parsed to their native bit representation for every operation. It served as an excellent guide and motivation for ipaddress.</li>
 <li>
 <a href="https://cyberpandas.readthedocs.io"><strong>cyberpandas</strong></a> – A Python package for using IP addresses in a <a href="https://pandas.pydata.org">pandas</a> DataFrame. This offers full support for IPv6 and stores addresses in the native bit representation. However, most “interesting” operations must deserialize each address to a Python <a href="https://docs.python.org/library/ipaddress.html">ipaddress</a> object, which is slow. It also doesn’t support IP networks.</li>
 </ul>
