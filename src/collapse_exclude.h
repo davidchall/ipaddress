@@ -50,7 +50,7 @@ std::vector<Network> collapse_networks(std::vector<Network> &input) {
     return std::vector<Network>();
   }
 
-  typedef typeof(input[0].address()) Address;
+  typedef decltype(input[0].address()) Address;
   typedef std::pair<Address, Address> AddressRange;
   std::vector<AddressRange> ranges = collapse_ranges<Address>(input);
 
@@ -77,7 +77,7 @@ std::vector<Network> exclude_networks(std::vector<Network> &include, std::vector
     return collapse_networks(include);
   }
 
-  typedef typeof(include[0].address()) Address;
+  typedef decltype(include[0].address()) Address;
   typedef std::pair<Address, Address> AddressRange;
   typedef std::pair<Address, int> RangeBoundary;
 
