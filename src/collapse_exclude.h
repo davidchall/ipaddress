@@ -50,12 +50,16 @@ std::vector<Network> collapse_networks(std::vector<Network> &input) {
     return std::vector<Network>();
   }
 
-  std::vector<Network> output;
-
   typedef typeof(input[0].address()) Address;
-  std::vector<std::pair<Address, Address> > ranges = collapse_ranges<Address>(input);
+  typedef std::pair<Address, Address> AddressRange;
+  std::vector<AddressRange> ranges = collapse_ranges<Address>(input);
 
+  std::vector<Network> output;
   for (std::size_t i=0; i<ranges.size(); ++i) {
+    if (i % 10000 == 0) {
+      Rcpp::checkUserInterrupt();
+    }
+
     auto networks = summarize_address_range<Network>(ranges[i].first, ranges[i].second);
     std::copy(networks.begin(), networks.end(), std::back_inserter(output));
   }
@@ -80,7 +84,7 @@ std::vector<Network> exclude_networks(std::vector<Network> &include, std::vector
   std::vector<AddressRange > include_ranges = collapse_ranges<Address>(include);
   std::vector<AddressRange > exclude_ranges = collapse_ranges<Address>(exclude);
 
-  // fill queue of range boundaries
+  // fill annotated range boundaries
   // (1,2,3,4) -> (start include, end include, start exclude, end exclude)
   std::vector<RangeBoundary > boundaries;
   std::transform(include_ranges.begin(), include_ranges.end(), std::back_inserter(boundaries),
@@ -92,7 +96,7 @@ std::vector<Network> exclude_networks(std::vector<Network> &include, std::vector
   std::transform(exclude_ranges.begin(), exclude_ranges.end(), std::back_inserter(boundaries),
                  [](AddressRange range) { return RangeBoundary(range.second, 4); });
 
-  // sort queue
+  // sort boundaries with ties keeping annotation order
   std::stable_sort(boundaries.begin(), boundaries.end(),
                    [](RangeBoundary a, RangeBoundary b) { return a.first < b.first; });
 
@@ -103,6 +107,10 @@ std::vector<Network> exclude_networks(std::vector<Network> &include, std::vector
   std::vector<Network> output;
 
   for (std::size_t i=0; i<boundaries.size(); ++i) {
+    if (i % 10000 == 0) {
+      Rcpp::checkUserInterrupt();
+    }
+
     switch (boundaries[i].second) {
     case 1: // start include
       if (!is_exclude) {

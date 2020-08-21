@@ -48,13 +48,29 @@ test_that("single network unaffected", {
   expect_equal(collapse_networks(ip_network(c("0.0.0.0/8", "::/8"))), ip_network(c("0.0.0.0/8", "::/8")))
 })
 
+test_that("empty values work", {
+  expect_equal(collapse_networks(ip_network()), ip_network())
+  expect_equal(exclude_networks(ip_network(), ip_network("0.0.0.0/8")), ip_network())
+  expect_equal(exclude_networks(ip_network("0.0.0.0/8"), ip_network()), ip_network("0.0.0.0/8"))
+})
+
 test_that("missing values work", {
   expect_equal(collapse_networks(ip_network(NA)), ip_network())
+  expect_equal(exclude_networks(ip_network(NA), ip_network("0.0.0.0/8")), ip_network())
+  expect_equal(exclude_networks(ip_network("0.0.0.0/8"), ip_network(NA)), ip_network("0.0.0.0/8"))
 })
 
 test_that("input validation", {
   expect_error(
     collapse_networks(ip_address("192.168.0.1")),
     "`network` must be an ip_network vector"
+  )
+  expect_error(
+    exclude_networks(ip_address("192.168.0.1"), ip_network("192.168.0.0/24")),
+    "`include` must be an ip_network vector"
+  )
+  expect_error(
+    exclude_networks(ip_network("192.168.0.0/24"), ip_address("192.168.0.1")),
+    "`exclude` must be an ip_network vector"
   )
 })

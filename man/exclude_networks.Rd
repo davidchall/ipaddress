@@ -15,5 +15,16 @@ exclude_networks(include, exclude)
 An \code{\link{ip_network}} vector
 }
 \description{
-Returns the minimal set of networks
+\code{exclude_networks()} takes lists of networks to include and exclude. It then
+calculates the address ranges that are included but not excluded (similar to
+\code{\link[=setdiff]{setdiff()}}), and finally returns the minimal set of networks needed to
+describe the remaining address ranges.
+}
+\examples{
+exclude_networks(ip_network('192.0.2.0/28'), ip_network('192.0.2.1/32'))
+
+exclude_networks(ip_network('192.0.2.0/28'), ip_network('192.0.2.15/32'))
+}
+\seealso{
+\code{\link[=collapse_networks]{collapse_networks()}}, \code{\link[=setdiff]{setdiff()}}
 }

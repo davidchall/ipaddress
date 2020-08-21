@@ -19,3 +19,6 @@ to represent the same range of addresses.
 \examples{
 collapse_networks(ip_network(c("192.168.0.0/24", "192.168.1.0/24")))
 }
+\seealso{
+\code{\link[=exclude_networks]{exclude_networks()}}
+}
