@@ -42,6 +42,25 @@ test_that("non-contiguous not collapsed", {
   )
 })
 
+test_that("excluded networks are removed", {
+  expect_equal(
+    exclude_networks(ip_network("192.0.2.0/28"), ip_network("192.0.2.1/32")),
+    ip_network(c("192.0.2.0/32", "192.0.2.2/31", "192.0.2.4/30", "192.0.2.8/29"))
+  )
+  expect_equal(
+    exclude_networks(ip_network("192.0.2.0/28"), ip_network("192.0.2.15/32")),
+    ip_network(c("192.0.2.0/29", "192.0.2.8/30", "192.0.2.12/31", "192.0.2.14/32"))
+  )
+  expect_equal(
+    exclude_networks(ip_network("2001:db8::/32"), ip_network("2001:db8:1000::/36")),
+    ip_network(c("2001:db8::/36", "2001:db8:2000::/35", "2001:db8:4000::/34", "2001:db8:8000::/33"))
+  )
+  expect_equal(
+    exclude_networks(ip_network("2001:db8::/32"), ip_network("2001:db8:f000::/36")),
+    ip_network(c("2001:db8::/33", "2001:db8:8000::/34", "2001:db8:c000::/35", "2001:db8:e000::/36"))
+  )
+})
+
 test_that("single network unaffected", {
   expect_equal(collapse_networks(ip_network("0.0.0.0/8")), ip_network("0.0.0.0/8"))
   expect_equal(collapse_networks(ip_network("::/8")), ip_network("::/8"))

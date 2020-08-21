@@ -21,7 +21,7 @@ std::vector<std::pair<Address, Address> > collapse_ranges(std::vector<Network> &
 
     // sweep line algorithm
     for (std::size_t i=1; i<input.size(); ++i) {
-      if (i % 10000 == 0) {
+      if (i % 10000 == 1) {
         Rcpp::checkUserInterrupt();
       }
 
