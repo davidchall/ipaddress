@@ -15,8 +15,8 @@ status](https://github.com/davidchall/ipaddress/workflows/R-CMD-check/badge.svg)
 status](https://codecov.io/gh/davidchall/ipaddress/branch/master/graph/badge.svg)](https://codecov.io/gh/davidchall/ipaddress?branch=master)
 <!-- badges: end -->
 
-{ipaddress} provides data classes and functions for working with IP
-addresses and networks, inspired by the Python
+ipaddress provides data classes and functions for working with IP
+addresses and networks. Its interface is inspired by the Python
 [ipaddress](https://docs.python.org/library/ipaddress.html) module.
 
 Here are some of the features:
@@ -27,12 +27,12 @@ Here are some of the features:
   - **Performance:** calculations performed in C++
   - Compatible with the **tidyverse**
 
-For data visualization of IP addresses and networks, check out
-[{ggip}](https://davidchall.github.io/ggip).
+For data visualization of IP addresses and networks, check out the
+[ggip](https://davidchall.github.io/ggip) package.
 
 ## Installation
 
-You can install the released version of {ipaddress} from
+You can install the released version of ipaddress from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
@@ -94,12 +94,12 @@ tibble(network = ip_network(c("192.168.100.0/22", "2001:db8::/80"))) %>%
 
 ## Related work
 
-  - [**{iptools}**](https://hrbrmstr.github.io/iptools/) – A well
+  - [**iptools**](https://hrbrmstr.github.io/iptools/) – A well
     established R package for working with IP addresses and networks.
     Unfortunately IPv6 support is severely limited. Also, addresses and
     networks are stored as character vectors, so they must be parsed to
     their native bit representation for every operation. It served as an
-    excellent guide and motivation for {ipaddress}.
+    excellent guide and motivation for ipaddress.
   - [**cyberpandas**](https://cyberpandas.readthedocs.io) – A Python
     package for using IP addresses in a
     [pandas](https://pandas.pydata.org) DataFrame. This offers full
