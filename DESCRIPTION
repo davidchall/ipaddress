@@ -13,7 +13,7 @@ Description: Classes and functions for working with IP (Internet
     versions 4 and 6) address spaces. It is specifically designed to work
     well with the 'tidyverse'.
 License: MIT + file LICENSE
-URL: https://davidchall.github.io/ipaddress,
+URL: https://davidchall.github.io/ipaddress/,
     https://github.com/davidchall/ipaddress
 BugReports: https://github.com/davidchall/ipaddress/issues
 Depends: 

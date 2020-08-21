@@ -18,10 +18,10 @@ knitr::opts_chunk$set(
 library(ipaddress)
 ```
 
-The ipaddress R package was heavily influenced by the design of the [ipaddress](https://docs.python.org/library/ipaddress.html) module in the Python Standard Library.
+The ipaddress R package was heavily influenced by the design of the [ipaddress](https://docs.python.org/3/library/ipaddress.html) module in the Python Standard Library.
 For this reason, the package is centered around 3 data classes: `ip_address()`, `ip_network()` and `ip_interface()`.
 
-This vignette is styled after the [official tutorial](https://docs.python.org/howto/ipaddress.html) for the Python module.
+This vignette is styled after the [official tutorial](https://docs.python.org/3/howto/ipaddress.html) for the Python module.
 It introduces you to these classes, laying the groundwork for the rest of the package functionality.
 
 

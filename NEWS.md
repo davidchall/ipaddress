@@ -1,6 +1,6 @@
 # ipaddress (development version)
 
-This release achieves feature parity with the Python [ipaddress](https://docs.python.org/library/ipaddress.html) module (#46).
+This release achieves feature parity with the Python [ipaddress](https://docs.python.org/3/library/ipaddress.html) module (#46).
 
 ## New features
 

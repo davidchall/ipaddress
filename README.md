@@ -17,7 +17,7 @@ status](https://codecov.io/gh/davidchall/ipaddress/branch/master/graph/badge.svg
 
 ipaddress provides data classes and functions for working with IP
 addresses and networks. Its interface is inspired by the Python
-[ipaddress](https://docs.python.org/library/ipaddress.html) module.
+[ipaddress](https://docs.python.org/3/library/ipaddress.html) module.
 
 Here are some of the features:
 
@@ -28,7 +28,7 @@ Here are some of the features:
   - Compatible with the **tidyverse**
 
 For data visualization of IP addresses and networks, check out the
-[ggip](https://davidchall.github.io/ggip) package.
+[ggip](https://davidchall.github.io/ggip/) package.
 
 ## Installation
 

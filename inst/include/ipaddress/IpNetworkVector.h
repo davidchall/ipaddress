@@ -292,7 +292,7 @@ public:
         output[i] = NA_STRING;
       } else if (is_ipv6[i]) {
         if (exploded) {
-          char buffer[44];
+          char buffer[50];
           auto bytes = network_v6[i].address().to_bytes();
           sprintf(
             buffer,

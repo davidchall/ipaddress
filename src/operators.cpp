@@ -153,7 +153,7 @@ List wrap_bitwise_shift_left(List lhs_r, IntegerVector rhs) {
 
   std::size_t vsize = lhs.size();
 
-  if (rhs.size() != vsize) {
+  if ((std::size_t)rhs.size() != vsize) {
     stop("Inputs must have same length"); // # nocov
   }
 
@@ -187,7 +187,7 @@ List wrap_bitwise_shift_right(List lhs_r, IntegerVector rhs) {
 
   std::size_t vsize = lhs.size();
 
-  if (rhs.size() != vsize) {
+  if ((std::size_t)rhs.size() != vsize) {
     stop("Inputs must have same length"); // # nocov
   }
 
