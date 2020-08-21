@@ -255,7 +255,7 @@ List wrap_decode_hostname(CharacterVector input) {
 
       if (ec) {
         if (ec != asio::error::host_not_found) {
-          warnOnRow(i, hostname, ec.message());
+          warnOnRow(i, hostname, ec.message()); // # nocov
         }
         out_address_v4.resize(1);
         out_address_v6.resize(1);
@@ -315,10 +315,10 @@ List wrap_encode_hostname(List input) {
       // reverse DNS resolution
       auto results = resolver.resolve(endpoint, ec);
 
-      if (ec) {
+      if (ec) { // # nocov start
         warnOnRow(i, endpoint.address().to_string(), ec.message());
         hostnames.push_back(NA_STRING);
-      } else {
+      } else { // # nocov end
         for (auto const& entry : results) {
           // unresolved hostnames often returned as original IP address
           if (entry.host_name() != endpoint.address().to_string()) {

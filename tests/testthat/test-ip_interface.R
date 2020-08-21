@@ -8,6 +8,7 @@ test_that("construction works", {
   expect_equal(ip_interface(x), as_ip_interface(x))
   expect_equal(as.character(ip_interface(x)), x)
   expect_equal(format(ip_interface(x)), x)
+  expect_equal(vec_ptype_abbr(ip_interface(x)), "ip_intf")
 
   expect_error(as_ip_interface(1L))
 
@@ -25,7 +26,7 @@ test_that("construction works", {
     ip_interface(ip_address("0.0.0.0"), rep(24L, 3)),
     ip_interface(rep("0.0.0.0/24", 3))
   )
-  expect_error(ip_interface(ip_address(rep("0.0.0.0", 3)), rep(24L, 2)))
+  expect_error(ip_interface(ip_address(rep("0.0.0.0", 3)), rep(24L, 2)), class = "vctrs_error_incompatible_size")
 })
 
 test_that("formats correctly", {
@@ -56,7 +57,7 @@ test_that("missing values work", {
 
 test_that("invalid inputs are caught", {
   expect_warning(ip_interface("192.168.0.1"))
-  expect_error(ip_interface(ip_address("192.168.0.1"), 24))
+  expect_error(ip_interface(ip_address("192.168.0.1"), 24), "`prefix_length` must be an integer vector")
   expect_warning(ip_interface(ip_address("192.168.0.1"), -1L))
 })
 
@@ -65,10 +66,10 @@ test_that("equality operations work", {
   expect_false(any(ip_interface(x) == rev(ip_interface(x))))
   expect_false(ip_interface("192.168.0.1/22") == ip_interface("192.168.0.1/23"))
 
-  expect_error(ip_interface("0.0.0.0/32") == ip_address("0.0.0.0"))
-  expect_error(ip_address("0.0.0.0") == ip_interface("0.0.0.0/32"))
-  expect_error(ip_interface("0.0.0.0/32") == ip_network("0.0.0.0/32"))
-  expect_error(ip_network("0.0.0.0/32") == ip_interface("0.0.0.0/32"))
+  expect_error(ip_interface("0.0.0.0/32") == ip_address("0.0.0.0"), class = "vctrs_error_incompatible_type")
+  expect_error(ip_address("0.0.0.0") == ip_interface("0.0.0.0/32"), class = "vctrs_error_incompatible_type")
+  expect_error(ip_interface("0.0.0.0/32") == ip_network("0.0.0.0/32"), class = "vctrs_error_incompatible_type")
+  expect_error(ip_network("0.0.0.0/32") == ip_interface("0.0.0.0/32"), class = "vctrs_error_incompatible_type")
 })
 
 test_that("comparison operations work", {
@@ -79,16 +80,16 @@ test_that("comparison operations work", {
   expect_true(ip_interface("192.168.0.0/24") > ip_interface("192.168.0.1/23"))
   expect_true(ip_interface("192.168.0.1/23") > ip_interface("192.168.0.0/23"))
 
-  expect_error(ip_interface("0.0.0.0/32") > ip_address("0.0.0.0"))
-  expect_error(ip_address("0.0.0.0") > ip_interface("0.0.0.0/32"))
-  expect_error(ip_interface("0.0.0.0/32") > ip_network("0.0.0.0/32"))
-  expect_error(ip_network("0.0.0.0/32") > ip_interface("0.0.0.0/32"))
+  expect_error(ip_interface("0.0.0.0/32") > ip_address("0.0.0.0"), class = "vctrs_error_incompatible_type")
+  expect_error(ip_address("0.0.0.0") > ip_interface("0.0.0.0/32"), class = "vctrs_error_incompatible_type")
+  expect_error(ip_interface("0.0.0.0/32") > ip_network("0.0.0.0/32"), class = "vctrs_error_incompatible_type")
+  expect_error(ip_network("0.0.0.0/32") > ip_interface("0.0.0.0/32"), class = "vctrs_error_incompatible_type")
 })
 
 test_that("arithmetic operations disabled", {
-  expect_error(!ip_interface("192.168.0.1/10"))
-  expect_error(ip_interface("192.168.0.1/10") + 1L)
-  expect_error(ip_interface("192.168.0.1/10") & ip_interface("192.168.0.1/10"))
-  expect_error(ip_interface("192.168.0.1/10") & ip_address("192.168.0.1"))
-  expect_error(ip_address("192.168.0.1") & ip_interface("192.168.0.1/10"))
+  expect_error(!ip_interface("192.168.0.1/10"), class = "vctrs_error_incompatible_op")
+  expect_error(ip_interface("192.168.0.1/10") + 1L, class = "vctrs_error_incompatible_op")
+  expect_error(ip_interface("192.168.0.1/10") & ip_interface("192.168.0.1/10"), class = "vctrs_error_incompatible_op")
+  expect_error(ip_interface("192.168.0.1/10") & ip_address("192.168.0.1"), class = "vctrs_error_incompatible_op")
+  expect_error(ip_address("192.168.0.1") & ip_interface("192.168.0.1/10"), class = "vctrs_error_incompatible_op")
 })

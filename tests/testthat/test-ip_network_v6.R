@@ -37,14 +37,14 @@ test_that("invalid inputs are caught", {
   expect_warning(ip_network("1::2/a"))
   expect_warning(ip_network("1::2/24/24"))
 
-  expect_error(ip_network(ip_address("2001:db8::"), 24))
+  expect_error(ip_network(ip_address("2001:db8::"), 24), "`prefix_length` must be an integer vector")
   expect_warning(ip_network(ip_address("2001:db8::"), -1L))
   expect_warning(ip_network(ip_address("2001:db8::"), 129L))
 })
 
 test_that("strict argument works", {
-  expect_error(ip_network("2001:db8::/36", strict = "yes"))
-  expect_error(ip_network("2001:db8::/36", strict = NA))
+  expect_error(ip_network("2001:db8::/36", strict = "yes"), "`strict` be must TRUE or FALSE")
+  expect_error(ip_network("2001:db8::/36", strict = NA), "`strict` be must TRUE or FALSE")
 
   expect_warning(ip_network("2001:db8::8a2e:370:7334/36"), "host bits set")
   expect_equal(ip_network("2001:db8::8a2e:370:7334/36", strict = FALSE), ip_network("2001:db8::/36"))
@@ -72,21 +72,4 @@ test_that("comparison operations work", {
     c(-1L, rep(1L, length(x) - 1L))
   )
   expect_equal(vec_compare(ip_network("2001:db8::/36"), ip_network(NA)), NA_integer_)
-})
-
-test_that("component extraction works", {
-  expect_equal(num_addresses(ip_network(x)), c(1, 2^56, 2^92, 1))
-  expect_equal(
-    network_address(ip_network(x)),
-    ip_address(c("::", "256::", "2001:db8::", "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"))
-  )
-  expect_equal(
-    broadcast_address(ip_network(x)),
-    ip_address(c("::", "256::ff:ffff:ffff:ffff", "2001:db8:fff:ffff:ffff:ffff:ffff:ffff", "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"))
-  )
-
-  expect_equal(
-    ip_network(x),
-    ip_network(network_address(ip_network(x)), prefix_length(ip_network(x)))
-  )
 })

@@ -28,7 +28,10 @@ test_that("bitwise AND works", {
     ip_address(c("192.168.0.1", "255.255.255.255")) & ip_address("100.2.0.3"),
     ip_address(c("64.0.0.1", "100.2.0.3"))
   )
-  expect_error(ip_address(rep("0.0.0.0", 2)) & ip_address(rep("0.0.0.0", 3)))
+  expect_error(
+    ip_address(rep("0.0.0.0", 2)) & ip_address(rep("0.0.0.0", 3)),
+    class = "vctrs_error_incompatible_size"
+  )
 
   # missing or empty values
   expect_equal(ip_address() & ip_address(), ip_address())
@@ -54,7 +57,10 @@ test_that("bitwise OR works", {
     ip_address(c("192.168.0.1", "255.255.255.255")) | ip_address("100.2.0.3"),
     ip_address(c("228.170.0.3", "255.255.255.255"))
   )
-  expect_error(ip_address(rep("0.0.0.0", 2)) | ip_address(rep("0.0.0.0", 3)))
+  expect_error(
+    ip_address(rep("0.0.0.0", 2)) | ip_address(rep("0.0.0.0", 3)),
+    class = "vctrs_error_incompatible_size"
+  )
 
   # missing or empty values
   expect_equal(ip_address() | ip_address(), ip_address())
@@ -80,7 +86,10 @@ test_that("bitwise XOR works", {
     ip_address(c("192.168.0.1", "255.255.255.255")) ^ ip_address("100.2.0.3"),
     ip_address(c("164.170.0.2", "155.253.255.252"))
   )
-  expect_error(ip_address(rep("0.0.0.0", 2)) ^ ip_address(rep("0.0.0.0", 3)))
+  expect_error(
+    ip_address(rep("0.0.0.0", 2)) ^ ip_address(rep("0.0.0.0", 3)),
+    class = "vctrs_error_incompatible_size"
+  )
 
   # missing or empty values
   expect_equal(ip_address() ^ ip_address(), ip_address())
@@ -116,8 +125,14 @@ test_that("bitwise shift works", {
   # vector recycling
   expect_equal(ip_address(rep("192.168.0.1", 2)) %<<% 1, ip_address(rep("129.80.0.2", 2)))
   expect_equal(ip_address(rep("192.168.0.1", 2)) %>>% 1, ip_address(rep("96.84.0.0", 2)))
-  expect_error(ip_address(rep("192.168.0.1", 2)) %<<% c(1L, 2L, 3L))
-  expect_error(ip_address(rep("192.168.0.1", 2)) %>>% c(1L, 2L, 3L))
+  expect_error(
+    ip_address(rep("192.168.0.1", 2)) %<<% c(1L, 2L, 3L),
+    class = "vctrs_error_incompatible_size"
+  )
+  expect_error(
+    ip_address(rep("192.168.0.1", 2)) %>>% c(1L, 2L, 3L),
+    class = "vctrs_error_incompatible_size"
+  )
 
   # missing values
   expect_equal(ip_address(NA) %<<% 1L, ip_address(NA))
@@ -128,18 +143,18 @@ test_that("bitwise shift works", {
   expect_equal(ip_address("192.168.0.1") %>>% NA_real_, ip_address(NA))
 
   # invalid arguments
-  expect_error(ip_network("192.168.0.0/24") %<<% 1L, "must be an ip_address vector")
-  expect_error(ip_network("192.168.0.0/24") %>>% 1L, "must be an ip_address vector")
-  expect_error(ip_interface("192.168.0.0/24") %<<% 1L, "must be an ip_address vector")
-  expect_error(ip_interface("192.168.0.0/24") %>>% 1L, "must be an ip_address vector")
-  expect_error(ip_address("192.168.0.1") %<<% 2.5, "must be a positive integer vector")
-  expect_error(ip_address("192.168.0.1") %>>% 2.5, "must be a positive integer vector")
-  expect_error(ip_address("192.168.0.1") %<<% -1L, "must be a positive integer vector")
-  expect_error(ip_address("192.168.0.1") %>>% -1L, "must be a positive integer vector")
+  expect_error(ip_network("192.168.0.0/24") %<<% 1L, class = "vctrs_error_incompatible_op")
+  expect_error(ip_network("192.168.0.0/24") %>>% 1L, class = "vctrs_error_incompatible_op")
+  expect_error(ip_interface("192.168.0.0/24") %<<% 1L, class = "vctrs_error_incompatible_op")
+  expect_error(ip_interface("192.168.0.0/24") %>>% 1L, class = "vctrs_error_incompatible_op")
+  expect_error(ip_address("192.168.0.1") %<<% 2.5, class = "vctrs_error_incompatible_op")
+  expect_error(ip_address("192.168.0.1") %>>% 2.5, class = "vctrs_error_incompatible_op")
+  expect_error(ip_address("192.168.0.1") %<<% -1L, "`n` must be a positive integer vector")
+  expect_error(ip_address("192.168.0.1") %>>% -1L, "`n` must be a positive integer vector")
 
   # address must come first
-  expect_error(1L %>>% ip_address("0.0.0.0"))
-  expect_error(1L %<<% ip_address("0.0.0.0"))
+  expect_error(1L %<<% ip_address("0.0.0.0"), class = "vctrs_error_incompatible_op")
+  expect_error(1L %>>% ip_address("0.0.0.0"), class = "vctrs_error_incompatible_op")
 })
 
 test_that("addition and subtraction work", {
@@ -161,7 +176,10 @@ test_that("addition and subtraction work", {
     ip_address(c("192.168.0.1", "255.255.255.254")) + 1L,
     ip_address(c("192.168.0.2", "255.255.255.255"))
   )
-  expect_error(ip_address(c("0.0.0.0", "1.2.3.4")) + c(1L, 2L, 3L))
+  expect_error(
+    ip_address(c("0.0.0.0", "1.2.3.4")) + c(1L, 2L, 3L),
+    class = "vctrs_error_incompatible_size"
+  )
 
   # missing values
   expect_equal(ip_address(NA) + 1L, ip_address(NA))
@@ -178,12 +196,14 @@ test_that("addition and subtraction work", {
   expect_warning(ip_address("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff") + 1L, "out-of-range")
 
   # address must come first
-  expect_error(1L + ip_address("0.0.0.0"))
+  expect_error(1L + ip_address("0.0.0.0"), class = "vctrs_error_incompatible_op")
 })
 
 test_that("other operations fail", {
-  expect_error(ip_address() + ip_address())
-  expect_error(-ip_address())
-  expect_error(ip_address() + 1.5)
-  expect_error(ip_address() * 1L)
+  expect_error(ip_address() + ip_address(), class = "vctrs_error_incompatible_op")
+  expect_error(ip_address() + ip_network(), class = "vctrs_error_incompatible_op")
+  expect_error(-ip_address(), class = "vctrs_error_incompatible_op")
+  expect_error(ip_address() + 1.5, class = "vctrs_error_incompatible_op")
+  expect_error(ip_address() * 1L, class = "vctrs_error_incompatible_op")
+  expect_error(ip_address() * 1, class = "vctrs_error_incompatible_op")
 })

@@ -1,10 +1,10 @@
 x <- ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334", NA))
 
 test_that("integer encoding/decoding works", {
-  expect_error(ip_to_integer("hello"))
-  expect_error(integer_to_ip(1.5))
-  expect_error(integer_to_ip(x))
-  expect_error(integer_to_ip("1", is_ipv6 = "true"))
+  expect_error(ip_to_integer("hello"), "`x` must be an ip_address vector")
+  expect_error(integer_to_ip(1.5), "`x` must be a character vector")
+  expect_error(integer_to_ip(x), "`x` must be a character vector")
+  expect_error(integer_to_ip("1", is_ipv6 = "true"), "`is_ipv6` must be a logical vector or NULL")
 
   expect_type(ip_to_integer(x), "character")
   expect_s3_class(integer_to_ip("1"), "ip_address")
@@ -35,9 +35,9 @@ test_that("integer encoding/decoding works", {
 })
 
 test_that("bytes encoding/decoding works", {
-  expect_error(ip_to_bytes("hello"))
-  expect_error(bytes_to_ip("hello"))
-  expect_error(bytes_to_ip(x))
+  expect_error(ip_to_bytes("hello"), "`x` must be an ip_address vector")
+  expect_error(bytes_to_ip("hello"), "`x` must be a blob object")
+  expect_error(bytes_to_ip(x), "`x` must be a blob object")
 
   expect_s3_class(ip_to_bytes(x), c("blob", "vctrs_vctr"))
   expect_equal(
@@ -54,8 +54,8 @@ test_that("bytes encoding/decoding works", {
 })
 
 test_that("binary encoding/decoding works", {
-  expect_error(ip_to_binary("hello"))
-  expect_error(binary_to_ip(x))
+  expect_error(ip_to_binary("hello"), "`x` must be an ip_address vector")
+  expect_error(binary_to_ip(x), "`x` must be a character vector")
 
   expect_type(ip_to_binary(x), "character")
   expect_equal(ip_to_binary(x), c(
@@ -75,15 +75,15 @@ test_that("binary encoding/decoding works", {
 })
 
 test_that("hostname encoding/decoding works", {
-  expect_error(ip_to_hostname(ip_network("192.168.0.0/24")))
-  expect_error(ip_to_hostname("127.0.0.1"))
-  expect_error(ip_to_hostname(ip_address("127.0.0.1"), multiple = "yes"))
-  expect_error(ip_to_hostname(ip_address("127.0.0.1"), multiple = NA))
+  expect_error(ip_to_hostname(ip_network("192.168.0.0/24")), "`x` must be an ip_address vector")
+  expect_error(ip_to_hostname("127.0.0.1"), "`x` must be an ip_address vector")
+  expect_error(ip_to_hostname(ip_address("127.0.0.1"), multiple = "yes"), "`multiple` must be TRUE or FALSE")
+  expect_error(ip_to_hostname(ip_address("127.0.0.1"), multiple = NA), "`multiple` must be TRUE or FALSE")
 
-  expect_error(hostname_to_ip(123))
-  expect_error(hostname_to_ip(ip_address("127.0.0.1")))
-  expect_error(hostname_to_ip("localhost", multiple = "yes"))
-  expect_error(hostname_to_ip("localhost", multiple = NA))
+  expect_error(hostname_to_ip(123), "`x` must be a character vector")
+  expect_error(hostname_to_ip(ip_address("127.0.0.1")), "`x` must be a character vector")
+  expect_error(hostname_to_ip("localhost", multiple = "yes"), "`multiple` must be TRUE or FALSE")
+  expect_error(hostname_to_ip("localhost", multiple = NA), "`multiple` must be TRUE or FALSE")
 
   skip_if_offline()
 
@@ -118,8 +118,8 @@ test_that("hostname encoding/decoding works", {
 
 test_that("DNS resolution errors if offline", {
   local_mock("ipaddress:::is_offline" = function() TRUE)
-  expect_error(ip_to_hostname(ip_address("127.0.0.1")))
-  expect_error(hostname_to_ip("localhost"))
+  expect_error(ip_to_hostname(ip_address("127.0.0.1")), "DNS resolution requires an internet connection")
+  expect_error(hostname_to_ip("localhost"), "DNS resolution requires an internet connection")
 })
 
 test_that("internal function pluck_first_of_each() works", {
@@ -167,6 +167,6 @@ test_that("reverse pointer works", {
     "1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.b.d.0.1.0.0.2.ip.arpa"
   )
 
-  expect_error(reverse_pointer(ip_network()))
+  expect_error(reverse_pointer(ip_network()), "`x` must be an ip_address vector")
   expect_equal(reverse_pointer(ip_address(NA)), NA_character_)
 })

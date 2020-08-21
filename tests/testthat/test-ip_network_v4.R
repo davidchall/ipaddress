@@ -7,6 +7,7 @@ test_that("construction works", {
   expect_length(ip_network(x), length(x))
   expect_equal(ip_network(x), as_ip_network(x))
   expect_equal(as.character(ip_network(x)), x)
+  expect_equal(vec_ptype_abbr(ip_network(x)), "ip_netwk")
 
   expect_error(as_ip_network(1L))
 
@@ -24,7 +25,7 @@ test_that("construction works", {
     ip_network(ip_address("0.0.0.0"), rep(24L, 3)),
     ip_network(rep("0.0.0.0/24", 3))
   )
-  expect_error(ip_network(ip_address(rep("0.0.0.0", 3)), rep(24L, 2)))
+  expect_error(ip_network(ip_address(rep("0.0.0.0", 3)), rep(24L, 2)), class = "vctrs_error_incompatible_size")
 })
 
 test_that("formats correctly", {
@@ -53,16 +54,16 @@ test_that("invalid inputs are caught", {
   expect_warning(ip_network("1.2.3.4/a"))
   expect_warning(ip_network("1.2.3.4/24/24"))
 
-  expect_error(ip_network(ip_address("1.2.3.4"), 24))
+  expect_error(ip_network(ip_address("1.2.3.4"), 24), "`prefix_length` must be an integer vector")
   expect_warning(ip_network(ip_address("1.2.3.4"), -1L))
   expect_warning(ip_network(ip_address("1.2.3.4"), 33L))
 })
 
 test_that("strict argument works", {
-  expect_error(ip_network("1.2.3.4/32", strict = "yes"))
-  expect_error(ip_network("1.2.3.4/32", strict = NA))
-  expect_error(ip_network(ip_address("1.2.3.4"), prefix_length = 32L, strict = "yes"))
-  expect_error(ip_network(ip_address("1.2.3.4"), prefix_length = 32L, strict = NA))
+  expect_error(ip_network("1.2.3.4/32", strict = "yes"), "`strict` be must TRUE or FALSE")
+  expect_error(ip_network("1.2.3.4/32", strict = NA), "`strict` be must TRUE or FALSE")
+  expect_error(ip_network(ip_address("1.2.3.4"), prefix_length = 32L, strict = "yes"), "`strict` be must TRUE or FALSE")
+  expect_error(ip_network(ip_address("1.2.3.4"), prefix_length = 32L, strict = NA), "`strict` be must TRUE or FALSE")
 
   expect_warning(ip_network("255.255.255.255/21"), "host bits set")
   expect_equal(ip_network("255.255.255.255/21", strict = FALSE), ip_network("255.255.248.0/21"))
@@ -94,29 +95,4 @@ test_that("comparison operations work", {
   # network address compared before prefix length
   expect_true(ip_network("192.168.0.0/24") > ip_network("192.168.0.0/23"))
   expect_true(ip_network("192.168.4.0/22") > ip_network("192.168.0.0/23"))
-})
-
-test_that("extracting basic info works", {
-  expect_equal(num_addresses(ip_network(x)), c(1, 65536, 1024, 1))
-  expect_equal(
-    network_address(ip_network(x)),
-    ip_address(c("0.0.0.0", "192.168.0.0", "192.168.100.0", "255.255.255.255"))
-  )
-  expect_equal(
-    broadcast_address(ip_network(x)),
-    ip_address(c("0.0.0.0", "192.168.255.255", "192.168.103.255", "255.255.255.255"))
-  )
-
-  expect_error(num_addresses(ip_address("192.168.0.1")))
-  expect_error(network_address(ip_address("192.168.0.1")))
-  expect_error(broadcast_address(ip_address("192.168.0.1")))
-
-  expect_equal(num_addresses(ip_network(NA)), NA_real_)
-  expect_equal(network_address(ip_network(NA)), ip_address(NA))
-  expect_equal(broadcast_address(ip_network(NA)), ip_address(NA))
-
-  expect_equal(
-    ip_network(x),
-    ip_network(network_address(ip_network(x)), prefix_length(ip_network(x)))
-  )
 })

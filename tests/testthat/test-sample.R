@@ -2,17 +2,20 @@ ipv4 <- ip_network("192.128.0.0/12")
 ipv6 <- ip_network("2001:db8::/108")
 
 test_that("input validation works", {
-  expect_error(sample_network(ip_network(rep(ipv4, 2)), 1))
-  expect_error(sample_network(ip_network(), 1))
-  expect_error(sample_network(ip_address("192.168.0.0"), 1))
-  expect_error(sample_network(ip_network("0.0.0.0/32"), 0))
-  expect_error(sample_network(ip_network("0.0.0.0/32"), 2^31, replace = TRUE))
-  expect_error(sample_network(ip_network("0.0.0.0/32"), NA))
-  expect_error(sample_network(ip_network("0.0.0.0/32"), 1, NA))
-  expect_error(sample_network(ip_network("0.0.0.0/32"), 1, 1))
-  expect_error(sample_network(ip_network(NA), 1))
+  expect_error(sample_network(rep(ipv4, 2), 1), "`x` must be an ip_network scalar")
+  expect_error(sample_network(ip_network(), 1), "`x` must be an ip_network scalar")
+  expect_error(sample_network(ip_address("192.168.0.0"), 1), "`x` must be an ip_network scalar")
+  expect_error(sample_network(ip_network("0.0.0.0/32"), -1), "`size` must be a positive integer scalar")
+  expect_error(sample_network(ip_network("0.0.0.0/32"), 2^31, replace = TRUE), "`size` must be less than 2^31", fixed = TRUE)
+  expect_error(sample_network(ip_network("0.0.0.0/32"), NA), "`size` must be a positive integer scalar")
+  expect_error(sample_network(ip_network("0.0.0.0/32"), 1, NA), "`replace` must be TRUE or FALSE")
+  expect_error(sample_network(ip_network("0.0.0.0/32"), 1, 1), "`replace` must be TRUE or FALSE")
+  expect_error(sample_network(ip_network(NA), 1), "`x` must be an ip_network scalar")
 
-  expect_error(sample_network(ipv4, num_addresses(ipv4) + 1, replace = FALSE))
+  expect_error(
+    sample_network(ipv4, num_addresses(ipv4) + 1, replace = FALSE),
+    "cannot take a sample larger than the network size when `replace = FALSE`"
+  )
 })
 
 test_that("generates within network", {

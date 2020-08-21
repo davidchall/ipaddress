@@ -1,9 +1,9 @@
 test_that("input validation works", {
-  expect_error(seq(ip_network(rep("192.168.0.0/24", 2))))
-  expect_error(hosts(ip_network(rep("192.168.0.0/24", 2))))
-  expect_error(seq(ip_network()))
-  expect_error(hosts(ip_network()))
-  expect_error(hosts(ip_address("192.168.0.0")))
+  expect_error(seq(ip_network(rep("192.168.0.0/24", 2))), "`x` must be an ip_network scalar")
+  expect_error(hosts(ip_network(rep("192.168.0.0/24", 2))), "`x` must be an ip_network scalar")
+  expect_error(seq(ip_network()), "`x` must be an ip_network scalar")
+  expect_error(hosts(ip_network()), "`x` must be an ip_network scalar")
+  expect_error(hosts(ip_address("192.168.0.0")), "`x` must be an ip_network scalar")
 
   expect_error(seq(ip_network("0.0.0.0/1")), "Network too large")
   expect_error(seq(ip_network("::/97")), "Network too large")

@@ -37,7 +37,7 @@ sample_ipv6 <- function(size, replace = FALSE) {
 #' @rdname sample
 #' @export
 sample_network <- function(x, size, replace = FALSE) {
-  if (!(is_ip_network(x) && length(x) == 1)) {
+  if (!(is_ip_network(x) && length(x) == 1) || is.na(x)) {
     abort("`x` must be an ip_network scalar")
   }
   if (!(is_scalar_integerish(size) && size > 0)) {

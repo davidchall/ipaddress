@@ -53,5 +53,8 @@ test_that("missing values work", {
 })
 
 test_that("input validation", {
-  expect_error(collapse_networks(ip_address("192.168.0.1")))
+  expect_error(
+    collapse_networks(ip_address("192.168.0.1")),
+    "`network` must be an ip_network vector"
+  )
 })

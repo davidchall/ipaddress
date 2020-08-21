@@ -43,10 +43,10 @@ NULL
 #' @rdname ip_operators
 #' @export
 `%<<%` <- function(x, n) {
-  if (!is_ip_address(x) || is_ip_interface(x)) {
-    abort("`x` must be an ip_address vector")
+  if (!is_ip_address(x) || is_ip_interface(x) || !is_integerish(n)) {
+    stop_incompatible_op("%<<%", x, n)
   }
-  if (!(is_integerish(n) && all(n >= 0, na.rm = TRUE))) {
+  if (!all(n >= 0, na.rm = TRUE)) {
     abort("`n` must be a positive integer vector")
   }
 
@@ -62,10 +62,10 @@ NULL
 #' @rdname ip_operators
 #' @export
 `%>>%` <- function(x, n) {
-  if (!is_ip_address(x) || is_ip_interface(x)) {
-    abort("`x` must be an ip_address vector")
+  if (!is_ip_address(x) || is_ip_interface(x) || !is_integerish(n)) {
+    stop_incompatible_op("%>>%", x, n)
   }
-  if (!(is_integerish(n) && all(n >= 0, na.rm = TRUE))) {
+  if (!all(n >= 0, na.rm = TRUE)) {
     abort("`n` must be a positive integer vector")
   }
 

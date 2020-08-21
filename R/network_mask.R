@@ -153,10 +153,10 @@ subnet_mask <- function(prefix_length, is_ipv6, mask_func) {
     abort("`prefix_length` cannot be negative")
   }
   if (any(prefix_length[!is_ipv6] > 32L, na.rm = TRUE)) {
-    abort("The maximum `prefix_length` is 32 for IPv4")
+    abort("`prefix_length` cannot be greater than 32 for IPv4")
   }
   if (any(prefix_length[is_ipv6] > 128L, na.rm = TRUE)) {
-    abort("The maximum `prefix_length` is 128 for IPv6")
+    abort("`prefix_length` cannot be greater than 128 for IPv6")
   }
 
   do.call(mask_func, list(prefix_length, is_ipv6))

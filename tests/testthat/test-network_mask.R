@@ -60,8 +60,8 @@ test_that("vector recycling works", {
     ip_address(c("3f:ffff:ffff:ffff:ffff:ffff:ffff:ffff", "0.63.255.255"))
   )
 
-  expect_error(netmask(rep(0L, 3), rep(TRUE, 2)))
-  expect_error(hostmask(rep(0L, 3), rep(TRUE, 2)))
+  expect_error(netmask(rep(0L, 3), rep(TRUE, 2)), class = "vctrs_error_incompatible_size")
+  expect_error(hostmask(rep(0L, 3), rep(TRUE, 2)), class = "vctrs_error_incompatible_size")
 
   expect_error(netmask(1L))
   expect_error(netmask(c(1L, 2L)))
@@ -70,21 +70,25 @@ test_that("vector recycling works", {
 })
 
 test_that("input validation works", {
-  expect_error(prefix_length(1L))
-  expect_error(netmask(ip_address("1.2.3.4")))
-  expect_error(hostmask(ip_address("1.2.3.4")))
+  expect_error(
+    prefix_length(1L),
+    "prefix_length() accepts an ip_address, ip_network or ip_interface vector",
+    fixed = TRUE
+  )
+  expect_error(netmask(ip_address("1.2.3.4")), "`prefix_length` must be an integer vector")
+  expect_error(hostmask(ip_address("1.2.3.4")), "`prefix_length` must be an integer vector")
 
-  expect_error(netmask(1, FALSE))
-  expect_error(hostmask(1, FALSE))
-  expect_error(netmask(1L, "yes"))
-  expect_error(hostmask(1L, "yes"))
+  expect_error(netmask(1, FALSE), "`prefix_length` must be an integer vector")
+  expect_error(hostmask(1, FALSE), "`prefix_length` must be an integer vector")
+  expect_error(netmask(1L, "yes"), "`is_ipv6` must be a logical vector")
+  expect_error(hostmask(1L, "yes"), "`is_ipv6` must be a logical vector")
 
-  expect_error(netmask(-1L, FALSE))
-  expect_error(hostmask(-1L, FALSE))
-  expect_error(netmask(33L, FALSE))
-  expect_error(hostmask(33L, FALSE))
-  expect_error(netmask(129L, TRUE))
-  expect_error(hostmask(129L, TRUE))
+  expect_error(netmask(-1L, FALSE), "`prefix_length` cannot be negative")
+  expect_error(hostmask(-1L, FALSE), "`prefix_length` cannot be negative")
+  expect_error(netmask(33L, FALSE), "`prefix_length` cannot be greater than 32 for IPv4")
+  expect_error(hostmask(33L, FALSE), "`prefix_length` cannot be greater than 32 for IPv4")
+  expect_error(netmask(129L, TRUE), "`prefix_length` cannot be greater than 128 for IPv6")
+  expect_error(hostmask(129L, TRUE), "`prefix_length` cannot be greater than 128 for IPv6")
 })
 
 test_that("missing values work", {
