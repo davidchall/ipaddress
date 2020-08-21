@@ -111,14 +111,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // wrap_exclude_networks
-List wrap_exclude_networks(List input_r, List exclude_r);
-RcppExport SEXP _ipaddress_wrap_exclude_networks(SEXP input_rSEXP, SEXP exclude_rSEXP) {
+List wrap_exclude_networks(List include_r, List exclude_r);
+RcppExport SEXP _ipaddress_wrap_exclude_networks(SEXP include_rSEXP, SEXP exclude_rSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< List >::type input_r(input_rSEXP);
+    Rcpp::traits::input_parameter< List >::type include_r(include_rSEXP);
     Rcpp::traits::input_parameter< List >::type exclude_r(exclude_rSEXP);
-    rcpp_result_gen = Rcpp::wrap(wrap_exclude_networks(input_r, exclude_r));
+    rcpp_result_gen = Rcpp::wrap(wrap_exclude_networks(include_r, exclude_r));
     return rcpp_result_gen;
 END_RCPP
 }
