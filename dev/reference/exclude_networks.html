@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Collapse contiguous and overlapping networks — collapse_networks • ipaddress</title>
+<title>Remove networks from others — exclude_networks • ipaddress</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -52,9 +52,11 @@
 
 
 
-<meta property="og:title" content="Collapse contiguous and overlapping networks — collapse_networks" />
-<meta property="og:description" content="Given a vector of networks, this returns the minimal set of networks required
-to represent the same range of addresses." />
+<meta property="og:title" content="Remove networks from others — exclude_networks" />
+<meta property="og:description" content="exclude_networks() takes lists of networks to include and exclude. It then
+calculates the address ranges that are included but not excluded (similar to
+setdiff()), and finally returns the minimal set of networks needed to
+describe the remaining address ranges." />
 <meta property="og:image" content="https://davidchall.github.io/ipaddress/logo.png" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="@hall_davidc" />
@@ -160,37 +162,45 @@ to represent the same range of addresses." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Collapse contiguous and overlapping networks</h1>
+    <h1>Remove networks from others</h1>
     <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/collapse_exclude.R'><code>R/collapse_exclude.R</code></a></small>
-    <div class="hidden name"><code>collapse_networks.Rd</code></div>
+    <div class="hidden name"><code>exclude_networks.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Given a vector of networks, this returns the minimal set of networks required
-to represent the same range of addresses.</p>
+    <p><code>exclude_networks()</code> takes lists of networks to include and exclude. It then
+calculates the address ranges that are included but not excluded (similar to
+<code><a href='https://rdrr.io/r/base/sets.html'>setdiff()</a></code>), and finally returns the minimal set of networks needed to
+describe the remaining address ranges.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>collapse_networks</span>(<span class='no'>network</span>)</pre>
+    <pre class="usage"><span class='fu'>exclude_networks</span>(<span class='no'>include</span>, <span class='no'>exclude</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>network</th>
+      <th>include</th>
+      <td><p>An <code><a href='ip_network.html'>ip_network</a></code> vector</p></td>
+    </tr>
+    <tr>
+      <th>exclude</th>
       <td><p>An <code><a href='ip_network.html'>ip_network</a></code> vector</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An <code><a href='ip_network.html'>ip_network</a></code> vector (potentially shorter than the input)</p>
+    <p>An <code><a href='ip_network.html'>ip_network</a></code> vector</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='exclude_networks.html'>exclude_networks()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='collapse_networks.html'>collapse_networks()</a></code>, <code><a href='https://rdrr.io/r/base/sets.html'>setdiff()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>collapse_networks</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.0/24"</span>, <span class='st'>"192.168.1.0/24"</span>)))</div><div class='output co'>#&gt; &lt;ip_network[1]&gt;
-#&gt; [1] 192.168.0.0/23</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>exclude_networks</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>'192.0.2.0/28'</span>), <span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>'192.0.2.1/32'</span>))</div><div class='output co'>#&gt; &lt;ip_network[4]&gt;
+#&gt; [1] 192.0.2.0/32 192.0.2.2/31 192.0.2.4/30 192.0.2.8/29</div><div class='input'>
+<span class='fu'>exclude_networks</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>'192.0.2.0/28'</span>), <span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>'192.0.2.15/32'</span>))</div><div class='output co'>#&gt; &lt;ip_network[4]&gt;
+#&gt; [1] 192.0.2.0/29  192.0.2.8/30  192.0.2.12/31 192.0.2.14/32</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

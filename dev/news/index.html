@@ -166,6 +166,7 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#ipaddress-development-version" class="anchor"></a>ipaddress (development version)<small> Unreleased </small>
 </h1>
+<p>This release achieves feature parity with the Python <a href="https://docs.python.org/library/ipaddress.html">ipaddress</a> module (<a href='https://github.com/davidchall/ipaddress/issues/46'>#46</a>).</p>
 <div id="new-features" class="section level2">
 <h2 class="hasAnchor">
 <a href="#new-features" class="anchor"></a>New features</h2>
@@ -173,6 +174,7 @@
 <li>Additional checks for reserved addresses/networks: <code><a href="../reference/is_reserved.html">is_private()</a></code>, <code><a href="../reference/is_reserved.html">is_reserved()</a></code>, <code><a href="../reference/is_reserved.html">is_site_local()</a></code> (<a href='https://github.com/davidchall/ipaddress/issues/49'>#49</a>)</li>
 <li>New <code><a href="../reference/is_reserved.html">is_global()</a></code> checks if addresses or networks are <em>not</em> reserved (<a href='https://github.com/davidchall/ipaddress/issues/49'>#49</a>)</li>
 <li>New <code><a href="../reference/collapse_networks.html">collapse_networks()</a></code> collapses contiguous and overlapping networks (<a href='https://github.com/davidchall/ipaddress/issues/54'>#54</a>)</li>
+<li>New <code><a href="../reference/exclude_networks.html">exclude_networks()</a></code> removes networks from others (<a href='https://github.com/davidchall/ipaddress/issues/59'>#59</a>)</li>
 <li>New <code><a href="../reference/reverse_pointer.html">reverse_pointer()</a></code> returns the record used by reverse DNS (<a href='https://github.com/davidchall/ipaddress/issues/57'>#57</a>)</li>
 <li>New datasets: <code>iana_ipv4</code> and <code>iana_ipv6</code> contain registries of allocated blocks (<a href='https://github.com/davidchall/ipaddress/issues/55'>#55</a>)</li>
 <li>New bitwise shift operators: <code><a href="../reference/ip_operators.html">%&lt;&lt;%</a></code> and <code><a href="../reference/ip_operators.html">%&gt;&gt;%</a></code> (<a href='https://github.com/davidchall/ipaddress/issues/52'>#52</a>)</li>
