@@ -11,7 +11,7 @@ This release achieves feature parity with the Python [ipaddress](https://docs.py
 * New `reverse_pointer()` returns the record used by reverse DNS (#57)
 * New datasets: `iana_ipv4` and `iana_ipv6` contain registries of allocated blocks (#55)
 * New bitwise shift operators: `%<<%` and `%>>%` (#52)
-* Reorganized C++ code to expose `IpAddressVector` and `IpNetworkVector` classes to other packages (use `LinkingTo: AsioHeaders, ipaddress, Rcpp`). This does not effect the public R interface. (#51)
+* Reorganized C++ code to expose `IpAddressVector` and `IpNetworkVector` classes to other packages (use `LinkingTo: AsioHeaders, ipaddress, Rcpp`). This does not affect the public R interface. (#51)
 
 ## Minor improvements and fixes
 
