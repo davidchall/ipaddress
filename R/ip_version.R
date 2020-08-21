@@ -57,5 +57,5 @@ max_prefix_length <- function(x) {
     abort("`x` must be an ip_address or ip_network vector")
   }
 
-  ifelse(field(x, "is_ipv6"), 128L, 32L)
+  ifelse(is_ipv6(x), 128L, 32L)
 }

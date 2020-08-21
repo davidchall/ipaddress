@@ -64,5 +64,5 @@ num_addresses <- function(x) {
     abort("`x` must be an ip_network vector")
   }
 
-  2L^(max_prefix_length(x) - field(x, "prefix"))
+  2L^(max_prefix_length(x) - prefix_length(x))
 }
