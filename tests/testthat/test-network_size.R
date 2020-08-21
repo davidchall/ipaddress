@@ -8,9 +8,6 @@ test_that("num_addresses works", {
 })
 
 test_that("network_address works", {
-  print(network_address(x))
-  print(network_address(ip_network(c("0.0.0.0/32", "192.168.100.0/22", "::/128", "2001:db8::/36"))))
-
   expect_equal(network_address(x), ip_address(c("0.0.0.0", "192.168.100.0", "::", "2001:db8::")))
   expect_equal(x, ip_network(network_address(x), prefix_length(x)))
 
@@ -19,9 +16,6 @@ test_that("network_address works", {
 })
 
 test_that("broadcast_address works", {
-  print(broadcast_address(x))
-  print(broadcast_address(ip_network(c("0.0.0.0/32", "192.168.100.0/22", "::/128", "2001:db8::/36"))))
-
   expect_equal(broadcast_address(x), ip_address(c("0.0.0.0", "192.168.103.255", "::", "2001:db8:fff:ffff:ffff:ffff:ffff:ffff")))
 
   expect_error(broadcast_address(ip_address("192.168.0.1")), "`x` must be an ip_network vector")
