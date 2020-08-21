@@ -45,6 +45,7 @@ reference:
       - common_network
       - summarize_address_range
       - collapse_networks
+      - exclude_networks
       - is_within
       - is_subnet
       - subnets

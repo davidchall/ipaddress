@@ -1,10 +1,13 @@
 # ipaddress (development version)
 
+This release achieves feature parity with the Python [ipaddress](https://docs.python.org/library/ipaddress.html) module (#46).
+
 ## New features
 
 * Additional checks for reserved addresses/networks: `is_private()`, `is_reserved()`, `is_site_local()` (#49)
 * New `is_global()` checks if addresses or networks are *not* reserved (#49)
 * New `collapse_networks()` collapses contiguous and overlapping networks (#54)
+* New `exclude_networks()` removes networks from others (#59)
 * New `reverse_pointer()` returns the record used by reverse DNS (#57)
 * New datasets: `iana_ipv4` and `iana_ipv6` contain registries of allocated blocks (#55)
 * New bitwise shift operators: `%<<%` and `%>>%` (#52)

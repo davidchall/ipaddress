@@ -99,6 +99,29 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// wrap_collapse_networks
+List wrap_collapse_networks(List input_r);
+RcppExport SEXP _ipaddress_wrap_collapse_networks(SEXP input_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type input_r(input_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(wrap_collapse_networks(input_r));
+    return rcpp_result_gen;
+END_RCPP
+}
+// wrap_exclude_networks
+List wrap_exclude_networks(List include_r, List exclude_r);
+RcppExport SEXP _ipaddress_wrap_exclude_networks(SEXP include_rSEXP, SEXP exclude_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type include_r(include_rSEXP);
+    Rcpp::traits::input_parameter< List >::type exclude_r(exclude_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(wrap_exclude_networks(include_r, exclude_r));
+    return rcpp_result_gen;
+END_RCPP
+}
 // wrap_broadcast_address
 List wrap_broadcast_address(List network_r);
 RcppExport SEXP _ipaddress_wrap_broadcast_address(SEXP network_rSEXP) {
@@ -226,17 +249,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< List >::type address1_r(address1_rSEXP);
     Rcpp::traits::input_parameter< List >::type address2_r(address2_rSEXP);
     rcpp_result_gen = Rcpp::wrap(wrap_summarize_address_range(address1_r, address2_r));
-    return rcpp_result_gen;
-END_RCPP
-}
-// wrap_collapse_networks
-List wrap_collapse_networks(List network_r);
-RcppExport SEXP _ipaddress_wrap_collapse_networks(SEXP network_rSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< List >::type network_r(network_rSEXP);
-    rcpp_result_gen = Rcpp::wrap(wrap_collapse_networks(network_r));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -566,6 +578,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_wrap_print_network", (DL_FUNC) &_ipaddress_wrap_print_network, 2},
     {"_ipaddress_wrap_parse_interface", (DL_FUNC) &_ipaddress_wrap_parse_interface, 1},
     {"_ipaddress_wrap_construct_interface_from_address", (DL_FUNC) &_ipaddress_wrap_construct_interface_from_address, 2},
+    {"_ipaddress_wrap_collapse_networks", (DL_FUNC) &_ipaddress_wrap_collapse_networks, 1},
+    {"_ipaddress_wrap_exclude_networks", (DL_FUNC) &_ipaddress_wrap_exclude_networks, 2},
     {"_ipaddress_wrap_broadcast_address", (DL_FUNC) &_ipaddress_wrap_broadcast_address, 1},
     {"_ipaddress_wrap_netmask", (DL_FUNC) &_ipaddress_wrap_netmask, 2},
     {"_ipaddress_wrap_hostmask", (DL_FUNC) &_ipaddress_wrap_hostmask, 2},
@@ -577,7 +591,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_wrap_sample_network", (DL_FUNC) &_ipaddress_wrap_sample_network, 2},
     {"_ipaddress_wrap_smallest_common_network", (DL_FUNC) &_ipaddress_wrap_smallest_common_network, 2},
     {"_ipaddress_wrap_summarize_address_range", (DL_FUNC) &_ipaddress_wrap_summarize_address_range, 2},
-    {"_ipaddress_wrap_collapse_networks", (DL_FUNC) &_ipaddress_wrap_collapse_networks, 1},
     {"_ipaddress_wrap_bitwise_not", (DL_FUNC) &_ipaddress_wrap_bitwise_not, 1},
     {"_ipaddress_wrap_bitwise_and", (DL_FUNC) &_ipaddress_wrap_bitwise_and, 2},
     {"_ipaddress_wrap_bitwise_or", (DL_FUNC) &_ipaddress_wrap_bitwise_or, 2},

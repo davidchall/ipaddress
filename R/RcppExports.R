@@ -33,6 +33,14 @@ wrap_construct_interface_from_address <- function(address, prefix_length) {
     .Call(`_ipaddress_wrap_construct_interface_from_address`, address, prefix_length)
 }
 
+wrap_collapse_networks <- function(input_r) {
+    .Call(`_ipaddress_wrap_collapse_networks`, input_r)
+}
+
+wrap_exclude_networks <- function(include_r, exclude_r) {
+    .Call(`_ipaddress_wrap_exclude_networks`, include_r, exclude_r)
+}
+
 wrap_broadcast_address <- function(network_r) {
     .Call(`_ipaddress_wrap_broadcast_address`, network_r)
 }
@@ -75,10 +83,6 @@ wrap_smallest_common_network <- function(address1_r, address2_r) {
 
 wrap_summarize_address_range <- function(address1_r, address2_r) {
     .Call(`_ipaddress_wrap_summarize_address_range`, address1_r, address2_r)
-}
-
-wrap_collapse_networks <- function(network_r) {
-    .Call(`_ipaddress_wrap_collapse_networks`, network_r)
 }
 
 wrap_bitwise_not <- function(lhs_r) {
