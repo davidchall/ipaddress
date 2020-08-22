@@ -156,7 +156,7 @@
 <div id="is-an-address-in-a-network" class="section level2">
 <h2 class="hasAnchor">
 <a href="#is-an-address-in-a-network" class="anchor"></a>Is an address in a network?</h2>
-<p>A very common task is to check if an IP address is within an IP network, so the ipaddress package provides a couple of different functions to help with this workflow: <code><a href="../reference/address_in_network.html">is_within()</a></code> and <code><a href="../reference/address_in_network.html">is_within_any()</a></code>. We also provide <code><a href="../reference/network_in_network.html">is_subnet()</a></code> and <code><a href="../reference/network_in_network.html">is_supernet()</a></code> to test if a network is within another network.</p>
+<p>A very common task is to check if an address is within a network, so the ipaddress package provides a couple of different functions to help with this workflow: <code><a href="../reference/address_in_network.html">is_within()</a></code> and <code><a href="../reference/address_in_network.html">is_within_any()</a></code>. We also provide <code><a href="../reference/network_in_network.html">is_subnet()</a></code> and <code><a href="../reference/network_in_network.html">is_supernet()</a></code> to test if a network is within another network.</p>
 <p>To see how these functions can be used in practice, let’s consider a couple of IP networks:</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">my_networks</span> <span class="kw">&lt;-</span> <span class="fu">tibble</span>(
   <span class="kw">network</span> <span class="kw">=</span> <span class="fu"><a href="../reference/ip_network.html">ip_network</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"192.168.0.0/16"</span>, <span class="st">"2001:db8::/32"</span>)),
@@ -183,15 +183,16 @@
 <span class="co">#&gt; 2                 1.2.3.4 FALSE     </span>
 <span class="co">#&gt; 3 2001:db8::8a2e:370:7334 TRUE      </span>
 <span class="co">#&gt; 4                     ::1 FALSE</span></pre></body></html></div>
-<p>But what if we need to know <em>which</em> of our networks the address was found in? We can do that by performing a cross-join with the table of networks, and filtering those rows that match.</p>
+<p>But what if we need to know <em>which</em> of our networks the address was found in? We can do that using the excellent <a href="https://cran.r-project.org/package=fuzzyjoin">fuzzyjoin</a> package together with the <code><a href="../reference/address_in_network.html">is_within()</a></code> function.</p>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">my_addresses</span> <span class="kw">%&gt;%</span>
-  <span class="fu">full_join</span>(<span class="no">my_networks</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">character</a></span>()) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="fu"><a href="../reference/address_in_network.html">is_within</a></span>(<span class="no">address</span>, <span class="no">network</span>))
-<span class="co">#&gt; # A tibble: 2 x 3</span>
+  <span class="kw pkg">fuzzyjoin</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/fuzzyjoin/man/fuzzy_join.html">fuzzy_left_join</a></span>(<span class="no">my_networks</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"address"</span> <span class="kw">=</span> <span class="st">"network"</span>), <span class="no">is_within</span>)
+<span class="co">#&gt; # A tibble: 4 x 3</span>
 <span class="co">#&gt;                   address        network label        </span>
 <span class="co">#&gt;                 &lt;ip_addr&gt;     &lt;ip_netwk&gt; &lt;chr&gt;        </span>
 <span class="co">#&gt; 1           192.168.100.1 192.168.0.0/16 Private      </span>
-<span class="co">#&gt; 2 2001:db8::8a2e:370:7334  2001:db8::/32 Documentation</span></pre></body></html></div>
+<span class="co">#&gt; 2                 1.2.3.4             NA &lt;NA&gt;         </span>
+<span class="co">#&gt; 3 2001:db8::8a2e:370:7334  2001:db8::/32 Documentation</span>
+<span class="co">#&gt; 4                     ::1             NA &lt;NA&gt;</span></pre></body></html></div>
 </div>
   </div>
 
