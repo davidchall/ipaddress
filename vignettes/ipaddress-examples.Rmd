@@ -55,7 +55,7 @@ Note that this approach assumes the two addresses do actually correspond to the 
 
 ## Is an address in a network?
 
-A very common task is to check if an IP address is within an IP network, so the ipaddress package provides a couple of different functions to help with this workflow: `is_within()` and `is_within_any()`.
+A very common task is to check if an address is within a network, so the ipaddress package provides a couple of different functions to help with this workflow: `is_within()` and `is_within_any()`.
 We also provide `is_subnet()` and `is_supernet()` to test if a network is within another network.
 
 To see how these functions can be used in practice, let's consider a couple of IP networks:
@@ -85,11 +85,10 @@ my_addresses %>%
 ```
 
 But what if we need to know _which_ of our networks the address was found in?
-We can do that by performing a cross-join with the table of networks, and filtering those rows that match.
+We can do that using the excellent [fuzzyjoin](https://cran.r-project.org/package=fuzzyjoin) package together with the `is_within()` function.
 
 ```{r}
 my_addresses %>%
-  full_join(my_networks, by = character()) %>%
-  filter(is_within(address, network))
+  fuzzyjoin::fuzzy_left_join(my_networks, c("address" = "network"), is_within)
 ```
 

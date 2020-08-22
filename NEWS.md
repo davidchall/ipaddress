@@ -18,6 +18,7 @@ This release achieves feature parity with the Python [ipaddress](https://docs.py
 * `format.ip_address()`, `format.ip_network()` and `format.ip_interface()` gain an `exploded` parameter to display leading zeros for IPv6 addresses (#56)
 * `ip_to_integer()` gains a `base` parameter to select between decimal, hexadecimal and binary outputs (#47)
 * Integer-like doubles are now accepted everywhere in place of an integer
+* Update `vignette("ipaddress-examples")` to use the [fuzzyjoin](https://cran.r-project.org/package=fuzzyjoin) package (#61)
 * Fixed comparison of `ip_address()` vectors to account for machine endianness (#53)
 * Comparison of `ip_network()` and `ip_interface()` vectors is now consistent with the Python ipaddress module
   * `ip_network()`: network address compared before prefix length
