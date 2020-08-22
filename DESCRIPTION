@@ -27,6 +27,7 @@ Imports:
 Suggests: 
     crayon,
     dplyr (>= 1.0.0),
+    fuzzyjoin (>= 0.1.6),
     knitr,
     pillar (>= 1.4.5),
     rmarkdown,
