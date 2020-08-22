@@ -194,6 +194,45 @@
 <span class="co">#&gt; 3 2001:db8::8a2e:370:7334  2001:db8::/32 Documentation</span>
 <span class="co">#&gt; 4                     ::1             NA &lt;NA&gt;</span></pre></body></html></div>
 </div>
+<div id="randomly-generate-public-addresses" class="section level2">
+<h2 class="hasAnchor">
+<a href="#randomly-generate-public-addresses" class="anchor"></a>Randomly generate public addresses</h2>
+<p>ipaddress provides functions to sample from a specific network (<code><a href="../reference/sample.html">sample_network()</a></code>) or the entire address space (<code><a href="../reference/sample.html">sample_ipv4()</a></code> and <code><a href="../reference/sample.html">sample_ipv6()</a></code>). However, it can be more difficult to sample from the majority of address space, while excluding certain networks.</p>
+<p>A good example is sampling public IPv4 addresses. The simplest solution is to use an accept-reject algorithm – sampling the entire IPv4 address space and rejecting addresses that are reserved.</p>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">sample_public</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">size</span>) {
+  <span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/sample.html">sample_ipv4</a></span>(<span class="no">size</span>)
+
+  <span class="no">all_public</span> <span class="kw">&lt;-</span> <span class="fl">FALSE</span>
+  <span class="kw">while</span> (!<span class="no">all_public</span>) {
+    <span class="no">public</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/is_reserved.html">is_global</a></span>(<span class="no">result</span>)
+    <span class="no">n_replace</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(!<span class="no">public</span>)
+
+    <span class="kw">if</span> (<span class="no">n_replace</span> <span class="kw">==</span> <span class="fl">0</span>) {
+      <span class="no">all_public</span> <span class="kw">&lt;-</span> <span class="fl">TRUE</span>
+    } <span class="kw">else</span> {
+      <span class="no">result</span>[!<span class="no">public</span>] <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/sample.html">sample_ipv4</a></span>(<span class="no">n_replace</span>)
+    }
+  }
+
+  <span class="no">result</span>
+}</pre></body></html></div>
+<p>We now sample 10 addresses and make sure they are all public addresses.</p>
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu">tibble</span>(<span class="kw">address</span> <span class="kw">=</span> <span class="fu">sample_public</span>(<span class="fl">10</span>)) <span class="kw">%&gt;%</span>
+  <span class="fu">mutate</span>(<span class="kw">is_public</span> <span class="kw">=</span> <span class="fu"><a href="../reference/is_reserved.html">is_global</a></span>(<span class="no">address</span>))
+<span class="co">#&gt; # A tibble: 10 x 2</span>
+<span class="co">#&gt;           address is_public</span>
+<span class="co">#&gt;         &lt;ip_addr&gt; &lt;lgl&gt;    </span>
+<span class="co">#&gt;  1  224.171.68.76 TRUE     </span>
+<span class="co">#&gt;  2     5.28.56.93 TRUE     </span>
+<span class="co">#&gt;  3 220.63.112.252 TRUE     </span>
+<span class="co">#&gt;  4  121.199.38.72 TRUE     </span>
+<span class="co">#&gt;  5  204.141.216.8 TRUE     </span>
+<span class="co">#&gt;  6 81.225.235.255 TRUE     </span>
+<span class="co">#&gt;  7    39.7.190.32 TRUE     </span>
+<span class="co">#&gt;  8  113.161.93.56 TRUE     </span>
+<span class="co">#&gt;  9  84.248.251.31 TRUE     </span>
+<span class="co">#&gt; 10 229.203.111.31 TRUE</span></pre></body></html></div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
