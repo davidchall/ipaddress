@@ -92,3 +92,37 @@ my_addresses %>%
   fuzzyjoin::fuzzy_left_join(my_networks, c("address" = "network"), is_within)
 ```
 
+## Randomly generate public addresses
+
+ipaddress provides functions to sample from a specific network (`sample_network()`) or the entire address space (`sample_ipv4()` and `sample_ipv6()`).
+However, it can be more difficult to sample from the majority of address space, while excluding certain networks.
+
+A good example is sampling public IPv4 addresses.
+The simplest solution is to use an accept-reject algorithm -- sampling the entire IPv4 address space and rejecting addresses that are reserved.
+
+```{r accept-reject}
+sample_public <- function(size) {
+  result <- sample_ipv4(size)
+  
+  all_public <- FALSE
+  while (!all_public) {
+    public <- is_global(result)
+    n_replace <- sum(!public)
+    
+    if (n_replace == 0) {
+      all_public <- TRUE
+    } else {
+      result[!public] <- sample_ipv4(n_replace)
+    }
+  }
+  
+  result
+}
+```
+
+We now sample 10 addresses and make sure they are all public addresses.
+
+```{r}
+tibble(address = sample_public(10)) %>%
+  mutate(is_public = is_global(address))
+```
