@@ -78,8 +78,8 @@ test_that("input validation works", {
   expect_error(netmask(ip_address("1.2.3.4")), "`prefix_length` must be an integer vector")
   expect_error(hostmask(ip_address("1.2.3.4")), "`prefix_length` must be an integer vector")
 
-  expect_error(netmask(1, FALSE), "`prefix_length` must be an integer vector")
-  expect_error(hostmask(1, FALSE), "`prefix_length` must be an integer vector")
+  expect_error(netmask(1.5, FALSE), "`prefix_length` must be an integer vector")
+  expect_error(hostmask(1.5, FALSE), "`prefix_length` must be an integer vector")
   expect_error(netmask(1L, "yes"), "`is_ipv6` must be a logical vector")
   expect_error(hostmask(1L, "yes"), "`is_ipv6` must be a logical vector")
 

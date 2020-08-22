@@ -80,7 +80,7 @@ ip_interface.default <- function(x = character(), ...) {
 #' @rdname ip_interface
 #' @export
 ip_interface.ip_address <- function(address, prefix_length, ...) {
-  if (!is_integer(prefix_length)) {
+  if (!is_integerish(prefix_length)) {
     abort("`prefix_length` must be an integer vector")
   }
 

@@ -37,7 +37,7 @@ test_that("invalid inputs are caught", {
   expect_warning(ip_network("1::2/a"))
   expect_warning(ip_network("1::2/24/24"))
 
-  expect_error(ip_network(ip_address("2001:db8::"), 24), "`prefix_length` must be an integer vector")
+  expect_error(ip_network(ip_address("2001:db8::"), 24.5), "`prefix_length` must be an integer vector")
   expect_warning(ip_network(ip_address("2001:db8::"), -1L))
   expect_warning(ip_network(ip_address("2001:db8::"), 129L))
 })

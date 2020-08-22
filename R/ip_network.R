@@ -103,7 +103,7 @@ ip_network.default <- function(x = character(), strict = TRUE, ...) {
 #' @rdname ip_network
 #' @export
 ip_network.ip_address <- function(address, prefix_length, strict = TRUE, ...) {
-  if (!is_integer(prefix_length)) {
+  if (!is_integerish(prefix_length)) {
     abort("`prefix_length` must be an integer vector")
   }
   if (!is_bool(strict)) {

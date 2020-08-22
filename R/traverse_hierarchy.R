@@ -39,7 +39,7 @@ supernet <- function(x, new_prefix = prefix_length(x) - 1L) {
   if (!is_ip_network(x)) {
     abort("`x` must be an ip_network vector")
   }
-  if (!is_integer(new_prefix)) {
+  if (!is_integerish(new_prefix)) {
     abort("`new_prefix` must be an integer vector")
   }
   if (any(new_prefix < 0, na.rm = TRUE)) {
@@ -75,7 +75,7 @@ subnets <- function(x, new_prefix = prefix_length(x) + 1L) {
   if (!(is_ip_network(x) && length(x) == 1)) {
     abort("`x` must be an ip_network scalar")
   }
-  if (!is_scalar_integer(new_prefix)) {
+  if (!is_scalar_integerish(new_prefix)) {
     abort("`new_prefix` must be an integer scalar")
   }
   if (any(new_prefix < 0, na.rm = TRUE)) {

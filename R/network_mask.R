@@ -137,7 +137,7 @@ hostmask.default <- function(prefix_length, is_ipv6, ...) {
 }
 
 subnet_mask <- function(prefix_length, is_ipv6, mask_func) {
-  if (!is_integer(prefix_length)) {
+  if (!is_integerish(prefix_length)) {
     abort("`prefix_length` must be an integer vector")
   }
   if (!is_logical(is_ipv6)) {
