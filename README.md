@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ipaddress <a href='https://davidchall.github.io/ipaddress'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# ipaddress <a href='https://davidchall.github.io/ipaddress/'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
 
@@ -106,8 +106,8 @@ tibble(network = ip_network(c("192.168.100.0/22", "2001:db8::/80"))) %>%
     support for IPv6 and stores addresses in the native bit
     representation. However, most “interesting” operations must
     deserialize each address to a Python
-    [ipaddress](https://docs.python.org/library/ipaddress.html) object,
-    which is slow. It also doesn’t support IP networks.
+    [ipaddress](https://docs.python.org/3/library/ipaddress.html)
+    object, which is slow. It also doesn’t support IP networks.
 
 -----
 

@@ -1,3 +1,10 @@
+## Resubmission
+
+This is a resubmission. In this version I have:
+
+* Adjusted README URLs that were being redirected.
+
+
 ## Test environments
 * macOS 10.15 (local), R 4.0.2
 * macOS 10.15 (GitHub Actions), R 4.0.2
