@@ -102,7 +102,7 @@ as_ip_interface() casts an object to ip_interface." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -193,7 +193,7 @@ as_ip_interface() casts an object to ip_interface." />
 <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for ip_interface</span>
-<span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span>(<span class='no'>x</span>, <span class='kw'>exploded</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -220,6 +220,11 @@ as_ip_interface() casts an object to ip_interface." />
       <th>prefix_length</th>
       <td><p>An integer vector</p></td>
     </tr>
+    <tr>
+      <th>exploded</th>
+      <td><p>Logical scalar. Should IPv6 addresses display leading zeros?
+(default: <code>FALSE</code>)</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -242,6 +247,8 @@ reserved for <code><a href='ip_network.html'>ip_network</a></code> vectors: <cod
 <code><a href='netmask.html'>hostmask()</a></code>.</p>
 <p>For other purposes, you can extract the address and network components using
 <code><a href='ip_address.html'>as_ip_address()</a></code> and <code><a href='ip_network.html'>as_ip_network()</a></code>.</p>
+<p>When comparing and sorting <code>ip_interface</code> vectors, the network is compared
+before the host address.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='../articles/ipaddress-classes.html'>vignette("ipaddress-classes")</a></code></p></div>

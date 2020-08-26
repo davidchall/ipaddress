@@ -98,7 +98,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -162,20 +162,62 @@
       <small>Source: <a href='https://github.com/davidchall/ipaddress/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="ipaddress-040" class="section level1">
-<h1 class="page-header" data-toc-text="0.4.0">
-<a href="#ipaddress-040" class="anchor"></a>ipaddress 0.4.0<small> 2020-08-06 </small>
+    <div id="ipaddress-050" class="section level1">
+<h1 class="page-header" data-toc-text="0.5.0">
+<a href="#ipaddress-050" class="anchor"></a>ipaddress 0.5.0<small> 2020-08-26 </small>
 </h1>
+<p>This release achieves feature parity with the Python <a href="https://docs.python.org/3/library/ipaddress.html">ipaddress</a> module (<a href='https://github.com/davidchall/ipaddress/issues/46'>#46</a>).</p>
 <div id="new-features" class="section level2">
 <h2 class="hasAnchor">
 <a href="#new-features" class="anchor"></a>New features</h2>
 <ul>
+<li>Additional checks for reserved addresses/networks: <code><a href="../reference/is_reserved.html">is_private()</a></code>, <code><a href="../reference/is_reserved.html">is_reserved()</a></code>, <code><a href="../reference/is_reserved.html">is_site_local()</a></code> (<a href='https://github.com/davidchall/ipaddress/issues/49'>#49</a>)</li>
+<li>New <code><a href="../reference/is_reserved.html">is_global()</a></code> checks if addresses or networks are <em>not</em> reserved (<a href='https://github.com/davidchall/ipaddress/issues/49'>#49</a>)</li>
+<li>New <code><a href="../reference/collapse_networks.html">collapse_networks()</a></code> collapses contiguous and overlapping networks (<a href='https://github.com/davidchall/ipaddress/issues/54'>#54</a>)</li>
+<li>New <code><a href="../reference/exclude_networks.html">exclude_networks()</a></code> removes networks from others (<a href='https://github.com/davidchall/ipaddress/issues/59'>#59</a>)</li>
+<li>New <code><a href="../reference/reverse_pointer.html">reverse_pointer()</a></code> returns the record used by reverse DNS (<a href='https://github.com/davidchall/ipaddress/issues/57'>#57</a>)</li>
+<li>New datasets: <code>iana_ipv4</code> and <code>iana_ipv6</code> contain registries of allocated blocks (<a href='https://github.com/davidchall/ipaddress/issues/55'>#55</a>)</li>
+<li>New bitwise shift operators: <code><a href="../reference/ip_operators.html">%&lt;&lt;%</a></code> and <code><a href="../reference/ip_operators.html">%&gt;&gt;%</a></code> (<a href='https://github.com/davidchall/ipaddress/issues/52'>#52</a>)</li>
+<li>Reorganized C++ code to expose <code>IpAddressVector</code> and <code>IpNetworkVector</code> classes to other packages (use <code>LinkingTo: AsioHeaders, ipaddress, Rcpp</code>). This does not affect the public R interface. (<a href='https://github.com/davidchall/ipaddress/issues/51'>#51</a>)</li>
+</ul>
+</div>
+<div id="minor-improvements-and-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-improvements-and-fixes" class="anchor"></a>Minor improvements and fixes</h2>
+<ul>
+<li>
+<code><a href="../reference/ip_address.html">format.ip_address()</a></code>, <code><a href="../reference/ip_network.html">format.ip_network()</a></code> and <code><a href="../reference/ip_interface.html">format.ip_interface()</a></code> gain an <code>exploded</code> parameter to display leading zeros for IPv6 addresses (<a href='https://github.com/davidchall/ipaddress/issues/56'>#56</a>)</li>
+<li>
+<code><a href="../reference/ip_to_integer.html">ip_to_integer()</a></code> gains a <code>base</code> parameter to select between decimal, hexadecimal and binary outputs (<a href='https://github.com/davidchall/ipaddress/issues/47'>#47</a>)</li>
+<li>Integer-like doubles are now accepted everywhere in place of an integer</li>
+<li>Update <code><a href="../articles/ipaddress-examples.html">vignette("ipaddress-examples")</a></code> to use the <a href="https://cran.r-project.org/package=fuzzyjoin">fuzzyjoin</a> package (<a href='https://github.com/davidchall/ipaddress/issues/61'>#61</a>)</li>
+<li>Update <code><a href="../articles/ipaddress-examples.html">vignette("ipaddress-examples")</a></code> with how to randomly generate public IP addresses (<a href='https://github.com/davidchall/ipaddress/issues/62'>#62</a>)</li>
+<li>Fixed comparison of <code><a href="../reference/ip_address.html">ip_address()</a></code> vectors to account for machine endianness (<a href='https://github.com/davidchall/ipaddress/issues/53'>#53</a>)</li>
+<li>Comparison of <code><a href="../reference/ip_network.html">ip_network()</a></code> and <code><a href="../reference/ip_interface.html">ip_interface()</a></code> vectors is now consistent with the Python ipaddress module
+<ul>
+<li>
+<code><a href="../reference/ip_network.html">ip_network()</a></code>: network address compared before prefix length</li>
+<li>
+<code><a href="../reference/ip_interface.html">ip_interface()</a></code>: network compared before host address</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+    <div id="ipaddress-040" class="section level1">
+<h1 class="page-header" data-toc-text="0.4.0">
+<a href="#ipaddress-040" class="anchor"></a>ipaddress 0.4.0<small> 2020-08-06 </small>
+</h1>
+<div id="new-features-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features-1" class="anchor"></a>New features</h2>
+<ul>
 <li>Add support for constructing <code><a href="../reference/ip_network.html">ip_network()</a></code> vectors without using CIDR notation
 <ul>
-<li>New <code><a href="../reference/common_network.html">common_network()</a></code> function finds the smallest network containing two addresses</li>
-<li>New <code><a href="../reference/summarize_address_range.html">summarize_address_range()</a></code> function lists the constituent networks of an address range</li>
+<li>New <code><a href="../reference/common_network.html">common_network()</a></code> function finds the smallest network containing two addresses (<a href='https://github.com/davidchall/ipaddress/issues/39'>#39</a>)</li>
+<li>New <code><a href="../reference/summarize_address_range.html">summarize_address_range()</a></code> function lists the constituent networks of an address range (<a href='https://github.com/davidchall/ipaddress/issues/41'>#41</a>)</li>
 <li>
-<code><a href="../reference/netmask.html">prefix_length()</a></code> can now infer the prefix length from an <code><a href="../reference/ip_address.html">ip_address()</a></code> vector of netmasks and/or hostmasks. This makes it possible to construct an <code><a href="../reference/ip_network.html">ip_network()</a></code> vector like so:
+<code><a href="../reference/netmask.html">prefix_length()</a></code> can now infer the prefix length from an <code><a href="../reference/ip_address.html">ip_address()</a></code> vector of netmasks and/or hostmasks. This makes it possible to construct an <code><a href="../reference/ip_network.html">ip_network()</a></code> vector like so: (<a href='https://github.com/davidchall/ipaddress/issues/36'>#36</a>)
 <ul>
 <li><code><a href="../reference/ip_network.html">ip_network(ip_address("192.0.2.0"), prefix_length(ip_address("255.255.255.0")))</a></code></li>
 <li><code><a href="../reference/ip_network.html">ip_network(ip_address("192.0.2.0"), prefix_length(ip_address("0.0.0.255")))</a></code></li>
@@ -183,13 +225,13 @@
 </li>
 </ul>
 </li>
-<li>New <code><a href="../reference/traverse_hierarchy.html">supernet()</a></code> and <code><a href="../reference/traverse_hierarchy.html">subnets()</a></code> functions for traversing the network hierarchy</li>
-<li>Added <code><a href="../articles/ipaddress-examples.html">vignette("ipaddress-examples")</a></code> to describe some typical usage patterns</li>
+<li>New <code><a href="../reference/traverse_hierarchy.html">supernet()</a></code> and <code><a href="../reference/traverse_hierarchy.html">subnets()</a></code> functions for traversing the network hierarchy (<a href='https://github.com/davidchall/ipaddress/issues/42'>#42</a>)</li>
+<li>Added <code><a href="../articles/ipaddress-examples.html">vignette("ipaddress-examples")</a></code> to describe some typical usage patterns (<a href='https://github.com/davidchall/ipaddress/issues/43'>#43</a>)</li>
 </ul>
 </div>
-<div id="minor-improvements-and-fixes" class="section level2">
+<div id="minor-improvements-and-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-improvements-and-fixes" class="anchor"></a>Minor improvements and fixes</h2>
+<a href="#minor-improvements-and-fixes-1" class="anchor"></a>Minor improvements and fixes</h2>
 <ul>
 <li>Check for user interrupts when processing large data sets</li>
 <li>
@@ -197,7 +239,7 @@
 <li>Addition/subtraction operators now accept integerish doubles</li>
 <li>Addition/subtraction operators now catch missing values in 2nd argument</li>
 <li>
-<code><a href="../reference/netmask.html">netmask()</a></code> and <code><a href="../reference/netmask.html">hostmask()</a></code> now raise an error if the <code>prefix_length</code> and <code>is_ipv6</code> arguments are not both specified</li>
+<code><a href="../reference/netmask.html">netmask()</a></code> and <code><a href="../reference/netmask.html">hostmask()</a></code> now raise an error if the <code>prefix_length</code> and <code>is_ipv6</code> arguments are not both specified (<a href='https://github.com/davidchall/ipaddress/issues/38'>#38</a>)</li>
 <li>Fix <code><a href="../reference/address_in_network.html">is_within_any()</a></code> to correctly catch when IPv6 addresses are in zero networks</li>
 <li>Rename <code>vignette("ipaddress")</code> as <code><a href="../articles/ipaddress-classes.html">vignette("ipaddress-classes")</a></code>
 </li>
@@ -212,7 +254,7 @@
 <h2 class="hasAnchor">
 <a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
 <ul>
-<li>Renamed functions for converting to and from alternative representations of IP addresses:
+<li>Renamed functions for converting to and from alternative representations of IP addresses: (<a href='https://github.com/davidchall/ipaddress/issues/30'>#30</a>)
 <ul>
 <li>
 <code>as_packed()</code> and <code>from_packed()</code> become <code><a href="../reference/ip_to_bytes.html">ip_to_bytes()</a></code> and <code><a href="../reference/ip_to_bytes.html">bytes_to_ip()</a></code>
@@ -227,18 +269,18 @@
 </li>
 </ul>
 </div>
-<div id="new-features-1" class="section level2">
+<div id="new-features-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-1" class="anchor"></a>New features</h2>
+<a href="#new-features-2" class="anchor"></a>New features</h2>
 <ul>
-<li>New <code><a href="../reference/ip_to_integer.html">ip_to_integer()</a></code> and <code><a href="../reference/ip_to_integer.html">integer_to_ip()</a></code> functions to encode and decode addresses as integers. Note that the integers are contained within a character vector. Please see the function documentation for an explanation.</li>
+<li>New <code><a href="../reference/ip_to_integer.html">ip_to_integer()</a></code> and <code><a href="../reference/ip_to_integer.html">integer_to_ip()</a></code> functions to encode and decode addresses as integers. Note that the integers are contained within a character vector. Please see the function documentation for an explanation. (<a href='https://github.com/davidchall/ipaddress/issues/30'>#30</a>)</li>
 </ul>
 </div>
 <div id="minor-improvements" class="section level2">
 <h2 class="hasAnchor">
 <a href="#minor-improvements" class="anchor"></a>Minor improvements</h2>
 <ul>
-<li>Support pretty printing in tibbles
+<li>Support pretty printing in tibbles (<a href='https://github.com/davidchall/ipaddress/issues/27'>#27</a>)
 <ul>
 <li>CIDRs aligned on forward slash separator</li>
 <li>Prefix length displayed in green to increase prominence</li>
@@ -247,7 +289,7 @@
 </ul>
 </li>
 <li>Added hex logo</li>
-<li>Compatible with vctrs 0.3.0</li>
+<li>Compatible with vctrs 0.3.0 (<a href='https://github.com/davidchall/ipaddress/issues/31'>#31</a>, <a href='https://github.com/davidchall/ipaddress/issues/34'>#34</a>)</li>
 </ul>
 </div>
 </div>
@@ -259,22 +301,22 @@
 <h2 class="hasAnchor">
 <a href="#classes" class="anchor"></a>Classes</h2>
 <ul>
-<li>Added <code>vignette("ipaddress")</code> to introduce the data classes provided by ipaddress</li>
-<li>New <code><a href="../reference/ip_interface.html">ip_interface()</a></code> class to simultaneously store the address and the network it is on</li>
+<li>Added <code>vignette("ipaddress")</code> to introduce the data classes provided by ipaddress (<a href='https://github.com/davidchall/ipaddress/issues/24'>#24</a>)</li>
+<li>New <code><a href="../reference/ip_interface.html">ip_interface()</a></code> class to simultaneously store the address and the network it is on (<a href='https://github.com/davidchall/ipaddress/issues/15'>#15</a>)</li>
 <li>
 <code><a href="../reference/ip_address.html">ip_address()</a></code> vectors now support bitwise operations (<code>!</code>, <code><a href="https://rdrr.io/r/base/Logic.html">&amp;</a></code>, <code><a href="https://rdrr.io/r/base/Logic.html">|</a></code> and <code><a href="https://rdrr.io/r/base/Arithmetic.html">^</a></code>)</li>
 <li>
-<code><a href="../reference/ip_address.html">ip_address()</a></code> vectors now support addition and subtraction of integers</li>
-<li>Added an <code><a href="../reference/ip_network.html">ip_network()</a></code> constructor that accepts <code>ip_address</code> and prefix length vectors</li>
+<code><a href="../reference/ip_address.html">ip_address()</a></code> vectors now support addition and subtraction of integers (<a href='https://github.com/davidchall/ipaddress/issues/14'>#14</a>)</li>
+<li>Added an <code><a href="../reference/ip_network.html">ip_network()</a></code> constructor that accepts <code>ip_address</code> and prefix length vectors (<a href='https://github.com/davidchall/ipaddress/issues/9'>#9</a>)</li>
 </ul>
 </div>
 <div id="other-representations" class="section level2">
 <h2 class="hasAnchor">
 <a href="#other-representations" class="anchor"></a>Other representations</h2>
 <ul>
-<li>New <code>as_packed()</code> and <code>from_packed()</code> functions to encode and decode addresses as raw bytes</li>
-<li>New <code>as_binary()</code> and <code>from_binary()</code> functions to encode and decode addresses as binary strings</li>
-<li>New <code>as_hostname()</code> and <code>from_hostname()</code> functions translate addresses to and from hostnames</li>
+<li>New <code>as_packed()</code> and <code>from_packed()</code> functions to encode and decode addresses as raw bytes (<a href='https://github.com/davidchall/ipaddress/issues/13'>#13</a>)</li>
+<li>New <code>as_binary()</code> and <code>from_binary()</code> functions to encode and decode addresses as binary strings (<a href='https://github.com/davidchall/ipaddress/issues/18'>#18</a>)</li>
+<li>New <code>as_hostname()</code> and <code>from_hostname()</code> functions translate addresses to and from hostnames (<a href='https://github.com/davidchall/ipaddress/issues/22'>#22</a>)</li>
 </ul>
 </div>
 <div id="address-space" class="section level2">
@@ -284,7 +326,7 @@
 <li>New <code><a href="../reference/max_prefix_length.html">max_prefix_length()</a></code> function to get the size of the address space (32-bit for IPv4 and 128-bit for IPv6)</li>
 <li>New functions to check if addresses or networks are reserved for special use: <code><a href="../reference/is_reserved.html">is_multicast()</a></code>, <code><a href="../reference/is_reserved.html">is_unspecified()</a></code>, <code><a href="../reference/is_reserved.html">is_loopback()</a></code>, <code><a href="../reference/is_reserved.html">is_link_local()</a></code>
 </li>
-<li>New functions for IPv6 transition mechanisms:
+<li>New functions for IPv6 transition mechanisms: (<a href='https://github.com/davidchall/ipaddress/issues/16'>#16</a>)
 <ul>
 <li>
 <code><a href="../reference/ipv6-transition.html">is_ipv4_mapped()</a></code>, <code><a href="../reference/ipv6-transition.html">is_6to4()</a></code>, <code><a href="../reference/ipv6-transition.html">is_teredo()</a></code>
@@ -318,8 +360,7 @@
 <a href="#generating-addresses" class="anchor"></a>Generating addresses</h2>
 <ul>
 <li>New <code><a href="../reference/sequence.html">seq.ip_network()</a></code> and <code><a href="../reference/sequence.html">hosts()</a></code> functions to list all addresses within a network</li>
-<li>New functions to randomly sample addresses: <code><a href="../reference/sample.html">sample_ipv4()</a></code>, <code><a href="../reference/sample.html">sample_ipv6()</a></code> and <code><a href="../reference/sample.html">sample_network()</a></code>
-</li>
+<li>New functions to randomly sample addresses: <code><a href="../reference/sample.html">sample_ipv4()</a></code>, <code><a href="../reference/sample.html">sample_ipv6()</a></code> and <code><a href="../reference/sample.html">sample_network()</a></code> (<a href='https://github.com/davidchall/ipaddress/issues/11'>#11</a>, <a href='https://github.com/davidchall/ipaddress/issues/19'>#19</a>)</li>
 </ul>
 </div>
 <div id="miscellaneous-improvements" class="section level2">

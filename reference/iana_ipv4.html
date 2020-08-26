@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Translate address to/from hostname — ip_to_hostname • ipaddress</title>
+<title>IPv4 address space allocation — iana_ipv4 • ipaddress</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -52,10 +52,8 @@
 
 
 
-<meta property="og:title" content="Translate address to/from hostname — ip_to_hostname" />
-<meta property="og:description" content="Perform reverse and forward DNS resolution.
-Note: These functions are significantly slower than others in the
-ipaddress package." />
+<meta property="og:title" content="IPv4 address space allocation — iana_ipv4" />
+<meta property="og:description" content="A dataset containing the registry of allocated blocks in IPv4 address space." />
 <meta property="og:image" content="https://davidchall.github.io/ipaddress/logo.png" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="@hall_davidc" />
@@ -161,73 +159,57 @@ ipaddress package." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Translate address to/from hostname</h1>
-    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/other_repr.R'><code>R/other_repr.R</code></a></small>
-    <div class="hidden name"><code>ip_to_hostname.Rd</code></div>
+    <h1>IPv4 address space allocation</h1>
+    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/data.R'><code>R/data.R</code></a></small>
+    <div class="hidden name"><code>iana_ipv4.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Perform reverse and forward DNS resolution.</p>
-<p><strong>Note:</strong> These functions are significantly slower than others in the
-ipaddress package.</p>
+    <p>A dataset containing the registry of allocated blocks in IPv4 address space.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ip_to_hostname</span>(<span class='no'>x</span>, <span class='kw'>multiple</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='no'>iana_ipv4</span></pre>
 
-<span class='fu'>hostname_to_ip</span>(<span class='no'>x</span>, <span class='kw'>multiple</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><ul>
-<li><p>For <code>ip_to_hostname()</code>: An <code><a href='ip_address.html'>ip_address</a></code> vector</p></li>
-<li><p>For <code>hostname_to_ip()</code>: A character vector of hostnames</p></li>
-</ul></td>
-    </tr>
-    <tr>
-      <th>multiple</th>
-      <td><p>A logical scalar indicating if <em>all</em> resolved endpoints are
-returned, or just the first endpoint (the default). This determines whether
-a vector or list of vectors is returned.</p></td>
-    </tr>
-    </table>
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    
+    <p>A data frame with 122 rows and 3 variables:</p><dl'>
+<dt>network</dt><dd><p>Address block (an <code><a href='ip_network.html'>ip_network</a></code> vector)</p></dd>
+<dt>allocation</dt><dd><p>There are three types of allocation:
 <ul>
-<li><p>For <code>ip_to_hostname()</code>: A character vector (<code>multiple = FALSE</code>) or
-a list of character vectors (<code>multiple = TRUE</code>)</p></li>
-<li><p>For <code>hostname_to_ip()</code>: A <code><a href='ip_address.html'>ip_address</a></code> vector (<code>multiple = FALSE</code>) or
-a list of <code><a href='ip_address.html'>ip_address</a></code> vectors (<code>multiple = TRUE</code>)</p></li>
-</ul>
+<li><p>reserved</p></li>
+<li><p>managed by regional Internet registry (RIR)</p></li>
+<li><p>assigned to organization</p></li>
+</ul></p></dd>
+<dt>label</dt><dd><p>The RIR, organization or purpose for reservation</p></dd>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+</dl>
 
-    <p>These functions require an internet connection. Before processing the input
-vector, we first check that a known hostname can be resolved. If this fails,
-an error is raised.</p>
-<p>If DNS lookup cannot resolve an input, then <code>NA</code> is returned for that input.
-If an error occurs during DNS lookup, then a warning is emitted and <code>NA</code> is
-returned for that input.</p>
-<p>DNS resolution performs a many-to-many mapping between IP addresses and
-hostnames. For this reason, these two functions can potentially return
-multiple values for each element of the input vector. The <code>multiple</code> argument
-control whether <em>all</em> values are returned (a vector for each input), or
-just the first value (a scalar for each input).</p>
+    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
+
+    <p><a href='https://www.iana.org/assignments/ipv4-address-space'>https://www.iana.org/assignments/ipv4-address-space</a></p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>Last updated 2020-08-18</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>The base function <code><a href='https://rdrr.io/r/utils/nsl.html'>nsl()</a></code> provides forward DNS resolution to IPv4 addresses,
-but only on Unix-like systems.</p></div>
+    <div class='dont-index'><p><code><a href='is_reserved.html'>is_reserved()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>hostname_to_ip</span>(<span class='st'>"r-project.org"</span>)
-
-<span class='fu'>ip_to_hostname</span>(<span class='fu'>hostname_to_ip</span>(<span class='st'>"r-project.org"</span>))
-}</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>iana_ipv4</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 122 x 3</span><span>
+#&gt;       network allocation label             
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;ip_netwk&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>             
+#&gt; </span><span style='color: #555555;'> 1</span><span>  0</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #00BB00;'>/8</span><span> Reserved   Reserved          
+#&gt; </span><span style='color: #555555;'> 2</span><span>  1</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #00BB00;'>/8</span><span> Managed    APNIC             
+#&gt; </span><span style='color: #555555;'> 3</span><span>  2</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #00BB00;'>/8</span><span> Managed    RIPE NCC          
+#&gt; </span><span style='color: #555555;'> 4</span><span>  3</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #00BB00;'>/8</span><span> Managed    Various registries
+#&gt; </span><span style='color: #555555;'> 5</span><span>  4</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #00BB00;'>/8</span><span> Managed    Various registries
+#&gt; </span><span style='color: #555555;'> 6</span><span>  5</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #00BB00;'>/8</span><span> Managed    RIPE NCC          
+#&gt; </span><span style='color: #555555;'> 7</span><span>  6</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #00BB00;'>/8</span><span> Assigned   US DoD            
+#&gt; </span><span style='color: #555555;'> 8</span><span>  7</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #00BB00;'>/8</span><span> Managed    Various registries
+#&gt; </span><span style='color: #555555;'> 9</span><span>  8</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #00BB00;'>/7</span><span> Managed    Various registries
+#&gt; </span><span style='color: #555555;'>10</span><span> 10</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #00BB00;'>/8</span><span> Reserved   Reserved          
+#&gt; </span><span style='color: #555555;'># … with 112 more rows</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

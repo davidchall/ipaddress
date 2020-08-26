@@ -101,7 +101,7 @@ converted using as.numeric() for IPv4 addresses." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -172,7 +172,7 @@ converted using as.numeric() for IPv4 addresses." />
 converted using <code><a href='https://rdrr.io/r/base/numeric.html'>as.numeric()</a></code> for IPv4 addresses.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ip_to_integer</span>(<span class='no'>x</span>)
+    <pre class="usage"><span class='fu'>ip_to_integer</span>(<span class='no'>x</span>, <span class='kw'>base</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"dec"</span>, <span class='st'>"hex"</span>, <span class='st'>"bin"</span>))
 
 <span class='fu'>integer_to_ip</span>(<span class='no'>x</span>, <span class='kw'>is_ipv6</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
@@ -185,6 +185,11 @@ converted using <code><a href='https://rdrr.io/r/base/numeric.html'>as.numeric()
 <li><p>For <code>ip_to_integer()</code>: An <code><a href='ip_address.html'>ip_address</a></code> vector</p></li>
 <li><p>For <code>integer_to_ip()</code>: A character vector</p></li>
 </ul></td>
+    </tr>
+    <tr>
+      <th>base</th>
+      <td><p>A string choosing the numeric base of the output. Choices are
+decimal (<code>"dec"</code>; the default), hexadecimal (<code>"hex"</code>), and binary (<code>"bin"</code>).</p></td>
     </tr>
     <tr>
       <th>is_ipv6</th>
@@ -250,8 +255,11 @@ the distinction between individual addresses because integer precision is lost.<
 #&gt; [1] 192.168.0.1             2001:db8::8a2e:370:7334 &lt;NA&gt;                   </div><div class='input'>
 <span class='co'># with IPv4 only, we can use numeric data type</span>
 <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='fu'>ip_to_integer</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"192.168.0.1"</span>)))</div><div class='output co'>#&gt; [1] 3232235521</div><div class='input'>
-<span class='fu'>integer_to_ip</span>(<span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='fl'>3232235521</span>))</div><div class='output co'>#&gt; &lt;ip_address[1]&gt;
-#&gt; [1] 192.168.0.1</div></pre>
+<span class='fu'>integer_to_ip</span>(<span class='fl'>3232235521</span>)</div><div class='output co'>#&gt; &lt;ip_address[1]&gt;
+#&gt; [1] 192.168.0.1</div><div class='input'>
+<span class='co'># hex representation</span>
+<span class='fu'>ip_to_integer</span>(<span class='no'>x</span>, <span class='kw'>base</span> <span class='kw'>=</span> <span class='st'>"hex"</span>)</div><div class='output co'>#&gt; [1] "0xC0A80001"                         "0x20010DB80000000000008A2E03707334"
+#&gt; [3] NA                                  </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

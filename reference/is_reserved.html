@@ -53,7 +53,9 @@
 
 
 <meta property="og:title" content="Reserved addresses — is_reserved" />
-<meta property="og:description" content="Check if an address or network is reserved for special use.
+<meta property="og:description" content="Most of these functions check if an address or network is reserved for
+special use. The exception is is_global(), which checks if it is not
+reserved.
 A network is considered reserved if both the network_address()
 and broadcast_address() are reserved." />
 <meta property="og:image" content="https://davidchall.github.io/ipaddress/logo.png" />
@@ -101,7 +103,7 @@ and broadcast_address() are reserved." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -167,18 +169,28 @@ and broadcast_address() are reserved." />
     </div>
 
     <div class="ref-description">
-    <p>Check if an address or network is reserved for special use.
-A network is considered reserved if both the <code><a href='network_size.html'>network_address()</a></code>
+    <p>Most of these functions check if an address or network is reserved for
+special use. The exception is <code>is_global()</code>, which checks if it is <em>not</em>
+reserved.</p>
+<p>A network is considered reserved if both the <code><a href='network_size.html'>network_address()</a></code>
 and <code><a href='network_size.html'>broadcast_address()</a></code> are reserved.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>is_multicast</span>(<span class='no'>x</span>)
+    <pre class="usage"><span class='fu'>is_private</span>(<span class='no'>x</span>)
+
+<span class='fu'>is_global</span>(<span class='no'>x</span>)
+
+<span class='fu'>is_multicast</span>(<span class='no'>x</span>)
 
 <span class='fu'>is_unspecified</span>(<span class='no'>x</span>)
 
+<span class='fu'>is_reserved</span>(<span class='no'>x</span>)
+
 <span class='fu'>is_loopback</span>(<span class='no'>x</span>)
 
-<span class='fu'>is_link_local</span>(<span class='no'>x</span>)</pre>
+<span class='fu'>is_link_local</span>(<span class='no'>x</span>)
+
+<span class='fu'>is_site_local</span>(<span class='no'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -194,21 +206,29 @@ and <code><a href='network_size.html'>broadcast_address()</a></code> are reserve
     <p>A logical vector</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>These special use addresses are documented in IETF documents
-<a href='https://tools.ietf.org/html/rfc5735.html'>RFC 5735</a> (for IPv4) and
-<a href='https://tools.ietf.org/html/rfc4291'>RFC 4291</a> (for IPv6).</p>
+    <p>Here are hyperlinks to the IANA registries of allocated address space:</p><ul>
+<li><p><strong>IPv4:</strong>
+<a href='https://www.iana.org/assignments/ipv4-address-space/ipv4-address-space.xhtml'>allocations</a>,
+<a href='https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml'>special purpose</a></p></li>
+<li><p><strong>IPv6:</strong>
+<a href='https://www.iana.org/assignments/ipv6-address-space/ipv6-address-space.xhtml'>allocations</a>,
+<a href='https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml'>special purpose</a></p></li>
+</ul>
+
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Addresses reserved by IPv6 transition mechanisms can be identified
 by functions described in <a href='ipv6-transition.html'>ipv6-transition</a>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># these examples show the reserved networks</span>
-
+    <pre class="examples"><div class='input'><span class='fu'>is_private</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.0/16"</span>, <span class='st'>"2001:db8::/32"</span>)))</div><div class='output co'>#&gt; [1] TRUE TRUE</div><div class='input'>
+<span class='fu'>is_global</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"1.0.0.0/8"</span>, <span class='st'>"2002::/32"</span>)))</div><div class='output co'>#&gt; [1] TRUE TRUE</div><div class='input'>
 <span class='fu'>is_multicast</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"224.0.0.0/4"</span>, <span class='st'>"ff00::/8"</span>)))</div><div class='output co'>#&gt; [1] TRUE TRUE</div><div class='input'>
 <span class='fu'>is_unspecified</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"0.0.0.0/32"</span>, <span class='st'>"::/128"</span>)))</div><div class='output co'>#&gt; [1] TRUE TRUE</div><div class='input'>
+<span class='fu'>is_reserved</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"240.0.0.0/4"</span>, <span class='st'>"f000::/5"</span>)))</div><div class='output co'>#&gt; [1] TRUE TRUE</div><div class='input'>
 <span class='fu'>is_loopback</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"127.0.0.0/8"</span>, <span class='st'>"::1/128"</span>)))</div><div class='output co'>#&gt; [1] TRUE TRUE</div><div class='input'>
-<span class='fu'>is_link_local</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"169.254.0.0/16"</span>, <span class='st'>"fe80::/10"</span>)))</div><div class='output co'>#&gt; [1] TRUE TRUE</div></pre>
+<span class='fu'>is_link_local</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"169.254.0.0/16"</span>, <span class='st'>"fe80::/10"</span>)))</div><div class='output co'>#&gt; [1] TRUE TRUE</div><div class='input'>
+<span class='fu'>is_site_local</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>"fec0::/10"</span>))</div><div class='output co'>#&gt; [1] TRUE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

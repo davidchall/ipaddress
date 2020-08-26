@@ -100,7 +100,7 @@ hosts() returns only usable hosts" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -199,7 +199,7 @@ In IPv6, the only unusable host is the subnet router anycast address
 (i.e. the first address in the network).</p>
 <p>For networks with a prefix length of 31 (for IPv4) or 127 (for IPv6),
 the unusable hosts are included in the results of <code>hosts()</code>.</p>
-<p>The <code>ipaddress</code> package does not support long vectors
+<p>The ipaddress package does not support long vectors
 (i.e. vectors with more than 2^31 - 1 elements). As a result, these two
 functions do not support networks larger than this size. This corresponds
 to prefix lengths less than 2 (for IPv4) or 98 (for IPv6). However, you

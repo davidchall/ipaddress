@@ -7,7 +7,19 @@
     <loc>https://davidchall.github.io/ipaddress/reference/address_in_network.html</loc>
   </url>
   <url>
+    <loc>https://davidchall.github.io/ipaddress/reference/collapse_networks.html</loc>
+  </url>
+  <url>
     <loc>https://davidchall.github.io/ipaddress/reference/common_network.html</loc>
+  </url>
+  <url>
+    <loc>https://davidchall.github.io/ipaddress/reference/exclude_networks.html</loc>
+  </url>
+  <url>
+    <loc>https://davidchall.github.io/ipaddress/reference/iana_ipv4.html</loc>
+  </url>
+  <url>
+    <loc>https://davidchall.github.io/ipaddress/reference/iana_ipv6.html</loc>
   </url>
   <url>
     <loc>https://davidchall.github.io/ipaddress/reference/ip_address.html</loc>
@@ -17,6 +29,9 @@
   </url>
   <url>
     <loc>https://davidchall.github.io/ipaddress/reference/ip_network.html</loc>
+  </url>
+  <url>
+    <loc>https://davidchall.github.io/ipaddress/reference/ip_operators.html</loc>
   </url>
   <url>
     <loc>https://davidchall.github.io/ipaddress/reference/ip_to_binary.html</loc>
@@ -56,6 +71,9 @@
   </url>
   <url>
     <loc>https://davidchall.github.io/ipaddress/reference/network_size.html</loc>
+  </url>
+  <url>
+    <loc>https://davidchall.github.io/ipaddress/reference/reverse_pointer.html</loc>
   </url>
   <url>
     <loc>https://davidchall.github.io/ipaddress/reference/sample.html</loc>

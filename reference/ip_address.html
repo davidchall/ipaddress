@@ -101,7 +101,7 @@ as_ip_address() casts an object to ip_address." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -188,7 +188,7 @@ as_ip_address() casts an object to ip_address." />
 <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for ip_address</span>
-<span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span>(<span class='no'>x</span>, <span class='kw'>exploded</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -206,6 +206,11 @@ notation (IPv4) or hexadecimal notation (IPv6)</p></li>
     <tr>
       <th>...</th>
       <td><p>Included for S3 generic consistency</p></td>
+    </tr>
+    <tr>
+      <th>exploded</th>
+      <td><p>Logical scalar. Should IPv6 addresses display leading zeros?
+(default: <code>FALSE</code>)</p></td>
     </tr>
     </table>
 
@@ -232,12 +237,10 @@ a warning is emitted and <code>NA</code> is stored instead.</p>
 <code><a href='https://rdrr.io/r/base/character.html'>as.character()</a></code>, IPv6 addresses are reduced to their compressed representation.
 A special case is IPv4-mapped IPv6 addresses (see <code><a href='ipv6-transition.html'>is_ipv4_mapped()</a></code>), which
 are returned in the dual representation (e.g. <code>::ffff:192.168.0.1</code>).</p>
-<p>Integers can be added to or subtracted from <code>ip_address</code> vectors.
-This class also supports bitwise operations: <code>!</code> (NOT), <code>&amp;</code> (AND),
-<code>|</code> (OR) and <code>^</code> (XOR).</p>
+<p><code>ip_address</code> vectors support a number of <a href='ip_operators.html'>operators</a>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='../articles/ipaddress-classes.html'>vignette("ipaddress-classes")</a></code></p></div>
+    <div class='dont-index'><p><code><a href='ip_operators.html'>ip_operators</a></code>, <code><a href='../articles/ipaddress-classes.html'>vignette("ipaddress-classes")</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># supports IPv4 and IPv6 simultaneously</span>
@@ -245,23 +248,7 @@ This class also supports bitwise operations: <code>!</code> (NOT), <code>&amp;</
 #&gt; [1] 192.168.0.1             2001:db8::8a2e:370:7334</div><div class='input'>
 <span class='co'># validates inputs and replaces with NA</span>
 <span class='fu'>ip_address</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"255.255.255.256"</span>, <span class='st'>"192.168.0.1/32"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: Problem on row 1: 255.255.255.256</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Problem on row 2: 192.168.0.1/32</span></div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
-#&gt; [1] &lt;NA&gt; &lt;NA&gt;</div><div class='input'>
-<span class='co'># addition of integers</span>
-<span class='fu'>ip_address</span>(<span class='st'>"192.168.0.1"</span>) + -<span class='fl'>2</span>:<span class='fl'>2</span></div><div class='output co'>#&gt; &lt;ip_address[5]&gt;
-#&gt; [1] 192.167.255.255 192.168.0.0     192.168.0.1     192.168.0.2    
-#&gt; [5] 192.168.0.3    </div><div class='input'>
-<span class='co'># bitwise NOT</span>
-!<span class='fu'>ip_address</span>(<span class='st'>"192.168.0.1"</span>)</div><div class='output co'>#&gt; &lt;ip_address[1]&gt;
-#&gt; [1] 63.87.255.254</div><div class='input'>
-<span class='co'># bitwise AND</span>
-<span class='fu'>ip_address</span>(<span class='st'>"192.168.0.1"</span>) <span class='kw'>&amp;</span> <span class='fu'>ip_address</span>(<span class='st'>"255.0.0.255"</span>)</div><div class='output co'>#&gt; &lt;ip_address[1]&gt;
-#&gt; [1] 192.0.0.1</div><div class='input'>
-<span class='co'># bitwise OR</span>
-<span class='fu'>ip_address</span>(<span class='st'>"192.168.0.0"</span>) <span class='kw'>|</span> <span class='fu'>ip_address</span>(<span class='st'>"255.0.0.255"</span>)</div><div class='output co'>#&gt; &lt;ip_address[1]&gt;
-#&gt; [1] 255.168.0.255</div><div class='input'>
-<span class='co'># bitwise XOR</span>
-<span class='fu'>ip_address</span>(<span class='st'>"192.168.0.0"</span>) ^ <span class='fu'>ip_address</span>(<span class='st'>"255.0.0.255"</span>)</div><div class='output co'>#&gt; &lt;ip_address[1]&gt;
-#&gt; [1] 63.168.0.255</div></pre>
+#&gt; [1] &lt;NA&gt; &lt;NA&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

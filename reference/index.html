@@ -98,7 +98,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -236,6 +236,12 @@
           <p><code><a href="ip_to_hostname.html">ip_to_hostname()</a></code> <code><a href="ip_to_hostname.html">hostname_to_ip()</a></code> </p>
         </td>
         <td><p>Translate address to/from hostname</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="reverse_pointer.html">reverse_pointer()</a></code> </p>
+        </td>
+        <td><p>Reverse DNS pointer</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -264,7 +270,7 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="is_reserved.html">is_multicast()</a></code> <code><a href="is_reserved.html">is_unspecified()</a></code> <code><a href="is_reserved.html">is_loopback()</a></code> <code><a href="is_reserved.html">is_link_local()</a></code> </p>
+          <p><code><a href="is_reserved.html">is_private()</a></code> <code><a href="is_reserved.html">is_global()</a></code> <code><a href="is_reserved.html">is_multicast()</a></code> <code><a href="is_reserved.html">is_unspecified()</a></code> <code><a href="is_reserved.html">is_reserved()</a></code> <code><a href="is_reserved.html">is_loopback()</a></code> <code><a href="is_reserved.html">is_link_local()</a></code> <code><a href="is_reserved.html">is_site_local()</a></code> </p>
         </td>
         <td><p>Reserved addresses</p></td>
       </tr><tr>
@@ -273,6 +279,12 @@
           <p><code><a href="ipv6-transition.html">is_ipv4_mapped()</a></code> <code><a href="ipv6-transition.html">is_6to4()</a></code> <code><a href="ipv6-transition.html">is_teredo()</a></code> <code><a href="ipv6-transition.html">extract_ipv4_mapped()</a></code> <code><a href="ipv6-transition.html">extract_6to4()</a></code> <code><a href="ipv6-transition.html">extract_teredo_server()</a></code> <code><a href="ipv6-transition.html">extract_teredo_client()</a></code> </p>
         </td>
         <td><p>IPv6 transition mechanisms</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ip_operators.html">ip_operators</a></code> </p>
+        </td>
+        <td><p>Operators for IP addresses</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -310,6 +322,18 @@
           <p><code><a href="summarize_address_range.html">summarize_address_range()</a></code> </p>
         </td>
         <td><p>List constituent networks of an address range</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="collapse_networks.html">collapse_networks()</a></code> </p>
+        </td>
+        <td><p>Collapse contiguous and overlapping networks</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="exclude_networks.html">exclude_networks()</a></code> </p>
+        </td>
+        <td><p>Remove networks from others</p></td>
       </tr><tr>
         
         <td>
@@ -353,6 +377,31 @@
           <p><code><a href="sequence.html">seq(<i>&lt;ip_network&gt;</i>)</a></code> <code><a href="sequence.html">hosts()</a></code> </p>
         </td>
         <td><p>List addresses within a network</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-datasets" class="hasAnchor"><a href="#section-datasets" class="anchor"></a>Datasets</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="iana_ipv4.html">iana_ipv4</a></code> </p>
+        </td>
+        <td><p>IPv4 address space allocation</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="iana_ipv6.html">iana_ipv6</a></code> </p>
+        </td>
+        <td><p>IPv6 address space allocation</p></td>
       </tr>
     </tbody>
     </table>
