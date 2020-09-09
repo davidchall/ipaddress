@@ -1,7 +1,6 @@
 #include <Rcpp.h>
-#include <asio/ip/address_v4.hpp>
-#include <asio/ip/address_v6.hpp>
 #include <ipaddress.h>
+#include <ipaddress/to_string.h>
 #include "warn.h"
 
 using namespace Rcpp;
@@ -163,15 +162,7 @@ IntegerVector wrap_prefix_from_mask(List address_r) {
         prefix = hostmask_to_prefix(address[i]);
       }
       if (prefix == -1) {
-        std::string address_str;
-        if (address[i].is_ipv6()) {
-          asio::ip::address_v6 asio_address(address[i].bytes_v6());
-          address_str = asio_address.to_string();
-        } else {
-          asio::ip::address_v4 asio_address(address[i].bytes_v4());
-          address_str = asio_address.to_string();
-        }
-        warnOnRow(i, address_str, "invalid netmask/hostmask");
+        warnOnRow(i, to_string(address[i]), "invalid netmask/hostmask");
         output[i] = NA_INTEGER;
       } else {
         output[i] = prefix;
