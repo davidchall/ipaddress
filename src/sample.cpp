@@ -7,7 +7,7 @@ using namespace ipaddress;
 
 std::vector<IpAddress> sample_bits(bool is_ipv6, unsigned int n_bits_to_sample, unsigned int n_sample) {
   typedef typename IpAddress::bytes_type_both Bytes;
-  std::vector<Bytes> result_bytes(n_sample, {});
+  std::vector<Bytes> result_bytes(n_sample, Bytes{});
   unsigned int n_bits_in_byte = 8;
 
   // fill bytes right to left
