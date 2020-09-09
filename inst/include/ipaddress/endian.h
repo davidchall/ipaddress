@@ -13,10 +13,10 @@ inline uint32_t host_to_network_long(uint32_t input) {
   // Windows is always little-endian
   uint32_t output;
   unsigned char* output_bytes = reinterpret_cast<unsigned char*>(&output);
-  result_bytes[0] = static_cast<unsigned char>((input >> 24) & 0xFF);
-  result_bytes[1] = static_cast<unsigned char>((input >> 16) & 0xFF);
-  result_bytes[2] = static_cast<unsigned char>((input >>  8) & 0xFF);
-  result_bytes[3] = static_cast<unsigned char>(input & 0xFF);
+  output_bytes[0] = static_cast<unsigned char>((input >> 24) & 0xFF);
+  output_bytes[1] = static_cast<unsigned char>((input >> 16) & 0xFF);
+  output_bytes[2] = static_cast<unsigned char>((input >>  8) & 0xFF);
+  output_bytes[3] = static_cast<unsigned char>(input & 0xFF);
   return output;
 #else
   return htonl(input);
