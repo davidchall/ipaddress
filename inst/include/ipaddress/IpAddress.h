@@ -2,7 +2,8 @@
 #define __IPADDRESS_ADDRESS__
 
 #include <array>
-#include <iostream>
+#include <cstring>
+#include <arpa/inet.h>
 
 
 namespace ipaddress {
