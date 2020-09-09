@@ -118,19 +118,19 @@ DataFrame wrap_compare_address(List address_r) {
       out_v6[i] = NA_LOGICAL;
     } else if (address[i].is_ipv6()) {
       r_type_v6 bytes = encode_address<r_type_v6>(address[i]);
-      out_addr1[i] = (ntohl(bytes[0]) & left_mask) >> 16;
-      out_addr2[i] = (ntohl(bytes[0]) & right_mask);
-      out_addr3[i] = (ntohl(bytes[1]) & left_mask) >> 16;
-      out_addr4[i] = (ntohl(bytes[1]) & right_mask);
-      out_addr5[i] = (ntohl(bytes[2]) & left_mask) >> 16;
-      out_addr6[i] = (ntohl(bytes[2]) & right_mask);
-      out_addr7[i] = (ntohl(bytes[3]) & left_mask) >> 16;
-      out_addr8[i] = (ntohl(bytes[3]) & right_mask);
+      out_addr1[i] = (network_to_host_long(bytes[0]) & left_mask) >> 16;
+      out_addr2[i] = (network_to_host_long(bytes[0]) & right_mask);
+      out_addr3[i] = (network_to_host_long(bytes[1]) & left_mask) >> 16;
+      out_addr4[i] = (network_to_host_long(bytes[1]) & right_mask);
+      out_addr5[i] = (network_to_host_long(bytes[2]) & left_mask) >> 16;
+      out_addr6[i] = (network_to_host_long(bytes[2]) & right_mask);
+      out_addr7[i] = (network_to_host_long(bytes[3]) & left_mask) >> 16;
+      out_addr8[i] = (network_to_host_long(bytes[3]) & right_mask);
       out_v6[i] = true;
     } else {
       r_type_v4 bytes = encode_address<r_type_v4>(address[i]);
-      out_addr1[i] = (ntohl(bytes[0]) & left_mask) >> 16;
-      out_addr2[i] = (ntohl(bytes[0]) & right_mask);
+      out_addr1[i] = (network_to_host_long(bytes[0]) & left_mask) >> 16;
+      out_addr2[i] = (network_to_host_long(bytes[0]) & right_mask);
     }
   }
 

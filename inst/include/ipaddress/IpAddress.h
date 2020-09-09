@@ -3,12 +3,7 @@
 
 #include <array>
 #include <cstring>
-
-#ifdef _WIN32
-#include <winsock.h>
-#else
-#include <arpa/inet.h>
-#endif
+#include <ipaddress/endian.h>
 
 
 namespace ipaddress {
@@ -190,9 +185,9 @@ public:
 
     for (int i=lhs.n_bytes()-4; i>=0; i-=4) {
       std::memcpy(&old_int, &lhs.bytes[i], 4);
-      old_int = ntohl(old_int);
+      old_int = network_to_host_long(old_int);
       new_int = old_int + ingest;
-      new_bytes = htonl(new_int);
+      new_bytes = host_to_network_long(new_int);
       std::memcpy(&result.bytes[i], &new_bytes, 4);
 
       if ((n > 0 && new_int < old_int) || (n < 0 && new_int > old_int)) {
