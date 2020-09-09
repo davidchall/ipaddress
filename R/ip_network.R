@@ -97,7 +97,7 @@ ip_network.default <- function(x = character(), strict = TRUE, ...) {
     abort("`strict` be must TRUE or FALSE")
   }
 
-  wrap_parse_network(x, strict)
+  wrap_parse_network(x, strict, FALSE)
 }
 
 #' @rdname ip_network
@@ -115,7 +115,7 @@ ip_network.ip_address <- function(address, prefix_length, strict = TRUE, ...) {
   address <- args[[1L]]
   prefix_length <- args[[2L]]
 
-  wrap_construct_network_from_address(address, prefix_length, strict)
+  wrap_construct_network_from_address(address, prefix_length, strict, FALSE)
 }
 
 #' Low-level constructor that accepts the underlying data types being stored

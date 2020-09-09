@@ -1,5 +1,11 @@
 # ipaddress (development version)
 
+* Addition/subtraction of integers is now much faster for large integers
+* Refactored C++ code (no changes to R interface)
+  * Package developers can now use `LinkingTo: ipaddress` without also needing `LinkingTo: AsioHeaders`
+  * Expected 10x filesize reduction for CRAN binaries on some platforms (#63)
+
+
 # ipaddress 0.5.0
 
 This release achieves feature parity with the Python [ipaddress](https://docs.python.org/3/library/ipaddress.html) module (#46).
