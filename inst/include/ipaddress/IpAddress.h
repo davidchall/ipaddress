@@ -52,8 +52,8 @@ public:
    * ----------- */
   bool is_ipv6() const { return is_ipv6_; }
   bool is_na() const { return is_na_; }
-  int n_bytes() const { return is_ipv6_ ? 16 : 4; }
-  int n_bits() const { return is_ipv6_ ? 128 : 32; }
+  unsigned int n_bytes() const { return is_ipv6_ ? 16 : 4; }
+  unsigned int n_bits() const { return is_ipv6_ ? 128 : 32; }
 
   bytes_type_v6 bytes_v6() const { return bytes; }
   bytes_type_v4 bytes_v4() const {
@@ -93,10 +93,8 @@ public:
     // IPv4 lower than IPv6
     if (lhs.is_ipv6_ == rhs.is_ipv6_) {
       return std::memcmp(&lhs.bytes, &rhs.bytes, lhs.n_bytes()) < 0;
-    } else if (lhs.is_ipv6_) {
-      return false;
     } else {
-      return true;
+      return rhs.is_ipv6_;
     }
   }
   friend bool operator>(const IpAddress &lhs, const IpAddress &rhs) {

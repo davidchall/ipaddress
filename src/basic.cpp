@@ -39,7 +39,7 @@ List wrap_parse_address(CharacterVector input) {
           output[i] = IpAddress::make_ipv6(tmp_v6.to_bytes());
         } else {
           output[i] = IpAddress::make_na();
-          warnOnRow(i, as<std::string>(input[i]));
+          warnOnRow(i, Rcpp::as<std::string>(input[i]));
         }
       }
     }
@@ -177,7 +177,7 @@ List wrap_parse_network(CharacterVector input, bool strict, bool is_interface) {
           output[i] = IpNetwork::make_ipv4(tmp_v4.address().to_bytes(), tmp_v4.prefix_length());
         } else if (strict) {
           output[i] = IpNetwork::make_na();
-          warnOnRow(i, as<std::string>(input[i]), "host bits set");
+          warnOnRow(i, Rcpp::as<std::string>(input[i]), "host bits set");
         } else {
           tmp_v4 = tmp_v4.canonical();
           output[i] = IpNetwork::make_ipv4(tmp_v4.address().to_bytes(), tmp_v4.prefix_length());
@@ -192,14 +192,14 @@ List wrap_parse_network(CharacterVector input, bool strict, bool is_interface) {
             output[i] = IpNetwork::make_ipv6(tmp_v6.address().to_bytes(), tmp_v6.prefix_length());
           } else if (strict) {
             output[i] = IpNetwork::make_na();
-            warnOnRow(i, as<std::string>(input[i]), "host bits set");
+            warnOnRow(i, Rcpp::as<std::string>(input[i]), "host bits set");
           } else {
             tmp_v6 = tmp_v6.canonical();
             output[i] = IpNetwork::make_ipv6(tmp_v6.address().to_bytes(), tmp_v6.prefix_length());
           }
         } else {
           output[i] = IpNetwork::make_na();
-          warnOnRow(i, as<std::string>(input[i]));
+          warnOnRow(i, Rcpp::as<std::string>(input[i]));
         }
       }
     }
