@@ -50,6 +50,9 @@ inline IpAddress broadcast_address(const IpNetwork &network) {
 }
 
 inline bool address_in_network(const IpAddress &address, const IpNetwork &network) {
+  if (address.is_na() || network.is_na()) {
+    return false;
+  }
   if (address.is_ipv6() != network.is_ipv6()) {
     return false;
   }
