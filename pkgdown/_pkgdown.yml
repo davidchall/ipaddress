@@ -43,12 +43,14 @@ reference:
       - num_addresses
       - prefix_length
       - common_network
-      - summarize_address_range
-      - collapse_networks
-      - exclude_networks
       - is_within
       - is_subnet
       - subnets
+  - title: "Address ranges"
+    contents:
+      - summarize_address_range
+      - collapse_networks
+      - exclude_networks
   - title: "Generating addresses"
     contents:
       - starts_with("sample")

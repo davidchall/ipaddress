@@ -33,7 +33,7 @@ List wrap_decode_bytes(List input) {
       output[i] = IpAddress::make_ipv6(bytes);
     } else {
       output[i] = IpAddress::make_na();
-      warnOnRow(i, "unable to decode");
+      warnOnRow(i, "unable to decode (must be 4 or 16 bytes)");
     }
   }
 

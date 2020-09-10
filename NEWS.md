@@ -1,9 +1,8 @@
 # ipaddress (development version)
 
-* Addition/subtraction of integers is now much faster for large integers
+* Addition/subtraction of large integers is now much faster
 * Refactored C++ code (no changes to R interface)
-  * Package developers can now use `LinkingTo: ipaddress` without also needing `LinkingTo: AsioHeaders`
-  * Expected 10x filesize reduction for CRAN binaries on some platforms (#63)
+  * Package developers can now use `LinkingTo: ipaddress` without `LinkingTo: AsioHeaders`
 
 
 # ipaddress 0.5.0
