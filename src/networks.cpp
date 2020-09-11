@@ -24,8 +24,7 @@ std::vector<IpNetwork> calculate_subnets(const IpNetwork &network, int new_prefi
     result.push_back(network);
 
     // advance to next block
-    block_start = broadcast_address(network);
-    block_start++;
+    block_start = ++broadcast_address(network);
 
     // if block ends on all-ones, then increment operator wraps around to all-zeros
     if (block_start <= range_start) break;
@@ -47,18 +46,18 @@ std::vector<IpAddress> calculate_hosts(const IpNetwork &network, bool exclude_un
 
   if (network.is_ipv6()) {
     // IPv6 does not use final address as broadcast address
-    ip_end++;
+    ++ip_end;
 
     // exclude subnet router anycast address
     if (exclude_unusable && (bits_used != 1)) {
-      ip_begin++;
+      ++ip_begin;
     }
   } else {
     // exclude network and broadcast addresses
     if (exclude_unusable && (bits_used != 1)) {
-      ip_begin++;
+      ++ip_begin;
     } else {
-      ip_end++;
+      ++ip_end;
     }
   }
 
@@ -68,7 +67,8 @@ std::vector<IpAddress> calculate_hosts(const IpNetwork &network, bool exclude_un
       checkUserInterrupt();
     }
 
-    hosts.push_back(ip_begin++);
+    hosts.push_back(ip_begin);
+    ++ip_begin;
   }
 
   return hosts;
