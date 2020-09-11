@@ -23,7 +23,9 @@
 namespace ipaddress {
 
 inline std::string to_string(const IpAddress &address) {
-  if (address.is_ipv6()) {
+  if (address.is_na()) {
+    return std::string();
+  } else if (address.is_ipv6()) {
     asio::ip::address_v6 asio_address(address.bytes_v6());
     return asio_address.to_string();
   } else {
@@ -33,7 +35,9 @@ inline std::string to_string(const IpAddress &address) {
 }
 
 inline std::string to_string(const IpNetwork &network) {
-  if (network.is_ipv6()) {
+  if (network.is_na()) {
+    return std::string();
+  } else if (network.is_ipv6()) {
     asio::ip::address_v6 asio_address(network.address().bytes_v6());
     asio::ip::network_v6 asio_network(asio_address, network.prefix_length());
     return asio_network.to_string();

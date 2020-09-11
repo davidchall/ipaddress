@@ -12,15 +12,17 @@ namespace ipaddress {
 typedef std::array<int32_t, 1> r_type_v4;
 typedef std::array<int32_t, 4> r_type_v6;
 
+
 template<class CBytes, class RBytes>
-inline CBytes decode_address(const RBytes &input) {
+CBytes decode_address(const RBytes &input) {
   CBytes output;
   std::memcpy(output.begin(), input.begin(), output.size());
   return output;
 }
 
+
 template<class RBytes>
-inline RBytes encode_address(const IpAddress &input) {
+RBytes encode_address(const IpAddress &input) {
   RBytes output;
   std::memcpy(output.begin(), input.begin(), input.n_bytes());
   return output;
@@ -156,9 +158,8 @@ inline Rcpp::List encode_addresses(const std::vector<IpAddress> &input) {
 
 
 inline Rcpp::List encode_networks(const std::vector<IpNetwork> &input) {
-  std::size_t vsize = input.size();
-
   // initialize vectors
+  std::size_t vsize = input.size();
   Rcpp::IntegerVector out_addr1(vsize);
   Rcpp::IntegerVector out_addr2(vsize);
   Rcpp::IntegerVector out_addr3(vsize);

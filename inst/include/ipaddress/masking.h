@@ -49,6 +49,7 @@ inline IpAddress broadcast_address(const IpNetwork &network) {
   if (network.is_na()) {
     return IpAddress::make_na();
   }
+
   IpAddress hostmask = prefix_to_hostmask(network.prefix_length(), network.is_ipv6());
   return bitwise_or(network.address(), hostmask);
 }
@@ -60,6 +61,7 @@ inline bool address_in_network(const IpAddress &address, const IpNetwork &networ
   if (address.is_ipv6() != network.is_ipv6()) {
     return false;
   }
+
   IpAddress netmask = prefix_to_netmask(network.prefix_length(), network.is_ipv6());
   return bitwise_and(address, netmask) == network.address();
 }

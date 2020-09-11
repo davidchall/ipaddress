@@ -7,6 +7,10 @@
 namespace ipaddress {
 
 inline unsigned int count_trailing_zero_bits(const IpAddress &address) {
+  if (address.is_na()) {
+    return 0;
+  }
+
   unsigned int zeros = 0;
   unsigned int ingest;
 
@@ -25,6 +29,10 @@ inline unsigned int count_trailing_zero_bits(const IpAddress &address) {
 }
 
 inline unsigned int count_leading_zero_bits(const IpAddress &address) {
+  if (address.is_na()) {
+    return 0;
+  }
+
   unsigned int zeros = 0;
   unsigned int ingest;
   unsigned int unused_bits = (sizeof(ingest) - 1) * CHAR_BIT;

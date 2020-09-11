@@ -38,10 +38,21 @@ public:
   /* ----------- *
    *  Accessors  *
    * ----------- */
-  IpAddress address() const { return address_; }
-  unsigned int prefix_length() const { return prefix_; }
-  bool is_ipv6() const { return address_.is_ipv6(); }
-  bool is_na() const { return address_.is_na(); }
+  IpAddress address() const {
+    return address_;
+  }
+
+  unsigned int prefix_length() const {
+    return prefix_;
+  }
+
+  bool is_ipv6() const {
+    return address_.is_ipv6();
+  }
+
+  bool is_na() const {
+    return address_.is_na();
+  }
 };
 
 }

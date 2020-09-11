@@ -14,7 +14,7 @@ public:
   typedef std::array<unsigned char, 16> bytes_type_v6;
   typedef bytes_type_v6 bytes_type_both;
 
-  // Bytes data are public for easy editing
+  // Bytes data are public for easy editing (but iterators are recommended)
   bytes_type_both bytes;
 
 private:
@@ -28,8 +28,8 @@ public:
   // default constructor
   IpAddress() : bytes({}), is_ipv6_(false), is_na_(false) {}
 
-  IpAddress(const bytes_type_both &bytes, bool is_ipv6, bool is_na) :
-    bytes(bytes), is_ipv6_(is_ipv6), is_na_(is_na) {}
+  IpAddress(const bytes_type_both &bytes, bool is_ipv6, bool is_na)
+    : bytes(bytes), is_ipv6_(is_ipv6), is_na_(is_na) {}
 
   static IpAddress make_ipv6(const bytes_type_v6 &bytes = {}) {
     return IpAddress(bytes, true, false);
@@ -50,12 +50,26 @@ public:
   /* ----------- *
    *  Accessors  *
    * ----------- */
-  bool is_ipv6() const { return is_ipv6_; }
-  bool is_na() const { return is_na_; }
-  unsigned int n_bytes() const { return is_ipv6_ ? 16 : 4; }
-  unsigned int n_bits() const { return is_ipv6_ ? 128 : 32; }
+  bool is_ipv6() const {
+    return is_ipv6_;
+  }
 
-  bytes_type_v6 bytes_v6() const { return bytes; }
+  bool is_na() const {
+    return is_na_;
+  }
+
+  unsigned int n_bytes() const {
+    return is_ipv6_ ? 16 : 4;
+  }
+
+  unsigned int n_bits() const {
+    return is_ipv6_ ? 128 : 32;
+  }
+
+  bytes_type_v6 bytes_v6() const {
+    return bytes;
+  }
+
   bytes_type_v4 bytes_v4() const {
     bytes_type_v4 less_bytes;
     std::copy(bytes.begin(), bytes.begin() + 4, less_bytes.begin());
@@ -116,7 +130,6 @@ public:
 
   friend bool operator<(const IpAddress &lhs, const IpAddress &rhs) {
     // Missing data ranked high
-    if (lhs.is_na_ && rhs.is_na_) return false;
     if (lhs.is_na_) return false;
     if (rhs.is_na_) return true;
 
@@ -141,17 +154,21 @@ public:
   }
 
 
-  /* ---------------------- *
-   *  Arithmetic operators  *
-   * ---------------------- */
+  /* --------------------- *
+   *  Increment operators  *
+   * --------------------- */
   // pre-increment
   IpAddress& operator++() {
+    if (is_na_) {
+      return *this;
+    }
+
     bool overflow = true;
     for (auto it = rbegin(); it != rend(); ++it) {
       if (*it == 0xFF) {
         *it = 0;
       } else {
-        ++(*it);
+        ++*it;
         overflow = false;
         break;
       }
@@ -173,12 +190,16 @@ public:
 
   // pre-decrement
   IpAddress& operator--() {
+    if (is_na_) {
+      return *this;
+    }
+
     bool overflow = true;
     for (auto it = rbegin(); it != rend(); ++it) {
       if (*it == 0) {
         *it = 0xFF;
       } else {
-        --(*it);
+        --*it;
         overflow = false;
         break;
       }
@@ -198,7 +219,10 @@ public:
     return tmp;
   }
 
-  // addition
+
+  /* ---------------------- *
+   *  Arithmetic operators  *
+   * ---------------------- */
   friend IpAddress operator+(const IpAddress &lhs, int32_t n) {
     IpAddress result = lhs;
 
@@ -212,18 +236,18 @@ public:
 
     // consider 32 bits at a time, moving right to left
     uint32_t ingest = n;
-    uint32_t old_int, new_int, new_bytes;
+    uint32_t old_bytes, old_int, new_int, new_bytes;
 
     auto it_in = lhs.rbegin() + 3;
     auto it_out = result.rbegin() + 3;
     for (; it_in != lhs.rend(); it_in += 4, it_out += 4) {
-      std::memcpy(&old_int, &*it_in, 4);
-      old_int = network_to_host_long(old_int);
+      std::memcpy(&old_bytes, &*it_in, 4);
+      old_int = network_to_host_long(old_bytes);
       new_int = old_int + ingest;
       new_bytes = host_to_network_long(new_int);
       std::memcpy(&*it_out, &new_bytes, 4);
 
-      if ((n > 0 && new_int < old_int) || (n < 0 && new_int > old_int)) {
+      if ((n > 0) == (new_int < old_int)) {
         ingest = n > 0 ? 1 : -1;
       } else {
         break;
@@ -231,7 +255,7 @@ public:
     }
 
     // catch overflow
-    if ((n > 0 && result < lhs) || (n < 0 && result > lhs)) {
+    if ((n > 0) == (result < lhs)) {
       return IpAddress::make_na();
     } else {
       return result;
