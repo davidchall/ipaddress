@@ -62,14 +62,40 @@ public:
     return less_bytes;
   }
 
-  // Iterators for bytes data (IPv4/IPv6 friendly)
-  bytes_type_both::iterator begin() { return bytes.begin(); }
-  bytes_type_both::const_iterator cbegin() const { return bytes.cbegin(); }
+
+  /* --------------------------- *
+   *  Iterators for bytes array  *
+   * --------------------------- */
+  bytes_type_both::iterator begin() {
+    return bytes.begin();
+  }
+
+  bytes_type_both::const_iterator begin() const {
+    return bytes.begin();
+  }
+
   bytes_type_both::iterator end() {
     return is_ipv6_ ? bytes.end() : bytes.begin() + 4;
   }
-  bytes_type_both::const_iterator cend() const {
-    return is_ipv6_ ? bytes.cend() : bytes.cbegin() + 4;
+
+  bytes_type_both::const_iterator end() const {
+    return is_ipv6_ ? bytes.end() : bytes.begin() + 4;
+  }
+
+  bytes_type_both::reverse_iterator rbegin() {
+    return is_ipv6_ ? bytes.rbegin() : bytes.rend() - 4;
+  }
+
+  bytes_type_both::const_reverse_iterator rbegin() const {
+    return is_ipv6_ ? bytes.rbegin() : bytes.rend() - 4;
+  }
+
+  bytes_type_both::reverse_iterator rend() {
+    return bytes.rend();
+  }
+
+  bytes_type_both::const_reverse_iterator rend() const {
+    return bytes.rend();
   }
 
 
@@ -77,13 +103,17 @@ public:
    *  Comparison operators  *
    * ---------------------- */
   friend bool operator==(const IpAddress &lhs, const IpAddress &rhs) {
-    return (lhs.is_ipv6_ == rhs.is_ipv6_)
-      && (lhs.is_na_ == rhs.is_na_)
-      && (lhs.bytes == rhs.bytes);
+    if (lhs.is_na_ || rhs.is_na_) {
+      return lhs.is_na_ == rhs.is_na_;
+    } else {
+      return (lhs.is_ipv6_ == rhs.is_ipv6_) && (lhs.bytes == rhs.bytes);
+    }
   }
+
   friend bool operator!=(const IpAddress &lhs, const IpAddress &rhs) {
     return !(lhs == rhs);
   }
+
   friend bool operator<(const IpAddress &lhs, const IpAddress &rhs) {
     // Missing data ranked high
     if (lhs.is_na_ && rhs.is_na_) return false;
@@ -97,12 +127,15 @@ public:
       return rhs.is_ipv6_;
     }
   }
+
   friend bool operator>(const IpAddress &lhs, const IpAddress &rhs) {
     return rhs < lhs;
   }
+
   friend bool operator<=(const IpAddress &lhs, const IpAddress &rhs) {
     return !(rhs < lhs);
   }
+
   friend bool operator>=(const IpAddress &lhs, const IpAddress &rhs) {
     return !(lhs < rhs);
   }
@@ -114,11 +147,11 @@ public:
   // pre-increment
   IpAddress& operator++() {
     bool overflow = true;
-    for (int i=n_bytes()-1; i>=0; --i) {
-      if (bytes[i] == 0xff) {
-        bytes[i] = 0;
+    for (auto it = rbegin(); it != rend(); ++it) {
+      if (*it == 0xFF) {
+        *it = 0;
       } else {
-        ++bytes[i];
+        ++(*it);
         overflow = false;
         break;
       }
@@ -141,11 +174,11 @@ public:
   // pre-decrement
   IpAddress& operator--() {
     bool overflow = true;
-    for (int i=n_bytes()-1; i>=0; --i) {
-      if (bytes[i] == 0) {
-        bytes[i] = 0xff;
+    for (auto it = rbegin(); it != rend(); ++it) {
+      if (*it == 0) {
+        *it = 0xFF;
       } else {
-        --bytes[i];
+        --(*it);
         overflow = false;
         break;
       }
@@ -181,12 +214,14 @@ public:
     uint32_t ingest = n;
     uint32_t old_int, new_int, new_bytes;
 
-    for (int i=lhs.n_bytes()-4; i>=0; i-=4) {
-      std::memcpy(&old_int, &lhs.bytes[i], 4);
+    auto it_in = lhs.rbegin() + 3;
+    auto it_out = result.rbegin() + 3;
+    for (; it_in != lhs.rend(); it_in += 4, it_out += 4) {
+      std::memcpy(&old_int, &*it_in, 4);
       old_int = network_to_host_long(old_int);
       new_int = old_int + ingest;
       new_bytes = host_to_network_long(new_int);
-      std::memcpy(&result.bytes[i], &new_bytes, 4);
+      std::memcpy(&*it_out, &new_bytes, 4);
 
       if ((n > 0 && new_int < old_int) || (n < 0 && new_int > old_int)) {
         ingest = n > 0 ? 1 : -1;

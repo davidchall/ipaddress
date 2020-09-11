@@ -204,7 +204,7 @@ asio::ip::address_v4 extract_teredo_client(const asio::ip::address_v6 &address) 
   asio::ip::address_v6::bytes_type bytes_v6 = address.to_bytes();
 
   std::copy(bytes_v6.begin() + 12, bytes_v6.end(), bytes_v4.begin());
-  std::transform(bytes_v4.cbegin(), bytes_v4.cend(), bytes_v4.begin(),
+  std::transform(bytes_v4.begin(), bytes_v4.end(), bytes_v4.begin(),
                  [](unsigned char b) { return ~b; });
 
   return asio::ip::make_address_v4(bytes_v4);

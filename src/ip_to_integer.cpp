@@ -18,7 +18,7 @@ std::string encode_integer(const IpAddress &x, bool hex) {
     >> x_int;
 
   // import most-significant byte first (x_bytes stored in network order)
-  import_bits(x_int, x.cbegin(), x.cend(), 8, true);
+  import_bits(x_int, x.begin(), x.end(), 8, true);
 
   if (hex) {
     std::stringstream ss;

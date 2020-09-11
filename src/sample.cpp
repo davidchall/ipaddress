@@ -56,9 +56,7 @@ List wrap_sample_network(List network_r, unsigned int size) {
   // initialize vectors
   std::vector<IpAddress> output;
 
-  if (network.size() != 1 || network[0].is_na()) {
-    // pass
-  } else {
+  if (network.size() == 1 && !network[0].is_na()) {
     output = sample_network(network[0], size);
   }
 

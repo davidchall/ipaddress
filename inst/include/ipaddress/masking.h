@@ -1,7 +1,6 @@
 #ifndef __IPADDRESS_MASKING__
 #define __IPADDRESS_MASKING__
 
-#include <algorithm>
 #include <ipaddress/IpAddress.h>
 #include <ipaddress/IpNetwork.h>
 #include <ipaddress/bitwise.h>
@@ -13,12 +12,17 @@ namespace ipaddress {
 inline IpAddress prefix_to_netmask(int prefix_length, bool is_ipv6) {
   IpAddress result = is_ipv6 ? IpAddress::make_ipv6() : IpAddress::make_ipv4();
 
-  for (std::size_t i=0; i<result.n_bytes(); ++i) {
-    int ingest = std::min(prefix_length, 8);
-    prefix_length -= ingest;
-
-    uint8_t byte_mask = ingest == 0 ? 0 : 0xff << (8 - ingest);
-    std::memcpy(&result.bytes[i], &byte_mask, sizeof(byte_mask));
+  unsigned int bits_to_ingest = prefix_length;
+  for (auto it = result.begin(); it != result.end(); ++it) {
+    if (bits_to_ingest == 0) {
+      break;
+    } else if (bits_to_ingest >= CHAR_BIT) {
+      *it = 0xFF;
+      bits_to_ingest -= CHAR_BIT;
+    } else {
+      *it = 0xFF << (CHAR_BIT - bits_to_ingest);
+      bits_to_ingest = 0;
+    }
   }
 
   return result;
@@ -58,6 +62,11 @@ inline bool address_in_network(const IpAddress &address, const IpNetwork &networ
   }
   IpAddress netmask = prefix_to_netmask(network.prefix_length(), network.is_ipv6());
   return bitwise_and(address, netmask) == network.address();
+}
+
+inline bool is_subnet(const IpNetwork &network, const IpNetwork &other) {
+  return address_in_network(network.address(), other)
+    && (network.prefix_length() >= other.prefix_length());
 }
 
 }

@@ -6,19 +6,15 @@
 
 namespace ipaddress {
 
-inline int count_trailing_zero_bits(const IpAddress &address) {
-  bool is_empty = std::all_of(address.cbegin(), address.cend(),
-                              [](unsigned char b){ return b == 0; });
-  if (is_empty) {
-    return address.n_bits();
-  }
+inline unsigned int count_trailing_zero_bits(const IpAddress &address) {
+  unsigned int zeros = 0;
+  unsigned int ingest;
 
-  int zeros = 0;
-  for (std::size_t i=0; i<address.n_bytes(); ++i) {
-    uint32_t ingest = address.bytes[address.n_bytes()-1-i];
+  for (auto it = address.rbegin(); it != address.rend(); ++it) {
+    ingest = *it;
 
     if (ingest == 0) {
-      zeros += 8;
+      zeros += CHAR_BIT;
     } else {
       zeros += __builtin_ctz(ingest);
       break;
@@ -28,22 +24,18 @@ inline int count_trailing_zero_bits(const IpAddress &address) {
   return zeros;
 }
 
-inline int count_leading_zero_bits(const IpAddress &address) {
-  bool is_empty = std::all_of(address.cbegin(), address.cend(),
-                              [](unsigned char b){ return b == 0; });
-  if (is_empty) {
-    return address.n_bits();
-  }
+inline unsigned int count_leading_zero_bits(const IpAddress &address) {
+  unsigned int zeros = 0;
+  unsigned int ingest;
+  unsigned int unused_bits = (sizeof(ingest) - 1) * CHAR_BIT;
 
-  int zeros = 0;
-  for (std::size_t i=0; i<address.n_bytes(); ++i) {
-    uint32_t ingest = address.bytes[i];
+  for (auto it = address.begin(); it != address.end(); ++it) {
+    ingest = *it;
 
     if (ingest == 0) {
-      zeros += 8;
+      zeros += CHAR_BIT;
     } else {
-      // ingest is 32-bits but only uses final 8-bits
-      zeros += __builtin_clz(ingest) - 24;
+      zeros += __builtin_clz(ingest) - unused_bits;
       break;
     }
   }

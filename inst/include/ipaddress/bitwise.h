@@ -13,7 +13,7 @@ inline IpAddress bitwise_not(const IpAddress &addr1) {
   }
 
   IpAddress result = addr1;
-  std::transform(addr1.cbegin(), addr1.cend(), result.begin(),
+  std::transform(addr1.begin(), addr1.end(), result.begin(),
                  [](unsigned char b1) { return ~b1; });
 
   return result;
@@ -25,7 +25,7 @@ inline IpAddress bitwise_and(const IpAddress &addr1, const IpAddress &addr2) {
   }
 
   IpAddress result = addr1;
-  std::transform(addr1.cbegin(), addr1.cend(), addr2.cbegin(), result.begin(),
+  std::transform(addr1.begin(), addr1.end(), addr2.begin(), result.begin(),
                  [](unsigned char b1, unsigned char b2) { return b1 & b2; });
 
   return result;
@@ -37,7 +37,7 @@ inline IpAddress bitwise_or(const IpAddress &addr1, const IpAddress &addr2) {
   }
 
   IpAddress result = addr1;
-  std::transform(addr1.cbegin(), addr1.cend(), addr2.cbegin(), result.begin(),
+  std::transform(addr1.begin(), addr1.end(), addr2.begin(), result.begin(),
                  [](unsigned char b1, unsigned char b2) { return b1 | b2; });
 
   return result;
@@ -49,7 +49,7 @@ inline IpAddress bitwise_xor(const IpAddress &addr1, const IpAddress &addr2) {
   }
 
   IpAddress result = addr1;
-  std::transform(addr1.cbegin(), addr1.cend(), addr2.cbegin(), result.begin(),
+  std::transform(addr1.begin(), addr1.end(), addr2.begin(), result.begin(),
                  [](unsigned char b1, unsigned char b2) { return b1 ^ b2; });
 
   return result;

@@ -11,8 +11,8 @@ std::string encode_binary(const IpAddress &x) {
   std::string bit_string;
   bit_string.reserve(x.n_bits());
 
-  for (std::size_t i=0; i<x.n_bytes(); ++i) {
-    std::bitset<8> bits(x.bytes[i]);
+  for (auto it = x.begin(); it != x.end(); ++it) {
+    std::bitset<8> bits(*it);
     bit_string += bits.to_string();
   }
 
@@ -22,9 +22,10 @@ std::string encode_binary(const IpAddress &x) {
 IpAddress decode_binary(const std::string &bit_string, bool is_ipv6) {
   IpAddress output(IpAddress::bytes_type_both(), is_ipv6, false);
 
-  for (std::size_t i=0; i<output.n_bytes(); ++i) {
-    std::bitset<8> bits(bit_string.substr(i*8, 8));
-    output.bytes[i] = bits.to_ulong();
+  unsigned int pos_char = 0;
+  for (auto it = output.begin(); it != output.end(); ++it, pos_char += 8) {
+    std::bitset<8> bits(bit_string.substr(pos_char, 8));
+    *it = bits.to_ulong();
   }
 
   return output;

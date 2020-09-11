@@ -22,7 +22,7 @@ CBytes decode_address(const RBytes &input) {
 template<class RBytes>
 RBytes encode_address(const IpAddress &input) {
   RBytes output;
-  std::memcpy(output.begin(), input.cbegin(), input.n_bytes());
+  std::memcpy(output.begin(), input.begin(), input.n_bytes());
   return output;
 }
 
