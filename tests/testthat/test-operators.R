@@ -163,6 +163,23 @@ test_that("addition and subtraction work", {
   expect_equal(ip_address("2001:db8::7334") + 5L, ip_address("2001:db8::7339"))
   expect_equal(ip_address("2001:db8::7334") - 5L, ip_address("2001:db8::732f"))
 
+  expect_equal(
+    ip_address("0.0.0.0") + c(0, 1, 2^31-1),
+    ip_address(c("0.0.0.0", "0.0.0.1", "127.255.255.255"))
+  )
+  expect_equal(
+    ip_address("255.255.255.255") - c(0, 1, 2^31-1),
+    ip_address(c("255.255.255.255", "255.255.255.254", "128.0.0.0"))
+  )
+  expect_equal(
+    ip_address("::feff:ffff") + c(0, 1, 2^31-1),
+    ip_address(c("::feff:ffff", "::ff00:0", "::1:7eff:fffe"))
+  )
+  expect_equal(
+    ip_address("::1:7eff:fffe") - c(0, 1, 2^31-1),
+    ip_address(c("::1:7eff:fffe", "::1:7eff:fffd", "::feff:ffff"))
+  )
+
   # integerish accepted
   expect_equal(ip_address("192.168.0.1") + 5, ip_address("192.168.0.6"))
   expect_equal(ip_address("192.168.0.1") - 5, ip_address("192.167.255.252"))
