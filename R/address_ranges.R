@@ -69,9 +69,9 @@ collapse_networks <- function(network) {
 #' @return An [`ip_network`] vector
 #'
 #' @examples
-#' exclude_networks(ip_network('192.0.2.0/28'), ip_network('192.0.2.1/32'))
+#' exclude_networks(ip_network("192.0.2.0/28"), ip_network("192.0.2.1/32"))
 #'
-#' exclude_networks(ip_network('192.0.2.0/28'), ip_network('192.0.2.15/32'))
+#' exclude_networks(ip_network("192.0.2.0/28"), ip_network("192.0.2.15/32"))
 #' @seealso [collapse_networks()], [setdiff()]
 #' @export
 exclude_networks <- function(include, exclude) {

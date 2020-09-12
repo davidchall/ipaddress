@@ -21,9 +21,9 @@ calculates the address ranges that are included but not excluded (similar to
 describe the remaining address ranges.
 }
 \examples{
-exclude_networks(ip_network('192.0.2.0/28'), ip_network('192.0.2.1/32'))
+exclude_networks(ip_network("192.0.2.0/28"), ip_network("192.0.2.1/32"))
 
-exclude_networks(ip_network('192.0.2.0/28'), ip_network('192.0.2.15/32'))
+exclude_networks(ip_network("192.0.2.0/28"), ip_network("192.0.2.15/32"))
 }
 \seealso{
 \code{\link[=collapse_networks]{collapse_networks()}}, \code{\link[=setdiff]{setdiff()}}
