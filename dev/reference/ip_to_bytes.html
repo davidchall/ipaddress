@@ -222,7 +222,10 @@ and missing values are encoded as <code>NULL</code>.</p>
 #&gt; </div><div class='input'>
 <span class='kw'>bytes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
   <span class='fu'><a href='https://rdrr.io/r/base/raw.html'>as.raw</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0xc0</span>, <span class='fl'>0xa8</span>, <span class='fl'>0x00</span>, <span class='fl'>0x01</span>)),
-  <span class='fu'><a href='https://rdrr.io/r/base/raw.html'>as.raw</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0x20</span>, <span class='fl'>0x01</span>, <span class='fl'>0x0d</span>, <span class='fl'>0xb8</span>, <span class='fl'>0x00</span>, <span class='fl'>0x00</span>, <span class='fl'>0x00</span>, <span class='fl'>0x00</span>, <span class='fl'>0x00</span>, <span class='fl'>0x00</span>, <span class='fl'>0x8a</span>, <span class='fl'>0x2e</span>, <span class='fl'>0x03</span>, <span class='fl'>0x70</span>, <span class='fl'>0x73</span>, <span class='fl'>0x34</span>)),
+  <span class='fu'><a href='https://rdrr.io/r/base/raw.html'>as.raw</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
+    <span class='fl'>0x20</span>, <span class='fl'>0x01</span>, <span class='fl'>0x0d</span>, <span class='fl'>0xb8</span>, <span class='fl'>0x00</span>, <span class='fl'>0x00</span>, <span class='fl'>0x00</span>, <span class='fl'>0x00</span>,
+    <span class='fl'>0x00</span>, <span class='fl'>0x00</span>, <span class='fl'>0x8a</span>, <span class='fl'>0x2e</span>, <span class='fl'>0x03</span>, <span class='fl'>0x70</span>, <span class='fl'>0x73</span>, <span class='fl'>0x34</span>
+  )),
   <span class='kw'>NULL</span>
 )
 <span class='fu'>bytes_to_ip</span>(<span class='kw'>bytes</span>)
