@@ -163,7 +163,7 @@ describe the remaining address ranges." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Remove networks from others</h1>
-    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/collapse_exclude.R'><code>R/collapse_exclude.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/address_ranges.R'><code>R/address_ranges.R</code></a></small>
     <div class="hidden name"><code>exclude_networks.Rd</code></div>
     </div>
 
@@ -174,7 +174,7 @@ calculates the address ranges that are included but not excluded (similar to
 describe the remaining address ranges.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>exclude_networks</span>(<span class='no'>include</span>, <span class='no'>exclude</span>)</pre>
+    <pre class="usage"><span class='fu'>exclude_networks</span>(<span class='kw'>include</span>, <span class='kw'>exclude</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -197,9 +197,11 @@ describe the remaining address ranges.</p>
     <div class='dont-index'><p><code><a href='collapse_networks.html'>collapse_networks()</a></code>, <code><a href='https://rdrr.io/r/base/sets.html'>setdiff()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>exclude_networks</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>'192.0.2.0/28'</span>), <span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>'192.0.2.1/32'</span>))</div><div class='output co'>#&gt; &lt;ip_network[4]&gt;
+    <pre class="examples"><div class='input'><span class='fu'>exclude_networks</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>'192.0.2.0/28'</span>), <span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>'192.0.2.1/32'</span>))
+</div><div class='output co'>#&gt; &lt;ip_network[4]&gt;
 #&gt; [1] 192.0.2.0/32 192.0.2.2/31 192.0.2.4/30 192.0.2.8/29</div><div class='input'>
-<span class='fu'>exclude_networks</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>'192.0.2.0/28'</span>), <span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>'192.0.2.15/32'</span>))</div><div class='output co'>#&gt; &lt;ip_network[4]&gt;
+<span class='fu'>exclude_networks</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>'192.0.2.0/28'</span>), <span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>'192.0.2.15/32'</span>))
+</div><div class='output co'>#&gt; &lt;ip_network[4]&gt;
 #&gt; [1] 192.0.2.0/29  192.0.2.8/30  192.0.2.12/31 192.0.2.14/32</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -216,7 +218,7 @@ describe the remaining address ranges.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

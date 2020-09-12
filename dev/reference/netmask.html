@@ -180,38 +180,38 @@ For example, <code>prefix_length()</code> can infer the prefix length from an
 <code>hostmask()</code> can accept a vector of prefix lengths.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>prefix_length</span>(<span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>prefix_length</span>(<span class='kw'>...</span>)
 
-<span class='fu'>netmask</span>(<span class='no'>...</span>)
+<span class='fu'>netmask</span>(<span class='kw'>...</span>)
 
-<span class='fu'>hostmask</span>(<span class='no'>...</span>)
-
-<span class='co'># S3 method for ip_network</span>
-<span class='fu'>prefix_length</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>hostmask</span>(<span class='kw'>...</span>)
 
 <span class='co'># S3 method for ip_network</span>
-<span class='fu'>netmask</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>prefix_length</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for ip_network</span>
-<span class='fu'>hostmask</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>netmask</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+
+<span class='co'># S3 method for ip_network</span>
+<span class='fu'>hostmask</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for ip_interface</span>
-<span class='fu'>prefix_length</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>prefix_length</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for ip_interface</span>
-<span class='fu'>netmask</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>netmask</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for ip_interface</span>
-<span class='fu'>hostmask</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>hostmask</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>prefix_length</span>(<span class='no'>mask</span>, <span class='no'>...</span>)
+<span class='fu'>prefix_length</span>(<span class='kw'>mask</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>netmask</span>(<span class='no'>prefix_length</span>, <span class='no'>is_ipv6</span>, <span class='no'>...</span>)
+<span class='fu'>netmask</span>(<span class='kw'>prefix_length</span>, <span class='kw'>is_ipv6</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>hostmask</span>(<span class='no'>prefix_length</span>, <span class='no'>is_ipv6</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>hostmask</span>(<span class='kw'>prefix_length</span>, <span class='kw'>is_ipv6</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -252,22 +252,29 @@ cases (all zeros, all ones) are treated as netmasks.</p></td>
     <div class='dont-index'><p><code><a href='max_prefix_length.html'>max_prefix_length()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.0/22"</span>, <span class='st'>"2001:db00::0/26"</span>))
+    <pre class="examples"><div class='input'><span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.0/22"</span>, <span class='st'>"2001:db00::0/26"</span>))
 
-<span class='fu'>prefix_length</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] 22 26</div><div class='input'>
-<span class='fu'>netmask</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
+<span class='fu'>prefix_length</span>(<span class='kw'>x</span>)
+</div><div class='output co'>#&gt; [1] 22 26</div><div class='input'>
+<span class='fu'>netmask</span>(<span class='kw'>x</span>)
+</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
 #&gt; [1] 255.255.252.0 ffff:ffc0::  </div><div class='input'>
-<span class='fu'>hostmask</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
+<span class='fu'>hostmask</span>(<span class='kw'>x</span>)
+</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
 #&gt; [1] 0.0.3.255                          0:3f:ffff:ffff:ffff:ffff:ffff:ffff</div><div class='input'>
 <span class='co'># construct netmask/hostmask from prefix length</span>
-<span class='fu'>netmask</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>22L</span>, <span class='fl'>26L</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>FALSE</span>, <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
+<span class='fu'>netmask</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>22L</span>, <span class='fl'>26L</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>FALSE</span>, <span class='fl'>TRUE</span>))
+</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
 #&gt; [1] 255.255.252.0 ffff:ffc0::  </div><div class='input'>
-<span class='fu'>hostmask</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>22L</span>, <span class='fl'>26L</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>FALSE</span>, <span class='fl'>TRUE</span>))</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
+<span class='fu'>hostmask</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>22L</span>, <span class='fl'>26L</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>FALSE</span>, <span class='fl'>TRUE</span>))
+</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
 #&gt; [1] 0.0.3.255                          0:3f:ffff:ffff:ffff:ffff:ffff:ffff</div><div class='input'>
 <span class='co'># extract prefix length from netmask/hostmask</span>
-<span class='fu'>prefix_length</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"255.255.255.0"</span>, <span class='st'>"0.255.255.255"</span>)))</div><div class='output co'>#&gt; [1] 24  8</div><div class='input'>
+<span class='fu'>prefix_length</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"255.255.255.0"</span>, <span class='st'>"0.255.255.255"</span>)))
+</div><div class='output co'>#&gt; [1] 24  8</div><div class='input'>
 <span class='co'># invalid netmask/hostmask raise a warning and return NA</span>
-<span class='fu'>prefix_length</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"255.255.255.1"</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: Problem on row 1: 255.255.255.1 (invalid netmask/hostmask)</span></div><div class='output co'>#&gt; [1] NA</div></pre>
+<span class='fu'>prefix_length</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"255.255.255.1"</span>))
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Problem on row 1: 255.255.255.1 (invalid netmask/hostmask)</span></div><div class='output co'>#&gt; [1] NA</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -283,7 +290,7 @@ cases (all zeros, all ones) are treated as netmasks.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>
