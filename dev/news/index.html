@@ -166,9 +166,10 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#ipaddress-development-version" class="anchor"></a>ipaddress (development version)<small> Unreleased </small>
 </h1>
+<p>This release introduces no changes to the R interface.</p>
 <ul>
-<li>Addition/subtraction of large integers is now much faster</li>
-<li>Refactored C++ code (no changes to R interface)
+<li>Addition/subtraction of large integers is now much faster (<a href='https://github.com/davidchall/ipaddress/issues/64'>#64</a>)</li>
+<li>Refactored C++ code to reduce dependence on Asio library (<a href='https://github.com/davidchall/ipaddress/issues/64'>#64</a>)
 <ul>
 <li>Package developers can now use <code>LinkingTo: ipaddress</code> without <code>LinkingTo: AsioHeaders</code>
 </li>
@@ -459,7 +460,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
