@@ -44,6 +44,7 @@ List wrap_decode_bytes(List input) {
 List wrap_encode_bytes(List input) {
   std::vector<IpAddress> address = decode_addresses(input);
 
+  // initialize vectors
   std::size_t vsize = address.size();
   List output(vsize);
 

@@ -9,6 +9,7 @@ using namespace ipaddress;
 
 // [[Rcpp::export]]
 List wrap_decode_hostname(CharacterVector input) {
+  // initialize vectors
   std::size_t vsize = input.size();
   List outputs(vsize);
 
@@ -59,6 +60,7 @@ List wrap_decode_hostname(CharacterVector input) {
 List wrap_encode_hostname(List input) {
   std::vector<IpAddress> address = decode_addresses(input);
 
+  // initialize vectors
   std::size_t vsize = address.size();
   List outputs(vsize);
 

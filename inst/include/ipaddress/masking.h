@@ -9,7 +9,7 @@
 
 namespace ipaddress {
 
-inline IpAddress prefix_to_netmask(int prefix_length, bool is_ipv6) {
+inline IpAddress prefix_to_netmask(unsigned int prefix_length, bool is_ipv6) {
   IpAddress result = is_ipv6 ? IpAddress::make_ipv6() : IpAddress::make_ipv4();
 
   unsigned int bits_to_ingest = prefix_length;
@@ -28,7 +28,7 @@ inline IpAddress prefix_to_netmask(int prefix_length, bool is_ipv6) {
   return result;
 }
 
-inline IpAddress prefix_to_hostmask(int prefix_length, bool is_ipv6) {
+inline IpAddress prefix_to_hostmask(unsigned int prefix_length, bool is_ipv6) {
   return bitwise_not(prefix_to_netmask(prefix_length, is_ipv6));
 }
 
@@ -38,7 +38,7 @@ inline int netmask_to_prefix(const IpAddress &mask) {
 
   // catch non-mask addresses (mixed zeros and ones)
   const IpAddress valid_mask = prefix_to_netmask(prefix, mask.is_ipv6());
-  return mask == valid_mask ? prefix: -1;
+  return mask == valid_mask ? prefix : -1;
 }
 
 inline int hostmask_to_prefix(const IpAddress &mask) {

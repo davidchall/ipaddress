@@ -53,14 +53,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // wrap_print_address
-CharacterVector wrap_print_address(List x, bool exploded);
-RcppExport SEXP _ipaddress_wrap_print_address(SEXP xSEXP, SEXP explodedSEXP) {
+CharacterVector wrap_print_address(List address_r, bool exploded);
+RcppExport SEXP _ipaddress_wrap_print_address(SEXP address_rSEXP, SEXP explodedSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< List >::type x(xSEXP);
+    Rcpp::traits::input_parameter< List >::type address_r(address_rSEXP);
     Rcpp::traits::input_parameter< bool >::type exploded(explodedSEXP);
-    rcpp_result_gen = Rcpp::wrap(wrap_print_address(x, exploded));
+    rcpp_result_gen = Rcpp::wrap(wrap_print_address(address_r, exploded));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -103,14 +103,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // wrap_print_network
-CharacterVector wrap_print_network(List x, bool exploded);
-RcppExport SEXP _ipaddress_wrap_print_network(SEXP xSEXP, SEXP explodedSEXP) {
+CharacterVector wrap_print_network(List network_r, bool exploded);
+RcppExport SEXP _ipaddress_wrap_print_network(SEXP network_rSEXP, SEXP explodedSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< List >::type x(xSEXP);
+    Rcpp::traits::input_parameter< List >::type network_r(network_rSEXP);
     Rcpp::traits::input_parameter< bool >::type exploded(explodedSEXP);
-    rcpp_result_gen = Rcpp::wrap(wrap_print_network(x, exploded));
+    rcpp_result_gen = Rcpp::wrap(wrap_print_network(network_r, exploded));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -126,13 +126,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // wrap_encode_binary
-CharacterVector wrap_encode_binary(List input);
-RcppExport SEXP _ipaddress_wrap_encode_binary(SEXP inputSEXP) {
+CharacterVector wrap_encode_binary(List address_r);
+RcppExport SEXP _ipaddress_wrap_encode_binary(SEXP address_rSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< List >::type input(inputSEXP);
-    rcpp_result_gen = Rcpp::wrap(wrap_encode_binary(input));
+    Rcpp::traits::input_parameter< List >::type address_r(address_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(wrap_encode_binary(address_r));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -204,17 +204,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// wrap_broadcast_address
-List wrap_broadcast_address(List network_r);
-RcppExport SEXP _ipaddress_wrap_broadcast_address(SEXP network_rSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< List >::type network_r(network_rSEXP);
-    rcpp_result_gen = Rcpp::wrap(wrap_broadcast_address(network_r));
-    return rcpp_result_gen;
-END_RCPP
-}
 // wrap_netmask
 List wrap_netmask(IntegerVector in_prefix_length, LogicalVector in_is_ipv6);
 RcppExport SEXP _ipaddress_wrap_netmask(SEXP in_prefix_lengthSEXP, SEXP in_is_ipv6SEXP) {
@@ -250,6 +239,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// wrap_broadcast_address
+List wrap_broadcast_address(List network_r);
+RcppExport SEXP _ipaddress_wrap_broadcast_address(SEXP network_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type network_r(network_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(wrap_broadcast_address(network_r));
+    return rcpp_result_gen;
+END_RCPP
+}
 // wrap_is_within
 LogicalVector wrap_is_within(List address_r, List network_r);
 RcppExport SEXP _ipaddress_wrap_is_within(SEXP address_rSEXP, SEXP network_rSEXP) {
@@ -271,30 +271,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< List >::type address_r(address_rSEXP);
     Rcpp::traits::input_parameter< List >::type network_r(network_rSEXP);
     rcpp_result_gen = Rcpp::wrap(wrap_is_within_any(address_r, network_r));
-    return rcpp_result_gen;
-END_RCPP
-}
-// wrap_network_hosts
-List wrap_network_hosts(List network_r, bool exclude_unusable);
-RcppExport SEXP _ipaddress_wrap_network_hosts(SEXP network_rSEXP, SEXP exclude_unusableSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< List >::type network_r(network_rSEXP);
-    Rcpp::traits::input_parameter< bool >::type exclude_unusable(exclude_unusableSEXP);
-    rcpp_result_gen = Rcpp::wrap(wrap_network_hosts(network_r, exclude_unusable));
-    return rcpp_result_gen;
-END_RCPP
-}
-// wrap_subnets
-List wrap_subnets(List network_r, IntegerVector new_prefix);
-RcppExport SEXP _ipaddress_wrap_subnets(SEXP network_rSEXP, SEXP new_prefixSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< List >::type network_r(network_rSEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type new_prefix(new_prefixSEXP);
-    rcpp_result_gen = Rcpp::wrap(wrap_subnets(network_r, new_prefix));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -526,13 +502,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // wrap_reverse_pointer
-CharacterVector wrap_reverse_pointer(List input);
-RcppExport SEXP _ipaddress_wrap_reverse_pointer(SEXP inputSEXP) {
+CharacterVector wrap_reverse_pointer(List address_r);
+RcppExport SEXP _ipaddress_wrap_reverse_pointer(SEXP address_rSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< List >::type input(inputSEXP);
-    rcpp_result_gen = Rcpp::wrap(wrap_reverse_pointer(input));
+    Rcpp::traits::input_parameter< List >::type address_r(address_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(wrap_reverse_pointer(address_r));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -545,6 +521,30 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< List >::type network_r(network_rSEXP);
     Rcpp::traits::input_parameter< unsigned int >::type size(sizeSEXP);
     rcpp_result_gen = Rcpp::wrap(wrap_sample_network(network_r, size));
+    return rcpp_result_gen;
+END_RCPP
+}
+// wrap_network_hosts
+List wrap_network_hosts(List network_r, bool exclude_unusable);
+RcppExport SEXP _ipaddress_wrap_network_hosts(SEXP network_rSEXP, SEXP exclude_unusableSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type network_r(network_rSEXP);
+    Rcpp::traits::input_parameter< bool >::type exclude_unusable(exclude_unusableSEXP);
+    rcpp_result_gen = Rcpp::wrap(wrap_network_hosts(network_r, exclude_unusable));
+    return rcpp_result_gen;
+END_RCPP
+}
+// wrap_subnets
+List wrap_subnets(List network_r, IntegerVector new_prefix);
+RcppExport SEXP _ipaddress_wrap_subnets(SEXP network_rSEXP, SEXP new_prefixSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type network_r(network_rSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type new_prefix(new_prefixSEXP);
+    rcpp_result_gen = Rcpp::wrap(wrap_subnets(network_r, new_prefix));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -567,14 +567,12 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_wrap_encode_hostname", (DL_FUNC) &_ipaddress_wrap_encode_hostname, 1},
     {"_ipaddress_wrap_decode_integer", (DL_FUNC) &_ipaddress_wrap_decode_integer, 2},
     {"_ipaddress_wrap_encode_integer", (DL_FUNC) &_ipaddress_wrap_encode_integer, 2},
-    {"_ipaddress_wrap_broadcast_address", (DL_FUNC) &_ipaddress_wrap_broadcast_address, 1},
     {"_ipaddress_wrap_netmask", (DL_FUNC) &_ipaddress_wrap_netmask, 2},
     {"_ipaddress_wrap_hostmask", (DL_FUNC) &_ipaddress_wrap_hostmask, 2},
     {"_ipaddress_wrap_prefix_from_mask", (DL_FUNC) &_ipaddress_wrap_prefix_from_mask, 1},
+    {"_ipaddress_wrap_broadcast_address", (DL_FUNC) &_ipaddress_wrap_broadcast_address, 1},
     {"_ipaddress_wrap_is_within", (DL_FUNC) &_ipaddress_wrap_is_within, 2},
     {"_ipaddress_wrap_is_within_any", (DL_FUNC) &_ipaddress_wrap_is_within_any, 2},
-    {"_ipaddress_wrap_network_hosts", (DL_FUNC) &_ipaddress_wrap_network_hosts, 2},
-    {"_ipaddress_wrap_subnets", (DL_FUNC) &_ipaddress_wrap_subnets, 2},
     {"_ipaddress_wrap_smallest_common_network", (DL_FUNC) &_ipaddress_wrap_smallest_common_network, 2},
     {"_ipaddress_wrap_bitwise_not", (DL_FUNC) &_ipaddress_wrap_bitwise_not, 1},
     {"_ipaddress_wrap_bitwise_and", (DL_FUNC) &_ipaddress_wrap_bitwise_and, 2},
@@ -597,6 +595,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_wrap_extract_teredo_client", (DL_FUNC) &_ipaddress_wrap_extract_teredo_client, 1},
     {"_ipaddress_wrap_reverse_pointer", (DL_FUNC) &_ipaddress_wrap_reverse_pointer, 1},
     {"_ipaddress_wrap_sample_network", (DL_FUNC) &_ipaddress_wrap_sample_network, 2},
+    {"_ipaddress_wrap_network_hosts", (DL_FUNC) &_ipaddress_wrap_network_hosts, 2},
+    {"_ipaddress_wrap_subnets", (DL_FUNC) &_ipaddress_wrap_subnets, 2},
     {NULL, NULL, 0}
 };
 

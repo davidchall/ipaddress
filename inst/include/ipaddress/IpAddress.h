@@ -50,8 +50,12 @@ public:
   /* ----------- *
    *  Accessors  *
    * ----------- */
+  bool is_ipv4() const {
+    return !is_na_ && !is_ipv6_;
+  }
+
   bool is_ipv6() const {
-    return is_ipv6_;
+    return !is_na_ && is_ipv6_;
   }
 
   bool is_na() const {

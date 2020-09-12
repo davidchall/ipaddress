@@ -86,8 +86,7 @@ List wrap_construct_network_from_address(List address_r, IntegerVector prefix_le
       // Construct IPv6
       if (prefix_length[i] < 0 || prefix_length[i] > 128) {
         output[i] = IpNetwork::make_na();
-        asio::ip::address_v6 asio_address(address[i].bytes_v6());
-        std::string cidr = asio_address.to_string() + "/" + std::to_string(prefix_length[i]);
+        std::string cidr = to_string(address[i]) + "/" + std::to_string(prefix_length[i]);
         warnOnRow(i, cidr, "prefix length out-of-bounds");
       } else {
         asio::ip::network_v6 tmp_v6(asio::ip::address_v6(address[i].bytes_v6()), prefix_length[i]);
@@ -107,8 +106,7 @@ List wrap_construct_network_from_address(List address_r, IntegerVector prefix_le
       // Construct IPv4
       if (prefix_length[i] < 0 || prefix_length[i] > 32) {
         output[i] = IpNetwork::make_na();
-        asio::ip::address_v4 asio_address(address[i].bytes_v4());
-        std::string cidr = asio_address.to_string() + "/" + std::to_string(prefix_length[i]);
+        std::string cidr = to_string(address[i]) + "/" + std::to_string(prefix_length[i]);
         warnOnRow(i, cidr, "prefix length out-of-bounds");
       } else {
         asio::ip::network_v4 tmp_v4(asio::ip::address_v4(address[i].bytes_v4()), prefix_length[i]);
@@ -129,8 +127,8 @@ List wrap_construct_network_from_address(List address_r, IntegerVector prefix_le
 }
 
 // [[Rcpp::export]]
-CharacterVector wrap_print_network(List x, bool exploded = false) {
-  std::vector<IpNetwork> network = decode_networks(x);
+CharacterVector wrap_print_network(List network_r, bool exploded = false) {
+  std::vector<IpNetwork> network = decode_networks(network_r);
 
   // initialize vectors
   std::size_t vsize = network.size();

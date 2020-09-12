@@ -29,6 +29,7 @@ std::string encode_integer(const IpAddress &x, bool hex) {
   }
 }
 
+
 template<class Bytes>
 Bytes decode_integer(const std::string& x_int_string) {
   Bytes x_bytes{};
@@ -48,6 +49,7 @@ Bytes decode_integer(const std::string& x_int_string) {
 
   return x_bytes;
 }
+
 
 // [[Rcpp::export]]
 List wrap_decode_integer(CharacterVector input, Nullable<LogicalVector> in_is_ipv6) {
@@ -102,6 +104,7 @@ List wrap_decode_integer(CharacterVector input, Nullable<LogicalVector> in_is_ip
 
   return encode_addresses(output);
 }
+
 
 // [[Rcpp::export]]
 CharacterVector wrap_encode_integer(List input, bool hex) {

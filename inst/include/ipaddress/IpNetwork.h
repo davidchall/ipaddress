@@ -46,6 +46,14 @@ public:
     return prefix_;
   }
 
+  unsigned int max_prefix_length() const {
+    return address_.n_bits();
+  }
+
+  bool is_ipv4() const {
+    return address_.is_ipv4();
+  }
+
   bool is_ipv6() const {
     return address_.is_ipv6();
   }

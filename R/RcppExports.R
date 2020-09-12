@@ -17,8 +17,8 @@ wrap_parse_address <- function(input) {
     .Call(`_ipaddress_wrap_parse_address`, input)
 }
 
-wrap_print_address <- function(x, exploded = FALSE) {
-    .Call(`_ipaddress_wrap_print_address`, x, exploded)
+wrap_print_address <- function(address_r, exploded = FALSE) {
+    .Call(`_ipaddress_wrap_print_address`, address_r, exploded)
 }
 
 wrap_compare_address <- function(address_r) {
@@ -33,16 +33,16 @@ wrap_construct_network_from_address <- function(address_r, prefix_length, strict
     .Call(`_ipaddress_wrap_construct_network_from_address`, address_r, prefix_length, strict, is_interface)
 }
 
-wrap_print_network <- function(x, exploded = FALSE) {
-    .Call(`_ipaddress_wrap_print_network`, x, exploded)
+wrap_print_network <- function(network_r, exploded = FALSE) {
+    .Call(`_ipaddress_wrap_print_network`, network_r, exploded)
 }
 
 wrap_decode_binary <- function(input) {
     .Call(`_ipaddress_wrap_decode_binary`, input)
 }
 
-wrap_encode_binary <- function(input) {
-    .Call(`_ipaddress_wrap_encode_binary`, input)
+wrap_encode_binary <- function(address_r) {
+    .Call(`_ipaddress_wrap_encode_binary`, address_r)
 }
 
 wrap_decode_bytes <- function(input) {
@@ -69,10 +69,6 @@ wrap_encode_integer <- function(input, hex) {
     .Call(`_ipaddress_wrap_encode_integer`, input, hex)
 }
 
-wrap_broadcast_address <- function(network_r) {
-    .Call(`_ipaddress_wrap_broadcast_address`, network_r)
-}
-
 wrap_netmask <- function(in_prefix_length, in_is_ipv6) {
     .Call(`_ipaddress_wrap_netmask`, in_prefix_length, in_is_ipv6)
 }
@@ -85,20 +81,16 @@ wrap_prefix_from_mask <- function(address_r) {
     .Call(`_ipaddress_wrap_prefix_from_mask`, address_r)
 }
 
+wrap_broadcast_address <- function(network_r) {
+    .Call(`_ipaddress_wrap_broadcast_address`, network_r)
+}
+
 wrap_is_within <- function(address_r, network_r) {
     .Call(`_ipaddress_wrap_is_within`, address_r, network_r)
 }
 
 wrap_is_within_any <- function(address_r, network_r) {
     .Call(`_ipaddress_wrap_is_within_any`, address_r, network_r)
-}
-
-wrap_network_hosts <- function(network_r, exclude_unusable) {
-    .Call(`_ipaddress_wrap_network_hosts`, network_r, exclude_unusable)
-}
-
-wrap_subnets <- function(network_r, new_prefix) {
-    .Call(`_ipaddress_wrap_subnets`, network_r, new_prefix)
 }
 
 wrap_smallest_common_network <- function(address1_r, address2_r) {
@@ -181,11 +173,19 @@ wrap_extract_teredo_client <- function(input) {
     .Call(`_ipaddress_wrap_extract_teredo_client`, input)
 }
 
-wrap_reverse_pointer <- function(input) {
-    .Call(`_ipaddress_wrap_reverse_pointer`, input)
+wrap_reverse_pointer <- function(address_r) {
+    .Call(`_ipaddress_wrap_reverse_pointer`, address_r)
 }
 
 wrap_sample_network <- function(network_r, size) {
     .Call(`_ipaddress_wrap_sample_network`, network_r, size)
+}
+
+wrap_network_hosts <- function(network_r, exclude_unusable) {
+    .Call(`_ipaddress_wrap_network_hosts`, network_r, exclude_unusable)
+}
+
+wrap_subnets <- function(network_r, new_prefix) {
+    .Call(`_ipaddress_wrap_subnets`, network_r, new_prefix)
 }
 

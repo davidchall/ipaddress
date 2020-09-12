@@ -46,8 +46,8 @@ List wrap_parse_address(CharacterVector input) {
 }
 
 // [[Rcpp::export]]
-CharacterVector wrap_print_address(List x, bool exploded = false) {
-  std::vector<IpAddress> address = decode_addresses(x);
+CharacterVector wrap_print_address(List address_r, bool exploded = false) {
+  std::vector<IpAddress> address = decode_addresses(address_r);
 
   // initialize vectors
   std::size_t vsize = address.size();

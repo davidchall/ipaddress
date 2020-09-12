@@ -7,24 +7,24 @@ using namespace Rcpp;
 using namespace ipaddress;
 
 
-std::string encode_binary(const IpAddress &x) {
-  std::string bit_string;
-  bit_string.reserve(x.n_bits());
+std::string encode_binary(const IpAddress &input) {
+  std::string output;
+  output.reserve(input.n_bits());
 
-  for (auto it = x.begin(); it != x.end(); ++it) {
+  for (auto it = input.begin(); it != input.end(); ++it) {
     std::bitset<8> bits(*it);
-    bit_string += bits.to_string();
+    output += bits.to_string();
   }
 
-  return bit_string;
+  return output;
 }
 
-IpAddress decode_binary(const std::string &bit_string, bool is_ipv6) {
-  IpAddress output(IpAddress::bytes_type_both(), is_ipv6, false);
+IpAddress decode_binary(const std::string &input, bool is_ipv6) {
+  IpAddress output = is_ipv6 ? IpAddress::make_ipv6() : IpAddress::make_ipv4();
 
   unsigned int pos_char = 0;
   for (auto it = output.begin(); it != output.end(); ++it, pos_char += 8) {
-    std::bitset<8> bits(bit_string.substr(pos_char, 8));
+    std::bitset<8> bits(input.substr(pos_char, 8));
     *it = bits.to_ulong();
   }
 
@@ -65,8 +65,8 @@ List wrap_decode_binary(CharacterVector input) {
 }
 
 // [[Rcpp::export]]
-CharacterVector wrap_encode_binary(List input) {
-  std::vector<IpAddress> address = decode_addresses(input);
+CharacterVector wrap_encode_binary(List address_r) {
+  std::vector<IpAddress> address = decode_addresses(address_r);
 
   // initialize vectors
   std::size_t vsize = address.size();

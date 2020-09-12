@@ -73,7 +73,7 @@ LogicalVector checkCondition(
   return output;
 }
 
-std::vector<IpAddress> map6to4(
+List map6to4(
   const std::vector<IpAddress> &address,
   const std::function<bool(const asio::ip::address_v6&)>& filter_fn,
   const std::function<asio::ip::address_v4(const asio::ip::address_v6&)>& map_fn
@@ -87,7 +87,7 @@ std::vector<IpAddress> map6to4(
       checkUserInterrupt();
     }
 
-    if (address[i].is_ipv6()) {
+    if (address[i].is_ipv6() && !address[i].is_na()) {
       asio::ip::address_v6 asio_address(address[i].bytes_v6());
       if (filter_fn(asio_address)) {
         output[i] = IpAddress::make_ipv4(map_fn(asio_address).to_bytes());
@@ -99,7 +99,7 @@ std::vector<IpAddress> map6to4(
     }
   }
 
-  return output;
+  return encode_addresses(output);
 }
 
 
@@ -170,6 +170,27 @@ LogicalVector wrap_is_site_local(List input) {
 /*------------------------------*
  *  IPv6 transition mechanisms  *
  * -----------------------------*/
+// [[Rcpp::export]]
+LogicalVector wrap_is_ipv4_mapped(List input) {
+  auto condition_v4 = [](const asio::ip::address_v4 &x) { return false; };
+  auto condition_v6 = [](const asio::ip::address_v6 &x) { return x.is_v4_mapped(); };
+
+  if (input.inherits("ip_address")) {
+    return checkCondition(decode_addresses(input), condition_v4, condition_v6);
+  } else {
+    return checkCondition(decode_networks(input),  condition_v4, condition_v6);
+  }
+}
+
+// [[Rcpp::export]]
+List wrap_extract_ipv4_mapped(List input) {
+  return map6to4(
+    decode_addresses(input),
+    [](const asio::ip::address_v6 &x) { return x.is_v4_mapped(); },
+    [](const asio::ip::address_v6 &x) { return asio::ip::make_address_v4(asio::ip::v4_mapped, x); }
+  );
+}
+
 bool is_6to4(const asio::ip::address_v6 &address) {
   asio::ip::address_v6::bytes_type bytes = address.to_bytes();
   return ((bytes[0] == 0x20) && (bytes[1] == 0x02));
@@ -182,6 +203,27 @@ asio::ip::address_v4 extract_6to4(const asio::ip::address_v6 &address) {
   std::copy(bytes_v6.begin() + 2, bytes_v6.begin() + 6, bytes_v4.begin());
 
   return asio::ip::make_address_v4(bytes_v4);
+}
+
+// [[Rcpp::export]]
+LogicalVector wrap_is_6to4(List input) {
+  auto condition_v4 = [](const asio::ip::address_v4 &x) { return false; };
+  auto condition_v6 = [](const asio::ip::address_v6 &x) { return is_6to4(x); };
+
+  if (input.inherits("ip_address")) {
+    return checkCondition(decode_addresses(input), condition_v4, condition_v6);
+  } else {
+    return checkCondition(decode_networks(input),  condition_v4, condition_v6);
+  }
+}
+
+// [[Rcpp::export]]
+List wrap_extract_6to4(List input) {
+  return map6to4(
+    decode_addresses(input),
+    [](const asio::ip::address_v6 &x) { return is_6to4(x); },
+    [](const asio::ip::address_v6 &x) { return extract_6to4(x); }
+  );
 }
 
 bool is_teredo(const asio::ip::address_v6 &address) {
@@ -210,49 +252,6 @@ asio::ip::address_v4 extract_teredo_client(const asio::ip::address_v6 &address) 
   return asio::ip::make_address_v4(bytes_v4);
 }
 
-
-// [[Rcpp::export]]
-LogicalVector wrap_is_ipv4_mapped(List input) {
-  auto condition_v4 = [](const asio::ip::address_v4 &x) { return false; };
-  auto condition_v6 = [](const asio::ip::address_v6 &x) { return x.is_v4_mapped(); };
-
-  if (input.inherits("ip_address")) {
-    return checkCondition(decode_addresses(input), condition_v4, condition_v6);
-  } else {
-    return checkCondition(decode_networks(input),  condition_v4, condition_v6);
-  }
-}
-
-// [[Rcpp::export]]
-List wrap_extract_ipv4_mapped(List input) {
-  return encode_addresses(map6to4(
-    decode_addresses(input),
-    [](const asio::ip::address_v6 &x) { return x.is_v4_mapped(); },
-    [](const asio::ip::address_v6 &x) { return asio::ip::make_address_v4(asio::ip::v4_mapped, x); }
-  ));
-}
-
-// [[Rcpp::export]]
-LogicalVector wrap_is_6to4(List input) {
-  auto condition_v4 = [](const asio::ip::address_v4 &x) { return false; };
-  auto condition_v6 = [](const asio::ip::address_v6 &x) { return is_6to4(x); };
-
-  if (input.inherits("ip_address")) {
-    return checkCondition(decode_addresses(input), condition_v4, condition_v6);
-  } else {
-    return checkCondition(decode_networks(input),  condition_v4, condition_v6);
-  }
-}
-
-// [[Rcpp::export]]
-List wrap_extract_6to4(List input) {
-  return encode_addresses(map6to4(
-    decode_addresses(input),
-    [](const asio::ip::address_v6 &x) { return is_6to4(x); },
-    [](const asio::ip::address_v6 &x) { return extract_6to4(x); }
-  ));
-}
-
 // [[Rcpp::export]]
 LogicalVector wrap_is_teredo(List input) {
   auto condition_v4 = [](const asio::ip::address_v4 &x) { return false; };
@@ -267,18 +266,18 @@ LogicalVector wrap_is_teredo(List input) {
 
 // [[Rcpp::export]]
 List wrap_extract_teredo_server(List input) {
-  return encode_addresses(map6to4(
+  return map6to4(
     decode_addresses(input),
     [](const asio::ip::address_v6 &x) { return is_teredo(x); },
     [](const asio::ip::address_v6 &x) { return extract_teredo_server(x); }
-  ));
+  );
 }
 
 // [[Rcpp::export]]
 List wrap_extract_teredo_client(List input) {
-  return encode_addresses(map6to4(
+  return map6to4(
     decode_addresses(input),
     [](const asio::ip::address_v6 &x) { return is_teredo(x); },
     [](const asio::ip::address_v6 &x) { return extract_teredo_client(x); }
-  ));
+  );
 }

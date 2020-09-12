@@ -31,14 +31,13 @@ List wrap_bitwise_and(List lhs_r, List rhs_r) {
   std::vector<IpAddress> lhs = decode_addresses(lhs_r);
   std::vector<IpAddress> rhs = decode_addresses(rhs_r);
 
+  // initialize vectors
   std::size_t vsize = lhs.size();
+  std::vector<IpAddress> result(vsize);
 
   if (rhs.size() != vsize) {
     stop("Inputs must have same length"); // # nocov
   }
-
-  // initialize vectors
-  std::vector<IpAddress> result(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
     if (i % 10000 == 0) {
@@ -56,14 +55,13 @@ List wrap_bitwise_or(List lhs_r, List rhs_r) {
   std::vector<IpAddress> lhs = decode_addresses(lhs_r);
   std::vector<IpAddress> rhs = decode_addresses(rhs_r);
 
+  // initialize vectors
   std::size_t vsize = lhs.size();
+  std::vector<IpAddress> result(vsize);
 
   if (rhs.size() != vsize) {
     stop("Inputs must have same length"); // # nocov
   }
-
-  // initialize vectors
-  std::vector<IpAddress> result(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
     if (i % 10000 == 0) {
@@ -81,14 +79,13 @@ List wrap_bitwise_xor(List lhs_r, List rhs_r) {
   std::vector<IpAddress> lhs = decode_addresses(lhs_r);
   std::vector<IpAddress> rhs = decode_addresses(rhs_r);
 
+  // initialize vectors
   std::size_t vsize = lhs.size();
+  std::vector<IpAddress> result(vsize);
 
   if (rhs.size() != vsize) {
     stop("Inputs must have same length"); // # nocov
   }
-
-  // initialize vectors
-  std::vector<IpAddress> result(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
     if (i % 10000 == 0) {
@@ -105,14 +102,13 @@ List wrap_bitwise_xor(List lhs_r, List rhs_r) {
 List wrap_bitwise_shift_left(List lhs_r, IntegerVector rhs) {
   std::vector<IpAddress> lhs = decode_addresses(lhs_r);
 
+  // initialize vectors
   std::size_t vsize = lhs.size();
+  std::vector<IpAddress> result(vsize);
 
-  if ((std::size_t)rhs.size() != vsize) {
+  if (static_cast<std::size_t>(rhs.size()) != vsize) {
     stop("Inputs must have same length"); // # nocov
   }
-
-  // initialize vectors
-  std::vector<IpAddress> result(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
     if (i % 10000 == 0) {
@@ -133,14 +129,13 @@ List wrap_bitwise_shift_left(List lhs_r, IntegerVector rhs) {
 List wrap_bitwise_shift_right(List lhs_r, IntegerVector rhs) {
   std::vector<IpAddress> lhs = decode_addresses(lhs_r);
 
+  // initialize vectors
   std::size_t vsize = lhs.size();
+  std::vector<IpAddress> result(vsize);
 
-  if ((std::size_t)rhs.size() != vsize) {
+  if (static_cast<std::size_t>(rhs.size()) != vsize) {
     stop("Inputs must have same length"); // # nocov
   }
-
-  // initialize vectors
-  std::vector<IpAddress> result(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
     if (i % 10000 == 0) {
@@ -161,14 +156,13 @@ List wrap_bitwise_shift_right(List lhs_r, IntegerVector rhs) {
 List wrap_add_integer(List lhs_r, IntegerVector rhs) {
   std::vector<IpAddress> lhs = decode_addresses(lhs_r);
 
+  // initialize vectors
   std::size_t vsize = lhs.size();
+  std::vector<IpAddress> output(vsize);
 
-  if (rhs.size() != static_cast<R_xlen_t>(vsize)) {
+  if (static_cast<std::size_t>(rhs.size()) != vsize) {
     stop("Inputs must have same length"); // # nocov
   }
-
-  // initialize vectors
-  std::vector<IpAddress> output(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
     if (i % 10000 == 0) {
@@ -178,7 +172,7 @@ List wrap_add_integer(List lhs_r, IntegerVector rhs) {
     if (lhs[i].is_na() || rhs[i] == NA_INTEGER) {
       output[i] = IpAddress::make_na();
     } else {
-      output[i] = (lhs[i] + rhs[i]);
+      output[i] = lhs[i] + rhs[i];
 
       if (output[i].is_na() && rhs[i] > 0) {
         warnOnRow(i, to_string(lhs[i]) + " + " + std::to_string(rhs[i]), "out-of-range");

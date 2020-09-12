@@ -5,45 +5,44 @@ using namespace Rcpp;
 using namespace ipaddress;
 
 
-std::vector<IpAddress> sample_bits(bool is_ipv6, unsigned int n_bits_to_sample, unsigned int n_sample) {
-  typedef typename IpAddress::bytes_type_both Bytes;
-  std::vector<Bytes> result_bytes(n_sample, Bytes{});
-  unsigned int n_bits_in_byte = 8;
+std::vector<IpAddress> sample_bits(bool is_ipv6, unsigned int bits_to_sample, unsigned int n_sample) {
+  IpAddress blank_address = is_ipv6 ? IpAddress::make_ipv6() : IpAddress::make_ipv4();
+  std::vector<IpAddress> result(n_sample, blank_address);
 
-  // fill bytes right to left
-  unsigned int start_bit = is_ipv6 ? 0 : 12;
-  for (std::size_t i=start_bit; i<sizeof(Bytes); ++i) {
-    unsigned int ingest_bits = std::min(n_bits_to_sample, n_bits_in_byte);
-    n_bits_to_sample -= ingest_bits;
-    if (ingest_bits == 0) {
+  for (unsigned int i_byte=blank_address.n_bytes()-1; i_byte>=0; --i_byte) {
+
+    unsigned int sample_max = 0;
+    if (bits_to_sample == 0) {
       break;
+    } else if (bits_to_sample >= CHAR_BIT) {
+      sample_max = 1 << CHAR_BIT;
+      bits_to_sample -= CHAR_BIT;
+    } else {
+      sample_max = 1 << bits_to_sample;
+      bits_to_sample = 0;
     }
 
-    Rcpp::IntegerVector byte_vector = Rcpp::sample(1 << ingest_bits, n_sample, true, R_NilValue, false);
+    IntegerVector byte_vector = sample(sample_max, n_sample, true, R_NilValue, false);
 
-    for (std::size_t j=0; j<n_sample; ++j) {
-      result_bytes[j][sizeof(Bytes)-1-i] = byte_vector[j];
+    for (std::size_t i_addr=0; i_addr<n_sample; ++i_addr) {
+      result[i_addr].bytes[i_byte] = byte_vector[i_addr];
     }
   }
-
-  std::vector<IpAddress> result;
-  result.reserve(n_sample);
-  std::transform(result_bytes.begin(), result_bytes.end(), std::back_inserter(result),
-                 [&](const Bytes &b) { return IpAddress(b, is_ipv6, false); });
 
   return result;
 }
 
 
 std::vector<IpAddress> sample_network(const IpNetwork &network, unsigned int size) {
-  unsigned int max_prefix_length = network.address().n_bits();
-  unsigned int n_bits_to_sample = max_prefix_length - network.prefix_length();
+  unsigned int n_bits_sampled = network.max_prefix_length() - network.prefix_length();
 
-  std::vector<IpAddress> result = sample_bits(network.is_ipv6(), n_bits_to_sample, size);
+  std::vector<IpAddress> result = sample_bits(network.is_ipv6(), n_bits_sampled, size);
 
   // shift addresses into network
-  std::transform(result.begin(), result.end(), result.begin(),
-                 [&](IpAddress addr) { return bitwise_or(addr, network.address()); });
+  if (network.prefix_length() > 0) {
+    std::transform(result.begin(), result.end(), result.begin(),
+                   [&](IpAddress addr) { return bitwise_or(addr, network.address()); });
+  }
 
   return result;
 }
