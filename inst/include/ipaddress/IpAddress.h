@@ -238,10 +238,11 @@ public:
       return --result;
     }
 
-    // consider 32 bits at a time, moving right to left
+    // cast signed to unsigned: negative n becomes (2^32 - n)
     uint32_t ingest = n;
     uint32_t old_bytes, old_int, new_int, new_bytes;
 
+    // consider 32 bits at a time, moving right to left
     auto it_in = lhs.rbegin() + 3;
     auto it_out = result.rbegin() + 3;
     for (; it_in != lhs.rend(); it_in += 4, it_out += 4) {
@@ -251,6 +252,7 @@ public:
       new_bytes = host_to_network_long(new_int);
       std::memcpy(&*it_out, &new_bytes, 4);
 
+      // catch overflow
       if ((n > 0) == (new_int < old_int)) {
         ingest = n > 0 ? 1 : -1;
       } else {
