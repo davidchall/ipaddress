@@ -19,7 +19,6 @@ BugReports: https://github.com/davidchall/ipaddress/issues
 Depends: 
     R (>= 3.3.0)
 Imports: 
-    methods,
     Rcpp,
     rlang (>= 0.4.0),
     vctrs (>= 0.3.0)

@@ -1,6 +1,3 @@
-#' @importFrom methods setOldClass
-methods::setOldClass(c("ip_address", "vctrs_vctr"))
-
 #' Vector of IP addresses
 #'
 #' @description
