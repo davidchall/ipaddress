@@ -1,4 +1,4 @@
-# ipaddress (development version)
+# ipaddress 0.5.1
 
 * Addition/subtraction of large integers is now much faster (#64)
 * `ip_to_bytes()` now returns a list of raw vectors instead of a `blob` object (#65)
