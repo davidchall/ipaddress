@@ -100,7 +100,7 @@ to represent the same range of addresses." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
       </span>
     </div>
 
@@ -161,7 +161,7 @@ to represent the same range of addresses." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Collapse contiguous and overlapping networks</h1>
-    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/collapse_exclude.R'><code>R/collapse_exclude.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/address_ranges.R'><code>R/address_ranges.R</code></a></small>
     <div class="hidden name"><code>collapse_networks.Rd</code></div>
     </div>
 
@@ -170,7 +170,7 @@ to represent the same range of addresses." />
 to represent the same range of addresses.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>collapse_networks</span>(<span class='no'>network</span>)</pre>
+    <pre class="usage"><span class='fu'>collapse_networks</span>(<span class='kw'>network</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -189,7 +189,8 @@ to represent the same range of addresses.</p>
     <div class='dont-index'><p><code><a href='exclude_networks.html'>exclude_networks()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>collapse_networks</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.0/24"</span>, <span class='st'>"192.168.1.0/24"</span>)))</div><div class='output co'>#&gt; &lt;ip_network[1]&gt;
+    <pre class="examples"><div class='input'><span class='fu'>collapse_networks</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.0/24"</span>, <span class='st'>"192.168.1.0/24"</span>)))
+</div><div class='output co'>#&gt; &lt;ip_network[1]&gt;
 #&gt; [1] 192.168.0.0/23</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -206,7 +207,7 @@ to represent the same range of addresses.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

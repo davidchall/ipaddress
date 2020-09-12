@@ -98,7 +98,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
       </span>
     </div>
 
@@ -162,6 +162,28 @@
       <small>Source: <a href='https://github.com/davidchall/ipaddress/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="ipaddress-051" class="section level1">
+<h1 class="page-header" data-toc-text="0.5.1">
+<a href="#ipaddress-051" class="anchor"></a>ipaddress 0.5.1<small> 2020-09-12 </small>
+</h1>
+<ul>
+<li>Addition/subtraction of large integers is now much faster (<a href='https://github.com/davidchall/ipaddress/issues/64'>#64</a>)</li>
+<li>
+<code><a href="../reference/ip_to_bytes.html">ip_to_bytes()</a></code> now returns a list of raw vectors instead of a <code>blob</code> object (<a href='https://github.com/davidchall/ipaddress/issues/65'>#65</a>)
+<ul>
+<li>Result can still be converted using <code><a href="https://rdrr.io/pkg/blob/man/blob.html">blob::as_blob()</a></code>
+</li>
+<li>Removes excessive blob package dependency</li>
+</ul>
+</li>
+<li>Refactored C++ code to reduce dependence on Asio library (<a href='https://github.com/davidchall/ipaddress/issues/64'>#64</a>)
+<ul>
+<li>Package developers can now use <code>LinkingTo: ipaddress</code> without <code>LinkingTo: AsioHeaders</code>
+</li>
+</ul>
+</li>
+</ul>
+</div>
     <div id="ipaddress-050" class="section level1">
 <h1 class="page-header" data-toc-text="0.5.0">
 <a href="#ipaddress-050" class="anchor"></a>ipaddress 0.5.0<small> 2020-08-26 </small>
@@ -304,7 +326,7 @@
 <li>Added <code>vignette("ipaddress")</code> to introduce the data classes provided by ipaddress (<a href='https://github.com/davidchall/ipaddress/issues/24'>#24</a>)</li>
 <li>New <code><a href="../reference/ip_interface.html">ip_interface()</a></code> class to simultaneously store the address and the network it is on (<a href='https://github.com/davidchall/ipaddress/issues/15'>#15</a>)</li>
 <li>
-<code><a href="../reference/ip_address.html">ip_address()</a></code> vectors now support bitwise operations (<code>!</code>, <code><a href="https://rdrr.io/r/base/Logic.html">&amp;</a></code>, <code><a href="https://rdrr.io/r/base/Logic.html">|</a></code> and <code><a href="https://rdrr.io/r/base/Arithmetic.html">^</a></code>)</li>
+<code><a href="../reference/ip_address.html">ip_address()</a></code> vectors now support bitwise operations (<code><a href="https://rdrr.io/r/base/Logic.html">!</a></code>, <code><a href="https://rdrr.io/r/base/Logic.html">&amp;</a></code>, <code><a href="https://rdrr.io/r/base/Logic.html">|</a></code> and <code><a href="https://rdrr.io/r/base/Arithmetic.html">^</a></code>)</li>
 <li>
 <code><a href="../reference/ip_address.html">ip_address()</a></code> vectors now support addition and subtraction of integers (<a href='https://github.com/davidchall/ipaddress/issues/14'>#14</a>)</li>
 <li>Added an <code><a href="../reference/ip_network.html">ip_network()</a></code> constructor that accepts <code>ip_address</code> and prefix length vectors (<a href='https://github.com/davidchall/ipaddress/issues/9'>#9</a>)</li>
@@ -445,7 +467,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

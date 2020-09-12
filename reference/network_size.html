@@ -101,7 +101,7 @@ addresses in the network." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
       </span>
     </div>
 
@@ -172,11 +172,11 @@ addresses of the network; <code>num_addresses()</code> gives the total number of
 addresses in the network.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>network_address</span>(<span class='no'>x</span>)
+    <pre class="usage"><span class='fu'>network_address</span>(<span class='kw'>x</span>)
 
-<span class='fu'>broadcast_address</span>(<span class='no'>x</span>)
+<span class='fu'>broadcast_address</span>(<span class='kw'>x</span>)
 
-<span class='fu'>num_addresses</span>(<span class='no'>x</span>)</pre>
+<span class='fu'>num_addresses</span>(<span class='kw'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -209,14 +209,17 @@ Although IPv6 does not follow this approach to broadcast addresses, the
     <div class='dont-index'><p>Use <code><a href='sequence.html'>seq.ip_network()</a></code> to generate all addresses in a network.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.0/22"</span>, <span class='st'>"2001:db8::/33"</span>))
+    <pre class="examples"><div class='input'><span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.0/22"</span>, <span class='st'>"2001:db8::/33"</span>))
 
-<span class='fu'>network_address</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
+<span class='fu'>network_address</span>(<span class='kw'>x</span>)
+</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
 #&gt; [1] 192.168.0.0 2001:db8:: </div><div class='input'>
-<span class='fu'>broadcast_address</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
+<span class='fu'>broadcast_address</span>(<span class='kw'>x</span>)
+</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
 #&gt; [1] 192.168.3.255                         
 #&gt; [2] 2001:db8:7fff:ffff:ffff:ffff:ffff:ffff</div><div class='input'>
-<span class='fu'>num_addresses</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] 1.024000e+03 3.961408e+28</div></pre>
+<span class='fu'>num_addresses</span>(<span class='kw'>x</span>)
+</div><div class='output co'>#&gt; [1] 1.024000e+03 3.961408e+28</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -232,7 +235,7 @@ Although IPv6 does not follow this approach to broadcast addresses, the
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

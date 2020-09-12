@@ -100,7 +100,7 @@ sample_network() samples from a specific network." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
       </span>
     </div>
 
@@ -170,11 +170,11 @@ sample_network() samples from a specific network." />
 <code>sample_network()</code> samples from a specific network.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sample_ipv4</span>(<span class='no'>size</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>sample_ipv4</span>(<span class='kw'>size</span>, replace = <span class='fl'>FALSE</span>)
 
-<span class='fu'>sample_ipv6</span>(<span class='no'>size</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>sample_ipv6</span>(<span class='kw'>size</span>, replace = <span class='fl'>FALSE</span>)
 
-<span class='fu'>sample_network</span>(<span class='no'>x</span>, <span class='no'>size</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+<span class='fu'>sample_network</span>(<span class='kw'>x</span>, <span class='kw'>size</span>, replace = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -201,18 +201,22 @@ sample_network() samples from a specific network." />
     <div class='dont-index'><p>Use <code><a href='sequence.html'>seq.ip_network()</a></code> to generate <em>all</em> addresses in a network.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>sample_ipv4</span>(<span class='fl'>5</span>)</div><div class='output co'>#&gt; &lt;ip_address[5]&gt;
+    <pre class="examples"><div class='input'><span class='fu'>sample_ipv4</span>(<span class='fl'>5</span>)
+</div><div class='output co'>#&gt; &lt;ip_address[5]&gt;
 #&gt; [1] 50.223.119.20  103.44.127.213 16.8.74.153    99.82.187.40   249.102.197.1 </div><div class='input'>
-<span class='fu'>sample_ipv6</span>(<span class='fl'>5</span>)</div><div class='output co'>#&gt; &lt;ip_address[5]&gt;
+<span class='fu'>sample_ipv6</span>(<span class='fl'>5</span>)
+</div><div class='output co'>#&gt; &lt;ip_address[5]&gt;
 #&gt; [1] 3dff:eb87:572:31d3:c776:c3ae:6e07:bd4a 
 #&gt; [2] 8c26:6699:605f:f246:3450:c57f:b439:dad 
 #&gt; [3] d584:3642:8f07:8a91:b62c:fda4:f24d:87bc
 #&gt; [4] 7d8:ab4a:db77:8b55:1088:f8a9:2ea2:b232 
 #&gt; [5] 78b7:f7a:6263:4798:5a7e:6318:377a:b0fb </div><div class='input'>
-<span class='fu'>sample_network</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>"192.168.0.0/16"</span>), <span class='fl'>5</span>)</div><div class='output co'>#&gt; &lt;ip_address[5]&gt;
+<span class='fu'>sample_network</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>"192.168.0.0/16"</span>), <span class='fl'>5</span>)
+</div><div class='output co'>#&gt; &lt;ip_address[5]&gt;
 #&gt; [1] 192.168.171.206 192.168.129.208 192.168.169.103 192.168.131.55 
 #&gt; [5] 192.168.213.107</div><div class='input'>
-<span class='fu'>sample_network</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>"2001:db8::/48"</span>), <span class='fl'>5</span>)</div><div class='output co'>#&gt; &lt;ip_address[5]&gt;
+<span class='fu'>sample_network</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>"2001:db8::/48"</span>), <span class='fl'>5</span>)
+</div><div class='output co'>#&gt; &lt;ip_address[5]&gt;
 #&gt; [1] 2001:db8:0:55b3:912:932a:3fdb:80b5  2001:db8:0:9138:97ff:afa9:6791:5bdf
 #&gt; [3] 2001:db8:0:40ba:3c9c:3edb:c540:c602 2001:db8:0:7637:e82c:bed:1eeb:95e3 
 #&gt; [5] 2001:db8:0:ea74:d1e8:e88d:31de:a2ff</div></pre>
@@ -231,7 +235,7 @@ sample_network() samples from a specific network." />
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

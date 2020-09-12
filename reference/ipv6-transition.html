@@ -101,7 +101,7 @@ embedded IPv4 address from an IPv6 address." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
       </span>
     </div>
 
@@ -172,19 +172,19 @@ from IPv4 to IPv6. These functions make it possible to extract the
 embedded IPv4 address from an IPv6 address.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>is_ipv4_mapped</span>(<span class='no'>x</span>)
+    <pre class="usage"><span class='fu'>is_ipv4_mapped</span>(<span class='kw'>x</span>)
 
-<span class='fu'>is_6to4</span>(<span class='no'>x</span>)
+<span class='fu'>is_6to4</span>(<span class='kw'>x</span>)
 
-<span class='fu'>is_teredo</span>(<span class='no'>x</span>)
+<span class='fu'>is_teredo</span>(<span class='kw'>x</span>)
 
-<span class='fu'>extract_ipv4_mapped</span>(<span class='no'>x</span>)
+<span class='fu'>extract_ipv4_mapped</span>(<span class='kw'>x</span>)
 
-<span class='fu'>extract_6to4</span>(<span class='no'>x</span>)
+<span class='fu'>extract_6to4</span>(<span class='kw'>x</span>)
 
-<span class='fu'>extract_teredo_server</span>(<span class='no'>x</span>)
+<span class='fu'>extract_teredo_server</span>(<span class='kw'>x</span>)
 
-<span class='fu'>extract_teredo_client</span>(<span class='no'>x</span>)</pre>
+<span class='fu'>extract_teredo_client</span>(<span class='kw'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -214,17 +214,24 @@ embedded IPv4 address from an IPv6 address.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># these examples show the reserved networks</span>
-<span class='fu'>is_ipv4_mapped</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>"::ffff:0.0.0.0/96"</span>))</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
-<span class='fu'>is_6to4</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>"2002::/16"</span>))</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
-<span class='fu'>is_teredo</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>"2001::/32"</span>))</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='fu'>is_ipv4_mapped</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>"::ffff:0.0.0.0/96"</span>))
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='fu'>is_6to4</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>"2002::/16"</span>))
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='fu'>is_teredo</span>(<span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='st'>"2001::/32"</span>))
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 <span class='co'># these examples show embedded IPv4 addresses</span>
-<span class='fu'>extract_ipv4_mapped</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"::ffff:192.168.0.1"</span>))</div><div class='output co'>#&gt; &lt;ip_address[1]&gt;
+<span class='fu'>extract_ipv4_mapped</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"::ffff:192.168.0.1"</span>))
+</div><div class='output co'>#&gt; &lt;ip_address[1]&gt;
 #&gt; [1] 192.168.0.1</div><div class='input'>
-<span class='fu'>extract_6to4</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"2002:c000:0204::"</span>))</div><div class='output co'>#&gt; &lt;ip_address[1]&gt;
+<span class='fu'>extract_6to4</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"2002:c000:0204::"</span>))
+</div><div class='output co'>#&gt; &lt;ip_address[1]&gt;
 #&gt; [1] 192.0.2.4</div><div class='input'>
-<span class='fu'>extract_teredo_server</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"2001:0000:4136:e378:8000:63bf:3fff:fdd2"</span>))</div><div class='output co'>#&gt; &lt;ip_address[1]&gt;
+<span class='fu'>extract_teredo_server</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"2001:0000:4136:e378:8000:63bf:3fff:fdd2"</span>))
+</div><div class='output co'>#&gt; &lt;ip_address[1]&gt;
 #&gt; [1] 65.54.227.120</div><div class='input'>
-<span class='fu'>extract_teredo_client</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"2001:0000:4136:e378:8000:63bf:3fff:fdd2"</span>))</div><div class='output co'>#&gt; &lt;ip_address[1]&gt;
+<span class='fu'>extract_teredo_client</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"2001:0000:4136:e378:8000:63bf:3fff:fdd2"</span>))
+</div><div class='output co'>#&gt; &lt;ip_address[1]&gt;
 #&gt; [1] 192.0.2.45</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -241,7 +248,7 @@ embedded IPv4 address from an IPv6 address.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

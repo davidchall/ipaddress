@@ -101,7 +101,7 @@ converted using as.numeric() for IPv4 addresses." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
       </span>
     </div>
 
@@ -162,7 +162,7 @@ converted using as.numeric() for IPv4 addresses." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Represent address as integer</h1>
-    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/other_repr.R'><code>R/other_repr.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/ip_to_integer.R'><code>R/ip_to_integer.R</code></a></small>
     <div class="hidden name"><code>ip_to_integer.Rd</code></div>
     </div>
 
@@ -172,9 +172,9 @@ converted using as.numeric() for IPv4 addresses." />
 converted using <code><a href='https://rdrr.io/r/base/numeric.html'>as.numeric()</a></code> for IPv4 addresses.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ip_to_integer</span>(<span class='no'>x</span>, <span class='kw'>base</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"dec"</span>, <span class='st'>"hex"</span>, <span class='st'>"bin"</span>))
+    <pre class="usage"><span class='fu'>ip_to_integer</span>(<span class='kw'>x</span>, base = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"dec"</span>, <span class='st'>"hex"</span>, <span class='st'>"bin"</span>))
 
-<span class='fu'>integer_to_ip</span>(<span class='no'>x</span>, <span class='kw'>is_ipv6</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'>integer_to_ip</span>(<span class='kw'>x</span>, is_ipv6 = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -247,18 +247,23 @@ the distinction between individual addresses because integer precision is lost.<
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.1"</span>, <span class='st'>"2001:db8::8a2e:370:7334"</span>, <span class='fl'>NA</span>))
-<span class='fu'>ip_to_integer</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] "3232235521"                            
+    <pre class="examples"><div class='input'><span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.1"</span>, <span class='st'>"2001:db8::8a2e:370:7334"</span>, <span class='fl'>NA</span>))
+<span class='fu'>ip_to_integer</span>(<span class='kw'>x</span>)
+</div><div class='output co'>#&gt; [1] "3232235521"                            
 #&gt; [2] "42540766411282592856904136881884656436"
 #&gt; [3] NA                                      </div><div class='input'>
-<span class='fu'>integer_to_ip</span>(<span class='fu'>ip_to_integer</span>(<span class='no'>x</span>))</div><div class='output co'>#&gt; &lt;ip_address[3]&gt;
+<span class='fu'>integer_to_ip</span>(<span class='fu'>ip_to_integer</span>(<span class='kw'>x</span>))
+</div><div class='output co'>#&gt; &lt;ip_address[3]&gt;
 #&gt; [1] 192.168.0.1             2001:db8::8a2e:370:7334 &lt;NA&gt;                   </div><div class='input'>
 <span class='co'># with IPv4 only, we can use numeric data type</span>
-<span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='fu'>ip_to_integer</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"192.168.0.1"</span>)))</div><div class='output co'>#&gt; [1] 3232235521</div><div class='input'>
-<span class='fu'>integer_to_ip</span>(<span class='fl'>3232235521</span>)</div><div class='output co'>#&gt; &lt;ip_address[1]&gt;
+<span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='fu'>ip_to_integer</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"192.168.0.1"</span>)))
+</div><div class='output co'>#&gt; [1] 3232235521</div><div class='input'>
+<span class='fu'>integer_to_ip</span>(<span class='fl'>3232235521</span>)
+</div><div class='output co'>#&gt; &lt;ip_address[1]&gt;
 #&gt; [1] 192.168.0.1</div><div class='input'>
 <span class='co'># hex representation</span>
-<span class='fu'>ip_to_integer</span>(<span class='no'>x</span>, <span class='kw'>base</span> <span class='kw'>=</span> <span class='st'>"hex"</span>)</div><div class='output co'>#&gt; [1] "0xC0A80001"                         "0x20010DB80000000000008A2E03707334"
+<span class='fu'>ip_to_integer</span>(<span class='kw'>x</span>, base = <span class='st'>"hex"</span>)
+</div><div class='output co'>#&gt; [1] "0xC0A80001"                         "0x20010DB80000000000008A2E03707334"
 #&gt; [3] NA                                  </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -275,7 +280,7 @@ the distinction between individual addresses because integer precision is lost.<
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

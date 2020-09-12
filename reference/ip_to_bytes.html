@@ -53,7 +53,7 @@
 
 
 <meta property="og:title" content="Represent address as raw bytes — ip_to_bytes" />
-<meta property="og:description" content="Encode or decode an ip_address as a vector of raw bytes." />
+<meta property="og:description" content="Encode or decode an ip_address as a list of raw bytes." />
 <meta property="og:image" content="https://davidchall.github.io/ipaddress/logo.png" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="@hall_davidc" />
@@ -99,7 +99,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
       </span>
     </div>
 
@@ -160,17 +160,17 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Represent address as raw bytes</h1>
-    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/other_repr.R'><code>R/other_repr.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/ip_to_bytes.R'><code>R/ip_to_bytes.R</code></a></small>
     <div class="hidden name"><code>ip_to_bytes.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Encode or decode an <code><a href='ip_address.html'>ip_address</a></code> as a vector of raw bytes.</p>
+    <p>Encode or decode an <code><a href='ip_address.html'>ip_address</a></code> as a list of raw bytes.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ip_to_bytes</span>(<span class='no'>x</span>)
+    <pre class="usage"><span class='fu'>ip_to_bytes</span>(<span class='kw'>x</span>)
 
-<span class='fu'>bytes_to_ip</span>(<span class='no'>x</span>)</pre>
+<span class='fu'>bytes_to_ip</span>(<span class='kw'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -179,7 +179,7 @@
       <th>x</th>
       <td><ul>
 <li><p>For <code>ip_to_bytes()</code>: An <code><a href='ip_address.html'>ip_address</a></code> vector</p></li>
-<li><p>For <code>bytes_to_ip()</code>: A <code><a href='https://rdrr.io/pkg/blob/man/blob.html'>blob::blob</a></code> vector</p></li>
+<li><p>For <code>bytes_to_ip()</code>: A list of raw vectors or a <code><a href='https://rdrr.io/pkg/blob/man/blob.html'>blob::blob</a></code> object</p></li>
 </ul></td>
     </tr>
     </table>
@@ -188,7 +188,7 @@
 
     
 <ul>
-<li><p>For <code>ip_to_bytes()</code>: A <code><a href='https://rdrr.io/pkg/blob/man/blob.html'>blob::blob</a></code> vector</p></li>
+<li><p>For <code>ip_to_bytes()</code>: A list of raw vectors</p></li>
 <li><p>For <code>bytes_to_ip()</code>: An <code><a href='ip_address.html'>ip_address</a></code> vector</p></li>
 </ul>
 
@@ -204,14 +204,32 @@ and missing values are encoded as <code>NULL</code>.</p>
 <ul>
 <li><p><code><a href='ip_to_integer.html'>ip_to_integer()</a></code> and <code><a href='ip_to_integer.html'>integer_to_ip()</a></code></p></li>
 <li><p><code><a href='ip_to_binary.html'>ip_to_binary()</a></code> and <code><a href='ip_to_binary.html'>binary_to_ip()</a></code></p></li>
+<li><p>Use <code><a href='https://rdrr.io/pkg/blob/man/blob.html'>blob::as_blob()</a></code> to cast result to a blob object</p></li>
 </ul>
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.1"</span>, <span class='st'>"2001:db8::8a2e:370:7334"</span>, <span class='fl'>NA</span>))
-<span class='fu'>ip_to_bytes</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; &lt;blob[3]&gt;
-#&gt; [1] blob[4 B]  blob[16 B] &lt;NA&gt;      </div><div class='input'>
-<span class='fu'>bytes_to_ip</span>(<span class='fu'>ip_to_bytes</span>(<span class='no'>x</span>))</div><div class='output co'>#&gt; &lt;ip_address[3]&gt;
+    <pre class="examples"><div class='input'><span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.1"</span>, <span class='st'>"2001:db8::8a2e:370:7334"</span>, <span class='fl'>NA</span>))
+<span class='fu'>ip_to_bytes</span>(<span class='kw'>x</span>)
+</div><div class='output co'>#&gt; [[1]]
+#&gt; [1] c0 a8 00 01
+#&gt; 
+#&gt; [[2]]
+#&gt;  [1] 20 01 0d b8 00 00 00 00 00 00 8a 2e 03 70 73 34
+#&gt; 
+#&gt; [[3]]
+#&gt; NULL
+#&gt; </div><div class='input'>
+<span class='kw'>bytes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
+  <span class='fu'><a href='https://rdrr.io/r/base/raw.html'>as.raw</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0xc0</span>, <span class='fl'>0xa8</span>, <span class='fl'>0x00</span>, <span class='fl'>0x01</span>)),
+  <span class='fu'><a href='https://rdrr.io/r/base/raw.html'>as.raw</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
+    <span class='fl'>0x20</span>, <span class='fl'>0x01</span>, <span class='fl'>0x0d</span>, <span class='fl'>0xb8</span>, <span class='fl'>0x00</span>, <span class='fl'>0x00</span>, <span class='fl'>0x00</span>, <span class='fl'>0x00</span>,
+    <span class='fl'>0x00</span>, <span class='fl'>0x00</span>, <span class='fl'>0x8a</span>, <span class='fl'>0x2e</span>, <span class='fl'>0x03</span>, <span class='fl'>0x70</span>, <span class='fl'>0x73</span>, <span class='fl'>0x34</span>
+  )),
+  <span class='kw'>NULL</span>
+)
+<span class='fu'>bytes_to_ip</span>(<span class='kw'>bytes</span>)
+</div><div class='output co'>#&gt; &lt;ip_address[3]&gt;
 #&gt; [1] 192.168.0.1             2001:db8::8a2e:370:7334 &lt;NA&gt;                   </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -228,7 +246,7 @@ and missing values are encoded as <code>NULL</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

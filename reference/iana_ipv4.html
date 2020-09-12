@@ -99,7 +99,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
       </span>
     </div>
 
@@ -168,12 +168,12 @@
     <p>A dataset containing the registry of allocated blocks in IPv4 address space.</p>
     </div>
 
-    <pre class="usage"><span class='no'>iana_ipv4</span></pre>
+    <pre class="usage"><span class='kw'>iana_ipv4</span></pre>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A data frame with 122 rows and 3 variables:</p><dl'>
+    <p>A data frame with 122 rows and 3 variables:</p><dl>
 <dt>network</dt><dd><p>Address block (an <code><a href='ip_network.html'>ip_network</a></code> vector)</p></dd>
 <dt>allocation</dt><dd><p>There are three types of allocation:
 <ul>
@@ -196,7 +196,8 @@
     <div class='dont-index'><p><code><a href='is_reserved.html'>is_reserved()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>iana_ipv4</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 122 x 3</span><span>
+    <pre class="examples"><div class='input'><span class='kw'>iana_ipv4</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 122 x 3</span><span>
 #&gt;       network allocation label             
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;ip_netwk&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>             
 #&gt; </span><span style='color: #555555;'> 1</span><span>  0</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #555555;'>.</span><span>0</span><span style='color: #00BB00;'>/8</span><span> Reserved   Reserved          
@@ -225,7 +226,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
