@@ -3,7 +3,7 @@
 * Addition/subtraction of large integers is now much faster (#64)
 * `ip_to_bytes()` now returns a list of raw vectors instead of a `blob` object (#65)
   * Result can still be converted using `blob::as_blob()`
-  * This removes dependency on blob package
+  * Removes excessive blob package dependency
 * Refactored C++ code to reduce dependence on Asio library (#64)
   * Package developers can now use `LinkingTo: ipaddress` without `LinkingTo: AsioHeaders`
 

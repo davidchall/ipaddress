@@ -5,14 +5,14 @@ bytes <- list(
   NULL
 )
 
-test_that("bytes encoding works", {
+test_that("encoding works", {
   expect_error(ip_to_bytes("hello"), "`x` must be an ip_address vector")
 
   expect_type(ip_to_bytes(address), "list")
   expect_equal(ip_to_bytes(address), bytes)
 })
 
-test_that("bytes decoding works", {
+test_that("decoding works", {
   expect_error(bytes_to_ip("hello"), "`x` must be a list of raw vectors")
   expect_error(bytes_to_ip(address), "`x` must be a list of raw vectors")
   expect_error(bytes_to_ip(c(bytes, "a")), "`x` must be a list of raw vectors")
