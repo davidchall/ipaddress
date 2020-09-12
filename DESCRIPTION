@@ -23,6 +23,7 @@ Imports:
     rlang (>= 0.4.0),
     vctrs (>= 0.3.0)
 Suggests: 
+    blob,
     crayon,
     dplyr (>= 1.0.0),
     fuzzyjoin (>= 0.1.6),
