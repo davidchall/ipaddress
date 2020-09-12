@@ -12,17 +12,17 @@ bytes_to_ip(x)
 \arguments{
 \item{x}{\itemize{
 \item For \code{ip_to_bytes()}: An \code{\link{ip_address}} vector
-\item For \code{bytes_to_ip()}: A \code{\link[blob:blob]{blob::blob}} vector
+\item For \code{bytes_to_ip()}: A list of raw vectors or a \code{\link[blob:blob]{blob::blob}} object
 }}
 }
 \value{
 \itemize{
-\item For \code{ip_to_bytes()}: A \code{\link[blob:blob]{blob::blob}} vector
+\item For \code{ip_to_bytes()}: A list of raw vectors
 \item For \code{bytes_to_ip()}: An \code{\link{ip_address}} vector
 }
 }
 \description{
-Encode or decode an \code{\link{ip_address}} as a vector of raw bytes.
+Encode or decode an \code{\link{ip_address}} as a list of raw bytes.
 }
 \details{
 The bytes are stored in network order (also known as
@@ -35,11 +35,17 @@ and missing values are encoded as \code{NULL}.
 x <- ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334", NA))
 ip_to_bytes(x)
 
-bytes_to_ip(ip_to_bytes(x))
+bytes <- list(
+  as.raw(c(0xc0, 0xa8, 0x00, 0x01)),
+  as.raw(c(0x20, 0x01, 0x0d, 0xb8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x8a, 0x2e, 0x03, 0x70, 0x73, 0x34)),
+  NULL
+)
+bytes_to_ip(bytes)
 }
 \seealso{
 \itemize{
 \item \code{\link[=ip_to_integer]{ip_to_integer()}} and \code{\link[=integer_to_ip]{integer_to_ip()}}
 \item \code{\link[=ip_to_binary]{ip_to_binary()}} and \code{\link[=binary_to_ip]{binary_to_ip()}}
+\item Use \code{\link[blob:blob]{blob::as_blob()}} to cast result to a blob object
 }
 }
