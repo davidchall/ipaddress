@@ -37,6 +37,10 @@ the bit sequence as a big-endian unsigned integer. This means IPv4 and IPv6
 addresses can be represented by 32-bit and 128-bit unsigned integers.
 In this way, the IPv4 addresses \verb{0.0.0.0} and \verb{255.255.255.255} would be
 represented as 0 and 4,294,967,295.
+
+The numeric data types within base R (\code{\link{integer}} and \code{\link{double}}) have
+insufficient precision to cover the IPv6 address space. Instead we return a
+\code{\link[bignum:biginteger]{bignum::biginteger}} vector, which supports arbitrary precision integers.
 }
 \examples{
 x <- ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334", NA))

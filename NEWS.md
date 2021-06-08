@@ -1,5 +1,9 @@
 # ipaddress (development version)
 
+* `ip_to_integer()` and `integer_to_ip()` now use `bignum::biginteger()` vectors to store the full range of integers covered by the IPv6 address space. Previously, these functions stored such large integers in a character vector.
+  * As a result, the BH package is no longer a dependency. The Boost C++ library was a heavy dependency, and unnecessary for those who didn't use these functions.
+  * The bignum package is now an optional dependency.
+
 # ipaddress 0.5.1
 
 * Addition/subtraction of large integers is now much faster (#64)

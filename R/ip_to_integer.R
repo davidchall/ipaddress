@@ -10,6 +10,10 @@
 #' In this way, the IPv4 addresses `0.0.0.0` and `255.255.255.255` would be
 #' represented as 0 and 4,294,967,295.
 #'
+#' The numeric data types within base R ([`integer`] and [`double`]) have
+#' insufficient precision to cover the IPv6 address space. Instead we return a
+#' [`bignum::biginteger`] vector, which supports arbitrary precision integers.
+#'
 #' @param x
 #'  * For `ip_to_integer()`: An [`ip_address`] vector
 #'  * For `integer_to_ip()`: A [`bignum::biginteger`] vector
