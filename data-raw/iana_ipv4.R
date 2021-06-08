@@ -38,7 +38,6 @@ iana_ipv4 <- csv_file %>%
       str_detect(designation, "Prudential") ~ "Prudential",
       str_detect(designation, "PSINet") ~ "Cogent",
       designation == "US Postal Service" ~ "USPS",
-
       TRUE ~ designation
     ),
     allocation = case_when(

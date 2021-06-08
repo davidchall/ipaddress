@@ -101,8 +101,7 @@ vec_arith.ip_address.ip_address <- function(op, x, y, ...) {
   x <- args[[1L]]
   y <- args[[2L]]
 
-  switch(
-    op,
+  switch(op,
     "&" = wrap_bitwise_and(x, y),
     "|" = wrap_bitwise_or(x, y),
     "^" = wrap_bitwise_xor(x, y),
@@ -117,8 +116,7 @@ vec_arith.ip_address.integer <- function(op, x, y, ...) {
   x <- args[[1L]]
   y <- args[[2L]]
 
-  switch(
-    op,
+  switch(op,
     "+" = wrap_add_integer(x, y),
     "-" = wrap_add_integer(x, -y),
     stop_incompatible_op(op, x, y)
@@ -136,8 +134,7 @@ vec_arith.ip_address.double <- function(op, x, y, ...) {
   x <- args[[1L]]
   y <- args[[2L]]
 
-  switch(
-    op,
+  switch(op,
     "+" = wrap_add_integer(x, y),
     "-" = wrap_add_integer(x, -y),
     stop_incompatible_op(op, x, y)
@@ -147,8 +144,7 @@ vec_arith.ip_address.double <- function(op, x, y, ...) {
 #' @method vec_arith.ip_address MISSING
 #' @export
 vec_arith.ip_address.MISSING <- function(op, x, y, ...) {
-  switch(
-    op,
+  switch(op,
     "!" = wrap_bitwise_not(x),
     stop_incompatible_op(op, x, y)
   )
