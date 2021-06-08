@@ -13,6 +13,8 @@
 #' @param x
 #'  * For `ip_to_integer()`: An [`ip_address`] vector
 #'  * For `integer_to_ip()`: A [`bignum::biginteger`] vector
+#' @param base A string choosing the numeric base of the output. Choices are
+#'   decimal (`"dec"`; the default), hexadecimal (`"hex"`), and binary (`"bin"`).
 #' @param is_ipv6 A logical vector indicating whether to construct an IPv4 or
 #'   IPv6 address. If `NULL` (the default), then integers less than 2^32 will
 #'   construct an IPv4 address and anything larger will construct an IPv6 address.
@@ -31,19 +33,28 @@
 #' as.numeric(ip_to_integer(ip_address("192.168.0.1")))
 #'
 #' integer_to_ip(3232235521)
+#'
+#' # hex representation
+#' ip_to_integer(x, base = "hex")
 #' @seealso
 #'  * [ip_to_bytes()] and [bytes_to_ip()]
 #'  * [ip_to_binary()] and [binary_to_ip()]
 #' @export
-ip_to_integer <- function(x) {
-  if (!is_installed("bignum")) {
-    abort("`bignum` must be installed to use `ip_to_integer()`.")
-  }
+ip_to_integer <- function(x, base = c("dec", "hex", "bin")) {
   if (!is_ip_address(x)) {
     abort("`x` must be an ip_address vector")
   }
 
-  bignum::biginteger(wrap_encode_integer(x))
+  switch(arg_match(base),
+    dec = {
+      if (!is_installed("bignum")) {
+        abort("`bignum` must be installed to use `base = \"dec\"`.")
+      }
+      bignum::biginteger(wrap_encode_integer(x))
+    },
+    hex = wrap_encode_integer(x),
+    bin = wrap_encode_binary(x)
+  )
 }
 
 #' @rdname ip_to_integer

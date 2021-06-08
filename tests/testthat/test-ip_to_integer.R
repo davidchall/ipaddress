@@ -13,6 +13,11 @@ test_that("integer encoding/decoding works", {
     ip_to_integer(x),
     bignum::biginteger(c("3232235521", "42540766411282592856904136881884656436", NA))
   )
+  expect_equal(
+    ip_to_integer(x, base = "hex"),
+    c("0xC0A80001", "0x20010DB80000000000008A2E03707334", NA)
+  )
+  expect_equal(ip_to_integer(x, base = "bin"), ip_to_binary(x))
 
   expect_equal(integer_to_ip(1, is_ipv6 = c(FALSE, TRUE)), ip_address(c("0.0.0.1", "::1")))
   expect_equal(
