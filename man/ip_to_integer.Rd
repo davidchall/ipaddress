@@ -5,18 +5,15 @@
 \alias{integer_to_ip}
 \title{Represent address as integer}
 \usage{
-ip_to_integer(x, base = c("dec", "hex", "bin"))
+ip_to_integer(x)
 
 integer_to_ip(x, is_ipv6 = NULL)
 }
 \arguments{
 \item{x}{\itemize{
 \item For \code{ip_to_integer()}: An \code{\link{ip_address}} vector
-\item For \code{integer_to_ip()}: A character vector
+\item For \code{integer_to_ip()}: A \code{\link[bignum:biginteger]{bignum::biginteger}} vector
 }}
-
-\item{base}{A string choosing the numeric base of the output. Choices are
-decimal (\code{"dec"}; the default), hexadecimal (\code{"hex"}), and binary (\code{"bin"}).}
 
 \item{is_ipv6}{A logical vector indicating whether to construct an IPv4 or
 IPv6 address. If \code{NULL} (the default), then integers less than 2^32 will
@@ -24,15 +21,12 @@ construct an IPv4 address and anything larger will construct an IPv6 address.}
 }
 \value{
 \itemize{
-\item For \code{ip_to_integer()}: A character vector
+\item For \code{ip_to_integer()}: A \code{\link[bignum:biginteger]{bignum::biginteger}} vector
 \item For \code{integer_to_ip()}: An \code{\link{ip_address}} vector
 }
 }
 \description{
 Encode or decode an \code{\link{ip_address}} as an integer.
-
-\strong{Note:} The result is a character vector (see below for why). This can be
-converted using \code{\link[=as.numeric]{as.numeric()}} for IPv4 addresses.
 }
 \details{
 It is common to represent an IP address as an integer, by reinterpreting
@@ -41,31 +35,6 @@ addresses can be represented by 32-bit and 128-bit unsigned integers.
 In this way, the IPv4 addresses \verb{0.0.0.0} and \verb{255.255.255.255} would be
 represented as 0 and 4,294,967,295.
 }
-\section{Why is a character vector returned?}{
-
-Base R provides two data types that can store integers: \code{\link{integer}} and
-\code{\link{double}} (also known as \code{\link{numeric}}). The former is a fixed-point data
-format (32-bit) and the latter is a floating-point data format (64-bit).
-Both types are signed, and R does not offer unsigned variants.
-
-For the purpose of storing IP addresses as integers, we need to be able to
-store a large range of positive integers without losing integer precision.
-Under these circumstances, the \code{\link{integer}} type can store integers up to
-2^31 - 1 and the \code{\link{double}} type can store integers up to 2^53. However,
-for IPv4 and IPv6 addresses we need to store integers up to 2^32 - 1 and
-2^128 - 1, respectively. This means an IPv4 address can be stored in a
-\code{\link{double}}, but an IPv6 address cannot be stored in either R data type.
-
-Although the integer representation of an IPv6 address cannot be stored in
-a numeric R data type, it can be stored as a character string instead.
-This allows the integer to be written to disk or used by other software that
-\emph{does} support 128-bit unsigned integers. To treat IPv4 and IPv6 equally,
-\code{ip_to_integer()} will always return a \code{\link{character}} vector. With IPv4
-addresses, this output can be converted to a \code{\link{double}} vector using
-\code{\link[=as.double]{as.double()}} or \code{\link[=as.numeric]{as.numeric()}}. With IPv6 addresses, this conversion loses
-the distinction between individual addresses because integer precision is lost.
-}
-
 \examples{
 x <- ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334", NA))
 ip_to_integer(x)
@@ -76,9 +45,6 @@ integer_to_ip(ip_to_integer(x))
 as.numeric(ip_to_integer(ip_address("192.168.0.1")))
 
 integer_to_ip(3232235521)
-
-# hex representation
-ip_to_integer(x, base = "hex")
 }
 \seealso{
 \itemize{

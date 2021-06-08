@@ -65,8 +65,8 @@ wrap_decode_integer <- function(input, in_is_ipv6) {
     .Call(`_ipaddress_wrap_decode_integer`, input, in_is_ipv6)
 }
 
-wrap_encode_integer <- function(input, hex) {
-    .Call(`_ipaddress_wrap_encode_integer`, input, hex)
+wrap_encode_integer <- function(input) {
+    .Call(`_ipaddress_wrap_encode_integer`, input)
 }
 
 wrap_netmask <- function(in_prefix_length, in_is_ipv6) {

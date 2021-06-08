@@ -1,5 +1,4 @@
 #include <Rcpp.h>
-#include <boost/multiprecision/cpp_int.hpp>
 #include <ipaddress.h>
 #include "warn.h"
 
@@ -7,57 +6,42 @@ using namespace Rcpp;
 using namespace ipaddress;
 
 
-std::string encode_integer(const IpAddress &x, bool hex) {
-  const std::size_t n_bits = x.n_bits();
+IpAddress decode_ipv4_hex(const std::string& hex) {
+  uint32_t input = host_to_network_long(std::stoul(hex, nullptr, 16));
 
-  boost::multiprecision::number<boost::multiprecision::cpp_int_backend<
-    128, 128,
-    boost::multiprecision::unsigned_magnitude,
-    boost::multiprecision::checked,
-    void
-    >> x_int;
-
-  // import most-significant byte first (x_bytes stored in network order)
-  import_bits(x_int, x.begin(), x.end(), 8, true);
-
-  if (hex) {
-    std::stringstream ss;
-    ss << "0x" << std::hex << std::setfill('0') << std::setw(n_bits/4) << std::uppercase <<  x_int;
-    return ss.str();
-  } else {
-    return x_int.str();
-  }
+  IpAddress::bytes_type_v4 output;
+  std::memcpy(output.begin(), &input, output.size());
+  return IpAddress::make_ipv4(output);
 }
 
 
-template<class Bytes>
-Bytes decode_integer(const std::string& x_int_string) {
-  Bytes x_bytes{};
+IpAddress decode_ipv6_hex(const std::string& hex) {
+  // strip base
+  std::string x = hex.substr(2, hex.size());
 
-  boost::multiprecision::number<boost::multiprecision::cpp_int_backend<
-    8*sizeof(x_bytes), 8*sizeof(x_bytes),
-    boost::multiprecision::unsigned_magnitude,
-    boost::multiprecision::checked,
-    void
-    >> x_int(x_int_string);
+  // left pad
+  unsigned int total_chars = 32;
+  if (x.size() < total_chars) {
+    x.insert(x.begin(), total_chars - x.size(), '0');
+  }
 
-  // must export least-significant byte first because boost::multiprecision is
-  // aggressively optimized and does not reserve space for unused bits,
-  // even though I've declared the size of the integer as 32-bit or 128-bit
-  export_bits(x_int, x_bytes.begin(), 8, false);
-  std::reverse(x_bytes.begin(), x_bytes.end());
+  std::size_t j = 0;
+  std::array<uint32_t, 4> input;
+  for (std::size_t i=0; i<x.size(); i += 8) {
+    input[j++] = host_to_network_long(std::stoul(x.substr(i, 8), nullptr, 16));
+  }
 
-  return x_bytes;
+  IpAddress::bytes_type_v6 output;
+  std::memcpy(output.begin(), input.begin(), output.size());
+  return IpAddress::make_ipv6(output);
 }
 
 
 // [[Rcpp::export]]
-List wrap_decode_integer(CharacterVector input, Nullable<LogicalVector> in_is_ipv6) {
+List wrap_decode_integer(CharacterVector input, LogicalVector in_is_ipv6) {
   // initialize vectors
   std::size_t vsize = input.size();
   std::vector<IpAddress> output(vsize);
-
-  bool guess_ipv6 = in_is_ipv6.isNull();
 
   for (std::size_t i=0; i<vsize; ++i) {
     if (i % 10000 == 0) {
@@ -69,36 +53,11 @@ List wrap_decode_integer(CharacterVector input, Nullable<LogicalVector> in_is_ip
       continue;
     }
 
-    std::string integer_string(input[i]);
-    if (guess_ipv6) {
-      try {
-        auto bytes = decode_integer<IpAddress::bytes_type_v4>(integer_string);
-        output[i] = IpAddress::make_ipv4(bytes);
-      } catch (...) {
-        try {
-          auto bytes = decode_integer<IpAddress::bytes_type_v6>(integer_string);
-          output[i] = IpAddress::make_ipv6(bytes);
-        } catch (...) {
-          warnOnRow(i, integer_string);
-          output[i] = IpAddress::make_na();
-        }
-      }
-    } else if (in_is_ipv6.as().at(i)) {
-      try {
-        auto bytes = decode_integer<IpAddress::bytes_type_v6>(integer_string);
-        output[i] = IpAddress::make_ipv6(bytes);
-      } catch (...) {
-        warnOnRow(i, integer_string);
-        output[i] = IpAddress::make_na();
-      }
+    std::string hex(input[i]);
+    if (in_is_ipv6[i]) {
+      output[i] = decode_ipv6_hex(hex);
     } else {
-      try {
-        auto bytes = decode_integer<IpAddress::bytes_type_v4>(integer_string);
-        output[i] = IpAddress::make_ipv4(bytes);
-      } catch (...) {
-        warnOnRow(i, integer_string);
-        output[i] = IpAddress::make_na();
-      }
+      output[i] = decode_ipv4_hex(hex);
     }
   }
 
@@ -107,7 +66,7 @@ List wrap_decode_integer(CharacterVector input, Nullable<LogicalVector> in_is_ip
 
 
 // [[Rcpp::export]]
-CharacterVector wrap_encode_integer(List input, bool hex) {
+CharacterVector wrap_encode_integer(List input) {
   std::vector<IpAddress> address = decode_addresses(input);
 
   // initialize vectors
@@ -121,8 +80,27 @@ CharacterVector wrap_encode_integer(List input, bool hex) {
 
     if (address[i].is_na()) {
       output[i] = NA_STRING;
+    } else if (address[i].is_ipv6()) {
+      char buffer[40];
+      auto bytes = address[i].bytes_v6();
+      sprintf(
+        buffer,
+        "%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
+        bytes[0], bytes[1], bytes[2], bytes[3], bytes[4], bytes[5], bytes[6], bytes[7],
+        bytes[8], bytes[9], bytes[10], bytes[11], bytes[12], bytes[13], bytes[14], bytes[15]
+      );
+
+      output[i] = "0x" + std::string(buffer);
     } else {
-      output[i] = encode_integer(address[i], hex);
+      char buffer[10];
+      auto bytes = address[i].bytes_v4();
+      sprintf(
+        buffer,
+        "%02x%02x%02x%02x",
+        bytes[0], bytes[1], bytes[2], bytes[3]
+      );
+
+      output[i] = "0x" + std::string(buffer);
     }
   }
 

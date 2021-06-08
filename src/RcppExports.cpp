@@ -181,26 +181,25 @@ BEGIN_RCPP
 END_RCPP
 }
 // wrap_decode_integer
-List wrap_decode_integer(CharacterVector input, Nullable<LogicalVector> in_is_ipv6);
+List wrap_decode_integer(CharacterVector input, LogicalVector in_is_ipv6);
 RcppExport SEXP _ipaddress_wrap_decode_integer(SEXP inputSEXP, SEXP in_is_ipv6SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< CharacterVector >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< Nullable<LogicalVector> >::type in_is_ipv6(in_is_ipv6SEXP);
+    Rcpp::traits::input_parameter< LogicalVector >::type in_is_ipv6(in_is_ipv6SEXP);
     rcpp_result_gen = Rcpp::wrap(wrap_decode_integer(input, in_is_ipv6));
     return rcpp_result_gen;
 END_RCPP
 }
 // wrap_encode_integer
-CharacterVector wrap_encode_integer(List input, bool hex);
-RcppExport SEXP _ipaddress_wrap_encode_integer(SEXP inputSEXP, SEXP hexSEXP) {
+CharacterVector wrap_encode_integer(List input);
+RcppExport SEXP _ipaddress_wrap_encode_integer(SEXP inputSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< List >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< bool >::type hex(hexSEXP);
-    rcpp_result_gen = Rcpp::wrap(wrap_encode_integer(input, hex));
+    rcpp_result_gen = Rcpp::wrap(wrap_encode_integer(input));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -566,7 +565,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ipaddress_wrap_decode_hostname", (DL_FUNC) &_ipaddress_wrap_decode_hostname, 1},
     {"_ipaddress_wrap_encode_hostname", (DL_FUNC) &_ipaddress_wrap_encode_hostname, 1},
     {"_ipaddress_wrap_decode_integer", (DL_FUNC) &_ipaddress_wrap_decode_integer, 2},
-    {"_ipaddress_wrap_encode_integer", (DL_FUNC) &_ipaddress_wrap_encode_integer, 2},
+    {"_ipaddress_wrap_encode_integer", (DL_FUNC) &_ipaddress_wrap_encode_integer, 1},
     {"_ipaddress_wrap_netmask", (DL_FUNC) &_ipaddress_wrap_netmask, 2},
     {"_ipaddress_wrap_hostmask", (DL_FUNC) &_ipaddress_wrap_hostmask, 2},
     {"_ipaddress_wrap_prefix_from_mask", (DL_FUNC) &_ipaddress_wrap_prefix_from_mask, 1},
