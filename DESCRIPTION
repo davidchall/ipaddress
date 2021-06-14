@@ -23,7 +23,7 @@ Imports:
     rlang (>= 0.4.0),
     vctrs (>= 0.3.0)
 Suggests: 
-    bignum,
+    bignum (>= 0.2.0),
     blob,
     crayon,
     dplyr (>= 1.0.0),
@@ -37,8 +37,6 @@ LinkingTo:
     Rcpp
 VignetteBuilder: 
     knitr
-Remotes: 
-    davidchall/bignum
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
