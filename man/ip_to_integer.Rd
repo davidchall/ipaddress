@@ -24,7 +24,8 @@ construct an IPv4 address and anything larger will construct an IPv6 address.}
 }
 \value{
 \itemize{
-\item For \code{ip_to_integer()}: A \code{\link[bignum:biginteger]{bignum::biginteger}} vector
+\item For \code{ip_to_integer()}: If \code{base = "dec"}, then a \code{\link[bignum:biginteger]{bignum::biginteger}}
+vector. Otherwise a \code{character()} vector.
 \item For \code{integer_to_ip()}: An \code{\link{ip_address}} vector
 }
 }
