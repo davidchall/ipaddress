@@ -51,9 +51,7 @@ ip_to_integer <- function(x, base = c("dec", "hex", "bin")) {
 
   switch(arg_match(base),
     dec = {
-      if (!is_installed("bignum")) {
-        abort("`bignum` must be installed to use `base = \"dec\"`.")
-      }
+      check_installed("bignum")
       bignum::biginteger(wrap_encode_integer(x))
     },
     hex = wrap_encode_integer(x),
@@ -64,9 +62,7 @@ ip_to_integer <- function(x, base = c("dec", "hex", "bin")) {
 #' @rdname ip_to_integer
 #' @export
 integer_to_ip <- function(x, is_ipv6 = NULL) {
-  if (!is_installed("bignum")) {
-    abort("`bignum` must be installed to use `integer_to_ip()`.")
-  }
+  check_installed("bignum")
 
   x <- vec_cast(x, bignum::biginteger())
   if (!(is_null(is_ipv6) || is_logical(is_ipv6))) {
