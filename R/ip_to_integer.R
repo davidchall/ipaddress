@@ -25,7 +25,7 @@
 #'
 #' @return
 #'  * For `ip_to_integer()`: If `base = "dec"`, then a [`bignum::biginteger`]
-#'    vector. Otherwise a `character()` vector.
+#'    vector. Otherwise a [`character`] vector.
 #'  * For `integer_to_ip()`: An [`ip_address`] vector
 #'
 #' @examples
