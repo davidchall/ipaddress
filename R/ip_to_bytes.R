@@ -30,10 +30,8 @@
 #'   NULL
 #' )
 #' bytes_to_ip(bytes)
-#' @seealso
-#'  * [ip_to_integer()] and [integer_to_ip()]
-#'  * [ip_to_binary()] and [binary_to_ip()]
-#'  * Use [blob::as_blob()] to cast result to a blob object
+#' @family address representations
+#' @seealso Use [blob::as_blob()] to cast result to a blob object
 #' @export
 ip_to_bytes <- function(x) {
   if (!is_ip_address(x)) {

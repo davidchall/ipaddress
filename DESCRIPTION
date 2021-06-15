@@ -7,11 +7,11 @@ Authors@R:
            role = c("aut", "cre"),
            email = "david.hall.physics@gmail.com",
            comment = c(ORCID = "0000-0002-2193-0480"))
-Description: Classes and functions for working with IP (Internet
-    Protocol) addresses and networks, inspired by the Python 'ipaddress'
-    module.  Offers full support for both IPv4 and IPv6 (Internet Protocol
-    versions 4 and 6) address spaces. It is specifically designed to work
-    well with the 'tidyverse'.
+Description: Classes and functions for working with IP (Internet Protocol)
+    addresses and networks, inspired by the Python 'ipaddress' module.
+    Offers full support for both IPv4 and IPv6 (Internet Protocol versions
+    4 and 6) address spaces. It is specifically designed to work well with
+    the 'tidyverse'.
 License: MIT + file LICENSE
 URL: https://davidchall.github.io/ipaddress/,
     https://github.com/davidchall/ipaddress
@@ -23,6 +23,7 @@ Imports:
     rlang (>= 0.4.0),
     vctrs (>= 0.3.0)
 Suggests: 
+    bignum (>= 0.2.0),
     blob,
     crayon,
     dplyr (>= 1.0.0),
@@ -33,7 +34,6 @@ Suggests:
     testthat (>= 2.2.0)
 LinkingTo: 
     AsioHeaders,
-    BH,
     Rcpp
 VignetteBuilder: 
     knitr

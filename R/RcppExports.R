@@ -53,20 +53,20 @@ wrap_encode_bytes <- function(input) {
     .Call(`_ipaddress_wrap_encode_bytes`, input)
 }
 
+wrap_decode_hex <- function(input, in_is_ipv6) {
+    .Call(`_ipaddress_wrap_decode_hex`, input, in_is_ipv6)
+}
+
+wrap_encode_hex <- function(input) {
+    .Call(`_ipaddress_wrap_encode_hex`, input)
+}
+
 wrap_decode_hostname <- function(input) {
     .Call(`_ipaddress_wrap_decode_hostname`, input)
 }
 
 wrap_encode_hostname <- function(input) {
     .Call(`_ipaddress_wrap_encode_hostname`, input)
-}
-
-wrap_decode_integer <- function(input, in_is_ipv6) {
-    .Call(`_ipaddress_wrap_decode_integer`, input, in_is_ipv6)
-}
-
-wrap_encode_integer <- function(input, hex) {
-    .Call(`_ipaddress_wrap_encode_integer`, input, hex)
 }
 
 wrap_netmask <- function(in_prefix_length, in_is_ipv6) {
