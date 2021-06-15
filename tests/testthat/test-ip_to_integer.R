@@ -22,7 +22,7 @@ test_that("integer encoding/decoding works", {
 
   expect_equal(integer_to_ip(ip_to_integer(x)), x)
 
-  expect_warning(integer_to_ip(bignum::biginteger(-1)))
+  expect_equal(integer_to_ip(bignum::biginteger(-1)), ip_address(NA))
   expect_equal(
     expect_warning(integer_to_ip(bignum::biginteger(2)^32L + c(-1L, 0, NA), is_ipv6 = FALSE)),
     ip_address(c("255.255.255.255", NA, NA))
