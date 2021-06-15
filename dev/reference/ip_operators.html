@@ -112,7 +112,7 @@ arithmetic operators: + (addition), - (subtraction)
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -141,7 +141,7 @@ arithmetic operators: + (addition), - (subtraction)
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/davidchall/ipaddress/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -185,35 +185,35 @@ arithmetic operators: + (addition), - (subtraction)
     <pre class="examples"><div class='input'><span class='co'># use ip_to_binary() to understand these examples better</span>
 
 <span class='co'># bitwise NOT</span>
-<span class='op'>!</span><span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"192.168.0.1"</span>)
+<span class='op'>!</span><span class='fu'><a href='ip_address.html'>ip_address</a></span><span class='op'>(</span><span class='st'>"192.168.0.1"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;ip_address[1]&gt;
 #&gt; [1] 63.87.255.254</div><div class='input'>
 <span class='co'># bitwise AND</span>
-<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"192.168.0.1"</span>) <span class='op'>&amp;</span> <span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"255.0.0.255"</span>)
+<span class='fu'><a href='ip_address.html'>ip_address</a></span><span class='op'>(</span><span class='st'>"192.168.0.1"</span><span class='op'>)</span> <span class='op'>&amp;</span> <span class='fu'><a href='ip_address.html'>ip_address</a></span><span class='op'>(</span><span class='st'>"255.0.0.255"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;ip_address[1]&gt;
 #&gt; [1] 192.0.0.1</div><div class='input'>
 <span class='co'># bitwise OR</span>
-<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"192.168.0.0"</span>) <span class='op'>|</span> <span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"255.0.0.255"</span>)
+<span class='fu'><a href='ip_address.html'>ip_address</a></span><span class='op'>(</span><span class='st'>"192.168.0.0"</span><span class='op'>)</span> <span class='op'>|</span> <span class='fu'><a href='ip_address.html'>ip_address</a></span><span class='op'>(</span><span class='st'>"255.0.0.255"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;ip_address[1]&gt;
 #&gt; [1] 255.168.0.255</div><div class='input'>
 <span class='co'># bitwise XOR</span>
-<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"192.168.0.0"</span>) <span class='op'>^</span> <span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"255.0.0.255"</span>)
+<span class='fu'><a href='ip_address.html'>ip_address</a></span><span class='op'>(</span><span class='st'>"192.168.0.0"</span><span class='op'>)</span> <span class='op'>^</span> <span class='fu'><a href='ip_address.html'>ip_address</a></span><span class='op'>(</span><span class='st'>"255.0.0.255"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;ip_address[1]&gt;
 #&gt; [1] 63.168.0.255</div><div class='input'>
 <span class='co'># bitwise shift left</span>
-<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"192.168.0.1"</span>) <span class='op'>%&lt;&lt;%</span> <span class='fl'>1</span>
+<span class='fu'><a href='ip_address.html'>ip_address</a></span><span class='op'>(</span><span class='st'>"192.168.0.1"</span><span class='op'>)</span> <span class='op'>%&lt;&lt;%</span> <span class='fl'>1</span>
 </div><div class='output co'>#&gt; &lt;ip_address[1]&gt;
 #&gt; [1] 129.80.0.2</div><div class='input'>
 <span class='co'># bitwise shift right</span>
-<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"192.168.0.1"</span>) <span class='op'>%&gt;&gt;%</span> <span class='fl'>1</span>
+<span class='fu'><a href='ip_address.html'>ip_address</a></span><span class='op'>(</span><span class='st'>"192.168.0.1"</span><span class='op'>)</span> <span class='op'>%&gt;&gt;%</span> <span class='fl'>1</span>
 </div><div class='output co'>#&gt; &lt;ip_address[1]&gt;
 #&gt; [1] 96.84.0.0</div><div class='input'>
 <span class='co'># addition of integers</span>
-<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"192.168.0.1"</span>) <span class='op'>+</span> <span class='fl'>10</span>
+<span class='fu'><a href='ip_address.html'>ip_address</a></span><span class='op'>(</span><span class='st'>"192.168.0.1"</span><span class='op'>)</span> <span class='op'>+</span> <span class='fl'>10</span>
 </div><div class='output co'>#&gt; &lt;ip_address[1]&gt;
 #&gt; [1] 192.168.0.11</div><div class='input'>
 <span class='co'># subtraction of integers</span>
-<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"192.168.0.1"</span>) <span class='op'>-</span> <span class='fl'>10</span>
+<span class='fu'><a href='ip_address.html'>ip_address</a></span><span class='op'>(</span><span class='st'>"192.168.0.1"</span><span class='op'>)</span> <span class='op'>-</span> <span class='fl'>10</span>
 </div><div class='output co'>#&gt; &lt;ip_address[1]&gt;
 #&gt; [1] 192.167.255.247</div></pre>
   </div>

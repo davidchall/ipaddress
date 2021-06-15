@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sample random addresses — sample • ipaddress</title>
+<title>Represent address as hexadecimal — ip_to_hex • ipaddress</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -52,9 +52,8 @@
 
 
 
-<meta property="og:title" content="Sample random addresses — sample" />
-<meta property="og:description" content="sample_ipv4() and sample_ipv6() sample from the entire address space;
-sample_network() samples from a specific network." />
+<meta property="og:title" content="Represent address as hexadecimal — ip_to_hex" />
+<meta property="og:description" content="Encode or decode an ip_address as a hexadecimal string." />
 <meta property="og:image" content="https://davidchall.github.io/ipaddress/logo.png" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="@hall_davidc" />
@@ -160,66 +159,60 @@ sample_network() samples from a specific network." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Sample random addresses</h1>
-    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/sample.R'><code>R/sample.R</code></a></small>
-    <div class="hidden name"><code>sample.Rd</code></div>
+    <h1>Represent address as hexadecimal</h1>
+    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/ip_to_hex.R'><code>R/ip_to_hex.R</code></a></small>
+    <div class="hidden name"><code>ip_to_hex.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>sample_ipv4()</code> and <code>sample_ipv6()</code> sample from the entire address space;
-<code>sample_network()</code> samples from a specific network.</p>
+    <p>Encode or decode an <code><a href='ip_address.html'>ip_address</a></code> as a hexadecimal string.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sample_ipv4</span><span class='op'>(</span><span class='va'>size</span>, replace <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>ip_to_hex</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>sample_ipv6</span><span class='op'>(</span><span class='va'>size</span>, replace <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-
-<span class='fu'>sample_network</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>size</span>, replace <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+<span class='fu'>hex_to_ip</span><span class='op'>(</span><span class='va'>x</span>, is_ipv6 <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>size</th>
-      <td><p>Integer specifying the number of addresses to return</p></td>
-    </tr>
-    <tr>
-      <th>replace</th>
-      <td><p>Should sampling be with replacement?</p></td>
-    </tr>
-    <tr>
       <th>x</th>
-      <td><p>An <code><a href='ip_network.html'>ip_network</a></code> scalar</p></td>
+      <td><ul>
+<li><p>For <code>ip_to_hex()</code>: An <code><a href='ip_address.html'>ip_address</a></code> vector</p></li>
+<li><p>For <code>hex_to_ip()</code>: A character vector containing hexadecimal strings</p></li>
+</ul></td>
+    </tr>
+    <tr>
+      <th>is_ipv6</th>
+      <td><p>A logical vector indicating whether to construct an IPv4 or
+IPv6 address. If <code>NULL</code> (the default), then IPv4 is preferred. An IPv6
+address is constructed when <code>x</code> is too large for the IPv4 address space.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An <code><a href='ip_address.html'>ip_address</a></code> vector</p>
+    
+<ul>
+<li><p>For <code>ip_to_hex()</code>: A character vector</p></li>
+<li><p>For <code>hex_to_ip()</code>: An <code><a href='ip_address.html'>ip_address</a></code> vector</p></li>
+</ul>
+
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Use <code><a href='sequence.html'>seq.ip_network()</a></code> to generate <em>all</em> addresses in a network.</p></div>
+    <div class='dont-index'><p>Other address representations: 
+<code><a href='ip_to_binary.html'>ip_to_binary</a>()</code>,
+<code><a href='ip_to_bytes.html'>ip_to_bytes</a>()</code>,
+<code><a href='ip_to_integer.html'>ip_to_integer</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>sample_ipv4</span><span class='op'>(</span><span class='fl'>5</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; &lt;ip_address[5]&gt;
-#&gt; [1] 50.223.119.20  103.44.127.213 16.8.74.153    99.82.187.40   249.102.197.1 </div><div class='input'>
-<span class='fu'>sample_ipv6</span><span class='op'>(</span><span class='fl'>5</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; &lt;ip_address[5]&gt;
-#&gt; [1] 3dff:eb87:572:31d3:c776:c3ae:6e07:bd4a 
-#&gt; [2] 8c26:6699:605f:f246:3450:c57f:b439:dad 
-#&gt; [3] d584:3642:8f07:8a91:b62c:fda4:f24d:87bc
-#&gt; [4] 7d8:ab4a:db77:8b55:1088:f8a9:2ea2:b232 
-#&gt; [5] 78b7:f7a:6263:4798:5a7e:6318:377a:b0fb </div><div class='input'>
-<span class='fu'>sample_network</span><span class='op'>(</span><span class='fu'><a href='ip_network.html'>ip_network</a></span><span class='op'>(</span><span class='st'>"192.168.0.0/16"</span><span class='op'>)</span>, <span class='fl'>5</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; &lt;ip_address[5]&gt;
-#&gt; [1] 192.168.171.206 192.168.129.208 192.168.169.103 192.168.131.55 
-#&gt; [5] 192.168.213.107</div><div class='input'>
-<span class='fu'>sample_network</span><span class='op'>(</span><span class='fu'><a href='ip_network.html'>ip_network</a></span><span class='op'>(</span><span class='st'>"2001:db8::/48"</span><span class='op'>)</span>, <span class='fl'>5</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; &lt;ip_address[5]&gt;
-#&gt; [1] 2001:db8:0:55b3:912:932a:3fdb:80b5  2001:db8:0:9138:97ff:afa9:6791:5bdf
-#&gt; [3] 2001:db8:0:40ba:3c9c:3edb:c540:c602 2001:db8:0:7637:e82c:bed:1eeb:95e3 
-#&gt; [5] 2001:db8:0:ea74:d1e8:e88d:31de:a2ff</div></pre>
+    <pre class="examples"><div class='input'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ip_address.html'>ip_address</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"192.168.0.1"</span>, <span class='st'>"2001:db8::8a2e:370:7334"</span>, <span class='cn'>NA</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>ip_to_hex</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "0xC0A80001"                         "0x20010DB80000000000008A2E03707334"
+#&gt; [3] NA                                  </div><div class='input'>
+<span class='fu'>hex_to_ip</span><span class='op'>(</span><span class='fu'>ip_to_hex</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;ip_address[3]&gt;
+#&gt; [1] 192.168.0.1             2001:db8::8a2e:370:7334 &lt;NA&gt;                   </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -106,7 +106,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -135,7 +135,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/davidchall/ipaddress/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -166,6 +166,26 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#ipaddress-development-version" class="anchor"></a>ipaddress (development version)<small> Unreleased </small>
 </h1>
+<ul>
+<li>The <code>base</code> argument of <code><a href="../reference/ip_to_integer.html">ip_to_integer()</a></code> is removed.
+<ul>
+<li>
+<code>base = "dec"</code> is still handled by <code><a href="../reference/ip_to_integer.html">ip_to_integer()</a></code>.</li>
+<li>
+<code>base = "bin"</code> is now handled by the existing <code><a href="../reference/ip_to_binary.html">ip_to_binary()</a></code> function.</li>
+<li>
+<code>base = "hex"</code> is now handled by the new <code><a href="../reference/ip_to_hex.html">ip_to_hex()</a></code> function.</li>
+</ul>
+</li>
+<li>
+<code><a href="../reference/ip_to_integer.html">ip_to_integer()</a></code> and <code><a href="../reference/ip_to_integer.html">integer_to_ip()</a></code> now use <code><a href="https://davidchall.github.io/bignum/reference/biginteger.html">bignum::biginteger()</a></code> vectors to store IP addresses as integers. Previously, these integers were stored in a character vector (because they were beyond the range covered by base R numeric types).
+<ul>
+<li>The BH package is no longer a dependency (C++ Boost headers were a heavy dependency).</li>
+<li>The bignum package is now an optional dependency.</li>
+</ul>
+</li>
+<li>New <code><a href="../reference/ip_to_hex.html">ip_to_hex()</a></code> and <code><a href="../reference/ip_to_hex.html">hex_to_ip()</a></code> functions to encode and decode addresses as hexadecimal strings.</li>
+</ul>
 </div>
     <div id="ipaddress-051" class="section level1">
 <h1 class="page-header" data-toc-text="0.5.1">

@@ -109,7 +109,7 @@ addresses in the network." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -138,7 +138,7 @@ addresses in the network." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/davidchall/ipaddress/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -172,11 +172,11 @@ addresses of the network; <code>num_addresses()</code> gives the total number of
 addresses in the network.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>network_address</span>(<span class='kw'>x</span>)
+    <pre class="usage"><span class='fu'>network_address</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>broadcast_address</span>(<span class='kw'>x</span>)
+<span class='fu'>broadcast_address</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>num_addresses</span>(<span class='kw'>x</span>)</pre>
+<span class='fu'>num_addresses</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -209,16 +209,16 @@ Although IPv6 does not follow this approach to broadcast addresses, the
     <div class='dont-index'><p>Use <code><a href='sequence.html'>seq.ip_network()</a></code> to generate all addresses in a network.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.0/22"</span>, <span class='st'>"2001:db8::/33"</span>))
+    <pre class="examples"><div class='input'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ip_network.html'>ip_network</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"192.168.0.0/22"</span>, <span class='st'>"2001:db8::/33"</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'>network_address</span>(<span class='kw'>x</span>)
+<span class='fu'>network_address</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
 #&gt; [1] 192.168.0.0 2001:db8:: </div><div class='input'>
-<span class='fu'>broadcast_address</span>(<span class='kw'>x</span>)
+<span class='fu'>broadcast_address</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
 #&gt; [1] 192.168.3.255                         
 #&gt; [2] 2001:db8:7fff:ffff:ffff:ffff:ffff:ffff</div><div class='input'>
-<span class='fu'>num_addresses</span>(<span class='kw'>x</span>)
+<span class='fu'>num_addresses</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] 1.024000e+03 3.961408e+28</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
