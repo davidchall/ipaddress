@@ -56,7 +56,7 @@ remotes::install_github("davidchall/ipaddress")
 Use `ip_address()` and `ip_network()` vectors either standalone or as columns in a data frame.
 
 ```{r example, message=FALSE}
-library(tidyverse)
+library(dplyr)
 library(ipaddress)
 
 tibble(

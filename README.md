@@ -21,11 +21,11 @@ addresses and networks. Its interface is inspired by the Python
 
 Here are some of the features:
 
-  - Functions for **generation and analysis of IP data**
-  - Full support for both **IPv4 and IPv6** address spaces
-  - **Memory footprint:** data stored in native format
-  - **Performance:** calculations performed in C++
-  - Compatible with the **tidyverse**
+-   Functions for **generation and analysis of IP data**
+-   Full support for both **IPv4 and IPv6** address spaces
+-   **Memory footprint:** data stored in native format
+-   **Performance:** calculations performed in C++
+-   Compatible with the **tidyverse**
 
 For data visualization of IP addresses and networks, check out the
 [ggip](https://davidchall.github.io/ggip/) package.
@@ -52,7 +52,7 @@ Use `ip_address()` and `ip_network()` vectors either standalone or as
 columns in a data frame.
 
 ``` r
-library(tidyverse)
+library(dplyr)
 library(ipaddress)
 
 tibble(
@@ -94,13 +94,13 @@ tibble(network = ip_network(c("192.168.100.0/22", "2001:db8::/80"))) %>%
 
 ## Related work
 
-  - [**iptools**](https://hrbrmstr.github.io/iptools/) – A well
+-   [**iptools**](https://hrbrmstr.github.io/iptools/) – A well
     established R package for working with IP addresses and networks.
     Unfortunately IPv6 support is severely limited. Also, addresses and
     networks are stored as character vectors, so they must be parsed to
     their native bit representation for every operation. It served as an
     excellent guide and motivation for ipaddress.
-  - [**cyberpandas**](https://cyberpandas.readthedocs.io) – A Python
+-   [**cyberpandas**](https://cyberpandas.readthedocs.io) – A Python
     package for using IP addresses in a
     [pandas](https://pandas.pydata.org) DataFrame. This offers full
     support for IPv6 and stores addresses in the native bit
@@ -109,7 +109,7 @@ tibble(network = ip_network(c("192.168.100.0/22", "2001:db8::/80"))) %>%
     [ipaddress](https://docs.python.org/3/library/ipaddress.html)
     object, which is slow. It also doesn’t support IP networks.
 
------
+------------------------------------------------------------------------
 
 Please note that the ipaddress project is released with a [Contributor
 Code of
