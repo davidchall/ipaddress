@@ -5,7 +5,7 @@
 \alias{integer_to_ip}
 \title{Represent address as integer}
 \usage{
-ip_to_integer(x, base = c("dec", "hex", "bin"))
+ip_to_integer(x)
 
 integer_to_ip(x, is_ipv6 = NULL)
 }
@@ -15,17 +15,13 @@ integer_to_ip(x, is_ipv6 = NULL)
 \item For \code{integer_to_ip()}: A \code{\link[bignum:biginteger]{bignum::biginteger}} vector
 }}
 
-\item{base}{A string choosing the numeric base of the output. Choices are
-decimal (\code{"dec"}; the default), hexadecimal (\code{"hex"}), and binary (\code{"bin"}).}
-
 \item{is_ipv6}{A logical vector indicating whether to construct an IPv4 or
-IPv6 address. If \code{NULL} (the default), then integers less than 2^32 will
-construct an IPv4 address and anything larger will construct an IPv6 address.}
+IPv6 address. If \code{NULL} (the default), then IPv4 is preferred. An IPv6
+address is constructed when \code{x} is too large for the IPv4 address space.}
 }
 \value{
 \itemize{
-\item For \code{ip_to_integer()}: If \code{base = "dec"}, then a \code{\link[bignum:biginteger]{bignum::biginteger}}
-vector. Otherwise a \code{\link{character}} vector.
+\item For \code{ip_to_integer()}: A \code{\link[bignum:biginteger]{bignum::biginteger}} vector
 \item For \code{integer_to_ip()}: An \code{\link{ip_address}} vector
 }
 }
@@ -53,13 +49,11 @@ integer_to_ip(ip_to_integer(x))
 as.numeric(ip_to_integer(ip_address("192.168.0.1")))
 
 integer_to_ip(3232235521)
-
-# hex representation
-ip_to_integer(x, base = "hex")
 }
 \seealso{
-\itemize{
-\item \code{\link[=ip_to_bytes]{ip_to_bytes()}} and \code{\link[=bytes_to_ip]{bytes_to_ip()}}
-\item \code{\link[=ip_to_binary]{ip_to_binary()}} and \code{\link[=binary_to_ip]{binary_to_ip()}}
+Other address representations: 
+\code{\link{ip_to_binary}()},
+\code{\link{ip_to_bytes}()},
+\code{\link{ip_to_hex}()}
 }
-}
+\concept{address representations}

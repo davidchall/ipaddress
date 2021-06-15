@@ -1,8 +1,15 @@
 # ipaddress (development version)
 
-* `ip_to_integer()` and `integer_to_ip()` now use `bignum::biginteger()` vectors to store the full range of integers covered by the IPv6 address space. Previously, these functions stored such large integers in a character vector.
-  * As a result, the BH package is no longer a dependency. The Boost C++ library was a heavy dependency, and unnecessary for those who didn't use these functions.
+* The `base` argument of `ip_to_integer()` is removed.
+  * `base = "dec"` is still handled by `ip_to_integer()`.
+  * `base = "bin"` is now handled by the existing `ip_to_binary()` function.
+  * `base = "hex"` is now handled by the new `ip_to_hex()` function.
+
+* `ip_to_integer()` and `integer_to_ip()` now use `bignum::biginteger()` vectors to store IP addresses as integers. Previously, these integers were stored in a character vector (because they were beyond the range covered by base R numeric types).
+  * The BH package is no longer a dependency (C++ Boost headers were a heavy dependency).
   * The bignum package is now an optional dependency.
+
+* New `ip_to_hex()` and `hex_to_ip()` functions to encode and decode addresses as hexadecimal strings.
 
 # ipaddress 0.5.1
 

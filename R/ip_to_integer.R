@@ -17,15 +17,12 @@
 #' @param x
 #'  * For `ip_to_integer()`: An [`ip_address`] vector
 #'  * For `integer_to_ip()`: A [`bignum::biginteger`] vector
-#' @param base A string choosing the numeric base of the output. Choices are
-#'   decimal (`"dec"`; the default), hexadecimal (`"hex"`), and binary (`"bin"`).
 #' @param is_ipv6 A logical vector indicating whether to construct an IPv4 or
-#'   IPv6 address. If `NULL` (the default), then integers less than 2^32 will
-#'   construct an IPv4 address and anything larger will construct an IPv6 address.
+#'   IPv6 address. If `NULL` (the default), then IPv4 is preferred. An IPv6
+#'   address is constructed when `x` is too large for the IPv4 address space.
 #'
 #' @return
-#'  * For `ip_to_integer()`: If `base = "dec"`, then a [`bignum::biginteger`]
-#'    vector. Otherwise a [`character`] vector.
+#'  * For `ip_to_integer()`: A [`bignum::biginteger`] vector
 #'  * For `integer_to_ip()`: An [`ip_address`] vector
 #'
 #' @examples
@@ -38,26 +35,15 @@
 #' as.numeric(ip_to_integer(ip_address("192.168.0.1")))
 #'
 #' integer_to_ip(3232235521)
-#'
-#' # hex representation
-#' ip_to_integer(x, base = "hex")
-#' @seealso
-#'  * [ip_to_bytes()] and [bytes_to_ip()]
-#'  * [ip_to_binary()] and [binary_to_ip()]
+#' @family address representations
 #' @export
-ip_to_integer <- function(x, base = c("dec", "hex", "bin")) {
+ip_to_integer <- function(x) {
   if (!is_ip_address(x)) {
     abort("`x` must be an ip_address vector")
   }
 
-  switch(arg_match(base),
-    dec = {
-      check_installed("bignum")
-      bignum::biginteger(wrap_encode_integer(x))
-    },
-    hex = wrap_encode_integer(x),
-    bin = wrap_encode_binary(x)
-  )
+  check_installed("bignum")
+  bignum::biginteger(wrap_encode_hex(x))
 }
 
 #' @rdname ip_to_integer
@@ -82,11 +68,11 @@ integer_to_ip <- function(x, is_ipv6 = NULL) {
     warn("Found negative integers.")
   }
 
-  max_value <- bignum::biginteger(2)^ifelse(is_ipv6, 128L, 32L)
-  if (any(x >= max_value, na.rm = TRUE)) {
-    warn("Found integers beyond the address space.")
-    x[x >= max_value] <- bignum::NA_biginteger_
+  x_oob <- x >= bignum::biginteger(2)^ifelse(is_ipv6, 128L, 32L)
+  if (any(x_oob, na.rm = TRUE)) {
+    warn("Found out-of-bounds input value(s)")
+    x[x_oob] <- bignum::NA_biginteger_
   }
 
-  wrap_decode_integer(format(x, notation = "hex"), is_ipv6)
+  wrap_decode_hex(format(x, notation = "hex"), is_ipv6)
 }

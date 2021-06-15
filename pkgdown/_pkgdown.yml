@@ -26,9 +26,7 @@ reference:
       - ip_interface
   - title: "Other representations"
     contents:
-      - ip_to_integer
-      - ip_to_bytes
-      - ip_to_binary
+      - has_concept("address representations")
       - ip_to_hostname
       - reverse_pointer
   - title: "Address space"

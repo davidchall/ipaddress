@@ -38,7 +38,7 @@ IpAddress decode_ipv6_hex(const std::string& hex) {
 
 
 // [[Rcpp::export]]
-List wrap_decode_integer(CharacterVector input, LogicalVector in_is_ipv6) {
+List wrap_decode_hex(CharacterVector input, LogicalVector in_is_ipv6) {
   // initialize vectors
   std::size_t vsize = input.size();
   std::vector<IpAddress> output(vsize);
@@ -66,7 +66,7 @@ List wrap_decode_integer(CharacterVector input, LogicalVector in_is_ipv6) {
 
 
 // [[Rcpp::export]]
-CharacterVector wrap_encode_integer(List input) {
+CharacterVector wrap_encode_hex(List input) {
   std::vector<IpAddress> address = decode_addresses(input);
 
   // initialize vectors

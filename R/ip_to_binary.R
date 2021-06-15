@@ -22,9 +22,7 @@
 #' ip_to_binary(x)
 #'
 #' binary_to_ip(ip_to_binary(x))
-#' @seealso
-#'  * [ip_to_integer()] and [integer_to_ip()]
-#'  * [ip_to_bytes()] and [bytes_to_ip()]
+#' @family address representations
 #' @export
 ip_to_binary <- function(x) {
   if (!is_ip_address(x)) {
