@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   ipaddress-classes: ipaddress-classes.html
   ipaddress-examples: ipaddress-examples.html
-last_built: 2021-06-16T02:39Z
+last_built: 2021-06-16T02:43Z
 urls:
   reference: https://davidchall.github.io/ipaddress/reference
   article: https://davidchall.github.io/ipaddress/articles
