@@ -1,19 +1,22 @@
 ## Test environments
-* macOS 10.15 (local), R 4.0.2
-* macOS 10.15 (GitHub Actions), R 4.0.2
-* Ubuntu 16.04 (GitHub Actions), R 3.3.3, 3.4.4, 3.5.3, 3.6.3, 4.0.2, R-devel
-* Ubuntu 16.04 (RHub), R 4.0.2
-* Fedora Linux (RHub), R-devel
-* Debian Linux (RHub), R-devel
-* Windows Server 2019 (GitHub Actions), R 4.0.2
-* Windows Server 2019 (GitHub Actions), R 3.6.3
-* Windows Server 2008 R2 SP1 32/64-bit (win-builder), R-devel
-* Windows Server 2008 R2 SP1 32/64-bit (RHub), R-devel
-* Oracle Solaris 10, x86, 32-bit (RHub), R-patched
+
+* macOS 10.15 (local): 4.0
+* macOS 10.15 (GitHub Actions): 4.1
+* Ubuntu 16.04 (GitHub Actions): 3.3, 3.4, 3.5, 4.0, 4.1, devel
+* Ubuntu 20.04 (RHub): 4.1
+* Fedora Linux (RHub): devel
+* Debian Linux (RHub): devel
+* Windows Server 2019 (GitHub Actions): 3.6, 4.1
+* Windows Server 2008 R2 SP1 32/64-bit (win-builder): devel
+* Oracle Solaris 10, x86, 32-bit (RHub): patched
 
 ## R CMD check results
 
 0 errors | 0 warnings | 0 notes
 
-## Reverse dependencies
-There are currently no reverse dependencies for this package.
+## revdepcheck results
+
+We checked 1 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+
+ * We saw 0 new problems
+ * We failed to check 0 packages

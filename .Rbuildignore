@@ -13,3 +13,4 @@
 [.]mmd$
 ^man/figures/logo_large\.png$
 ^data-raw$
+^revdep$
