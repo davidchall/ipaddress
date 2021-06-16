@@ -16,7 +16,7 @@ hex_to_ip(x, is_ipv6 = NULL)
 }}
 
 \item{is_ipv6}{A logical vector indicating whether to construct an IPv4 or
-IPv6 address. If \code{NULL} (the default), then IPv4 is preferred. An IPv6
+IPv6 address. If \code{NULL} (the default), then IPv4 is preferred but an IPv6
 address is constructed when \code{x} is too large for the IPv4 address space.}
 }
 \value{

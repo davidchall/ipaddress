@@ -6,7 +6,7 @@
 #'  * For `ip_to_hex()`: An [`ip_address`] vector
 #'  * For `hex_to_ip()`: A character vector containing hexadecimal strings
 #' @param is_ipv6 A logical vector indicating whether to construct an IPv4 or
-#'   IPv6 address. If `NULL` (the default), then IPv4 is preferred. An IPv6
+#'   IPv6 address. If `NULL` (the default), then IPv4 is preferred but an IPv6
 #'   address is constructed when `x` is too large for the IPv4 address space.
 #'
 #' @return
