@@ -11,6 +11,11 @@ test_that("hostname encoding/decoding works", {
 
   skip_if_offline()
 
+  # missing values
+  expect_equal(hostname_to_ip(NA_character_), ip_address(NA))
+  expect_equal(ip_to_hostname(ip_address(NA), multiple = FALSE), NA_character_)
+  expect_equal(ip_to_hostname(ip_address(NA), multiple = TRUE), list(NA_character_))
+
   expect_s3_class(hostname_to_ip("localhost", multiple = FALSE), "ip_address")
   expect_type(hostname_to_ip("localhost", multiple = TRUE), "list")
   expect_type(ip_to_hostname(ip_address("::1"), multiple = FALSE), "character")
@@ -26,6 +31,8 @@ test_that("hostname encoding/decoding works", {
   expect_length(ip_to_hostname(ip_address(c("::1", "::2")), multiple = FALSE), 2)
   expect_length(ip_to_hostname(ip_address(c("::1", "::2")), multiple = TRUE), 2)
 
+  skip_on_cran()
+
   expect_equal(hostname_to_ip("unknown"), ip_address(NA))
   expect_equal(ip_to_hostname(ip_address("0.0.0.0")), NA_character_)
 
@@ -33,11 +40,6 @@ test_that("hostname encoding/decoding works", {
   expect_true(is_loopback(hostname_to_ip("localhost")))
   expect_match(ip_to_hostname(ip_address("127.0.0.1")), "localhost")
   expect_match(ip_to_hostname(ip_address("::1")), "localhost")
-
-  # missing values
-  expect_equal(hostname_to_ip(NA_character_), ip_address(NA))
-  expect_equal(ip_to_hostname(ip_address(NA), multiple = FALSE), NA_character_)
-  expect_equal(ip_to_hostname(ip_address(NA), multiple = TRUE), list(NA_character_))
 })
 
 test_that("DNS resolution errors if offline", {
