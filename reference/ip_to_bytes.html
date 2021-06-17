@@ -99,7 +99,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
       </span>
     </div>
 
@@ -107,7 +107,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -136,7 +136,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/davidchall/ipaddress/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -168,9 +168,9 @@
     <p>Encode or decode an <code><a href='ip_address.html'>ip_address</a></code> as a list of raw bytes.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ip_to_bytes</span>(<span class='kw'>x</span>)
+    <pre class="usage"><span class='fu'>ip_to_bytes</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>bytes_to_ip</span>(<span class='kw'>x</span>)</pre>
+<span class='fu'>bytes_to_ip</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -200,17 +200,15 @@ big-endian order), which is part of the IP standard.</p>
 and missing values are encoded as <code>NULL</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'>
-<ul>
-<li><p><code><a href='ip_to_integer.html'>ip_to_integer()</a></code> and <code><a href='ip_to_integer.html'>integer_to_ip()</a></code></p></li>
-<li><p><code><a href='ip_to_binary.html'>ip_to_binary()</a></code> and <code><a href='ip_to_binary.html'>binary_to_ip()</a></code></p></li>
-<li><p>Use <code><a href='https://rdrr.io/pkg/blob/man/blob.html'>blob::as_blob()</a></code> to cast result to a blob object</p></li>
-</ul>
-</div>
+    <div class='dont-index'><p>Use <code><a href='https://rdrr.io/pkg/blob/man/blob.html'>blob::as_blob()</a></code> to cast result to a blob object</p>
+<p>Other address representations: 
+<code><a href='ip_to_binary.html'>ip_to_binary</a>()</code>,
+<code><a href='ip_to_hex.html'>ip_to_hex</a>()</code>,
+<code><a href='ip_to_integer.html'>ip_to_integer</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.1"</span>, <span class='st'>"2001:db8::8a2e:370:7334"</span>, <span class='fl'>NA</span>))
-<span class='fu'>ip_to_bytes</span>(<span class='kw'>x</span>)
+    <pre class="examples"><div class='input'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ip_address.html'>ip_address</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"192.168.0.1"</span>, <span class='st'>"2001:db8::8a2e:370:7334"</span>, <span class='cn'>NA</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>ip_to_bytes</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [[1]]
 #&gt; [1] c0 a8 00 01
 #&gt; 
@@ -220,15 +218,15 @@ and missing values are encoded as <code>NULL</code>.</p>
 #&gt; [[3]]
 #&gt; NULL
 #&gt; </div><div class='input'>
-<span class='kw'>bytes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-  <span class='fu'><a href='https://rdrr.io/r/base/raw.html'>as.raw</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0xc0</span>, <span class='fl'>0xa8</span>, <span class='fl'>0x00</span>, <span class='fl'>0x01</span>)),
-  <span class='fu'><a href='https://rdrr.io/r/base/raw.html'>as.raw</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
+<span class='va'>bytes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/raw.html'>as.raw</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0xc0</span>, <span class='fl'>0xa8</span>, <span class='fl'>0x00</span>, <span class='fl'>0x01</span><span class='op'>)</span><span class='op'>)</span>,
+  <span class='fu'><a href='https://rdrr.io/r/base/raw.html'>as.raw</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
     <span class='fl'>0x20</span>, <span class='fl'>0x01</span>, <span class='fl'>0x0d</span>, <span class='fl'>0xb8</span>, <span class='fl'>0x00</span>, <span class='fl'>0x00</span>, <span class='fl'>0x00</span>, <span class='fl'>0x00</span>,
     <span class='fl'>0x00</span>, <span class='fl'>0x00</span>, <span class='fl'>0x8a</span>, <span class='fl'>0x2e</span>, <span class='fl'>0x03</span>, <span class='fl'>0x70</span>, <span class='fl'>0x73</span>, <span class='fl'>0x34</span>
-  )),
-  <span class='kw'>NULL</span>
-)
-<span class='fu'>bytes_to_ip</span>(<span class='kw'>bytes</span>)
+  <span class='op'>)</span><span class='op'>)</span>,
+  <span class='cn'>NULL</span>
+<span class='op'>)</span>
+<span class='fu'>bytes_to_ip</span><span class='op'>(</span><span class='va'>bytes</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;ip_address[3]&gt;
 #&gt; [1] 192.168.0.1             2001:db8::8a2e:370:7334 &lt;NA&gt;                   </div></pre>
   </div>

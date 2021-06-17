@@ -49,7 +49,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
       </span>
     </div>
 
@@ -57,7 +57,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -86,7 +86,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/davidchall/ipaddress/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -132,54 +132,49 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the released version of ipaddress from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"ipaddress"</span>)
-</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"ipaddress"</span><span class="op">)</span></code></pre></div>
 <p>Or you can install the development version from GitHub:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="co"># install.packages("remotes")</span>
-<span class="kw">remotes</span>::<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"davidchall/ipaddress"</span>)
-</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"davidchall/ipaddress"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
 <p>Use <code><a href="reference/ip_address.html">ip_address()</a></code> and <code><a href="reference/ip_network.html">ip_network()</a></code> vectors either standalone or as columns in a data frame.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">tidyverse</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://davidchall.github.io/ipaddress">ipaddress</a></span>)
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://davidchall.github.io/ipaddress/">ipaddress</a></span><span class="op">)</span>
 
-<span class="fu">tibble</span>(
-  address = <span class="fu"><a href="reference/ip_address.html">ip_address</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"192.168.0.1"</span>, <span class="st">"2001:db8::8a2e:370:7334"</span>)),
-  network = <span class="fu"><a href="reference/ip_network.html">ip_network</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"192.168.100.0/22"</span>, <span class="st">"2001:db8::/80"</span>))
-)
+<span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
+  address <span class="op">=</span> <span class="fu"><a href="reference/ip_address.html">ip_address</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"192.168.0.1"</span>, <span class="st">"2001:db8::8a2e:370:7334"</span><span class="op">)</span><span class="op">)</span>,
+  network <span class="op">=</span> <span class="fu"><a href="reference/ip_network.html">ip_network</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"192.168.100.0/22"</span>, <span class="st">"2001:db8::/80"</span><span class="op">)</span><span class="op">)</span>
+<span class="op">)</span>
 <span class="co">#&gt; # A tibble: 2 x 2</span>
 <span class="co">#&gt;                   address          network</span>
 <span class="co">#&gt;                 &lt;ip_addr&gt;       &lt;ip_netwk&gt;</span>
 <span class="co">#&gt; 1             192.168.0.1 192.168.100.0/22</span>
-<span class="co">#&gt; 2 2001:db8::8a2e:370:7334    2001:db8::/80</span>
-</pre></div>
+<span class="co">#&gt; 2 2001:db8::8a2e:370:7334    2001:db8::/80</span></code></pre></div>
 <p>Input character vectors are validated as they are parsed. Invalid inputs raise a warning and are replaced with <code>NA</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="reference/ip_address.html">ip_address</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"255.255.255.255"</span>, <span class="st">"255.255.255.256"</span>))
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/ip_address.html">ip_address</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"255.255.255.255"</span>, <span class="st">"255.255.255.256"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Warning: Problem on row 2: 255.255.255.256</span>
 <span class="co">#&gt; &lt;ip_address[2]&gt;</span>
-<span class="co">#&gt; [1] 255.255.255.255 &lt;NA&gt;</span>
-</pre></div>
+<span class="co">#&gt; [1] 255.255.255.255 &lt;NA&gt;</span></code></pre></div>
 <p>A variety of functions are provided to enable common tasks.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu">tibble</span>(network = <span class="fu"><a href="reference/ip_network.html">ip_network</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"192.168.100.0/22"</span>, <span class="st">"2001:db8::/80"</span>))) <span class="op">%&gt;%</span>
-  <span class="fu">mutate</span>(
-    first = <span class="fu"><a href="reference/network_size.html">network_address</a></span>(<span class="kw">network</span>),
-    last = <span class="fu"><a href="reference/network_size.html">broadcast_address</a></span>(<span class="kw">network</span>),
-    ipv6 = <span class="fu"><a href="reference/is_ipv6.html">is_ipv6</a></span>(<span class="kw">network</span>)
-  )
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>network <span class="op">=</span> <span class="fu"><a href="reference/ip_network.html">ip_network</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"192.168.100.0/22"</span>, <span class="st">"2001:db8::/80"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
+    first <span class="op">=</span> <span class="fu"><a href="reference/network_size.html">network_address</a></span><span class="op">(</span><span class="va">network</span><span class="op">)</span>,
+    last <span class="op">=</span> <span class="fu"><a href="reference/network_size.html">broadcast_address</a></span><span class="op">(</span><span class="va">network</span><span class="op">)</span>,
+    ipv6 <span class="op">=</span> <span class="fu"><a href="reference/is_ipv6.html">is_ipv6</a></span><span class="op">(</span><span class="va">network</span><span class="op">)</span>
+  <span class="op">)</span>
 <span class="co">#&gt; # A tibble: 2 x 4</span>
 <span class="co">#&gt;            network         first                     last ipv6 </span>
 <span class="co">#&gt;         &lt;ip_netwk&gt;     &lt;ip_addr&gt;                &lt;ip_addr&gt; &lt;lgl&gt;</span>
 <span class="co">#&gt; 1 192.168.100.0/22 192.168.100.0          192.168.103.255 FALSE</span>
-<span class="co">#&gt; 2    2001:db8::/80    2001:db8:: 2001:db8::ffff:ffff:ffff TRUE</span>
-</pre></div>
+<span class="co">#&gt; 2    2001:db8::/80    2001:db8:: 2001:db8::ffff:ffff:ffff TRUE</span></code></pre></div>
 </div>
 <div id="related-work" class="section level2">
 <h2 class="hasAnchor">
@@ -232,7 +227,6 @@
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
 <li><a href="https://CRAN.R-project.org/package=ipaddress"><img src="https://www.r-pkg.org/badges/version/ipaddress" alt="CRAN status"></a></li>
 <li><a href="https://github.com/davidchall/ipaddress/actions"><img src="https://github.com/davidchall/ipaddress/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
 <li><a href="https://codecov.io/gh/davidchall/ipaddress?branch=master"><img src="https://codecov.io/gh/davidchall/ipaddress/branch/master/graph/badge.svg" alt="Coverage status"></a></li>

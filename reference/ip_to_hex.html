@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Network size — network_size • ipaddress</title>
+<title>Represent address as hexadecimal — ip_to_hex • ipaddress</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -52,10 +52,8 @@
 
 
 
-<meta property="og:title" content="Network size — network_size" />
-<meta property="og:description" content="network_address() and broadcast_address() yield the first and last
-addresses of the network; num_addresses() gives the total number of
-addresses in the network." />
+<meta property="og:title" content="Represent address as hexadecimal — ip_to_hex" />
+<meta property="og:description" content="Encode or decode an ip_address as a hexadecimal string." />
 <meta property="og:image" content="https://davidchall.github.io/ipaddress/logo.png" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="@hall_davidc" />
@@ -161,29 +159,34 @@ addresses in the network." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Network size</h1>
-    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/network_size.R'><code>R/network_size.R</code></a></small>
-    <div class="hidden name"><code>network_size.Rd</code></div>
+    <h1>Represent address as hexadecimal</h1>
+    <small class="dont-index">Source: <a href='https://github.com/davidchall/ipaddress/blob/master/R/ip_to_hex.R'><code>R/ip_to_hex.R</code></a></small>
+    <div class="hidden name"><code>ip_to_hex.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>network_address()</code> and <code>broadcast_address()</code> yield the first and last
-addresses of the network; <code>num_addresses()</code> gives the total number of
-addresses in the network.</p>
+    <p>Encode or decode an <code><a href='ip_address.html'>ip_address</a></code> as a hexadecimal string.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>network_address</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>ip_to_hex</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>broadcast_address</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-
-<span class='fu'>num_addresses</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
+<span class='fu'>hex_to_ip</span><span class='op'>(</span><span class='va'>x</span>, is_ipv6 <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>An <code><a href='ip_network.html'>ip_network</a></code> vector</p></td>
+      <td><ul>
+<li><p>For <code>ip_to_hex()</code>: An <code><a href='ip_address.html'>ip_address</a></code> vector</p></li>
+<li><p>For <code>hex_to_ip()</code>: A character vector containing hexadecimal strings</p></li>
+</ul></td>
+    </tr>
+    <tr>
+      <th>is_ipv6</th>
+      <td><p>A logical vector indicating whether to construct an IPv4 or
+IPv6 address. If <code>NULL</code> (the default), then IPv4 is preferred but an IPv6
+address is constructed when <code>x</code> is too large for the IPv4 address space.</p></td>
     </tr>
     </table>
 
@@ -191,35 +194,25 @@ addresses in the network.</p>
 
     
 <ul>
-<li><p><code>network_address()</code> and <code>broadcast_address()</code> return an
-<code><a href='ip_address.html'>ip_address</a></code> vector</p></li>
-<li><p><code>num_addresses()</code> returns a numeric vector</p></li>
+<li><p>For <code>ip_to_hex()</code>: A character vector</p></li>
+<li><p>For <code>hex_to_ip()</code>: An <code><a href='ip_address.html'>ip_address</a></code> vector</p></li>
 </ul>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The broadcast address is a special address at which any host connected
-to the network can receive messages. That is, packets sent to this address
-are received by all hosts on the network.
-In IPv4, the last address of a network is the broadcast address.
-Although IPv6 does not follow this approach to broadcast addresses, the
-<code>broadcast_address()</code> function still returns the last address of the network.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Use <code><a href='sequence.html'>seq.ip_network()</a></code> to generate all addresses in a network.</p></div>
+    <div class='dont-index'><p>Other address representations: 
+<code><a href='ip_to_binary.html'>ip_to_binary</a>()</code>,
+<code><a href='ip_to_bytes.html'>ip_to_bytes</a>()</code>,
+<code><a href='ip_to_integer.html'>ip_to_integer</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ip_network.html'>ip_network</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"192.168.0.0/22"</span>, <span class='st'>"2001:db8::/33"</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='fu'>network_address</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
-#&gt; [1] 192.168.0.0 2001:db8:: </div><div class='input'>
-<span class='fu'>broadcast_address</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
-#&gt; [1] 192.168.3.255                         
-#&gt; [2] 2001:db8:7fff:ffff:ffff:ffff:ffff:ffff</div><div class='input'>
-<span class='fu'>num_addresses</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 1.024000e+03 3.961408e+28</div></pre>
+    <pre class="examples"><div class='input'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ip_address.html'>ip_address</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"192.168.0.1"</span>, <span class='st'>"2001:db8::8a2e:370:7334"</span>, <span class='cn'>NA</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>ip_to_hex</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "0xC0A80001"                         "0x20010DB80000000000008A2E03707334"
+#&gt; [3] NA                                  </div><div class='input'>
+<span class='fu'>hex_to_ip</span><span class='op'>(</span><span class='fu'>ip_to_hex</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;ip_address[3]&gt;
+#&gt; [1] 192.168.0.1             2001:db8::8a2e:370:7334 &lt;NA&gt;                   </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -105,7 +105,7 @@ hostmask() can accept a vector of prefix lengths." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
       </span>
     </div>
 
@@ -113,7 +113,7 @@ hostmask() can accept a vector of prefix lengths." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -142,7 +142,7 @@ hostmask() can accept a vector of prefix lengths." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/davidchall/ipaddress/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -180,38 +180,38 @@ For example, <code>prefix_length()</code> can infer the prefix length from an
 <code>hostmask()</code> can accept a vector of prefix lengths.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>prefix_length</span>(<span class='kw'>...</span>)
+    <pre class="usage"><span class='fu'>prefix_length</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>netmask</span>(<span class='kw'>...</span>)
+<span class='fu'>netmask</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>hostmask</span>(<span class='kw'>...</span>)
-
-<span class='co'># S3 method for ip_network</span>
-<span class='fu'>prefix_length</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+<span class='fu'>hostmask</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for ip_network</span>
-<span class='fu'>netmask</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+<span class='fu'>prefix_length</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for ip_network</span>
-<span class='fu'>hostmask</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+<span class='fu'>netmask</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for ip_network</span>
+<span class='fu'>hostmask</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for ip_interface</span>
-<span class='fu'>prefix_length</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+<span class='fu'>prefix_length</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for ip_interface</span>
-<span class='fu'>netmask</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+<span class='fu'>netmask</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for ip_interface</span>
-<span class='fu'>hostmask</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+<span class='fu'>hostmask</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>prefix_length</span>(<span class='kw'>mask</span>, <span class='kw'>...</span>)
+<span class='fu'>prefix_length</span><span class='op'>(</span><span class='va'>mask</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>netmask</span>(<span class='kw'>prefix_length</span>, <span class='kw'>is_ipv6</span>, <span class='kw'>...</span>)
+<span class='fu'>netmask</span><span class='op'>(</span><span class='va'>prefix_length</span>, <span class='va'>is_ipv6</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>hostmask</span>(<span class='kw'>prefix_length</span>, <span class='kw'>is_ipv6</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'>hostmask</span><span class='op'>(</span><span class='va'>prefix_length</span>, <span class='va'>is_ipv6</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -252,28 +252,28 @@ cases (all zeros, all ones) are treated as netmasks.</p></td>
     <div class='dont-index'><p><code><a href='max_prefix_length.html'>max_prefix_length()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ip_network.html'>ip_network</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"192.168.0.0/22"</span>, <span class='st'>"2001:db00::0/26"</span>))
+    <pre class="examples"><div class='input'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ip_network.html'>ip_network</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"192.168.0.0/22"</span>, <span class='st'>"2001:db00::0/26"</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'>prefix_length</span>(<span class='kw'>x</span>)
+<span class='fu'>prefix_length</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] 22 26</div><div class='input'>
-<span class='fu'>netmask</span>(<span class='kw'>x</span>)
+<span class='fu'>netmask</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
 #&gt; [1] 255.255.252.0 ffff:ffc0::  </div><div class='input'>
-<span class='fu'>hostmask</span>(<span class='kw'>x</span>)
+<span class='fu'>hostmask</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
 #&gt; [1] 0.0.3.255                          0:3f:ffff:ffff:ffff:ffff:ffff:ffff</div><div class='input'>
 <span class='co'># construct netmask/hostmask from prefix length</span>
-<span class='fu'>netmask</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>22L</span>, <span class='fl'>26L</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>FALSE</span>, <span class='fl'>TRUE</span>))
+<span class='fu'>netmask</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>22L</span>, <span class='fl'>26L</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>FALSE</span>, <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
 #&gt; [1] 255.255.252.0 ffff:ffc0::  </div><div class='input'>
-<span class='fu'>hostmask</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>22L</span>, <span class='fl'>26L</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>FALSE</span>, <span class='fl'>TRUE</span>))
+<span class='fu'>hostmask</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>22L</span>, <span class='fl'>26L</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>FALSE</span>, <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;ip_address[2]&gt;
 #&gt; [1] 0.0.3.255                          0:3f:ffff:ffff:ffff:ffff:ffff:ffff</div><div class='input'>
 <span class='co'># extract prefix length from netmask/hostmask</span>
-<span class='fu'>prefix_length</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"255.255.255.0"</span>, <span class='st'>"0.255.255.255"</span>)))
+<span class='fu'>prefix_length</span><span class='op'>(</span><span class='fu'><a href='ip_address.html'>ip_address</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"255.255.255.0"</span>, <span class='st'>"0.255.255.255"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] 24  8</div><div class='input'>
 <span class='co'># invalid netmask/hostmask raise a warning and return NA</span>
-<span class='fu'>prefix_length</span>(<span class='fu'><a href='ip_address.html'>ip_address</a></span>(<span class='st'>"255.255.255.1"</span>))
+<span class='fu'>prefix_length</span><span class='op'>(</span><span class='fu'><a href='ip_address.html'>ip_address</a></span><span class='op'>(</span><span class='st'>"255.255.255.1"</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='warning'>Warning: Problem on row 1: 255.255.255.1 (invalid netmask/hostmask)</span></div><div class='output co'>#&gt; [1] NA</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
