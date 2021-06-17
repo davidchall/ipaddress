@@ -1,3 +1,5 @@
+# ipaddress (development version)
+
 # ipaddress 0.5.2
 
 * The `base` argument of `ip_to_integer()` is removed.
