@@ -1,6 +1,8 @@
 x <- ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334", NA))
 
 test_that("integer encoding/decoding works", {
+  skip_if_not_installed("bignum")
+
   expect_error(ip_to_integer("hello"), "`x` must be an ip_address vector")
   expect_error(integer_to_ip(1.5), class = "vctrs_error_cast_lossy")
   expect_error(integer_to_ip(x), class = "vctrs_error_incompatible_type")
