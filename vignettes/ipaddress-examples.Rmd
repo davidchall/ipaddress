@@ -87,7 +87,7 @@ my_addresses %>%
 But what if we need to know _which_ of our networks the address was found in?
 We can do that using the excellent [fuzzyjoin](https://cran.r-project.org/package=fuzzyjoin) package together with the `is_within()` function.
 
-```{r}
+```{r, eval=rlang::is_installed("fuzzyjoin")}
 my_addresses %>%
   fuzzyjoin::fuzzy_left_join(my_networks, c("address" = "network"), is_within)
 ```
