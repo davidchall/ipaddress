@@ -1,4 +1,4 @@
-# ipaddress (development version)
+# ipaddress 0.5.3
 
 Hotfix for CRAN check warnings.
 
