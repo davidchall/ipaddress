@@ -98,7 +98,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3</span>
       </span>
     </div>
 
@@ -162,6 +162,12 @@
       <small>Source: <a href='https://github.com/davidchall/ipaddress/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="ipaddress-053" class="section level1">
+<h1 class="page-header" data-toc-text="0.5.3">
+<a href="#ipaddress-053" class="anchor"></a>ipaddress 0.5.3<small> 2021-07-27 </small>
+</h1>
+<p>Hotfix for CRAN check warnings.</p>
+</div>
     <div id="ipaddress-052" class="section level1">
 <h1 class="page-header" data-toc-text="0.5.2">
 <a href="#ipaddress-052" class="anchor"></a>ipaddress 0.5.2<small> 2021-06-17 </small>
@@ -196,7 +202,7 @@
 <li>
 <code><a href="../reference/ip_to_bytes.html">ip_to_bytes()</a></code> now returns a list of raw vectors instead of a <code>blob</code> object (<a href='https://github.com/davidchall/ipaddress/issues/65'>#65</a>).
 <ul>
-<li>Result can still be converted using <code><a href="https://rdrr.io/pkg/blob/man/blob.html">blob::as_blob()</a></code>.</li>
+<li>Result can still be converted using <code><a href="https://blob.tidyverse.org/reference/blob.html">blob::as_blob()</a></code>.</li>
 <li>Removes excessive blob package dependency.</li>
 </ul>
 </li>

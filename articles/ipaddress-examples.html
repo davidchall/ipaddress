@@ -49,7 +49,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ipaddress</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3</span>
       </span>
     </div>
 
@@ -147,7 +147,7 @@
   end <span class="op">=</span> <span class="fu"><a href="../reference/ip_address.html">ip_address</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"192.168.0.15"</span>, <span class="st">"2001:db8::ffff:ffff:ffff"</span><span class="op">)</span><span class="op">)</span>
 <span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>network <span class="op">=</span> <span class="fu"><a href="../reference/common_network.html">common_network</a></span><span class="op">(</span><span class="va">start</span>, <span class="va">end</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 2 x 3</span>
+<span class="co">#&gt; # A tibble: 2 × 3</span>
 <span class="co">#&gt;         start                      end        network</span>
 <span class="co">#&gt;     &lt;ip_addr&gt;                &lt;ip_addr&gt;     &lt;ip_netwk&gt;</span>
 <span class="co">#&gt; 1 192.168.0.0             192.168.0.15 192.168.0.0/28</span>
@@ -166,7 +166,7 @@
 <span class="op">)</span>
 
 <span class="va">my_networks</span>
-<span class="co">#&gt; # A tibble: 2 x 2</span>
+<span class="co">#&gt; # A tibble: 2 × 2</span>
 <span class="co">#&gt;          network label        </span>
 <span class="co">#&gt;       &lt;ip_netwk&gt; &lt;chr&gt;        </span>
 <span class="co">#&gt; 1 192.168.0.0/16 Private      </span>
@@ -180,7 +180,7 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">my_addresses</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>in_network <span class="op">=</span> <span class="fu"><a href="../reference/address_in_network.html">is_within_any</a></span><span class="op">(</span><span class="va">address</span>, <span class="va">my_networks</span><span class="op">$</span><span class="va">network</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 x 2</span>
+<span class="co">#&gt; # A tibble: 4 × 2</span>
 <span class="co">#&gt;                   address in_network</span>
 <span class="co">#&gt;                 &lt;ip_addr&gt; &lt;lgl&gt;     </span>
 <span class="co">#&gt; 1           192.168.100.1 TRUE      </span>
@@ -191,7 +191,7 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">my_addresses</span> <span class="op">%&gt;%</span>
   <span class="fu">fuzzyjoin</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/fuzzyjoin/man/fuzzy_join.html">fuzzy_left_join</a></span><span class="op">(</span><span class="va">my_networks</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"address"</span> <span class="op">=</span> <span class="st">"network"</span><span class="op">)</span>, <span class="va">is_within</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 x 3</span>
+<span class="co">#&gt; # A tibble: 4 × 3</span>
 <span class="co">#&gt;                   address        network label        </span>
 <span class="co">#&gt;                 &lt;ip_addr&gt;     &lt;ip_netwk&gt; &lt;chr&gt;        </span>
 <span class="co">#&gt; 1           192.168.100.1 192.168.0.0/16 Private      </span>
@@ -226,19 +226,19 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>address <span class="op">=</span> <span class="fu">sample_public</span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>is_public <span class="op">=</span> <span class="fu"><a href="../reference/is_reserved.html">is_global</a></span><span class="op">(</span><span class="va">address</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 10 x 2</span>
-<span class="co">#&gt;            address is_public</span>
-<span class="co">#&gt;          &lt;ip_addr&gt; &lt;lgl&gt;    </span>
-<span class="co">#&gt;  1   156.225.10.10 TRUE     </span>
-<span class="co">#&gt;  2   27.35.219.140 TRUE     </span>
-<span class="co">#&gt;  3 140.116.170.110 TRUE     </span>
-<span class="co">#&gt;  4    19.85.107.86 TRUE     </span>
-<span class="co">#&gt;  5  195.43.226.252 TRUE     </span>
-<span class="co">#&gt;  6   202.215.92.86 TRUE     </span>
-<span class="co">#&gt;  7 169.177.242.209 TRUE     </span>
-<span class="co">#&gt;  8  98.212.146.250 TRUE     </span>
-<span class="co">#&gt;  9  164.230.98.223 TRUE     </span>
-<span class="co">#&gt; 10  77.221.101.137 TRUE</span></code></pre></div>
+<span class="co">#&gt; # A tibble: 10 × 2</span>
+<span class="co">#&gt;           address is_public</span>
+<span class="co">#&gt;         &lt;ip_addr&gt; &lt;lgl&gt;    </span>
+<span class="co">#&gt;  1 164.32.136.162 TRUE     </span>
+<span class="co">#&gt;  2 139.62.137.176 TRUE     </span>
+<span class="co">#&gt;  3  99.119.167.17 TRUE     </span>
+<span class="co">#&gt;  4 115.48.166.162 TRUE     </span>
+<span class="co">#&gt;  5  70.127.42.131 TRUE     </span>
+<span class="co">#&gt;  6   149.5.245.88 TRUE     </span>
+<span class="co">#&gt;  7  224.249.230.4 TRUE     </span>
+<span class="co">#&gt;  8 33.228.138.178 TRUE     </span>
+<span class="co">#&gt;  9   25.145.57.71 TRUE     </span>
+<span class="co">#&gt; 10  87.234.216.39 TRUE</span></code></pre></div>
 </div>
   </div>
 
