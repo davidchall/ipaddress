@@ -1,5 +1,7 @@
 # ipaddress (development version)
 
+Compatible with new compiler toolchain on Windows for R 4.2 ([see announcement](https://developer.r-project.org/Blog/public/2021/12/07/upcoming-changes-in-r-4.2-on-windows/)).
+
 # ipaddress 0.5.3
 
 Hotfix for CRAN check warnings.
