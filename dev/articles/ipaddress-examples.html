@@ -38,6 +38,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -56,12 +58,6 @@
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -86,7 +82,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/davidchall/ipaddress/">
+  <a href="https://github.com/davidchall/ipaddress/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -113,7 +109,7 @@
       <h1 data-toc-skip>Example usage</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/davidchall/ipaddress/blob/master/vignettes/ipaddress-examples.Rmd"><code>vignettes/ipaddress-examples.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/davidchall/ipaddress/blob/HEAD/vignettes/ipaddress-examples.Rmd" class="external-link"><code>vignettes/ipaddress-examples.Rmd</code></a></small>
       <div class="hidden name"><code>ipaddress-examples.Rmd</code></div>
 
     </div>
@@ -121,19 +117,19 @@
     
     
 <p>This vignette demonstrates some typical use cases for the ipaddress package.</p>
-<div id="addresses-from-integers" class="section level2">
-<h2 class="hasAnchor">
-<a href="#addresses-from-integers" class="anchor"></a>Addresses from integers</h2>
+<div class="section level2">
+<h2 id="addresses-from-integers">Addresses from integers<a class="anchor" aria-label="anchor" href="#addresses-from-integers"></a>
+</h2>
 <p>Although IPv4 addresses are usually displayed in a human-readable format (e.g. <code>192.168.0.1</code>), they are often saved to disk as integers to reduce storage requirements. R is unable to store the entire range of IPv4 addresses in its integer data type, but they can instead be stored in its numeric data type. More details are found under <code><a href="../reference/ip_to_integer.html">help("ip_to_integer")</a></code>.</p>
 <p>Given this, it’s quite possible that you’ll receive IPv4 addresses represented as integers, and we’ll want to convert them to the <code><a href="../reference/ip_address.html">ip_address()</a></code> vector type. Here’s an example of how to do that:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ip_to_integer.html">integer_to_ip</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3232235521</span>, <span class="fl">4294967295</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ip_to_integer.html">integer_to_ip</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3232235521</span>, <span class="fl">4294967295</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; &lt;ip_address[3]&gt;</span>
 <span class="co">#&gt; [1] 0.0.0.0         192.168.0.1     255.255.255.255</span></code></pre></div>
 </div>
-<div id="networks-from-address-ranges" class="section level2">
-<h2 class="hasAnchor">
-<a href="#networks-from-address-ranges" class="anchor"></a>Networks from address ranges</h2>
+<div class="section level2">
+<h2 id="networks-from-address-ranges">Networks from address ranges<a class="anchor" aria-label="anchor" href="#networks-from-address-ranges"></a>
+</h2>
 <p>There are multiple equivalent ways to represent an IP network:</p>
 <ol style="list-style-type: decimal">
 <li>start address + prefix length (e.g. CIDR notation)</li>
@@ -143,66 +139,66 @@
 </ol>
 <p>Although the <code><a href="../reference/ip_network.html">ip_network()</a></code> function can handle the first 3 options, we use the <code><a href="../reference/common_network.html">common_network()</a></code> function for the final option.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
-  start <span class="op">=</span> <span class="fu"><a href="../reference/ip_address.html">ip_address</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"192.168.0.0"</span>, <span class="st">"2001:db8::"</span><span class="op">)</span><span class="op">)</span>,
-  end <span class="op">=</span> <span class="fu"><a href="../reference/ip_address.html">ip_address</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"192.168.0.15"</span>, <span class="st">"2001:db8::ffff:ffff:ffff"</span><span class="op">)</span><span class="op">)</span>
-<span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>network <span class="op">=</span> <span class="fu"><a href="../reference/common_network.html">common_network</a></span><span class="op">(</span><span class="va">start</span>, <span class="va">end</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 2 × 3</span>
+<code class="sourceCode R"><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>
+  start <span class="op">=</span> <span class="fu"><a href="../reference/ip_address.html">ip_address</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"192.168.0.0"</span>, <span class="st">"2001:db8::"</span><span class="op">)</span><span class="op">)</span>,
+  end <span class="op">=</span> <span class="fu"><a href="../reference/ip_address.html">ip_address</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"192.168.0.15"</span>, <span class="st">"2001:db8::ffff:ffff:ffff"</span><span class="op">)</span><span class="op">)</span>
+<span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>network <span class="op">=</span> <span class="fu"><a href="../reference/common_network.html">common_network</a></span><span class="op">(</span><span class="va">start</span>, <span class="va">end</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 3</span></span>
 <span class="co">#&gt;         start                      end        network</span>
-<span class="co">#&gt;     &lt;ip_addr&gt;                &lt;ip_addr&gt;     &lt;ip_netwk&gt;</span>
-<span class="co">#&gt; 1 192.168.0.0             192.168.0.15 192.168.0.0/28</span>
-<span class="co">#&gt; 2  2001:db8:: 2001:db8::ffff:ffff:ffff  2001:db8::/80</span></code></pre></div>
+<span class="co">#&gt;     <span style="color: #949494; font-style: italic;">&lt;ip_addr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;ip_addr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;ip_netwk&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 192<span style="color: #949494;">.</span>168<span style="color: #949494;">.</span>0<span style="color: #949494;">.</span>0             192<span style="color: #949494;">.</span>168<span style="color: #949494;">.</span>0<span style="color: #949494;">.</span>15 192<span style="color: #949494;">.</span>168<span style="color: #949494;">.</span>0<span style="color: #949494;">.</span>0<span style="color: #00BB00;">/28</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  2001<span style="color: #949494;">:</span>db8<span style="color: #949494;">::</span> 2001<span style="color: #949494;">:</span>db8<span style="color: #949494;">::</span>ffff<span style="color: #949494;">:</span>ffff<span style="color: #949494;">:</span>ffff  2001<span style="color: #949494;">:</span>db8<span style="color: #949494;">::</span><span style="color: #00BB00;">/80</span></span></code></pre></div>
 <p>Note that this approach assumes the two addresses do actually correspond to the first and last addresses of the network, otherwise an expanded network will be returned (see <code><a href="../reference/common_network.html">help("common_network")</a></code> for details).</p>
 </div>
-<div id="is-an-address-in-a-network" class="section level2">
-<h2 class="hasAnchor">
-<a href="#is-an-address-in-a-network" class="anchor"></a>Is an address in a network?</h2>
+<div class="section level2">
+<h2 id="is-an-address-in-a-network">Is an address in a network?<a class="anchor" aria-label="anchor" href="#is-an-address-in-a-network"></a>
+</h2>
 <p>A very common task is to check if an address is within a network, so the ipaddress package provides a couple of different functions to help with this workflow: <code><a href="../reference/address_in_network.html">is_within()</a></code> and <code><a href="../reference/address_in_network.html">is_within_any()</a></code>. We also provide <code><a href="../reference/network_in_network.html">is_subnet()</a></code> and <code><a href="../reference/network_in_network.html">is_supernet()</a></code> to test if a network is within another network.</p>
 <p>To see how these functions can be used in practice, let’s consider a couple of IP networks:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">my_networks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
-  network <span class="op">=</span> <span class="fu"><a href="../reference/ip_network.html">ip_network</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"192.168.0.0/16"</span>, <span class="st">"2001:db8::/32"</span><span class="op">)</span><span class="op">)</span>,
-  label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Private"</span>, <span class="st">"Documentation"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">my_networks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>
+  network <span class="op">=</span> <span class="fu"><a href="../reference/ip_network.html">ip_network</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"192.168.0.0/16"</span>, <span class="st">"2001:db8::/32"</span><span class="op">)</span><span class="op">)</span>,
+  label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Private"</span>, <span class="st">"Documentation"</span><span class="op">)</span>
 <span class="op">)</span>
 
 <span class="va">my_networks</span>
-<span class="co">#&gt; # A tibble: 2 × 2</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span>
 <span class="co">#&gt;          network label        </span>
-<span class="co">#&gt;       &lt;ip_netwk&gt; &lt;chr&gt;        </span>
-<span class="co">#&gt; 1 192.168.0.0/16 Private      </span>
-<span class="co">#&gt; 2  2001:db8::/32 Documentation</span></code></pre></div>
+<span class="co">#&gt;       <span style="color: #949494; font-style: italic;">&lt;ip_netwk&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 192<span style="color: #949494;">.</span>168<span style="color: #949494;">.</span>0<span style="color: #949494;">.</span>0<span style="color: #00BB00;">/16</span> Private      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  2001<span style="color: #949494;">:</span>db8<span style="color: #949494;">::</span><span style="color: #00BB00;">/32</span> Documentation</span></code></pre></div>
 <p>and a handful of addresses:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">my_addresses</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
-  address <span class="op">=</span> <span class="fu"><a href="../reference/ip_address.html">ip_address</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"192.168.100.1"</span>, <span class="st">"1.2.3.4"</span>, <span class="st">"2001:db8::8a2e:370:7334"</span>, <span class="st">"::1"</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">my_addresses</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>
+  address <span class="op">=</span> <span class="fu"><a href="../reference/ip_address.html">ip_address</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"192.168.100.1"</span>, <span class="st">"1.2.3.4"</span>, <span class="st">"2001:db8::8a2e:370:7334"</span>, <span class="st">"::1"</span><span class="op">)</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
 <p>First, we’ll check if each address is in <em>any</em> of our networks.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">my_addresses</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>in_network <span class="op">=</span> <span class="fu"><a href="../reference/address_in_network.html">is_within_any</a></span><span class="op">(</span><span class="va">address</span>, <span class="va">my_networks</span><span class="op">$</span><span class="va">network</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 2</span>
+<code class="sourceCode R"><span class="va">my_addresses</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>in_network <span class="op">=</span> <span class="fu"><a href="../reference/address_in_network.html">is_within_any</a></span><span class="op">(</span><span class="va">address</span>, <span class="va">my_networks</span><span class="op">$</span><span class="va">network</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 2</span></span>
 <span class="co">#&gt;                   address in_network</span>
-<span class="co">#&gt;                 &lt;ip_addr&gt; &lt;lgl&gt;     </span>
-<span class="co">#&gt; 1           192.168.100.1 TRUE      </span>
-<span class="co">#&gt; 2                 1.2.3.4 FALSE     </span>
-<span class="co">#&gt; 3 2001:db8::8a2e:370:7334 TRUE      </span>
-<span class="co">#&gt; 4                     ::1 FALSE</span></code></pre></div>
-<p>But what if we need to know <em>which</em> of our networks the address was found in? We can do that using the excellent <a href="https://cran.r-project.org/package=fuzzyjoin">fuzzyjoin</a> package together with the <code><a href="../reference/address_in_network.html">is_within()</a></code> function.</p>
+<span class="co">#&gt;                 <span style="color: #949494; font-style: italic;">&lt;ip_addr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>           192<span style="color: #949494;">.</span>168<span style="color: #949494;">.</span>100<span style="color: #949494;">.</span>1 TRUE      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>                 1<span style="color: #949494;">.</span>2<span style="color: #949494;">.</span>3<span style="color: #949494;">.</span>4 FALSE     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2001<span style="color: #949494;">:</span>db8<span style="color: #949494;">::</span>8a2e<span style="color: #949494;">:</span>370<span style="color: #949494;">:</span>7334 TRUE      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>                     <span style="color: #949494;">::</span>1 FALSE</span></code></pre></div>
+<p>But what if we need to know <em>which</em> of our networks the address was found in? We can do that using the excellent <a href="https://cran.r-project.org/package=fuzzyjoin" class="external-link">fuzzyjoin</a> package together with the <code><a href="../reference/address_in_network.html">is_within()</a></code> function.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">my_addresses</span> <span class="op">%&gt;%</span>
-  <span class="fu">fuzzyjoin</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/fuzzyjoin/man/fuzzy_join.html">fuzzy_left_join</a></span><span class="op">(</span><span class="va">my_networks</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"address"</span> <span class="op">=</span> <span class="st">"network"</span><span class="op">)</span>, <span class="va">is_within</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 × 3</span>
+<code class="sourceCode R"><span class="va">my_addresses</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu">fuzzyjoin</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/fuzzyjoin/man/fuzzy_join.html" class="external-link">fuzzy_left_join</a></span><span class="op">(</span><span class="va">my_networks</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"address"</span> <span class="op">=</span> <span class="st">"network"</span><span class="op">)</span>, <span class="va">is_within</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
 <span class="co">#&gt;                   address        network label        </span>
-<span class="co">#&gt;                 &lt;ip_addr&gt;     &lt;ip_netwk&gt; &lt;chr&gt;        </span>
-<span class="co">#&gt; 1           192.168.100.1 192.168.0.0/16 Private      </span>
-<span class="co">#&gt; 2                 1.2.3.4             NA &lt;NA&gt;         </span>
-<span class="co">#&gt; 3 2001:db8::8a2e:370:7334  2001:db8::/32 Documentation</span>
-<span class="co">#&gt; 4                     ::1             NA &lt;NA&gt;</span></code></pre></div>
+<span class="co">#&gt;                 <span style="color: #949494; font-style: italic;">&lt;ip_addr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;ip_netwk&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>           192<span style="color: #949494;">.</span>168<span style="color: #949494;">.</span>100<span style="color: #949494;">.</span>1 192<span style="color: #949494;">.</span>168<span style="color: #949494;">.</span>0<span style="color: #949494;">.</span>0<span style="color: #00BB00;">/16</span> Private      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>                 1<span style="color: #949494;">.</span>2<span style="color: #949494;">.</span>3<span style="color: #949494;">.</span>4             <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>           </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2001<span style="color: #949494;">:</span>db8<span style="color: #949494;">::</span>8a2e<span style="color: #949494;">:</span>370<span style="color: #949494;">:</span>7334  2001<span style="color: #949494;">:</span>db8<span style="color: #949494;">::</span><span style="color: #00BB00;">/32</span> Documentation</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>                     <span style="color: #949494;">::</span>1             <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span></span></code></pre></div>
 </div>
-<div id="randomly-generate-public-addresses" class="section level2">
-<h2 class="hasAnchor">
-<a href="#randomly-generate-public-addresses" class="anchor"></a>Randomly generate public addresses</h2>
+<div class="section level2">
+<h2 id="randomly-generate-public-addresses">Randomly generate public addresses<a class="anchor" aria-label="anchor" href="#randomly-generate-public-addresses"></a>
+</h2>
 <p>ipaddress provides functions to sample from a specific network (<code><a href="../reference/sample.html">sample_network()</a></code>) or the entire address space (<code><a href="../reference/sample.html">sample_ipv4()</a></code> and <code><a href="../reference/sample.html">sample_ipv6()</a></code>). However, it can be more difficult to sample from the majority of address space, while excluding certain networks.</p>
 <p>A good example is sampling public IPv4 addresses. The simplest solution is to use an accept-reject algorithm – sampling the entire IPv4 address space and rejecting addresses that are reserved.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -212,7 +208,7 @@
   <span class="va">all_public</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span>
   <span class="kw">while</span> <span class="op">(</span><span class="op">!</span><span class="va">all_public</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">public</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/is_reserved.html">is_global</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>
-    <span class="va">n_replace</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">!</span><span class="va">public</span><span class="op">)</span>
+    <span class="va">n_replace</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="op">!</span><span class="va">public</span><span class="op">)</span>
     
     <span class="kw">if</span> <span class="op">(</span><span class="va">n_replace</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span>
       <span class="va">all_public</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span>
@@ -225,21 +221,21 @@
 <span class="op">}</span></code></pre></div>
 <p>We now sample 10 addresses and make sure they are all public addresses.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>address <span class="op">=</span> <span class="fu">sample_public</span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>is_public <span class="op">=</span> <span class="fu"><a href="../reference/is_reserved.html">is_global</a></span><span class="op">(</span><span class="va">address</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 10 × 2</span>
+<code class="sourceCode R"><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>address <span class="op">=</span> <span class="fu">sample_public</span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>is_public <span class="op">=</span> <span class="fu"><a href="../reference/is_reserved.html">is_global</a></span><span class="op">(</span><span class="va">address</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span>
 <span class="co">#&gt;            address is_public</span>
-<span class="co">#&gt;          &lt;ip_addr&gt; &lt;lgl&gt;    </span>
-<span class="co">#&gt;  1     26.80.75.50 TRUE     </span>
-<span class="co">#&gt;  2    237.93.73.17 TRUE     </span>
-<span class="co">#&gt;  3 130.201.129.143 TRUE     </span>
-<span class="co">#&gt;  4  124.66.238.212 TRUE     </span>
-<span class="co">#&gt;  5  53.214.114.241 TRUE     </span>
-<span class="co">#&gt;  6 208.154.113.141 TRUE     </span>
-<span class="co">#&gt;  7     64.24.67.60 TRUE     </span>
-<span class="co">#&gt;  8      26.81.2.58 TRUE     </span>
-<span class="co">#&gt;  9  35.155.240.191 TRUE     </span>
-<span class="co">#&gt; 10  204.209.98.167 TRUE</span></code></pre></div>
+<span class="co">#&gt;          <span style="color: #949494; font-style: italic;">&lt;ip_addr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  49<span style="color: #949494;">.</span>112<span style="color: #949494;">.</span>195<span style="color: #949494;">.</span>184 TRUE     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  59<span style="color: #949494;">.</span>159<span style="color: #949494;">.</span>238<span style="color: #949494;">.</span>253 TRUE     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 194<span style="color: #949494;">.</span>137<span style="color: #949494;">.</span>191<span style="color: #949494;">.</span>157 TRUE     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 115<span style="color: #949494;">.</span>115<span style="color: #949494;">.</span>227<span style="color: #949494;">.</span>145 TRUE     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>   46<span style="color: #949494;">.</span>32<span style="color: #949494;">.</span>231<span style="color: #949494;">.</span>206 TRUE     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>   159<span style="color: #949494;">.</span>101<span style="color: #949494;">.</span>96<span style="color: #949494;">.</span>51 TRUE     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 103<span style="color: #949494;">.</span>161<span style="color: #949494;">.</span>122<span style="color: #949494;">.</span>195 TRUE     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>   57<span style="color: #949494;">.</span>205<span style="color: #949494;">.</span>142<span style="color: #949494;">.</span>86 TRUE     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  209<span style="color: #949494;">.</span>201<span style="color: #949494;">.</span>234<span style="color: #949494;">.</span>74 TRUE     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  48<span style="color: #949494;">.</span>194<span style="color: #949494;">.</span>229<span style="color: #949494;">.</span>162 TRUE</span></code></pre></div>
 </div>
   </div>
 
@@ -254,11 +250,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by David Hall.</p>
+  <p></p>
+<p>Developed by David Hall.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>

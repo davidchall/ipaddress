@@ -38,6 +38,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -56,12 +58,6 @@
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -86,7 +82,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/davidchall/ipaddress/">
+  <a href="https://github.com/davidchall/ipaddress/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -109,13 +105,13 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="ipaddress-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#ipaddress-" class="anchor"></a>ipaddress <a href="https://davidchall.github.io/ipaddress/"><img src="reference/figures/logo.png" align="right" height="139"></a>
+<div class="section level1">
+<div class="page-header"><h1 id="ipaddress-">ipaddress <a href="https://davidchall.github.io/ipaddress/"><img src="reference/figures/logo.png" align="right" height="139"></a>
+<a class="anchor" aria-label="anchor" href="#ipaddress-"></a>
 </h1></div>
 <!-- badges: start -->
 
-<p>ipaddress provides data classes and functions for working with IP addresses and networks. Its interface is inspired by the Python <a href="https://docs.python.org/3/library/ipaddress.html">ipaddress</a> module.</p>
+<p>ipaddress provides data classes and functions for working with IP addresses and networks. Its interface is inspired by the Python <a href="https://docs.python.org/3/library/ipaddress.html" class="external-link">ipaddress</a> module.</p>
 <p>Here are some of the features:</p>
 <ul>
 <li>Functions for <strong>generation and analysis of IP data</strong>
@@ -128,29 +124,29 @@
 <li>Compatible with the <strong>tidyverse</strong>
 </li>
 </ul>
-<p>For data visualization of IP addresses and networks, check out the <a href="https://davidchall.github.io/ggip/">ggip</a> package.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the released version of ipaddress from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
+<p>For data visualization of IP addresses and networks, check out the <a href="https://davidchall.github.io/ggip/" class="external-link">ggip</a> package.</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install the released version of ipaddress from <a href="https://CRAN.R-project.org" class="external-link">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"ipaddress"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ipaddress"</span><span class="op">)</span></code></pre></div>
 <p>Or you can install the development version from GitHub:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"davidchall/ipaddress"</span><span class="op">)</span></code></pre></div>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"davidchall/ipaddress"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
 <p>Use <code><a href="reference/ip_address.html">ip_address()</a></code> and <code><a href="reference/ip_network.html">ip_network()</a></code> vectors either standalone or as columns in a data frame.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://davidchall.github.io/ipaddress/">ipaddress</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://davidchall.github.io/ipaddress/">ipaddress</a></span><span class="op">)</span>
 
-<span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
-  address <span class="op">=</span> <span class="fu"><a href="reference/ip_address.html">ip_address</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"192.168.0.1"</span>, <span class="st">"2001:db8::8a2e:370:7334"</span><span class="op">)</span><span class="op">)</span>,
-  network <span class="op">=</span> <span class="fu"><a href="reference/ip_network.html">ip_network</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"192.168.100.0/22"</span>, <span class="st">"2001:db8::/80"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>
+  address <span class="op">=</span> <span class="fu"><a href="reference/ip_address.html">ip_address</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"192.168.0.1"</span>, <span class="st">"2001:db8::8a2e:370:7334"</span><span class="op">)</span><span class="op">)</span>,
+  network <span class="op">=</span> <span class="fu"><a href="reference/ip_network.html">ip_network</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"192.168.100.0/22"</span>, <span class="st">"2001:db8::/80"</span><span class="op">)</span><span class="op">)</span>
 <span class="op">)</span>
 <span class="co">#&gt; # A tibble: 2 x 2</span>
 <span class="co">#&gt;                   address          network</span>
@@ -159,14 +155,14 @@
 <span class="co">#&gt; 2 2001:db8::8a2e:370:7334    2001:db8::/80</span></code></pre></div>
 <p>Input character vectors are validated as they are parsed. Invalid inputs raise a warning and are replaced with <code>NA</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/ip_address.html">ip_address</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"255.255.255.255"</span>, <span class="st">"255.255.255.256"</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="reference/ip_address.html">ip_address</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"255.255.255.255"</span>, <span class="st">"255.255.255.256"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Warning: Problem on row 2: 255.255.255.256</span>
 <span class="co">#&gt; &lt;ip_address[2]&gt;</span>
 <span class="co">#&gt; [1] 255.255.255.255 &lt;NA&gt;</span></code></pre></div>
 <p>A variety of functions are provided to enable common tasks.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>network <span class="op">=</span> <span class="fu"><a href="reference/ip_network.html">ip_network</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"192.168.100.0/22"</span>, <span class="st">"2001:db8::/80"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>network <span class="op">=</span> <span class="fu"><a href="reference/ip_network.html">ip_network</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"192.168.100.0/22"</span>, <span class="st">"2001:db8::/80"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>
     first <span class="op">=</span> <span class="fu"><a href="reference/network_size.html">network_address</a></span><span class="op">(</span><span class="va">network</span><span class="op">)</span>,
     last <span class="op">=</span> <span class="fu"><a href="reference/network_size.html">broadcast_address</a></span><span class="op">(</span><span class="va">network</span><span class="op">)</span>,
     ipv6 <span class="op">=</span> <span class="fu"><a href="reference/is_ipv6.html">is_ipv6</a></span><span class="op">(</span><span class="va">network</span><span class="op">)</span>
@@ -177,14 +173,14 @@
 <span class="co">#&gt; 1 192.168.100.0/22 192.168.100.0          192.168.103.255 FALSE</span>
 <span class="co">#&gt; 2    2001:db8::/80    2001:db8:: 2001:db8::ffff:ffff:ffff TRUE</span></code></pre></div>
 </div>
-<div id="related-work" class="section level2">
-<h2 class="hasAnchor">
-<a href="#related-work" class="anchor"></a>Related work</h2>
+<div class="section level2">
+<h2 id="related-work">Related work<a class="anchor" aria-label="anchor" href="#related-work"></a>
+</h2>
 <ul>
 <li>
-<a href="https://hrbrmstr.github.io/iptools/"><strong>iptools</strong></a> – A well established R package for working with IP addresses and networks. Unfortunately IPv6 support is severely limited. Also, addresses and networks are stored as character vectors, so they must be parsed to their native bit representation for every operation. It served as an excellent guide and motivation for ipaddress.</li>
+<a href="https://hrbrmstr.github.io/iptools/" class="external-link"><strong>iptools</strong></a> – A well established R package for working with IP addresses and networks. Unfortunately IPv6 support is severely limited. Also, addresses and networks are stored as character vectors, so they must be parsed to their native bit representation for every operation. It served as an excellent guide and motivation for ipaddress.</li>
 <li>
-<a href="https://cyberpandas.readthedocs.io"><strong>cyberpandas</strong></a> – A Python package for using IP addresses in a <a href="https://pandas.pydata.org">pandas</a> DataFrame. This offers full support for IPv6 and stores addresses in the native bit representation. However, most “interesting” operations must deserialize each address to a Python <a href="https://docs.python.org/3/library/ipaddress.html">ipaddress</a> object, which is slow. It also doesn’t support IP networks.</li>
+<a href="https://cyberpandas.readthedocs.io" class="external-link"><strong>cyberpandas</strong></a> – A Python package for using IP addresses in a <a href="https://pandas.pydata.org" class="external-link">pandas</a> DataFrame. This offers full support for IPv6 and stores addresses in the native bit representation. However, most “interesting” operations must deserialize each address to a Python <a href="https://docs.python.org/3/library/ipaddress.html" class="external-link">ipaddress</a> object, which is slow. It also doesn’t support IP networks.</li>
 </ul>
 <hr>
 <p>Please note that the ipaddress project is released with a <a href="https://davidchall.github.io/ipaddress/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
@@ -194,55 +190,65 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=ipaddress">https://​cloud.r-project.org/​package=ipaddress</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/davidchall/ipaddress/">https://​github.com/​davidchall/​ipaddress/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/davidchall/ipaddress/issues">https://​github.com/​davidchall/​ipaddress/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=ipaddress" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/davidchall/ipaddress/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/davidchall/ipaddress/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
-<div class="developers">
-<h2>Developers</h2>
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li>David Hall <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-2193-0480" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html#citation">Citing ipaddress</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li><a href="https://CRAN.R-project.org/package=ipaddress"><img src="https://www.r-pkg.org/badges/version/ipaddress" alt="CRAN status"></a></li>
-<li><a href="https://github.com/davidchall/ipaddress/actions"><img src="https://github.com/davidchall/ipaddress/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://codecov.io/gh/davidchall/ipaddress?branch=master"><img src="https://codecov.io/gh/davidchall/ipaddress/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
+<li>David Hall <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-2193-0480" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://CRAN.R-project.org/package=ipaddress" class="external-link"><img src="https://www.r-pkg.org/badges/version/ipaddress" alt="CRAN status"></a></li>
+<li><a href="https://github.com/davidchall/ipaddress/actions" class="external-link"><img src="https://github.com/davidchall/ipaddress/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://codecov.io/gh/davidchall/ipaddress?branch=master" class="external-link"><img src="https://codecov.io/gh/davidchall/ipaddress/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
+</ul>
 </div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by David Hall.</p>
+  <p></p>
+<p>Developed by David Hall.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
