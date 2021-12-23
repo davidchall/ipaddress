@@ -3,6 +3,7 @@
 
 #include <array>
 #include <cstring>
+#include <cstdint>
 #include <ipaddress/endian.h>
 
 
