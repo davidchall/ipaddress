@@ -57,7 +57,7 @@ tibble(
   address = ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334")),
   network = ip_network(c("192.168.100.0/22", "2001:db8::/80"))
 )
-#> # A tibble: 2 x 2
+#> # A tibble: 2 × 2
 #>                   address          network
 #>                 <ip_addr>       <ip_netwk>
 #> 1             192.168.0.1 192.168.100.0/22
@@ -83,7 +83,7 @@ tibble(network = ip_network(c("192.168.100.0/22", "2001:db8::/80"))) %>%
     last = broadcast_address(network),
     ipv6 = is_ipv6(network)
   )
-#> # A tibble: 2 x 4
+#> # A tibble: 2 × 4
 #>            network         first                     last ipv6 
 #>         <ip_netwk>     <ip_addr>                <ip_addr> <lgl>
 #> 1 192.168.100.0/22 192.168.100.0          192.168.103.255 FALSE
