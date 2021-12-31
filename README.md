@@ -10,7 +10,7 @@ status](https://www.r-pkg.org/badges/version/ipaddress)](https://CRAN.R-project.
 [![R build
 status](https://github.com/davidchall/ipaddress/workflows/R-CMD-check/badge.svg)](https://github.com/davidchall/ipaddress/actions)
 [![Coverage
-status](https://codecov.io/gh/davidchall/ipaddress/branch/master/graph/badge.svg)](https://codecov.io/gh/davidchall/ipaddress?branch=master)
+status](https://codecov.io/gh/davidchall/ipaddress/branch/master/graph/badge.svg)](https://app.codecov.io/gh/davidchall/ipaddress?branch=master)
 <!-- badges: end -->
 
 ipaddress provides data classes and functions for working with IP
