@@ -1,7 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://davidchall.github.io/ipaddress/404.html</loc>
+  </url>
+  <url>
+    <loc>https://davidchall.github.io/ipaddress/CODE_OF_CONDUCT.html</loc>
+  </url>
+  <url>
+    <loc>https://davidchall.github.io/ipaddress/CONTRIBUTING.html</loc>
+  </url>
+  <url>
+    <loc>https://davidchall.github.io/ipaddress/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://davidchall.github.io/ipaddress/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://davidchall.github.io/ipaddress/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://davidchall.github.io/ipaddress/articles/ipaddress-classes.html</loc>
+  </url>
+  <url>
+    <loc>https://davidchall.github.io/ipaddress/articles/ipaddress-examples.html</loc>
+  </url>
+  <url>
+    <loc>https://davidchall.github.io/ipaddress/authors.html</loc>
+  </url>
+  <url>
     <loc>https://davidchall.github.io/ipaddress/index.html</loc>
+  </url>
+  <url>
+    <loc>https://davidchall.github.io/ipaddress/news/index.html</loc>
   </url>
   <url>
     <loc>https://davidchall.github.io/ipaddress/reference/address_in_network.html</loc>
@@ -20,6 +50,9 @@
   </url>
   <url>
     <loc>https://davidchall.github.io/ipaddress/reference/iana_ipv6.html</loc>
+  </url>
+  <url>
+    <loc>https://davidchall.github.io/ipaddress/reference/index.html</loc>
   </url>
   <url>
     <loc>https://davidchall.github.io/ipaddress/reference/ip_address.html</loc>
@@ -89,11 +122,5 @@
   </url>
   <url>
     <loc>https://davidchall.github.io/ipaddress/reference/traverse_hierarchy.html</loc>
-  </url>
-  <url>
-    <loc>https://davidchall.github.io/ipaddress/articles/ipaddress-classes.html</loc>
-  </url>
-  <url>
-    <loc>https://davidchall.github.io/ipaddress/articles/ipaddress-examples.html</loc>
   </url>
 </urlset>
