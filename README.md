@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ipaddress <a href='https://davidchall.github.io/ipaddress/'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# ipaddress <a href='https://davidchall.github.io/ipaddress/'><img src='man/figures/logo.png' align="right" height="138" /></a>
 
 <!-- badges: start -->
 

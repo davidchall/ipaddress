@@ -1,6 +1,3 @@
-development:
-  mode: auto
-
 url: https://davidchall.github.io/ipaddress
 
 home:
@@ -8,15 +5,7 @@ home:
   description: R package for working with IP addresses and networks
 
 template:
-  params:
-    docsearch:
-      api_key: a959f56e56e76081c6ebdec4073adbaf
-      index_name: ipaddress
-    ganalytics: UA-160789885-1
-  opengraph:
-    twitter:
-      creator: "@hall_davidc"
-      card: summary
+  bootstrap: 5
 
 reference:
   - title: "Data classes"

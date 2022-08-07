@@ -11,6 +11,6 @@
 ^CRAN-RELEASE$
 ^codecov\.yml$
 [.]mmd$
-^man/figures/logo_large\.png$
+^man/figures/logo\.svg$
 ^data-raw$
 ^revdep$
