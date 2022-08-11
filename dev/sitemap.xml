@@ -1,123 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://davidchall.github.io/ipaddress/CODE_OF_CONDUCT.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/CODE_OF_CONDUCT.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/CONTRIBUTING.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/CONTRIBUTING.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/LICENSE-text.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/LICENSE.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/articles/index.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/articles/ipaddress-classes.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/articles/ipaddress-classes.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/articles/ipaddress-examples.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/articles/ipaddress-examples.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/authors.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/authors.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/index.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/index.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/news/index.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/news/index.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/address_in_network.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/address_in_network.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/collapse_networks.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/collapse_networks.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/common_network.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/common_network.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/exclude_networks.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/exclude_networks.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/iana_ipv4.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/iana_ipv4.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/iana_ipv6.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/iana_ipv6.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/index.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/ip_address.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/ip_address.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/ip_interface.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/ip_interface.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/ip_network.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/ip_network.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/ip_operators.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/ip_operators.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/ip_to_binary.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/ip_to_binary.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/ip_to_bytes.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/ip_to_bytes.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/ip_to_hex.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/ip_to_hex.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/ip_to_hostname.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/ip_to_hostname.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/ip_to_integer.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/ip_to_integer.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/ipaddress-package.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/ipaddress-package.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/ipaddress-vctrs.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/ipaddress-vctrs.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/ipv6-transition.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/ipv6-transition.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/is_ipv6.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/is_ipv6.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/is_reserved.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/is_reserved.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/max_prefix_length.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/max_prefix_length.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/netmask.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/netmask.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/network_in_network.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/network_in_network.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/network_size.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/network_size.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/reverse_pointer.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/reverse_pointer.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/sample.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/sample.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/sequence.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/sequence.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/summarize_address_range.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/summarize_address_range.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/reference/traverse_hierarchy.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/traverse_hierarchy.html</loc>
   </url>
 </urlset>
