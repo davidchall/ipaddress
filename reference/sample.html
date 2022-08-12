@@ -12,7 +12,7 @@ sample_network() samples from a specific network."><meta property="og:image" con
     
     <a class="navbar-brand me-2" href="../index.html">ipaddress</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.4.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.5</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -97,27 +97,25 @@ sample_network() samples from a specific network."><meta property="og:image" con
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">sample_ipv4</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;ip_address[5]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 236.141.97.125  13.249.115.34   55.80.211.47    156.88.100.118 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5] 190.244.152.193</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 39.69.2.133    73.145.199.150 217.81.7.177   246.77.178.185 83.76.144.50  </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">sample_ipv6</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;ip_address[5]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] f5b8:4df2:1feb:45a4:4b8f:8685:4f2:a382 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2] 5666:ee7d:3b85:c1aa:80ff:6bb9:65b0:d6ce</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3] 7da5:cf5b:d79b:9d66:c459:2b08:f55f:a440</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4] 85fc:490a:629a:f059:c372:6fac:99f8:3677</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5] 4f52:437:e800:e33a:8b97:ca18:618f:5f4b </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] c37d:667:757e:f11d:6be1:b122:b794:6066 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2] 8b77:1d61:58d1:2f62:71fc:5599:2abc:d498</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3] 9358:f757:538e:70a8:5be1:e65d:cb86:4c14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4] 58df:bb52:28c6:d868:5fe1:5eea:5fe6:c6b2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5] a010:ee0b:359a:145d:17ce:9cd1:4cb:d570 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">sample_network</span><span class="op">(</span><span class="fu"><a href="ip_network.html">ip_network</a></span><span class="op">(</span><span class="st">"192.168.0.0/16"</span><span class="op">)</span>, <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;ip_address[5]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 192.168.32.30   192.168.136.160 192.168.108.33  192.168.235.119</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5] 192.168.19.179 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 192.168.52.101 192.168.40.247 192.168.35.186 192.168.95.183 192.168.76.38 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">sample_network</span><span class="op">(</span><span class="fu"><a href="ip_network.html">ip_network</a></span><span class="op">(</span><span class="st">"2001:db8::/48"</span><span class="op">)</span>, <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;ip_address[5]&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2001:db8:0:50a4:d708:7170:6ca:3de7  2001:db8:0:f488:689:b708:835:eb6d  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3] 2001:db8:0:9ad8:8f1e:e9b8:6fe8:21dd 2001:db8:0:5902:117f:cf9c:c81b:2a94</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5] 2001:db8:0:8598:daed:44e3:7820:1d56</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2001:db8:0:f6de:888e:f994:35e1:1e6d 2001:db8:0:b2a8:a31d:6dc1:7cc9:7d01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3] 2001:db8:0:2211:6a6c:d568:6b57:d599 2001:db8:0:a440:3157:d8a2:5781:f902</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5] 2001:db8:0:3554:5faf:7992:33ea:8c44</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
