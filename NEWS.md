@@ -1,4 +1,4 @@
-# ipaddress (development version)
+# ipaddress 0.5.5
 
 Resolve CRAN check notes about HTML5 by upgrading to latest {roxygen}.
 
