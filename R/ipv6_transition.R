@@ -6,9 +6,9 @@
 #'
 #' @details
 #' The IPv6 transition mechanisms are described in the IETF memos:
-#' * IPv4-mapped: [RFC 4291](https://tools.ietf.org/html/rfc4291)
-#' * 6to4: [RFC 3056](https://tools.ietf.org/html/rfc3056.html)
-#' * Teredo: [RFC 4380](https://tools.ietf.org/html/rfc4380)
+#' * IPv4-mapped: [RFC 4291](https://www.rfc-editor.org/rfc/rfc4291)
+#' * 6to4: [RFC 3056](https://www.rfc-editor.org/rfc/rfc3056)
+#' * Teredo: [RFC 4380](https://www.rfc-editor.org/rfc/rfc4380)
 #'
 #' @param x An [`ip_address`] vector
 #'

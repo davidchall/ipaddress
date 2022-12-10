@@ -18,8 +18,8 @@ Returns the PTR record used by reverse DNS.
 \details{
 These documents describe reverse DNS lookup in more detail:
 \itemize{
-\item \strong{IPv4:} \href{https://tools.ietf.org/html/rfc1035}{RFC-1035 Section 3.5}
-\item \strong{IPv6:} \href{https://tools.ietf.org/html/rfc3596}{RFC-3596 Section 2.5}
+\item \strong{IPv4:} \href{https://www.rfc-editor.org/rfc/rfc1035}{RFC-1035 Section 3.5}
+\item \strong{IPv6:} \href{https://www.rfc-editor.org/rfc/rfc3596}{RFC-3596 Section 2.5}
 }
 }
 \examples{

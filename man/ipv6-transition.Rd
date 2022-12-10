@@ -42,9 +42,9 @@ embedded IPv4 address from an IPv6 address.
 \details{
 The IPv6 transition mechanisms are described in the IETF memos:
 \itemize{
-\item IPv4-mapped: \href{https://tools.ietf.org/html/rfc4291}{RFC 4291}
-\item 6to4: \href{https://tools.ietf.org/html/rfc3056.html}{RFC 3056}
-\item Teredo: \href{https://tools.ietf.org/html/rfc4380}{RFC 4380}
+\item IPv4-mapped: \href{https://www.rfc-editor.org/rfc/rfc4291}{RFC 4291}
+\item 6to4: \href{https://www.rfc-editor.org/rfc/rfc3056}{RFC 3056}
+\item Teredo: \href{https://www.rfc-editor.org/rfc/rfc4380}{RFC 4380}
 }
 }
 \examples{
