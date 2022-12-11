@@ -19,7 +19,7 @@ List wrap_decode_hostname(CharacterVector input) {
   asio::error_code ec;
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 100 == 0) {
+    if (i % 128 == 0) {
       checkUserInterrupt();
     }
 
@@ -70,7 +70,7 @@ List wrap_encode_hostname(List input) {
   asio::error_code ec;
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 100 == 0) {
+    if (i % 128 == 0) {
       checkUserInterrupt();
     }
 

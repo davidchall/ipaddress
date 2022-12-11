@@ -16,23 +16,19 @@
 #' returned for that input.
 #'
 #' DNS resolution performs a many-to-many mapping between IP addresses and
-#' hostnames. For this reason, these two functions can potentially return
-#' multiple values for each element of the input vector. The `multiple` argument
-#' control whether _all_ values are returned (a vector for each input), or
-#' just the first value (a scalar for each input).
+#' hostnames. For this reason, there are two versions of each function. The
+#' regular version returns just the first value and the `_all()` suffix version
+#' returns all values.
 #'
 #' @param x
 #'  * For `ip_to_hostname()`: An [`ip_address`] vector
 #'  * For `hostname_to_ip()`: A character vector of hostnames
-#' @param multiple A logical scalar indicating if _all_ resolved endpoints are
-#'   returned, or just the first endpoint (the default). This determines whether
-#'   a vector or list of vectors is returned.
 #'
 #' @return
-#' * For `ip_to_hostname()`: A character vector (`multiple = FALSE`) or
-#'   a list of character vectors (`multiple = TRUE`)
-#' * For `hostname_to_ip()`: A [`ip_address`] vector (`multiple = FALSE`) or
-#'   a list of [`ip_address`] vectors (`multiple = TRUE`)
+#' * For `ip_to_hostname()`: A character vector
+#' * For `ip_to_hostname_all()`: A list of character vectors
+#' * For `hostname_to_ip()`: An [`ip_address`] vector
+#' * For `hostname_to_ip_all()`: A list of [`ip_address`] vectors
 #'
 #' @examples
 #' \dontrun{
@@ -44,46 +40,40 @@
 #' The base function `nsl()` provides forward DNS resolution to IPv4 addresses,
 #' but only on Unix-like systems.
 #' @export
-ip_to_hostname <- function(x, multiple = FALSE) {
-  if (!is_ip_address(x)) {
-    abort("`x` must be an ip_address vector")
-  }
-  if (!is_bool(multiple)) {
-    abort("`multiple` must be TRUE or FALSE")
-  }
-  if (is_offline()) {
-    abort("DNS resolution requires an internet connection")
-  }
-
-  out <- wrap_encode_hostname(x)
-
-  if (multiple) {
-    out
-  } else {
-    pluck_first_of_each(out)
-  }
+ip_to_hostname <- function(x) {
+  pluck_first_of_each(ip_to_hostname_all(x))
 }
 
 #' @rdname ip_to_hostname
 #' @export
-hostname_to_ip <- function(x, multiple = FALSE) {
-  if (!is_character(x)) {
-    abort("`x` must be a character vector")
-  }
-  if (!is_bool(multiple)) {
-    abort("`multiple` must be TRUE or FALSE")
+ip_to_hostname_all <- function(x) {
+  if (!is_ip_address(x)) {
+    abort("`x` must be an ip_address vector")
   }
   if (is_offline()) {
     abort("DNS resolution requires an internet connection")
   }
 
-  out <- wrap_decode_hostname(x)
+  as_list_of(wrap_encode_hostname(x), .ptype = character())
+}
 
-  if (multiple) {
-    out
-  } else {
-    pluck_first_of_each(out)
+#' @rdname ip_to_hostname
+#' @export
+hostname_to_ip <- function(x) {
+  pluck_first_of_each(hostname_to_ip_all(x))
+}
+
+#' @rdname ip_to_hostname
+#' @export
+hostname_to_ip_all <- function(x) {
+  if (!is_character(x)) {
+    abort("`x` must be a character vector")
   }
+  if (is_offline()) {
+    abort("DNS resolution requires an internet connection")
+  }
+
+  as_list_of(wrap_decode_hostname(x), .ptype = ip_address())
 }
 
 is_offline <- function() {
