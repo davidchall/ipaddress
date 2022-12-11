@@ -45,6 +45,13 @@ test_that("vector recycling works", {
     supernet(ip_network("192.168.0.0/24"), new_prefix = c(23L, 10L)),
     ip_network(c("192.168.0.0/23", "192.128.0.0/10"))
   )
+  expect_equal(
+    subnets(ip_network("192.168.0.0/24"), new_prefix = c(25L, 26L)),
+    list_of(
+      ip_network(c("192.168.0.0/25", "192.168.0.128/25")),
+      ip_network(c("192.168.0.0/26", "192.168.0.64/26", "192.168.0.128/26", "192.168.0.192/26"))
+    )
+  )
 })
 
 test_that("missing values work", {
