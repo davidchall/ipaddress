@@ -18,7 +18,7 @@ List wrap_netmask(IntegerVector in_prefix_length, LogicalVector in_is_ipv6) {
   }
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 
@@ -44,7 +44,7 @@ List wrap_hostmask(IntegerVector in_prefix_length, LogicalVector in_is_ipv6) {
   }
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 
@@ -68,7 +68,7 @@ IntegerVector wrap_prefix_from_mask(List address_r) {
   IntegerVector output(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 

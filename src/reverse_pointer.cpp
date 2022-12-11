@@ -17,7 +17,7 @@ CharacterVector wrap_reverse_pointer(List address_r) {
   char buffer[40];
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 

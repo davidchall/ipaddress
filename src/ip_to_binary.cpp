@@ -38,7 +38,7 @@ List wrap_decode_binary(CharacterVector input) {
   std::vector<IpAddress> output(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 
@@ -73,7 +73,7 @@ CharacterVector wrap_encode_binary(List address_r) {
   CharacterVector output(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 

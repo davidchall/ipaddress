@@ -20,7 +20,7 @@ List wrap_parse_network(CharacterVector input, bool strict, bool is_interface) {
   asio::ip::network_v6 tmp_v6;
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 
@@ -75,7 +75,7 @@ List wrap_construct_network_from_address(List address_r, IntegerVector prefix_le
   std::vector<IpNetwork> output(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 
@@ -135,7 +135,7 @@ CharacterVector wrap_print_network(List network_r, bool exploded = false) {
   CharacterVector output(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 

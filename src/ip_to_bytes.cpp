@@ -13,7 +13,7 @@ List wrap_decode_bytes(List input) {
   std::vector<IpAddress> output(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 
@@ -49,7 +49,7 @@ List wrap_encode_bytes(List input) {
   List output(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 
