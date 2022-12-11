@@ -1,5 +1,11 @@
 # ipaddress (development version)
 
+* Removed the `multiple` argument from `ip_to_hostname()` and `hostname_to_ip()` (#83).
+  * `ip_to_hostname()` and `hostname_to_ip()` now always return one result per input (stored in a vector).
+  * New `ip_to_hostname_all()` and `hostname_to_ip_all()` return all results per input (stored in a list of vectors).
+* `subnets()` now takes vector input and outputs a list of vectors (#83).
+
+
 # ipaddress 0.5.6
 
 Resolve CRAN check warnings about deprecated use of C++ function `sprintf()`.

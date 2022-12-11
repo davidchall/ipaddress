@@ -1,35 +1,32 @@
 test_that("hostname encoding/decoding works", {
   expect_error(ip_to_hostname(ip_network("192.168.0.0/24")), "`x` must be an ip_address vector")
   expect_error(ip_to_hostname("127.0.0.1"), "`x` must be an ip_address vector")
-  expect_error(ip_to_hostname(ip_address("127.0.0.1"), multiple = "yes"), "`multiple` must be TRUE or FALSE")
-  expect_error(ip_to_hostname(ip_address("127.0.0.1"), multiple = NA), "`multiple` must be TRUE or FALSE")
 
   expect_error(hostname_to_ip(123), "`x` must be a character vector")
   expect_error(hostname_to_ip(ip_address("127.0.0.1")), "`x` must be a character vector")
-  expect_error(hostname_to_ip("localhost", multiple = "yes"), "`multiple` must be TRUE or FALSE")
-  expect_error(hostname_to_ip("localhost", multiple = NA), "`multiple` must be TRUE or FALSE")
 
   skip_if_offline()
 
   # missing values
   expect_equal(hostname_to_ip(NA_character_), ip_address(NA))
-  expect_equal(ip_to_hostname(ip_address(NA), multiple = FALSE), NA_character_)
-  expect_equal(ip_to_hostname(ip_address(NA), multiple = TRUE), list(NA_character_))
+  expect_equal(hostname_to_ip_all(NA_character_), list_of(ip_address(NA)))
+  expect_equal(ip_to_hostname(ip_address(NA)), NA_character_)
+  expect_equal(ip_to_hostname_all(ip_address(NA)), list_of(NA_character_))
 
-  expect_s3_class(hostname_to_ip("localhost", multiple = FALSE), "ip_address")
-  expect_type(hostname_to_ip("localhost", multiple = TRUE), "list")
-  expect_type(ip_to_hostname(ip_address("::1"), multiple = FALSE), "character")
-  expect_type(ip_to_hostname(ip_address("::1"), multiple = TRUE), "list")
+  expect_s3_class(hostname_to_ip("localhost"), "ip_address")
+  expect_s3_class(hostname_to_ip_all("localhost"), "vctrs_list_of")
+  expect_type(ip_to_hostname(ip_address("::1")), "character")
+  expect_s3_class(ip_to_hostname_all(ip_address("::1")), "vctrs_list_of")
 
-  expect_length(hostname_to_ip("localhost", multiple = FALSE), 1)
-  expect_length(hostname_to_ip("localhost", multiple = TRUE), 1)
-  expect_length(hostname_to_ip(c("localhost", "www.r-project.org"), multiple = FALSE), 2)
-  expect_length(hostname_to_ip(c("localhost", "www.r-project.org"), multiple = TRUE), 2)
+  expect_length(hostname_to_ip("localhost"), 1)
+  expect_length(hostname_to_ip_all("localhost"), 1)
+  expect_length(hostname_to_ip(c("localhost", "www.r-project.org")), 2)
+  expect_length(hostname_to_ip_all(c("localhost", "www.r-project.org")), 2)
 
-  expect_length(ip_to_hostname(ip_address("::1"), multiple = FALSE), 1)
-  expect_length(ip_to_hostname(ip_address("::1"), multiple = TRUE), 1)
-  expect_length(ip_to_hostname(ip_address(c("::1", "::2")), multiple = FALSE), 2)
-  expect_length(ip_to_hostname(ip_address(c("::1", "::2")), multiple = TRUE), 2)
+  expect_length(ip_to_hostname(ip_address("::1")), 1)
+  expect_length(ip_to_hostname_all(ip_address("::1")), 1)
+  expect_length(ip_to_hostname(ip_address(c("::1", "::2"))), 2)
+  expect_length(ip_to_hostname_all(ip_address(c("::1", "::2"))), 2)
 
   skip_on_cran()
 

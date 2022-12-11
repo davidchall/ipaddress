@@ -2,29 +2,31 @@
 % Please edit documentation in R/ip_to_hostname.R
 \name{ip_to_hostname}
 \alias{ip_to_hostname}
+\alias{ip_to_hostname_all}
 \alias{hostname_to_ip}
+\alias{hostname_to_ip_all}
 \title{Translate address to/from hostname}
 \usage{
-ip_to_hostname(x, multiple = FALSE)
+ip_to_hostname(x)
 
-hostname_to_ip(x, multiple = FALSE)
+ip_to_hostname_all(x)
+
+hostname_to_ip(x)
+
+hostname_to_ip_all(x)
 }
 \arguments{
 \item{x}{\itemize{
 \item For \code{ip_to_hostname()}: An \code{\link{ip_address}} vector
 \item For \code{hostname_to_ip()}: A character vector of hostnames
 }}
-
-\item{multiple}{A logical scalar indicating if \emph{all} resolved endpoints are
-returned, or just the first endpoint (the default). This determines whether
-a vector or list of vectors is returned.}
 }
 \value{
 \itemize{
-\item For \code{ip_to_hostname()}: A character vector (\code{multiple = FALSE}) or
-a list of character vectors (\code{multiple = TRUE})
-\item For \code{hostname_to_ip()}: A \code{\link{ip_address}} vector (\code{multiple = FALSE}) or
-a list of \code{\link{ip_address}} vectors (\code{multiple = TRUE})
+\item For \code{ip_to_hostname()}: A character vector
+\item For \code{ip_to_hostname_all()}: A list of character vectors
+\item For \code{hostname_to_ip()}: An \code{\link{ip_address}} vector
+\item For \code{hostname_to_ip_all()}: A list of \code{\link{ip_address}} vectors
 }
 }
 \description{
@@ -43,10 +45,9 @@ If an error occurs during DNS lookup, then a warning is emitted and \code{NA} is
 returned for that input.
 
 DNS resolution performs a many-to-many mapping between IP addresses and
-hostnames. For this reason, these two functions can potentially return
-multiple values for each element of the input vector. The \code{multiple} argument
-control whether \emph{all} values are returned (a vector for each input), or
-just the first value (a scalar for each input).
+hostnames. For this reason, there are two versions of each function. The
+regular version returns just the first value and the \verb{_all()} suffix version
+returns all values.
 }
 \examples{
 \dontrun{

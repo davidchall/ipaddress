@@ -102,15 +102,27 @@ List wrap_subnets(List network_r, IntegerVector new_prefix) {
   std::vector<IpNetwork> network = decode_networks(network_r);
 
   // initialize vectors
-  std::vector<IpNetwork> output;
+  std::size_t vsize = network.size();
+  List outputs(vsize);
 
-  if ((network.size() != 1) || (new_prefix.size() != 1)) {
-    // pass
-  } else if (network[0].is_na() || new_prefix[0] == NA_INTEGER) {
-    output.push_back(IpNetwork::make_na());
-  } else {
-    output = calculate_subnets(network[0], new_prefix[0]);
+  if (new_prefix.size() != vsize) {
+    stop("Inputs must have same length"); // # nocov
   }
 
-  return encode_networks(output);
+  std::vector<IpNetwork> result_na = {IpNetwork::make_na()};
+  List output_na = encode_networks(result_na);
+
+  for (std::size_t i=0; i<vsize; ++i) {
+    if (i % 8192 == 0) {
+      checkUserInterrupt();
+    }
+
+    if (network[i].is_na() || new_prefix[i] == NA_INTEGER) {
+      outputs[i] = output_na;
+    } else {
+      outputs[i] = encode_networks(calculate_subnets(network[i], new_prefix[i]));
+    }
+  }
+
+  return outputs;
 }

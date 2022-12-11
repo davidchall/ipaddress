@@ -4,12 +4,12 @@
 #' the supernetwork containing the given network. `subnets()` returns the list
 #' of subnetworks which join to make the given network.
 #'
-#' @param x
-#'  * For `supernet()`: An [`ip_network`] vector
-#'  * For `subnets()`: An [`ip_network`] scalar
+#' @param x An [`ip_network`] vector
 #' @param new_prefix An integer vector indicating the desired prefix length.
 #'   By default, this steps a single level through the hierarchy.
-#' @return An [`ip_network`] vector
+#' @return
+#'  * For `supernet()`: An [`ip_network`] vector
+#'  * For `subnets()`: A list of [`ip_network`] vectors
 #'
 #' @details
 #' The ipaddress package does not support \link[base:LongVectors]{long vectors}
@@ -72,11 +72,11 @@ supernet <- function(x, new_prefix = prefix_length(x) - 1L) {
 #' @rdname traverse_hierarchy
 #' @export
 subnets <- function(x, new_prefix = prefix_length(x) + 1L) {
-  if (!(is_ip_network(x) && length(x) == 1)) {
-    abort("`x` must be an ip_network scalar")
+  if (!is_ip_network(x)) {
+    abort("`x` must be an ip_network vector")
   }
-  if (!is_scalar_integerish(new_prefix)) {
-    abort("`new_prefix` must be an integer scalar")
+  if (!is_integerish(new_prefix)) {
+    abort("`new_prefix` must be an integer vector")
   }
   if (any(new_prefix < 0, na.rm = TRUE)) {
     abort("`new_prefix` cannot be negative")
@@ -91,5 +91,10 @@ subnets <- function(x, new_prefix = prefix_length(x) + 1L) {
     abort("Too many subnets")
   }
 
-  wrap_subnets(x, new_prefix)
+  # vector recycling
+  args <- vec_recycle_common(x, new_prefix)
+  x <- args[[1L]]
+  new_prefix <- args[[2L]]
+
+  as_list_of(wrap_subnets(x, new_prefix), .ptype = ip_network())
 }
