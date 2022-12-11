@@ -53,7 +53,14 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="ipaddress-development-version">ipaddress (development version)<a class="anchor" aria-label="anchor" href="#ipaddress-development-version"></a></h2>
-</div>
+<ul><li>Removed the <code>multiple</code> argument from <code><a href="../reference/ip_to_hostname.html">ip_to_hostname()</a></code> and <code><a href="../reference/ip_to_hostname.html">hostname_to_ip()</a></code> (<a href="https://github.com/davidchall/ipaddress/issues/83" class="external-link">#83</a>).
+<ul><li>
+<code><a href="../reference/ip_to_hostname.html">ip_to_hostname()</a></code> and <code><a href="../reference/ip_to_hostname.html">hostname_to_ip()</a></code> now always return one result per input (stored in a vector).</li>
+<li>New <code><a href="../reference/ip_to_hostname.html">ip_to_hostname_all()</a></code> and <code><a href="../reference/ip_to_hostname.html">hostname_to_ip_all()</a></code> return all results per input (stored in a list of vectors).</li>
+</ul></li>
+<li>
+<code><a href="../reference/traverse_hierarchy.html">subnets()</a></code> now takes vector input and outputs a list of vectors (<a href="https://github.com/davidchall/ipaddress/issues/83" class="external-link">#83</a>).</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.6" id="ipaddress-056">ipaddress 0.5.6<a class="anchor" aria-label="anchor" href="#ipaddress-056"></a></h2><p class="text-muted">CRAN release: 2022-12-11</p>
 <p>Resolve CRAN check warnings about deprecated use of C++ function <code><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf()</a></code>.</p>

@@ -64,9 +64,13 @@ ipaddress package.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ip_to_hostname</span><span class="op">(</span><span class="va">x</span>, multiple <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ip_to_hostname</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">hostname_to_ip</span><span class="op">(</span><span class="va">x</span>, multiple <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">ip_to_hostname_all</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">hostname_to_ip</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">hostname_to_ip_all</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -76,21 +80,15 @@ ipaddress package.</p>
 <li><p>For <code>hostname_to_ip()</code>: A character vector of hostnames</p></li>
 </ul></dd>
 
-
-<dt>multiple</dt>
-<dd><p>A logical scalar indicating if <em>all</em> resolved endpoints are
-returned, or just the first endpoint (the default). This determines whether
-a vector or list of vectors is returned.</p></dd>
-
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<ul><li><p>For <code>ip_to_hostname()</code>: A character vector (<code>multiple = FALSE</code>) or
-a list of character vectors (<code>multiple = TRUE</code>)</p></li>
-<li><p>For <code>hostname_to_ip()</code>: A <code><a href="ip_address.html">ip_address</a></code> vector (<code>multiple = FALSE</code>) or
-a list of <code><a href="ip_address.html">ip_address</a></code> vectors (<code>multiple = TRUE</code>)</p></li>
+<ul><li><p>For <code>ip_to_hostname()</code>: A character vector</p></li>
+<li><p>For <code>ip_to_hostname_all()</code>: A list of character vectors</p></li>
+<li><p>For <code>hostname_to_ip()</code>: An <code><a href="ip_address.html">ip_address</a></code> vector</p></li>
+<li><p>For <code>hostname_to_ip_all()</code>: A list of <code><a href="ip_address.html">ip_address</a></code> vectors</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -101,10 +99,9 @@ an error is raised.</p>
 If an error occurs during DNS lookup, then a warning is emitted and <code>NA</code> is
 returned for that input.</p>
 <p>DNS resolution performs a many-to-many mapping between IP addresses and
-hostnames. For this reason, these two functions can potentially return
-multiple values for each element of the input vector. The <code>multiple</code> argument
-control whether <em>all</em> values are returned (a vector for each input), or
-just the first value (a scalar for each input).</p>
+hostnames. For this reason, there are two versions of each function. The
+regular version returns just the first value and the <code>_all()</code> suffix version
+returns all values.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
