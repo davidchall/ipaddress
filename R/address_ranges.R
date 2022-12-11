@@ -32,7 +32,10 @@ summarize_address_range <- function(address1, address2) {
   address1 <- args[[1L]]
   address2 <- args[[2L]]
 
-  wrap_summarize_address_range(address1, address2)
+  as_list_of(
+    wrap_summarize_address_range(address1, address2),
+    .ptype = ip_network()
+  )
 }
 
 
