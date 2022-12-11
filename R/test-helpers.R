@@ -57,7 +57,7 @@ expect_reserved_network <- function(reserved_func, network,
 
   other_networks <- vec_c(
     network,
-    if (prefix_length(network) != max_prefix_length(network)) subnets(network),
+    if (prefix_length(network) != max_prefix_length(network)) subnets(network)[[1]],
     if (!(ignore_super || prefix_length(network) == 0)) supernet(network)
   )
   expected <- c(

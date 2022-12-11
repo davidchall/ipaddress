@@ -11,16 +11,16 @@ supernet(x, new_prefix = prefix_length(x) - 1L)
 subnets(x, new_prefix = prefix_length(x) + 1L)
 }
 \arguments{
-\item{x}{\itemize{
-\item For \code{supernet()}: An \code{\link{ip_network}} vector
-\item For \code{subnets()}: An \code{\link{ip_network}} scalar
-}}
+\item{x}{An \code{\link{ip_network}} vector}
 
 \item{new_prefix}{An integer vector indicating the desired prefix length.
 By default, this steps a single level through the hierarchy.}
 }
 \value{
-An \code{\link{ip_network}} vector
+\itemize{
+\item For \code{supernet()}: An \code{\link{ip_network}} vector
+\item For \code{subnets()}: A list of \code{\link{ip_network}} vectors
+}
 }
 \description{
 These functions step up and down the network hierarchy. \code{supernet()} returns
