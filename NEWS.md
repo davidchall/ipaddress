@@ -1,3 +1,5 @@
+# ipaddress (development version)
+
 # ipaddress 0.5.6
 
 Resolve CRAN check warnings about deprecated use of C++ function `sprintf()`.

@@ -1,6 +1,6 @@
 Package: ipaddress
 Title: Tidy IP Addresses
-Version: 0.5.6
+Version: 0.5.6.9000
 Authors@R: 
     person(given = "David",
            family = "Hall",
