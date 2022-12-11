@@ -17,7 +17,7 @@ LogicalVector checkCondition(
   LogicalVector output(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 
@@ -45,7 +45,7 @@ LogicalVector checkCondition(
   LogicalVector output(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 
@@ -83,7 +83,7 @@ List map6to4(
   std::vector<IpAddress> output(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 

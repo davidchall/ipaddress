@@ -16,7 +16,7 @@ List wrap_bitwise_not(List lhs_r) {
   std::vector<IpAddress> result(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 
@@ -40,7 +40,7 @@ List wrap_bitwise_and(List lhs_r, List rhs_r) {
   }
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 
@@ -64,7 +64,7 @@ List wrap_bitwise_or(List lhs_r, List rhs_r) {
   }
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 
@@ -88,7 +88,7 @@ List wrap_bitwise_xor(List lhs_r, List rhs_r) {
   }
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 
@@ -111,7 +111,7 @@ List wrap_bitwise_shift_left(List lhs_r, IntegerVector rhs) {
   }
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 
@@ -138,7 +138,7 @@ List wrap_bitwise_shift_right(List lhs_r, IntegerVector rhs) {
   }
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 
@@ -165,7 +165,7 @@ List wrap_add_integer(List lhs_r, IntegerVector rhs) {
   }
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 

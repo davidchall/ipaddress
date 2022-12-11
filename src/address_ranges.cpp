@@ -27,7 +27,7 @@ std::vector<IpNetwork> summarize_address_range(const AddressRange &range) {
   unsigned int max_prefix = addr1.n_bits();
   unsigned int i = 0;
   while (block_start <= range_end) {
-    if (i++ % 10000 == 0) {
+    if (i++ % 8192 == 0) {
       checkUserInterrupt();
     }
 
@@ -75,7 +75,7 @@ List wrap_summarize_address_range(List address1_r, List address2_r) {
   }
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 
@@ -99,7 +99,7 @@ std::vector<AddressRange> collapse_ranges(std::vector<IpNetwork> &input) {
 
     // sweep line algorithm
     for (std::size_t i=1; i<input.size(); ++i) {
-      if (i % 10000 == 1) {
+      if (i % 8192 == 1) {
         checkUserInterrupt();
       }
 
@@ -135,7 +135,7 @@ std::vector<IpNetwork> collapse_networks(std::vector<IpNetwork> &input) {
 
   std::vector<IpNetwork> output;
   for (std::size_t i=0; i<ranges.size(); ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 
@@ -210,7 +210,7 @@ std::vector<IpNetwork> exclude_networks(std::vector<IpNetwork> &include, std::ve
   std::vector<IpNetwork> output;
 
   for (std::size_t i=0; i<boundaries.size(); ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 

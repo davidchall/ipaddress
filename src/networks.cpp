@@ -14,7 +14,7 @@ List wrap_broadcast_address(List network_r) {
   std::vector<IpAddress> output(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 
@@ -39,7 +39,7 @@ LogicalVector wrap_is_within(List address_r, List network_r) {
   }
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 
@@ -69,7 +69,7 @@ LogicalVector wrap_is_within_any(List address_r, List network_r) {
     } else {
       output[i_addr] = false;
       for (std::size_t i_netw=0; i_netw<network.size(); ++i_netw) {
-        if (i++ % 10000 == 0) {
+        if (i++ % 8192 == 0) {
           checkUserInterrupt();
         }
 
@@ -117,7 +117,7 @@ List wrap_smallest_common_network(List address1_r, List address2_r) {
   }
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 

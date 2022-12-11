@@ -20,7 +20,7 @@ List wrap_parse_address(CharacterVector input) {
   asio::ip::address_v6 tmp_v6;
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 
@@ -54,7 +54,7 @@ CharacterVector wrap_print_address(List address_r, bool exploded = false) {
   CharacterVector output(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 
@@ -99,7 +99,7 @@ DataFrame wrap_compare_address(List address_r) {
   uint32_t left_mask = ~right_mask;
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       checkUserInterrupt();
     }
 

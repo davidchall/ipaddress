@@ -46,7 +46,7 @@ inline std::vector<IpAddress> decode_addresses(Rcpp::List input) {
   std::vector<IpAddress> output(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       Rcpp::checkUserInterrupt();
     }
 
@@ -85,7 +85,7 @@ inline std::vector<IpNetwork> decode_networks(Rcpp::List input) {
   std::vector<IpNetwork> output(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       Rcpp::checkUserInterrupt();
     }
 
@@ -116,7 +116,7 @@ inline Rcpp::List encode_addresses(const std::vector<IpAddress> &input) {
   Rcpp::LogicalVector out_v6(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       Rcpp::checkUserInterrupt();
     }
 
@@ -168,7 +168,7 @@ inline Rcpp::List encode_networks(const std::vector<IpNetwork> &input) {
   Rcpp::LogicalVector out_v6(vsize);
 
   for (std::size_t i=0; i<vsize; ++i) {
-    if (i % 10000 == 0) {
+    if (i % 8192 == 0) {
       Rcpp::checkUserInterrupt();
     }
 

@@ -34,7 +34,7 @@ std::vector<IpAddress> calculate_hosts(const IpNetwork &network, bool exclude_un
 
   unsigned int i = 0;
   while (ip_begin != ip_end) {
-    if (i++ % 10000 == 0) {
+    if (i++ % 8192 == 0) {
       checkUserInterrupt();
     }
 
@@ -77,7 +77,7 @@ std::vector<IpNetwork> calculate_subnets(const IpNetwork &network, int new_prefi
 
   unsigned int i = 0;
   while (block_start <= range_end) {
-    if (i++ % 10000 == 0) {
+    if (i++ % 8192 == 0) {
       checkUserInterrupt();
     }
 
