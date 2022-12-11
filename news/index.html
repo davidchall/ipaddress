@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ipaddress</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,6 +52,10 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.5.6" id="ipaddress-056">ipaddress 0.5.6<a class="anchor" aria-label="anchor" href="#ipaddress-056"></a></h2><p class="text-muted">CRAN release: 2022-12-11</p>
+<p>Resolve CRAN check warnings about deprecated use of C++ function <code><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf()</a></code>.</p>
+</div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.5" id="ipaddress-055">ipaddress 0.5.5<a class="anchor" aria-label="anchor" href="#ipaddress-055"></a></h2><p class="text-muted">CRAN release: 2022-08-12</p>
 <p>Resolve CRAN check notes about HTML5 by upgrading to latest {roxygen}.</p>
 </div>
@@ -65,7 +69,8 @@
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.2" id="ipaddress-052">ipaddress 0.5.2<a class="anchor" aria-label="anchor" href="#ipaddress-052"></a></h2><p class="text-muted">CRAN release: 2021-06-17</p>
-<ul><li>The <code>base</code> argument of <code><a href="../reference/ip_to_integer.html">ip_to_integer()</a></code> is removed.<ul><li>
+<ul><li>The <code>base</code> argument of <code><a href="../reference/ip_to_integer.html">ip_to_integer()</a></code> is removed.
+<ul><li>
 <code>base = "dec"</code> is still handled by <code><a href="../reference/ip_to_integer.html">ip_to_integer()</a></code>.</li>
 <li>
 <code>base = "bin"</code> is still handled by the existing <code><a href="../reference/ip_to_binary.html">ip_to_binary()</a></code> function.</li>
@@ -73,7 +78,8 @@
 <code>base = "hex"</code> is now handled by the new <code><a href="../reference/ip_to_hex.html">ip_to_hex()</a></code> function.</li>
 </ul></li>
 <li>
-<code><a href="../reference/ip_to_integer.html">ip_to_integer()</a></code> and <code><a href="../reference/ip_to_integer.html">integer_to_ip()</a></code> now use <code><a href="https://davidchall.github.io/bignum/reference/biginteger.html" class="external-link">bignum::biginteger()</a></code> vectors to store IP addresses as integers. Previously, these integers were stored in a character vector (because they were beyond the range of base R numeric types).<ul><li>The BH package is no longer a dependency (C++ Boost headers were a heavy dependency).</li>
+<code><a href="../reference/ip_to_integer.html">ip_to_integer()</a></code> and <code><a href="../reference/ip_to_integer.html">integer_to_ip()</a></code> now use <code><a href="https://davidchall.github.io/bignum/reference/biginteger.html" class="external-link">bignum::biginteger()</a></code> vectors to store IP addresses as integers. Previously, these integers were stored in a character vector (because they were beyond the range of base R numeric types).
+<ul><li>The BH package is no longer a dependency (C++ Boost headers were a heavy dependency).</li>
 <li>The bignum package is now an optional dependency.</li>
 </ul></li>
 <li>New <code><a href="../reference/ip_to_hex.html">ip_to_hex()</a></code> and <code><a href="../reference/ip_to_hex.html">hex_to_ip()</a></code> functions to encode and decode addresses as hexadecimal strings.</li>
@@ -82,10 +88,13 @@
 <h2 class="pkg-version" data-toc-text="0.5.1" id="ipaddress-051">ipaddress 0.5.1<a class="anchor" aria-label="anchor" href="#ipaddress-051"></a></h2><p class="text-muted">CRAN release: 2020-09-12</p>
 <ul><li>Addition/subtraction of large integers is now much faster (<a href="https://github.com/davidchall/ipaddress/issues/64" class="external-link">#64</a>).</li>
 <li>
-<code><a href="../reference/ip_to_bytes.html">ip_to_bytes()</a></code> now returns a list of raw vectors instead of a <code>blob</code> object (<a href="https://github.com/davidchall/ipaddress/issues/65" class="external-link">#65</a>).<ul><li>Result can still be converted using <code><a href="https://blob.tidyverse.org/reference/blob.html" class="external-link">blob::as_blob()</a></code>.</li>
+<code><a href="../reference/ip_to_bytes.html">ip_to_bytes()</a></code> now returns a list of raw vectors instead of a <code>blob</code> object (<a href="https://github.com/davidchall/ipaddress/issues/65" class="external-link">#65</a>).
+<ul><li>Result can still be converted using <code><a href="https://blob.tidyverse.org/reference/blob.html" class="external-link">blob::as_blob()</a></code>.</li>
 <li>Removes excessive blob package dependency.</li>
 </ul></li>
-<li>Refactored C++ code to reduce dependence on Asio library (<a href="https://github.com/davidchall/ipaddress/issues/64" class="external-link">#64</a>).<ul><li>Package developers can now use <code>LinkingTo: ipaddress</code> without <code>LinkingTo: AsioHeaders</code>.</li></ul></li>
+<li>Refactored C++ code to reduce dependence on Asio library (<a href="https://github.com/davidchall/ipaddress/issues/64" class="external-link">#64</a>).
+<ul><li>Package developers can now use <code>LinkingTo: ipaddress</code> without <code>LinkingTo: AsioHeaders</code>.</li>
+</ul></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.0" id="ipaddress-050">ipaddress 0.5.0<a class="anchor" aria-label="anchor" href="#ipaddress-050"></a></h2><p class="text-muted">CRAN release: 2020-08-26</p>
@@ -111,7 +120,8 @@
 <li>Update <code><a href="../articles/ipaddress-examples.html">vignette("ipaddress-examples")</a></code> to use the <a href="https://cran.r-project.org/package=fuzzyjoin" class="external-link">fuzzyjoin</a> package (<a href="https://github.com/davidchall/ipaddress/issues/61" class="external-link">#61</a>).</li>
 <li>Update <code><a href="../articles/ipaddress-examples.html">vignette("ipaddress-examples")</a></code> with how to randomly generate public IP addresses (<a href="https://github.com/davidchall/ipaddress/issues/62" class="external-link">#62</a>).</li>
 <li>Fixed comparison of <code><a href="../reference/ip_address.html">ip_address()</a></code> vectors to account for machine endianness (<a href="https://github.com/davidchall/ipaddress/issues/53" class="external-link">#53</a>).</li>
-<li>Comparison of <code><a href="../reference/ip_network.html">ip_network()</a></code> and <code><a href="../reference/ip_interface.html">ip_interface()</a></code> vectors is now consistent with the Python ipaddress module.<ul><li>
+<li>Comparison of <code><a href="../reference/ip_network.html">ip_network()</a></code> and <code><a href="../reference/ip_interface.html">ip_interface()</a></code> vectors is now consistent with the Python ipaddress module.
+<ul><li>
 <code><a href="../reference/ip_network.html">ip_network()</a></code>: network address compared before prefix length.</li>
 <li>
 <code><a href="../reference/ip_interface.html">ip_interface()</a></code>: network compared before host address.</li>
@@ -122,10 +132,12 @@
 <h2 class="pkg-version" data-toc-text="0.4.0" id="ipaddress-040">ipaddress 0.4.0<a class="anchor" aria-label="anchor" href="#ipaddress-040"></a></h2><p class="text-muted">CRAN release: 2020-08-06</p>
 <div class="section level3">
 <h3 id="new-features-0-4-0">New features<a class="anchor" aria-label="anchor" href="#new-features-0-4-0"></a></h3>
-<ul><li>Add support for constructing <code><a href="../reference/ip_network.html">ip_network()</a></code> vectors without using CIDR notation.<ul><li>New <code><a href="../reference/common_network.html">common_network()</a></code> function finds the smallest network containing two addresses (<a href="https://github.com/davidchall/ipaddress/issues/39" class="external-link">#39</a>).</li>
+<ul><li>Add support for constructing <code><a href="../reference/ip_network.html">ip_network()</a></code> vectors without using CIDR notation.
+<ul><li>New <code><a href="../reference/common_network.html">common_network()</a></code> function finds the smallest network containing two addresses (<a href="https://github.com/davidchall/ipaddress/issues/39" class="external-link">#39</a>).</li>
 <li>New <code><a href="../reference/summarize_address_range.html">summarize_address_range()</a></code> function lists the constituent networks of an address range (<a href="https://github.com/davidchall/ipaddress/issues/41" class="external-link">#41</a>).</li>
 <li>
-<code><a href="../reference/netmask.html">prefix_length()</a></code> can now infer the prefix length from an <code><a href="../reference/ip_address.html">ip_address()</a></code> vector of netmasks and/or hostmasks. This makes it possible to construct an <code><a href="../reference/ip_network.html">ip_network()</a></code> vector like so: (<a href="https://github.com/davidchall/ipaddress/issues/36" class="external-link">#36</a>)<ul><li>
+<code><a href="../reference/netmask.html">prefix_length()</a></code> can now infer the prefix length from an <code><a href="../reference/ip_address.html">ip_address()</a></code> vector of netmasks and/or hostmasks. This makes it possible to construct an <code><a href="../reference/ip_network.html">ip_network()</a></code> vector like so: (<a href="https://github.com/davidchall/ipaddress/issues/36" class="external-link">#36</a>)
+<ul><li>
 <code>ip_network(ip_address("192.0.2.0"), prefix_length(ip_address("255.255.255.0")))</code>.</li>
 <li>
 <code>ip_network(ip_address("192.0.2.0"), prefix_length(ip_address("0.0.0.255")))</code>.</li>
@@ -151,19 +163,23 @@
 <h2 class="pkg-version" data-toc-text="0.3.0" id="ipaddress-030">ipaddress 0.3.0<a class="anchor" aria-label="anchor" href="#ipaddress-030"></a></h2><p class="text-muted">CRAN release: 2020-05-12</p>
 <div class="section level3">
 <h3 id="breaking-changes-0-3-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-3-0"></a></h3>
-<ul><li>Renamed functions for converting to and from alternative representations of IP addresses: (<a href="https://github.com/davidchall/ipaddress/issues/30" class="external-link">#30</a>)<ul><li>
+<ul><li>Renamed functions for converting to and from alternative representations of IP addresses: (<a href="https://github.com/davidchall/ipaddress/issues/30" class="external-link">#30</a>)
+<ul><li>
 <code>as_packed()</code> and <code>from_packed()</code> become <code><a href="../reference/ip_to_bytes.html">ip_to_bytes()</a></code> and <code><a href="../reference/ip_to_bytes.html">bytes_to_ip()</a></code>.</li>
 <li>
 <code>as_binary()</code> and <code>from_binary()</code> become <code><a href="../reference/ip_to_binary.html">ip_to_binary()</a></code> and <code><a href="../reference/ip_to_binary.html">binary_to_ip()</a></code>.</li>
 <li>
 <code>as_hostname()</code> and <code>from_hostname()</code> become <code><a href="../reference/ip_to_hostname.html">ip_to_hostname()</a></code> and <code><a href="../reference/ip_to_hostname.html">hostname_to_ip()</a></code>.</li>
-</ul></li></ul></div>
+</ul></li>
+</ul></div>
 <div class="section level3">
 <h3 id="new-features-0-3-0">New features<a class="anchor" aria-label="anchor" href="#new-features-0-3-0"></a></h3>
-<ul><li>New <code><a href="../reference/ip_to_integer.html">ip_to_integer()</a></code> and <code><a href="../reference/ip_to_integer.html">integer_to_ip()</a></code> functions to encode and decode addresses as integers. Note that the integers are contained within a character vector. Please see the function documentation for an explanation (<a href="https://github.com/davidchall/ipaddress/issues/30" class="external-link">#30</a>).</li></ul></div>
+<ul><li>New <code><a href="../reference/ip_to_integer.html">ip_to_integer()</a></code> and <code><a href="../reference/ip_to_integer.html">integer_to_ip()</a></code> functions to encode and decode addresses as integers. Note that the integers are contained within a character vector. Please see the function documentation for an explanation (<a href="https://github.com/davidchall/ipaddress/issues/30" class="external-link">#30</a>).</li>
+</ul></div>
 <div class="section level3">
 <h3 id="minor-improvements-0-3-0">Minor improvements<a class="anchor" aria-label="anchor" href="#minor-improvements-0-3-0"></a></h3>
-<ul><li>Support pretty printing in tibbles (<a href="https://github.com/davidchall/ipaddress/issues/27" class="external-link">#27</a>).<ul><li>CIDRs aligned on forward slash separator.</li>
+<ul><li>Support pretty printing in tibbles (<a href="https://github.com/davidchall/ipaddress/issues/27" class="external-link">#27</a>).
+<ul><li>CIDRs aligned on forward slash separator.</li>
 <li>Prefix length displayed in green to increase prominence.</li>
 <li>Dots and colons displayed in gray to reduce prominence.</li>
 <li>IPv6 addresses can be automatically truncated, to fit more columns into the console width.</li>
@@ -194,7 +210,8 @@
 <h3 id="address-space-0-2-0">Address space<a class="anchor" aria-label="anchor" href="#address-space-0-2-0"></a></h3>
 <ul><li>New <code><a href="../reference/max_prefix_length.html">max_prefix_length()</a></code> function to get the size of the address space (32-bit for IPv4 and 128-bit for IPv6).</li>
 <li>New functions to check if addresses or networks are reserved for special use: <code><a href="../reference/is_reserved.html">is_multicast()</a></code>, <code><a href="../reference/is_reserved.html">is_unspecified()</a></code>, <code><a href="../reference/is_reserved.html">is_loopback()</a></code>, <code><a href="../reference/is_reserved.html">is_link_local()</a></code>.</li>
-<li>New functions for IPv6 transition mechanisms: (<a href="https://github.com/davidchall/ipaddress/issues/16" class="external-link">#16</a>)<ul><li>
+<li>New functions for IPv6 transition mechanisms: (<a href="https://github.com/davidchall/ipaddress/issues/16" class="external-link">#16</a>)
+<ul><li>
 <code><a href="../reference/ipv6-transition.html">is_ipv4_mapped()</a></code>, <code><a href="../reference/ipv6-transition.html">is_6to4()</a></code>, <code><a href="../reference/ipv6-transition.html">is_teredo()</a></code>.</li>
 <li>
 <code><a href="../reference/ipv6-transition.html">extract_ipv4_mapped()</a></code>, <code><a href="../reference/ipv6-transition.html">extract_6to4()</a></code>, <code><a href="../reference/ipv6-transition.html">extract_teredo_server()</a></code>, <code><a href="../reference/ipv6-transition.html">extract_teredo_client()</a></code>.</li>
@@ -205,7 +222,8 @@
 <ul><li>New functions about the size of a network: <code><a href="../reference/network_size.html">num_addresses()</a></code>, <code><a href="../reference/network_size.html">network_address()</a></code> and <code><a href="../reference/network_size.html">broadcast_address()</a></code>.</li>
 <li>New <code><a href="../reference/network_in_network.html">overlaps()</a></code> function to check for <em>any</em> overlap between networks.</li>
 <li>
-<code><a href="../reference/netmask.html">netmask()</a></code> and <code><a href="../reference/netmask.html">hostmask()</a></code> are now generics, so they can now accept:<ul><li>an <code><a href="../reference/ip_network.html">ip_network()</a></code> vector (existing behavior).</li>
+<code><a href="../reference/netmask.html">netmask()</a></code> and <code><a href="../reference/netmask.html">hostmask()</a></code> are now generics, so they can now accept:
+<ul><li>an <code><a href="../reference/ip_network.html">ip_network()</a></code> vector (existing behavior).</li>
 <li>an <code><a href="../reference/ip_interface.html">ip_interface()</a></code> vector.</li>
 <li>a vector of prefix lengths.</li>
 </ul></li>
@@ -224,7 +242,8 @@
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.2" id="ipaddress-012">ipaddress 0.1.2<a class="anchor" aria-label="anchor" href="#ipaddress-012"></a></h2><p class="text-muted">CRAN release: 2020-03-10</p>
-<ul><li>Fixed decoding bug which meant that some IP addresses were interpreted as <code>NA</code>.<ul><li>In IPv4, this affected <code>0.0.0.128</code>.</li>
+<ul><li>Fixed decoding bug which meant that some IP addresses were interpreted as <code>NA</code>.
+<ul><li>In IPv4, this affected <code>0.0.0.128</code>.</li>
 <li>In IPv6, this affected any address in the <code>0:80::/32</code> network.</li>
 </ul></li>
 <li>
@@ -237,16 +256,19 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.0" id="ipaddress-010">ipaddress 0.1.0<a class="anchor" aria-label="anchor" href="#ipaddress-010"></a></h2><p class="text-muted">CRAN release: 2020-03-05</p>
 <p>First CRAN release</p>
-<ul><li>Added <code><a href="../reference/ip_address.html">ip_address()</a></code> and <code><a href="../reference/ip_network.html">ip_network()</a></code> classes.<ul><li>Full support for both IPv4 and IPv6 address spaces.</li>
+<ul><li>Added <code><a href="../reference/ip_address.html">ip_address()</a></code> and <code><a href="../reference/ip_network.html">ip_network()</a></code> classes.
+<ul><li>Full support for both IPv4 and IPv6 address spaces.</li>
 <li>Efficiently store data in their native representations (i.e. a sequence of bits).</li>
 <li>Classes based on <code>vctrs</code> package for full tidyverse compatibility.</li>
 </ul></li>
-<li>Added functions to determine network membership.<ul><li>
+<li>Added functions to determine network membership.
+<ul><li>
 <code><a href="../reference/address_in_network.html">is_within()</a></code> and <code><a href="../reference/address_in_network.html">is_within_any()</a></code> check if addresses are within networks.</li>
 <li>
 <code><a href="../reference/network_in_network.html">is_subnet()</a></code> and <code><a href="../reference/network_in_network.html">is_supernet()</a></code> check if networks are within other networks.</li>
 </ul></li>
-<li>Added convenience functions to extract IP metadata.<ul><li>
+<li>Added convenience functions to extract IP metadata.
+<ul><li>
 <code><a href="../reference/is_ipv6.html">is_ipv4()</a></code> and <code><a href="../reference/is_ipv6.html">is_ipv6()</a></code> classify the address space.</li>
 <li>
 <code><a href="../reference/netmask.html">prefix_length()</a></code>, <code><a href="../reference/netmask.html">netmask()</a></code> and <code><a href="../reference/netmask.html">hostmask()</a></code> yield different representations of the network mask.</li>
