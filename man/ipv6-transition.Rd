@@ -30,8 +30,8 @@ extract_teredo_client(x)
 }
 \value{
 \itemize{
-\item \code{is_xxx()} functions return a logical vector
-\item \code{extract_xxx()} functions return an \code{\link{ip_address}} vector.
+\item \code{is_xxx()}: A logical vector
+\item \code{extract_xxx()}: An \code{\link{ip_address}} vector
 }
 }
 \description{

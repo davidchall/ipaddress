@@ -10,12 +10,12 @@
 #' are encoded as `NA`.
 #'
 #' @param x
-#'  * For `ip_to_binary()`: An [`ip_address`] vector
-#'  * For `binary_to_ip()`: A character vector containing only `0` and `1` characters
+#'  * `ip_to_binary()`: An [`ip_address`] vector
+#'  * `binary_to_ip()`: A character vector containing only `0` and `1` characters
 #'
 #' @return
-#'  * For `ip_to_binary()`: A character vector
-#'  * For `binary_to_ip()`: An [`ip_address`] vector
+#'  * `ip_to_binary()`: A character vector
+#'  * `binary_to_ip()`: An [`ip_address`] vector
 #'
 #' @examples
 #' x <- ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334", NA))

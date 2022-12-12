@@ -17,8 +17,9 @@
 #' @param is_ipv6 A logical vector
 #' @inheritParams rlang::args_dots_empty
 #' @return
-#' * `prefix_length()` returns an integer vector
-#' * `netmask()` and `hostmask()` return an [`ip_address`] vector
+#' * `prefix_length()`: An integer vector
+#' * `netmask()`: An [`ip_address`] vector
+#' * `hostmask()`: An [`ip_address`] vector
 #'
 #' @examples
 #' x <- ip_network(c("192.168.0.0/22", "2001:db00::0/26"))

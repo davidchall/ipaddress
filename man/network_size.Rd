@@ -18,9 +18,9 @@ num_addresses(x)
 }
 \value{
 \itemize{
-\item \code{network_address()} and \code{broadcast_address()} return an
-\code{\link{ip_address}} vector
-\item \code{num_addresses()} returns a numeric vector
+\item \code{network_address()}: An \code{\link{ip_address}} vector
+\item \code{broadcast_address()}: An \code{\link{ip_address}} vector
+\item \code{num_addresses()}: A numeric vector
 }
 }
 \description{

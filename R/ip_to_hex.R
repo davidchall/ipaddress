@@ -3,15 +3,15 @@
 #' Encode or decode an [`ip_address`] as a hexadecimal string.
 #'
 #' @param x
-#'  * For `ip_to_hex()`: An [`ip_address`] vector
-#'  * For `hex_to_ip()`: A character vector containing hexadecimal strings
+#'  * `ip_to_hex()`: An [`ip_address`] vector
+#'  * `hex_to_ip()`: A character vector containing hexadecimal strings
 #' @param is_ipv6 A logical vector indicating whether to construct an IPv4 or
 #'   IPv6 address. If `NULL` (the default), then IPv4 is preferred but an IPv6
 #'   address is constructed when `x` is too large for the IPv4 address space.
 #'
 #' @return
-#'  * For `ip_to_hex()`: A character vector
-#'  * For `hex_to_ip()`: An [`ip_address`] vector
+#'  * `ip_to_hex()`: A character vector
+#'  * `hex_to_ip()`: An [`ip_address`] vector
 #'
 #' @examples
 #' x <- ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334", NA))

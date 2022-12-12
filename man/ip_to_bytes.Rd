@@ -11,14 +11,14 @@ bytes_to_ip(x)
 }
 \arguments{
 \item{x}{\itemize{
-\item For \code{ip_to_bytes()}: An \code{\link{ip_address}} vector
-\item For \code{bytes_to_ip()}: A list of raw vectors or a \code{\link[blob:blob]{blob::blob}} object
+\item \code{ip_to_bytes()}: An \code{\link{ip_address}} vector
+\item \code{bytes_to_ip()}: A list of raw vectors or a \code{\link[blob:blob]{blob::blob}} object
 }}
 }
 \value{
 \itemize{
-\item For \code{ip_to_bytes()}: A list of raw vectors
-\item For \code{bytes_to_ip()}: An \code{\link{ip_address}} vector
+\item \code{ip_to_bytes()}: A list of raw vectors
+\item \code{bytes_to_ip()}: An \code{\link{ip_address}} vector
 }
 }
 \description{

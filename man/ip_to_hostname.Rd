@@ -17,16 +17,16 @@ hostname_to_ip_all(x)
 }
 \arguments{
 \item{x}{\itemize{
-\item For \code{ip_to_hostname()}: An \code{\link{ip_address}} vector
-\item For \code{hostname_to_ip()}: A character vector of hostnames
+\item \code{ip_to_hostname()}: An \code{\link{ip_address}} vector
+\item \code{hostname_to_ip()}: A character vector of hostnames
 }}
 }
 \value{
 \itemize{
-\item For \code{ip_to_hostname()}: A character vector
-\item For \code{ip_to_hostname_all()}: A list of character vectors
-\item For \code{hostname_to_ip()}: An \code{\link{ip_address}} vector
-\item For \code{hostname_to_ip_all()}: A list of \code{\link{ip_address}} vectors
+\item \code{ip_to_hostname()}: A character vector
+\item \code{ip_to_hostname_all()}: A list of character vectors
+\item \code{hostname_to_ip()}: An \code{\link{ip_address}} vector
+\item \code{hostname_to_ip_all()}: A list of \code{\link{ip_address}} vectors
 }
 }
 \description{

@@ -18,8 +18,8 @@ By default, this steps a single level through the hierarchy.}
 }
 \value{
 \itemize{
-\item For \code{supernet()}: An \code{\link{ip_network}} vector
-\item For \code{subnets()}: A list of \code{\link{ip_network}} vectors
+\item \code{supernet()}: An \code{\link{ip_network}} vector
+\item \code{subnets()}: A list of \code{\link{ip_network}} vectors
 }
 }
 \description{
