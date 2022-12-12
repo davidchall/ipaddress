@@ -2,51 +2,19 @@
 % Please edit documentation in R/ip_address.R
 \name{ip_address}
 \alias{ip_address}
-\alias{is_ip_address}
-\alias{as_ip_address}
-\alias{as_ip_address.character}
-\alias{as_ip_address.ip_interface}
-\alias{as.character.ip_address}
-\alias{format.ip_address}
 \title{Vector of IP addresses}
 \usage{
 ip_address(x = character())
-
-is_ip_address(x)
-
-as_ip_address(x)
-
-\method{as_ip_address}{character}(x)
-
-\method{as_ip_address}{ip_interface}(x)
-
-\method{as.character}{ip_address}(x, ...)
-
-\method{format}{ip_address}(x, exploded = FALSE, ...)
 }
 \arguments{
-\item{x}{\itemize{
-\item For \code{ip_address()}: A character vector of IP addresses, in dot-decimal
-notation (IPv4) or hexadecimal notation (IPv6)
-\item For \code{is_ip_address()}: An object to test
-\item For \code{as_ip_address()}: An object to cast
-\item For \code{as.character()}: An \code{ip_address} vector
-}}
-
-\item{...}{Included for S3 generic consistency}
-
-\item{exploded}{Logical scalar. Should IPv6 addresses display leading zeros?
-(default: \code{FALSE})}
+\item{x}{A character vector of IP addresses, in dot-decimal notation (IPv4)
+or hexadecimal notation (IPv6)}
 }
 \value{
 An S3 vector of class \code{ip_address}
 }
 \description{
-\code{ip_address()} constructs a vector of IP addresses.
-
-\code{is_ip_address()} checks if an object is of class \code{ip_address}.
-
-\code{as_ip_address()} casts an object to \code{ip_address}.
+Construct a vector of IP addresses.
 }
 \details{
 An address in IPv4 space uses 32-bits. It is usually represented

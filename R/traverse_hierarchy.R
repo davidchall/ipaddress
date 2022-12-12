@@ -8,8 +8,8 @@
 #' @param new_prefix An integer vector indicating the desired prefix length.
 #'   By default, this steps a single level through the hierarchy.
 #' @return
-#'  * For `supernet()`: An [`ip_network`] vector
-#'  * For `subnets()`: A list of [`ip_network`] vectors
+#'  * `supernet()`: An [`ip_network`] vector
+#'  * `subnets()`: A list of [`ip_network`] vectors
 #'
 #' @details
 #' The ipaddress package does not support \link[base:LongVectors]{long vectors}

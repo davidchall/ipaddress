@@ -40,7 +40,7 @@ hostmask(...)
 \method{hostmask}{default}(prefix_length, is_ipv6, ...)
 }
 \arguments{
-\item{...}{Arguments to be passed to other methods}
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{x}{An \code{\link{ip_network}} or \code{\link{ip_interface}} vector}
 
@@ -53,8 +53,9 @@ cases (all zeros, all ones) are treated as netmasks.}
 }
 \value{
 \itemize{
-\item \code{prefix_length()} returns an integer vector
-\item \code{netmask()} and \code{hostmask()} return an \code{\link{ip_address}} vector
+\item \code{prefix_length()}: An integer vector
+\item \code{netmask()}: An \code{\link{ip_address}} vector
+\item \code{hostmask()}: An \code{\link{ip_address}} vector
 }
 }
 \description{

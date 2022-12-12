@@ -16,6 +16,9 @@ reference:
       - ip_address
       - ip_network
       - ip_interface
+      - ip_test
+      - ip_cast
+      - ip_format
   - title: "Other representations"
     contents:
       - has_concept("address representations")

@@ -11,14 +11,14 @@ binary_to_ip(x)
 }
 \arguments{
 \item{x}{\itemize{
-\item For \code{ip_to_binary()}: An \code{\link{ip_address}} vector
-\item For \code{binary_to_ip()}: A character vector containing only \code{0} and \code{1} characters
+\item \code{ip_to_binary()}: An \code{\link{ip_address}} vector
+\item \code{binary_to_ip()}: A character vector containing only \code{0} and \code{1} characters
 }}
 }
 \value{
 \itemize{
-\item For \code{ip_to_binary()}: A character vector
-\item For \code{binary_to_ip()}: An \code{\link{ip_address}} vector
+\item \code{ip_to_binary()}: A character vector
+\item \code{binary_to_ip()}: An \code{\link{ip_address}} vector
 }
 }
 \description{

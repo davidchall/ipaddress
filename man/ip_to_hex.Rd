@@ -11,8 +11,8 @@ hex_to_ip(x, is_ipv6 = NULL)
 }
 \arguments{
 \item{x}{\itemize{
-\item For \code{ip_to_hex()}: An \code{\link{ip_address}} vector
-\item For \code{hex_to_ip()}: A character vector containing hexadecimal strings
+\item \code{ip_to_hex()}: An \code{\link{ip_address}} vector
+\item \code{hex_to_ip()}: A character vector containing hexadecimal strings
 }}
 
 \item{is_ipv6}{A logical vector indicating whether to construct an IPv4 or
@@ -21,8 +21,8 @@ address is constructed when \code{x} is too large for the IPv4 address space.}
 }
 \value{
 \itemize{
-\item For \code{ip_to_hex()}: A character vector
-\item For \code{hex_to_ip()}: An \code{\link{ip_address}} vector
+\item \code{ip_to_hex()}: A character vector
+\item \code{hex_to_ip()}: An \code{\link{ip_address}} vector
 }
 }
 \description{

@@ -4,11 +4,6 @@
 \alias{ip_interface}
 \alias{ip_interface.default}
 \alias{ip_interface.ip_address}
-\alias{is_ip_interface}
-\alias{as_ip_interface}
-\alias{as_ip_interface.character}
-\alias{as.character.ip_interface}
-\alias{format.ip_interface}
 \title{Vector of IP interfaces}
 \usage{
 ip_interface(...)
@@ -16,46 +11,23 @@ ip_interface(...)
 \method{ip_interface}{default}(x = character(), ...)
 
 \method{ip_interface}{ip_address}(address, prefix_length, ...)
-
-is_ip_interface(x)
-
-as_ip_interface(x)
-
-\method{as_ip_interface}{character}(x)
-
-\method{as.character}{ip_interface}(x, ...)
-
-\method{format}{ip_interface}(x, exploded = FALSE, ...)
 }
 \arguments{
-\item{...}{Included for S3 generic consistency}
+\item{...}{These dots are for future extensions and must be empty.}
 
-\item{x}{\itemize{
-\item For \code{ip_interface()}: A character vector of IP interfaces, in CIDR notation
-(IPv4 or IPv6)
-\item For \code{is_ip_interface()}: An object to test
-\item For \code{as_ip_interface()}: An object to cast
-\item For \code{as.character()}: An \code{ip_interface} vector
-}}
+\item{x}{A character vector of IP interfaces, in CIDR notation (IPv4 or IPv6)}
 
 \item{address}{An \code{\link{ip_address}} vector}
 
 \item{prefix_length}{An integer vector}
-
-\item{exploded}{Logical scalar. Should IPv6 addresses display leading zeros?
-(default: \code{FALSE})}
 }
 \value{
 An S3 vector of class \code{ip_interface}
 }
 \description{
+Construct a vector of IP interfaces.
+
 This hybrid class stores both the host address and the network it is on.
-
-\code{ip_interface()} constructs a vector of IP interfaces.
-
-\code{is_ip_interface()} checks if an object is of class \code{ip_interface}.
-
-\code{as_ip_interface()} casts an object to \code{ip_interface}.
 }
 \details{
 Constructing an \code{ip_interface} vector is conceptually like constructing an

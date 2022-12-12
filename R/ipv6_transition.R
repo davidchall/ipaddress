@@ -13,8 +13,8 @@
 #' @param x An [`ip_address`] vector
 #'
 #' @return
-#' * `is_xxx()` functions return a logical vector
-#' * `extract_xxx()` functions return an [`ip_address`] vector.
+#' * `is_xxx()`: A logical vector
+#' * `extract_xxx()`: An [`ip_address`] vector
 #'
 #' @examples
 #' # these examples show the reserved networks

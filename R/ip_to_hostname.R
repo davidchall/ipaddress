@@ -21,14 +21,14 @@
 #' returns all values.
 #'
 #' @param x
-#'  * For `ip_to_hostname()`: An [`ip_address`] vector
-#'  * For `hostname_to_ip()`: A character vector of hostnames
+#'  * `ip_to_hostname()`: An [`ip_address`] vector
+#'  * `hostname_to_ip()`: A character vector of hostnames
 #'
 #' @return
-#' * For `ip_to_hostname()`: A character vector
-#' * For `ip_to_hostname_all()`: A list of character vectors
-#' * For `hostname_to_ip()`: An [`ip_address`] vector
-#' * For `hostname_to_ip_all()`: A list of [`ip_address`] vectors
+#'  * `ip_to_hostname()`: A character vector
+#'  * `ip_to_hostname_all()`: A list of character vectors
+#'  * `hostname_to_ip()`: An [`ip_address`] vector
+#'  * `hostname_to_ip_all()`: A list of [`ip_address`] vectors
 #'
 #' @examples
 #' \dontrun{

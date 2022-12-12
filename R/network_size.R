@@ -6,9 +6,9 @@
 #'
 #' @param x An [`ip_network`] vector
 #' @return
-#' * `network_address()` and `broadcast_address()` return an
-#'   [`ip_address`] vector
-#' * `num_addresses()` returns a numeric vector
+#' * `network_address()`: An [`ip_address`] vector
+#' * `broadcast_address()`: An [`ip_address`] vector
+#' * `num_addresses()`: A numeric vector
 #'
 #' @examples
 #' x <- ip_network(c("192.168.0.0/22", "2001:db8::/33"))

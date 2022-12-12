@@ -1,11 +1,6 @@
 #' Vector of IP networks
 #'
-#' @description
-#' `ip_network()` constructs a vector of IP networks.
-#'
-#' `is_ip_network()` checks if an object is of class `ip_network`.
-#'
-#' `as_ip_network()` casts an object to `ip_network`.
+#' Construct a vector of IP networks.
 #'
 #' @details
 #' An IP network corresponds to a contiguous range of IP addresses
@@ -35,13 +30,8 @@
 #' When comparing and sorting `ip_network` vectors, the network address is
 #' compared before the prefix length.
 #'
-#' @param ... Included for S3 generic consistency
-#' @param x
-#' * For `ip_network()`: A character vector of IP networks, in CIDR notation
-#'   (IPv4 or IPv6)
-#' * For `is_ip_network()`: An object to test
-#' * For `as_ip_network()`: An object to cast
-#' * For `as.character()`: An `ip_network` vector
+#' @inheritParams rlang::args_dots_empty
+#' @param x A character vector of IP networks, in CIDR notation (IPv4 or IPv6)
 #' @param address An [`ip_address`] vector
 #' @param prefix_length An integer vector
 #' @param strict If `TRUE` (the default) and the input has host bits set,
@@ -90,6 +80,7 @@ ip_network <- function(...) {
 #' @rdname ip_network
 #' @export
 ip_network.default <- function(x = character(), strict = TRUE, ...) {
+  check_dots_empty()
   if (!is_bool(strict)) {
     abort("`strict` be must TRUE or FALSE")
   }
@@ -100,6 +91,7 @@ ip_network.default <- function(x = character(), strict = TRUE, ...) {
 #' @rdname ip_network
 #' @export
 ip_network.ip_address <- function(address, prefix_length, strict = TRUE, ...) {
+  check_dots_empty()
   if (!is_integerish(prefix_length)) {
     abort("`prefix_length` must be an integer vector")
   }
@@ -132,33 +124,33 @@ new_ip_network <- function(address1 = integer(), address2 = integer(), address3 
   ), class = "ip_network")
 }
 
-#' @rdname ip_network
+#' @examples
+#' is_ip_network(ip_network("192.168.0.0/24"))
+#' @rdname ip_test
 #' @export
 is_ip_network <- function(x) inherits(x, "ip_network")
 
 
 # Casting ------------------------------------------------------------
 
-#' @rdname ip_network
+#' @rdname ip_cast
 #' @export
 as_ip_network <- function(x) UseMethod("as_ip_network")
 
-#' @rdname ip_network
+#' @rdname ip_cast
 #' @export
 as_ip_network.character <- function(x) ip_network(x)
 
-#' @rdname ip_network
+#' @rdname ip_cast
 #' @export
 as_ip_network.ip_interface <- function(x) {
   ip_network(x, field(x, "prefix"), strict = FALSE)
 }
 
-#' @rdname ip_network
 #' @export
 as.character.ip_network <- function(x, ...) wrap_print_network(x)
 
-#' @inheritParams format.ip_address
-#' @rdname ip_network
+#' @rdname ip_format
 #' @export
 format.ip_network <- function(x, exploded = FALSE, ...) {
   wrap_print_network(x, exploded)

@@ -15,10 +15,11 @@
 #'   cases (all zeros, all ones) are treated as netmasks.
 #' @param prefix_length An integer vector
 #' @param is_ipv6 A logical vector
-#' @param ... Arguments to be passed to other methods
+#' @inheritParams rlang::args_dots_empty
 #' @return
-#' * `prefix_length()` returns an integer vector
-#' * `netmask()` and `hostmask()` return an [`ip_address`] vector
+#' * `prefix_length()`: An integer vector
+#' * `netmask()`: An [`ip_address`] vector
+#' * `hostmask()`: An [`ip_address`] vector
 #'
 #' @examples
 #' x <- ip_network(c("192.168.0.0/22", "2001:db00::0/26"))
@@ -65,6 +66,8 @@ hostmask <- function(...) {
 #' @rdname netmask
 #' @export
 prefix_length.ip_network <- function(x, ...) {
+  check_dots_empty()
+
   # directly returning field enables assignment
   result <- field(x, "prefix")
   result
@@ -73,6 +76,8 @@ prefix_length.ip_network <- function(x, ...) {
 #' @rdname netmask
 #' @export
 netmask.ip_network <- function(x, ...) {
+  check_dots_empty()
+
   wrap_netmask(
     field(x, "prefix"),
     field(x, "is_ipv6")
@@ -82,6 +87,8 @@ netmask.ip_network <- function(x, ...) {
 #' @rdname netmask
 #' @export
 hostmask.ip_network <- function(x, ...) {
+  check_dots_empty()
+
   wrap_hostmask(
     field(x, "prefix"),
     field(x, "is_ipv6")
@@ -91,6 +98,8 @@ hostmask.ip_network <- function(x, ...) {
 #' @rdname netmask
 #' @export
 prefix_length.ip_interface <- function(x, ...) {
+  check_dots_empty()
+
   # directly returning field enables assignment
   result <- field(x, "prefix")
   result
@@ -99,6 +108,8 @@ prefix_length.ip_interface <- function(x, ...) {
 #' @rdname netmask
 #' @export
 netmask.ip_interface <- function(x, ...) {
+  check_dots_empty()
+
   wrap_netmask(
     field(x, "prefix"),
     field(x, "is_ipv6")
@@ -108,6 +119,8 @@ netmask.ip_interface <- function(x, ...) {
 #' @rdname netmask
 #' @export
 hostmask.ip_interface <- function(x, ...) {
+  check_dots_empty()
+
   wrap_hostmask(
     field(x, "prefix"),
     field(x, "is_ipv6")
@@ -117,6 +130,7 @@ hostmask.ip_interface <- function(x, ...) {
 #' @rdname netmask
 #' @export
 prefix_length.default <- function(mask, ...) {
+  check_dots_empty()
   if (!is_ip_address(mask)) {
     abort("prefix_length() accepts an ip_address, ip_network or ip_interface vector")
   }
@@ -127,12 +141,16 @@ prefix_length.default <- function(mask, ...) {
 #' @rdname netmask
 #' @export
 netmask.default <- function(prefix_length, is_ipv6, ...) {
+  check_dots_empty()
+
   subnet_mask(prefix_length, is_ipv6, wrap_netmask)
 }
 
 #' @rdname netmask
 #' @export
 hostmask.default <- function(prefix_length, is_ipv6, ...) {
+  check_dots_empty()
+
   subnet_mask(prefix_length, is_ipv6, wrap_hostmask)
 }
 

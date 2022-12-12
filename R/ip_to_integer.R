@@ -15,13 +15,13 @@
 #' [`bignum::biginteger`] vector, which supports arbitrary precision integers.
 #'
 #' @param x
-#'  * For `ip_to_integer()`: An [`ip_address`] vector
-#'  * For `integer_to_ip()`: A [`bignum::biginteger`] vector
+#'  * `ip_to_integer()`: An [`ip_address`] vector
+#'  * `integer_to_ip()`: A [`bignum::biginteger`] vector
 #' @inheritParams ip_to_hex
 #'
 #' @return
-#'  * For `ip_to_integer()`: A [`bignum::biginteger`] vector
-#'  * For `integer_to_ip()`: An [`ip_address`] vector
+#'  * `ip_to_integer()`: A [`bignum::biginteger`] vector
+#'  * `integer_to_ip()`: An [`ip_address`] vector
 #'
 #' @examples
 #' x <- ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334", NA))

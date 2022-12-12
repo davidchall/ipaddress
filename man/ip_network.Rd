@@ -4,12 +4,6 @@
 \alias{ip_network}
 \alias{ip_network.default}
 \alias{ip_network.ip_address}
-\alias{is_ip_network}
-\alias{as_ip_network}
-\alias{as_ip_network.character}
-\alias{as_ip_network.ip_interface}
-\alias{as.character.ip_network}
-\alias{format.ip_network}
 \title{Vector of IP networks}
 \usage{
 ip_network(...)
@@ -17,29 +11,11 @@ ip_network(...)
 \method{ip_network}{default}(x = character(), strict = TRUE, ...)
 
 \method{ip_network}{ip_address}(address, prefix_length, strict = TRUE, ...)
-
-is_ip_network(x)
-
-as_ip_network(x)
-
-\method{as_ip_network}{character}(x)
-
-\method{as_ip_network}{ip_interface}(x)
-
-\method{as.character}{ip_network}(x, ...)
-
-\method{format}{ip_network}(x, exploded = FALSE, ...)
 }
 \arguments{
-\item{...}{Included for S3 generic consistency}
+\item{...}{These dots are for future extensions and must be empty.}
 
-\item{x}{\itemize{
-\item For \code{ip_network()}: A character vector of IP networks, in CIDR notation
-(IPv4 or IPv6)
-\item For \code{is_ip_network()}: An object to test
-\item For \code{as_ip_network()}: An object to cast
-\item For \code{as.character()}: An \code{ip_network} vector
-}}
+\item{x}{A character vector of IP networks, in CIDR notation (IPv4 or IPv6)}
 
 \item{strict}{If \code{TRUE} (the default) and the input has host bits set,
 then a warning is emitted and \code{NA} is returned. If \code{FALSE}, the
@@ -49,19 +25,12 @@ to retain the host bits, consider using \code{\link[=ip_interface]{ip_interface(
 \item{address}{An \code{\link{ip_address}} vector}
 
 \item{prefix_length}{An integer vector}
-
-\item{exploded}{Logical scalar. Should IPv6 addresses display leading zeros?
-(default: \code{FALSE})}
 }
 \value{
 An S3 vector of class \code{ip_network}
 }
 \description{
-\code{ip_network()} constructs a vector of IP networks.
-
-\code{is_ip_network()} checks if an object is of class \code{ip_network}.
-
-\code{as_ip_network()} casts an object to \code{ip_network}.
+Construct a vector of IP networks.
 }
 \details{
 An IP network corresponds to a contiguous range of IP addresses
