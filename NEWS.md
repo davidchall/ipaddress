@@ -8,19 +8,19 @@
 
 # ipaddress 0.5.6
 
-Resolve CRAN check warnings about deprecated use of C++ function `sprintf()`.
+Fix for CRAN checks.
 
 # ipaddress 0.5.5
 
-Resolve CRAN check notes about HTML5 by upgrading to latest {roxygen}.
+Fix for CRAN checks.
 
 # ipaddress 0.5.4
 
-Compatible with new compiler toolchain on Windows for R 4.2 ([see announcement](https://developer.r-project.org/Blog/public/2021/12/07/upcoming-changes-in-r-4.2-on-windows/)).
+Fix for CRAN checks.
 
 # ipaddress 0.5.3
 
-Hotfix for CRAN check warnings.
+Fix for CRAN checks.
 
 
 # ipaddress 0.5.2
@@ -178,7 +178,7 @@ This release achieves feature parity with the Python [ipaddress](https://docs.py
 
 # ipaddress 0.1.1
 
-Hotfix for CRAN errors on Solaris.
+Fix for CRAN checks.
 
 
 # ipaddress 0.1.0
