@@ -23,12 +23,12 @@ test_that("hex encoding/decoding works", {
 
   expect_error(hex_to_ip("0x12GH"), "invalid hexadecimal")
   expect_error(hex_to_ip("12ab"), "invalid hexadecimal")
-  expect_equal(
-    expect_warning(hex_to_ip(c("0xFFFFFFFF", "0x100000000"), is_ipv6 = FALSE)),
+  expect_warning(expect_equal(
+    hex_to_ip(c("0xFFFFFFFF", "0x100000000"), is_ipv6 = FALSE),
     ip_address(c("255.255.255.255", NA))
-  )
-  expect_equal(
-    expect_warning(hex_to_ip(c("0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF", "0x100000000000000000000000000000000"), is_ipv6 = TRUE)),
+  ))
+  expect_warning(expect_equal(
+    hex_to_ip(c("0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF", "0x100000000000000000000000000000000"), is_ipv6 = TRUE),
     ip_address(c("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff", NA))
-  )
+  ))
 })

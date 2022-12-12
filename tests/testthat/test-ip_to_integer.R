@@ -25,12 +25,12 @@ test_that("integer encoding/decoding works", {
   expect_equal(integer_to_ip(ip_to_integer(x)), x)
 
   expect_equal(integer_to_ip(bignum::biginteger(-1)), ip_address(NA))
-  expect_equal(
-    expect_warning(integer_to_ip(bignum::biginteger(2)^32L + c(-1L, 0, NA), is_ipv6 = FALSE)),
+  expect_warning(expect_equal(
+    integer_to_ip(bignum::biginteger(2)^32L + c(-1L, 0, NA), is_ipv6 = FALSE),
     ip_address(c("255.255.255.255", NA, NA))
-  )
-  expect_equal(
-    expect_warning(integer_to_ip(bignum::biginteger(2)^128L + c(-1L, 0, NA), is_ipv6 = TRUE)),
+  ))
+  expect_warning(expect_equal(
+    integer_to_ip(bignum::biginteger(2)^128L + c(-1L, 0, NA), is_ipv6 = TRUE),
     ip_address(c("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff", NA, NA))
-  )
+  ))
 })
