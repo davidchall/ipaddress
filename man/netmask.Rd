@@ -40,7 +40,7 @@ hostmask(...)
 \method{hostmask}{default}(prefix_length, is_ipv6, ...)
 }
 \arguments{
-\item{...}{Arguments to be passed to other methods}
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{x}{An \code{\link{ip_network}} or \code{\link{ip_interface}} vector}
 

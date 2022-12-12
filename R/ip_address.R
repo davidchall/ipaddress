@@ -1,11 +1,6 @@
 #' Vector of IP addresses
 #'
-#' @description
-#' `ip_address()` constructs a vector of IP addresses.
-#'
-#' `is_ip_address()` checks if an object is of class `ip_address`.
-#'
-#' `as_ip_address()` casts an object to `ip_address`.
+#' Construct a vector of IP addresses.
 #'
 #' @details
 #' An address in IPv4 space uses 32-bits. It is usually represented
@@ -32,13 +27,8 @@
 #'
 #' `ip_address` vectors support a number of [operators][ip_operators].
 #'
-#' @param x
-#' * For `ip_address()`: A character vector of IP addresses, in dot-decimal
-#'   notation (IPv4) or hexadecimal notation (IPv6)
-#' * For `is_ip_address()`: An object to test
-#' * For `as_ip_address()`: An object to cast
-#' * For `as.character()`: An `ip_address` vector
-#' @param ... Included for S3 generic consistency
+#' @param x A character vector of IP addresses, in dot-decimal notation (IPv4)
+#'   or hexadecimal notation (IPv6)
 #' @return An S3 vector of class `ip_address`
 #'
 #' @examples
@@ -76,22 +66,47 @@ new_ip_address <- function(address1 = integer(), address2 = integer(), address3 
   ), class = "ip_address")
 }
 
-#' @rdname ip_address
+#' Test for IP vector
+#'
+#' Check if an object is an [`ip_address`], [`ip_network`] or [`ip_interface`]
+#' vector.
+#'
+#' @param x An object to test
+#' @return A logical scalar
+#' @name ip_test
+#'
+#' @examples
+#' is_ip_address(ip_address("192.168.0.1"))
 #' @export
 is_ip_address <- function(x) inherits(x, "ip_address")
 
 
 # Casting ------------------------------------------------------------
 
-#' @rdname ip_address
+#' Cast to IP vector
+#'
+#' Methods for converting character vectors and [`ip_interface`] vectors to
+#' [`ip_address`] and [`ip_network`] vectors.
+#'
+#' @param x An object to cast
+#' @return
+#' * `as_ip_address()`: An [`ip_address`] vector
+#' * `as_ip_network()`: An [`ip_network`] vector
+#' * `as_ip_interface()`: An [`ip_interface`] vector
+#'
+#' @examples
+#' as_ip_address(ip_interface("192.168.0.1/10"))
+#'
+#' as_ip_network(ip_interface("192.168.0.1/10"))
+#' @name ip_cast
 #' @export
 as_ip_address <- function(x) UseMethod("as_ip_address")
 
-#' @rdname ip_address
+#' @rdname ip_cast
 #' @export
 as_ip_address.character <- function(x) ip_address(x)
 
-#' @rdname ip_address
+#' @rdname ip_cast
 #' @export
 as_ip_address.ip_interface <- function(x) {
   new_ip_address(
@@ -103,13 +118,24 @@ as_ip_address.ip_interface <- function(x) {
   )
 }
 
-#' @rdname ip_address
 #' @export
 as.character.ip_address <- function(x, ...) wrap_print_address(x)
 
+#' Format IP vector
+#'
+#' Format as character vector, using either compressed or exploded representation.
+#'
+#' @param x An object to format
 #' @param exploded Logical scalar. Should IPv6 addresses display leading zeros?
 #'   (default: `FALSE`)
-#' @rdname ip_address
+#' @inheritParams rlang::args_dots_empty
+#' @return A character vector
+#'
+#' @examples
+#' format(ip_address("2001:db8::8a2e:370:7334"))
+#'
+#' format(ip_address("2001:db8::8a2e:370:7334"), exploded = TRUE)
+#' @name ip_format
 #' @export
 format.ip_address <- function(x, exploded = FALSE, ...) {
   wrap_print_address(x, exploded)

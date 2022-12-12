@@ -1,7 +1,7 @@
 #' List addresses within a network
 #'
 #' @param x An [`ip_network`] scalar
-#' @param ... Included for generic consistency
+#' @inheritParams rlang::args_dots_empty
 #' @return An [`ip_address`] vector
 #'
 #' @details
@@ -43,6 +43,7 @@ NULL
 #' @rdname sequence
 #' @export
 seq.ip_network <- function(x, ...) {
+  check_dots_empty()
   if (length(x) != 1) {
     abort("`x` must be an ip_network scalar")
   }

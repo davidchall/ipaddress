@@ -1,13 +1,9 @@
 #' Vector of IP interfaces
 #'
 #' @description
+#' Construct a vector of IP interfaces.
+#'
 #' This hybrid class stores both the host address and the network it is on.
-#'
-#' `ip_interface()` constructs a vector of IP interfaces.
-#'
-#' `is_ip_interface()` checks if an object is of class `ip_interface`.
-#'
-#' `as_ip_interface()` casts an object to `ip_interface`.
 #'
 #' @details
 #' Constructing an `ip_interface` vector is conceptually like constructing an
@@ -30,13 +26,8 @@
 #' When comparing and sorting `ip_interface` vectors, the network is compared
 #' before the host address.
 #'
-#' @param ... Included for S3 generic consistency
-#' @param x
-#' * For `ip_interface()`: A character vector of IP interfaces, in CIDR notation
-#'   (IPv4 or IPv6)
-#' * For `is_ip_interface()`: An object to test
-#' * For `as_ip_interface()`: An object to cast
-#' * For `as.character()`: An `ip_interface` vector
+#' @inheritParams rlang::args_dots_empty
+#' @param x A character vector of IP interfaces, in CIDR notation (IPv4 or IPv6)
 #' @param address An [`ip_address`] vector
 #' @param prefix_length An integer vector
 #' @return An S3 vector of class `ip_interface`
@@ -71,12 +62,14 @@ ip_interface <- function(...) {
 #' @rdname ip_interface
 #' @export
 ip_interface.default <- function(x = character(), ...) {
+  check_dots_empty()
   new_ip_interface_reclass(wrap_parse_network(x, FALSE, TRUE))
 }
 
 #' @rdname ip_interface
 #' @export
 ip_interface.ip_address <- function(address, prefix_length, ...) {
+  check_dots_empty()
   if (!is_integerish(prefix_length)) {
     abort("`prefix_length` must be an integer vector")
   }
@@ -115,27 +108,27 @@ new_ip_interface <- function(address1 = integer(), address2 = integer(), address
   ), class = c("ip_interface", "ip_address"))
 }
 
-#' @rdname ip_interface
+#' @examples
+#' is_ip_interface(ip_interface("192.168.0.1/10"))
+#' @rdname ip_test
 #' @export
 is_ip_interface <- function(x) inherits(x, "ip_interface")
 
 
 # Casting ------------------------------------------------------------
 
-#' @rdname ip_interface
+#' @rdname ip_cast
 #' @export
 as_ip_interface <- function(x) UseMethod("as_ip_interface")
 
-#' @rdname ip_interface
+#' @rdname ip_cast
 #' @export
 as_ip_interface.character <- function(x) ip_interface(x)
 
-#' @rdname ip_interface
 #' @export
 as.character.ip_interface <- function(x, ...) wrap_print_network(x)
 
-#' @inheritParams format.ip_address
-#' @rdname ip_interface
+#' @rdname ip_format
 #' @export
 format.ip_interface <- function(x, exploded = FALSE, ...) {
   wrap_print_network(x, exploded)

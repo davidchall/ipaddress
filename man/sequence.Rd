@@ -13,7 +13,7 @@ hosts(x)
 \arguments{
 \item{x}{An \code{\link{ip_network}} scalar}
 
-\item{...}{Included for generic consistency}
+\item{...}{These dots are for future extensions and must be empty.}
 }
 \value{
 An \code{\link{ip_address}} vector
