@@ -250,16 +250,16 @@ functions will treat an <code><a href="../reference/ip_interface.html">ip_interf
 <code><a href="../reference/ip_address.html">ip_address()</a></code> vector. Some exceptions are listed under
 <code><a href="../reference/ip_interface.html">help(ip_interface)</a></code>.</p>
 <p>The address and network components can be extracted using the
-<code><a href="../reference/ip_address.html">as_ip_address()</a></code> and <code><a href="../reference/ip_network.html">as_ip_network()</a></code> functions,
+<code><a href="../reference/ip_cast.html">as_ip_address()</a></code> and <code><a href="../reference/ip_cast.html">as_ip_network()</a></code> functions,
 respectively.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ip_interface.html">ip_interface</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"192.168.0.1/10"</span>, <span class="st">"2001:db8:c3::abcd/45"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/ip_address.html">as_ip_address</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/ip_cast.html">as_ip_address</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="co">#&gt; &lt;ip_address[2]&gt;</span></span>
 <span><span class="co">#&gt; [1] 192.168.0.1       2001:db8:c3::abcd</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/ip_network.html">as_ip_network</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/ip_cast.html">as_ip_network</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="co">#&gt; &lt;ip_network[2]&gt;</span></span>
 <span><span class="co">#&gt; [1] 192.128.0.0/10   2001:db8:c0::/45</span></span></code></pre></div>
 </div>
@@ -275,7 +275,7 @@ contained in this package use these classes.</p>
 hybrid class describing a specific host on a specific network. Although
 most functions treat this class like an <code><a href="../reference/ip_address.html">ip_address()</a></code>, the
 constituent address and network components can be extracted using
-<code><a href="../reference/ip_address.html">as_ip_address()</a></code> and <code><a href="../reference/ip_network.html">as_ip_network()</a></code>.</p>
+<code><a href="../reference/ip_cast.html">as_ip_address()</a></code> and <code><a href="../reference/ip_cast.html">as_ip_network()</a></code>.</p>
 <div class="figure">
 <img src="ipaddress_classes.png" alt=""><p class="caption">Summary of ipaddress classes</p>
 </div>

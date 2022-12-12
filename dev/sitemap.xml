@@ -55,6 +55,12 @@
     <loc>https://davidchall.github.io/ipaddress/dev/reference/ip_address.html</loc>
   </url>
   <url>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/ip_cast.html</loc>
+  </url>
+  <url>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/ip_format.html</loc>
+  </url>
+  <url>
     <loc>https://davidchall.github.io/ipaddress/dev/reference/ip_interface.html</loc>
   </url>
   <url>
@@ -62,6 +68,9 @@
   </url>
   <url>
     <loc>https://davidchall.github.io/ipaddress/dev/reference/ip_operators.html</loc>
+  </url>
+  <url>
+    <loc>https://davidchall.github.io/ipaddress/dev/reference/ip_test.html</loc>
   </url>
   <url>
     <loc>https://davidchall.github.io/ipaddress/dev/reference/ip_to_binary.html</loc>
