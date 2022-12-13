@@ -53,6 +53,7 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="ipaddress-development-version">ipaddress (development version)<a class="anchor" aria-label="anchor" href="#ipaddress-development-version"></a></h2>
+<p>To mark the release of ipaddress 1.0.0, some <strong>breaking changes</strong> were made to improve the interface for data analysis.</p>
 <ul><li>Removed the <code>multiple</code> argument from <code><a href="../reference/ip_to_hostname.html">ip_to_hostname()</a></code> and <code><a href="../reference/ip_to_hostname.html">hostname_to_ip()</a></code> (<a href="https://github.com/davidchall/ipaddress/issues/83" class="external-link">#83</a>).
 <ul><li>
 <code><a href="../reference/ip_to_hostname.html">ip_to_hostname()</a></code> and <code><a href="../reference/ip_to_hostname.html">hostname_to_ip()</a></code> now always return one result per input (stored in a vector).</li>
@@ -60,6 +61,11 @@
 </ul></li>
 <li>
 <code><a href="../reference/traverse_hierarchy.html">subnets()</a></code> now takes vector input and outputs a list of vectors (<a href="https://github.com/davidchall/ipaddress/issues/83" class="external-link">#83</a>).</li>
+<li>Some arguments must now be explicitly specified using the argument name:
+<ul><li>The <code>strict</code> argument of <code><a href="../reference/ip_network.html">ip_network()</a></code>.</li>
+<li>The <code>exploded</code> argument of <code><a href="../reference/ip_format.html">format.ip_address()</a></code>, <code><a href="../reference/ip_format.html">format.ip_network()</a></code> and <code><a href="../reference/ip_format.html">format.ip_interface()</a></code>.</li>
+<li>The <code>replace</code> argument of <code><a href="../reference/sample.html">sample_ipv4()</a></code>, <code><a href="../reference/sample.html">sample_ipv6()</a></code> and <code><a href="../reference/sample.html">sample_network()</a></code>.</li>
+</ul></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.6" id="ipaddress-056">ipaddress 0.5.6<a class="anchor" aria-label="anchor" href="#ipaddress-056"></a></h2><p class="text-muted">CRAN release: 2022-12-11</p>

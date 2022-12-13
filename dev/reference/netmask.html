@@ -76,57 +76,32 @@ For example, <code>prefix_length()</code> can infer the prefix length from an
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">prefix_length</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">prefix_length</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">netmask</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">hostmask</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S3 method for ip_network</span></span>
-<span><span class="fu">prefix_length</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S3 method for ip_network</span></span>
 <span><span class="fu">netmask</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># S3 method for ip_network</span></span>
+<span><span class="co"># S3 method for numeric</span></span>
+<span><span class="fu">netmask</span><span class="op">(</span><span class="va">x</span>, <span class="va">is_ipv6</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu">hostmask</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># S3 method for ip_interface</span></span>
-<span><span class="fu">prefix_length</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S3 method for ip_interface</span></span>
-<span><span class="fu">netmask</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S3 method for ip_interface</span></span>
-<span><span class="fu">hostmask</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S3 method for default</span></span>
-<span><span class="fu">prefix_length</span><span class="op">(</span><span class="va">mask</span>, <span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S3 method for default</span></span>
-<span><span class="fu">netmask</span><span class="op">(</span><span class="va">prefix_length</span>, <span class="va">is_ipv6</span>, <span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S3 method for default</span></span>
-<span><span class="fu">hostmask</span><span class="op">(</span><span class="va">prefix_length</span>, <span class="va">is_ipv6</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co"># S3 method for numeric</span></span>
+<span><span class="fu">hostmask</span><span class="op">(</span><span class="va">x</span>, <span class="va">is_ipv6</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>...</dt>
-<dd><p>These dots are for future extensions and must be empty.</p></dd>
+    <dl><dt>x</dt>
+<dd><ul><li><p>An <code><a href="ip_network.html">ip_network</a></code> vector.</p></li>
+<li><p>An <code><a href="ip_interface.html">ip_interface</a></code> vector.</p></li>
+<li><p><code>prefix_length()</code>: An <code><a href="ip_address.html">ip_address</a></code> vector of netmasks and/or hostmasks. Ambiguous cases
+(all zeros, all ones) are treated as netmasks.</p></li>
+<li><p><code>netmask()</code> and <code>hostmask()</code>: An integer vector of prefix lengths.</p></li>
+</ul></dd>
 
 
-<dt>x</dt>
-<dd><p>An <code><a href="ip_network.html">ip_network</a></code> or <code><a href="ip_interface.html">ip_interface</a></code> vector</p></dd>
-
-
-<dt>mask</dt>
-<dd><p>An <code><a href="ip_address.html">ip_address</a></code> vector of netmasks and/or hostmasks. Ambiguous
-cases (all zeros, all ones) are treated as netmasks.</p></dd>
-
-
-<dt>prefix_length</dt>
-<dd><p>An integer vector</p></dd>
+<dt>...</dt>
+<dd><p>Arguments passed to methods.</p></dd>
 
 
 <dt>is_ipv6</dt>
