@@ -12,11 +12,11 @@ prefix_length(x)
 
 netmask(x, ...)
 
-\method{netmask}{numeric}(x, is_ipv6, ...)
+\method{netmask}{numeric}(x, is_ipv6 = NULL, ...)
 
 hostmask(x, ...)
 
-\method{hostmask}{numeric}(x, is_ipv6, ...)
+\method{hostmask}{numeric}(x, is_ipv6 = NULL, ...)
 }
 \arguments{
 \item{x}{\itemize{
@@ -29,7 +29,9 @@ hostmask(x, ...)
 
 \item{...}{Arguments passed to methods.}
 
-\item{is_ipv6}{A logical vector}
+\item{is_ipv6}{A logical vector indicating whether to construct an IPv4 or
+IPv6 address. If \code{NULL} (the default), then IPv4 is preferred but an IPv6
+address is constructed when \code{x} is too large for the IPv4 address space.}
 }
 \value{
 \itemize{

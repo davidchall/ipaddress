@@ -2,14 +2,20 @@
 
 To mark the release of ipaddress 1.0.0, some **breaking changes** were made to improve the interface for data analysis.
 
+## Breaking changes
+
 * Removed the `multiple` argument from `ip_to_hostname()` and `hostname_to_ip()` (#83).
   * `ip_to_hostname()` and `hostname_to_ip()` now always return one result per input (stored in a vector).
   * New `ip_to_hostname_all()` and `hostname_to_ip_all()` return all results per input (stored in a list of vectors).
 * `subnets()` now takes vector input and outputs a list of vectors (#83).
-* Some arguments must now be explicitly specified using the argument name:
+* Some arguments must now be explicitly passed using the argument name:
   * The `strict` argument of `ip_network()`.
   * The `exploded` argument of `format.ip_address()`, `format.ip_network()` and `format.ip_interface()`.
   * The `replace` argument of `sample_ipv4()`, `sample_ipv6()` and `sample_network()`.
+  
+## New features
+
+* The `is_ipv6` argument of `netmask()` and `hostmask()` defaults to `NULL`. This option prefers an IPv4 mask, but creates an IPv6 mask as a fallback.
 
 
 # ipaddress 0.5.6

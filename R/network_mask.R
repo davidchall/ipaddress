@@ -16,8 +16,11 @@
 #'  * `prefix_length()`: An [`ip_address`] vector of netmasks and/or hostmasks. Ambiguous cases
 #'  (all zeros, all ones) are treated as netmasks.
 #'  * `netmask()` and `hostmask()`: An integer vector of prefix lengths.
-#' @param is_ipv6 A logical vector
+#' @param is_ipv6 A logical vector indicating whether to construct an IPv4 or
+#'   IPv6 address. If `NULL` (the default), then IPv4 is preferred but an IPv6
+#'   address is constructed when `x` is too large for the IPv4 address space.
 #' @inheritParams rlang::args_dots_used
+#'
 #' @return
 #' * `prefix_length()`: An integer vector
 #' * `netmask()`: An [`ip_address`] vector
@@ -108,7 +111,7 @@ netmask.ip_interface <- function(x, ...) {
 
 #' @rdname netmask
 #' @export
-netmask.numeric <- function(x, is_ipv6, ...) {
+netmask.numeric <- function(x, is_ipv6 = NULL, ...) {
   subnet_mask(x, is_ipv6, wrap_netmask)
 }
 
@@ -145,7 +148,7 @@ hostmask.ip_interface <- function(x, ...) {
 
 #' @rdname netmask
 #' @export
-hostmask.numeric <- function(x, is_ipv6, ...) {
+hostmask.numeric <- function(x, is_ipv6 = NULL, ...) {
   subnet_mask(x, is_ipv6, wrap_hostmask)
 }
 
@@ -162,14 +165,17 @@ subnet_mask <- function(prefix_length, is_ipv6, mask_func) {
     force(is_ipv6)
     abort("`prefix_length` must be an integer vector")
   }
-  if (!is_logical(is_ipv6)) {
-    abort("`is_ipv6` must be a logical vector")
+  if (!(is_null(is_ipv6) || is_logical(is_ipv6))) {
+    abort("`is_ipv6` must be a logical vector or NULL")
   }
 
-  # vector recycling
-  args <- vec_recycle_common(prefix_length, is_ipv6)
-  prefix_length <- args[[1L]]
-  is_ipv6 <- args[[2L]]
+  if (is_null(is_ipv6)) {
+    is_ipv6 <- prefix_length > 32L
+  } else {
+    args <- vec_recycle_common(prefix_length, is_ipv6)
+    prefix_length <- args[[1L]]
+    is_ipv6 <- args[[2L]]
+  }
 
   if (any(prefix_length < 0L, na.rm = TRUE)) {
     abort("`prefix_length` cannot be negative")
