@@ -18,7 +18,7 @@ sample_network(x, size, ..., replace = FALSE)
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{replace}{Should sampling be with replacement?}
+\item{replace}{Should sampling be with replacement? (default: \code{FALSE})}
 
 \item{x}{An \code{\link{ip_network}} scalar}
 }

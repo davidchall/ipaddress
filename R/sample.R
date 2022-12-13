@@ -5,7 +5,7 @@
 #'
 #' @param x An [`ip_network`] scalar
 #' @param size Integer specifying the number of addresses to return
-#' @param replace Should sampling be with replacement?
+#' @param replace Should sampling be with replacement? (default: `FALSE`)
 #' @inheritParams rlang::args_dots_empty
 #' @return An [`ip_address`] vector
 #'
