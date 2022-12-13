@@ -81,12 +81,12 @@ For example, <code>prefix_length()</code> can infer the prefix length from an
 <span><span class="fu">netmask</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for numeric</span></span>
-<span><span class="fu">netmask</span><span class="op">(</span><span class="va">x</span>, <span class="va">is_ipv6</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">netmask</span><span class="op">(</span><span class="va">x</span>, is_ipv6 <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">hostmask</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for numeric</span></span>
-<span><span class="fu">hostmask</span><span class="op">(</span><span class="va">x</span>, <span class="va">is_ipv6</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">hostmask</span><span class="op">(</span><span class="va">x</span>, is_ipv6 <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -105,7 +105,9 @@ For example, <code>prefix_length()</code> can infer the prefix length from an
 
 
 <dt>is_ipv6</dt>
-<dd><p>A logical vector</p></dd>
+<dd><p>A logical vector indicating whether to construct an IPv4 or
+IPv6 address. If <code>NULL</code> (the default), then IPv4 is preferred but an IPv6
+address is constructed when <code>x</code> is too large for the IPv4 address space.</p></dd>
 
 </dl></div>
     <div class="section level2">
