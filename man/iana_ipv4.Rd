@@ -5,7 +5,7 @@
 \alias{iana_ipv4}
 \title{IPv4 address space allocation}
 \format{
-A data frame with 122 rows and 3 variables:
+A data frame with 121 rows and 3 variables:
 \describe{
 \item{network}{Address block (an \code{\link{ip_network}} vector)}
 \item{allocation}{There are three types of allocation:
@@ -28,7 +28,7 @@ iana_ipv4
 A dataset containing the registry of allocated blocks in IPv4 address space.
 }
 \note{
-Last updated 2020-08-18
+Last updated 2022-12-12
 }
 \examples{
 iana_ipv4

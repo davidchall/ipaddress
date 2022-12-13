@@ -2,7 +2,7 @@
 #'
 #' A dataset containing the registry of allocated blocks in IPv4 address space.
 #'
-#' @format A data frame with 122 rows and 3 variables:
+#' @format A data frame with 121 rows and 3 variables:
 #' \describe{
 #'   \item{network}{Address block (an [`ip_network`] vector)}
 #'   \item{allocation}{There are three types of allocation:
@@ -15,7 +15,7 @@
 #'   \item{label}{The RIR, organization or purpose for reservation}
 #' }
 #' @source \url{https://www.iana.org/assignments/ipv4-address-space}
-#' @note Last updated 2020-08-18
+#' @note Last updated 2022-12-12
 #' @examples
 #' iana_ipv4
 #' @seealso [is_reserved()]
