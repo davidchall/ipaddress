@@ -7,25 +7,25 @@
 \alias{format.ip_network}
 \title{Format IP vector}
 \usage{
-\method{format}{ip_address}(x, exploded = FALSE, ...)
+\method{format}{ip_address}(x, ..., exploded = FALSE)
 
-\method{format}{ip_interface}(x, exploded = FALSE, ...)
+\method{format}{ip_interface}(x, ..., exploded = FALSE)
 
-\method{format}{ip_network}(x, exploded = FALSE, ...)
+\method{format}{ip_network}(x, ..., exploded = FALSE)
 }
 \arguments{
 \item{x}{An object to format}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{exploded}{Logical scalar. Should IPv6 addresses display leading zeros?
 (default: \code{FALSE})}
-
-\item{...}{These dots are for future extensions and must be empty.}
 }
 \value{
 A character vector
 }
 \description{
-Format as character vector, using either compressed or exploded representation.
+Format vector of IP data using compressed or exploded representation.
 }
 \examples{
 format(ip_address("2001:db8::8a2e:370:7334"))

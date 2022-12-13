@@ -7,14 +7,16 @@
 \alias{sample_network}
 \title{Sample random addresses}
 \usage{
-sample_ipv4(size, replace = FALSE)
+sample_ipv4(size, ..., replace = FALSE)
 
-sample_ipv6(size, replace = FALSE)
+sample_ipv6(size, ..., replace = FALSE)
 
-sample_network(x, size, replace = FALSE)
+sample_network(x, size, ..., replace = FALSE)
 }
 \arguments{
 \item{size}{Integer specifying the number of addresses to return}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{replace}{Should sampling be with replacement?}
 

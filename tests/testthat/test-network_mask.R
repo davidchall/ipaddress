@@ -72,11 +72,19 @@ test_that("vector recycling works", {
 test_that("input validation works", {
   expect_error(
     prefix_length(1L),
-    "prefix_length() accepts an ip_address, ip_network or ip_interface vector",
+    "prefix_length() accepts an ip_network, ip_interface or ip_address vector",
     fixed = TRUE
   )
-  expect_error(netmask(ip_address("1.2.3.4")), "`prefix_length` must be an integer vector")
-  expect_error(hostmask(ip_address("1.2.3.4")), "`prefix_length` must be an integer vector")
+  expect_error(
+    netmask(ip_address("1.2.3.4")),
+    "netmask() accepts an ip_network, ip_interface or integer vector",
+    fixed = TRUE
+  )
+  expect_error(
+    hostmask(ip_address("1.2.3.4")),
+    "hostmask() accepts an ip_network, ip_interface or integer vector",
+    fixed = TRUE
+  )
 
   expect_error(netmask(1.5, FALSE), "`prefix_length` must be an integer vector")
   expect_error(hostmask(1.5, FALSE), "`prefix_length` must be an integer vector")

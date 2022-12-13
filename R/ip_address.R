@@ -102,11 +102,9 @@ is_ip_address <- function(x) inherits(x, "ip_address")
 #' @export
 as_ip_address <- function(x) UseMethod("as_ip_address")
 
-#' @rdname ip_cast
 #' @export
 as_ip_address.character <- function(x) ip_address(x)
 
-#' @rdname ip_cast
 #' @export
 as_ip_address.ip_interface <- function(x) {
   new_ip_address(
@@ -123,7 +121,7 @@ as.character.ip_address <- function(x, ...) wrap_print_address(x)
 
 #' Format IP vector
 #'
-#' Format as character vector, using either compressed or exploded representation.
+#' Format vector of IP data using compressed or exploded representation.
 #'
 #' @param x An object to format
 #' @param exploded Logical scalar. Should IPv6 addresses display leading zeros?
@@ -137,7 +135,7 @@ as.character.ip_address <- function(x, ...) wrap_print_address(x)
 #' format(ip_address("2001:db8::8a2e:370:7334"), exploded = TRUE)
 #' @name ip_format
 #' @export
-format.ip_address <- function(x, exploded = FALSE, ...) {
+format.ip_address <- function(x, ..., exploded = FALSE) {
   wrap_print_address(x, exploded)
 }
 

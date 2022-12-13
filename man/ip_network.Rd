@@ -8,12 +8,12 @@
 \usage{
 ip_network(...)
 
-\method{ip_network}{default}(x = character(), strict = TRUE, ...)
+\method{ip_network}{default}(x = character(), ..., strict = TRUE)
 
-\method{ip_network}{ip_address}(address, prefix_length, strict = TRUE, ...)
+\method{ip_network}{ip_address}(address, prefix_length, ..., strict = TRUE)
 }
 \arguments{
-\item{...}{These dots are for future extensions and must be empty.}
+\item{...}{Arguments passed to methods.}
 
 \item{x}{A character vector of IP networks, in CIDR notation (IPv4 or IPv6)}
 

@@ -3,30 +3,15 @@
 \name{ip_cast}
 \alias{ip_cast}
 \alias{as_ip_address}
-\alias{as_ip_address.character}
-\alias{as_ip_address.ip_interface}
 \alias{as_ip_interface}
-\alias{as_ip_interface.character}
 \alias{as_ip_network}
-\alias{as_ip_network.character}
-\alias{as_ip_network.ip_interface}
 \title{Cast to IP vector}
 \usage{
 as_ip_address(x)
 
-\method{as_ip_address}{character}(x)
-
-\method{as_ip_address}{ip_interface}(x)
-
 as_ip_interface(x)
 
-\method{as_ip_interface}{character}(x)
-
 as_ip_network(x)
-
-\method{as_ip_network}{character}(x)
-
-\method{as_ip_network}{ip_interface}(x)
 }
 \arguments{
 \item{x}{An object to cast}

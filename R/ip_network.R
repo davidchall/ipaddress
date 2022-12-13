@@ -30,7 +30,7 @@
 #' When comparing and sorting `ip_network` vectors, the network address is
 #' compared before the prefix length.
 #'
-#' @inheritParams rlang::args_dots_empty
+#' @inheritParams rlang::args_dots_used
 #' @param x A character vector of IP networks, in CIDR notation (IPv4 or IPv6)
 #' @param address An [`ip_address`] vector
 #' @param prefix_length An integer vector
@@ -74,13 +74,13 @@ NULL
 #' @rdname ip_network
 #' @export
 ip_network <- function(...) {
+  check_dots_used()
   UseMethod("ip_network")
 }
 
 #' @rdname ip_network
 #' @export
-ip_network.default <- function(x = character(), strict = TRUE, ...) {
-  check_dots_empty()
+ip_network.default <- function(x = character(), ..., strict = TRUE) {
   if (!is_bool(strict)) {
     abort("`strict` be must TRUE or FALSE")
   }
@@ -90,8 +90,7 @@ ip_network.default <- function(x = character(), strict = TRUE, ...) {
 
 #' @rdname ip_network
 #' @export
-ip_network.ip_address <- function(address, prefix_length, strict = TRUE, ...) {
-  check_dots_empty()
+ip_network.ip_address <- function(address, prefix_length, ..., strict = TRUE) {
   if (!is_integerish(prefix_length)) {
     abort("`prefix_length` must be an integer vector")
   }
@@ -137,11 +136,9 @@ is_ip_network <- function(x) inherits(x, "ip_network")
 #' @export
 as_ip_network <- function(x) UseMethod("as_ip_network")
 
-#' @rdname ip_cast
 #' @export
 as_ip_network.character <- function(x) ip_network(x)
 
-#' @rdname ip_cast
 #' @export
 as_ip_network.ip_interface <- function(x) {
   ip_network(x, field(x, "prefix"), strict = FALSE)
@@ -152,7 +149,7 @@ as.character.ip_network <- function(x, ...) wrap_print_network(x)
 
 #' @rdname ip_format
 #' @export
-format.ip_network <- function(x, exploded = FALSE, ...) {
+format.ip_network <- function(x, ..., exploded = FALSE) {
   wrap_print_network(x, exploded)
 }
 

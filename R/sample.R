@@ -6,6 +6,7 @@
 #' @param x An [`ip_network`] scalar
 #' @param size Integer specifying the number of addresses to return
 #' @param replace Should sampling be with replacement?
+#' @inheritParams rlang::args_dots_empty
 #' @return An [`ip_address`] vector
 #'
 #' @seealso
@@ -24,19 +25,22 @@ NULL
 
 #' @rdname sample
 #' @export
-sample_ipv4 <- function(size, replace = FALSE) {
-  sample_network(ip_network("0.0.0.0/0"), size, replace)
+sample_ipv4 <- function(size, ..., replace = FALSE) {
+  check_dots_empty()
+  sample_network(ip_network("0.0.0.0/0"), size, replace = replace)
 }
 
 #' @rdname sample
 #' @export
-sample_ipv6 <- function(size, replace = FALSE) {
-  sample_network(ip_network("::/0"), size, replace)
+sample_ipv6 <- function(size, ..., replace = FALSE) {
+  check_dots_empty()
+  sample_network(ip_network("::/0"), size, replace = replace)
 }
 
 #' @rdname sample
 #' @export
-sample_network <- function(x, size, replace = FALSE) {
+sample_network <- function(x, size, ..., replace = FALSE) {
+  check_dots_empty()
   if (!(is_ip_network(x) && length(x) == 1) || is.na(x)) {
     abort("`x` must be an ip_network scalar")
   }

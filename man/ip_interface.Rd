@@ -13,7 +13,7 @@ ip_interface(...)
 \method{ip_interface}{ip_address}(address, prefix_length, ...)
 }
 \arguments{
-\item{...}{These dots are for future extensions and must be empty.}
+\item{...}{Arguments passed to methods.}
 
 \item{x}{A character vector of IP interfaces, in CIDR notation (IPv4 or IPv6)}
 

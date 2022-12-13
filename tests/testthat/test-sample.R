@@ -8,8 +8,8 @@ test_that("input validation works", {
   expect_error(sample_network(ip_network("0.0.0.0/32"), -1), "`size` must be a positive integer scalar")
   expect_error(sample_network(ip_network("0.0.0.0/32"), 2^31, replace = TRUE), "`size` must be less than 2^31", fixed = TRUE)
   expect_error(sample_network(ip_network("0.0.0.0/32"), NA), "`size` must be a positive integer scalar")
-  expect_error(sample_network(ip_network("0.0.0.0/32"), 1, NA), "`replace` must be TRUE or FALSE")
-  expect_error(sample_network(ip_network("0.0.0.0/32"), 1, 1), "`replace` must be TRUE or FALSE")
+  expect_error(sample_network(ip_network("0.0.0.0/32"), 1, replace = NA), "`replace` must be TRUE or FALSE")
+  expect_error(sample_network(ip_network("0.0.0.0/32"), 1, replace = 1), "`replace` must be TRUE or FALSE")
   expect_error(sample_network(ip_network(NA), 1), "`x` must be an ip_network scalar")
 
   expect_error(
