@@ -46,6 +46,8 @@ NULL
 #' @rdname is_reserved
 #' @export
 is_private <- function(x) {
+  check_ip(x)
+
   private <- ip_network(c(
     "0.0.0.0/8", "10.0.0.0/8", "127.0.0.0/8", "169.254.0.0/16", "172.16.0.0/12",
     "192.0.0.0/29", "192.0.0.170/31", "192.0.2.0/24", "192.168.0.0/16",
@@ -56,54 +58,48 @@ is_private <- function(x) {
 
   if (is_ip_address(x)) {
     is_within_any(x, private)
-  } else if (is_ip_network(x)) {
+  } else {
     first <- network_address(x)
     last <- broadcast_address(x)
     is_within_any(first, private) & is_within_any(last, private)
-  } else {
-    abort("`x` must be an ip_address or ip_network vector")
   }
 }
 
 #' @rdname is_reserved
 #' @export
 is_global <- function(x) {
+  check_ip(x)
+
   shared <- ip_network("100.64.0.0/10")
 
   if (is_ip_address(x)) {
     !is_within_any(x, shared) & !is_private(x)
-  } else if (is_ip_network(x)) {
+  } else {
     first <- network_address(x)
     last <- broadcast_address(x)
     !is_within_any(first, shared) & !is_within_any(last, shared) & !is_private(first) & !is_private(last)
-  } else {
-    abort("`x` must be an ip_address or ip_network vector")
   }
 }
 
 #' @rdname is_reserved
 #' @export
 is_multicast <- function(x) {
-  if (!(is_ip_address(x) || is_ip_network(x))) {
-    abort("`x` must be an ip_address or ip_network vector")
-  }
-
+  check_ip(x)
   wrap_is_multicast(x)
 }
 
 #' @rdname is_reserved
 #' @export
 is_unspecified <- function(x) {
-  if (!(is_ip_address(x) || is_ip_network(x))) {
-    abort("`x` must be an ip_address or ip_network vector")
-  }
-
+  check_ip(x)
   wrap_is_unspecified(x)
 }
 
 #' @rdname is_reserved
 #' @export
 is_reserved <- function(x) {
+  check_ip(x)
+
   reserved <- ip_network(c(
     "240.0.0.0/4", "::/3", "4000::/2", "8000::/2", "c000::/3", "e000::/4",
     "f000::/5", "f800::/6", "fe00::/9"
@@ -111,41 +107,30 @@ is_reserved <- function(x) {
 
   if (is_ip_address(x)) {
     is_within_any(x, reserved)
-  } else if (is_ip_network(x)) {
+  } else {
     first <- network_address(x)
     last <- broadcast_address(x)
     is_within_any(first, reserved) & is_within_any(last, reserved)
-  } else {
-    abort("`x` must be an ip_address or ip_network vector")
   }
 }
 
 #' @rdname is_reserved
 #' @export
 is_loopback <- function(x) {
-  if (!(is_ip_address(x) || is_ip_network(x))) {
-    abort("`x` must be an ip_address or ip_network vector")
-  }
-
+  check_ip(x)
   wrap_is_loopback(x)
 }
 
 #' @rdname is_reserved
 #' @export
 is_link_local <- function(x) {
-  if (!(is_ip_address(x) || is_ip_network(x))) {
-    abort("`x` must be an ip_address or ip_network vector")
-  }
-
+  check_ip(x)
   wrap_is_link_local(x)
 }
 
 #' @rdname is_reserved
 #' @export
 is_site_local <- function(x) {
-  if (!(is_ip_address(x) || is_ip_network(x))) {
-    abort("`x` must be an ip_address or ip_network vector")
-  }
-
+  check_ip(x)
   wrap_is_site_local(x)
 }

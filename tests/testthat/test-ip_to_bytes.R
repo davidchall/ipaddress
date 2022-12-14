@@ -6,16 +6,20 @@ bytes <- list(
 )
 
 test_that("encoding works", {
-  expect_error(ip_to_bytes("hello"), "`x` must be an ip_address vector")
+  expect_snapshot(error = TRUE, {
+    ip_to_bytes("hello")
+  })
 
   expect_type(ip_to_bytes(address), "list")
   expect_equal(ip_to_bytes(address), bytes)
 })
 
 test_that("decoding works", {
-  expect_error(bytes_to_ip("hello"), "`x` must be a list of raw vectors")
-  expect_error(bytes_to_ip(address), "`x` must be a list of raw vectors")
-  expect_error(bytes_to_ip(c(bytes, "a")), "`x` must be a list of raw vectors")
+  expect_snapshot(error = TRUE, {
+    bytes_to_ip("hello")
+    bytes_to_ip(address)
+    bytes_to_ip(c(bytes, "a"))
+  })
 
   expect_warning(bytes_to_ip(list(as.raw(10))), "unable to decode")
 

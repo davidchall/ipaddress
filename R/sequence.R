@@ -44,9 +44,7 @@ NULL
 #' @export
 seq.ip_network <- function(x, ...) {
   check_dots_empty()
-  if (length(x) != 1) {
-    abort("`x` must be an ip_network scalar")
-  }
+  check_scalar(x)
   if (any(max_prefix_length(x) - prefix_length(x) > 30L, na.rm = TRUE)) {
     abort("Network too large")
   }
@@ -60,9 +58,8 @@ seq.ip_network <- function(x, ...) {
 #' @rdname sequence
 #' @export
 hosts <- function(x) {
-  if (!(is_ip_network(x) && length(x) == 1)) {
-    abort("`x` must be an ip_network scalar")
-  }
+  check_network(x)
+  check_scalar(x)
   if (any(max_prefix_length(x) - prefix_length(x) > 30L, na.rm = TRUE)) {
     abort("Network too large")
   }

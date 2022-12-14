@@ -130,28 +130,16 @@ test_that("missing values work", {
 })
 
 test_that("input validation", {
-  expect_error(
-    summarize_address_range(ip_address(), ip_network()),
-    "`address2` must be an ip_address vector"
-  )
-  expect_error(
-    summarize_address_range(ip_network(), ip_address()),
-    "`address1` must be an ip_address vector"
-  )
-  expect_error(
-    summarize_address_range(ip_address(rep("1.2.3.4", 3)), ip_address(rep("1.2.3.4", 2))),
-    class = "vctrs_error_incompatible_size"
-  )
-  expect_error(
-    collapse_networks(ip_address("192.168.0.1")),
-    "`network` must be an ip_network vector"
-  )
-  expect_error(
-    exclude_networks(ip_address("192.168.0.1"), ip_network("192.168.0.0/24")),
-    "`include` must be an ip_network vector"
-  )
-  expect_error(
-    exclude_networks(ip_network("192.168.0.0/24"), ip_address("192.168.0.1")),
-    "`exclude` must be an ip_network vector"
-  )
+  expect_snapshot(error = TRUE, {
+    summarize_address_range(ip_network(), ip_address())
+    summarize_address_range(ip_address(), ip_network())
+    summarize_address_range(ip_address(rep("1.2.3.4", 3)), ip_address(rep("1.2.3.4", 2)))
+  })
+  expect_snapshot(error = TRUE, {
+    collapse_networks(ip_address("192.168.0.1"))
+  })
+  expect_snapshot(error = TRUE, {
+    exclude_networks(ip_address("192.168.0.1"), ip_network("192.168.0.0/24"))
+    exclude_networks(ip_network("192.168.0.0/24"), ip_address("192.168.0.1"))
+  })
 })

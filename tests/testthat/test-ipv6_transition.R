@@ -15,10 +15,14 @@ test_that("IPv4-mapped IPv6 addresses work", {
   expect_equal(is_ipv4_mapped(ip_network(NA)), NA)
   expect_equal(extract_ipv4_mapped(ip_address(NA)), ip_address(NA))
 
-  expect_error(is_ipv4_mapped("hello"), "`x` must be an ip_address or ip_network vector")
-  expect_error(extract_ipv4_mapped("hello"), "`x` must be an ip_address vector")
-  expect_error(extract_ipv4_mapped(ip_network()), "`x` must be an ip_address vector")
-  expect_error(extract_ipv4_mapped(NA), "`x` must be an ip_address vector")
+  expect_snapshot(error = TRUE, {
+    is_ipv4_mapped("hello")
+  })
+  expect_snapshot(error = TRUE, {
+    extract_ipv4_mapped("hello")
+    extract_ipv4_mapped(ip_network())
+    extract_ipv4_mapped(NA)
+  })
 })
 
 test_that("6to4 IPv6 addresses work", {
@@ -38,10 +42,14 @@ test_that("6to4 IPv6 addresses work", {
   expect_equal(is_6to4(ip_network(NA)), NA)
   expect_equal(extract_6to4(ip_address(NA)), ip_address(NA))
 
-  expect_error(is_6to4("hello"), "`x` must be an ip_address or ip_network vector")
-  expect_error(extract_6to4("hello"), "`x` must be an ip_address vector")
-  expect_error(extract_6to4(ip_network()), "`x` must be an ip_address vector")
-  expect_error(extract_6to4(NA), "`x` must be an ip_address vector")
+  expect_snapshot(error = TRUE, {
+    is_6to4("hello")
+  })
+  expect_snapshot(error = TRUE, {
+    extract_6to4("hello")
+    extract_6to4(ip_network())
+    extract_6to4(NA)
+  })
 })
 
 test_that("Teredo IPv6 addresses work", {
@@ -67,11 +75,17 @@ test_that("Teredo IPv6 addresses work", {
   expect_equal(extract_teredo_server(ip_address(NA)), ip_address(NA))
   expect_equal(extract_teredo_client(ip_address(NA)), ip_address(NA))
 
-  expect_error(is_teredo("hello"), "`x` must be an ip_address or ip_network vector")
-  expect_error(extract_teredo_server("hello"), "`x` must be an ip_address vector")
-  expect_error(extract_teredo_server(ip_network()), "`x` must be an ip_address vector")
-  expect_error(extract_teredo_server(NA), "`x` must be an ip_address vector")
-  expect_error(extract_teredo_client("hello"), "`x` must be an ip_address vector")
-  expect_error(extract_teredo_client(ip_network()), "`x` must be an ip_address vector")
-  expect_error(extract_teredo_client(NA), "`x` must be an ip_address vector")
+  expect_snapshot(error = TRUE, {
+    is_teredo("hello")
+  })
+  expect_snapshot(error = TRUE, {
+    extract_teredo_server("hello")
+    extract_teredo_server(ip_network())
+    extract_teredo_server(NA)
+  })
+  expect_snapshot(error = TRUE, {
+    extract_teredo_client("hello")
+    extract_teredo_client(ip_network())
+    extract_teredo_client(NA)
+  })
 })

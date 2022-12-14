@@ -47,9 +47,7 @@ ip_to_hostname <- function(x) {
 #' @rdname ip_to_hostname
 #' @export
 ip_to_hostname_all <- function(x) {
-  if (!is_ip_address(x)) {
-    abort("`x` must be an ip_address vector")
-  }
+  check_address(x)
   if (is_offline()) {
     abort("DNS resolution requires an internet connection")
   }
@@ -66,9 +64,7 @@ hostname_to_ip <- function(x) {
 #' @rdname ip_to_hostname
 #' @export
 hostname_to_ip_all <- function(x) {
-  if (!is_character(x)) {
-    abort("`x` must be a character vector")
-  }
+  check_character(x)
   if (is_offline()) {
     abort("DNS resolution requires an internet connection")
   }

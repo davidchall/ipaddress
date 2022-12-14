@@ -54,16 +54,22 @@ test_that("invalid inputs are caught", {
   expect_warning(ip_network("1.2.3.4/a"))
   expect_warning(ip_network("1.2.3.4/24/24"))
 
-  expect_error(ip_network(ip_address("1.2.3.4"), 24.5), "`prefix_length` must be an integer vector")
+  expect_snapshot(error = TRUE, {
+    ip_network(ip_address("1.2.3.4"), 24.5)
+  })
   expect_warning(ip_network(ip_address("1.2.3.4"), -1L))
   expect_warning(ip_network(ip_address("1.2.3.4"), 33L))
 })
 
 test_that("strict argument works", {
-  expect_error(ip_network("1.2.3.4/32", strict = "yes"), "`strict` be must TRUE or FALSE")
-  expect_error(ip_network("1.2.3.4/32", strict = NA), "`strict` be must TRUE or FALSE")
-  expect_error(ip_network(ip_address("1.2.3.4"), prefix_length = 32L, strict = "yes"), "`strict` be must TRUE or FALSE")
-  expect_error(ip_network(ip_address("1.2.3.4"), prefix_length = 32L, strict = NA), "`strict` be must TRUE or FALSE")
+  expect_snapshot(error = TRUE, {
+    ip_network("1.2.3.4/32", strict = "yes")
+    ip_network("1.2.3.4/32", strict = NA)
+  })
+  expect_snapshot(error = TRUE, {
+    ip_network(ip_address("1.2.3.4"), prefix_length = 32L, strict = "yes")
+    ip_network(ip_address("1.2.3.4"), prefix_length = 32L, strict = NA)
+  })
 
   expect_warning(ip_network("255.255.255.255/21"), "host bits set")
   expect_equal(ip_network("255.255.255.255/21", strict = FALSE), ip_network("255.255.248.0/21"))

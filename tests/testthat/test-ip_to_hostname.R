@@ -1,9 +1,12 @@
 test_that("hostname encoding/decoding works", {
-  expect_error(ip_to_hostname(ip_network("192.168.0.0/24")), "`x` must be an ip_address vector")
-  expect_error(ip_to_hostname("127.0.0.1"), "`x` must be an ip_address vector")
-
-  expect_error(hostname_to_ip(123), "`x` must be a character vector")
-  expect_error(hostname_to_ip(ip_address("127.0.0.1")), "`x` must be a character vector")
+  expect_snapshot(error = TRUE, {
+    ip_to_hostname(ip_network("192.168.0.0/24"))
+    ip_to_hostname("127.0.0.1")
+  })
+  expect_snapshot(error = TRUE, {
+    hostname_to_ip(123)
+    hostname_to_ip(ip_address("127.0.0.1"))
+  })
 
   skip_if_offline()
 

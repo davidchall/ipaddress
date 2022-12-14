@@ -20,12 +20,8 @@
 #' @seealso [common_network()]
 #' @export
 summarize_address_range <- function(address1, address2) {
-  if (!is_ip_address(address1)) {
-    abort("`address1` must be an ip_address vector")
-  }
-  if (!is_ip_address(address2)) {
-    abort("`address2` must be an ip_address vector")
-  }
+  check_address(address1)
+  check_address(address2)
 
   # vector recycling
   args <- vec_recycle_common(address1, address2)
@@ -52,10 +48,7 @@ summarize_address_range <- function(address1, address2) {
 #' @seealso [exclude_networks()]
 #' @export
 collapse_networks <- function(network) {
-  if (!is_ip_network(network)) {
-    abort("`network` must be an ip_network vector")
-  }
-
+  check_network(network)
   wrap_collapse_networks(network)
 }
 
@@ -78,12 +71,7 @@ collapse_networks <- function(network) {
 #' @seealso [collapse_networks()], [setdiff()]
 #' @export
 exclude_networks <- function(include, exclude) {
-  if (!is_ip_network(include)) {
-    abort("`include` must be an ip_network vector")
-  }
-  if (!is_ip_network(exclude)) {
-    abort("`exclude` must be an ip_network vector")
-  }
-
+  check_network(include)
+  check_network(exclude)
   wrap_exclude_networks(include, exclude)
 }

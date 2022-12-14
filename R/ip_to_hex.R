@@ -21,25 +21,21 @@
 #' @family address representations
 #' @export
 ip_to_hex <- function(x) {
-  if (!is_ip_address(x)) {
-    abort("`x` must be an ip_address vector")
-  }
-
+  check_address(x)
   wrap_encode_hex(x)
 }
 
 #' @rdname ip_to_hex
 #' @export
 hex_to_ip <- function(x, is_ipv6 = NULL) {
-  if (!is_character(x)) {
-    abort("`x` must be a character vector")
-  }
-  if (!(is_null(is_ipv6) || is_logical(is_ipv6))) {
-    abort("`is_ipv6` must be a logical vector or NULL")
-  }
+  check_character(x)
+  check_all(
+    grepl("^0[xX][0-9a-fA-F]+$", x %|% "0xff", perl = TRUE),
+    "x", "must be a hexadecimal string"
+  )
 
-  if (!all(grepl("^0[xX][0-9a-fA-F]+$", x[!is.na(x)], perl = TRUE))) {
-    abort("Found invalid hexadecimal string")
+  if (!(is_null(is_ipv6) || is_logical(is_ipv6))) {
+    cli::cli_abort("{.arg is_ipv6} must be a logical vector or NULL")
   }
 
   if (is_null(is_ipv6)) {

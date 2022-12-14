@@ -24,12 +24,8 @@ NULL
 #' @rdname address_in_network
 #' @export
 is_within <- function(address, network) {
-  if (!is_ip_address(address)) {
-    abort("`address` must be an ip_address vector")
-  }
-  if (!is_ip_network(network)) {
-    abort("`network` must be an ip_network vector")
-  }
+  check_address(address)
+  check_network(network)
 
   # vector recycling
   args <- vec_recycle_common(address, network)
@@ -45,13 +41,8 @@ is_within <- function(address, network) {
 #' @rdname address_in_network
 #' @export
 is_within_any <- function(address, network) {
-  if (!is_ip_address(address)) {
-    abort("`address` must be an ip_address vector")
-  }
-  if (!is_ip_network(network)) {
-    abort("`network` must be an ip_network vector")
-  }
-
+  check_address(address)
+  check_network(network)
   wrap_is_within_any(address, network)
 }
 
@@ -85,12 +76,8 @@ NULL
 #' @rdname network_in_network
 #' @export
 is_supernet <- function(network, other) {
-  if (!is_ip_network(network)) {
-    abort("`network` must be an ip_network vector")
-  }
-  if (!is_ip_network(other)) {
-    abort("`other` must be an ip_network vector")
-  }
+  check_network(network)
+  check_network(other)
 
   # vector recycling
   args <- vec_recycle_common(network, other)
@@ -103,12 +90,8 @@ is_supernet <- function(network, other) {
 #' @rdname network_in_network
 #' @export
 is_subnet <- function(network, other) {
-  if (!is_ip_network(network)) {
-    abort("`network` must be an ip_network vector")
-  }
-  if (!is_ip_network(other)) {
-    abort("`other` must be an ip_network vector")
-  }
+  check_network(network)
+  check_network(other)
 
   # vector recycling
   args <- vec_recycle_common(network, other)
@@ -121,12 +104,8 @@ is_subnet <- function(network, other) {
 #' @rdname network_in_network
 #' @export
 overlaps <- function(network, other) {
-  if (!is_ip_network(network)) {
-    abort("`network` must be an ip_network vector")
-  }
-  if (!is_ip_network(other)) {
-    abort("`other` must be an ip_network vector")
-  }
+  check_network(network)
+  check_network(other)
 
   # vector recycling
   args <- vec_recycle_common(network, other)

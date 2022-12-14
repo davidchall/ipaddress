@@ -45,16 +45,9 @@ test_that("missing values work", {
 })
 
 test_that("input validation", {
-  expect_error(
-    common_network(ip_address(), ip_network()),
-    "`address2` must be an ip_address vector"
-  )
-  expect_error(
-    common_network(ip_network(), ip_address()),
-    "`address1` must be an ip_address vector"
-  )
-  expect_error(
-    common_network(ip_address(rep("1.2.3.4", 3)), ip_address(rep("1.2.3.4", 2))),
-    class = "vctrs_error_incompatible_size"
-  )
+  expect_snapshot(error = TRUE, {
+    common_network(ip_network(), ip_address())
+    common_network(ip_address(), ip_network())
+    common_network(ip_address(rep("1.2.3.4", 3)), ip_address(rep("1.2.3.4", 2)))
+  })
 })

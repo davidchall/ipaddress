@@ -149,8 +149,12 @@ test_that("bitwise shift works", {
   expect_error(ip_interface("192.168.0.0/24") %>>% 1L, class = "vctrs_error_incompatible_op")
   expect_error(ip_address("192.168.0.1") %<<% 2.5, class = "vctrs_error_incompatible_op")
   expect_error(ip_address("192.168.0.1") %>>% 2.5, class = "vctrs_error_incompatible_op")
-  expect_error(ip_address("192.168.0.1") %<<% -1L, "`n` must be a positive integer vector")
-  expect_error(ip_address("192.168.0.1") %>>% -1L, "`n` must be a positive integer vector")
+  expect_snapshot(error = TRUE, {
+    ip_address("192.168.0.1") %<<% -1L
+  })
+  expect_snapshot(error = TRUE, {
+    ip_address("192.168.0.1") %>>% -1L
+  })
 
   # address must come first
   expect_error(1L %<<% ip_address("0.0.0.0"), class = "vctrs_error_incompatible_op")

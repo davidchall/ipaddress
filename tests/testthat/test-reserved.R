@@ -26,7 +26,9 @@ test_that("is_private works", {
   expect_equal(is_private(ip_address(NA)), NA)
   expect_equal(is_private(ip_network(NA)), NA)
 
-  expect_error(is_private("hello"), "`x` must be an ip_address or ip_network vector")
+  expect_snapshot(error = TRUE, {
+    is_private("hello")
+  })
 })
 
 test_that("is_global works", {
@@ -42,7 +44,9 @@ test_that("is_global works", {
   expect_equal(is_global(ip_address(NA)), NA)
   expect_equal(is_global(ip_network(NA)), NA)
 
-  expect_error(is_global("hello"), "`x` must be an ip_address or ip_network vector")
+  expect_snapshot(error = TRUE, {
+    is_global("hello")
+  })
 })
 
 test_that("is_multicast works", {
@@ -55,7 +59,9 @@ test_that("is_multicast works", {
   expect_equal(is_multicast(ip_address(NA)), NA)
   expect_equal(is_multicast(ip_network(NA)), NA)
 
-  expect_error(is_multicast("hello"), "`x` must be an ip_address or ip_network vector")
+  expect_snapshot(error = TRUE, {
+    is_multicast("hello")
+  })
 })
 
 test_that("is_unspecified works", {
@@ -68,7 +74,9 @@ test_that("is_unspecified works", {
   expect_equal(is_unspecified(ip_address(NA)), NA)
   expect_equal(is_unspecified(ip_network(NA)), NA)
 
-  expect_error(is_unspecified("hello"), "`x` must be an ip_address or ip_network vector")
+  expect_snapshot(error = TRUE, {
+    is_unspecified("hello")
+  })
 })
 
 test_that("is_reserved works", {
@@ -88,7 +96,9 @@ test_that("is_reserved works", {
   expect_equal(is_reserved(ip_address(NA)), NA)
   expect_equal(is_reserved(ip_network(NA)), NA)
 
-  expect_error(is_reserved("hello"), "`x` must be an ip_address or ip_network vector")
+  expect_snapshot(error = TRUE, {
+    is_reserved("hello")
+  })
 })
 
 test_that("is_loopback works", {
@@ -101,7 +111,9 @@ test_that("is_loopback works", {
   expect_equal(is_loopback(ip_address(NA)), NA)
   expect_equal(is_loopback(ip_network(NA)), NA)
 
-  expect_error(is_loopback("hello"), "`x` must be an ip_address or ip_network vector")
+  expect_snapshot(error = TRUE, {
+    is_loopback("hello")
+  })
 })
 
 test_that("is_link_local works", {
@@ -114,7 +126,9 @@ test_that("is_link_local works", {
   expect_equal(is_link_local(ip_address(NA)), NA)
   expect_equal(is_link_local(ip_network(NA)), NA)
 
-  expect_error(is_link_local("hello"), "`x` must be an ip_address or ip_network vector")
+  expect_snapshot(error = TRUE, {
+    is_link_local("hello")
+  })
 })
 
 test_that("is_site_local works", {
@@ -128,5 +142,7 @@ test_that("is_site_local works", {
   expect_equal(is_site_local(ip_address(NA)), NA)
   expect_equal(is_site_local(ip_network(NA)), NA)
 
-  expect_error(is_site_local("hello"), "`x` must be an ip_address or ip_network vector")
+  expect_snapshot(error = TRUE, {
+    is_site_local("hello")
+  })
 })
