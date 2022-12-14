@@ -1,8 +1,12 @@
 x <- ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334", NA))
 
 test_that("binary encoding/decoding works", {
-  expect_error(ip_to_binary("hello"), "`x` must be an ip_address vector")
-  expect_error(binary_to_ip(x), "`x` must be a character vector")
+  expect_snapshot(error = TRUE, {
+    ip_to_binary("hello")
+  })
+  expect_snapshot(error = TRUE, {
+    binary_to_ip(x)
+  })
 
   expect_type(ip_to_binary(x), "character")
   expect_equal(ip_to_binary(x), c(

@@ -63,7 +63,7 @@ pillar_shaft_ipaddress <- function(addr, pfx) {
 format.pillar_shaft_ipaddress <- function(x, width, ...) {
   min_width <- attr(x, "min_width")
   if (width < min_width) {
-    abort(message = paste0("Need at least width ", min_width, ", requested ", width, "."))
+    cli::cli_abort("Need at least width {.val min_width}, requested {.val width}.")
   }
 
   is_cidr <- attr(x, "is_cidr")

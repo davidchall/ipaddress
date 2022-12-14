@@ -36,21 +36,11 @@ NULL
 #' @rdname traverse_hierarchy
 #' @export
 supernet <- function(x, new_prefix = prefix_length(x) - 1L) {
-  if (!is_ip_network(x)) {
-    abort("`x` must be an ip_network vector")
-  }
-  if (!is_integerish(new_prefix)) {
-    abort("`new_prefix` must be an integer vector")
-  }
-  if (any(new_prefix < 0, na.rm = TRUE)) {
-    abort("`new_prefix` cannot be negative")
-  }
-  if (any(new_prefix > max_prefix_length(x), na.rm = TRUE)) {
-    abort("`new_prefix` cannot be greater than maximum (32 for IPv4, 128 for IPv6)")
-  }
-  if (any(new_prefix >= prefix_length(x), na.rm = TRUE)) {
-    abort("`new_prefix` must be shorter than current prefix length")
-  }
+  check_network(x)
+  check_integer(new_prefix)
+  check_all(prefix_length(x) > 0, "x", "must have a supernetwork")
+  check_all(new_prefix >= 0, "new_prefix", "must be positive")
+  check_all(new_prefix < prefix_length(x), "new_prefix", "must be less than {.code prefix_length(x)}")
 
   # vector recycling
   args <- vec_recycle_common(x, new_prefix)
@@ -72,21 +62,13 @@ supernet <- function(x, new_prefix = prefix_length(x) - 1L) {
 #' @rdname traverse_hierarchy
 #' @export
 subnets <- function(x, new_prefix = prefix_length(x) + 1L) {
-  if (!is_ip_network(x)) {
-    abort("`x` must be an ip_network vector")
-  }
-  if (!is_integerish(new_prefix)) {
-    abort("`new_prefix` must be an integer vector")
-  }
-  if (any(new_prefix < 0, na.rm = TRUE)) {
-    abort("`new_prefix` cannot be negative")
-  }
-  if (any(new_prefix > max_prefix_length(x), na.rm = TRUE)) {
-    abort("`new_prefix` cannot be greater than maximum (32 for IPv4, 128 for IPv6)")
-  }
-  if (any(new_prefix <= prefix_length(x), na.rm = TRUE)) {
-    abort("`new_prefix` must be longer than current prefix length")
-  }
+  check_network(x)
+  check_integer(new_prefix)
+  check_all(new_prefix >= 0, "new_prefix", "must be positive")
+  check_all(prefix_length(x) < max_prefix_length(x), "x", "must have a subnetwork")
+  check_all(new_prefix > prefix_length(x), "new_prefix", "must be greater than {.code prefix_length(x)}")
+  check_all(new_prefix <= max_prefix_length(x), "new_prefix", "must be less than {.code max_prefix_length(x)}")
+
   if (any(new_prefix - prefix_length(x) > 30L, na.rm = TRUE)) {
     abort("Too many subnets")
   }

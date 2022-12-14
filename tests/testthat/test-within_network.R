@@ -1,21 +1,32 @@
 test_that("input validation works", {
-  expect_error(is_within(ip_network(), ip_network()), "`address` must be an ip_address vector")
-  expect_error(is_within(ip_address(), ip_address()), "`network` must be an ip_network vector")
+  expect_snapshot(error = TRUE, {
+    is_within(ip_network(), ip_network())
+    is_within(ip_address(), ip_address())
+
+  })
   expect_error(is_within(ip_address(rep("1.2.3.4", 3)), ip_network(rep("1.2.3.4/32", 2))), class = "vctrs_error_incompatible_size")
 
-  expect_error(is_within_any(ip_network(), ip_network()), "`address` must be an ip_address vector")
-  expect_error(is_within_any(ip_address(), ip_address()), "`network` must be an ip_network vector")
+  expect_snapshot(error = TRUE, {
+    is_within_any(ip_network(), ip_network())
+    is_within_any(ip_address(), ip_address())
+  })
 
-  expect_error(overlaps(ip_address(), ip_network()), "`network` must be an ip_network vector")
-  expect_error(overlaps(ip_network(), ip_address()), "`other` must be an ip_network vector")
+  expect_snapshot(error = TRUE, {
+    overlaps(ip_address(), ip_network())
+    overlaps(ip_network(), ip_address())
+  })
   expect_error(overlaps(ip_network(rep("1.2.3.4/32", 3)), ip_network(rep("1.2.3.4/32", 2))), class = "vctrs_error_incompatible_size")
 
-  expect_error(is_subnet(ip_address(), ip_network()), "`network` must be an ip_network vector")
-  expect_error(is_subnet(ip_network(), ip_address()), "`other` must be an ip_network vector")
+  expect_snapshot(error = TRUE, {
+    is_subnet(ip_address(), ip_network())
+    is_subnet(ip_network(), ip_address())
+  })
   expect_error(is_subnet(ip_network(rep("1.2.3.4/32", 3)), ip_network(rep("1.2.3.4/32", 2))), class = "vctrs_error_incompatible_size")
 
-  expect_error(is_supernet(ip_address(), ip_network()), "`network` must be an ip_network vector")
-  expect_error(is_supernet(ip_network(), ip_address()), "`other` must be an ip_network vector")
+  expect_snapshot(error = TRUE, {
+    is_supernet(ip_address(), ip_network())
+    is_supernet(ip_network(), ip_address())
+  })
   expect_error(is_supernet(ip_network(rep("1.2.3.4/32", 3)), ip_network(rep("1.2.3.4/32", 2))), class = "vctrs_error_incompatible_size")
 })
 

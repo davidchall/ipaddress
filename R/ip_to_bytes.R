@@ -34,10 +34,7 @@
 #' @seealso Use [blob::as_blob()] to cast result to a blob object
 #' @export
 ip_to_bytes <- function(x) {
-  if (!is_ip_address(x)) {
-    abort("`x` must be an ip_address vector")
-  }
-
+  check_address(x)
   wrap_encode_bytes(x)
 }
 
@@ -47,7 +44,7 @@ bytes_to_ip <- function(x) {
   is_bytes <- function(y) is_raw(y) || is_null(y)
 
   if (!is_list(x) || !all(vapply(x, is_bytes, TRUE))) {
-    abort("`x` must be a list of raw vectors")
+    cli::cli_abort("{.arg x} must be a list of raw vectors")
   }
 
   wrap_decode_bytes(x)

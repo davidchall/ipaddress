@@ -37,14 +37,18 @@ test_that("invalid inputs are caught", {
   expect_warning(ip_network("1::2/a"))
   expect_warning(ip_network("1::2/24/24"))
 
-  expect_error(ip_network(ip_address("2001:db8::"), 24.5), "`prefix_length` must be an integer vector")
+  expect_snapshot(error = TRUE, {
+    ip_network(ip_address("2001:db8::"), 24.5)
+  })
   expect_warning(ip_network(ip_address("2001:db8::"), -1L))
   expect_warning(ip_network(ip_address("2001:db8::"), 129L))
 })
 
 test_that("strict argument works", {
-  expect_error(ip_network("2001:db8::/36", strict = "yes"), "`strict` be must TRUE or FALSE")
-  expect_error(ip_network("2001:db8::/36", strict = NA), "`strict` be must TRUE or FALSE")
+  expect_snapshot(error = TRUE, {
+    ip_network("2001:db8::/36", strict = "yes")
+    ip_network("2001:db8::/36", strict = NA)
+  })
 
   expect_warning(ip_network("2001:db8::8a2e:370:7334/36"), "host bits set")
   expect_equal(ip_network("2001:db8::8a2e:370:7334/36", strict = FALSE), ip_network("2001:db8::/36"))

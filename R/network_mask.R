@@ -80,7 +80,7 @@ prefix_length.ip_address <- function(x) {
 
 #' @export
 prefix_length.default <- function(x) {
-  abort("prefix_length() accepts an ip_network, ip_interface or ip_address vector")
+  cli::cli_abort("{.arg x} must be an {.cls ip_network}, {.cls ip_interface} or {.cls ip_address} vector")
 }
 
 
@@ -117,7 +117,7 @@ netmask.numeric <- function(x, is_ipv6 = NULL, ...) {
 
 #' @export
 netmask.default <- function(x, ...) {
-  abort("netmask() accepts an ip_network, ip_interface or integer vector")
+  cli::cli_abort("{.arg x} must be an {.cls ip_network}, {.cls ip_interface} or integer vector")
 }
 
 
@@ -154,19 +154,18 @@ hostmask.numeric <- function(x, is_ipv6 = NULL, ...) {
 
 #' @export
 hostmask.default <- function(x, ...) {
-  abort("hostmask() accepts an ip_network, ip_interface or integer vector")
+  cli::cli_abort("{.arg x} must be an {.cls ip_network}, {.cls ip_interface} or integer vector")
 }
 
 
 # prefix to mask ---------------------------------------------------------------
 
 subnet_mask <- function(prefix_length, is_ipv6, mask_func) {
-  if (!is_integerish(prefix_length)) {
-    force(is_ipv6)
-    abort("`prefix_length` must be an integer vector")
-  }
+  force(is_ipv6)
+  check_integer(prefix_length)
+
   if (!(is_null(is_ipv6) || is_logical(is_ipv6))) {
-    abort("`is_ipv6` must be a logical vector or NULL")
+    cli::cli_abort("{.arg is_ipv6} must be a logical vector or NULL")
   }
 
   if (is_null(is_ipv6)) {
@@ -177,15 +176,9 @@ subnet_mask <- function(prefix_length, is_ipv6, mask_func) {
     is_ipv6 <- args[[2L]]
   }
 
-  if (any(prefix_length < 0L, na.rm = TRUE)) {
-    abort("`prefix_length` cannot be negative")
-  }
-  if (any(prefix_length[!is_ipv6] > 32L, na.rm = TRUE)) {
-    abort("`prefix_length` cannot be greater than 32 for IPv4")
-  }
-  if (any(prefix_length[is_ipv6] > 128L, na.rm = TRUE)) {
-    abort("`prefix_length` cannot be greater than 128 for IPv6")
-  }
+  check_all(prefix_length >=   0L,            "prefix_length", "must be positive")
+  check_all(prefix_length <=  32L |  is_ipv6, "prefix_length", "must not be greater than 32 for IPv4")
+  check_all(prefix_length <= 128L | !is_ipv6, "prefix_length", "must not be greater than 128 for IPv6")
 
   do.call(mask_func, list(prefix_length, is_ipv6))
 }

@@ -5,6 +5,8 @@ test_that("reverse pointer works", {
     "1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.b.d.0.1.0.0.2.ip.arpa"
   )
 
-  expect_error(reverse_pointer(ip_network()), "`x` must be an ip_address vector")
+  expect_snapshot(error = TRUE, {
+    reverse_pointer(ip_network())
+  })
   expect_equal(reverse_pointer(ip_address(NA)), NA_character_)
 })

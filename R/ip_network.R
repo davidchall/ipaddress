@@ -81,22 +81,15 @@ ip_network <- function(...) {
 #' @rdname ip_network
 #' @export
 ip_network.default <- function(x = character(), ..., strict = TRUE) {
-  if (!is_bool(strict)) {
-    abort("`strict` be must TRUE or FALSE")
-  }
-
+  check_bool(strict)
   wrap_parse_network(x, strict, FALSE)
 }
 
 #' @rdname ip_network
 #' @export
 ip_network.ip_address <- function(address, prefix_length, ..., strict = TRUE) {
-  if (!is_integerish(prefix_length)) {
-    abort("`prefix_length` must be an integer vector")
-  }
-  if (!is_bool(strict)) {
-    abort("`strict` be must TRUE or FALSE")
-  }
+  check_integer(prefix_length)
+  check_bool(strict)
 
   # vector recycling
   args <- vec_recycle_common(address, prefix_length)

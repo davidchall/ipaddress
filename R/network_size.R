@@ -26,10 +26,7 @@ NULL
 #' @rdname network_size
 #' @export
 network_address <- function(x) {
-  if (!is_ip_network(x)) {
-    abort("`x` must be an ip_network vector")
-  }
-
+  check_network(x)
   new_ip_address(
     field(x, "address1"),
     field(x, "address2"),
@@ -50,19 +47,13 @@ network_address <- function(x) {
 #' @rdname network_size
 #' @export
 broadcast_address <- function(x) {
-  if (!is_ip_network(x)) {
-    abort("`x` must be an ip_network vector")
-  }
-
+  check_network(x)
   wrap_broadcast_address(x)
 }
 
 #' @rdname network_size
 #' @export
 num_addresses <- function(x) {
-  if (!is_ip_network(x)) {
-    abort("`x` must be an ip_network vector")
-  }
-
+  check_network(x)
   2L^(max_prefix_length(x) - prefix_length(x))
 }

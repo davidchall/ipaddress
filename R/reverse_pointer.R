@@ -17,9 +17,6 @@
 #' reverse_pointer(ip_address("2001:db8::1"))
 #' @export
 reverse_pointer <- function(x) {
-  if (!is_ip_address(x)) {
-    abort("`x` must be an ip_address vector")
-  }
-
+  check_address(x)
   wrap_reverse_pointer(x)
 }

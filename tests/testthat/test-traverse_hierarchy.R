@@ -5,8 +5,10 @@ test_that("supernet() works", {
   expect_equal(supernet(ip_network("192.168.0.0/24"), new_prefix = 10L), ip_network("192.128.0.0/10"))
   expect_equal(supernet(ip_network("2001:db8::/36"), new_prefix = 10L), ip_network("2000::/10"))
 
-  expect_error(supernet(ip_network("0.0.0.0/0")), "`new_prefix` cannot be negative")
-  expect_error(supernet(ip_network("::/0")), "`new_prefix` cannot be negative")
+  expect_snapshot(error = TRUE, {
+    supernet(ip_network("0.0.0.0/0"))
+    supernet(ip_network("::/0"))
+  })
 })
 
 test_that("subnets() works", {
@@ -36,8 +38,10 @@ test_that("subnets() works", {
     list_of(ip_network(c("ffff:ffff:ffff:ffff:ffff:ffff:ffff:fffe/128", "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff/128")))
   )
 
-  expect_error(subnets(ip_network("0.0.0.0/32")), "`new_prefix` cannot be greater than maximum (32 for IPv4, 128 for IPv6)", fixed = TRUE)
-  expect_error(subnets(ip_network("::/128")), "`new_prefix` cannot be greater than maximum (32 for IPv4, 128 for IPv6)", fixed = TRUE)
+  expect_snapshot(error = TRUE, {
+    subnets(ip_network("0.0.0.0/32"))
+    subnets(ip_network("::/128"))
+  })
 })
 
 test_that("vector recycling works", {
@@ -58,25 +62,34 @@ test_that("missing values work", {
   expect_equal(supernet(ip_network(NA)), ip_network(NA))
   expect_equal(subnets(ip_network(NA)), list_of(ip_network(NA)))
 
-  expect_error(supernet(ip_network("192.168.0.0/24"), new_prefix = NA), "`new_prefix` must be an integer vector")
+  expect_snapshot(error = TRUE, {
+    supernet(ip_network("192.168.0.0/24"), new_prefix = NA)
+  })
+  expect_snapshot(error = TRUE, {
+    subnets(ip_network("192.168.0.0/24"), new_prefix = NA)
+  })
   expect_equal(supernet(ip_network("192.168.0.0/24"), new_prefix = NA_integer_), ip_network(NA))
-  expect_error(subnets(ip_network("192.168.0.0/24"), new_prefix = NA), "`new_prefix` must be an integer vector")
   expect_equal(subnets(ip_network("192.168.0.0/24"), new_prefix = NA_integer_), list_of(ip_network(NA)))
 })
 
 test_that("input validation", {
-  expect_error(supernet(ip_address("1.2.3.4")), "`x` must be an ip_network vector")
-  expect_error(subnets(ip_address("1.2.3.4")), "`x` must be an ip_network vector")
+  expect_snapshot(error = TRUE, {
+    supernet(ip_address("1.2.3.4"))
 
-  expect_error(supernet(ip_network("192.168.0.0/20"), new_prefix = "yes"), "`new_prefix` must be an integer vector")
-  expect_error(subnets(ip_network("192.168.0.0/20"), new_prefix = "yes"), "`new_prefix` must be an integer vector")
+    supernet(ip_network("192.168.0.0/20"), new_prefix = "yes")
 
-  expect_error(supernet(ip_network("192.168.0.0/20"), new_prefix = -1L), "`new_prefix` cannot be negative")
-  expect_error(subnets(ip_network("192.168.0.0/20"), new_prefix = -1L), "`new_prefix` cannot be negative")
-  expect_error(supernet(ip_network("192.168.0.0/20"), new_prefix = 33L), "`new_prefix` cannot be greater than maximum (32 for IPv4, 128 for IPv6)", fixed = TRUE)
-  expect_error(subnets(ip_network("192.168.0.0/20"), new_prefix = 33L), "`new_prefix` cannot be greater than maximum (32 for IPv4, 128 for IPv6)", fixed = TRUE)
-  expect_error(supernet(ip_network("192.168.0.0/20"), new_prefix = 21L), "`new_prefix` must be shorter than current prefix length")
-  expect_error(subnets(ip_network("192.168.0.0/20"), new_prefix = 19L), "`new_prefix` must be longer than current prefix length")
+    supernet(ip_network("192.168.0.0/20"), new_prefix = -1L)
+    supernet(ip_network("192.168.0.0/20"), new_prefix = 21L)
+  })
+  expect_snapshot(error = TRUE, {
+    subnets(ip_address("1.2.3.4"))
+
+    subnets(ip_network("192.168.0.0/20"), new_prefix = "yes")
+
+    subnets(ip_network("192.168.0.0/20"), new_prefix = -1L)
+    subnets(ip_network("192.168.0.0/20"), new_prefix = 33L)
+    subnets(ip_network("192.168.0.0/20"), new_prefix = 19L)
+  })
 
   expect_error(subnets(ip_network("0.0.0.0/0"), new_prefix = 32L), "Too many subnets")
   expect_error(subnets(ip_network("::/97"), new_prefix = 128L), "Too many subnets")

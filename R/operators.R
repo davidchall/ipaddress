@@ -46,9 +46,7 @@ NULL
   if (!is_ip_address(x) || is_ip_interface(x) || !is_integerish(n)) {
     stop_incompatible_op("%<<%", x, n)
   }
-  if (!all(n >= 0, na.rm = TRUE)) {
-    abort("`n` must be a positive integer vector")
-  }
+  check_all(n >= 0, "n", "must be positive")
 
   # vector recycling
   args <- vec_recycle_common(x, n)
@@ -65,9 +63,7 @@ NULL
   if (!is_ip_address(x) || is_ip_interface(x) || !is_integerish(n)) {
     stop_incompatible_op("%>>%", x, n)
   }
-  if (!all(n >= 0, na.rm = TRUE)) {
-    abort("`n` must be a positive integer vector")
-  }
+  check_all(n >= 0, "n", "must be positive")
 
   # vector recycling
   args <- vec_recycle_common(x, n)

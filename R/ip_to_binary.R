@@ -25,19 +25,13 @@
 #' @family address representations
 #' @export
 ip_to_binary <- function(x) {
-  if (!is_ip_address(x)) {
-    abort("`x` must be an ip_address vector")
-  }
-
+  check_address(x)
   wrap_encode_binary(x)
 }
 
 #' @rdname ip_to_binary
 #' @export
 binary_to_ip <- function(x) {
-  if (!is_character(x)) {
-    abort("`x` must be a character vector")
-  }
-
+  check_character(x)
   wrap_decode_binary(x)
 }
