@@ -103,19 +103,19 @@ The simplest solution is to use an accept-reject algorithm -- sampling the entir
 ```{r accept-reject}
 sample_public <- function(size) {
   result <- sample_ipv4(size)
-  
+
   all_public <- FALSE
   while (!all_public) {
     public <- is_global(result)
     n_replace <- sum(!public)
-    
+
     if (n_replace == 0) {
       all_public <- TRUE
     } else {
       result[!public] <- sample_ipv4(n_replace)
     }
   }
-  
+
   result
 }
 ```

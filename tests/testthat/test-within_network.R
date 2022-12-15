@@ -2,7 +2,6 @@ test_that("input validation works", {
   expect_snapshot(error = TRUE, {
     is_within(ip_network(), ip_network())
     is_within(ip_address(), ip_address())
-
   })
   expect_error(is_within(ip_address(rep("1.2.3.4", 3)), ip_network(rep("1.2.3.4/32", 2))), class = "vctrs_error_incompatible_size")
 
