@@ -4,7 +4,7 @@
 \name{ipaddress-package}
 \alias{ipaddress}
 \alias{ipaddress-package}
-\title{ipaddress: Tidy IP Addresses}
+\title{ipaddress: Data Analysis for IP Addresses and Networks}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
