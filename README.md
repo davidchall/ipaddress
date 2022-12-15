@@ -30,14 +30,14 @@ For data visualization of IP addresses and networks, check out the
 
 ## Installation
 
-You can install the released version of ipaddress from
-[CRAN](https://CRAN.R-project.org) with:
+Install the released version from [CRAN](https://CRAN.R-project.org)
+with:
 
 ``` r
 install.packages("ipaddress")
 ```
 
-Or you can install the development version from GitHub:
+Install the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("remotes")
