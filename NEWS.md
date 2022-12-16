@@ -18,6 +18,7 @@ To mark the release of ipaddress 1.0.0, some **breaking changes** were made to i
 * The `is_ipv6` argument of `netmask()` and `hostmask()` defaults to `NULL`. This option prefers an IPv4 mask, but creates an IPv6 mask as a fallback.
 * Updated the `iana_ipv4` dataset.
 * Error formatting has been improved using {cli} (#86).
+* Tests now use {testthat} 3e.
 
 
 # ipaddress 0.5.6
