@@ -29,6 +29,7 @@ Suggests:
     knitr,
     pillar,
     rmarkdown,
+    tibble,
     testthat
 LinkingTo: 
     AsioHeaders,
