@@ -25,35 +25,38 @@ country_networks <- function(country) {
   networks <- lapply(country, download_iwik)
   networks <- as_list_of(networks, .ptype = ip_network())
 
-  if (all(vapply(networks, length, 0) == 0)) {
-    cli::cli_abort(c(
-      "Can't download networks for {.emph any} country",
-      "i" = "Is your internet connection working?"
-    ), arg = "country")
+  empty <- vapply(networks, length, 0) == 0
+  if (all(empty)) {
+    msg <- "Can't download networks for {.emph any} country"
+    if (is_offline()) {
+      msg <- c(msg, "i" = "Is your internet connection working?")
+    } else {
+      msg <- c(msg, "i" = "Is server down? {.url {url_iwik()}}")
+      msg <- c(msg, "i" = "Check country codes are valid: {.val {country}}")
+    }
+    cli::cli_abort(msg, arg = "country")
+  } else if (any(empty)) {
+    cli::cli_warn(c(
+      "Can't download networks for {length(country[empty])} countr{?y/ies}",
+      "i" = "Check country codes are valid: {.val {country[empty]}}"
+    ))
   }
 
   tibble::tibble(country, networks)
 }
 
-download_iwik <- function(country) {
-  url_base <- "https://www.iwik.org/ipcountry/"
-  url_ipv4 <- paste0(url_base, country, ".cidr")
-  url_ipv6 <- paste0(url_base, country, ".ipv6")
+url_iwik <- function() {
+  "https://www.iwik.org/ipcountry/"
+}
 
-  networks <- vctrs::vec_c(
+download_iwik <- function(country) {
+  url_ipv4 <- paste0(url_iwik(), country, ".cidr")
+  url_ipv6 <- paste0(url_iwik(), country, ".ipv6")
+
+  vctrs::vec_c(
     download_networks(url_ipv4, strict = FALSE),
     download_networks(url_ipv6, strict = TRUE)
   )
-
-  if (length(networks) == 0) {
-    cli::cli_warn(c(
-      "Can't download networks for country {.val {country}}.",
-      "i" = "Is this a valid two-letter country code?",
-      "x" = "Not found: {.url {url_ipv4}} and {.url {url_ipv6}}"
-    ))
-  }
-
-  networks
 }
 
 download_networks <- function(url, strict = TRUE, comment = "#") {

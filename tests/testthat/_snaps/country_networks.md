@@ -4,9 +4,8 @@
       country_networks(c("US", "AA"))
     Condition
       Warning:
-      Can't download networks for country "AA".
-      i Is this a valid two-letter country code?
-      x Not found: <https://www.iwik.org/ipcountry/AA.cidr> and <https://www.iwik.org/ipcountry/AA.ipv6>
+      Can't download networks for 1 country
+      i Check country codes are valid: "AA"
     Output
       # A tibble: 2 x 2
         country         networks
@@ -19,13 +18,10 @@
     Code
       country_networks("AA")
     Condition
-      Warning:
-      Can't download networks for country "AA".
-      i Is this a valid two-letter country code?
-      x Not found: <https://www.iwik.org/ipcountry/AA.cidr> and <https://www.iwik.org/ipcountry/AA.ipv6>
       Error in `country_networks()`:
       ! Can't download networks for any country
-      i Is your internet connection working?
+      i Is server down? <https://www.iwik.org/ipcountry/>
+      i Check country codes are valid: "AA"
 
 # input validation
 
