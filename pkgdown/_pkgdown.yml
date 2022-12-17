@@ -50,5 +50,6 @@ reference:
       - seq.ip_network
   - title: "Datasets"
     contents:
+      - country_networks
       - iana_ipv4
       - iana_ipv6
