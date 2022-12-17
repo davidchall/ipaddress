@@ -59,9 +59,7 @@ download_iwik <- function(country) {
 download_networks <- function(url, strict = TRUE, comment = "#") {
   lines <- try_fetch(
     suppressWarnings(readLines(url, warn = FALSE)),
-    error = function(cnd) {
-      ip_network()
-    }
+    error = function(cnd) character()
   )
 
   # exclude commented lines
