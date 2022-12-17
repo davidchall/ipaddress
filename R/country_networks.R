@@ -11,7 +11,7 @@
 #'  * `network`: A list of [`ip_network`] vectors
 #'
 #' @examples
-#' country_networks(c("BR", "FR", "IN", "NA", "US"))
+#' country_networks(c("GB", "US"))
 #'
 #' @source \url{https://www.iwik.org/ipcountry} (updated daily)
 #' @export

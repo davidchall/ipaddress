@@ -26,6 +26,6 @@ Retrieve lists of IP networks registered to specific countries.
 This function requires an internet connection to download network lists.
 }
 \examples{
-country_networks(c("BR", "FR", "IN", "NA", "US"))
+country_networks(c("GB", "US"))
 
 }
