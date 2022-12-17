@@ -1,6 +1,6 @@
 #' Country-level IP networks
 #'
-#' Retrieve list of IP networks registered to specific countries.
+#' Retrieve lists of IP networks registered to specific countries.
 #'
 #' @details
 #' This function requires an internet connection to download network lists.
