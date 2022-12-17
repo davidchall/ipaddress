@@ -16,7 +16,8 @@ test_that("download fails", {
   skip_if_offline()
 
   # invalid country: single
-  expect_snapshot(country_networks(c("US", "AA")))
+  hide_length <- function(x) gsub("\\[[\\d,]+\\]", "[n]", x, perl = TRUE)
+  expect_snapshot(country_networks(c("US", "AA")), transform = hide_length)
 
   # invalid country: all
   expect_snapshot(error = TRUE, country_networks("AA"))
@@ -29,5 +30,7 @@ test_that("input validation", {
     country_networks(1L)
     country_networks("hello")
     country_networks("A1")
+    country_networks("US", FALSE)
+    country_networks("US", collapse = "TRUE")
   })
 })

@@ -6,23 +6,31 @@
 #' This function requires an internet connection to download network lists.
 #'
 #' @param country Character vector of two-letter country codes (ISO 3166-1 alpha-2)
+#' @param collapse If `TRUE` (the default), contiguous networks are collapsed.
+#'   See [collapse_networks()].
+#' @inheritParams rlang::args_dots_empty
 #' @return A data frame with 2 variables:
 #'  * `country`: A character vector
 #'  * `network`: A list of [`ip_network`] vectors
 #'
 #' @examples
+#' \dontrun{
 #' country_networks(c("GB", "US"))
 #'
+#' country_networks(c("GB", "US"), collapse = FALSE)
+#' }
 #' @source \url{https://www.iwik.org/ipcountry} (updated daily)
 #' @export
-country_networks <- function(country) {
+country_networks <- function(country, ..., collapse = TRUE) {
   check_installed("tibble")
+  check_dots_empty()
   check_character(country)
+  check_bool(collapse)
   check_all(nchar(country) == 2, "country", "must contain exactly 2 letters")
   check_all(!grepl("[^A-Za-z]", country), "country", "must contain letters only")
 
   country <- toupper(country)
-  networks <- lapply(country, download_iwik)
+  networks <- lapply(country, download_iwik, collapse)
   networks <- as_list_of(networks, .ptype = ip_network())
 
   empty <- vapply(networks, length, 0) == 0
@@ -49,14 +57,20 @@ url_iwik <- function() {
   "https://www.iwik.org/ipcountry/"
 }
 
-download_iwik <- function(country) {
+download_iwik <- function(country, collapse) {
   url_ipv4 <- paste0(url_iwik(), country, ".cidr")
   url_ipv6 <- paste0(url_iwik(), country, ".ipv6")
 
-  vctrs::vec_c(
+  networks <- vctrs::vec_c(
     download_networks(url_ipv4, strict = FALSE),
     download_networks(url_ipv6, strict = TRUE)
   )
+
+  if (collapse) {
+    networks <- collapse_networks(networks)
+  }
+
+  networks
 }
 
 download_networks <- function(url, strict = TRUE, comment = "#") {

@@ -7,10 +7,15 @@
 \url{https://www.iwik.org/ipcountry} (updated daily)
 }
 \usage{
-country_networks(country)
+country_networks(country, ..., collapse = TRUE)
 }
 \arguments{
 \item{country}{Character vector of two-letter country codes (ISO 3166-1 alpha-2)}
+
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{collapse}{If \code{TRUE} (the default), contiguous networks are collapsed.
+See \code{\link[=collapse_networks]{collapse_networks()}}.}
 }
 \value{
 A data frame with 2 variables:
@@ -26,6 +31,9 @@ Retrieve lists of IP networks registered to specific countries.
 This function requires an internet connection to download network lists.
 }
 \examples{
+\dontrun{
 country_networks(c("GB", "US"))
 
+country_networks(c("GB", "US"), collapse = FALSE)
+}
 }

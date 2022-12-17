@@ -10,8 +10,8 @@
       # A tibble: 2 x 2
         country         networks
         <chr>   <list<ip_netwk>>
-      1 US              [72,168]
-      2 AA                   [0]
+      1 US              [n]
+      2 AA                   [n]
 
 ---
 
@@ -40,4 +40,17 @@
     Condition
       Error in `country_networks()`:
       ! `country` must contain letters only
+    Code
+      country_networks("US", FALSE)
+    Condition
+      Error in `country_networks()`:
+      ! `...` must be empty.
+      x Problematic argument:
+      * ..1 = FALSE
+      i Did you forget to name an argument?
+    Code
+      country_networks("US", collapse = "TRUE")
+    Condition
+      Error in `country_networks()`:
+      ! `collapse` must be TRUE or FALSE
 
