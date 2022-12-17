@@ -70,10 +70,14 @@
 </ul></li>
 </ul></div>
 <div class="section level3">
+<h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
+<ul><li>New <code><a href="../reference/country_networks.html">country_networks()</a></code> gets lists of IP networks registered to specific countries (<a href="https://github.com/davidchall/ipaddress/issues/87" class="external-link">#87</a>).</li>
+<li>Error formatting has been improved using {cli} (<a href="https://github.com/davidchall/ipaddress/issues/86" class="external-link">#86</a>).</li>
+</ul></div>
+<div class="section level3">
 <h3 id="minor-improvements-and-fixes-development-version">Minor improvements and fixes<a class="anchor" aria-label="anchor" href="#minor-improvements-and-fixes-development-version"></a></h3>
 <ul><li>The <code>is_ipv6</code> argument of <code><a href="../reference/netmask.html">netmask()</a></code> and <code><a href="../reference/netmask.html">hostmask()</a></code> defaults to <code>NULL</code>. This option prefers an IPv4 mask, but creates an IPv6 mask as a fallback.</li>
 <li>Updated the <code>iana_ipv4</code> dataset.</li>
-<li>Error formatting has been improved using {cli} (<a href="https://github.com/davidchall/ipaddress/issues/86" class="external-link">#86</a>).</li>
 <li>Tests now use {testthat} 3e.</li>
 </ul></div>
 </div>
