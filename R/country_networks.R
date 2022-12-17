@@ -17,6 +17,9 @@
 #' @export
 country_networks <- function(country) {
   check_installed("tibble")
+  check_character(country)
+  check_all(nchar(country) == 2, "country", "must contain exactly 2 letters")
+  check_all(!grepl("[^A-Za-z]", country), "country", "must contain letters only")
 
   country <- toupper(country)
   networks <- lapply(country, download_iwik)
