@@ -66,8 +66,7 @@ download_networks <- function(url, strict = TRUE, comment = "#") {
 
   # exclude commented lines
   if (nzchar(comment)) {
-    regex_comment <- paste0("^", comment)
-    lines <- grep(regex_comment, lines, invert = TRUE, value = TRUE)
+    lines <- lines[substr(lines, 1, nchar(comment)) != comment]
   }
 
   ip_network(lines, strict = strict)
