@@ -17,12 +17,12 @@ ipaddress provides data classes and functions for working with IP
 addresses and networks. Its interface is inspired by the Python
 [ipaddress](https://docs.python.org/3/library/ipaddress.html) module.
 
-Here are some of the features:
+Here are some key features:
 
-- Functions for **generation and analysis of IP data**
+- Functions to **generate and analyze IP data**
 - Full support for both **IPv4 and IPv6** address spaces
-- **Memory footprint:** data stored in native format
-- **Performance:** calculations performed in C++
+- Data stored in native bit format for **reduced memory footprint**
+- Calculations written in C++ for **fast performance**
 - Compatible with the **tidyverse**
 
 For data visualization of IP addresses and networks, check out the
@@ -46,17 +46,18 @@ remotes::install_github("davidchall/ipaddress")
 
 ## Usage
 
-Use `ip_address()` and `ip_network()` vectors either standalone or as
-columns in a data frame.
+Use `ip_address()` and `ip_network()` to create standalone vectors or
+data frame columns. See `vignette("ipaddress-classes")` to learn more
+about these vector classes.
 
 ``` r
-library(dplyr)
+library(tibble)
 library(ipaddress)
 
-tibble(
-  address = ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334")),
-  network = ip_network(c("192.168.100.0/22", "2001:db8::/80"))
-)
+address <- ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334"))
+network <- ip_network(c("192.168.100.0/22", "2001:db8::/80"))
+
+tibble(address, network)
 #> # A tibble: 2 × 2
 #>                   address          network
 #>                 <ip_addr>       <ip_netwk>
@@ -64,31 +65,17 @@ tibble(
 #> 2 2001:db8::8a2e:370:7334    2001:db8::/80
 ```
 
-Input character vectors are validated as they are parsed. Invalid inputs
-raise a warning and are replaced with `NA`.
+It looks like we’ve simply stored the character vector, but we’ve
+actually validated each input and stored its native bit representation.
+When the vector is displayed, the `print()` method formats each value
+back to the human-readable character representation. There are two main
+advantages to storing IP data in their native bit representation:
 
-``` r
-ip_address(c("255.255.255.255", "255.255.255.256"))
-#> Warning: Problem on row 2: 255.255.255.256
-#> <ip_address[2]>
-#> [1] 255.255.255.255 <NA>
-```
+- The data occupy less space in memory (up to 80% reduction),
+- Subsequent use is much faster, since we don’t repeatedly parse the
+  character vector.
 
-A variety of functions are provided to enable common tasks.
-
-``` r
-tibble(network = ip_network(c("192.168.100.0/22", "2001:db8::/80"))) %>%
-  mutate(
-    first = network_address(network),
-    last = broadcast_address(network),
-    ipv6 = is_ipv6(network)
-  )
-#> # A tibble: 2 × 4
-#>            network         first                     last ipv6 
-#>         <ip_netwk>     <ip_addr>                <ip_addr> <lgl>
-#> 1 192.168.100.0/22 192.168.100.0          192.168.103.255 FALSE
-#> 2    2001:db8::/80    2001:db8:: 2001:db8::ffff:ffff:ffff TRUE
-```
+A variety of functions support common tasks on ipaddress vectors.
 
 ## Related work
 
