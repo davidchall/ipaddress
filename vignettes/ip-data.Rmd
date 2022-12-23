@@ -1,8 +1,8 @@
 ---
-title: "Data classes"
+title: "IP Data"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Data classes}
+  %\VignetteIndexEntry{IP Data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

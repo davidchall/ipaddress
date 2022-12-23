@@ -67,5 +67,5 @@ as_ip_address(x)
 as_ip_network(x)
 }
 \seealso{
-\code{vignette("ipaddress-classes")}
+\code{vignette("ip-data")}
 }

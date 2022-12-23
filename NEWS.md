@@ -12,6 +12,7 @@ To mark the release of ipaddress 1.0.0, some **breaking changes** were made to i
   * The `strict` argument of `ip_network()`.
   * The `exploded` argument of `format.ip_address()`, `format.ip_network()` and `format.ip_interface()`.
   * The `replace` argument of `sample_ipv4()`, `sample_ipv6()` and `sample_network()`.
+* Renamed `vignette("ipaddress-classes")` and `vignette("ipaddress-examples")` to `vignette("ip-data")` and `vignette("recipes")`, respectively.
 
 ## New features
 

@@ -38,7 +38,7 @@
 #' # validates inputs and replaces with NA
 #' ip_address(c("255.255.255.256", "192.168.0.1/32"))
 #' @seealso
-#' [`ip_operators`], `vignette("ipaddress-classes")`
+#' [`ip_operators`], `vignette("ip-data")`
 #' @name ip_address
 NULL
 

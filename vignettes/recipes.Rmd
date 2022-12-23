@@ -1,8 +1,8 @@
 ---
-title: "Example usage"
+title: "Examples and Recipes"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Example usage}
+  %\VignetteIndexEntry{Examples and Recipes}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,7 +15,7 @@ library(dplyr)
 library(ipaddress)
 ```
 
-This vignette demonstrates some typical use cases for the ipaddress package.
+This vignette demonstrates some typical example usage and recipes when learning about ipaddress.
 
 
 ## Addresses from integers

@@ -47,8 +47,7 @@ remotes::install_github("davidchall/ipaddress")
 ## Usage
 
 Use `ip_address()` and `ip_network()` to create standalone vectors or
-data frame columns. See `vignette("ipaddress-classes")` to learn more
-about these vector classes.
+data frame columns.
 
 ``` r
 library(tibble)
@@ -75,7 +74,9 @@ advantages to storing IP data in their native bit representation:
 - Subsequent use is much faster, since we don’t repeatedly parse the
   character vector.
 
-A variety of functions support common tasks on ipaddress vectors.
+Read `vignette("ip-data")` to learn more about these vector classes. For
+a demonstration of common recipes using ipaddress vectors and functions,
+see `vignette("recipes")`.
 
 ## Related work
 

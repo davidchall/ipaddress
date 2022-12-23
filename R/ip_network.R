@@ -64,7 +64,7 @@
 #' @seealso
 #' [prefix_length()], [network_address()], [netmask()], [hostmask()]
 #'
-#' `vignette("ipaddress-classes")`
+#' `vignette("ip-data")`
 #' @name ip_network
 NULL
 

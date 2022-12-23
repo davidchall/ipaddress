@@ -49,5 +49,5 @@ ip_address(c("192.168.0.1", "2001:db8::8a2e:370:7334"))
 ip_address(c("255.255.255.256", "192.168.0.1/32"))
 }
 \seealso{
-\code{\link{ip_operators}}, \code{vignette("ipaddress-classes")}
+\code{\link{ip_operators}}, \code{vignette("ip-data")}
 }

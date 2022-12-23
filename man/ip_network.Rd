@@ -85,5 +85,5 @@ ip_network(ip_address("192.168.0.0"), prefix_length(ip_address("0.0.0.255")))
 \seealso{
 \code{\link[=prefix_length]{prefix_length()}}, \code{\link[=network_address]{network_address()}}, \code{\link[=netmask]{netmask()}}, \code{\link[=hostmask]{hostmask()}}
 
-\code{vignette("ipaddress-classes")}
+\code{vignette("ip-data")}
 }

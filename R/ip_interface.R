@@ -46,7 +46,7 @@
 #' # extract IP network (with host bits masked)
 #' as_ip_network(x)
 #' @seealso
-#' `vignette("ipaddress-classes")`
+#' `vignette("ip-data")`
 #' @name ip_interface
 NULL
 
