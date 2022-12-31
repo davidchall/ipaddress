@@ -4,7 +4,7 @@
 \alias{country_networks}
 \title{Country-level IP networks}
 \source{
-\url{https://www.iwik.org/ipcountry} (updated daily)
+\url{https://www.iwik.org/ipcountry/} (updated daily)
 }
 \usage{
 country_networks(country, ..., collapse = TRUE)

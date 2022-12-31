@@ -19,7 +19,7 @@
 #'
 #' country_networks(c("GB", "US"), collapse = FALSE)
 #' }
-#' @source \url{https://www.iwik.org/ipcountry} (updated daily)
+#' @source \url{https://www.iwik.org/ipcountry/} (updated daily)
 #' @export
 country_networks <- function(country, ..., collapse = TRUE) {
   check_installed("tibble")
