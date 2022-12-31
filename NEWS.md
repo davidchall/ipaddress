@@ -12,16 +12,16 @@ To mark the release of ipaddress 1.0.0, some **breaking changes** were made to i
   * The `strict` argument of `ip_network()`.
   * The `exploded` argument of `format.ip_address()`, `format.ip_network()` and `format.ip_interface()`.
   * The `replace` argument of `sample_ipv4()`, `sample_ipv6()` and `sample_network()`.
-* Renamed `vignette("ipaddress-classes")` and `vignette("ipaddress-examples")` to `vignette("ip-data")` and `vignette("recipes")`, respectively.
 
 ## New features
 
-* New `country_networks()` gets lists of IP networks registered to specific countries (#87).
+* New `country_networks()` downloads IP networks registered to specific countries (#87).
 * Error formatting has been improved using {cli} (#86).
 
 ## Minor improvements and fixes
 
 * The `is_ipv6` argument of `netmask()` and `hostmask()` defaults to `NULL`. This option prefers an IPv4 mask, but creates an IPv6 mask as a fallback.
+* Renamed `vignette("ipaddress-classes")` and `vignette("ipaddress-examples")` to `vignette("ip-data")` and `vignette("recipes")`, respectively.
 * Updated the `iana_ipv4` dataset.
 * Tests now use {testthat} 3e.
 
