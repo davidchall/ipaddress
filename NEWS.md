@@ -21,7 +21,8 @@ To mark the release of ipaddress 1.0.0, some **breaking changes** were made to i
 ## Minor improvements and fixes
 
 * The `is_ipv6` argument of `netmask()` and `hostmask()` defaults to `NULL`. This option prefers an IPv4 mask, but creates an IPv6 mask as a fallback.
-* Renamed `vignette("ipaddress-classes")` and `vignette("ipaddress-examples")` to `vignette("ip-data")` and `vignette("recipes")`, respectively.
+* Renamed `vignette("ipaddress-classes")` to `vignette("ip-data")`.
+* Renamed `vignette("ipaddress-examples")` to `vignette("recipes")`.
 * Updated the `iana_ipv4` dataset.
 * Tests now use {testthat} 3e.
 
