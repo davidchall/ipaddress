@@ -226,18 +226,18 @@ addresses.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>address <span class="op">=</span> <span class="fu">sample_public</span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">mutate</span><span class="op">(</span>is_public <span class="op">=</span> <span class="fu"><a href="../reference/is_reserved.html">is_global</a></span><span class="op">(</span><span class="va">address</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span></span>
-<span><span class="co">#&gt;            address is_public</span></span>
-<span><span class="co">#&gt;          <span style="color: #949494; font-style: italic;">&lt;ip_addr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 139<span style="color: #949494;">.</span>152<span style="color: #949494;">.</span>184<span style="color: #949494;">.</span>125 TRUE     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>    93<span style="color: #949494;">.</span>102<span style="color: #949494;">.</span>85<span style="color: #949494;">.</span>52 TRUE     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>   160<span style="color: #949494;">.</span>40<span style="color: #949494;">.</span>95<span style="color: #949494;">.</span>158 TRUE     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>   90<span style="color: #949494;">.</span>109<span style="color: #949494;">.</span>47<span style="color: #949494;">.</span>208 TRUE     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>   90<span style="color: #949494;">.</span>150<span style="color: #949494;">.</span>191<span style="color: #949494;">.</span>47 TRUE     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  14<span style="color: #949494;">.</span>244<span style="color: #949494;">.</span>142<span style="color: #949494;">.</span>201 TRUE     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>   214<span style="color: #949494;">.</span>233<span style="color: #949494;">.</span>25<span style="color: #949494;">.</span>33 TRUE     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     1<span style="color: #949494;">.</span>60<span style="color: #949494;">.</span>19<span style="color: #949494;">.</span>212 TRUE     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>    175<span style="color: #949494;">.</span>58<span style="color: #949494;">.</span>41<span style="color: #949494;">.</span>98 TRUE     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>   40<span style="color: #949494;">.</span>177<span style="color: #949494;">.</span>48<span style="color: #949494;">.</span>244 TRUE</span></span></code></pre></div>
+<span><span class="co">#&gt;           address is_public</span></span>
+<span><span class="co">#&gt;         <span style="color: #949494; font-style: italic;">&lt;ip_addr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  136<span style="color: #949494;">.</span>170<span style="color: #949494;">.</span>52<span style="color: #949494;">.</span>61 TRUE     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>   206<span style="color: #949494;">.</span>213<span style="color: #949494;">.</span>8<span style="color: #949494;">.</span>96 TRUE     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 143<span style="color: #949494;">.</span>43<span style="color: #949494;">.</span>252<span style="color: #949494;">.</span>184 TRUE     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  37<span style="color: #949494;">.</span>36<span style="color: #949494;">.</span>154<span style="color: #949494;">.</span>163 TRUE     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 214<span style="color: #949494;">.</span>228<span style="color: #949494;">.</span>36<span style="color: #949494;">.</span>174 TRUE     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 153<span style="color: #949494;">.</span>54<span style="color: #949494;">.</span>122<span style="color: #949494;">.</span>150 TRUE     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 215<span style="color: #949494;">.</span>153<span style="color: #949494;">.</span>207<span style="color: #949494;">.</span>83 TRUE     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  179<span style="color: #949494;">.</span>232<span style="color: #949494;">.</span>84<span style="color: #949494;">.</span>96 TRUE     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  16<span style="color: #949494;">.</span>217<span style="color: #949494;">.</span>149<span style="color: #949494;">.</span>70 TRUE     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>   98<span style="color: #949494;">.</span>24<span style="color: #949494;">.</span>174<span style="color: #949494;">.</span>63 TRUE</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
