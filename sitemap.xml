@@ -19,10 +19,10 @@
     <loc>https://davidchall.github.io/ipaddress/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/articles/ipaddress-classes.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/articles/ip-data.html</loc>
   </url>
   <url>
-    <loc>https://davidchall.github.io/ipaddress/articles/ipaddress-examples.html</loc>
+    <loc>https://davidchall.github.io/ipaddress/articles/recipes.html</loc>
   </url>
   <url>
     <loc>https://davidchall.github.io/ipaddress/authors.html</loc>
@@ -43,6 +43,9 @@
     <loc>https://davidchall.github.io/ipaddress/reference/common_network.html</loc>
   </url>
   <url>
+    <loc>https://davidchall.github.io/ipaddress/reference/country_networks.html</loc>
+  </url>
+  <url>
     <loc>https://davidchall.github.io/ipaddress/reference/exclude_networks.html</loc>
   </url>
   <url>
@@ -58,6 +61,12 @@
     <loc>https://davidchall.github.io/ipaddress/reference/ip_address.html</loc>
   </url>
   <url>
+    <loc>https://davidchall.github.io/ipaddress/reference/ip_cast.html</loc>
+  </url>
+  <url>
+    <loc>https://davidchall.github.io/ipaddress/reference/ip_format.html</loc>
+  </url>
+  <url>
     <loc>https://davidchall.github.io/ipaddress/reference/ip_interface.html</loc>
   </url>
   <url>
@@ -65,6 +74,9 @@
   </url>
   <url>
     <loc>https://davidchall.github.io/ipaddress/reference/ip_operators.html</loc>
+  </url>
+  <url>
+    <loc>https://davidchall.github.io/ipaddress/reference/ip_test.html</loc>
   </url>
   <url>
     <loc>https://davidchall.github.io/ipaddress/reference/ip_to_binary.html</loc>
