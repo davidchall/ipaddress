@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ipaddress</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.1.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -101,14 +101,14 @@ See <code><a href="collapse_networks.html">collapse_networks()</a></code>.</p></
 <span class="r-out co"><span class="r-pr">#&gt;</span>   country         networks</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&lt;ip_netwk&gt;&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> GB               <span style="color: #949494;">[9,372]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> US              <span style="color: #949494;">[31,652]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> US              <span style="color: #949494;">[31,657]</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">country_networks</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GB"</span>, <span class="st">"US"</span><span class="op">)</span>, collapse <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   country         networks</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&lt;ip_netwk&gt;&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> GB              <span style="color: #949494;">[10,351]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> US              <span style="color: #949494;">[73,288]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> US              <span style="color: #949494;">[73,293]</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># retrieve networks for a single country</span></span></span>
 <span class="r-in"><span><span class="fu">country_networks</span><span class="op">(</span><span class="st">"TO"</span><span class="op">)</span><span class="op">$</span><span class="va">networks</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span></span>
@@ -120,7 +120,7 @@ See <code><a href="collapse_networks.html">collapse_networks()</a></code>.</p></
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># expand networks for multiple countries</span></span></span>
 <span class="r-in"><span><span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/chop.html" class="external-link">unchop</a></span><span class="op">(</span><span class="fu">country_networks</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GB"</span>, <span class="st">"US"</span><span class="op">)</span><span class="op">)</span>, <span class="va">networks</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 41,024 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 41,029 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    country      networks</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;ip_netwk&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> GB        2<span style="color: #949494;">.</span>24<span style="color: #949494;">.</span>0<span style="color: #949494;">.</span>0<span style="color: #00BB00;">/13</span></span>
@@ -133,7 +133,7 @@ See <code><a href="collapse_networks.html">collapse_networks()</a></code>.</p></
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> GB        2<span style="color: #949494;">.</span>58<span style="color: #949494;">.</span>4<span style="color: #949494;">.</span>0<span style="color: #00BB00;">/22</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> GB      2<span style="color: #949494;">.</span>58<span style="color: #949494;">.</span>152<span style="color: #949494;">.</span>0<span style="color: #00BB00;">/22</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> GB      2<span style="color: #949494;">.</span>58<span style="color: #949494;">.</span>160<span style="color: #949494;">.</span>0<span style="color: #00BB00;">/22</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 41,014 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 41,019 more rows</span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
