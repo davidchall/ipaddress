@@ -1,4 +1,4 @@
-# ipaddress (development version)
+# ipaddress 1.0.1
 
 Fix for CRAN checks.
 
