@@ -1,5 +1,8 @@
 # ipaddress (development version)
 
+Fix for CRAN checks.
+
+
 # ipaddress 1.0.0
 
 To mark the release of ipaddress 1.0.0, some **breaking changes** were made to improve the interface for data analysis.

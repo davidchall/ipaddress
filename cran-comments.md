@@ -1,7 +1,7 @@
 ## Test environments
 
 * macOS 13 (local): 4.2
-* macOS 11 (GitHub Actions): 4.2
+* macOS 12 (GitHub Actions): 4.2
 * Ubuntu 22.04 (GitHub Actions): 3.5, 3.6, 4.0, 4.1, 4.2, devel
 * Ubuntu 20.04 (RHub): 4.2
 * Fedora Linux (RHub): devel
