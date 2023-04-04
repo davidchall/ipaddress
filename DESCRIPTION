@@ -29,8 +29,9 @@ Suggests:
     knitr,
     pillar,
     rmarkdown,
+    testthat,
     tibble,
-    testthat
+    tidyr
 LinkingTo: 
     AsioHeaders,
     Rcpp

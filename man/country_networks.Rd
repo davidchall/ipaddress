@@ -23,6 +23,8 @@ A data frame with 2 variables:
 \item \code{country}: A character vector
 \item \code{network}: A list of \code{\link{ip_network}} vectors
 }
+
+Each row represents a single country associated with a vector of IP networks.
 }
 \description{
 Retrieve lists of IP networks registered to specific countries.
@@ -35,5 +37,11 @@ This function requires an internet connection to download network lists.
 country_networks(c("GB", "US"))
 
 country_networks(c("GB", "US"), collapse = FALSE)
+
+# retrieve networks for a single country
+country_networks("TO")$networks[[1]]
+
+# expand networks for multiple countries
+tidyr::unchop(country_networks(c("GB", "US")), networks)
 }
 }

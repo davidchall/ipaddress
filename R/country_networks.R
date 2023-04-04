@@ -13,11 +13,19 @@
 #'  * `country`: A character vector
 #'  * `network`: A list of [`ip_network`] vectors
 #'
+#' Each row represents a single country associated with a vector of IP networks.
+#'
 #' @examples
 #' \dontrun{
 #' country_networks(c("GB", "US"))
 #'
 #' country_networks(c("GB", "US"), collapse = FALSE)
+#'
+#' # retrieve networks for a single country
+#' country_networks("TO")$networks[[1]]
+#'
+#' # expand networks for multiple countries
+#' tidyr::unchop(country_networks(c("GB", "US")), networks)
 #' }
 #' @source \url{https://www.iwik.org/ipcountry/} (updated daily)
 #' @export
