@@ -1,6 +1,6 @@
 test_that("download works", {
   skip_if_not_installed("tibble")
-  skip_if_offline()
+  skip_if(is_offline(), "offline")
 
   out <- country_networks(c("GB", "US"))
   expect_s3_class(out, "tbl_df")
@@ -13,7 +13,7 @@ test_that("download works", {
 
 test_that("download fails", {
   skip_if_not_installed("tibble")
-  skip_if_offline()
+  skip_if(is_offline(), "offline")
 
   # invalid country: single
   hide_length <- function(x) gsub("\\[[\\d,]+\\]", "[n]", x, perl = TRUE)
