@@ -31,7 +31,9 @@ test_that("hostname encoding/decoding works", {
   expect_length(ip_to_hostname(ip_address(c("::1", "::2"))), 2)
   expect_length(ip_to_hostname_all(ip_address(c("::1", "::2"))), 2)
 
+  # relies on specific hostname mapping
   skip_on_cran()
+  skip_on_os("windows")
 
   expect_equal(hostname_to_ip("unknown"), ip_address(NA))
   expect_equal(ip_to_hostname(ip_address("0.0.0.0")), NA_character_)
