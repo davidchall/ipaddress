@@ -8,7 +8,7 @@ test_that("hostname encoding/decoding works", {
     hostname_to_ip(ip_address("127.0.0.1"))
   })
 
-  skip_if_offline()
+  skip_if(is_offline(), "offline")
 
   # missing values
   expect_equal(hostname_to_ip(NA_character_), ip_address(NA))
