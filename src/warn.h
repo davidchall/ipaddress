@@ -13,7 +13,7 @@ inline void warnOnRow(unsigned int index, const std::string &input, const std::s
     msg += " (" + reason + ")";
   }
 
-  Rf_warningcall(R_NilValue, msg.c_str());
+  Rf_warningcall(R_NilValue, "%s", msg.c_str());
 }
 
 }
