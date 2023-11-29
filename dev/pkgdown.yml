@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   ip-data: ip-data.html
   recipes: recipes.html
-last_built: 2023-04-04T15:07Z
+last_built: 2023-11-29T06:30Z
 urls:
   reference: https://davidchall.github.io/ipaddress/reference
   article: https://davidchall.github.io/ipaddress/articles
