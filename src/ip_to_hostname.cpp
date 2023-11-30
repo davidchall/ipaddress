@@ -1,5 +1,4 @@
 #include <Rcpp.h>
-#include "asio_config.h"
 #include <asio/ip/tcp.hpp>
 #include <ipaddress.h>
 #include "warn.h"
