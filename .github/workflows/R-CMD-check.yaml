@@ -41,12 +41,11 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
-      #SDKROOT: /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk
 
     steps:
       - name: Choose MacOS SDK
         if: runner.os == 'macOS-11'
-        run: echo "SDKROOT=$(xcrun -sdk macosx11.1 --show-sdk-path)" >> $GITHUB_ENV
+        run: echo "SDKROOT=$(xcrun -sdk macosx11.3 --show-sdk-path)" >> $GITHUB_ENV
 
       - uses: actions/checkout@v3
 
