@@ -44,7 +44,7 @@ jobs:
 
     steps:
       - name: Choose MacOS SDK
-        if: runner.os == 'macOS-11'
+        if: matrix.os == 'macOS-11'
         run: echo "SDKROOT=$(xcrun -sdk macosx11.3 --show-sdk-path)" >> $GITHUB_ENV
 
       - uses: actions/checkout@v3
