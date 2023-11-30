@@ -45,7 +45,7 @@ jobs:
     steps:
       - name: Choose MacOS SDK
         if: matrix.config.os == 'macOS-11'
-        run: echo "SDKROOT=$(xcrun -sdk macosx11.3 --show-sdk-path)" >> $GITHUB_ENV
+        run: echo "SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk" >> $GITHUB_ENV
 
       - uses: actions/checkout@v3
 
