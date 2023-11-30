@@ -1,4 +1,5 @@
 #include <Rcpp.h>
+#include "asio_config.h"
 #include <ipaddress.h>
 #include <ipaddress/to_string.h>
 #include "warn.h"
