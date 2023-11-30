@@ -1,4 +1,5 @@
 #include <Rcpp.h>
+#include "asio_config.h"
 #include <asio/ip/address_v4.hpp>
 #include <asio/ip/address_v6.hpp>
 #include <ipaddress.h>
