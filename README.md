@@ -80,7 +80,7 @@ see `vignette("recipes")`.
 
 ## Related work
 
-- [**iptools**](https://hrbrmstr.github.io/iptools/) – A well
+- [**iptools**](https://github.com/hrbrmstr/iptools) – A well
   established R package for working with IP addresses and networks.
   Unfortunately IPv6 support is severely limited. Also, addresses and
   networks are stored as character vectors, so they must be parsed to
