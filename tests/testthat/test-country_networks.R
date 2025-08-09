@@ -15,8 +15,24 @@ test_that("download fails", {
   skip_if_not_installed("tibble")
   skip_if(is_offline(), "offline")
 
+  hide_length <- function(x) {
+    m <- gregexpr("\\[[\\d,]+\\]", x, perl = TRUE)
+    regmatches_list <- regmatches(x, m)
+    for (i in seq_along(regmatches_list)) {
+      regmatches_list[[i]] <- vapply(
+        regmatches_list[[i]],
+        function(matched) {
+          pad <- nchar(matched) - nchar("[n]")
+          paste0(strrep(" ", pad), "[n]")
+        },
+        character(1)
+      )
+    }
+    regmatches(x, m) <- regmatches_list
+    x
+  }
+
   # invalid country: single
-  hide_length <- function(x) gsub("\\[[\\d,]+\\]", "[n]", x, perl = TRUE)
   expect_snapshot(country_networks(c("US", "AA")), transform = hide_length)
 
   # invalid country: all
