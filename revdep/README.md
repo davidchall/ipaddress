@@ -1,24 +1,25 @@
 # Platform
 
-|field    |value                                    |
-|:--------|:----------------------------------------|
-|version  |R version 4.3.1 (2023-06-16)             |
-|os       |macOS Sonoma 14.1.1                      |
-|system   |aarch64, darwin20                        |
-|ui       |RStudio                                  |
-|language |(EN)                                     |
-|collate  |en_US.UTF-8                              |
-|ctype    |en_US.UTF-8                              |
-|tz       |America/Los_Angeles                      |
-|date     |2023-11-30                               |
-|rstudio  |2023.09.1+494 Desert Sunflower (desktop) |
-|pandoc   |NA                                       |
+|field    |value                                                                                            |
+|:--------|:------------------------------------------------------------------------------------------------|
+|version  |R version 4.5.1 (2025-06-13)                                                                     |
+|os       |macOS Sequoia 15.6                                                                               |
+|system   |aarch64, darwin20                                                                                |
+|ui       |RStudio                                                                                          |
+|language |(EN)                                                                                             |
+|collate  |en_US.UTF-8                                                                                      |
+|ctype    |en_US.UTF-8                                                                                      |
+|tz       |America/Chicago                                                                                  |
+|date     |2025-08-09                                                                                       |
+|rstudio  |2025.05.1+513 Mariposa Orchid (desktop)                                                          |
+|pandoc   |3.4 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/aarch64/ (via rmarkdown) |
+|quarto   |1.6.42 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/quarto                      |
 
 # Dependencies
 
 |package   |old   |new        |Δ  |
 |:---------|:-----|:----------|:--|
-|ipaddress |1.0.1 |1.0.1.9000 |*  |
+|ipaddress |1.0.2 |1.0.2.9000 |*  |
 
 # Revdeps
 

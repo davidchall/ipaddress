@@ -1,4 +1,6 @@
-# ipaddress (development version)
+# ipaddress 1.0.3
+
+Fix for testthat deprecation warnings.
 
 # ipaddress 1.0.2
 
