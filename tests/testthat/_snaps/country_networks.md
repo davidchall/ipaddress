@@ -10,7 +10,7 @@
       # A tibble: 2 x 2
         country         networks
         <chr>   <list<ip_netwk>>
-      1 US              [n]
+      1 US                   [n]
       2 AA                   [n]
 
 ---

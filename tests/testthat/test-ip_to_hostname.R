@@ -46,7 +46,7 @@ test_that("hostname encoding/decoding works", {
 
 test_that("DNS resolution errors if offline", {
   local_edition(2)
-  local_mock("ipaddress:::is_offline" = function() TRUE)
+  local_mocked_bindings(is_offline = function(...) TRUE)
 
   expect_error(ip_to_hostname(ip_address("127.0.0.1")), "DNS resolution requires an internet connection")
   expect_error(hostname_to_ip("localhost"), "DNS resolution requires an internet connection")
