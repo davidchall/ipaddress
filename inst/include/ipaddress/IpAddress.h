@@ -2,6 +2,7 @@
 #define __IPADDRESS_ADDRESS__
 
 #include <array>
+#include <algorithm>
 #include <cstring>
 #include <cstdint>
 #include <ipaddress/endian.h>
