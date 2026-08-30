@@ -20,3 +20,8 @@ Useful links:
 
 **Maintainer**: David Hall <david.hall.physics@gmail.com>
 ([ORCID](https://orcid.org/0000-0002-2193-0480))
+
+Authors:
+
+- David Hall <david.hall.physics@gmail.com>
+  ([ORCID](https://orcid.org/0000-0002-2193-0480))

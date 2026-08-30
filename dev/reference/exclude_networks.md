@@ -2,7 +2,7 @@
 
 `exclude_networks()` takes lists of networks to include and exclude. It
 then calculates the address ranges that are included but not excluded
-(similar to [`setdiff()`](https://rdrr.io/r/base/sets.html)), and
+(similar to [`base::setdiff()`](https://rdrr.io/r/base/sets.html)), and
 finally returns the minimal set of networks needed to describe the
 remaining address ranges.
 
@@ -35,7 +35,7 @@ vector
 ## See also
 
 [`collapse_networks()`](https://davidchall.github.io/ipaddress/dev/reference/collapse_networks.md),
-[`setdiff()`](https://rdrr.io/r/base/sets.html)
+[`base::setdiff()`](https://rdrr.io/r/base/sets.html)
 
 ## Examples
 
