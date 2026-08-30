@@ -38,9 +38,9 @@ ip_to_binary(x)
 binary_to_ip(ip_to_binary(x))
 }
 \seealso{
-Other address representations: 
-\code{\link{ip_to_bytes}()},
-\code{\link{ip_to_hex}()},
-\code{\link{ip_to_integer}()}
+Other address representations:
+\code{\link[=ip_to_bytes]{ip_to_bytes()}},
+\code{\link[=ip_to_hex]{ip_to_hex()}},
+\code{\link[=ip_to_integer]{ip_to_integer()}}
 }
 \concept{address representations}

@@ -57,7 +57,7 @@ collapse_networks <- function(network) {
 #'
 #' `exclude_networks()` takes lists of networks to include and exclude. It then
 #' calculates the address ranges that are included but not excluded (similar to
-#' [setdiff()]), and finally returns the minimal set of networks needed to
+#' [base::setdiff()]), and finally returns the minimal set of networks needed to
 #' describe the remaining address ranges.
 #'
 #' @param include An [`ip_network`] vector
@@ -68,7 +68,7 @@ collapse_networks <- function(network) {
 #' exclude_networks(ip_network("192.0.2.0/28"), ip_network("192.0.2.1/32"))
 #'
 #' exclude_networks(ip_network("192.0.2.0/28"), ip_network("192.0.2.15/32"))
-#' @seealso [collapse_networks()], [setdiff()]
+#' @seealso [collapse_networks()], [base::setdiff()]
 #' @export
 exclude_networks <- function(include, exclude) {
   check_network(include)

@@ -51,9 +51,9 @@ as.numeric(ip_to_integer(ip_address("192.168.0.1")))
 integer_to_ip(3232235521)
 }
 \seealso{
-Other address representations: 
-\code{\link{ip_to_binary}()},
-\code{\link{ip_to_bytes}()},
-\code{\link{ip_to_hex}()}
+Other address representations:
+\code{\link[=ip_to_binary]{ip_to_binary()}},
+\code{\link[=ip_to_bytes]{ip_to_bytes()}},
+\code{\link[=ip_to_hex]{ip_to_hex()}}
 }
 \concept{address representations}

@@ -46,11 +46,11 @@ bytes <- list(
 bytes_to_ip(bytes)
 }
 \seealso{
-Use \code{\link[blob:blob]{blob::as_blob()}} to cast result to a blob object
+Use \code{\link[blob:as_blob]{blob::as_blob()}} to cast result to a blob object
 
-Other address representations: 
-\code{\link{ip_to_binary}()},
-\code{\link{ip_to_hex}()},
-\code{\link{ip_to_integer}()}
+Other address representations:
+\code{\link[=ip_to_binary]{ip_to_binary()}},
+\code{\link[=ip_to_hex]{ip_to_hex()}},
+\code{\link[=ip_to_integer]{ip_to_integer()}}
 }
 \concept{address representations}
